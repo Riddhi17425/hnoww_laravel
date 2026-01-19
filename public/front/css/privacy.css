@@ -1,0 +1,76 @@
+.privacy_main .title_40
+{
+    /*text-align:center;*/
+}
+
+.privacy_main .sub_head
+{
+    font-size: 18px;
+        line-height: 24px;
+}
+
+.privacy_main ul,.privacy_main ol
+{
+   padding-left: 1rem;
+}
+
+/**/
+
+.privacy_nav_jump {
+      display: flex;
+      min-height: 100vh;
+      padding-top:30px;
+    }
+
+    /* Left sidebar */
+    .sidebar {
+     
+      /*background: var(--secondary-color);*/
+      /*color: white;*/
+      position: sticky;
+      top: 0px;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 20px 5px;
+      width:50%;
+    }
+    
+.sidebar a {
+    display: block;
+    /* color: #dfe6e9; */
+    text-decoration: none;
+    padding: 10px 0;
+    transition: all 0.15s;
+    display: flex;
+    gap: 15px;
+    align-items: anchor-center;
+    transition: .8s;
+}
+
+.sidebar a:hover
+{
+    color:var(--gold-color);
+    font-weight: 600;
+}
+   
+   
+   .sidebar a svg {
+   width:45px;
+}
+    
+  
+
+    /*.sidebar a:hover,*/
+    /*.sidebar a.active {*/
+    /*  background: #a19f85;*/
+    /*  color: white;*/
+    /*}*/
+
+    .content {
+      /*flex: 1;*/
+      padding:10px 40px;
+     
+    }
+
+
+  </style>

@@ -1,0 +1,189 @@
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1030;
+    padding: 10px 70px;
+    border-bottom: 1px solid #607062;
+}
+
+header .navbar {
+    padding: 0;
+}
+
+.navbar_left {
+    display: flex;
+    align-items: center;
+    gap: 54px;
+}
+
+.hamburger {
+    width: 36px;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.hamburger>span {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    height: 100%;
+}
+
+.hamburger>span span {
+    display: block;
+    height: 3px;
+    background: var(--white-color);
+    transition: 0.3s ease;
+}
+
+/* Size difference */
+.hamburger>span span:nth-child(1) {
+    width: 100%;
+}
+
+.hamburger>span span:nth-child(2) {
+    width: 70%;
+}
+
+.hamburger>span span:nth-child(3) {
+    width: 50%;
+}
+
+.nav_links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav_links li {
+    display: inline-block;
+    margin: 0 20px;
+}
+
+.nav_links li a {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    color: var(--white-color);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 28px;
+    text-transform: uppercase;
+}
+
+/* original text */
+.nav_links li a span {
+    display: inline-block;
+    transition: transform 0.35s ease, color 0.35s ease;
+}
+
+/* duplicate text */
+.nav_links li a::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    color: var(--gold-color); /* 👈 hover color */
+    transition: transform 0.35s ease;
+}
+
+/* hover effect */
+.nav_links li a:hover span {
+    transform: translateY(-100%);
+    color: var(--gold-color);
+}
+
+.nav_links li a:hover::after {
+    transform: translateY(-100%);
+}
+
+
+.navbar_right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+
+.sticky-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    transition: all 0.35s ease-in-out;
+    background: transparent;
+    box-shadow: none;
+}
+
+/* Scroll hone ke baad apply hoga */
+.header-scrolled {
+    background: var(--secondary-color);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    filter:opacity(0.95);
+}
+
+/* Hide on scroll down */
+.header-hidden {
+    transform: translateY(-100%);
+}
+
+/* Show on scroll up */
+.header-visible {
+    transform: translateY(0);
+}
+
+.navbar-toggler {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.toggler-icon {
+    width: 28px;
+    height: 2px;
+    background: white;
+    display: block;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.toggler-icon::before,
+.toggler-icon::after {
+    content: "";
+    width: 28px;
+    height: 2px;
+    background: var(--gold-color);
+    position: absolute;
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+.toggler-icon::before {
+    top: -8px;
+}
+
+.toggler-icon::after {
+    top: 8px;
+}
+
+/* ===== ACTIVE STATE (X) ===== */
+.navbar-toggler.active .toggler-icon {
+    background: transparent;
+}
+
+.navbar-toggler.active .toggler-icon::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.navbar-toggler.active .toggler-icon::after {
+    transform: rotate(-45deg);
+    top: 0;
+}

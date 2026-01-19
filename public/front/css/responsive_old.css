@@ -1,0 +1,1402 @@
+@media (min-width:1900px) {
+    .container {
+        max-width: 1600px !important;
+    }
+}
+
+/*=========================                  =========================
+===========================                  =========================
+===========================      1710        ===========================
+===========================                  ===========================*/
+
+@media (max-width:1710px) {
+    .container {
+        max-width: 1420px !important;
+    }
+
+    .hero_left_right {
+        top: 20%;
+    }
+
+    .section_header {
+        margin-bottom: 30px;
+    }
+
+    .magic_wrapper h2 {
+        font-size: 100px;
+    }
+
+    .magic_wrapper_h3 {
+        font-size: 34px;
+    }
+
+    .gesture_filter select {
+        padding-right: 55px;
+        font-size: 20px;
+    }
+
+    .gesture_title {
+        font-size: 24px;
+    }
+
+    .gesture_filter {
+        gap: 30px;
+    }
+
+    .him_wrapper {
+        grid-template-columns: 1fr 1fr;
+        gap: 60px 80px;
+    }
+
+    .gift_box_rt .sub_head_inter {
+        margin: 50px 0;
+        margin-left: 60px;
+        line-height: 34px;
+    }
+
+    .cta_ftwrapper .sub_head span {
+        font-size: 28px;
+    }
+
+    .cta_ftwrapper .sub_head svg {
+        width: 100px;
+    }
+
+    .material_img {
+        width: 170px;
+        height: 170px;
+    }
+
+}
+
+/*=========================                  =========================
+===========================                  =========================
+===========================      1601        ===========================
+===========================                  ===========================*/
+
+
+@media (max-width:1601px) {
+
+    body {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .container {
+        max-width: 1330px !important;
+    }
+
+    .hero_left_right {
+        top: 18%;
+    }
+
+    .main_head {
+        font-size: 56px;
+    }
+
+    .mt_80 {
+        margin-top: 60px;
+    }
+
+    .section_header {
+        margin-bottom: 25px;
+    }
+
+    .com_btn {
+        padding: 11px 20px;
+        font-size: 16px;
+    }
+
+    .mt_120 {
+        margin-top: 90px;
+    }
+
+    .magic_wrapper h2 {
+        font-size: 90px;
+    }
+
+    .desire_slider.slick-initialized .slick-slide {
+        margin: 0 15px;
+    }
+
+    .sub_head {
+        font-size: 22px;
+    }
+
+    .title_60 {
+        font-size: 54px;
+    }
+
+    .mb_120 {
+        margin-bottom: 90px;
+    }
+
+    .ft_top_right h2 {
+        font-size: 50px;
+    }
+
+    .ft_input input {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .ft_center_box {
+        padding-bottom: 30px;
+    }
+
+    .hero_content_inner .sub_heads {
+        font-size: 24px;
+        line-height: 28px;
+    }
+
+    .sec_in_mb {
+        margin-bottom: 26px;
+    }
+
+    .hero_content_inner .para {
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    .him_wrapper {
+        grid-template-columns: 1fr 1fr;
+        gap: 50px 70px;
+    }
+
+    .mt_60 {
+        margin-top: 50px;
+    }
+
+    .pro_details_right .main_head {
+        font-size: 34px;
+    }
+
+    .sub_head_inter {
+        font-size: 20px;
+        line-height: 28px;
+    }
+
+    .pro_details_right .increment_decrement .dec_btn,
+    .pro_details_right .increment_decrement .inc_btn {
+        width: 50px;
+        height: 42px;
+    }
+
+    .pro_details_right .increment_decrement .span_value {
+        font-size: 24px;
+        padding: 11px 30px;
+    }
+
+    .pro_details_right .increment_decrement_area {
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+
+    .pro_details .left img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .modern-tabs .nav-link {
+        padding: 16px 20px;
+        font-size: 16px;
+    }
+
+    .pro_details_right .main_head {
+        font-size: 28px;
+    }
+
+    .gift_box_rt .gift_head {
+        font-size: 36px;
+        line-height: 52px;
+    }
+
+    .cta_ftwrapper .sub_head span {
+        font-size: 24px;
+    }
+
+    .cta_ft_center {
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    .btn_2 {
+        padding: 11px 20px;
+        font-size: 16px;
+    }
+
+    .contact_box {
+        padding: 30px 50px;
+    }
+
+    .contact_box:before {
+        width: 156px;
+        height: 163px;
+        background-size: contain;
+    }
+
+    .ct_input {
+        margin-bottom: 50px;
+    }
+
+    .ct_form input,
+    .ct_form textarea,
+    .ct_form select {
+        padding-bottom: 12px;
+        font-size: 20px;
+    }
+
+    .faq_cont .tab-content {
+        margin-top: 40px;
+    }
+
+    .faq_cont .faq_cont_acco {
+        padding-bottom: 20px;
+        margin-bottom: 25px;
+    }
+
+    .wedding_h2 {
+        font-size: 28px;
+    }
+
+
+    .wedding_box {
+        padding: 30px 24px;
+    }
+
+    .wedding_box_head {
+        font-size: 64px;
+        margin-bottom: 30px;
+    }
+
+    .ceremonial_box .inquire_bespoke {
+        width: 200px;
+        height: 200px;
+    }
+
+    .ceremonial_box .inquire_link {
+        font-size: 20px;
+    }
+
+    .corporate_kit_content .corporate_kit_list {
+        font-size: 20px;
+        line-height: 34px;
+    }
+
+    .corporate_kit_content .sub_head_inter {
+        margin: 27px 0;
+    }
+
+    .title_40 {
+        font-size: 34px;
+    }
+
+    .vip_board_content .vip_board_item:last-child .sub_head_inter {
+        margin: 30px 0;
+    }
+
+    .origin_left_content {
+        top: 50px;
+        left: 50px;
+    }
+
+    .material_img {
+        width: 160px;
+        height: 160px;
+    }
+
+    .material_slider {
+        margin-bottom: 40px;
+    }
+
+}
+
+
+/*=========================                  =========================
+===========================                  =========================
+===========================      1441        ===========================
+===========================                  ===========================*/
+
+@media (max-width:1441px) {
+
+    .container {
+        max-width: 1190px !important;
+    }
+
+    .hero_left_right {
+        top: 20%;
+    }
+
+    .hero_left_right .sub_head {
+        font-size: 18px;
+    }
+
+    .nav_links li a {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .header_logo {
+        width: 120px;
+    }
+
+    .main_head {
+        font-size: 48px;
+    }
+
+    .gesture_box svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    .title_60 {
+        font-size: 42px;
+    }
+
+    .com_btn {
+        padding: 11px 20px;
+        font-size: 14px;
+    }
+
+    .magic_wrapper h2 {
+        font-size: 80px;
+    }
+
+    .magic_wrapper_h3 {
+        font-size: 28px;
+        line-height: 38px;
+    }
+
+    .section_header .sub_head {
+        font-size: 18px;
+    }
+
+    .desire_box_bot_child svg {
+        height: 30px;
+        width: 30px;
+    }
+
+    .title_40 {
+        font-size: 28px;
+    }
+
+    .bespoke_box_bot {
+        padding: 30px 30px 0;
+    }
+
+    .mt_120 {
+        margin-top: 80px;
+    }
+
+    .hnow_footer {
+        padding: 30px 0;
+    }
+
+    .ft_head {
+        font-size: 20px;
+    }
+
+    .ft_input input {
+        font-size: 18px;
+        line-height: 20px;
+    }
+
+    .ft_input {
+        padding: 14px 24px;
+    }
+
+    .ft_input button {
+        padding: 9px 20px;
+    }
+
+    .ft_input button {
+        padding: 10px 30px;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .footer_logo {
+        width: 350px;
+    }
+
+    .icon_hert svg {
+        width: 25px;
+        height: 25px;
+    }
+
+    .him_wrapper {
+        gap: 40px 60px;
+    }
+
+    .pro_details .left img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .pro_details .left {
+        gap: 18px;
+    }
+
+    .zoom-lens {
+        width: 100px;
+        height: 100px;
+    }
+
+    .pro_details_right .increment_decrement .span_value {
+        font-size: 18px;
+        padding: 11px 30px;
+    }
+
+    .increment_decrement svg {
+        width: 15px;
+        height: 15px;
+    }
+
+    .modern-tabs .nav-link {
+        padding: 14px 18px;
+        font-size: 16px;
+    }
+
+    .modern-tabs .tab-content {
+        border: 1px solid var(--gold-color);
+        border-top: none;
+        padding: 20px;
+    }
+
+    .mt_35 {
+        margin-top: 25px;
+    }
+
+    .gift_box_rt .sub_head_inter {
+        margin: 30px 0;
+        margin-left: 40px;
+        font-size: 18px;
+        line-height: 30px;
+    }
+
+    .gift_box_rt .com_btn {
+        margin-left: 75px;
+    }
+
+    .gift_box_rt .gift_head {
+        font-size: 32px;
+        line-height: 42px;
+    }
+
+    .btn_2 {
+        font-size: 14px;
+    }
+
+    .contact_box {
+        padding: 25px 40px;
+    }
+
+    .contact_box:before {
+        width: 142px;
+        height: 150px;
+    }
+
+    .ct_input {
+        margin-bottom: 40px;
+    }
+
+    .ct_form input,
+    .ct_form textarea,
+    .ct_form select {
+        font-size: 18px;
+        margin-top: 18px;
+    }
+
+    .faq_cont .tab-content {
+        padding: 0px;
+    }
+
+    .faq_cont .faq_cont_acco {
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+    }
+
+    .request_catalogue_para .sub_head {
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    .wedding_h2 {
+        font-size: 26px;
+    }
+
+    .wedding_vault_form input {
+        width: 600px;
+        padding: 18px;
+        font-size: 20px;
+        line-height: 28px;
+    }
+
+    .wedding_btn {
+        width: 200px;
+        height: 200px;
+    }
+
+    .wedding_btn svg {
+        width: 20px;
+    }
+
+    .wedding_box_main {
+        padding: 0 25px;
+    }
+
+    .ceremonial_box .inquire_bespoke {
+        width: 150px;
+        height: 150px;
+    }
+
+    .ceremonial_box .inquire_link {
+        font-size: 18px;
+    }
+
+    .corporate_slider .slick-slide {
+        margin: 0 15px;
+    }
+
+    .corporate_kit_content .corporate_kit_list {
+        font-size: 18px;
+        line-height: 32px;
+    }
+
+    .audio-card {
+        padding: 30px;
+    }
+
+    .atelier_origin_content {
+        padding-left: 30px;
+    }
+
+    .font_34 {
+        font-size: 26px;
+    }
+
+    .atelier_origin_content .sub_head_inter {
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    .material_wrapper {
+        padding: 50px;
+    }
+
+    .material_img {
+        width: 140px;
+        height: 140px;
+    }
+
+    .material_slider {
+        margin-bottom: 30px;
+    }
+
+    .bespoke_box_bot .para {
+        font-size: 18px;
+        margin-bottom: 18px;
+    }
+
+}
+
+/*=========================                  =========================
+===========================                  =========================
+===========================      1281        ===========================
+===========================                  ===========================*/
+
+@media (max-width:1281px) {
+
+    .container {
+        max-width: 1070px !important;
+    }
+
+    .header_logo {
+        width: 100px;
+    }
+
+    .sub_head {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .mt_120 {
+        margin-top: 60px;
+    }
+
+    .magic_wrapper h2 {
+        font-size: 70px;
+    }
+
+    .magic_wrapper_h3 {
+        font-size: 24px;
+        line-height: 28px;
+    }
+
+    .section_header .sub_head {
+        font-size: 16px;
+    }
+
+    .title_60 {
+        font-size: 36px;
+    }
+
+    /* .mb_120 {
+        margin-bottom: 60px;
+    } */
+
+    .hero_left_right .sub_head {
+        font-size: 16px;
+    }
+
+    .com_btn {
+        padding: 8px 18px;
+        font-size: 12px;
+    }
+
+    .mt_80 {
+        margin-top: 50px;
+    }
+
+    .hero_content p {
+        font-size: 16px;
+        line-height: 28px;
+    }
+
+    .main_head {
+        font-size: 42px;
+    }
+
+    .section_header {
+        margin-bottom: 20px;
+    }
+
+    .gesture_title {
+        font-size: 20px;
+    }
+
+    .gesture_filter select {
+        padding-right: 55px;
+        font-size: 16px;
+    }
+
+    .gesture_filter select {
+        background: url(../images/down_arr.svg) no-repeat right 0px center / 14px;
+        padding-bottom: 2px;
+    }
+
+    .hero_content_inner .sub_heads {
+        font-size: 20px;
+        line-height: 26px;
+    }
+
+    .sec_in_mb {
+        margin-bottom: 20px;
+    }
+
+    .hero_content_inner .para {
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    .him_wrapper {
+        gap: 40px 50px;
+    }
+
+    .btn_2 {
+        padding: 8px 18px;
+        font-size: 12px;
+    }
+
+    .cta_ftwrapper {
+        padding: 25px 0;
+    }
+
+    .cta_ftwrapper .sub_head span {
+        font-size: 22px;
+    }
+
+    .mt_60 {
+        margin-top: 30px;
+    }
+
+    .pro_details .left img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .cta_ftwrapper .sub_head svg {
+        width: 80px;
+    }
+
+    .cta_ft_center {
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    .pro_details .left {
+        gap: 14px;
+    }
+
+    .pro_details_right .sub_head_inter {
+        font-size: 18px;
+    }
+
+    .pro_details_right .main_head {
+        font-size: 26px;
+    }
+
+    .pro_details_right .para {
+        margin-bottom: 10px;
+    }
+
+    .pro_details_right .increment_decrement .span_value {
+        font-size: 16px;
+        padding: 9px 30px;
+    }
+
+    .pro_details_right .increment_decrement_area {
+        margin-bottom: 25px;
+    }
+
+    .pro_details_right .increment_decrement .dec_btn,
+    .pro_details_right .increment_decrement .inc_btn {
+        width: 35px;
+        height: 38px;
+    }
+
+    .mb_120 {
+        margin-bottom: 60px;
+    }
+
+    .gift_box_rt .gift_head {
+        font-size: 26px;
+        line-height: 36px;
+    }
+
+    .contact_box {
+        padding: 25px 30px;
+    }
+
+    .contact_box .sub_head {
+        font-size: 18px;
+    }
+
+    .ct_grid {
+        column-gap: 35px;
+        row-gap: 20px;
+    }
+
+    .ct_form input,
+    .ct_form textarea,
+    .ct_form select {
+        font-size: 16px;
+    }
+
+    .modern-tabs .nav-link {
+        padding: 14px 18px;
+        font-size: 14px;
+    }
+
+    .faq_cont .tab-content {
+        margin-top: 30px;
+    }
+
+    .faq_cont .faq_cont_acco {
+        padding-bottom: 12px;
+        margin-bottom: 15px;
+    }
+
+    .wedding_h2 {
+        font-size: 22px;
+    }
+
+    .wedding_btn {
+        width: 180px;
+        height: 180px;
+    }
+
+    .wedding_vault_form input {
+        width: 500px;
+        padding: 14px;
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .corporate_kit_content .sub_head_inter {
+        margin: 20px 0;
+    }
+
+    .corporate_kit_content .corporate_kit_list {
+        font-size: 16px;
+        line-height: 28px;
+    }
+
+    .corporate_kit_content .sub_head_inter {
+        font-size: 18px;
+        line-height: 20px;
+    }
+
+    .vip_board_content .vip_board_item:last-child .sub_head_inter {
+        margin: 25px 0;
+        font-size: 18px;
+    }
+
+
+    .atelier_origin_content {
+        padding-left: 20px;
+    }
+
+    .material_img {
+        width: 125px;
+        height: 125px;
+    }
+
+}
+
+
+/*=========================                  =========================
+===========================                  =========================
+===========================      768px       ===========================
+===========================                  ===========================*/
+
+@media (max-width:767px) {
+
+
+    header {
+        padding: 10px 10px;
+    }
+
+    .sticky-header {
+        background: var(--secondary-color);
+    }
+
+    .nav_links li {
+        display: inline-block;
+        margin: 0 0;
+    }
+
+    .header_logo {
+        width: 80px;
+    }
+
+    .section_header {
+        margin-bottom: 15px;
+    }
+
+    .nav_links {
+        display: flex;
+        gap: 20px;
+        flex-direction: column;
+        margin: 25px 0;
+    }
+
+    .hero-section img {
+        height: 80vh;
+        object-fit: cover;
+    }
+
+    .hero_left_right {
+        display: none;
+    }
+
+    .main_head {
+        font-size: 26px;
+    }
+
+    .hero_content {
+        width: 100%;
+        top: 15em;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .mt_120 {
+        margin-top: 50px;
+    }
+
+    .gesture_filter {
+        gap: 20px;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .gesture_filter_child {
+        align-items: start;
+        justify-content: space-between;
+        gap: 24px;
+        width: 100%;
+    }
+
+    .gesture_title {
+        font-size: 16px;
+        text-align: start;
+    }
+
+    .gesture_filter select {
+        font-size: 14px;
+    }
+
+    .magic_wrapper h2 {
+        font-size: 30px;
+        line-height: 35px;
+    }
+
+    .magic_head_1,
+    .magic_head_2 {
+        display: none;
+    }
+
+    .magic_wrapper_logo {
+        display: none;
+    }
+
+    .magic_wrapper {
+        gap: 20px;
+        grid-template-columns: repeat(1, 1fr);
+        padding: 0;
+    }
+
+    .magic_wrapper {
+        text-align: center;
+    }
+
+    .magic_wrapper img {
+        width: 50%;
+    }
+
+    .sub_head {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .desire_box .price {
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    .curated_rituals_box .box_bot {
+        justify-content: space-between;
+        align-items: start;
+        flex-direction: column;
+    }
+
+    .magic_head_phone {
+        display: block;
+    }
+
+    .mobile_slider .curated_rituals_box {
+        margin: 0 15px;
+    }
+
+    .bespoke_box_bot {
+        padding: 10px 0px 0;
+    }
+
+    .bespoke_box_top .title_40 {
+        top: 40px;
+        left: 30px;
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    .bespoke_box_top_2 .title_40 {
+        bottom: 30px;
+        left: 30px;
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    .mobile_slider .collection_box {
+        margin: 0 10px;
+    }
+
+    .title_60 {
+        font-size: 28px;
+        line-height: 36px;
+    }
+
+    .pro_details {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 20px;
+    }
+
+    .pro_details .left {
+        gap: 12px;
+        flex-direction: row !important;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .modern-tabs .nav-link {
+        padding: 12px 16px;
+    }
+
+    .pro_details_right .main_head {
+        font-size: 24px;
+    }
+
+    .pro_details_right .sub_head_inter {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .mb_120 {
+        margin-bottom: 50px;
+    }
+
+    .gift_box {
+        gap: 20px;
+        flex-direction: column;
+    }
+
+    .gift_box_rt .sub_head_inter {
+        margin: 0;
+        border-left: none;
+        padding: 19px 0 19px 0px;
+        margin-left: 0px;
+    }
+
+    .gift_box_rt .com_btn {
+        margin-left: 0;
+    }
+
+    .gift_box .gift_box_lt,
+    .gift_box .gift_box_rt {
+        width: 100%;
+    }
+
+    .cta_ftwrapper {
+        flex-direction: column;
+        gap: 18px;
+        padding: 25px 0;
+    }
+
+    .cta_ftwrapper .sub_head span svg {
+        display: none;
+    }
+
+    /* footer */
+
+    .ft_head_wrapper {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .ft_head_wrapper div {
+        text-align: center;
+    }
+
+    .ft_top_right h2 {
+        font-size: 36px;
+    }
+
+    .ft_center_wrapper>div:not(:first-child) {
+        border-left: none;
+    }
+
+    .footer_logo {
+        width: 200px;
+    }
+
+    .ft_input input {
+        font-size: 16px;
+    }
+
+
+
+    .ft_input {
+        padding: 8px 14px;
+    }
+
+    .ft_center_box {
+        justify-content: start;
+        padding-left: 15px;
+        border-bottom: 1px solid #C8B58D;
+    }
+
+    .ft_input button {
+        padding: 8px 20px;
+    }
+
+    .ft_center_box:last-child {
+        border-bottom: none;
+    }
+
+    .ft_center_box:nth-child(odd) {
+        border-right: 1px solid #C8B58D;
+    }
+
+    .ft_center_box {
+        padding-bottom: 20px;
+    }
+
+    .ft_head {
+        font-size: 20px;
+        margin: 15px 0;
+    }
+
+    .ft_center_wrapper {
+        grid-template-columns: repeat(2, 1fr);
+        
+    }
+
+    .ft_bottom {
+        flex-direction: column;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .ft_privacy {
+        justify-content: center;
+        width: 100%;
+        margin: 15px 0;
+    }
+
+    .hnow_footer {
+        padding-bottom: 0;
+    }
+
+    .ct_grid {
+        grid-template-columns: repeat(1, 1fr);
+        column-gap: 50px;
+        row-gap: 24px;
+    }
+
+    .ct_grid>div:first-child {
+        border-right: none;
+    }
+
+    .ct_form input,
+    .ct_form textarea,
+    .ct_form select {
+        padding-bottom: 5px;
+        font-size: 16px;
+    }
+
+    .ct_form .row {
+        --bs-gutter-x: 0px;
+    }
+
+    .modern-tabs #filledTabs {
+        display: flex;
+        justify-content: start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+    }
+
+    .modern-tabs #filledTabs::-webkit-scrollbar {
+        height: 3px;
+        /* bottom scrollbar */
+    }
+
+    .modern-tabs #filledTabs::-webkit-scrollbar-thumb {
+        background: #C8B58D;
+        border-radius: 10px;
+    }
+
+    .modern-tabs #filledTabs .nav-link {
+        white-space: nowrap;
+        padding: 12px 20px;
+    }
+
+    .wedding_vault {
+        padding-top: 100px;
+        padding-bottom: 30px;
+        height: 100vh;
+        background-size: cover;
+
+    }
+
+    .wedding_vault_form input {
+        width: 100%;
+        padding: 16px;
+        margin: 15px auto 15px auto;
+        font-size: 18px;
+    }
+
+    .wedding_btn {
+        width: 100%;
+        height: auto;
+        border-radius: 0;
+        width: 100%;
+        height: auto;
+        position: static;
+        flex-direction: row;
+        gap: 25px;
+    }
+
+    .wedding_h2 {
+        font-size: 16px;
+    }
+
+    .wedding_box_line {
+        display: none;
+    }
+
+    .wedding_box_main {
+        padding: 0 0px;
+    }
+
+    .wedding_gifting .wedding_svg1 {
+        width: 100px;
+    }
+
+    .wedding_gifting .wedding_svg2 {
+        width: 150px;
+    }
+
+    .wedding_gifting {
+        padding: 35px 0;
+    }
+    
+    .magic_wrapper {
+    margin-bottom: 0px;
+   }
+   
+       .hero_content p
+    {
+        line-height: 20px;
+    }
+   
+   /*-------------------------------*/
+   
+    /*   .vip_board_content .vip_board_item:last-child .sub_head_inter {*/
+    /*margin: 15px 0;*/
+    /*}*/
+    /*.vip_board_content .vip_board_item:first-child {*/
+    /*margin-top: 30px;*/
+    /*}*/
+    /*.vip_board_item {*/
+    /*margin-left: auto;*/
+    /*padding-left: 10px;*/
+    /*}*/
+    /*.vip_board {*/
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*}*/
+    /*.vip_board_rt, .vip_board_lt {*/
+    /*width: 100%;*/
+    /*}*/
+    .corporatekits{
+    flex-direction: column;
+    }
+    .corporate_kit_content {
+    padding: 15px 15px;
+    }
+    .corporate_kit_content .sub_head_inter{
+    font-size: 16px;
+    }
+   
+    .him_wrapper {
+    grid-template-columns: 1fr;
+    }
+    .hero-section_inner img {
+    height: 80vh;
+    object-fit: cover;
+    }
+    .hero_content_inner{
+    width: 100%;
+    /*padding:20px;*/
+ 
+    }
+    
+    .hero_content_inner {
+  
+    top: 15em;
+   
+}
+
+    .hero_content_inner .sub_heads {
+        font-size: 18px;
+        line-height: 26px;
+    }
+    
+        .request_catalogue_para .sub_head,
+        .request_catalogue_para .sub_head_inter{
+        font-size: 16px;
+        line-height: 28px;
+    }
+    
+        .corporate_slider .slick-slide {
+        margin: 0 5px;
+    }
+    
+    .vip_board {
+    flex-direction: column;
+    gap: 20px;
+}
+
+.vip_board_rt, .vip_board_lt {
+    width: 100%;
+}
+
+.vip_board_item
+
+ {
+    margin-left: 0px;
+    padding-left: 0px;
+    border-left: none;
+   
+}
+
+    .title_40 {
+        font-size: 24px;
+        line-height: 26px;
+    }
+    
+        .vip_board_content .vip_board_item:last-child .sub_head_inter {
+        margin: 20px 0;
+        font-size: 16px;
+    }
+    
+    .vip_board_content .vip_board_item:first-child {
+    margin-top: 25px;
+}
+
+    .btn_2 {
+      
+        text-align: center;
+    }
+    
+    .audio-card {
+    padding: 15px;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.audio-content {
+     text-align: start; 
+    width: 100%;
+}
+
+    .origin_left_content {
+        top: 35px;
+        left: 30px;
+    }
+    
+    .atelier_origin_content {
+        padding-left: 0px;
+    }
+    
+    .origin_left {
+    margin-bottom: 10px;
+}
+
+    .material_wrapper {
+        padding: 20px;
+    }
+    
+    .slick-dots
+{
+    padding:5px 0;
+}
+
+
+
+}
