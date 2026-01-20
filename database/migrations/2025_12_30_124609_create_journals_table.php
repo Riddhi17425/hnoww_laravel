@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->String('month_name')->nullable();
             $table->String('title')->nullable();
+            $table->String('feature_title')->nullable();
+            $table->String('feature_description', 500)->nullable();
             $table->String('description', 2000)->nullable();
             $table->String('image')->nullable();
             $table->tinyInteger('is_active')->default(1)->comment("0 = Active 1 = In-active");
