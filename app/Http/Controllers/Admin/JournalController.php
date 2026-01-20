@@ -76,6 +76,8 @@ class JournalController extends Controller
         $validator = Validator::make($request->all(), [
             'month_name' => ['required', Rule::in(config('global_values.months')),'unique:journals,month_name'],
             'title'        => 'required|string|max:255',
+            'feature_title'        => 'required|string|max:255',
+            'feature_description'        => 'required|string|max:500',
             'description'  => 'required|string|max:2000',
             'image'        => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
@@ -86,6 +88,13 @@ class JournalController extends Controller
             'title.required'       => 'The title is required.',
             'title.string'         => 'The title must be a valid text.',
             'title.max'            => 'The title may not be greater than 255 characters.',
+
+            'feature_title.required'       => 'The feature title is required.',
+            'feature_title.string'         => 'The feature title must be a valid text.',
+            'feature_title.max'            => 'The feature title may not be greater than 255 characters.',
+            'feature_description.required'       => 'The feature description is required.',
+            'feature_description.string'         => 'The feature description must be a valid text.',
+            'feature_description.max'            => 'The feature description may not be greater than 500 characters.',
 
             'description.required' => 'The description is required.',
             'description.string'   => 'The description must be a valid text.',
@@ -104,7 +113,9 @@ class JournalController extends Controller
 
         $journal = new Journal();
         $journal->month_name = $request->month_name;
-        $journal->title = $request->title;
+        $journal->title = $request->title ?? null;
+        $journal->feature_title = $request->feature_title ?? null;
+        $journal->feature_description = $request->feature_description ?? null;
         $journal->description = $request->description;
         $journal->is_active = 0;
         $journal->save();
@@ -148,6 +159,8 @@ class JournalController extends Controller
         $validator = Validator::make($request->all(), [
             'month_name' => ['required', Rule::in(config('global_values.months')), Rule::unique('journals', 'month_name')->ignore($journal->id)],
             'title'        => 'required|string|max:255',
+            'feature_title'        => 'required|string|max:255',
+            'feature_description'        => 'required|string|max:500',
             'description'  => 'required|string|max:2000',
             'image'        => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ], [
@@ -158,6 +171,13 @@ class JournalController extends Controller
             'title.required'       => 'The title is required.',
             'title.string'         => 'The title must be a valid text.',
             'title.max'            => 'The title may not be greater than 255 characters.',
+
+            'feature_title.required'       => 'The feature title is required.',
+            'feature_title.string'         => 'The feature title must be a valid text.',
+            'feature_title.max'            => 'The feature title may not be greater than 255 characters.',
+            'feature_description.required'       => 'The feature description is required.',
+            'feature_description.string'         => 'The feature description must be a valid text.',
+            'feature_description.max'            => 'The feature description may not be greater than 500 characters.',
 
             'description.required' => 'The description is required.',
             'description.string'   => 'The description must be a valid text.',
@@ -175,6 +195,8 @@ class JournalController extends Controller
 
         $journal->month_name = $request->month_name;
         $journal->title = $request->title;
+        $journal->feature_title = $request->feature_title ?? null;
+        $journal->feature_description = $request->feature_description ?? null;
         $journal->description = $request->description;
         $journal->save();
 

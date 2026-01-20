@@ -16,12 +16,13 @@
                         <form id="newsletterForm" class="ft_newsletter" action="{{ route('front.newsletter.store') }}" method="POST">
                             @csrf
                             <div class="ft_input">
-                                <input class="w-100" type="email" name="newsletter_email" id="newsletter_email" placeholder="Enter your email address" required>
+                                <input class="w-100" type="email" name="newsletter_email" id="newsletter_email" placeholder="Enter your email address">
                                 <button type="submit" id="newsletterSubmitBtn">
                                     <span class="btn-text">Submit</span>
                                     <span class="btn-loader" style="display:none;">Submitting...</span>
                                 </button>
                             </div>
+                            <div id="newsletter_error"></div>
                         </form>
                         <div id="newsletterMessage" class="auto-hide" style="color: green; margin-top: 7px;"></div>
 
@@ -155,7 +156,7 @@ AOS.init();
         setTimeout(function () {
             $('.auto-hide').fadeOut('slow');
         }, 5000); //5 seconds
-
+newsletter_error
         $("#newsletterForm").validate({
             rules: {
                 newsletter_email: {
@@ -170,6 +171,9 @@ AOS.init();
                     required: "Please enter your email",
                     email: "Please enter a valid email address"
                 }
+            },
+            errorPlacement: function (error, element) {
+                 $('#newsletter_error').html(error); // replace instead of append
             },
             submitHandler: function(form) {
                 var $form = $(form);

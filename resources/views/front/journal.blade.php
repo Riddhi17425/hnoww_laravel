@@ -153,7 +153,16 @@ $monthMap = [
                             <div class="col-md-6">
                                 <div class="montheditions_rt">
                                     <h3 class="sub_head mb-md-3">{{ $val->title }}</h3>
-                                    {!! $val->description !!}
+                                    @if(isset($val->feature_title))<p class="montheditions_para">Feature: {{$val->feature_title}}</p>@endif
+                                    @if(isset($val->feature_description))<p>{{$val->feature_description ?? '' }}</p>@endif
+
+                                    <div class="content-wrap">
+                                        <h3 class="sub_head mt-md-4 mb-md-3">The Practice:</h3>
+                                        <!--<p class="montheditions_para">Teach readers to curate a reflective moment � candles, scent, a silver bowl, a note of intention.</p>
+                                        <p class="sub_head_inter mb-0">Ritual as self-care through design..</p> -->
+                                        {!! $val->description !!}
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
