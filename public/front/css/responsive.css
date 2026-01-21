@@ -1,4 +1,4 @@
-@media (min-width:1900px) {
+@media (min-width: 1900px) {
     .container {
         max-width: 1600px !important;
     }
@@ -9,7 +9,7 @@
 ===========================      1710        ===========================
 ===========================                  ===========================*/
 
-@media (max-width:1710px) {
+@media (max-width: 1710px) {
     .container {
         max-width: 1420px !important;
     }
@@ -22,7 +22,9 @@
         margin-bottom: 30px;
     }
 
-    .magic_wrapper h2 {
+    .magic_wrapper h2,
+    .founder_main .founder_text_1 h2,
+    .founder_main .founder_text_2 h2 {
         font-size: 100px;
     }
 
@@ -66,31 +68,30 @@
         width: 170px;
         height: 170px;
     }
-    
+
     .month_box_main {
-  
-    padding: 50px;
-    row-gap: 30px;
-    column-gap: 40px;
-}
+        padding: 50px;
+        row-gap: 30px;
+        column-gap: 40px;
+    }
 
-.month_box svg {
-  
-    width: 30px;
-    height: 30px;
-}
+    .month_box svg {
+        width: 30px;
+        height: 30px;
+    }
 
-.month_box p
-{
-    font-size:14px;
-}
+    .month_box p {
+        font-size: 14px;
+    }
 
-.month_box .green_svg
-{
-     width: 20px;
-    height: 20px;
-}
+    .month_box .green_svg {
+        width: 20px;
+        height: 20px;
+    }
 
+    .abiout_left_tp img {
+        width: 190px;
+    }
 }
 
 /*=========================                  =========================
@@ -98,9 +99,7 @@
 ===========================      1601        ===========================
 ===========================                  ===========================*/
 
-
-@media (max-width:1601px) {
-
+@media (max-width: 1601px) {
     body {
         font-size: 14px;
         line-height: 20px;
@@ -109,11 +108,14 @@
     .container {
         max-width: 1330px !important;
     }
-    
+
+    .privacy_nav_jump .sidebar {
+        width: 35%;
+    }
+
     .wedding_gifting .wedding_svg1,
-    .wedding_gifting .wedding_svg2
-    {
-        width:15em;
+    .wedding_gifting .wedding_svg2 {
+        width: 15em;
     }
 
     .hero_left_right {
@@ -141,7 +143,9 @@
         margin-top: 90px;
     }
 
-    .magic_wrapper h2 {
+    .magic_wrapper h2,
+    .founder_main .founder_text_1 h2,
+    .founder_main .founder_text_2 h2 {
         font-size: 90px;
     }
 
@@ -289,7 +293,6 @@
         font-size: 28px;
     }
 
-
     .wedding_box {
         padding: 30px 24px;
     }
@@ -338,41 +341,79 @@
     .material_slider {
         margin-bottom: 40px;
     }
-    
-        .month_box_main {
+
+    .month_box_main {
         padding: 40px;
         row-gap: 25px;
         column-gap: 25px;
     }
-    
+
     .month_box_main {
         padding: 30px;
         row-gap: 20px;
         column-gap: 20px;
     }
-    
-    .month_box {
-    padding: 14px;
-}
 
-.whatsapp-float img {
+    .month_box {
+        padding: 14px;
+    }
+
+    .whatsapp-float img {
         width: 60px;
         height: 60px;
     }
 
+    .founder_main .founder_text_1 p {
+        font-size: 24px;
+        line-height: 28px;
+    }
 
+    .abiout_left {
+        padding-right: 40px;
+        margin-right: 40px;
+    }
+
+    .abiout_left_tp {
+        gap: 25px;
+    }
 }
-
 
 /*=========================                  =========================
 ===========================                  =========================
 ===========================      1441        ===========================
 ===========================                  ===========================*/
 
-@media (max-width:1441px) {
-
+@media (max-width: 1441px) {
     .container {
         max-width: 1190px !important;
+    }
+
+    .practice_content .sub_head_inter {
+        margin-bottom: 30px;
+    }
+
+    .practice_content .title_40 {
+        font-size: 28px;
+        margin-bottom: 12px;
+    }
+
+    .practice_content .small_heasd {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .abiout_left_tp p {
+        line-height: 30px;
+    }
+
+    .abiout_left {
+        padding-right: 25px;
+        margin-right: 25px;
+    }
+
+    .abiout_left .sub_head,
+    .abiout_right .sub_head {
+        line-height: 30px;
     }
 
     .hero_left_right {
@@ -410,7 +451,9 @@
         font-size: 14px;
     }
 
-    .magic_wrapper h2 {
+    .magic_wrapper h2,
+    .founder_main .founder_text_1 h2,
+    .founder_main .founder_text_2 h2 {
         font-size: 80px;
     }
 
@@ -649,21 +692,21 @@
         font-size: 18px;
         margin-bottom: 18px;
     }
-    
-     .month_box svg {
+
+    .month_box svg {
         width: 25px;
         height: 25px;
     }
-    
-        .month_box .green_svg {
+
+    .month_box .green_svg {
         width: 15px;
         height: 15px;
     }
-    
-        .month_box p {
+
+    .month_box p {
         font-size: 13px;
     }
-    
+
     .montheditions_rt .content-wrap {
         max-height: 150px;
         overflow: hidden;
@@ -678,22 +721,25 @@
     .montheditions_rt .read-more-btn {
         display: inline-block;
     }
-    
-     .montheditions_rt .content-wrap:not(.expanded)::after {
+
+    .montheditions_rt .content-wrap:not(.expanded)::after {
         content: "";
         position: absolute;
         bottom: 0;
         left: 0;
         width: 100%;
         height: 40px;
-        background: linear-gradient(to bottom, rgba(255,255,255,0), #faf9f6);
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #faf9f6);
     }
-    
+
     .whatsapp-float img {
         width: 50px;
         height: 50px;
     }
 
+    .privacy_nav_jump .sidebar {
+        width: 45%;
+    }
 }
 
 /*=========================                  =========================
@@ -701,8 +747,7 @@
 ===========================      1281        ===========================
 ===========================                  ===========================*/
 
-@media (max-width:1281px) {
-
+@media (max-width: 1281px) {
     .container {
         max-width: 1070px !important;
     }
@@ -720,7 +765,9 @@
         margin-top: 60px;
     }
 
-    .magic_wrapper h2 {
+    .magic_wrapper h2,
+    .founder_main .founder_text_1 h2,
+    .founder_main .founder_text_2 h2 {
         font-size: 70px;
     }
 
@@ -777,7 +824,8 @@
     }
 
     .gesture_filter select {
-        background: url(../images/down_arr.svg) no-repeat right 0px center / 14px;
+        background: url(../images/down_arr.svg) no-repeat right 0px center /
+            14px;
         padding-bottom: 2px;
     }
 
@@ -938,7 +986,6 @@
         font-size: 18px;
     }
 
-
     .atelier_origin_content {
         padding-left: 20px;
     }
@@ -947,33 +994,29 @@
         width: 125px;
         height: 125px;
     }
-    
-        .month_box_main {
+
+    .month_box_main {
         padding: 25px;
         row-gap: 15px;
         column-gap: 15px;
     }
-    
-    .montheditions_rt .sub_head_inter {
-    font-size: 16px;
-    line-height: 20px;
-}
 
-   .month_box p {
-        font-size: 12px;
+    .montheditions_rt .sub_head_inter {
+        font-size: 16px;
+        line-height: 20px;
     }
 
+    .month_box p {
+        font-size: 12px;
+    }
 }
-
 
 /*=========================                  =========================
 ===========================                  =========================
 ===========================      768px       ===========================
 ===========================                  ===========================*/
 
-@media (max-width:767px) {
-
-
+@media (max-width: 767px) {
     header {
         padding: 10px 10px;
     }
@@ -1048,7 +1091,9 @@
         font-size: 14px;
     }
 
-    .magic_wrapper h2 {
+    .magic_wrapper h2,
+    .founder_main .founder_text_1 h2,
+    .founder_main .founder_text_2 h2 {
         font-size: 30px;
         line-height: 35px;
     }
@@ -1203,7 +1248,7 @@
         font-size: 36px;
     }
 
-    .ft_center_wrapper>div:not(:first-child) {
+    .ft_center_wrapper > div:not(:first-child) {
         border-left: none;
     }
 
@@ -1215,8 +1260,6 @@
         font-size: 16px;
     }
 
-
-
     .ft_input {
         padding: 8px 14px;
     }
@@ -1224,7 +1267,7 @@
     .ft_center_box {
         justify-content: start;
         padding-left: 15px;
-        border-bottom: 1px solid #C8B58D;
+        border-bottom: 1px solid #c8b58d;
     }
 
     .ft_input button {
@@ -1236,7 +1279,7 @@
     }
 
     .ft_center_box:nth-child(odd) {
-        border-right: 1px solid #C8B58D;
+        border-right: 1px solid #c8b58d;
     }
 
     .ft_center_box {
@@ -1250,7 +1293,6 @@
 
     .ft_center_wrapper {
         grid-template-columns: repeat(2, 1fr);
-        
     }
 
     .ft_bottom {
@@ -1275,7 +1317,7 @@
         row-gap: 24px;
     }
 
-    .ct_grid>div:first-child {
+    .ct_grid > div:first-child {
         border-right: none;
     }
 
@@ -1307,7 +1349,7 @@
     }
 
     .modern-tabs #filledTabs::-webkit-scrollbar-thumb {
-        background: #C8B58D;
+        background: #c8b58d;
         border-radius: 10px;
     }
 
@@ -1321,7 +1363,6 @@
         padding-bottom: 30px;
         height: 100vh;
         background-size: cover;
-
     }
 
     .wedding_vault_form input {
@@ -1365,18 +1406,17 @@
     .wedding_gifting {
         padding: 35px 0;
     }
-    
+
     .magic_wrapper {
-    margin-bottom: 0px;
-   }
-   
-       .hero_content p
-    {
+        margin-bottom: 0px;
+    }
+
+    .hero_content p {
         line-height: 20px;
     }
-   
-   /*-------------------------------*/
-   
+
+    /*-------------------------------*/
+
     /*   .vip_board_content .vip_board_item:last-child .sub_head_inter {*/
     /*margin: 15px 0;*/
     /*}*/
@@ -1394,151 +1434,193 @@
     /*.vip_board_rt, .vip_board_lt {*/
     /*width: 100%;*/
     /*}*/
-    .corporatekits{
-    flex-direction: column;
+    .corporatekits {
+        flex-direction: column;
     }
     .corporate_kit_content {
-    padding: 15px 15px;
+        padding: 15px 15px;
     }
-    .corporate_kit_content .sub_head_inter{
-    font-size: 16px;
+    .corporate_kit_content .sub_head_inter {
+        font-size: 16px;
     }
-   
+
     .him_wrapper {
-    grid-template-columns: 1fr;
+        grid-template-columns: 1fr;
     }
     .hero-section_inner img {
-    height: 80vh;
-    object-fit: cover;
+        height: 80vh;
+        object-fit: cover;
     }
-    .hero_content_inner{
-    width: 100%;
-    /*padding:20px;*/
- 
-    }
-    
     .hero_content_inner {
-  
-    top: 15em;
-   
-}
+        width: 100%;
+        /*padding:20px;*/
+    }
+
+    .hero_content_inner {
+        top: 15em;
+    }
 
     .hero_content_inner .sub_heads {
         font-size: 18px;
         line-height: 26px;
     }
-    
-        .request_catalogue_para .sub_head,
-        .request_catalogue_para .sub_head_inter{
+
+    .request_catalogue_para .sub_head,
+    .request_catalogue_para .sub_head_inter {
         font-size: 16px;
         line-height: 28px;
     }
-    
-        .corporate_slider .slick-slide {
+
+    .corporate_slider .slick-slide {
         margin: 0 5px;
     }
-    
+
     .vip_board {
-    flex-direction: column;
-    gap: 20px;
-}
+        flex-direction: column;
+        gap: 20px;
+    }
 
-.vip_board_rt, .vip_board_lt {
-    width: 100%;
-}
+    .vip_board_rt,
+    .vip_board_lt {
+        width: 100%;
+    }
 
-.vip_board_item
-
- {
-    margin-left: 0px;
-    padding-left: 0px;
-    border-left: none;
-   
-}
+    .vip_board_item {
+        margin-left: 0px;
+        padding-left: 0px;
+        border-left: none;
+    }
 
     .title_40 {
         font-size: 24px;
         line-height: 26px;
     }
-    
-        .vip_board_content .vip_board_item:last-child .sub_head_inter {
+
+    .vip_board_content .vip_board_item:last-child .sub_head_inter {
         margin: 20px 0;
         font-size: 16px;
     }
-    
+
     .vip_board_content .vip_board_item:first-child {
-    margin-top: 25px;
-}
+        margin-top: 25px;
+    }
 
     .btn_2 {
-      
         text-align: center;
     }
-    
-    .audio-card {
-    padding: 15px;
-    flex-direction: column;
-    gap: 10px;
-}
 
-.audio-content {
-     text-align: start; 
-    width: 100%;
-}
+    .audio-card {
+        padding: 15px;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .audio-content {
+        text-align: start;
+        width: 100%;
+    }
 
     .origin_left_content {
         top: 35px;
         left: 30px;
     }
-    
+
     .atelier_origin_content {
         padding-left: 0px;
     }
-    
+
     .origin_left {
-    margin-bottom: 10px;
-}
+        margin-bottom: 10px;
+    }
 
     .material_wrapper {
         padding: 20px;
     }
-    
-    .slick-dots
-{
-    padding:5px 0;
-}
+
+    .slick-dots {
+        padding: 5px 0;
+    }
 
     .month_box_main {
         overflow: auto;
         grid-template-columns: repeat(12, 1fr);
         row-gap: 0px;
         column-gap: 20px;
-         padding: 15px;
+        padding: 15px;
     }
-    
+
     .month_box {
-      
         width: 150px;
     }
-    
+
     .montheditions_rt .content-wrap {
-         max-height: 100%; 
-       
+        max-height: 100%;
     }
-        .montheditions_rt .content-wrap:not(.expanded)::after {
+    .montheditions_rt .content-wrap:not(.expanded)::after {
         content: none;
-       
     }
-    
+
     .montheditions_rt .read-more-btn {
         display: none;
     }
-    
-    .montheditions_rt .montheditions_para
-    {
-       margin-bottom: 0.5rem;
+
+    .montheditions_rt .montheditions_para {
+        margin-bottom: 0.5rem;
     }
 
+    .abiout_left {
+        padding: 0;
+        margin: 0;
+        border: none;
+    }
 
+    .abiout_left_tp img,
+    .abiout_right .abiout_left_tp img {
+        display: none;
+    }
 
+    .abiout_left_tp {
+        margin-bottom: 12px;
+    }
+
+    .practice_content .sub_head_inter {
+        margin-bottom: 15px;
+    }
+
+    .practice_content .title_40 {
+        font-size: 20px;
+        line-height: 26px;
+    }
+
+    .founder_main {
+        flex-direction: column;
+    }
+
+    .founder_main .founder_text_1 p {
+        text-align: center;
+    }
+
+    .founder_text_2 {
+        display: none;
+    }
+
+    .privacy_nav_jump .content {
+        padding: 10px 0px;
+    }
+
+    .privacy_nav_jump .sidebar {
+        display: none;
+    }
+
+    .hero_content_inner {
+        padding: 16px;
+    }
+
+    .privacy_nav_jump {
+        padding-top: 0px;
+    }
+
+    .privacy_main .title_40 {
+        margin-bottom: 15px;
+    }
 }

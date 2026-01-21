@@ -45,6 +45,7 @@
     <link rel="stylesheet" href="{{ asset('public/front/css/footer.css')}}">
     <link rel="stylesheet" href="{{ asset('public/front/css/journal.css')}}">
     <link rel="stylesheet" href="{{ asset('public/front/css/privacy.css')}}">
+    <link rel="stylesheet" href="{{ asset('public/front/css/about.css')}}">
     <!-- responsive css start -->
     <link rel="stylesheet" href="{{ asset('public/front/css/responsive.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
