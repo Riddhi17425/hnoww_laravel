@@ -1,8 +1,7 @@
 @include('layouts.frontheader')
-@push('style')
 <style>
 .theme-green .header-scrolled {
-    /*background: #EDEAE4;*/
+    background: #EDEAE4 !important;
 }
 
 .theme-green .language-select .dropdown-input-lan {
@@ -15,7 +14,6 @@
     }
 }
 </style>
-@endpush
 
 <section class="mt_60 mt-5">
     <div class="container">
