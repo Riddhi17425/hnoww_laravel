@@ -284,3 +284,20 @@ window.addEventListener("load", () => {
 
 // loader js end
 
+
+// ----------------------- journal
+
+document.querySelectorAll(".read-more-btn").forEach(btn => {
+    btn.addEventListener("click", function () {
+
+        const wrapper = this.previousElementSibling;
+
+        wrapper.classList.toggle("expanded");
+
+        this.textContent = wrapper.classList.contains("expanded")
+            ? "Read Less"
+            : "Read More";
+    });
+});
+
+

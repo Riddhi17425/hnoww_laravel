@@ -162,6 +162,7 @@ $monthMap = [
                                         <p class="sub_head_inter mb-0">Ritual as self-care through design..</p> -->
                                         {!! $val->description !!}
                                     </div>
+                                    <a href="javascript:void(0)" class="read-more-btn">Read More</a>
                                     
                                 </div>
                             </div>
