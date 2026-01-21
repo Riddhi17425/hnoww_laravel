@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DB;
 use Illuminate\Support\Facades\Mail;
-use App\Models\{Category, Product, ProductInquiry, NewsLetter, FaqType, ContactInquiry, RequestCatalogue, CorporateProposalRequest, Journal, Blessing, WeddingCatalogueRequest, GiftBlessing, Ceremonial, CeremonialInquiry, GiftShop, CorporateKit};
+use App\Models\{Category, Product, ProductInquiry, NewsLetter, FaqType, ContactInquiry, RequestCatalogue, CorporateProposalRequest, Journal, Blessing, WeddingCatalogueRequest, GiftBlessing, Ceremonial, CeremonialInquiry, GiftShop, CorporateKit, CorporateKitRequest};
 use Exception;
 use Illuminate\Validation\Rule;
 
@@ -279,6 +279,8 @@ class FrontController extends Controller
             $exists = DB::table('request_catalogues')->where('email', $email)->exists();
         } elseif($table === 'gift_shops') {
             $exists = DB::table('product_inquiries')->where('email', $email)->where('is_gift_inquiry', 1)->exists();
+        } elseif($table === 'corporate_kit_requests') {
+            $exists = DB::table('corporate_kit_requests')->where('email', $email)->exists();
         }
 
         return response()->json([
@@ -648,6 +650,130 @@ class FrontController extends Controller
         }
 
         return redirect()->back()->with('success', 'Corporate proposal request submitted successfully.');
+    }
+
+    public function storeCorporateKitRequest(Request $request){
+        $qualityRange = config('global_values.quality_range');
+        $rules = [
+            'k_full_name'             => 'required|string|min:2|max:100',
+            'k_company_name'          => 'required|string|min:2|max:150',
+            'k_phone'                 => 'required|regex:/^[0-9\s\-\+\(\)]+$/|min:7|max:20',
+            'k_email'                 => 'required|email|max:150',
+            'k_product_of_interest'   => 'nullable|array',
+            'k_product_of_interest.*' => 'string',
+            'k_quantity_range'        => 'required|string',
+            'k_budget'                => 'nullable|string|max:100',
+            'k_branding_requirements' => 'nullable|string|max:255',
+            'k_delivery_date'         => 'required|date|after_or_equal:today',
+            'k_message'               => 'nullable|string|max:500',
+        ];
+        $messages = [
+            'k_full_name.required'             => 'Full Name is required.',
+            'k_full_name.min'                  => 'Full Name must be at least 2 characters.',
+            'k_full_name.max'                  => 'Full Name cannot be longer than 100 characters.',
+            'k_company_name.required'          => 'Company Organization is required.',
+            'k_phone.required'                 => 'Phone Number is required.',
+            'k_phone.regex'                   => 'Phone Number format is invalid.',
+            'k_phone.min'                     => 'Phone Number is too short.',
+            'k_phone.max'                     => 'Phone Number is too long.',
+            'k_email.required'                => 'Email Address is required.',
+            'k_email.email'                   => 'Email must be a valid email address.',
+            'k_quantity_range.required'       => 'Quantity Range is required.',
+            'k_quantity_range.in'             => 'Selected Quantity Range is invalid.',
+            'k_delivery_date.required'        => 'Delivery Timeline is required.',
+            'k_delivery_date.date'            => 'Delivery Timeline must be a valid date.',
+            'k_delivery_date.after_or_equal'  => 'Delivery Timeline cannot be in the past.',
+            'k_message.max'                   => 'Message cannot exceed 500 characters.',
+        ];
+
+        // Validate the request
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+       
+        $data = [
+            'full_name' => $request->k_full_name,
+            'company_name' => $request->k_company_name,
+            'phone' => $request->k_phone,
+            'email' => $request->k_email,
+            'quantity_range' => $request->k_quantity_range,
+            'budget' => $request->k_budget,
+            'branding_requirements' => $request->k_branding_requirements,
+            'delivery_date' => $request->k_delivery_date,
+            'message' => $request->k_message,
+        ];
+
+        // Convert array to string for product_of_interest if needed (or save JSON)
+        if ($request->has('k_product_of_interest')) {
+            $data['product_of_interest'] = json_encode($request->input('k_product_of_interest'));
+        } else {
+            $data['product_of_interest'] = null;
+        }
+
+        CorporateKitRequest::create($data);
+
+        $commaSeparatedProducts = '';
+        $productIds = $request->k_product_of_interest;
+        $productNames = CorporateKit::whereIn('id', $productIds)->pluck('title')->toArray();
+        if(isset($productNames) && is_countable($productNames) && count($productNames) > 0){
+            $commaSeparatedProducts = implode(', ', $productNames);
+        }
+
+        // SEND MAIL TO USER AND ADMIN
+        $adminEmail = $this->adminEmail;
+        $userEmail = $request->k_email;
+        $data = [
+            'name'        => $request->k_full_name,
+            'company_name'        => $request->k_company_name,
+            'phone'        => $request->k_phone,
+            'email'       => $request->k_email,
+            'product_of_interest' => $commaSeparatedProducts,
+            'quantity_range'  => $qualityRange[$request->k_quantity_range],
+            'budget'  => $request->k_budget,
+            'branding_requirements'  => $request->k_branding_requirements,
+            'delivery_date'  => $request->k_delivery_date,
+            'message_data'     => $request->k_message ?? NULL,
+        ];
+
+        try {
+            Mail::send('email.admin.wedding_catalogue_request', $data, function ($message) use ($adminEmail) {
+                $message->to($this->adminEmail)->subject('New Corporate Kit Request Received');
+            });
+       
+            Mail::send('email.front.wedding_catalogue_request', $data, function ($message) use ($userEmail) {
+                $message->to($userEmail)->subject('Corporate Kit Request send Successfully');
+            });
+        } catch (Exception $e) {
+            Log::error('Inquiry Mail sending failed: '.$e->getMessage());
+        }
+
+        // SEND WHATSAPP MESSAGE TO ADMIN
+        //$message = 'New Corporate Kit Request is placed using email - '.$request->w_email;
+        $message = "📩 *New Corporate Kit Request*\n\n" .
+                "*Full Name:* {$request->k_full_name}\n" .
+                "*Company Name:* {$request->k_company_name}\n" .
+                "*Phone:* {$request->k_phone}\n" .
+                "*Email:* {$request->k_email}\n" .
+                "*Product of Interest:* " . ($commaSeparatedProducts ?? 'N/A') . "\n" .
+                "*Quantity Range:* {$qualityRange[$request->k_quantity_range]}\n" .
+                "*Budget:* {$request->k_budget}\n" .
+                "*Branding Requirements:* {$request->k_branding_requirements}\n" .
+                "*Delivery Date:* {$request->k_delivery_date}\n" .
+                "*Message:* " . ($request->k_message ?? 'N/A') . "\n\n" .
+                "— HNoWW";
+
+        try {
+            $url = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode($message);
+            //return redirect()->away($url);
+            return back()->with('whatsapp_url', $url);
+        } catch (Exception $e) {
+            Log::error('Inquiry Whatsapp message sending failed: '.$e->getMessage());
+        }
+
+        return redirect()->back()->with('success', 'Wedding Catalogue request submitted successfully.');
     }
 
     public function storeWeddingCatalogueRequest(Request $request){

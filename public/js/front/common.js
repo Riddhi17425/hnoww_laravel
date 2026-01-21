@@ -14,6 +14,15 @@ var choices = new Choices(element, {
     searchEnabled: true,
 });
 
+var element = $('#k_product_of_interest')[0];  // get raw DOM element from jQuery object
+var choices = new Choices(element, {
+    removeItemButton: true,  // shows an "x" to deselect each selected option
+    placeholder: true,
+    placeholderValue: 'Select products',
+    searchEnabled: true,
+});
+
+
 var cFormSubmitted = false;
 $("#requestCorporateProposalForm").validate({
     ignore: [],
