@@ -104,6 +104,7 @@ $monthMap = [
             <h2 class="title_60">Collections</h2>
             <p>Publishing Schedule</p>
         </div>
+
         <div class="row g-4 g-xxl-5">
             @if(isset($journal) && is_countable($journal) && count($journal) > 0)
                 {{-- @foreach($journal as $key => $val)
@@ -150,7 +151,7 @@ $monthMap = [
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <div class="montheditions_rt">
                                     <h3 class="sub_head mb-md-3">{{ $val->title }}</h3>
                                     @if(isset($val->feature_title))<p class="montheditions_para">Feature: {{$val->feature_title}}</p>@endif
@@ -162,9 +163,24 @@ $monthMap = [
                                         <p class="sub_head_inter mb-0">Ritual as self-care through design..</p> -->
                                         {!! $val->description !!}
                                     </div>
-                                    
+                                    <a href="javascript:void(0)" class="read-more-btn">Read More</a>
+                                </div>
+                            </div> --}}
+                            <div class="col-md-6">
+                                <div class="montheditions_rt">
+                                    <h3 class="sub_head mb-md-3">The Ritual of Renewal</h3>
+                                    <p class="montheditions_para">Feature: When Objects Reflect New Light</p>
+                                    <div class="content-wrap">
+                                        <p>A meditation on reflection - silver, glass, and stillness as metaphors for self-awareness.</p>
+                                        <h3 class="sub_head mt-md-4 mb-md-3" style="color:#0D5E4C;">The Practice:</h3>
+                                        <p class="montheditions_para">How to Create a Morning Ritual Table</p>
+                                        <p>Teach readers to curate a reflective moment � candles, scent, a silver bowl, a note of intention.</p>
+                                        <p class="sub_head_inter mb-0">Ritual as self-care through design..</p>
+                                    </div>
+                                <a href="javascript:void(0)" class="read-more-btn">Read More</a>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     @endif

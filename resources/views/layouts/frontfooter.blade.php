@@ -109,7 +109,7 @@
                  <ul>
                      <li><a href="https://www.instagram.com/h.noww" target="_blank">Instagram</a></li>
                      {{-- <li><a href="">WhatsApp</a></li> --}}
-                     <li><a href="">Facebook</a></li>
+                     <li><a href="https://www.facebook.com/profile.php?id=61579793212952" target="_blank">Facebook</a></li>
                  </ul>
              </div>
 
