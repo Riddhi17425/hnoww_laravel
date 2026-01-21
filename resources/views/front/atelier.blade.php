@@ -60,7 +60,7 @@
             <div data-aos="fade-left" data-aos-delay="800" data-aos-duration="800" data-aos-once="true">
                 <h3 class="magic_wrapper_h3">Designed in Dubai. Rooted in ritual. Made to endure.</h3>
                 <p>
-                   At HNOWW, every object is a gesture. A pause.
+                    At HNOWW, every object is a gesture. A pause.
                     A moment of intention.
                     We craft sculptural pieces that turn daily actions into quiet ceremonies where form becomes meaning,
                     and the everyday becomes sacred.
@@ -157,7 +157,8 @@
         <div class="row gy-4 gy-md-0">
             <div class="col-md-4">
                 <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/blessing-library1.png')}}" alt="images">
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/blessing-library1.png')}}"
+                        alt="images">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h3 class="sub_head">For Home</h3>
@@ -168,7 +169,8 @@
             </div>
             <div class="col-md-4">
                 <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/blessing-library2.png')}}" alt="images">
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/blessing-library2.png')}}"
+                        alt="images">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h3 class="sub_head">For Union</h3>
@@ -179,7 +181,8 @@
             </div>
             <div class="col-md-4">
                 <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/blessing-library3.png')}}" alt="images">
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/blessing-library3.png')}}"
+                        alt="images">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h3 class="sub_head">For Self</h3>
@@ -219,19 +222,22 @@
         <div class="row gy-4 gy-md-0">
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/Journal1.png')}}" alt="images">
+                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/Journal1.png')}}"
+                        alt="images">
                     <h3 class="sub_head mb-0">Why We Chose Travertine: A Study in Stone</h3>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/Journal2.png')}}" alt="images">
+                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/Journal2.png')}}"
+                        alt="images">
                     <h3 class="sub_head mb-0">The Ritual of Hosting: The Table as Ceremony</h3>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/Journal3.png')}}" alt="images">
+                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/Journal3.png')}}"
+                        alt="images">
                     <h3 class="sub_head mb-0">Objects of Memory: Creating a Personal Shrine at Home</h3>
                 </div>
             </div>
@@ -263,21 +269,22 @@
                 </span>
             </p>
             <h2 class="title_60 mb-4">Bespoke Rituals</h2>
-            
+
             <div class="row align-items-center px-3">
                 <div class="col-md-12 text-center mb-3 mb-md-0">
                     <p class="mb-0">Commission custom ceremonial objects, heirlooms, and sacred gifts.
-                        Our atelier collaborates with families, designers, and couples to create one-of-a-kind pieces for
+                        Our atelier collaborates with families, designers, and couples to create one-of-a-kind pieces
+                        for
                     </p>
                 </div>
                 {{-- <div class="text-md-end col-md-6">
                 <a href="javascript:void(0);" class="com_btn">View Bespoke Portfolio  </a>
             </div> --}}
+            </div>
         </div>
-        </div>
-        
-        
- 
+
+
+
         <div class="corporate_slider">
 
             <div class="desire_box">
@@ -285,7 +292,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <h3 class="sub_head">Weddings & Pheras</h3>
-                      
+
                     </div>
                 </div>
             </div>
@@ -294,7 +301,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <h3 class="sub_head">Milestone Celebrations</h3>
-                       
+
                     </div>
                 </div>
             </div>
@@ -303,7 +310,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <h3 class="sub_head">New Homes</h3>
-                       
+
                     </div>
                 </div>
             </div>
@@ -312,11 +319,11 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <h3 class="sub_head">New Homes</h3>
-                       
+
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </section>
@@ -344,57 +351,57 @@
                 <p>Our objects are made in small batches using natural materials:</p>
             </div>
             <div class="material_flex">
-                <div class="mobile_slider">  
-                    
-                        <div class="material_slide text-center">
-                            <div class="material_img">
-                                <img src="{{asset('public/images/front/natural-stone.png')}}" alt="natural-stone" class="img-fluid"
-                                    loading="lazy">
-                            </div>
-                            <h6 class="sub_head">Natural stone</h6>
+                <div class="mobile_slider">
+
+                    <div class="material_slide text-center">
+                        <div class="material_img">
+                            <img src="{{asset('public/images/front/natural-stone.png')}}" alt="natural-stone"
+                                class="img-fluid" loading="lazy">
                         </div>
-                  
-                   
-                        <div class="material_slide text-center">
-                            <div class="material_img">
-                                <img src="{{asset('public/images/front/natural-stone2.png')}}" alt="natural-stone" class="img-fluid"
-                                    loading="lazy">
-                            </div>
-                            <h6 class="sub_head">Brass</h6>
+                        <h6 class="sub_head">Natural stone</h6>
+                    </div>
+
+
+                    <div class="material_slide text-center">
+                        <div class="material_img">
+                            <img src="{{asset('public/images/front/natural-stone2.png')}}" alt="natural-stone"
+                                class="img-fluid" loading="lazy">
                         </div>
-                   
-                        <div class="material_slide text-center">
-                            <div class="material_img">
-                                <img src="{{asset('public/images/front/natural-stone3.png')}}" alt="natural-stone" class="img-fluid"
-                                    loading="lazy">
-                            </div>
-                            <h6 class="sub_head">Malachite</h6>
+                        <h6 class="sub_head">Brass</h6>
+                    </div>
+
+                    <div class="material_slide text-center">
+                        <div class="material_img">
+                            <img src="{{asset('public/images/front/natural-stone3.png')}}" alt="natural-stone"
+                                class="img-fluid" loading="lazy">
                         </div>
-                   
-                        <div class="material_slide text-center">
-                            <div class="material_img">
-                                <img src="{{asset('public/images/front/natural-stone4.png')}}" alt="natural-stone" class="img-fluid"
-                                    loading="lazy">
-                            </div>
-                            <h6 class="sub_head">Rose Quartz</h6>
+                        <h6 class="sub_head">Malachite</h6>
+                    </div>
+
+                    <div class="material_slide text-center">
+                        <div class="material_img">
+                            <img src="{{asset('public/images/front/natural-stone4.png')}}" alt="natural-stone"
+                                class="img-fluid" loading="lazy">
                         </div>
-                    
-                        <div class="material_slide text-center">
-                            <div class="material_img">
-                                <img src="{{asset('public/images/front/natural-stone5.png')}}" alt="natural-stone" class="img-fluid"
-                                    loading="lazy">
-                            </div>
-                            <h6 class="sub_head">Silver Metal</h6>
+                        <h6 class="sub_head">Rose Quartz</h6>
+                    </div>
+
+                    <div class="material_slide text-center">
+                        <div class="material_img">
+                            <img src="{{asset('public/images/front/natural-stone5.png')}}" alt="natural-stone"
+                                class="img-fluid" loading="lazy">
                         </div>
-                   
-                        <div class="material_slide text-center">
-                            <div class="material_img">
-                                <img src="{{asset('public/images/front/natural-stone6.png')}}" alt="natural-stone" class="img-fluid"
-                                    loading="lazy">
-                            </div>
-                            <h6 class="sub_head">Leather</h6>
+                        <h6 class="sub_head">Silver Metal</h6>
+                    </div>
+
+                    <div class="material_slide text-center">
+                        <div class="material_img">
+                            <img src="{{asset('public/images/front/natural-stone6.png')}}" alt="natural-stone"
+                                class="img-fluid" loading="lazy">
                         </div>
-                   
+                        <h6 class="sub_head">Leather</h6>
+                    </div>
+
                 </div>
             </div>
             <p class="text-center mb-0">We work with artisans whose hands understand the language of weight, stone, and
@@ -436,7 +443,7 @@
             <div class="col-md-4">
                 <div class="collection_box">
                     <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/values2.png')}}" alt="images">
-                     <h3 class="sub_head">Sculptural Purity</h3>
+                    <h3 class="sub_head">Sculptural Purity</h3>
                     <p class="mb-0">Form, weight, and shadow shape our vocabulary.</p>
                 </div>
             </div>
@@ -482,7 +489,9 @@
                     </div>
                     <div class="bespoke_box_bot">
                         <p class="para">Sculptural ceremonial pieces for modern unions.</p>
-                        <span><a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#requestWeddingCatalogue" class="com_btn">Request Wedding Catalogue</a></span>
+                        <span><a href="javascript:void(0);" data-bs-toggle="modal"
+                                data-bs-target="#requestWeddingCatalogue" class="com_btn">Request Wedding
+                                Catalogue</a></span>
                     </div>
                 </div>
             </div>
@@ -496,7 +505,9 @@
                     </div>
                     <div class="bespoke_box_bot">
                         <p class="para">Objects that create lasting partnerships. Custom engraving available.</p>
-                        <span><a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#requestCorporateProposal" class="com_btn">Request Corporate Lookbook</a></span>
+                        <span><a href="javascript:void(0);" data-bs-toggle="modal"
+                                data-bs-target="#requestCorporateProposal" class="com_btn">Request Corporate
+                                Lookbook</a></span>
                     </div>
                 </div>
             </div>
