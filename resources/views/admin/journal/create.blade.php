@@ -36,6 +36,18 @@
                 @error('title') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
+            <div class="col-md-6">
+                <label class="form-label">Feature Title</label><span class="text-danger">*</span>
+                <input type="text" name="feature_title" class="form-control" value="{{ old('feature_title') }}">
+                @error('feature_title') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Feature Description</label><span class="text-danger">*</span>
+                <input type="text" name="feature_description" class="form-control" value="{{ old('feature_description') }}">
+                @error('feature_description') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
             <div class="col-md-12">
                 <label class="form-label">Description</label><span class="text-danger">*</span>
                 <textarea name="description" id="description" class="form-control">{{ old('description') }}</textarea>
