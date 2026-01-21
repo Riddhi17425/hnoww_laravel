@@ -47,13 +47,13 @@
                         <div class="ct_input">
                            <label class="sub_head">Product of Interest <span class="text-danger">*</span></label>
                            <select id="w_product_of_interest" name="w_product_of_interest[]" multiple>
-                           @if(isset($weddingProduct) && is_countable($weddingProduct) && count($weddingProduct) > 0)
-                              @foreach($weddingProduct as $value)
-                              <option value="{{ $value->id }}" {{ collect(old('product_of_interest'))->contains($value->id) ? 'selected' : '' }}>
-                              {{ $value->product_name }}
-                              </option>
-                              @endforeach
-                           @endif
+                              @if(isset($weddingProduct) && is_countable($weddingProduct) && count($weddingProduct) > 0)
+                                 @foreach($weddingProduct as $value)
+                                 <option value="{{ $value->id }}" {{ collect(old('product_of_interest'))->contains($value->id) ? 'selected' : '' }}>
+                                 {{ $value->product_name }}
+                                 </option>
+                                 @endforeach
+                              @endif
                            </select>
                            <div id="w_product_error"></div>
                            @error('w_product_of_interest') <small class="text-danger">{{ $message }}</small> @enderror

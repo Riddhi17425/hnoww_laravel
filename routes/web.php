@@ -43,6 +43,7 @@ Route::name('front.')->group(function () {
 
 	Route::get('/atelier', [FrontController::class, 'getAtelier'])->name('atelier');
 	Route::post('store-corporate-proposal-request', [FrontController::class, 'storeCorporateProposalRequest'])->name('store.corporate.proposal.request');
+	Route::post('store-corporate-kit-request', [FrontController::class, 'storeCorporateKitRequest'])->name('store.corporate.kit.request');
     Route::post('store-wedding-catelogue-request', [FrontController::class, 'storeWeddingCatalogueRequest'])->name('store.wedding.catelogue.request');
 
 	Route::get('/ceremonials', [FrontController::class, 'getCeremonials'])->name('ceremonials');

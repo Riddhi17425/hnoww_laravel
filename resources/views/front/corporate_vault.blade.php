@@ -17,7 +17,7 @@
             ritual instruments, and heritage pieces designed for the
             modern executive. Every object is customizable, crafted from solid materials, and engineered to earn its
             place on a CEO's desk.</p>
-    </div>
+    </div> 
 
 </section>
 
@@ -63,60 +63,6 @@
                     <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/product-not-found.png')}}" alt="images">
                 </div>
             @endif
-            {{-- <div class="desire_box">
-                <img class="w-100  mb-2 mb-md-4" src="{{asset('public/images/front/corporate1.png')}}" alt="images">
-                <div class="desire_box_bot_child">
-                    <div>
-                        <h3 class="sub_head">The Oculus (Solo) 1.</h3>
-                        <p>A compact ritual centerpiece for intimate hosting.</p>
-                        <p class="price">AED 1,980</p>
-                    </div>
-
-                    <a href="#">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                            <path d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
-                                stroke="#0D5E4C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </a>
-                </div>
-            </div>
-
-            <div class="desire_box">
-                <img class="w-100  mb-2 mb-md-4" src="{{asset('public/images/front/corporate1.png')}}" alt="images">
-                <div class="desire_box_bot_child">
-                    <div>
-                        <h3 class="sub_head">The Oculus (Solo) 1.</h3>
-                        <p>A compact ritual centerpiece for intimate hosting.</p>
-                        <p class="price">AED 1,980</p>
-                    </div>
-
-                    <a href="#">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                            <path d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
-                                stroke="#0D5E4C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </a>
-                </div>
-            </div>
-
-            <div class="desire_box">
-                <img class="w-100  mb-2 mb-md-4" src="{{asset('public/images/front/corporate1.png')}}" alt="images">
-                <div class="desire_box_bot_child">
-                    <div>
-                        <h3 class="sub_head">The Oculus (Solo) 1.</h3>
-                        <p>A compact ritual centerpiece for intimate hosting.</p>
-                        <p class="price">AED 1,980</p>
-                    </div>
-
-                    <a href="#">
-                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                            <path d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
-                                stroke="#0D5E4C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </a>
-                </div>
-            </div> --}}
-
         </div>
     </div>
 </section>
@@ -167,61 +113,6 @@
                     </div>
                 </div>
             @endforeach 
-
-            {{-- <div class="slider">
-                <div class="corporatekits">
-                    <div>
-                        <img class=" img-fluid" src="{{asset('public/images/front/corporate-kits.png')}}" alt="images">
-                    </div>
-
-                    <div class="corporate_kit_content">
-                        <h3 class="title_40">The Onboarding Kit</h3>
-                        <p class="mb-4">A sculptural starter ritual for new teams. Elevates the workspace from day one.
-                        </p>
-                        <ul class="corporate_kit_list">
-                            <li>Contains:</li>
-                            <li> – The Horizon Mat (Desk Pad)</li>
-                            <li> – The Scribe’s Cradle (Pen Stand) </li>
-                            <li> – Branding: Debossed Mat / Etched Cradle </li>
-                        </ul>
-
-                        <h5 class="sub_head_inter">
-                            <span>AED 600 – 800 </span>
-                            <span class="mx-3" style="color: #D0C2AA;">|</span>
-                            <span>MOQ: 20 Units</span>
-                        </h5>
-
-                        <a href="#" class="com_btn"> REQUEST CORPORATE PROPOSAL </a>
-                    </div>
-                </div>
-            </div>
-            <div class="slider">
-                <div class="corporatekits">
-                    <div>
-                        <img class=" img-fluid" src="{{asset('public/images/front/corporate-kits.png')}}" alt="images">
-                    </div>
-
-                    <div class="corporate_kit_content">
-                        <h3 class="title_40">The Onboarding Kit</h3>
-                        <p class="mb-4">A sculptural starter ritual for new teams. Elevates the workspace from day one.
-                        </p>
-                        <ul class="corporate_kit_list">
-                            <li>Contains:</li>
-                            <li> – The Horizon Mat (Desk Pad)</li>
-                            <li> – The Scribe’s Cradle (Pen Stand) </li>
-                            <li> – Branding: Debossed Mat / Etched Cradle </li>
-                        </ul>
-
-                        <h5 class="sub_head_inter">
-                            <span>AED 600 – 800 </span>
-                            <span class="mx-3" style="color: #D0C2AA;">|</span>
-                            <span>MOQ: 20 Units</span>
-                        </h5>
-
-                        <a href="#" class="com_btn"> REQUEST CORPORATE PROPOSAL </a>
-                    </div>
-                </div>
-            </div> --}}
         </div>
 
     </div>
@@ -353,22 +244,6 @@
                         </svg>
 
                     </span>
-                    {{-- <span>Not sure what to choose?</span> --}}
-                    {{-- <span>
-                        <svg width="146" height="11" viewBox="0 0 146 11" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M134.667 5.33325C134.667 8.27877 137.054 10.6666 140 10.6666C142.946 10.6666 145.333 8.27877 145.333 5.33325C145.333 2.38773 142.946 -8.13802e-05 140 -8.13802e-05C137.054 -8.13802e-05 134.667 2.38773 134.667 5.33325ZM0 5.33325L0 6.33325L140 6.33325V5.33325V4.33325L0 4.33325L0 5.33325Z"
-                                fill="url(#paint0_linear_32_114)" />
-                            <defs>
-                                <linearGradient id="paint0_linear_32_114" x1="0" y1="5.83325" x2="140" y2="5.83325"
-                                    gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#F8F7F3" stop-opacity="0" />
-                                    <stop offset="1" stop-color="#F8F7F3" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                    </span> --}}
                 </p>
             </div>
             <div>
@@ -378,8 +253,8 @@
     </div>
 </section>
 
-<!-- Corporate Request -->
-{{-- <div class="modal fade corporate_vault_modal" id="requestCorporateKitProposal" data-bs-backdrop="static" data-bs-keyboard="false"
+<!-- Corporate Kit Request -->
+<div class="modal fade corporate_vault_modal" id="requestCorporateKitProposal" data-bs-backdrop="static" data-bs-keyboard="false"
     tabindex="-1" aria-labelledby="requestCorporateKitProposalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen modal-dialog-centered">
         <div class="modal-content">
@@ -388,15 +263,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ route('front.store.corporate.proposal.request') }}" id="requestCorporateKitProposalForm" class="ct_form">
+                    <form method="POST" action="{{ route('front.store.corporate.kit.request') }}" id="requestCorporateKitProposalForm" class="ct_form">
                     @csrf
                         <div class="row">
                             <!-- Full Name -->
                             <div class="col-lg-6">
                                 <div class="ct_input">
                                     <label class="sub_head">Full Name <span class="text-danger">*</span></label>
-                                    <input type="text" name="full_name" id="full_name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();" placeholder="Enter your Full Name" value="{{ old('full_name') }}">
-                                    @error('full_name') <small class="text-danger">{{ $message }}</small> @enderror
+                                    <input type="text" name="k_full_name" id="k_full_name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();" placeholder="Enter your Full Name" value="{{ old('k_full_name') }}">
+                                    @error('k_full_name') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                             </div>
 
@@ -404,8 +279,8 @@
                             <div class="col-lg-6">
                                 <div class="ct_input">
                                     <label class="sub_head">Company Organization <span class="text-danger">*</span></label>
-                                    <input type="text" name="company_name" placeholder="Enter your Company Organization Name" id="company_name" value="{{ old('company_name') }}">
-                                    @error('company_name') <small class="text-danger">{{ $message }}</small> @enderror
+                                    <input type="text" name="k_company_name" placeholder="Enter your Company Organization Name" id="k_company_name" value="{{ old('k_company_name') }}">
+                                    @error('k_company_name') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                             </div>
 
@@ -413,8 +288,8 @@
                             <div class="col-lg-6">
                                 <div class="ct_input">
                                     <label class="sub_head">Phone Number <span class="text-danger">*</span></label>
-                                    <input type="text" name="phone" id="phone" placeholder="Enter your WhatsApp Phone Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);" value="{{ old('phone') }}">
-                                    @error('phone') <small class="text-danger">{{ $message }}</small> @enderror
+                                    <input type="text" name="k_phone" id="k_phone" placeholder="Enter your WhatsApp Phone Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);" value="{{ old('phone') }}">
+                                    @error('k_phone') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                             </div>
 
@@ -422,8 +297,8 @@
                             <div class="col-lg-6">
                                 <div class="ct_input">
                                     <label class="sub_head">Email <span class="text-danger">*</span></label>
-                                    <input type="email" name="email" placeholder="Enter your Email Address" id="email" value="{{ old('email') }}">
-                                    @error('email') <small class="text-danger">{{ $message }}</small> @enderror
+                                    <input type="email" name="k_email" placeholder="Enter your Email Address" id="k_email" value="{{ old('k_email') }}">
+                                    @error('k_email') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                             </div>
 
@@ -431,17 +306,17 @@
                             <div class="col-lg-4">
                                 <div class="ct_input">
                                     <label class="sub_head">Product of Interest <span class="text-danger">*</span></label>
-                                    <select id="product_of_interest" name="product_of_interest[]" multiple>
+                                    <select id="k_product_of_interest" name="k_product_of_interest[]" multiple>
                                         @if(isset($corporateKits) && is_countable($corporateKits) && count($corporateKits) > 0)
                                             @foreach($corporateKits as $value)
-                                                <option value="{{ $value->id }}" {{ collect(old('product_of_interest'))->contains($value->id) ? 'selected' : '' }}>
+                                                <option value="{{ $value->id }}" {{ collect(old('k_product_of_interest'))->contains($value->id) ? 'selected' : '' }}>
                                                     {{ $value->title }}
                                                 </option>
                                             @endforeach
                                         @endif
                                     </select>
-
-                                    @error('product_of_interest') <small class="text-danger">{{ $message }}</small> @enderror
+                                    <div id="product_kit_error"></div>
+                                    @error('k_product_of_interest') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                             </div>
 
@@ -449,15 +324,15 @@
                             <div class="col-lg-4">
                                 <div class="ct_input">
                                     <label class="sub_head">Quantity Range <span class="text-danger">*</span></label>
-                                    <select name="quantity_range" id="quantity_range">
+                                    <select name="k_quantity_range" id="k_quantity_range">
                                         <option value="">Select</option>
                                         @foreach(config('global_values.quality_range') as $key => $value)
-                                            <option value="{{ $key }}" {{ old('quantity_range') == $key ? 'selected' : '' }}>
+                                            <option value="{{ $key }}" {{ old('k_quantity_range') == $key ? 'selected' : '' }}>
                                                 {{ $value }}
                                             </option>
                                         @endforeach
                                     </select>
-                                    @error('quantity_range') <small class="text-danger">{{ $message }}</small> @enderror
+                                    @error('k_quantity_range') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                             </div>
 
@@ -465,8 +340,8 @@
                             <div class="col-lg-4">
                                 <div class="ct_input">
                                     <label class="sub_head">Approximate Budget</label>
-                                    <input type="text" placeholder="Enter Approximate Budget" name="budget" id="budget" value="{{ old('budget') }}">
-                                    @error('budget') <small class="text-danger">{{ $message }}</small> @enderror
+                                    <input type="text" placeholder="Enter Approximate Budget" name="k_budget" id="k_budget" value="{{ old('k_budget') }}">
+                                    @error('k_budget') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                             </div>
 
@@ -474,7 +349,7 @@
                             <div class="col-lg-6">
                                 <div class="ct_input">
                                     <label class="sub_head">Branding Requirements</label>
-                                    <input type="text" placeholder="e.g. Logo etching, Custom box colour" name="branding_requirements" id="branding_requirements" value="{{ old('branding_requirements') }}">
+                                    <input type="text" placeholder="e.g. Logo etching, Custom box colour" name="k_branding_requirements" id="k_branding_requirements" value="{{ old('k_branding_requirements') }}">
                                 </div>
                             </div>
 
@@ -482,8 +357,8 @@
                             <div class="col-lg-6">
                                 <div class="ct_input">
                                     <label class="sub_head">Delivery Timeline <span class="text-danger">*</span></label>
-                                    <input type="date" name="delivery_date" id="delivery_date" value="{{ old('delivery_date') }}">
-                                    @error('delivery_date') <small class="text-danger">{{ $message }}</small> @enderror
+                                    <input type="date" name="k_delivery_date" id="k_delivery_date" value="{{ old('k_delivery_date') }}">
+                                    @error('k_delivery_date') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                             </div>
 
@@ -491,7 +366,7 @@
                             <div class="col-12">
                                 <div class="ct_input">
                                     <label class="sub_head">Message / Notes</label>
-                                    <textarea name="message" placeholder="Enter Message" id="message">{{ old('message') }}</textarea>
+                                    <textarea name="k_message" placeholder="Enter Message" id="k_message">{{ old('k_message') }}</textarea>
                                 </div>
                             </div>
 
@@ -505,7 +380,7 @@
             </div>
         </div>
     </div>
-</div> --}}
+</div>
 
 @push('script')
 <script>
@@ -520,6 +395,107 @@ $( document ).ready(function() {
             window.location.href = "{{ route('front.corporate.vault') }}";
         }
     });
+
+    $("#requestCorporateKitProposalForm").validate({
+        ignore: [],
+        rules: { 
+            k_full_name: { 
+                required: true, 
+                minlength: 2, 
+                maxlength: 50, 
+                lettersonly: true 
+            },
+            k_company_name: { 
+                required: true 
+            },
+            k_phone: { 
+                required: true, 
+                number: true, 
+                validPhone: true 
+            },
+            k_email: { 
+                required: true, 
+                email: true, 
+                noSpamEmail: true, 
+                uniqueEmail: "corporate_kit_requests" 
+            },
+            'k_product_of_interest[]': { 
+                required: true 
+            },
+            k_quantity_range: { 
+                required: true 
+            },
+            k_delivery_date: { 
+                required: true, 
+                date: true, 
+                minDate: true 
+            },
+            k_message:{
+                maxlength:500,
+            }
+        },
+        messages: {
+            k_full_name: {
+                required: "Please enter your full name",
+                minlength: "Full name must be at least 2 characters",
+                maxlength: "Full name cannot exceed 50 characters",
+                lettersonly: "Full name can only contain letters and spaces"
+            },
+            k_company_name: {
+                required: "Please enter your company or organization name"
+            },
+            k_phone: {
+                required: "Please enter your phone number",
+                number: "Phone number must contain only digits",
+                validPhone: "Enter a valid phone number"
+            },
+            k_email: {
+                required: "Please enter your email address",
+                email: "Please enter a valid email address",
+                noSpamEmail: "This email address is not allowed",
+                uniqueEmail: "This email is already used"
+            },
+            'k_product_of_interest[]': {
+                required: "Please select at least one product of interest"
+            },
+            k_quantity_range: {
+                required: "Please select a quantity range"
+            },
+            k_delivery_date: {
+                required: "Please select a delivery date",
+                date: "Enter a valid date",
+                minDate: "Delivery date must be after today"
+            },
+            k_message:{
+                maxlength: "Message cannot exceed 50 characters",
+            }
+        },
+        errorElement: 'div',
+        errorPlacement: function(error, element) {
+            if (element.attr('name') === 'product_of_interest[]') {
+                $('#product_kit_error').append(error);
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        highlight: function(element) {
+            $(element).addClass('is-invalid').removeClass('is-valid');
+        },
+        unhighlight: function(element) {
+            $(element).addClass('is-valid').removeClass('is-invalid');
+        },
+        submitHandler: function(form) {
+            if (!cFormSubmitted) {
+                cFormSubmitted = true;
+                const btn = $(form).find('button[type="submit"]');
+                if (btn.length) {
+                    btn.prop('disabled', true).text('Submitting...');
+                }
+                form.submit();
+            }
+        }
+    });
+
 });
 </script>
 @endpush
