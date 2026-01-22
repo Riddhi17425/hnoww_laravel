@@ -25,6 +25,9 @@ use App\Http\Middleware\RedirectIfNotAdmin;
 //FRONT ROUTE
 Route::name('front.')->group(function () {
     Route::get('/', [FrontController::class, 'index'])->name('home');
+    Route::post('stripe', [FrontController::class, 'stripePost'])->name('stripe.post');
+
+
     Route::get('list/{category_slug}', [FrontController::class, 'getList'])->name('list');
     Route::get('product-details/{product_slug}', [FrontController::class, 'getProductDetails'])->name('product.details');
     Route::post('store-product-inquiry', [FrontController::class, 'storeProductInquiry'])->name('store.product.inquiry');

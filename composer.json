@@ -13,6 +13,7 @@
         "guzzlehttp/guzzle": "^7.5",
         "laravel/framework": "^10.0",
         "laravel/tinker": "^2.8",
+        "stripe/stripe-php": "^19.2",
         "yajra/laravel-datatables-oracle": "10.7"
     },
     "require-dev": {
