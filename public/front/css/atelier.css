@@ -28,8 +28,8 @@
 }
 
 .material_wrapper {
-    background: url(../images/ft_bg.png) center / cover no-repeat, #EDEAE4;
-    background-blend-mode: multiply;
+    background: url(../../images/front/with_intention_banner.png) center / cover no-repeat;
+    /*background-blend-mode: multiply;*/
     padding: 60px;
 }
 

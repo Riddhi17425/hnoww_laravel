@@ -127,7 +127,7 @@ input:focus {
 
 .ft_bottom {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     margin-top: 24px;
 }

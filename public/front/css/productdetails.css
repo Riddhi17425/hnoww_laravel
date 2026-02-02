@@ -28,6 +28,9 @@
 .pro_details {
     display: flex;
     gap: 24px;
+    position: sticky;
+    top: 25px;
+    left: 0px;
 }
 
 .pro_details .left {
@@ -159,7 +162,7 @@
     position: relative;
     width: 100%;
     overflow: hidden;
-    cursor: zoom-in;
+    /*cursor: zoom-in;*/
 }
 
 .zoom-image {
@@ -171,7 +174,7 @@
     position: absolute;
     width: 120px;
     height: 120px;
-    border-radius: 50%;
+    /*border-radius: 50%;*/
     border: 2px solid rgba(255, 255, 255, 0.8);
     background-repeat: no-repeat;
     background-size: 200% 200%;

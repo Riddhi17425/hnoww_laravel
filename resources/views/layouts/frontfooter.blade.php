@@ -49,10 +49,11 @@
                     <div>
                          <h4 class="ft_head">The Worlds</h4>
                          <ul class="ft_menu">
-                             <li><a href="{{ route('front.everyday-sacred') }}">The Everyday Sacred</a></li>
-                             <li><a href="{{ route('front.memory-shelf') }}">The Memory Shelf</a></li>
-                             <li><a href="{{ route('front.modern-majilis') }}">The Modern Majilis</a></li>
-                             <li><a href="{{ route('front.architect-study') }}">The Architect’s Study</a></li>
+                             <li><a href="#">The Architect’s Study</a></li>
+                             <li><a href="#">The The Desert Rose</a></li>
+                             <li><a href="#">The Modern Majlis</a></li>
+                             <li><a href="#">The Ritual Table</a></li>
+                             <li><a href="#">The Table As Landscape</a></li>
                          </ul>
                      </div>
                  </div>
@@ -63,8 +64,8 @@
                          <ul class="ft_menu">
                              <li><a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#requestWeddingCatalogue">Weddings & Celebrations</a></li>
                              <li><a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#requestCorporateProposal">Corporate Rituals</a></li>
-                             {{-- <li><a href="bespoke.php">Bespoke Commissions</a></li> --}}
-                             <li><a href="{{ route('front.ceremonials') }}">Ceremonial Objects</a></li>
+                             <li><a href="#">Bespoke Commissions</a></li> 
+                             <!--<li><a href="{{ route('front.ceremonials') }}">Ceremonial Objects</a></li>-->
                          </ul>
                      </div>
                  </div>
@@ -73,6 +74,7 @@
                      <div>
                          <h4 class="ft_head">Editions</h4>
                          <ul class="ft_menu">
+                              <li><a href="#">About</a></li>
                              <li><a href="{{ route('front.journal') }}">The Journal</a></li>
                              <li><a href="{{ route('front.blessings.library') }}">The Blessing Library</a></li>
                              <!--<li><a href="">Philosophy & Craft</a></li>-->

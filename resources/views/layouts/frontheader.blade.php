@@ -125,41 +125,74 @@
                             <span>for home</span>
                         </a>
                     </li>
-                    <!--<li>-->
-                    <!--    <a href="rituals.php" data-text="rituals">-->
-                    <!--        <span>rituals</span>-->
-                    <!--    </a>-->
-                    <!--</li>-->
-                    <li>
-                        <a href="#editions" data-text="editions">
-                            <span>editions</span>
+                    
+                   <li class="has-dropdown">
+                        <a href="#" data-text="The Worlds">
+                            <span>The Worlds</span>
+                            <!-- SVG ARROW -->
+                            <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                            <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
                         </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">The Architect’s Study</a></li>
+                            <li><a href="#">The The Desert Rose</a></li>
+                            <li><a href="#">The Modern Majlis</a></li>
+                            <li><a href="#">The Ritual Table</a></li>
+                            <li><a href="#">The Table As Landscape</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a href="{{ route('front.atelier') }}" data-text="the atelier">
                             <span>the atelier</span>
                         </a>
                     </li>
+
+                    @auth
+                    <li class="has-dropdown">
+                        <a href="#" data-text="My Account">
+                            <span>My Account</span>
+                            <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                            <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">My Profile</a></li>
+                            <li><a href="#">My Orders</a></li>
+                            {{-- <li><a href="#">My Wishlist</a></li> --}}
+                            <li><a href="{{route('front.logout')}}">Logout</a></li>
+                        </ul>
+                    </li>
+                    @else
+                        <li>
+                           <a href="{{ route('front.login') }}" data-text="Login">
+                                <span>Login </span>
+                            </a>
+                           <a href="{{ route('front.register') }}" data-text="Register">
+                                <span>Register</span>
+                            </a>
+                        </li>
+                    @endauth
                     
                     <li>
-                         <div class="language-select">
-                    <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M16 28C18.66 27.9998 21.2446 27.1163 23.348 25.488C25.4515 23.8598 26.9546 21.5791 27.6213 19.004M16 28C13.34 27.9998 10.7554 27.1163 8.65197 25.488C6.54854 23.8598 5.04544 21.5791 4.37867 19.004M16 28C19.3133 28 22 22.6267 22 16C22 9.37334 19.3133 4 16 4M16 28C12.6867 28 10 22.6267 10 16C10 9.37334 12.6867 4 16 4M27.6213 19.004C27.868 18.044 28 17.0373 28 16C28.0033 13.9361 27.4718 11.9067 26.4573 10.1093M27.6213 19.004C24.0656 20.9752 20.0656 22.0064 16 22C11.784 22 7.82267 20.9133 4.37867 19.004M4.37867 19.004C4.12633 18.0226 3.9991 17.0133 4 16C4 13.86 4.56 11.8493 5.54267 10.1093M16 4C18.1283 3.99911 20.2186 4.56448 22.0563 5.63809C23.894 6.71169 25.4129 8.25489 26.4573 10.1093M16 4C13.8717 3.99911 11.7814 4.56448 9.94375 5.63809C8.10606 6.71169 6.58708 8.25489 5.54267 10.1093M26.4573 10.1093C23.5542 12.6239 19.8407 14.0055 16 14C12.0027 14 8.34667 12.5333 5.54267 10.1093" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                
-                    <div class="dropdown-wrapper notranslate">
-                      <input type="text" id="dropdownInput" class="dropdown-input-lan" placeholder="Select Language" readonly/>
-                      <div class="dropdown-list" id="dropdownList">
-                        <div class="search-box">
-                          <input type="text" id="searchInput" placeholder="Search language..."/>
+                        <div class="language-select">
+                        <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 28C18.66 27.9998 21.2446 27.1163 23.348 25.488C25.4515 23.8598 26.9546 21.5791 27.6213 19.004M16 28C13.34 27.9998 10.7554 27.1163 8.65197 25.488C6.54854 23.8598 5.04544 21.5791 4.37867 19.004M16 28C19.3133 28 22 22.6267 22 16C22 9.37334 19.3133 4 16 4M16 28C12.6867 28 10 22.6267 10 16C10 9.37334 12.6867 4 16 4M27.6213 19.004C27.868 18.044 28 17.0373 28 16C28.0033 13.9361 27.4718 11.9067 26.4573 10.1093M27.6213 19.004C24.0656 20.9752 20.0656 22.0064 16 22C11.784 22 7.82267 20.9133 4.37867 19.004M4.37867 19.004C4.12633 18.0226 3.9991 17.0133 4 16C4 13.86 4.56 11.8493 5.54267 10.1093M16 4C18.1283 3.99911 20.2186 4.56448 22.0563 5.63809C23.894 6.71169 25.4129 8.25489 26.4573 10.1093M16 4C13.8717 3.99911 11.7814 4.56448 9.94375 5.63809C8.10606 6.71169 6.58708 8.25489 5.54267 10.1093M26.4573 10.1093C23.5542 12.6239 19.8407 14.0055 16 14C12.0027 14 8.34667 12.5333 5.54267 10.1093" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        
+                        <div class="dropdown-wrapper notranslate">
+                            <input type="text" id="dropdownInput" class="dropdown-input-lan" placeholder="Select Language" readonly/>
+                            <div class="dropdown-list" id="dropdownList">
+                            <div class="search-box">
+                                <input type="text" id="searchInput" placeholder="Search language..."/>
+                            </div>
+                            <div class="list-items" id="listItems"></div>
+                            </div>
                         </div>
-                        <div class="list-items" id="listItems"></div>
-                      </div>
-                    </div>
-                
-                    <!-- Hidden Google Translate element -->
-                    <div id="google_translate_element" style="display:none;"></div>
-                  </div>
+                        
+                        <!-- Hidden Google Translate element -->
+                        <div id="google_translate_element" style="display:none;"></div>
+                        </div>
                     </li>
                 </ul>
 
@@ -201,7 +234,8 @@
         </div>
     </div>
 
-  <script>
+<script>
+// Your languages array (unchanged)
 const languages = [
       { code: 'ar', name: 'العربية (Arabic)' }, { code: 'ru', name: 'Русский (Russian)' }, { code: 'af', name: 'Afrikaans' }, { code: 'sq', name: 'Shqip (Albanian)' }, { code: 'am', name: 'አማርኛ (Amharic)' },  { code: 'hy', name: 'Հայերեն (Armenian)' }, { code: 'az', name: 'Azərbaycan (Azerbaijani)' }, { code: 'eu', name: 'Euskara (Basque)' }, { code: 'be', name: 'Беларуская (Belarusian)' }, { code: 'bn', name: 'বাংলা (Bengali)' }, { code: 'bs', name: 'Bosanski (Bosnian)' },
       { code: 'bg', name: 'Български (Bulgarian)' }, { code: 'ca', name: 'Català (Catalan)' }, { code: 'ceb', name: 'Cebuano' }, { code: 'ny', name: 'Chichewa' }, { code: 'zh-CN', name: '中文 (Chinese Simplified)' }, { code: 'zh-TW', name: '中文繁體 (Chinese Traditional)' }, { code: 'co', name: 'Corsican' }, { code: 'hr', name: 'Hrvatski (Croatian)' }, { code: 'cs', name: 'Čeština (Czech)' }, { code: 'da', name: 'Dansk (Danish)' },
@@ -216,79 +250,94 @@ const languages = [
       { code: 'ur', name: 'اردو (Urdu)' }, { code: 'ug', name: 'ئۇيغۇرچە (Uyghur)' }, { code: 'uz', name: 'Oʻzbek (Uzbek)' }, { code: 'vi', name: 'Tiếng Việt (Vietnamese)' }, { code: 'cy', name: 'Cymraeg (Welsh)' }, { code: 'xh', name: 'isiXhosa (Xhosa)' }, { code: 'yi', name: 'ייִדיש (Yiddish)' }, { code: 'yo', name: 'Yorùbá' }, { code: 'zu', name: 'isiZulu (Zulu)' }
     ];
 
-    const dropdownInput = document.getElementById('dropdownInput');
-    const dropdownList = document.getElementById('dropdownList');
-    const listItems = document.getElementById('listItems');
-    const searchInput = document.getElementById('searchInput');
+const dropdownInput = document.getElementById('dropdownInput');
+const dropdownList = document.getElementById('dropdownList');
+const listItems = document.getElementById('listItems');
+const searchInput = document.getElementById('searchInput');
 
-    // Render language list
-    function renderList(langList) {
-      listItems.innerHTML = '';
-      langList.forEach(lang => {
-        const div = document.createElement('div');
-        div.textContent = lang.name;
-        div.dataset.code = lang.code;
-        div.addEventListener('click', () => {
-          dropdownInput.value = lang.name;
-          dropdownList.classList.remove('show');
-          changeLanguage(lang.code);
-        });
-        listItems.appendChild(div);
-      });
+// Render language list
+function renderList(langList) {
+  listItems.innerHTML = '';
+  langList.forEach(lang => {
+    const div = document.createElement('div');
+    div.textContent = lang.name;
+    div.dataset.code = lang.code;
+    div.addEventListener('click', () => {
+      dropdownInput.value = lang.name;
+      dropdownList.classList.remove('show');
+      changeLanguage(lang.code);
+    });
+    listItems.appendChild(div);
+  });
+}
+
+renderList(languages);
+
+// Search filter
+searchInput.addEventListener('input', () => {
+  const term = searchInput.value.toLowerCase();
+  const filtered = languages.filter(l => l.name.toLowerCase().includes(term));
+  renderList(filtered);
+});
+
+// Toggle dropdown
+dropdownInput.addEventListener('click', (e) => {
+  e.stopPropagation();
+  dropdownList.classList.toggle('show');
+});
+
+// Close when clicking outside
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.language-select')) {
+    dropdownList.classList.remove('show');
+  }
+});
+
+// Change language with delay for cookie to apply
+function changeLanguage(langCode) {
+  if (!langCode) return;
+
+  // Clear old cookie
+  document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';
+
+  // Set new cookie
+  const cookieValue = langCode === 'en' ? '/en/en' : `/en/${langCode}`;
+  document.cookie = `googtrans=${cookieValue}; path=/; domain=${location.hostname}; SameSite=Lax`;
+
+  // Small delay → reload
+  setTimeout(() => {
+    window.location.reload(true);
+  }, 400);
+}
+
+// Google Translate init
+window.googleTranslateElementInit = function() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    includedLanguages: languages.map(l => l.code).join(','),
+    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+    autoDisplay: false
+  }, 'google_translate_element');
+};
+
+// Load saved language on page load
+window.addEventListener('load', () => {
+  const cookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+  if (cookie) {
+    const parts = cookie.split('=');
+    const value = parts[1];
+    const langCode = value.split('/')[2];
+    const lang = languages.find(l => l.code === langCode);
+    if (lang) {
+      dropdownInput.value = lang.name;
+    } else {
+      dropdownInput.value = 'Select Language';
     }
+  }
+});
+</script>
 
-    renderList(languages);
 
-    // Search filter
-    searchInput.addEventListener('input', () => {
-      const term = searchInput.value.toLowerCase();
-      const filtered = languages.filter(l => l.name.toLowerCase().includes(term));
-      renderList(filtered);
-    });
-
-    // Toggle dropdown
-    dropdownInput.addEventListener('click', (e) => {
-      e.stopPropagation();
-      dropdownList.classList.toggle('show');
-    });
-
-    // Close dropdown when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!e.target.closest('.dropdown-wrapper')) {
-        dropdownList.classList.remove('show');
-      }
-    });
-
-    // Google Translate change
-    function changeLanguage(langCode) {
-      if (!langCode) return;
-      // Clear previous cookie
-      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';
-      // Set new cookie
-      const cookieValue = langCode === 'en' ? '/en/en' : `/en/${langCode}`;
-      document.cookie = `googtrans=${cookieValue}; path=/;`;
-      // Reload to apply translation
-      window.location.reload();
-    }
-
-    // Initialize Google Translate
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        includedLanguages: languages.map(l => l.code).join(','),
-        autoDisplay: false
-      }, 'google_translate_element');
-    }
-
-    // Load saved language from cookie
-    window.addEventListener('load', () => {
-      const cookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
-      if (cookie) {
-        const langCode = cookie.split('/')[2];
-        const lang = languages.find(l => l.code === langCode);
-        if (lang) dropdownInput.value = lang.name;
-      }
-    });
-  </script>
-
+<!-- Load Google Translate -->
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
       @include('admin.includes.messages')

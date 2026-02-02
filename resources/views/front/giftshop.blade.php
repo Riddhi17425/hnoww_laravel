@@ -8,11 +8,11 @@
         <h2 class="main_head mb-3">The Gift Shop</h2>
         <p class="para sec_in_mb"> Curated gestures, sculptural objects, thoughtful rituals — for every moment worth
             honouring.</p>
-        <a href="#" class="com_btn border-white bg-transparent text-white">ENTER THE WORLD </a>
+        <!--<a href="#" class="com_btn border-white bg-transparent text-white">ENTER THE WORLD </a>-->
     </div>
 </section>
 
-<section class="mt_80">
+<section class="mt_80 d-none">
     <div class="container">
 
         <div class="section_header text-start">

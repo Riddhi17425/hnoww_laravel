@@ -2,7 +2,7 @@
 @include('layouts.frontheader')
 <!-- hero section -->
 <section class="hero-section">
-    <img class="img-fluid" src="{{ asset('public/front/images/hero-banner.jpg') }}" alt="images">
+    <img class="img-fluid" src="{{ asset('public/front/images/hero-banner.jpg') }}" alt="images" loading="lazy">
     <!-- <video autoplay muted loop class="hero_video">
         <source src="{{ asset('public/front/images/hero-video.mp4') }}" type="video/mp4">
         Your browser does not support the video tag.
@@ -31,7 +31,7 @@
 </section>
 
 <!--Find Gesture -->
-<section class="mt_120">
+<section class="mt_120 d-none">
     <div class="container">
         <div class="section_header">
             <p class="sub_head mb-0">
@@ -79,90 +79,7 @@
             <div id="gift-list-wrapper">
                     @if($allGifts->isNotEmpty())
                         @include('front.partials.gift-list', ['allGifts' => $allGifts])
-                        {{-- @foreach ($allGifts as $key => $val )
-                            <div class="col-md-4">
-                                <div class="gesture_box">
-                                    <img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/images/admin/gifts/product_list/'.$val->list_page_img) }}" alt="images">
-                                    <div class="desire_box_bot_child">
-                                        <div>
-                                            <h3 class="sub_head">{{ $val->product_name ?? '' }}</h3>
-                                            <p class="mb-0">{!! $val->short_description ?? '' !!}</p>
-                                        </div>
-                                        <a href="#"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <g clip-path="url(#clip0_1_73)">
-                                                    <path
-                                                        d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
-                                                        stroke="#0D5E4C" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </g>
-                                                <defs>
-                                                    <clipPath id="clip0_1_73">
-                                                        <rect width="40" height="40" fill="white" />
-                                                    </clipPath>
-                                                </defs>
-                                            </svg>
-
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach --}}
                     @endif
-                    {{-- <div class="col-md-4">
-                        <div class="gesture_box">
-                            <img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/front/images/desire2.png') }}" alt="images">
-                            <div class="desire_box_bot_child">
-                                <div>
-                                    <h3 class="sub_head">The Emerald Eclipse</h3>
-                                    <p class="mb-0">Two flames dancing on the edge of the night.</p>
-                                </div>
-                                <a href="#"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#clip0_1_73)">
-                                            <path
-                                                d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
-                                                stroke="#0D5E4C" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_1_73">
-                                                <rect width="40" height="40" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="gesture_box">
-                            <img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/front/images/gesture3.png') }}" alt="images">
-                            <div class="desire_box_bot_child">
-                                <div>
-                                    <h3 class="sub_head">The Lotus Bowl</h3>
-                                    <p class="mb-0">A golden vessel guarded by silver wings.</p>
-                                </div>
-                                <a href="#"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#clip0_1_73)">
-                                            <path
-                                                d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
-                                                stroke="#0D5E4C" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_1_73">
-                                                <rect width="40" height="40" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-
-                                </a>
-                            </div>
-                        </div>
-                    </div> --}}
                 </div>
             </div>
         </div>
@@ -241,16 +158,16 @@
             <!-- 3️⃣ Left image (from left) -->
             <div class="text-end magic_wrapper_logo" data-aos="fade-right" data-aos-delay="600" data-aos-duration="800"
                 data-aos-once="true">
-                <img src="{{ asset('public/front/images/home_magic_left.svg') }}" alt="" class="img-fluid">
+                <img src="{{ asset('public/front/images/home_magic_left.svg') }}" loading="lazy" alt="" class="img-fluid">
             </div>
 
             <!-- 2️⃣ Center image (scale 0 → 1) -->
             <div data-aos="zoom-in" data-aos-delay="400" data-aos-duration="800" data-aos-once="true">
-                <img src="{{ asset('public/front/images/home_magic.png') }}" alt="" class="img-fluid">
+                <img src="{{ asset('public/front/images/home_magic.png') }}" loading="lazy" alt="" class="img-fluid">
             </div>
 
             <!-- 4️⃣ Text block (from right) -->
-            <div data-aos="fade-left" data-aos-delay="800" data-aos-duration="800" data-aos-once="true">
+            <div data-aos="fade-left" data-aos-delay="800" data-aos-duration="800"  data-aos-once="true">
                 <h3 class="magic_wrapper_h3">Every object is an offering.</h3>
                 <p>
                     Every curve, every shadow, every material is chosen with intention
@@ -301,8 +218,7 @@
             @foreach($allProd as $key => $val)
                 <div class="desire_box">
                     <div class="desire_box_top mb-4">
-                        {{-- <img class="img-fluid img_1" src="{{ asset('public/front/images/desire1.png') }}" alt="images"> --}}
-                        <img class="img-fluid img_1" src="{{ isset($val->list_page_img) ? asset('public/images/admin/product_list/'.$val->list_page_img) : '' }}" alt="{{ $val->product_name ?? 'Product Image' }}">
+                        <img class="img-fluid img_1" src="{{ isset($val->list_page_img) ? asset('public/images/admin/product_list/'.$val->list_page_img) : '' }}" alt="{{ $val->product_name ?? 'Product Image' }}" loading="lazy">
                         <span class="icon_hert">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="28" viewBox="0 0 30 28" fill="none">
                                 {{-- <path class="heart-path"
@@ -340,179 +256,6 @@
                 </div>
             @endforeach
         @endif
-
-        {{-- <div class="desire_box">
-            <div class="desire_box_top mb-4">
-
-                <img class="img-fluid img_1" src="{{ asset('public/front/images/desire2.png') }}" alt="images">
-
-                <span class="icon_hert">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="28" viewBox="0 0 30 28" fill="none">
-                        <path class="heart-path"
-                            d="M22.1426 1C23.0312 1.00003 23.9132 1.19019 24.7393 1.56152C25.5655 1.93295 26.3221 2.4794 26.9629 3.1748V3.17578C27.6039 3.87135 28.1169 4.70101 28.4678 5.62012C28.8187 6.53946 29 7.52807 29 8.52734C28.9999 9.52647 28.8187 10.5144 28.4678 11.4336C28.1607 12.2379 27.7296 12.9738 27.1973 13.6113L26.9629 13.8789L15 26.8594L3.03711 13.8789C1.74115 12.4726 1.0001 10.5486 1 8.52734C1 6.50595 1.74106 4.58125 3.03711 3.1748C4.33058 1.77138 6.0665 1.00001 7.85742 1C9.64834 1 11.3843 1.7714 12.6777 3.1748L14.2646 4.89648L15 5.69434L15.7354 4.89648L17.3213 3.1748C17.9622 2.47924 18.7195 1.933 19.5459 1.56152C20.3719 1.19024 21.254 1 22.1426 1Z"
-                            stroke="#B58A46" stroke-width="2" />
-                    </svg>
-                </span>
-
-                <div class="desire_box_top_child"
-                    style="background: linear-gradient(180deg, rgba(4, 51, 25, 0) 32%, #043319 95%), url('public/images/front/desire2.png') center/cover no-repeat;">
-                    <a href="#" class="desire_box_top_child_inner">
-                        <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
-                            <path
-                                d="M0.5 4.5H18.5M0.5 4.5V16.5C0.5 17.6046 1.39543 18.5 2.5 18.5H16.5C17.6046 18.5 18.5 17.6046 18.5 16.5V4.5M0.5 4.5L2.46327 1.00974C2.64039 0.69486 2.97357 0.5 3.33485 0.5H15.6652C16.0264 0.5 16.3596 0.69486 16.5367 1.00974L18.5 4.5M12.5 8.5C12.5 10.1569 11.1569 11.5 9.5 11.5C7.8431 11.5 6.5 10.1569 6.5 8.5"
-                                stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <span>Add to Ritual</span>
-                    </a>
-                </div>
-
-            </div>
-
-            <div class="desire_box_bot_child">
-                <div>
-                    <h3 class="sub_head">The Oculus (Solo)</h3>
-                    <p>A compact ritual centerpiece for intimate hosting.</p>
-                    <!--<p class="price">AED 1,980</p>-->
-                </div>
-
-                <a href="#">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                        <path d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
-                            stroke="#0D5E4C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </a>
-            </div>
-        </div>
-
-        <div class="desire_box">
-            <div class="desire_box_top mb-4">
-
-                <img class="img-fluid img_1" src="{{ asset('public/front/images/desire3.png') }}" alt="images">
-
-                <span class="icon_hert">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="28" viewBox="0 0 30 28" fill="none">
-                        <path class="heart-path"
-                            d="M22.1426 1C23.0312 1.00003 23.9132 1.19019 24.7393 1.56152C25.5655 1.93295 26.3221 2.4794 26.9629 3.1748V3.17578C27.6039 3.87135 28.1169 4.70101 28.4678 5.62012C28.8187 6.53946 29 7.52807 29 8.52734C28.9999 9.52647 28.8187 10.5144 28.4678 11.4336C28.1607 12.2379 27.7296 12.9738 27.1973 13.6113L26.9629 13.8789L15 26.8594L3.03711 13.8789C1.74115 12.4726 1.0001 10.5486 1 8.52734C1 6.50595 1.74106 4.58125 3.03711 3.1748C4.33058 1.77138 6.0665 1.00001 7.85742 1C9.64834 1 11.3843 1.7714 12.6777 3.1748L14.2646 4.89648L15 5.69434L15.7354 4.89648L17.3213 3.1748C17.9622 2.47924 18.7195 1.933 19.5459 1.56152C20.3719 1.19024 21.254 1 22.1426 1Z"
-                            stroke="#B58A46" stroke-width="2" />
-                    </svg>
-                </span>
-
-                <div class="desire_box_top_child"
-                    style="background: linear-gradient(180deg, rgba(4, 51, 25, 0) 32%, #043319 95%), url('public/images/front/desire2.png') center/cover no-repeat;">
-                    <a href="#" class="desire_box_top_child_inner">
-                        <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
-                            <path
-                                d="M0.5 4.5H18.5M0.5 4.5V16.5C0.5 17.6046 1.39543 18.5 2.5 18.5H16.5C17.6046 18.5 18.5 17.6046 18.5 16.5V4.5M0.5 4.5L2.46327 1.00974C2.64039 0.69486 2.97357 0.5 3.33485 0.5H15.6652C16.0264 0.5 16.3596 0.69486 16.5367 1.00974L18.5 4.5M12.5 8.5C12.5 10.1569 11.1569 11.5 9.5 11.5C7.8431 11.5 6.5 10.1569 6.5 8.5"
-                                stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <span>Add to Ritual</span>
-                    </a>
-                </div>
-
-            </div>
-
-            <div class="desire_box_bot_child">
-                <div>
-                    <h3 class="sub_head">The Oculus (Solo)</h3>
-                    <p>A compact ritual centerpiece for intimate hosting.</p>
-                    <!--<p class="price">AED 1,980</p>-->
-                </div>
-
-                <a href="#">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                        <path d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
-                            stroke="#0D5E4C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </a>
-            </div>
-        </div>
-
-        <div class="desire_box">
-            <div class="desire_box_top mb-4">
-
-                <img class="img-fluid img_1" src="{{ asset('public/front/images/desire4.png') }}" alt="images">
-
-                <span class="icon_hert">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="28" viewBox="0 0 30 28" fill="none">
-                        <path class="heart-path"
-                            d="M22.1426 1C23.0312 1.00003 23.9132 1.19019 24.7393 1.56152C25.5655 1.93295 26.3221 2.4794 26.9629 3.1748V3.17578C27.6039 3.87135 28.1169 4.70101 28.4678 5.62012C28.8187 6.53946 29 7.52807 29 8.52734C28.9999 9.52647 28.8187 10.5144 28.4678 11.4336C28.1607 12.2379 27.7296 12.9738 27.1973 13.6113L26.9629 13.8789L15 26.8594L3.03711 13.8789C1.74115 12.4726 1.0001 10.5486 1 8.52734C1 6.50595 1.74106 4.58125 3.03711 3.1748C4.33058 1.77138 6.0665 1.00001 7.85742 1C9.64834 1 11.3843 1.7714 12.6777 3.1748L14.2646 4.89648L15 5.69434L15.7354 4.89648L17.3213 3.1748C17.9622 2.47924 18.7195 1.933 19.5459 1.56152C20.3719 1.19024 21.254 1 22.1426 1Z"
-                            stroke="#B58A46" stroke-width="2" />
-                    </svg>
-                </span>
-
-                <div class="desire_box_top_child"
-                    style="background: linear-gradient(180deg, rgba(4, 51, 25, 0) 32%, #043319 95%), url('public/images/desire2.png') center/cover no-repeat;">
-                    <a href="#" class="desire_box_top_child_inner">
-                        <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
-                            <path
-                                d="M0.5 4.5H18.5M0.5 4.5V16.5C0.5 17.6046 1.39543 18.5 2.5 18.5H16.5C17.6046 18.5 18.5 17.6046 18.5 16.5V4.5M0.5 4.5L2.46327 1.00974C2.64039 0.69486 2.97357 0.5 3.33485 0.5H15.6652C16.0264 0.5 16.3596 0.69486 16.5367 1.00974L18.5 4.5M12.5 8.5C12.5 10.1569 11.1569 11.5 9.5 11.5C7.8431 11.5 6.5 10.1569 6.5 8.5"
-                                stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <span>Add to Ritual</span>
-                    </a>
-                </div>
-
-            </div>
-
-            <div class="desire_box_bot_child">
-                <div>
-                    <h3 class="sub_head">The Oculus (Solo)</h3>
-                    <p>A compact ritual centerpiece for intimate hosting.</p>
-                    <!--<p class="price">AED 1,980</p>-->
-                </div>
-
-                <a href="#">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                        <path d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
-                            stroke="#0D5E4C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </a>
-            </div>
-        </div>
-
-        <div class="desire_box">
-            <div class="desire_box_top mb-4">
-
-                <img class="img-fluid img_1" src="{{ asset('public/front/images/desire2.png') }}" alt="images">
-
-                <span class="icon_hert">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="28" viewBox="0 0 30 28" fill="none">
-                        <path class="heart-path"
-                            d="M22.1426 1C23.0312 1.00003 23.9132 1.19019 24.7393 1.56152C25.5655 1.93295 26.3221 2.4794 26.9629 3.1748V3.17578C27.6039 3.87135 28.1169 4.70101 28.4678 5.62012C28.8187 6.53946 29 7.52807 29 8.52734C28.9999 9.52647 28.8187 10.5144 28.4678 11.4336C28.1607 12.2379 27.7296 12.9738 27.1973 13.6113L26.9629 13.8789L15 26.8594L3.03711 13.8789C1.74115 12.4726 1.0001 10.5486 1 8.52734C1 6.50595 1.74106 4.58125 3.03711 3.1748C4.33058 1.77138 6.0665 1.00001 7.85742 1C9.64834 1 11.3843 1.7714 12.6777 3.1748L14.2646 4.89648L15 5.69434L15.7354 4.89648L17.3213 3.1748C17.9622 2.47924 18.7195 1.933 19.5459 1.56152C20.3719 1.19024 21.254 1 22.1426 1Z"
-                            stroke="#B58A46" stroke-width="2" />
-                    </svg>
-                </span>
-
-                <div class="desire_box_top_child"
-                    style="background: linear-gradient(180deg, rgba(4, 51, 25, 0) 32%, #043319 95%), url('public/images/front/desire2.png') center/cover no-repeat;">
-                    <a href="#" class="desire_box_top_child_inner">
-                        <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
-                            <path
-                                d="M0.5 4.5H18.5M0.5 4.5V16.5C0.5 17.6046 1.39543 18.5 2.5 18.5H16.5C17.6046 18.5 18.5 17.6046 18.5 16.5V4.5M0.5 4.5L2.46327 1.00974C2.64039 0.69486 2.97357 0.5 3.33485 0.5H15.6652C16.0264 0.5 16.3596 0.69486 16.5367 1.00974L18.5 4.5M12.5 8.5C12.5 10.1569 11.1569 11.5 9.5 11.5C7.8431 11.5 6.5 10.1569 6.5 8.5"
-                                stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <span>Add to Ritual</span>
-                    </a>
-                </div>
-
-            </div>
-
-            <div class="desire_box_bot_child">
-                <div>
-                    <h3 class="sub_head">The Oculus (Solo)</h3>
-                    <p>A compact ritual centerpiece for intimate hosting.</p>
-                    <!--<p class="price">AED 1,980</p>-->
-                </div>
-
-                <a href="#">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                        <path d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
-                            stroke="#0D5E4C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </a>
-            </div>
-        </div> --}}
-
     </div>
     </div>
 </section>
@@ -542,7 +285,7 @@
             <div class="col-md-6">
                 <div class="curated_rituals_box">
                     <div>
-                        <img class="w-100 mb-4" src="{{ asset('public/front/images/rurated-rituals1.png') }}" alt="images">
+                        <img class="w-100 mb-4" src="{{ asset('public/front/images/rurated-rituals1.png') }}" alt="images" loading="lazy">
                     </div>
                     <div class="box_bot">
                         <div>
@@ -556,7 +299,7 @@
 
             <div class="col-md-6">
                 <div class="curated_rituals_box">
-                    <img class="w-100 mb-4" src="{{ asset('public/front/images/rurated-rituals2.png') }}" alt="images">
+                    <img class="w-100 mb-4" src="{{ asset('public/front/images/rurated-rituals2.png') }}" alt="images" loading="lazy">
                     <div class="box_bot">
                         <div>
                             <h3 class="sub_head">The Memory Shelf</h3>
@@ -569,7 +312,7 @@
 
             <div class="col-md-6">
                 <div class="curated_rituals_box">
-                    <img class="w-100 mb-4" src="{{ asset('public/front/images/rurated-rituals3.png') }}" alt="images">
+                    <img class="w-100 mb-4" src="{{ asset('public/front/images/rurated-rituals3.png') }}" alt="images" loading="lazy">
                     <div class="box_bot">
                         <div>
                             <h3 class="sub_head">The Gift Shop</h3>
@@ -582,7 +325,7 @@
 
             <div class="col-md-6">
                 <div class="curated_rituals_box">
-                    <img class="w-100 mb-4" src="{{ asset('public/front/images/rurated-rituals4.png') }}" alt="images">
+                    <img class="w-100 mb-4" src="{{ asset('public/front/images/rurated-rituals4.png') }}" alt="images" loading="lazy">
                     <div class="box_bot">
                         <div>
                             <h3 class="sub_head">The Everyday Sacred</h3>
@@ -621,7 +364,7 @@
             <div class="col-md-6">
                 <div class="bespoke_box">
                     <div class="bespoke_box_top">
-                        <img class="img-fluid" src="{{ asset('public/front/images/bespoke1.png') }}" alt="images">
+                        <img class="img-fluid" src="{{ asset('public/front/images/bespoke1.png') }}" alt="images" loading="lazy">
                         <p class="title_40">Weddings & Celebrations</p>
                     </div>
                     <div class="bespoke_box_bot">
@@ -635,7 +378,7 @@
                 <div class="bespoke_box">
 
                     <div class="bespoke_box_top_2">
-                        <img class="img-fluid" src="{{ asset('public/front/images/bespoke2.png') }}" alt="images">
+                        <img class="img-fluid" src="{{ asset('public/front/images/bespoke2.png') }}" alt="images" loading="lazy">
                         <p class="title_40">Corporate Rituals</p>
                     </div>
                     <div class="bespoke_box_bot">
@@ -674,7 +417,7 @@
         <div class="row mobile_slider">
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-4" src="{{ asset('public/front/images/editions1.png') }}" alt="images">
+                    <img class="img-fluid mb-4" src="{{ asset('public/front/images/editions1.png') }}" alt="images" loading="lazy">
                     <h3 class="sub_head">The Blessing Library</h3>
                     <p>A collection of poetic messages for home, union, and self.</p>
                     <a href="{{ route('front.blessings.library') }}" target="_blank" class="com_btn">Explore </a>
@@ -682,7 +425,7 @@
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-4" src="{{ asset('public/front/images/editions2.png') }}" alt="images">
+                    <img class="img-fluid mb-4" src="{{ asset('public/front/images/editions2.png') }}" alt="images" loading="lazy">
                     <h3 class="sub_head">The Journal</h3>
                     <p>Essays on design, ritual, and the modern home.</p>
                     <a href="{{ route('front.journal') }}" target="_blank" class="com_btn">Explore</a>
@@ -690,7 +433,7 @@
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-4" src="{{ asset('public/front/images/editions3.png') }}" alt="images">
+                    <img class="img-fluid mb-4" src="{{ asset('public/front/images/editions3.png') }}" alt="images" loading="lazy">
                     <h3 class="sub_head">Bespoke Commissions</h3>
                     <p>Work with the Atelier to create a personal ritual object.</p>
                     <a href="{{ route('front.bespoke.commission') }}" target="_blank" class="com_btn">Explore</a>

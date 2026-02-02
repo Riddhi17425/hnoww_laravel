@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\RegistationController;
 // use App\Http\Controllers\superAdminController;
 
-use App\Http\Controllers\{FrontController};
+use App\Http\Controllers\{FrontController, AuthController};
 
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\{AdminController, CategoryController, ProductController, ProductTabController, ProductImageController, FaqController, JournalController, BlessingController, CeremonialController, GiftShopController, CorporateKitController};
@@ -27,6 +27,11 @@ Route::name('front.')->group(function () {
     Route::get('/', [FrontController::class, 'index'])->name('home');
     Route::post('stripe', [FrontController::class, 'stripePost'])->name('stripe.post');
 
+	Route::get('front/register', [AuthController::class, 'getRegister'])->name('register');
+    Route::post('front/register', [AuthController::class, 'submitRegister'])->name('register.post');
+	Route::get('front/login', [AuthController::class, 'getLogin'])->name('login');
+    Route::post('front/login', [AuthController::class, 'submitLogin'])->name('login.post');
+    Route::get('front/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('list/{category_slug}', [FrontController::class, 'getList'])->name('list');
     Route::get('product-details/{product_slug}', [FrontController::class, 'getProductDetails'])->name('product.details');
