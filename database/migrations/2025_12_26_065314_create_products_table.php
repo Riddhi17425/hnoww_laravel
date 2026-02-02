@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('short_note')->nullable();
             $table->string('short_description', 700)->nullable();
             $table->string('product_price');
+            $table->unsignedInteger('product_stock')->default(0)->after('product_price');
             $table->text('large_description')->nullable();
             $table->string('dimensions', 5000)->nullable();
             $table->string('meta_title')->nullable();

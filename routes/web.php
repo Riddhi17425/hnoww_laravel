@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\RegistationController;
 // use App\Http\Controllers\superAdminController;
 
-use App\Http\Controllers\{FrontController, AuthController};
+use App\Http\Controllers\{FrontController, AuthController, CartController};
 
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\{AdminController, CategoryController, ProductController, ProductTabController, ProductImageController, FaqController, JournalController, BlessingController, CeremonialController, GiftShopController, CorporateKitController};
@@ -31,7 +31,6 @@ Route::name('front.')->group(function () {
     Route::post('front/register', [AuthController::class, 'submitRegister'])->name('register.post');
 	Route::get('front/login', [AuthController::class, 'getLogin'])->name('login');
     Route::post('front/login', [AuthController::class, 'submitLogin'])->name('login.post');
-    Route::get('front/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('list/{category_slug}', [FrontController::class, 'getList'])->name('list');
     Route::get('product-details/{product_slug}', [FrontController::class, 'getProductDetails'])->name('product.details');
@@ -79,8 +78,15 @@ Route::name('front.')->group(function () {
 	Route::get('/architect-study', [FrontController::class, 'getArchitectStudy'])->name('architect-study'); 
 	Route::get('/about', [FrontController::class, 'getAbout'])->name('about'); 
 
-
 	// NOT MADE DYNAMIC - END
+
+	Route::middleware(['auth'])->group(function () {
+
+		Route::get('/cart', [CartController::class, 'getCart'])->name('cart.view');
+		Route::post('/cart/add', [CartController::class, 'addToCartAjax'])->name('cart.add.ajax');
+		// Route::get('/profile', [ProfileController::class, 'index'])->name('user.profile');
+		Route::get('front/logout', [AuthController::class, 'logout'])->name('logout');
+	});
 
 });
   

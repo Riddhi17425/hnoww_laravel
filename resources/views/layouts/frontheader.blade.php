@@ -173,6 +173,18 @@
                             </a>
                         </li>
                     @endauth
+
+                    <!-- Cart icon with badge -->
+                    <li class="cart-menu">
+                        <a href="{{ route('front.cart.view') }}" class="d-flex align-items-center position-relative">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                <path d="M0 1.5A.5.5 0 0 1 .5 1h1a.5.5 0 0 1 .485.379L2.89 5H14.5a.5.5 0 0 1 .49.598l-1.5 7A.5.5 0 0 1 13 13H4a.5.5 0 0 1-.491-.408L1.01 1.607 0 1.5zm3.14 4l1.25 5.5H13l1.25-5.5H3.14zM5.5 14a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                            </svg>
+                            <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {{ \App\Models\Cart::where('user_id', auth()->id())->sum('quantity') ?? 0 }}
+                            </span>
+                        </a>
+                    </li>
                     
                     <li>
                         <div class="language-select">

@@ -141,7 +141,8 @@
  
    <!-- Load Google Translate script -->
   <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
+   <!-- Sweetalert popup -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  <script>
 AOS.init();
  </script>
@@ -158,7 +159,7 @@ AOS.init();
         setTimeout(function () {
             $('.auto-hide').fadeOut('slow');
         }, 5000); //5 seconds
-newsletter_error
+
         $("#newsletterForm").validate({
             rules: {
                 newsletter_email: {

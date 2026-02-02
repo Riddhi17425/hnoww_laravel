@@ -118,6 +118,7 @@ class ProductController extends Controller
             'product_name' => 'required|string|max:255',
             'product_price' => 'required|string|max:255',
             'product_url' => 'required|string|max:255|unique:products,product_url',
+            'product_stock' => 'required|integer|min:0',
             'list_img' => 'required|image|mimes:jpg,jpeg,png,webp|max:5120',
             'detail_imgs'       => 'required|array|min:1',
             'detail_imgs.*'     => 'image|mimes:jpg,jpeg,png,webp|max:5120',
@@ -141,6 +142,9 @@ class ProductController extends Controller
             'product_url.string' => 'Product URL must be a valid string.',
             'product_url.max' => 'Product URL cannot exceed 255 characters.',
             'product_url.unique' => 'This product URL is already taken.',
+            'product_stock.required' => 'Product stock is required.',
+            'product_stock.integer'  => 'Product stock must be a whole number.',
+            'product_stock.min'      => 'Product stock cannot be negative.',
             'list_img.required' => 'Please upload the list page image.',
             'list_img.image'    => 'The list page file must be a valid image.',
             'list_img.mimes'    => 'The list page image must be a JPG, JPEG, PNG, or WEBP file.',
@@ -171,7 +175,7 @@ class ProductController extends Controller
 
         $data = $request->only([
             'category_id', 'product_name', 'product_price', 'short_description', 'large_description',
-            'meta_title', 'meta_description', 'product_url', 'dimensions', 'moq', 'short_note'
+            'meta_title', 'meta_description', 'product_url', 'dimensions', 'moq', 'short_note', 'product_stock'
         ]);
 
         // STORE LIST PAGE IMAGE (SINGLE)
@@ -236,7 +240,7 @@ class ProductController extends Controller
             'product_name' => 'required|string|max:255',
             'product_price' => 'required|string|max:255',
             'product_url' => 'required|string|max:255|unique:products,product_url,' . $id,
-
+            'product_stock' => 'required|integer|min:0',
             // 'list_img' => 'required|image|mimes:jpg,jpeg,png,webp|max:5120',
             // 'detail_imgs'       => 'required|array|min:1',
             // 'detail_imgs.*'     => 'image|mimes:jpg,jpeg,png,webp|max:5120',
@@ -264,6 +268,9 @@ class ProductController extends Controller
             'product_url.string' => 'Product URL must be a valid string.',
             'product_url.max' => 'Product URL cannot exceed 255 characters.',
             'product_url.unique' => 'This product URL is already taken.',
+            'product_stock.required' => 'Product stock is required.',
+            'product_stock.integer'  => 'Product stock must be a whole number.',
+            'product_stock.min'      => 'Product stock cannot be negative.',
             'list_img.required' => 'Please upload the list page image.',
             'list_img.image'    => 'The list page file must be a valid image.',
             'list_img.mimes'    => 'The list page image must be a JPG, JPEG, PNG, or WEBP file.',
@@ -295,7 +302,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $data = $request->only([
             'category_id', 'product_name', 'product_price', 'short_description', 'large_description',
-            'meta_title', 'meta_description', 'product_url', 'dimensions', 'moq', 'short_note'
+            'meta_title', 'meta_description', 'product_url', 'dimensions', 'moq', 'short_note', 'product_stock'
         ]);
         if ($request->hasFile('list_img')) {
             // delete old file

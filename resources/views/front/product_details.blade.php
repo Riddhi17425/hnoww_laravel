@@ -92,9 +92,9 @@
             <h4 class="sub_head_inter">AED {{ $product->product_price ?? '' }} @if(isset($product->moq)) | MOQ
                 {{$product->moq }} @endif</h4>
 
-            <div class="increment_decrement_area">
+            {{-- <div class="increment_decrement_area">
                 <div class="increment_decrement">
-                    {{-- <button class="dec_btn"><svg width="16" height="2" viewBox="0 0 16 2" fill="none"
+                    <button class="dec_btn"><svg width="16" height="2" viewBox="0 0 16 2" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path d="M0.75 0.75H14.75" stroke="#666666" stroke-width="1.5"
                                         stroke-linecap="round" stroke-linejoin="round" />
@@ -109,10 +109,34 @@
                                         stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </button>
-                        </div> --}}
-                    <a href="#" class="com_btn" data-bs-toggle="modal" data-bs-target="#productInquiry">Enquire Now </a>
+                        </div>
+                    @auth
+                        <a href="" class="com_btn">Add to Cart </a>
+                    @else
+                        <a href="javascript:void(0)" class="com_btn" data-bs-toggle="modal" data-bs-target="#loginRequiredModal">
+                            Add to Cart
+                        </a>
+                    @endauth
+                    <!--<a href="#" class="com_btn" data-bs-toggle="modal" data-bs-target="#productInquiry">Enquire Now </a>-->
                 </div>
+            </div> --}}
+
+            <div class="increment_decrement_area">
+                <div class="increment_decrement" data-product-id="{{ $product->id }}" data-stock="{{ $product->product_stock }}">
+                    <button class="dec_btn" type="button">−</button>
+                    <span class="span_value">1</span>
+                    <input type="hidden" class="qty_input" value="1">
+                    <button class="inc_btn" type="button">+</button>
+                </div>
+
+
+                @auth
+                    <a href="javascript:void(0)" class="com_btn add_to_cart_btn" data-product-id="{{ $product->id }}"> Add to Cart</a>
+                @else
+                    <a href="javascript:void(0)" class="com_btn" data-bs-toggle="modal" data-bs-target="#loginRequiredModal"> Add to Cart </a>
+                @endauth
             </div>
+
 
             @if(isset($product->large_description) && $product->large_description != '')
             <h4 class="sub_head mb-4">The Story</h4>
@@ -351,79 +375,105 @@
     </div>
 </div>
 
+<div class="modal fade audio_modal" id="loginRequiredModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="productInquiryLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Login Required</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p class="m-3">Please login to continue and add items to your cart.</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <a href="{{ route('front.login') }}" class="com_btn">
+                    Login Now
+                </a>
+                <button type="button" class="com_btn" data-bs-dismiss="modal">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @push('script')
+<script src="{{ asset('public/js/front/cart.js') }} "></script>
+
 <script>
 var formSubmitted = false;
 $(document).ready(function() {
-    // $("#productInquiryForm").validate({
-    //     rules: {
-    //         name: {
-    //             required: true,
-    //             minlength: 2,
-    //             maxlength: 50,
-    //             lettersonly: true
-    //         },
-    //         email: {
-    //             required: true,
-    //             email: true,
-    //             noSpamEmail: true,
-    //             //uniqueEmail: true
-    //             uniqueEmail: "product_inquiries"
-    //         },
-    //         contact_no: {
-    //             required: true,
-    //             validPhone: true,
-    //             number:true,
-    //         },
-    //         message: {
-    //             maxlength: 300
-    //         },
-    //     },
-    //     messages: {
-    //         name: {
-    //             required: "Please enter your name",
-    //             minlength: "Name must be at least 2 characters",
-    //             maxlength: "Name cannot be longer than 50 characters",
-    //             lettersonly: "Only letters and spaces are allowed"
-    //         },
-    //         email: {
-    //             required: "Please enter your email",
-    //             email: "Please enter a valid email address",
-    //             noSpamEmail: "This email address is not allowed",
-    //         },
-    //         contact_no: {
-    //             required: "Please enter your Contact number"
-    //         },
-    //         comment: {
-    //             maxlength: "Message cannot be longer than 300 characters"
-    //         },
-    //     },
-    //     errorElement: 'div',
-    //     errorPlacement: function(error, element) {
-    //         // error.addClass('invalid-feedback');
-    //         // if (element.attr("name") === "g-recaptcha-response") {
-    //         //     error.insertAfter(".g-recaptcha"); // show error below CAPTCHA
-    //         // } else {
-    //             error.insertAfter(element);
-    //         //}
-    //     },
-    //     highlight: function(element) {
-    //         $(element).addClass('is-invalid').removeClass('is-valid');
-    //     },
-    //     unhighlight: function(element) {
-    //         $(element).addClass('is-valid').removeClass('is-invalid');
-    //     },
-    //     submitHandler: function(form) {
-    //         if (!formSubmitted) {
-    //             formSubmitted = true;
-    //             const btn = $(form).find('button[type="submit"]');
-    //             if (btn.length) {
-    //                 btn.prop('disabled', true).text('Submitting...');
-    //             }
-    //             form.submit();
-    //         }
-    //     }
-    // });
+    $("#productInquiryForm").validate({
+        rules: {
+            name: {
+                required: true,
+                minlength: 2,
+                maxlength: 50,
+                lettersonly: true
+            },
+            email: {
+                required: true,
+                email: true,
+                noSpamEmail: true,
+                //uniqueEmail: true
+                uniqueEmail: "product_inquiries"
+            },
+            contact_no: {
+                required: true,
+                validPhone: true,
+                number:true,
+            },
+            message: {
+                maxlength: 300
+            },
+        },
+        messages: {
+            name: {
+                required: "Please enter your name",
+                minlength: "Name must be at least 2 characters",
+                maxlength: "Name cannot be longer than 50 characters",
+                lettersonly: "Only letters and spaces are allowed"
+            },
+            email: {
+                required: "Please enter your email",
+                email: "Please enter a valid email address",
+                noSpamEmail: "This email address is not allowed",
+            },
+            contact_no: {
+                required: "Please enter your Contact number"
+            },
+            comment: {
+                maxlength: "Message cannot be longer than 300 characters"
+            },
+        },
+        errorElement: 'div',
+        errorPlacement: function(error, element) {
+            // error.addClass('invalid-feedback');
+            // if (element.attr("name") === "g-recaptcha-response") {
+            //     error.insertAfter(".g-recaptcha"); // show error below CAPTCHA
+            // } else {
+                error.insertAfter(element);
+            //}
+        },
+        highlight: function(element) {
+            $(element).addClass('is-invalid').removeClass('is-valid');
+        },
+        unhighlight: function(element) {
+            $(element).addClass('is-valid').removeClass('is-invalid');
+        },
+        submitHandler: function(form) {
+            if (!formSubmitted) {
+                formSubmitted = true;
+                const btn = $(form).find('button[type="submit"]');
+                if (btn.length) {
+                    btn.prop('disabled', true).text('Submitting...');
+                }
+                form.submit();
+            }
+        }
+    });
 });
 </script>
 @endpush

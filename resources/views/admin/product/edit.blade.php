@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+    @extends('admin.layouts.app')
 
 @section('title', 'Edit Product')
 
@@ -59,17 +59,23 @@
             </div>
 
             {{-- Product Name --}}
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <label class="form-label">Product Name</label><span class="text-danger">*</span>
                 <input type="text" name="product_name" id="product_name" class="form-control" value="{{ old('product_name', $product->product_name) }}">
                 @error('product_name') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
             {{-- Product URL --}}
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <label class="form-label">Product URL</label><span class="text-danger">*</span>
                 <input type="text" name="product_url" id="product_url" class="form-control" value="{{ old('product_url', $product->product_url) }}">
                 @error('product_url') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="col-md-2">
+                <label class="form-label">Product Stock</label><span class="text-danger">*</span>
+                <input type="number" name="product_stock" id="product_stock" class="form-control" value="{{ old('product_stock', $product->product_stock) }}">
+                @error('product_stock') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
             <div class="col-md-8">
