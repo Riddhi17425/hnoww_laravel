@@ -153,6 +153,9 @@ AOS.init();
  <script src="{{ asset('public/js/front/custom_validations.js') }}"></script>
  <script src="{{ asset('public/js/front/common.js') }}" defer></script>
 
+ {{-- STRIPE PAYMENT GATEWAY --}}
+ <script src="https://js.stripe.com/v3/"></script>
+
  <script>
     var sitePath = "{{ url('/') }}";
     $(document).ready(function () {

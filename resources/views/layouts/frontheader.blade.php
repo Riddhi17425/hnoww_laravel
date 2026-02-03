@@ -69,17 +69,22 @@
             color:red;
         }
         
-      #dropdownInput::placeholder
+       #dropdownInput::placeholder
         {
             color: white;
         }
 
-        /* TEMP */
-        .start-100 {
-            left: 52% !important;
+        /* STRIPE PAYMENT */
+        #card-element {
+            border: 1px solid #ccc;
+            padding: 12px;
+            border-radius: 6px;
+            max-width: 400px;
+            margin-top: 10px;
         }
-        .top-0 {
-            top: 12 !important;
+        #error-message {
+            color: red;
+            margin-top: 10px;
         }
     </style>
 

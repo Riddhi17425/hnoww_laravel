@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{FrontController, AuthController, CartController};
 
 use App\Http\Controllers\Admin\Auth\LoginController;
-use App\Http\Controllers\Admin\{AdminController, CategoryController, ProductController, ProductTabController, ProductImageController, FaqController, JournalController, BlessingController, CeremonialController, GiftShopController, CorporateKitController};
+use App\Http\Controllers\Admin\{AdminController, CategoryController, ProductController, ProductTabController, ProductImageController, FaqController, JournalController, BlessingController, CeremonialController, GiftShopController, CorporateKitController, UserController};
 use App\Http\Middleware\RedirectIfNotAdmin;
 
 /*
@@ -25,7 +25,6 @@ use App\Http\Middleware\RedirectIfNotAdmin;
 //FRONT ROUTE
 Route::name('front.')->group(function () {
     Route::get('/', [FrontController::class, 'index'])->name('home');
-    Route::post('stripe', [FrontController::class, 'stripePost'])->name('stripe.post');
 
 	Route::get('front/register', [AuthController::class, 'getRegister'])->name('register');
     Route::post('front/register', [AuthController::class, 'submitRegister'])->name('register.post');
@@ -88,25 +87,16 @@ Route::name('front.')->group(function () {
 		
 		Route::get('/checkout', [CartController::class, 'getCheckout'])->name('checkout.view');
 		Route::post('/checkout/process', [CartController::class, 'checkoutProcess'])->name('checkout.process');
+		Route::get('/payment/success', [CartController::class, 'paymentSuccess'])->name('payment.success');
+		Route::get('/get/success/{orderid}', [CartController::class, 'getSuccess'])->name('get.success');
+		Route::get('/get/failed/{orderid}', [CartController::class, 'getFailed'])->name('get.failed');
 
 		Route::get('front/logout', [AuthController::class, 'logout'])->name('logout');
 	});
 
 });
   
-//Route::get('login', [dashboardController::class, 'login'])->name('login');
-// Auth::routes();
-// Route::group(['middleware' => 'auth'], function () {
-//     Route::get('/admin/dashboard',[dashboardController::class, 'admin'])->name('/admin/dashboard');
-//     Route::get('/superAdmin', [superAdminController::class, 'superAdmin'])->name('superAdmin');  
-//  	Route::get('/admin/dashboard', [adminController::class, 'admin'])->name('admin/dashboard');
-//     Route::prefix('backend')->group(function () {
-//         // Route::get('home', [adminController::class, 'index'])->name('home');
-//     });
-// });
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// ----------------------------------
+// -----------------------------------------------------------------------------------------------------------------
 //ADMIN ROUTES
 Route::prefix('admin')->name('admin.')->group(function () {
 
@@ -179,6 +169,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
             route::get('/edit/{type_id}' , [FaqController::class , 'editFaqs'])->name('edit');
             route::post('/update/{type_id}' , [FaqController::class , 'updateFaqs'])->name('update');
             Route::delete('/delete/{type_id}', [FaqController::class, 'destroyByType'])->name('delete');
+        });
+
+		Route::prefix('users')->name('users.')->group(function () {
+            route::get('/get-users' , [UserController::class , 'getUsers'])->name('get');
+            route::get('/get-orders' , [UserController::class , 'getOrders'])->name('orders');
         });
 		
 		Route::resource('journals', JournalController::class);
