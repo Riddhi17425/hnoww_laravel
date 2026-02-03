@@ -10,8 +10,6 @@
 
 <section class="mt_120">
     <div class="container">
-	
-
 	<!-- Shopping Cart -->
 	<div class="shopping-cart section">
 		<div class="container">
