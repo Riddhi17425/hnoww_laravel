@@ -27,7 +27,7 @@ class CartController extends Controller
                 'message' => $validator->errors()->first(),
             ]);
         }
-
+        
         $product = Product::findOrFail($request->product_id);
         // Check existing cart item
         $cart = Cart::where('user_id', auth()->id())
@@ -48,18 +48,17 @@ class CartController extends Controller
                 ],
             ]);
         }
-        // Stock check
-        // if ($request->quantity > $product->product_stock) {
-        //     return response()->json([
-        //         'status' => false,
-        //         'message' => 'Not enough stock available.',
-        //         'data' => $product->product_stock ?? 0,
-        //     ]);
-        // }
 
         if ($cart) {
             // SET quantity (not increment)
-            $cart->quantity += $request->quantity;
+            // $cart->quantity += $request->quantity;
+            // Update quantity when cart_id is sent (increment/decrement)
+            if ($request->has('cart_id')) {
+                $cart->quantity = $requestedQty; // Use quantity from front-end
+            } else {
+                $cart->quantity += $requestedQty; // Existing logic
+            }
+
             // Remove item if quantity becomes 0
             if ($cart->quantity <= 0) {
                 $cart->delete();
