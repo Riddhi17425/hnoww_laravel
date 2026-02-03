@@ -44,7 +44,7 @@
 											<td class="price" data-title="Price"><span class="unit-price" data-price="{{ $cart->price }}">{{ $cart->price ?? '' }}</span></td>
 											<td>
 												<div class="increment_decrement_area">
-													<div class="increment_decrement" data-product-id="{{ $cart->product_id }}" data-stock="{{ $cart->product->product_stock }}">
+													<div class="increment_decrement" data-product-id="{{ $cart->product_id }}" data-stock="{{ $cart->product->product_stock }}" data-cart-id="{{ $cart->id }}">
 														<button class="dec_btn" type="button">−</button>
 														<span class="span_value">{{$cart->quantity ?? 1}}</span>
 														<input type="hidden" class="qty_input" id="product-qty" value="{{$cart->quantity ?? 1}}">

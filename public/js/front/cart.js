@@ -23,7 +23,8 @@ $(document).on('click', '.inc_btn', function () {
     let qtyInput = row.find('.qty_input');
     let qty = parseInt(qtyInput.val());
     let stock = parseInt($(this).closest('.increment_decrement').data('stock'));
-
+    let cartId = row.data('cart-id');
+    let productId = row.data('product-id');
     if (qty < stock) {
         qty++;
         qtyInput.val(qty);
@@ -31,7 +32,7 @@ $(document).on('click', '.inc_btn', function () {
         recalculateCartTotals();
         updateCartCount();
         // Update DB using your existing addToCartAjax function
-        $.post(sitePath + '/cart/add', { cart_id: cartId, quantity: qty });
+        $.post(sitePath + '/cart/add', { cart_id: cartId, quantity: qty, product_id: productId });
     } else {
         // Keep quantity as-is
         qtyInput.val(qty);
@@ -60,13 +61,15 @@ $(document).on('click', '.dec_btn', function () {
     let row = $(this).closest('.cart-item-row');
     let qtyInput = row.find('.qty_input');
     let qty = parseInt(qtyInput.val());
+    let cartId = row.find('.increment_decrement').data('cart-id');
+    let productId = row.find('.increment_decrement').data('product-id');
     if (qty > 1) {
         qty--;
         qtyInput.val(qty);
         row.find('.span_value').text(qty);
         recalculateCartTotals();
         updateCartCount();
-        $.post(sitePath + '/cart/add', { cart_id: cartId, quantity: qty });
+        $.post(sitePath + '/cart/add', { cart_id: cartId, quantity: qty, product_id: productId });
     }
 });
 
