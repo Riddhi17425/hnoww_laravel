@@ -15,6 +15,7 @@
 	<!-- Shopping Cart -->
 	<div class="shopping-cart section">
 		<div class="container">
+			@php $subTotal = 0; @endphp
 			<div class="row">
 				<div class="col-12">
 					<!-- Shopping Summery -->
@@ -23,10 +24,10 @@
 							<tr class="main-hading">
 								<th>PRODUCT</th>
 								<th>NAME</th>
-								<th class="text-center">UNIT PRICE</th>
-								<th class="text-center">QUANTITY</th>
-								<th class="text-center">TOTAL</th>
-								<th class="text-center"><i class="ti-trash remove-icon"></i></th>
+								<th>UNIT PRICE (IN AED)</th>
+								<th>QUANTITY</th>
+								<th>TOTAL (IN AED)</th>
+								<th><i class="ti-trash remove-icon"></i></th>
 							</tr>
 						</thead>
 						<tbody id="cart_item_list">
@@ -34,49 +35,33 @@
 								@csrf
 								@if(isset($cartData) && count($cartData) > 0 && is_countable($cartData) > 0)
 									@foreach($cartData as $key=>$cart)
-										<tr>
-											<td class="image" data-title="No">
+									@php $subTotal += ($cart->price * $cart->quantity) @endphp
+										<tr id="cart-row-{{$cart->id}}" class="cart-item-row">
+											<td class="image" data-title="Product Image">
+												<a href="{{ route('front.product.details', $cart->product->product_url) }}"><img class="img-fluid img_1" src="{{ isset($cart->product->list_page_img) ? asset('public/images/admin/product_list/'.$cart->product->list_page_img) : '' }}" height="120" width="150" alt="{{ $cart->product->product_name ?? 'Product Image' }}"></a>
 											</td>
-											<td class="product-des" data-title="Description">
+											<td class="" data-title="Product Name">
 												<p class="product-name"><a href="" target="_blank">{{ $cart->product->product_name ?? '' }}</a></p>
 											</td>
-											<td class="price" data-title="Price"><span>{{ $cart->product->product_price ?? '' }}</span></td>
-											<td class="qty" data-title="Qty"><!-- Input Order -->
-												<div class="input-group">
-													<div class="button minus"> 
-														<button type="button" class="btn btn-primary btn-number" data-type="minus" data-field="quant[{{$key}}]" min="1">
-															<i class="ti-minus"></i>
-														</button>
-													</div>
-
-													<input type="text" name="quant[{{$key}}]" class="input-number"  data-min="1" data-max="100" value="{{$cart->quantity}}" readonly>
-													<input type="hidden" name="qty_id[]" value="{{$cart->id}}">
-
-													<div class="button plus">
-														<button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[{{$key}}]">
-															<i class="ti-plus"></i>
-														</button>
+											<td class="price" data-title="Price"><span class="unit-price" data-price="{{ $cart->price }}">{{ $cart->price ?? '' }}</span></td>
+											<td>
+												<div class="increment_decrement_area">
+													<div class="increment_decrement" data-product-id="{{ $cart->product_id }}" data-stock="{{ $cart->product->product_stock }}">
+														<button class="dec_btn" type="button">−</button>
+														<span class="span_value">{{$cart->quantity ?? 1}}</span>
+														<input type="hidden" class="qty_input" id="product-qty" value="{{$cart->quantity ?? 1}}">
+														<button class="inc_btn" type="button">+</button>
 													</div>
 												</div>
-												<!--/ End Input Order -->
 											</td>
-											<td class="total-amount cart_single_price" data-title="Total"><span class="money"> AED 100</span></td>
-
-											<td class="action" data-title="Remove"><a href=""><i class="ti-trash remove-icon"></i></a></td>
+											<td class="total-amount cart_single_price" data-title="Total"><span class="row-total"> {{ $cart->price ? ($cart->price * $cart->quantity) : '' }}</span></td>
+											<td><a href="javascript:void(0);" class="btn btn-danger delete-cart-item"  data-id="{{ $cart->id }}"><i class="fa fa-trash"></i></a></td>
 										</tr>
 									@endforeach
-									<track>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-									</track>
 								@else
 										<tr>
 											<td class="text-center">
-												There are no any carts available. <a href="" style="color:blue;">Continue shopping</a>
-
+												There are no any carts available. <a href="{{ route('front.home') }}" class="com_btn">Continue shopping</a>
 											</td>
 										</tr>
 								@endif
@@ -88,7 +73,7 @@
 				</div>
 			</div>
 			@if($cartData->count() > 0)
-			<div class="row">
+			<div class="row" id="calculation-section">
 				<div class="col-12">
 					<!-- Total Amount -->
 					<div class="total-amount">
@@ -96,12 +81,12 @@
 							<div class="col-lg-4 col-md-7 col-12">
 								<div class="right">
 									<ul>
-										<li class="order_subtotal" data-price="">Cart Subtotal<span> AED </span></li>
-										<li class="last" id="order_total_price">You Pay<span> AED </span></li>
+										<li class="order_subtotal" data-price="">Cart Subtotal <span id="cart-subtotal">{{ $subTotal ?? 0 }} AED </span></li>
+										<li class="last" id="order_total_price">You Pay <span id="you-pay">{{ $subTotal ?? 0 }} AED </span></li>
 									</ul>
 									<div class="button5">
-										<a href="" class="btn">Checkout</a>
-										<a href="" class="btn">Continue shopping</a>
+										<a href="" class="com_btn">Checkout</a>
+										<a href="{{ route('front.home') }}" class="com_btn">Continue shopping</a>
 									</div>
 								</div>
 							</div>
@@ -118,6 +103,7 @@
 </section>
 
 @push('script')
+<script src="{{ asset('public/js/front/cart.js') }} "></script>
 	<script>
 		$(document).on('change', '.input-number', function () {
 			clearTimeout(window.cartTimer);

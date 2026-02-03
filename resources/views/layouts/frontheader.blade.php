@@ -73,6 +73,14 @@
         {
             color: white;
         }
+
+        /* TEMP */
+        .start-100 {
+            left: 52% !important;
+        }
+        .top-0 {
+            top: 12 !important;
+        }
     </style>
 
     
@@ -174,7 +182,7 @@
                         </li>
                     @endauth
 
-                    <!-- Cart icon with badge -->
+                    @auth
                     <li class="cart-menu">
                         <a href="{{ route('front.cart.view') }}" class="d-flex align-items-center position-relative">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
@@ -185,6 +193,7 @@
                             </span>
                         </a>
                     </li>
+                    @endauth
                     
                     <li>
                         <div class="language-select">

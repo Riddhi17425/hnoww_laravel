@@ -125,11 +125,9 @@
                 <div class="increment_decrement" data-product-id="{{ $product->id }}" data-stock="{{ $product->product_stock }}">
                     <button class="dec_btn" type="button">−</button>
                     <span class="span_value">1</span>
-                    <input type="hidden" class="qty_input" value="1">
+                    <input type="hidden" class="qty_input" id="product-qty" value="1">
                     <button class="inc_btn" type="button">+</button>
                 </div>
-
-
                 @auth
                     <a href="javascript:void(0)" class="com_btn add_to_cart_btn" data-product-id="{{ $product->id }}"> Add to Cart</a>
                 @else

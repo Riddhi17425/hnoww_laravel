@@ -25,7 +25,6 @@
                                 <h3 class="sub_head">{{ $val->product_name ?? '' }}</h3>
                                 <p class>{!! $val->short_description ?? '' !!}</p>
                             </div>
-                    
                         <div>
                             <a href="{{ route('front.product.details', $val->product_url) }}" class="com_btn">VIEW OBJECT </a>
                         </div>

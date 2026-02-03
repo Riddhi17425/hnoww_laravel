@@ -114,8 +114,7 @@ const incBtn = document.querySelector(".inc_btn");
 const valueSpan = document.querySelector(".span_value");
 
 let value = 1;
-
-if (valueSpan) valueSpan.textContent = value;
+//if (valueSpan) valueSpan.textContent = value;
 
 if (incBtn) {
     incBtn.addEventListener("click", () => {
