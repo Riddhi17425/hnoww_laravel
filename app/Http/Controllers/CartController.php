@@ -27,17 +27,18 @@ class CartController extends Controller
                 'message' => $validator->errors()->first(),
             ]);
         }
-        
+
         $product = Product::findOrFail($request->product_id);
-        // Check existing cart item
-        $cart = Cart::where('user_id', auth()->id())
-            ->where('product_id', $product->id)
-            ->first();
-        $existingQty = $cart ? $cart->quantity : 0;
+        $cart = Cart::where('user_id', auth()->id())->where('product_id', $product->id)->first();
         $requestedQty = $request->quantity;
-        // Total quantity after adding
-        $totalQty = $existingQty + $requestedQty;
-        // Stock check (IMPORTANT FIX)
+        if(isset($request->cart_id) && $request->cart_id != ''){
+            $totalQty = $requestedQty;   
+        }else{
+            $existingQty = $cart ? $cart->quantity : 0;
+            $totalQty = $existingQty + $requestedQty;
+        }
+       
+        // Stock check
         if ($totalQty > $product->product_stock) {
             return response()->json([
                 'status'  => false,
@@ -50,15 +51,11 @@ class CartController extends Controller
         }
 
         if ($cart) {
-            // SET quantity (not increment)
-            // $cart->quantity += $request->quantity;
-            // Update quantity when cart_id is sent (increment/decrement)
             if ($request->has('cart_id')) {
-                $cart->quantity = $requestedQty; // Use quantity from front-end
+                $cart->quantity = $requestedQty; //FROM CART PAGE
             } else {
-                $cart->quantity += $requestedQty; // Existing logic
+                $cart->quantity += $requestedQty; //FROM DETAIL PAGE
             }
-
             // Remove item if quantity becomes 0
             if ($cart->quantity <= 0) {
                 $cart->delete();
