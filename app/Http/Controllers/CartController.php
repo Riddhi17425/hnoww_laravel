@@ -99,6 +99,13 @@ class CartController extends Controller
         ]);
     }
 
+    public function getCheckout(Request $request){
+
+    }
+
+    public function checkoutProcess(Request $request){
+        
+    }
 
 
 }

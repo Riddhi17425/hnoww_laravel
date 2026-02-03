@@ -85,7 +85,10 @@ Route::name('front.')->group(function () {
 		Route::get('/cart', [CartController::class, 'getCart'])->name('cart.view');
 		Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add.ajax');
 		Route::post('/cart/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
-		// Route::get('/profile', [ProfileController::class, 'index'])->name('user.profile');
+		
+		Route::get('/checkout', [CartController::class, 'getCheckout'])->name('checkout.view');
+		Route::post('/checkout/process', [CartController::class, 'checkoutProcess'])->name('checkout.process');
+
 		Route::get('front/logout', [AuthController::class, 'logout'])->name('logout');
 	});
 

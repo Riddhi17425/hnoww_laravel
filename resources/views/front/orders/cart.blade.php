@@ -85,7 +85,7 @@
 										<li class="last" id="order_total_price">You Pay <span id="you-pay">{{ $subTotal ?? 0 }} AED </span></li>
 									</ul>
 									<div class="button5">
-										<a href="" class="com_btn">Checkout</a>
+										<a href="{{ route('front.checkout.view') }}" class="com_btn">Checkout</a>
 										<a href="{{ route('front.home') }}" class="com_btn">Continue shopping</a>
 									</div>
 								</div>
