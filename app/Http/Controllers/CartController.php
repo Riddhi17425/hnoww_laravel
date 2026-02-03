@@ -19,6 +19,7 @@ class CartController extends Controller
         $validator = Validator::make($request->all(), [
             'product_id' => 'required|exists:products,id',
             'quantity'   => 'required|integer|min:1',
+            'cart_id'    => 'nullable|exists:carts,id', // Optional if updating
         ]);
         if ($validator->fails()) {
             return response()->json([

@@ -24,14 +24,14 @@ $(document).on('click', '.inc_btn', function () {
     let qty = parseInt(qtyInput.val());
     let stock = parseInt($(this).closest('.increment_decrement').data('stock'));
 
- console.log("QTY - " + qty);
- console.log("STOCK - " + stock);
     if (qty < stock) {
         qty++;
         qtyInput.val(qty);
         row.find('.span_value').text(qty);
         recalculateCartTotals();
         updateCartCount();
+        // Update DB using your existing addToCartAjax function
+        $.post(sitePath + '/cart/add', { cart_id: cartId, quantity: qty });
     } else {
         // Keep quantity as-is
         qtyInput.val(qty);
@@ -66,6 +66,7 @@ $(document).on('click', '.dec_btn', function () {
         row.find('.span_value').text(qty);
         recalculateCartTotals();
         updateCartCount();
+        $.post(sitePath + '/cart/add', { cart_id: cartId, quantity: qty });
     }
 });
 
