@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
+use App\Models\{Product, Cart, Order, OrderProduct};
 use Illuminate\Support\Facades\Validator;
-use App\Models\Cart;
+use App\Services\PaymentService;
+use Stripe;
 
 class CartController extends Controller
 {
+    protected $paymentService;
+    public function __construct(PaymentService $paymentService)
+    {
+        $this->paymentService = $paymentService;
+    }
+
     public function getCart(Request $request){
         $cartData = Cart::where('user_id', auth()->id())->get();
         return view('front.orders.cart', compact('cartData'));
@@ -27,17 +34,18 @@ class CartController extends Controller
                 'message' => $validator->errors()->first(),
             ]);
         }
-        
+
         $product = Product::findOrFail($request->product_id);
-        // Check existing cart item
-        $cart = Cart::where('user_id', auth()->id())
-            ->where('product_id', $product->id)
-            ->first();
-        $existingQty = $cart ? $cart->quantity : 0;
+        $cart = Cart::where('user_id', auth()->id())->where('product_id', $product->id)->first();
         $requestedQty = $request->quantity;
-        // Total quantity after adding
-        $totalQty = $existingQty + $requestedQty;
-        // Stock check (IMPORTANT FIX)
+        if(isset($request->cart_id) && $request->cart_id != ''){
+            $totalQty = $requestedQty;   
+        }else{
+            $existingQty = $cart ? $cart->quantity : 0;
+            $totalQty = $existingQty + $requestedQty;
+        }
+       
+        // Stock check
         if ($totalQty > $product->product_stock) {
             return response()->json([
                 'status'  => false,
@@ -50,15 +58,11 @@ class CartController extends Controller
         }
 
         if ($cart) {
-            // SET quantity (not increment)
-            // $cart->quantity += $request->quantity;
-            // Update quantity when cart_id is sent (increment/decrement)
             if ($request->has('cart_id')) {
-                $cart->quantity = $requestedQty; // Use quantity from front-end
+                $cart->quantity = $requestedQty; //FROM CART PAGE
             } else {
-                $cart->quantity += $requestedQty; // Existing logic
+                $cart->quantity += $requestedQty; //FROM DETAIL PAGE
             }
-
             // Remove item if quantity becomes 0
             if ($cart->quantity <= 0) {
                 $cart->delete();
@@ -100,12 +104,73 @@ class CartController extends Controller
     }
 
     public function getCheckout(Request $request){
+        $cartItems = Cart::where('user_id', auth()->id())->get();
+        $subTotal = $cartItems->sum(function ($item) {
+            return $item->price * $item->quantity;
+        });
 
+        return view('front.orders.checkout', compact('cartItems', 'subTotal'));
     }
 
-    public function checkoutProcess(Request $request){
-        
+    public function checkoutProcess(Request $request, PaymentService $paymentService){
+        $validator = Validator::make($request->all(), [
+            'amount' => 'required|numeric|min:1'
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => $validator->errors()->first(),
+            ]);
+        }
+
+        $intent = $paymentService->createPaymentIntent($request->amount);
+        return response()->json([
+            'client_secret' => $intent->client_secret
+        ]);
     }
 
+    public function paymentSuccess(Request $request){
+        \Log::info("PAYMENT RESPONSE - " . json_encode($request->all()));
+        if(isset($request['redirect_status']) && strtolower($request['redirect_status']) == 'succeeded'){
+            $cartItems = Cart::where('user_id', auth()->id())->get();
+            // Calculate subtotal
+            $subTotal = $cartItems->sum(function($item) {
+                return $item->price * $item->quantity;
+            });
+            if(isset($cartItems) && is_countable($cartItems) && count($cartItems) > 0){
+                $order = new Order();
+                $order->user_id = auth()->id();
+                $order->status = 'confirmed';
+                $order->subtotal = $subTotal;
+                $order->order_total = $subTotal;    
+                $order->stripe_payment_intent = $request['payment_intent'] ?? null;
+                $order->stripe_payment_intent_client_secret = $request['payment_intent_client_secret'] ?? null;
+                $order->payment_status = 'confirmed';
+                $order->save();    
+                foreach($cartItems as $k => $cart){
+                    $orderProduct = new OrderProduct();
+                    $orderProduct->order_id = $order->id;
+                    $orderProduct->product_id = $cart->product_id;
+                    $orderProduct->price = $cart->price;
+                    $orderProduct->quantity = $cart->quantity;
+                    $orderProduct->subtotal = ($cart->price * $cart->quantity);
+                    $orderProduct->save();
+                    $cart->delete();
+                }  
+            }
+            return redirect()->route('front.get.success', $order->id);
+        }else{
+            return redirect()->route('front.get.failed', $order->id);
+            
+        }
+    }
+
+    public function getSuccess(Request $request, $orderid){
+        return view('front.orders.success');
+    }
+
+    public function getFailed(Request $request, $orderid){
+        return view('front.orders.failed');
+    }
 
 }

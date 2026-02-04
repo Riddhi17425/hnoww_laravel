@@ -1,38 +1,22 @@
 //Increase & Decrease Quantity with stock check
 $(document).on('click', '.inc_btn', function () {
-    // let parent = $(this).closest('.increment_decrement');
-    // let qty = parseInt(parent.find('.qty_input').val());
-    // let stock = parseInt(parent.data('stock'));
-    // if(qty < stock){
-    //     qty++;
-    //     parent.find('.qty_input').val(qty);
-    //     parent.find('.span_value').text(qty);
-    // } else {
-    //     parent.find('.qty_input').val(qty);
-    //     parent.find('.span_value').text(qty);
-    //     Swal.fire({
-    //         icon: 'warning',
-    //         title: 'Out of Stock',
-    //         text: 'You cannot add more than available stock (' + stock + ')',
-    //         timer: 3000,
-    //         showConfirmButton: true,
-    //         confirmButtonColor: '#B58A46',
-    //     });
-    // }
     let row = $(this).closest('.increment_decrement');
     let qtyInput = row.find('.qty_input');
     let qty = parseInt(qtyInput.val());
     let stock = parseInt($(this).closest('.increment_decrement').data('stock'));
     let cartId = row.data('cart-id');
     let productId = row.data('product-id');
+    let callFrom = $(this).data('call');
     if (qty < stock) {
         qty++;
         qtyInput.val(qty);
         row.find('.span_value').text(qty);
-        recalculateCartTotals();
-        updateCartCount();
-        // Update DB using your existing addToCartAjax function
-        $.post(sitePath + '/cart/add', { cart_id: cartId, quantity: qty, product_id: productId });
+        if(callFrom == 'cart'){
+            recalculateCartTotals();
+            updateCartCount();
+            // Update DB using your existing addToCartAjax function
+            $.post(sitePath + '/cart/add', { cart_id: cartId, quantity: qty, product_id: productId });
+        }
     } else {
         // Keep quantity as-is
         qtyInput.val(qty);
@@ -51,25 +35,21 @@ $(document).on('click', '.inc_btn', function () {
 });
 
 $(document).on('click', '.dec_btn', function () {
-    // let parent = $(this).closest('.increment_decrement');
-    // let qty = parseInt(parent.find('.qty_input').val());
-    // if(qty > 1){
-    //     qty--;
-    //     parent.find('.qty_input').val(qty);
-    //     parent.find('.span_value').text(qty);
-    // }
-    let row = $(this).closest('.cart-item-row');
+    let row = $(this).closest('.increment_decrement');
     let qtyInput = row.find('.qty_input');
     let qty = parseInt(qtyInput.val());
-    let cartId = row.find('.increment_decrement').data('cart-id');
-    let productId = row.find('.increment_decrement').data('product-id');
+    let cartId = row.data('cart-id');
+    let productId = row.data('product-id');
+    let callFrom = $(this).data('call');
     if (qty > 1) {
         qty--;
         qtyInput.val(qty);
         row.find('.span_value').text(qty);
-        recalculateCartTotals();
-        updateCartCount();
-        $.post(sitePath + '/cart/add', { cart_id: cartId, quantity: qty, product_id: productId });
+        if(callFrom == 'cart'){
+            recalculateCartTotals();
+            updateCartCount();
+            $.post(sitePath + '/cart/add', { cart_id: cartId, quantity: qty, product_id: productId });
+        }
     }
 });
 

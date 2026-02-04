@@ -69,6 +69,16 @@
                 </ul>
             </li>
 
+            <li class="{{ request()->routeIs('admin.users*') ? '' : 'collapsed' }}">
+                <a class="m-link {{ request()->routeIs('admin.users*') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#users" href="#">
+                    <i class="icofont-users fs-5"></i> <span>Users</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
+                <!-- Menu: Sub menu ul -->
+                <ul class="sub-menu collapse {{ request()->routeIs('admin.users*') ? 'show' : '' }}" id="users">
+                    <li><a class="ms-link {{ request()->routeIs('admin.users.get') ? 'active' : '' }}" href="{{ route('admin.users.get') }}">Users List</a></li>
+                    <li><a class="ms-link {{ request()->routeIs('admin.users.orders') ? 'active' : '' }}" href="{{ route('admin.users.orders') }}">User's Orders</a></li>
+                </ul>
+            </li>
+
             <li class="{{ request()->routeIs('admin.journals*') ? '' : 'collapsed' }}">
                 <a class="m-link {{ request()->routeIs('admin.journals.*') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-journals" href="#">
                     <i class="icofont-notepad fs-5"></i> <span>Journals</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>

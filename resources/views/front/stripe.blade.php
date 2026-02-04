@@ -73,7 +73,7 @@
 </script> --}}
 
 <script>
-    const stripe = Stripe("{{ env('STRIPE_KEY') }}"); // <--- You MUST do this once upfront
+const stripe = Stripe("{{ env('STRIPE_KEY') }}"); // <--- You MUST do this once upfront
 let elements;
 let paymentElement;
 let clientSecret;
@@ -100,31 +100,34 @@ async function mountPaymentElement(clientSecret) {
     paymentElement.mount('#card-element');
 }
 
-document.getElementById('amount').addEventListener('change', async (e) => {
-    const amount = e.target.value;
-    if (amount && amount > 0) {
-        clientSecret = await createPaymentIntent(amount);
-        await mountPaymentElement(clientSecret);
-        document.getElementById('error-message').textContent = ''; // Clear errors
-    }
-});
+$(document).ready(function () {   
+    $('#amount').on('change', async function () {
+        const amount = $(this).val();
 
-document.getElementById('payBtn').addEventListener('click', async () => {
-    if (!clientSecret) {
-        document.getElementById('error-message').textContent = 'Please enter a valid amount first.';
-        return;
-    }
-
-    const { error } = await stripe.confirmPayment({
-        elements,
-        confirmParams: {
-            return_url: window.location.href // or your success page URL
-        },
+        if (amount && amount > 0) {
+            clientSecret = await createPaymentIntent(amount);
+            await mountPaymentElement(clientSecret);
+            $('#error-message').text(''); // Clear errors
+        }
     });
 
-    if (error) {
-        document.getElementById('error-message').textContent = error.message;
-    }
+    $('#payBtn').on('click', async function () {
+        if (!clientSecret) {
+            $('#error-message').text('Please enter a valid amount first.');
+            return;
+        }
+        const { error } = await stripe.confirmPayment({
+            elements,
+            confirmParams: {
+                return_url: window.location.href // or your success page URL
+            },
+        });
+        if (error) {
+            $('#error-message').text(error.message);
+        }
+    });
+
+
 });
 
 </script>

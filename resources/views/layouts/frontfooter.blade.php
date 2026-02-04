@@ -162,8 +162,82 @@ AOS.init();
 <script src="{{ asset('public/front/js/main.js') }}"></script>
 
 <!-- Custom Validations -->
-<script src="{{ asset('public/js/front/custom_validations.js') }}"></script>
-<script src="{{ asset('public/js/front/common.js') }}" defer></script>
+ <script src="{{ asset('public/js/front/custom_validations.js') }}"></script>
+ <script src="{{ asset('public/js/front/common.js') }}" defer></script>
+
+ {{-- STRIPE PAYMENT GATEWAY --}}
+ <script src="https://js.stripe.com/v3/"></script>
+
+ <script>
+    var sitePath = "{{ url('/') }}";
+    $(document).ready(function () {
+        setTimeout(function () {
+            $('.auto-hide').fadeOut('slow');
+        }, 5000); //5 seconds
+
+        $("#newsletterForm").validate({
+            rules: {
+                newsletter_email: {
+                    required: true,
+                    email: true,
+                    noSpamEmail: true,
+                    uniqueEmail: "newsletters" // dynamic table
+                }
+            },
+            messages: {
+                newsletter_email: {
+                    required: "Please enter your email",
+                    email: "Please enter a valid email address"
+                }
+            },
+            errorPlacement: function (error, element) {
+                 $('#newsletter_error').html(error); // replace instead of append
+            },
+            submitHandler: function(form) {
+                var $form = $(form);
+                var $btn = $form.find('button[type="submit"]');
+                var originalBtnText = 'Submit';
+                // Disable button and show loader
+                $btn.prop('disabled', true).text('Submitting...');
+                $('#newsletterMessage').text(''); // clear previous messages
+
+                $.ajax({
+                    url: $form.attr('action'),
+                    type: 'POST',
+                    data: $form.serialize(),
+                    success: function(response) {
+                        if(response.success){
+                            $btn.prop('disabled', false).text(originalBtnText);
+                            $('#newsletterMessage').text(response.message);
+                            // Open WhatsApp link in new tab AFTER slight delay to ensure UI updates
+                            if(response.whatsappUrl){
+                                setTimeout(function(){
+                                    window.open(response.whatsappUrl, '_blank');
+                                }, 200);
+                            }
+                            $form[0].reset();
+                        } else {
+                            // Display first server-side validation error
+                            if(response.errors){
+                                var firstError = Object.values(response.errors)[0][0];
+                                $('#newsletterMessage').text(firstError);
+                            } else {
+                                $('#newsletterMessage').text(response.message);
+                            }
+                        }
+                    },
+                    error: function(xhr){
+                        $('#newsletterMessage').text('Something went wrong. Please try again.');
+                    },
+                    complete: function(){
+                        // Re-enable button and restore original text
+                        //$btn.prop('disabled', false).text(originalBtnText);
+                    }
+                });
+
+                return false; // prevent default form submit
+            }
+        });
 
 <script>
 var sitePath = "{{ url('/') }}";
