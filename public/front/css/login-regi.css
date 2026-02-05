@@ -1,0 +1,225 @@
+#reg_login {
+    margin-top: 60px;
+    position: relative;
+    /* background-image: url(../../images/front/with_intention_banner.png); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#reg_login .reg_login_child {
+    position: relative;
+    width: 100%;
+    height: 800px;
+    /* background: #fff; */
+    /* box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1); */
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+#reg_login .reg_login_child .user {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+#reg_login .reg_login_child .user .imgBx {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    transition: 0.5s;
+}
+
+#reg_login .reg_login_child .user .imgBx img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#reg_login .reg_login_child .user .formBx {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    background-image: url(../../images/front/with_intention_banner.png);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    transition: 0.5s;
+}
+
+.ct_input {
+    margin-bottom: 40px;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0 30px 0;
+    font-size: 15px;
+    color: #555;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+    cursor: pointer;
+}
+
+/* ===== Custom Checkbox ===== */
+.remember-me input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    /* border-radius: 5px; */
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+    background: white;
+    margin-top: 0;
+}
+
+/* Checked state - RED */
+.remember-me input[type="checkbox"]:checked {
+    background: var(--secondary-color); /* red background */
+    border-color: var(--secondary-color); /* darker red border */
+}
+
+/* Checkmark inside when checked */
+.remember-me input[type="checkbox"]:checked::after {
+    content: "✔";
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Hover effect */
+.remember-me input[type="checkbox"]:hover {
+    border-color: #999;
+}
+
+@media (max-width: 400px) {
+    .options {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .login-box {
+        padding: 32px 24px;
+    }
+}
+
+#reg_login .reg_login_child .user .formBx .title_60 {
+    text-align: center;
+    color: var(--dark-900);
+    margin-bottom: 40px;
+}
+
+#reg_login .reg_login_child .signupBx {
+    pointer-events: none;
+}
+
+#reg_login .reg_login_child.active .signupBx {
+    pointer-events: initial;
+}
+
+#reg_login .reg_login_child .signupBx .formBx {
+    left: 100%;
+}
+
+#reg_login .reg_login_child.active .signupBx .formBx {
+    left: 0;
+}
+
+#reg_login .reg_login_child .signupBx .imgBx {
+    left: -100%;
+}
+
+#reg_login .reg_login_child.active .signupBx .imgBx {
+    left: 0%;
+}
+
+#reg_login .reg_login_child .signinBx .formBx {
+    left: 0%;
+}
+
+#reg_login .reg_login_child.active .signinBx .formBx {
+    left: 100%;
+}
+
+#reg_login .reg_login_child .signinBx .imgBx {
+    left: 0%;
+}
+
+#reg_login .reg_login_child.active .signinBx .imgBx {
+    left: -100%;
+}
+
+.password_wrap {
+    position: relative;
+}
+
+.password_wrap input {
+    padding-right: 50px;
+}
+
+.toggle_password {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.toggle_password svg {
+    width: 22px;
+    height: 22px;
+}
+
+.eye-close {
+    display: none;
+}
+
+.toggle_password.active .eye-open {
+    display: none;
+}
+
+.toggle_password.active .eye-close {
+    display: block;
+}
+
+@media (max-width: 991px) {
+    #reg_login .reg_login_child {
+        max-width: 400px;
+    }
+
+    #reg_login .reg_login_child .imgBx {
+        display: none;
+    }
+
+    #reg_login .reg_login_child .user .formBx {
+        width: 100%;
+    }
+}

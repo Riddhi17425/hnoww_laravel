@@ -109,6 +109,10 @@
         max-width: 1330px !important;
     }
 
+    #reg_login {
+    margin-top: 20px;
+    }
+
     .privacy_nav_jump .sidebar {
         width: 35%;
     }
@@ -376,6 +380,18 @@
     .abiout_left_tp {
         gap: 25px;
     }
+
+    #reg_login .reg_login_child {
+        height: 700px;
+    }
+
+    .formBx .ct_input {
+        margin-bottom: 30px;
+    }
+
+    .formBx .ct_form .row {
+        --bs-gutter-x: 40px;
+    }
 }
 
 /*=========================                  =========================
@@ -386,6 +402,14 @@
 @media (max-width: 1441px) {
     .container {
         max-width: 1190px !important;
+    }
+
+     .formBx .ct_input {
+        margin-bottom: 30px;
+    }
+
+    #reg_login .reg_login_child {
+    height: 650px;
     }
 
     .practice_content .sub_head_inter {
@@ -1622,5 +1646,19 @@
 
     .privacy_main .title_40 {
         margin-bottom: 15px;
+    }
+
+    .user_menu
+    {
+        left: 0px;
+    }
+
+    #reg_login
+    {
+        padding: 0;
+    }
+
+        #reg_login .reg_login_child {
+        height: 640px;
     }
 }

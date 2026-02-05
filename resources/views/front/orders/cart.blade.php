@@ -64,53 +64,54 @@
 										</tr>
 								@endif
 
-							</form>
-						</tbody>
-					</table>
-					<!--/ End Shopping Summery -->
-				</div>
-			</div>
-			@if($cartData->count() > 0)
-			<div class="row" id="calculation-section">
-				<div class="col-12">
-					<!-- Total Amount -->
-					<div class="total-amount">
-						<div class="row">
-							<div class="col-lg-4 col-md-7 col-12">
-								<div class="right">
-									<ul>
-										<li class="order_subtotal" data-price="">Cart Subtotal <span id="cart-subtotal">{{ $subTotal ?? 0 }} AED </span></li>
-										<li class="last" id="order_total_price">You Pay <span id="you-pay">{{ $subTotal ?? 0 }} AED </span></li>
-									</ul>
-									<div class="button5">
-										<a href="{{ route('front.checkout.view') }}" class="com_btn">Checkout</a>
-										<a href="{{ route('front.home') }}" class="com_btn">Continue shopping</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!--/ End Total Amount -->
-				</div>
-			</div>
-            @endif
-		</div>
-	</div>
-	<!--/ End Shopping Cart -->
+                                </form>
+                            </tbody>
+                        </table>
+                        <!--/ End Shopping Summery -->
+                    </div>
+                </div>
+                @if($cartData->count() > 0)
+                <div class="row" id="calculation-section">
+                    <div class="col-12">
+                        <!-- Total Amount -->
+                        <div class="total-amount">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-7 col-12">
+                                    <div class="right">
+                                        <ul>
+                                            <li class="order_subtotal" data-price="">Cart Subtotal <span
+                                                    id="cart-subtotal">{{ $subTotal ?? 0 }} AED </span></li>
+                                            <li class="last" id="order_total_price">You Pay <span
+                                                    id="you-pay">{{ $subTotal ?? 0 }} AED </span></li>
+                                        </ul>
+                                        <div class="button5">
+                                            <a href="{{ route('front.checkout.view') }}" class="com_btn">Checkout</a>
+                                            <a href="{{ route('front.home') }}" class="com_btn">Continue shopping</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/ End Total Amount -->
+                    </div>
+                </div>
+                @endif
+            </div>
+        </div>
+        <!--/ End Shopping Cart -->
     </div>
 </section>
 
 @push('script')
 <script src="{{ asset('public/js/front/cart.js') }} "></script>
-	<script>
-		$(document).on('change', '.input-number', function () {
-			clearTimeout(window.cartTimer);
-			window.cartTimer = setTimeout(function () {
-				$('#cart-update-form').submit();
-			}, 300); // debounce
-		});
-
-	</script>
+<script>
+$(document).on('change', '.input-number', function() {
+    clearTimeout(window.cartTimer);
+    window.cartTimer = setTimeout(function() {
+        $('#cart-update-form').submit();
+    }, 300); // debounce
+});
+</script>
 
 @endpush
 @include('layouts.frontfooter')
