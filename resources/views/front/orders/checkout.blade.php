@@ -109,7 +109,7 @@
         elements = stripe.elements({ clientSecret });
 
         //paymentElement = elements.create('payment');
-        paymentElement = elements.create('payment', {
+    paymentElement = elements.create('payment', {
             fields: {
                 billingDetails: {
                     address: {

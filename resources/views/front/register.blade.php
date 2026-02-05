@@ -82,7 +82,7 @@
                             <div class="text-center">
                                 <button class="com_btn bg-transparent w-100" type="submit">Login</button>
                                 <div class="mt-3">
-                                    <p>Don't Have An Account? <a href="javascript:void(0);" onclick="toggleForm();"
+                                    <p>Already Have An Account? <a href="javascript:void(0);" onclick="toggleForm();"
                                             style="color:var(--dark-900);"><u> Sign Up</u></a></p>
                                 </div>
                             </div>
