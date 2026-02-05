@@ -43,7 +43,7 @@
                     <div class="text-center">
                         <button class="com_btn bg-transparent" type="submit">Login</button> 
                         <div>
-                            <a href="{{ route('front.register') }}">Not Registered? Register First</a>
+                            <a href="{{ route('front.auth', 'register') }}">Not Registered? Register First</a>
                         </div>
                     </div>
                 </form>
