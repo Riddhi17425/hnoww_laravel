@@ -385,7 +385,7 @@
                 <p class="m-3">Please login to continue and add items to your cart.</p>
             </div>
             <div class="modal-footer justify-content-center">
-                <a href="{{ route('front.login') }}" class="com_btn">
+                <a href="{{ route('front.auth', 'login') }}" class="com_btn">
                     Login Now
                 </a>
                 <button type="button" class="com_btn" data-bs-dismiss="modal">

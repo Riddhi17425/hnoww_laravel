@@ -19,7 +19,10 @@
 
 <section id="reg_login">
     <div class="container">
-        <div class="reg_login_child">
+        {{-- <div class="reg_login_child"> --}}
+        <div class="reg_login_child {{ ($pageVal ?? 'login') === 'register' ? 'active' : '' }}">
+            
+{{-- SIGN IN --}}
             <div class="user signinBx">
                 <div class="imgBx"><img src="{{ asset('public/front/images/login.png')}}" alt="images" /></div>
                 <div class="formBx">
@@ -31,7 +34,7 @@
                                 <input type="email" id="email" name="email" value="{{ old('email') }}"
                                     placeholder="Enter Email Address">
                                 @error('email')
-                                <small class="text-danger">{{ $message }}</small>
+                                    <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
 
@@ -66,15 +69,12 @@
 
                             <div class="ct_input">
                                 <div class="options">
-                                    <label class="remember-me">
-                                        <input type="checkbox" id="remember" />
+                                    <label class="remember-me" for="remember">
+                                        <input type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}/>
                                         <span>Remember me</span>
                                     </label>
-
                                     <div class="forgot-password">
-                                        <a href="#" onclick="alert('Forgot password - coming soon!')"
-                                            style="color:var(--dark-900);">Forgot
-                                            Password?</a>
+                                        <a href="#" onclick="alert('Forgot password - coming soon!')" style="color:var(--dark-900);">Forgot Password?</a>
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
                             <div class="text-center">
                                 <button class="com_btn bg-transparent w-100" type="submit">Login</button>
                                 <div class="mt-3">
-                                    <p>Don't Have An Account? <a href="javascript:void(0);" onclick="toggleForm();"
+                                    <p>Already Have An Account? <a href="javascript:void(0);" onclick="toggleForm();"
                                             style="color:var(--dark-900);"><u> Sign Up</u></a></p>
                                 </div>
                             </div>
@@ -91,7 +91,7 @@
                 </div>
             </div>
 
-            <!-- <a href="javascript:void(0);" onclick="toggleForm();">Sign in.</a> -->
+{{-- SIGN UP --}}
             <div class="user signupBx">
                 <div class="formBx">
                     <div class="ct_form">
@@ -126,7 +126,7 @@
                                 <!-- Email -->
                                 <div class="col-lg-12">
                                     <div class="ct_input">
-                                        <input type="email" id="email" name="email" value="{{ old('email') }}"
+                                        <input type="email" id="email" name="r_email" value="{{ old('email') }}"
                                             placeholder="Enter Email Address">
                                         @error('email')
                                         <small class="text-danger">{{ $message }}</small>
@@ -138,11 +138,11 @@
                                 <div class="col-12">
 
                                     <div class="ct_input password_wrap">
-                                        <input type="password" id="regi_password" name="password"
+                                        <input type="password" id="r_password" name="r_password"
                                             placeholder="Enter Password">
 
                                         <span class="toggle_password"
-                                            onclick="togglePasswordSvg('regi_password', this)">
+                                            onclick="togglePasswordSvg('r_password', this)">
                                             <!-- 👁 Eye (show) -->
                                             <svg class="eye-open" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -170,7 +170,7 @@
                                 <div class="col-12">
 
                                     <div class="ct_input password_wrap">
-                                        <input type="password" id="regi_com_password" name="password"
+                                        <input type="password" id="regi_com_password" name="r_password_confirmation"
                                             placeholder="Enter Confirm password">
 
                                         <span class="toggle_password"
@@ -205,9 +205,7 @@
                                     <div class="text-center">
                                         <button class="com_btn bg-transparent w-75" type="submit">Register</button>
                                         <div class="mt-3">
-                                            <p>Don't Have An Account? <a href="javascript:void(0);"
-                                                    onclick="toggleForm();" style="color:var(--dark-900);"><u>Sign
-                                                        in</u></a></p>
+                                            <p>Don't Have An Account? <a href="javascript:void(0);" onclick="toggleForm();" style="color:var(--dark-900);"><u>Sign in</u></a></p>
                                         </div>
                                     </div>
 
@@ -218,234 +216,190 @@
                 </div>
                 <div class="imgBx"><img src="{{ asset('public/front/images/login.png')}}" alt="images" /></div>
             </div>
+
         </div>
-    </div>
-</section>
-
-<!-- ---------------  no use ---------------- -->
-
-<section class="mt_60 mb_120">
-    <div class="container">
-        <div class="ct_form">
-            <form method="POST" id="registerForm" action="{{ route('front.register.post') }}">
-                @csrf
-                <div class="row">
-                    <!-- Full Name -->
-                    <div class="col-lg-6">
-                        <div class="ct_input">
-                            <label for="full_name" class="sub_head">Full Name</label> <span class="text-danger">*</span>
-                            <input type="text" id="full_name" name="full_name" value="{{ old('full_name') }}"
-                                placeholder="Enter your Full Name" pattern="[A-Za-z\s]{2,50}"
-                                oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();">
-                            @error('full_name')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <!-- Email -->
-                    <div class="col-lg-6">
-                        <div class="ct_input">
-                            <label for="email" class="sub_head">Email Address</label> <span class="text-danger">*</span>
-                            <input type="email" id="email" name="email" value="{{ old('email') }}"
-                                placeholder="Enter your Email Address">
-
-                            @error('email')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <!-- Phone -->
-                    <div class="col-lg-4">
-                        <div class="ct_input">
-                            <label for="phone" class="sub_head">Phone Number</label> <span class="text-danger">*</span>
-                            <input type="text" id="phone" name="phone" value="{{ old('phone') }}"
-                                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
-                                placeholder="Enter your Phone Number">
-                            @error('phone')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-                    <!-- Password -->
-                    <div class="col-4">
-                        <div class="ct_input">
-                            <label for="password" class="sub_head">Password</label> <span class="text-danger">*</span>
-                            <input type="password" id="password" name="password" placeholder="Enter password" rows="1">
-                            @error('password')
-                            <small class="text-danger">{{ $password }}</small>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="ct_input">
-                            <label for="password_confirmation" class="sub_head">Confirm Password</label> <span
-                                class="text-danger">*</span>
-                            <input type="password" id="password_confirmation" name="password_confirmation"
-                                placeholder="Enter Confirm Password" value="{{ old('password_confirmation') }}">
-                            @error('password_confirmation')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <!-- Address -->
-                    <div class="col-12">
-                        <div class="ct_input">
-                            <label for="address" class="sub_head">Address</label>
-                            <textarea id="address" name="address" placeholder="Enter Address"
-                                rows="1">{{ old('address') }}</textarea>
-                            @error('address')
-                            <small class="text-danger">{{ $address }}</small>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <!-- Submit -->
-                    <div class="col-12 text-center">
-                        <button class="com_btn bg-transparent" type="submit">Register</button>
-                        <a class="" href="{{ route('front.login') }}">Already Register ? Login </a>
-                    </div>
-
-                </div>
-            </form>
-        </div>
-
     </div>
 </section>
 
 @push('script')
 <script>
-var formSubmitted = false;
-$(document).ready(function() {
-    $("#registerForm").validate({
-        rules: {
-            full_name: {
-                required: true,
-                minlength: 2,
-                maxlength: 50,
-                lettersonly: true
+
+    $(document).ready(function() {
+        $("#registerForm").validate({
+            rules: {
+                full_name: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 50,
+                    lettersonly: true
+                },
+                r_password: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 30,
+                },
+                r_password_confirmation: {
+                    required: true,
+                    equalTo: "#r_password"
+                },
+                r_email: {
+                    required: true,
+                    email: true,
+                    noSpamEmail: true,
+                    uniqueEmail: "users"
+                },
+                phone: {
+                    required: true,
+                    validPhone: true,
+                    //number:true,
+                },
+                address: {
+                    minlength: 5,
+                    maxlength: 500
+                },
             },
-            password: {
-                required: true,
-                minlength: 6,
-                maxlength: 30,
+            messages: {
+                full_name: {
+                    required: "Please enter your Full name",
+                    minlength: "Name must be at least 2 characters",
+                    maxlength: "Name cannot be longer than 50 characters",
+                    lettersonly: "Only letters and spaces are allowed"
+                },
+                r_email: {
+                    required: "Please enter your email",
+                    email: "Please enter a valid email address",
+                    noSpamEmail: "This email address is not allowed",
+                },
+                phone: {
+                    required: "Please enter your Contact number"
+                },
+                r_password: {
+                    required: "Please enter your Password",
+                    minlength: "Password must be at least 2 characters",
+                    maxlength: "Password cannot be longer than 50 characters",
+                },
+                r_password_confirmation: {
+                    required: "Please confirm your password",
+                    equalTo: "Passwords do not match"
+                },
+                address: {
+                    minlength: "Address atlease 5 characters",
+                    maxlength: "Address cannot be longer than 500 characters"
+                },
             },
-            password_confirmation: {
-                required: true,
-                equalTo: "#password"
+            errorElement: 'div',
+            errorPlacement: function(error, element) {
+                // error.addClass('invalid-feedback');
+                // if (element.attr("name") === "g-recaptcha-response") {
+                //     error.insertAfter(".g-recaptcha"); 
+                // } else {
+                error.insertAfter(element);
+                //}
             },
-            email: {
-                required: true,
-                email: true,
-                noSpamEmail: true,
-                uniqueEmail: "contact_inquiries"
+            highlight: function(element) {
+                $(element).addClass('is-invalid').removeClass('is-valid');
             },
-            phone: {
-                required: true,
-                validPhone: true,
-                //number:true,
+            unhighlight: function(element) {
+                $(element).addClass('is-valid').removeClass('is-invalid');
             },
-            address: {
-                minlength: 5,
-                maxlength: 500
-            },
-        },
-        messages: {
-            full_name: {
-                required: "Please enter your Full name",
-                minlength: "Name must be at least 2 characters",
-                maxlength: "Name cannot be longer than 50 characters",
-                lettersonly: "Only letters and spaces are allowed"
-            },
-            email: {
-                required: "Please enter your email",
-                email: "Please enter a valid email address",
-                noSpamEmail: "This email address is not allowed",
-            },
-            phone: {
-                required: "Please enter your Contact number"
-            },
-            password: {
-                required: "Please enter your Password",
-                minlength: "Password must be at least 2 characters",
-                maxlength: "Password cannot be longer than 50 characters",
-            },
-            password_confirmation: {
-                required: "Please confirm your password",
-                equalTo: "Passwords do not match"
-            },
-            address: {
-                minlength: "Address atlease 5 characters",
-                maxlength: "Address cannot be longer than 500 characters"
-            },
-        },
-        errorElement: 'div',
-        errorPlacement: function(error, element) {
-            // error.addClass('invalid-feedback');
-            // if (element.attr("name") === "g-recaptcha-response") {
-            //     error.insertAfter(".g-recaptcha"); 
-            // } else {
-            error.insertAfter(element);
-            //}
-        },
-        highlight: function(element) {
-            $(element).addClass('is-invalid').removeClass('is-valid');
-        },
-        unhighlight: function(element) {
-            $(element).addClass('is-valid').removeClass('is-invalid');
-        },
-        submitHandler: function(form) {
-            if (!formSubmitted) {
-                formSubmitted = true;
-                const btn = $(form).find('button[type="submit"]');
-                if (btn.length) {
-                    btn.prop('disabled', true).text('Submitting...');
+            submitHandler: function(form) {
+                if (!formSubmitted) {
+                    formSubmitted = true;
+                    const btn = $(form).find('button[type="submit"]');
+                    if (btn.length) {
+                        btn.prop('disabled', true).text('Submitting...');
+                    }
+                    form.submit();
                 }
-                form.submit();
             }
-        }
+        });
+
+        $("#loginForm").validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true,
+                    noSpamEmail: true,
+                    uniqueEmail: "contact_inquiries"
+                },
+                password:{
+                    required: true,
+                    minlength: 6,
+                    maxlength: 30,
+                },
+            },
+            messages: {
+                email: {
+                    required: "Please enter your email",
+                    email: "Please enter a valid email address",
+                    noSpamEmail: "This email address is not allowed",
+                },
+                password: {
+                    required: "Please enter your Password",
+                    minlength: "Password must be at least 2 characters",
+                    maxlength: "Password cannot be longer than 50 characters",
+                }
+            },
+            errorElement: 'div',
+            errorPlacement: function(error, element) {
+                // error.addClass('invalid-feedback');
+                // if (element.attr("name") === "g-recaptcha-response") {
+                //     error.insertAfter(".g-recaptcha"); 
+                // } else {
+                    error.insertAfter(element);
+                //}
+            },
+            highlight: function(element) {
+                $(element).addClass('is-invalid').removeClass('is-valid');
+            },
+            unhighlight: function(element) {
+                $(element).addClass('is-valid').removeClass('is-invalid');
+            },
+            submitHandler: function(form) {
+                if (!formSubmitted) {
+                    formSubmitted = true;
+                    const btn = $(form).find('button[type="submit"]');
+                    if (btn.length) {
+                        btn.prop('disabled', true).text('Submitting...');
+                    }
+                    form.submit();
+                }
+            }
+        });
+
     });
-});
+
+    function toggleForm() {
+        document.querySelector(".reg_login_child").classList.toggle("active");
+    }
+    // document.querySelectorAll(".toggle-form").forEach((link) => {
+    //     link.addEventListener("click", function(e) {
+    //         e.preventDefault();
+    //         toggleForm();
+    //     });
+    // });
+
+    const rememberCheckbox = document.getElementById("remember");
+    if (localStorage.getItem("rememberMe") === "true") {
+        rememberCheckbox.checked = true;
+    }
+    rememberCheckbox.addEventListener("change", () => {
+        localStorage.setItem("rememberMe", rememberCheckbox.checked);
+    });
+
+    function togglePasswordSvg(inputId, el) {
+        const input = document.getElementById(inputId);
+
+        if (input.type === "password") {
+            input.type = "text";
+            el.classList.add("active");
+        } else {
+            input.type = "password";
+            el.classList.remove("active");
+        }
+    }
 </script>
 
 @endpush
-
-<script>
-function toggleForm() {
-    document.querySelector(".reg_login_child").classList.toggle("active");
-}
-
-document.querySelectorAll(".toggle-form").forEach((link) => {
-    link.addEventListener("click", function(e) {
-        e.preventDefault();
-        toggleForm();
-    });
-});
-
-const rememberCheckbox = document.getElementById("remember");
-if (localStorage.getItem("rememberMe") === "true") {
-    rememberCheckbox.checked = true;
-}
-rememberCheckbox.addEventListener("change", () => {
-    localStorage.setItem("rememberMe", rememberCheckbox.checked);
-});
-</script>
-
-<script>
-function togglePasswordSvg(inputId, el) {
-    const input = document.getElementById(inputId);
-
-    if (input.type === "password") {
-        input.type = "text";
-        el.classList.add("active");
-    } else {
-        input.type = "password";
-        el.classList.remove("active");
-    }
-}
-</script>
-
 
 @include('layouts.frontfooter')

@@ -153,10 +153,10 @@
                                         {{ number_format($subTotal ?? 0, 2) }}</span>
                                 </div>
 
-                                <div class="summary-row">
+                                {{-- <div class="summary-row">
                                     <span class="label">Shipping</span>
                                     <span class="value text-muted">Calculated at checkout</span>
-                                </div>
+                                </div> --}}
                             </div>
 
                             <hr class="summary-divider">

@@ -17,7 +17,7 @@ class Authenticate extends Middleware
     {
         if (! $request->expectsJson()) {
             //return route('login');
-            return route('front.login');
+            return route('front.auth', 'login');
         }
     }
 }

@@ -205,7 +205,7 @@
                                 </div>
                             </div>
 
-                            <div class="faq_cont_acco">
+                            {{-- <div class="faq_cont_acco">
                                 <h6 class="according_head sub_head" data-bs-toggle="collapse"
                                     data-bs-target="#collapse-1-2" aria-expanded="false" aria-controls="collapse-1-2">
                                     option 2
@@ -220,8 +220,7 @@
                                         </p>
                                     </div>
                                 </div>
-
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>
@@ -277,33 +276,31 @@ async function createPaymentIntent(amount) {
 }
 
 async function mountPaymentElement(clientSecret) {
-    if (elements) {
-        elements.unmount(); // Clean up previous Elements if any
-    }
-    elements = stripe.elements({
-        clientSecret
-    });
-
-    //paymentElement = elements.create('payment');
-    paymentElement = elements.create('payment', {
-        fields: {
-            billingDetails: {
-                address: {
-                    country: 'never' // ✅ Hides country dropdown
-                }
-            }
-        },
-        defaultValues: {
-            billingDetails: {
-                address: {
-                    country: 'AE' // ✅ Force UAE (Dubai)
-                }
-            }
+        if (elements) {
+            elements.unmount(); // Clean up previous Elements if any
         }
-    });
+        elements = stripe.elements({ clientSecret });
 
-    paymentElement.mount('#card-element');
-}
+        //paymentElement = elements.create('payment');
+        paymentElement = elements.create('payment', {
+            fields: {
+                billingDetails: {
+                    address: {
+                        country: 'never'   // ✅ Hides country dropdown
+                    }
+                }
+            },
+            defaultValues: {
+                billingDetails: {
+                    address: {
+                        country: 'AE'     // ✅ Force UAE (Dubai)
+                    }
+                }
+            }
+        });
+
+        paymentElement.mount('#card-element');
+    }
 
 $(document).ready(async function() {
     const amount = @json($subTotal);

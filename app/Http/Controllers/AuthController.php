@@ -11,16 +11,18 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function getRegister(Request $request){
-        return view('front.register');
+    public function getAuth(Request $request, $page = null){
+        $pageVal = $page ?? 'login';
+        return view('front.register', compact('pageVal'));
     }
 
     public function submitRegister(Request $request){
         $validator = Validator::make($request->all(), [
             'full_name'=>'string|required|min:2',
             'phone'=>'required|numeric|digits_between:8,15',
-            'email'=>'string|required|unique:users,email',
-            'password'=>'required|min:6|confirmed',
+            'r_email'=>'string|required|unique:users,email',
+            'r_password'=>'required|min:6|confirmed',
+            //'address'=>'nullable|max:200',
         ]);
         if ($validator->fails()) {
             return redirect()->back()
@@ -30,23 +32,25 @@ class AuthController extends Controller
         $data=$request->all();
         $check = User::create([
             'name'=>$data['full_name'],
-            'email'=>$data['email'],
-            'password'=>Hash::make($data['password']),
+            'email'=>$data['r_email'],
+            'phone'=>$data['phone'],
+            //'address'=>$data['address'],
+            'password'=>Hash::make($data['r_password']),
             'status'=>'active'
             ]);
 
-        Session::put('user',$data['email']);
+        Session::put('user',$data['r_email']);
         if($check){
             request()->session()->flash('success','Successfully registered');
-            return redirect()->route('front.login');
+            return redirect()->route('front.auth', 'register');
         }
         else{
             request()->session()->flash('error','Please try again!');
-            return back();
+            return redirect()->route('front.auth','register');
         }
     }
 
-    public function getLogin(Request $request){
+    public function getLogin(Request $request){ // Un-used
         return view('front.login');
     }
 
@@ -67,8 +71,8 @@ class AuthController extends Controller
             return redirect()->route('front.home');
         }
         else{ 
-            request()->session()->flash('error','Invalid email and password pleas try again!');
-            return redirect()->route('front.login');
+            request()->session()->flash('error','Invalid email and password please try again!');
+            return redirect()->route('front.auth', 'register'); //here login
         }
     }
 

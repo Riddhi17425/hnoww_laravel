@@ -281,6 +281,8 @@ class FrontController extends Controller
             $exists = DB::table('product_inquiries')->where('email', $email)->where('is_gift_inquiry', 1)->exists();
         } elseif($table === 'corporate_kit_requests') {
             $exists = DB::table('corporate_kit_requests')->where('email', $email)->exists();
+        } elseif($table === 'users') {
+            $exists = DB::table('users')->where('email', $email)->exists();
         }
 
         return response()->json([

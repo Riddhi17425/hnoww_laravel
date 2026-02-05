@@ -1,7 +1,8 @@
 @php
 $current_route = Route::currentRouteName();
 $is_green = ($current_route === 'front.product.details' || $current_route === 'front.gift.details' || $current_route ===
-'front.register' || $current_route === 'front.cart.view' || $current_route === 'front.checkout.view');
+'front.auth' || $current_route === 'front.cart.view' || $current_route === 'front.checkout.view');
+
 @endphp
 
 <head class="mb-3">
@@ -184,10 +185,10 @@ $is_green = ($current_route === 'front.product.details' || $current_route === 'f
                     </li>
                     @else
                     <li>
-                        <a href="{{ route('front.login') }}" data-text="Login">
+                        <a href="{{ route('front.auth', 'login') }}" data-text="Login">
                             <span>Login </span>
                         </a>
-                        <a href="{{ route('front.register') }}" data-text="Register">
+                        <a href="{{ route('front.auth', 'register') }}" data-text="Register">
                             <span>Register</span>
                         </a>
                     </li>
@@ -253,18 +254,17 @@ $is_green = ($current_route === 'front.product.details' || $current_route === 'f
                         </div>
                         @else
                         <div class="user_menu">
-                            <a href="{{ route('front.login') }}">Login</a>
-                            <a href="{{ route('front.register') }}">Register</a>
+                            <a href="{{ route('front.auth', 'login') }}">Login</a>
+                            <a href="{{ route('front.auth', 'register') }}">Register</a>
                         </div>
                         @endauth
 
 
                     </div>
                     <!-- Cart with Badge -->
-                    <a href="#" class="cart_icon">
-                        <img src="<?= $is_green ? asset('public/front/images/cart-icon-black.svg') : asset('public/front/images/cart-icon.svg') ?>"
-                            alt="Cart">
-                        <span class="cart_badge">3</span>
+                    <a href="{{ route('front.cart.view') }}" class="cart_icon">
+                        <img src="<?= $is_green ? asset('public/front/images/cart-icon-black.svg') : asset('public/front/images/cart-icon.svg') ?>" alt="Cart">
+                        <span id="cart-count" class="cart_badge">{{ \App\Models\Cart::where('user_id', auth()->id())->sum('quantity') ?? 0 }}</span>
                     </a>
 
                     <div class="language-select ms-lg-3">

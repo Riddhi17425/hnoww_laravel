@@ -26,9 +26,9 @@ use App\Http\Middleware\RedirectIfNotAdmin;
 Route::name('front.')->group(function () {
     Route::get('/', [FrontController::class, 'index'])->name('home');
 
-	Route::get('front/register', [AuthController::class, 'getRegister'])->name('register');
+	Route::get('front/auth/{page?}', [AuthController::class, 'getAuth'])->name('auth'); // used for both login & registration
     Route::post('front/register', [AuthController::class, 'submitRegister'])->name('register.post');
-	Route::get('front/login', [AuthController::class, 'getLogin'])->name('login');
+	Route::get('front/login', [AuthController::class, 'getLogin'])->name('login'); //un-used
     Route::post('front/login', [AuthController::class, 'submitLogin'])->name('login.post');
 
     Route::get('list/{category_slug}', [FrontController::class, 'getList'])->name('list');
@@ -173,7 +173,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 		Route::prefix('users')->name('users.')->group(function () {
             route::get('/get-users' , [UserController::class , 'getUsers'])->name('get');
+            route::get('/fetch-users' , [UserController::class , 'fetchUsers'])->name('fetch');
             route::get('/get-orders' , [UserController::class , 'getOrders'])->name('orders');
+            route::get('/fetch-orders' , [UserController::class , 'fetchOrders'])->name('orders.fetch');
+            route::get('/view-order-details/{orderid}' , [UserController::class , 'viewOrderDetails'])->name('orders.details');
         });
 		
 		Route::resource('journals', JournalController::class);
