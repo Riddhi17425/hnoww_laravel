@@ -173,7 +173,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 		Route::prefix('users')->name('users.')->group(function () {
             route::get('/get-users' , [UserController::class , 'getUsers'])->name('get');
+            route::get('/fetch-users' , [UserController::class , 'fetchUsers'])->name('fetch');
             route::get('/get-orders' , [UserController::class , 'getOrders'])->name('orders');
+            route::get('/fetch-orders' , [UserController::class , 'fetchOrders'])->name('orders.fetch');
+            route::get('/view-order-details/{orderid}' , [UserController::class , 'viewOrderDetails'])->name('orders.details');
         });
 		
 		Route::resource('journals', JournalController::class);

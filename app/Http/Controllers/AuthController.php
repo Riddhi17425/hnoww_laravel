@@ -21,6 +21,7 @@ class AuthController extends Controller
             'phone'=>'required|numeric|digits_between:8,15',
             'email'=>'string|required|unique:users,email',
             'password'=>'required|min:6|confirmed',
+            'address'=>'nullable|max:200',
         ]);
         if ($validator->fails()) {
             return redirect()->back()
@@ -31,6 +32,8 @@ class AuthController extends Controller
         $check = User::create([
             'name'=>$data['full_name'],
             'email'=>$data['email'],
+            'phone'=>$data['phone'],
+            'address'=>$data['address'],
             'password'=>Hash::make($data['password']),
             'status'=>'active'
             ]);

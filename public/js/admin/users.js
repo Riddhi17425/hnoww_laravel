@@ -1,54 +1,47 @@
 $(document).ready(function () {
-    var table = $('#journalTable').DataTable({
+    var table = $('#userTable').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-            url: window.APP_URLS.getJournals,
+            url: window.APP_URLS.getUsers,
             data: function(d) {
-                d.status = $('#status').val(); // send dropdown value
+               
             }
         },
         order: [[0, 'desc']],
         columns: [
             { data: 'id', name: 'id' },
-            { data: 'month_name', name:"month_name" },
-            { data: 'title', name: 'title' },
-            { data: 'description', name: 'description' },
-            { data: 'thumbnail_img', name: 'thumbnail_img', orderable: false, searchable: false  },
-            { data: 'status', name: 'status', orderable: false, searchable: false  },
-            { data: 'action', name: 'action', orderable: false, searchable: false }
+            { data: 'name', name:"name" },
+            { data: 'email', name: 'email' },
+            { data: 'phone', name: 'phone' },
+            { data: 'address', name: 'address' },
+        ]
+    });
+
+    var orderTable = $('#orderTable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: window.APP_URLS.getOrders,
+            data: function(d) {
+               d.user_id = $('#user_id').val(); // send dropdown value
+            }
+        },
+        order: [[0, 'desc']],
+        columns: [
+            { data: 'order_number', name: 'order_number' },
+            { data: 'user_details', name:"user_details", orderable:false, searchable:false },
+            { data: 'status', name: 'status' },
+            { data: 'subtotal', name: 'subtotal' },
+            { data: 'order_total', name: 'order_total' },
+            { data: 'action', name: 'action', orderable:false, searchable:false },
         ]
     });
 
     // Trigger table reload when dropdown changes
-    $('#status').change(function () {
-        table.draw();
+    $('#user_id').change(function () {
+        orderTable.draw();
     });
     
+    
 });
-
-function updateStatus(status, catId){
-    $.ajax({
-        url:  window.APP_URLS.updateStatus,
-        type: "POST",
-        headers: {
-            'X-CSRF-TOKEN': window.APP_URLS.csrfToken
-        },
-        data: {
-            id: catId,
-            status: status
-        },
-        success: function (response) {
-            console.log(response);
-            if (response.success) {
-                alert(response.message);
-            } else {
-                alert(response.message);
-            }
-            $('#journalTable').DataTable().ajax.reload(null, false);
-        },
-        error: function () {
-            alert('Server error');
-        }
-    });
-}

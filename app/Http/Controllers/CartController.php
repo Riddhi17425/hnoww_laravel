@@ -147,6 +147,9 @@ class CartController extends Controller
                 $order->stripe_payment_intent_client_secret = $request['payment_intent_client_secret'] ?? null;
                 $order->payment_status = 'confirmed';
                 $order->save();    
+                $randomNum = rand(1000, 9999);
+                $order->order_number = 'ORD-'.$order->id.'-'.$user->id.'-'.$randomNum;
+                $order->save();
                 foreach($cartItems as $k => $cart){
                     $orderProduct = new OrderProduct();
                     $orderProduct->order_id = $order->id;
