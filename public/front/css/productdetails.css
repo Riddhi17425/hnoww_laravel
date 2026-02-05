@@ -67,7 +67,7 @@
     color: var(--grey-666);
 }
 
-.pro_details_right .increment_decrement_area {
+ .increment_decrement_area {
     display: flex;
     align-items: center;
     gap: 24px;
@@ -75,14 +75,14 @@
     margin-bottom: 40px;
 }
 
-.pro_details_right .increment_decrement {
+.increment_decrement {
     display: inline-flex;
     align-items: center;
     border: 1px solid #EDEAE4;
 }
 
-.pro_details_right .increment_decrement .dec_btn,
-.pro_details_right .increment_decrement .inc_btn {
+.increment_decrement .dec_btn,
+.increment_decrement .inc_btn {
     background: #EDEAE4;
     width: 50px;
     height: 55px;
@@ -91,23 +91,23 @@
 }
 
 
-.pro_details_right .increment_decrement .dec_btn:hover,
-.pro_details_right .increment_decrement .inc_btn:hover {
+ .increment_decrement .dec_btn:hover,
+.increment_decrement .inc_btn:hover {
     background: var(--secondary-color);
 }
 
-.pro_details_right .increment_decrement .dec_btn:hover svg path,
-.pro_details_right .increment_decrement .inc_btn:hover svg path {
+.increment_decrement .dec_btn:hover svg path,
+.increment_decrement .inc_btn:hover svg path {
     stroke: var(--white-color);
 }
 
-.pro_details_right .increment_decrement .span_value {
+.increment_decrement .span_value {
     color: var(--grey-666);
     leading-trim: both;
     text-edge: cap;
     font-size: 28px;
     font-weight: 500;
-    padding: 14px 45px;
+    padding: 0 45px;
 }
 
 .pro_details_info b {

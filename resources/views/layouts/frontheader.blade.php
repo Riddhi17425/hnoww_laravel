@@ -1,7 +1,7 @@
 @php
 $current_route = Route::currentRouteName();
 $is_green = ($current_route === 'front.product.details' || $current_route === 'front.gift.details' || $current_route ===
-'front.register');
+'front.register' || $current_route === 'front.cart.view' || $current_route === 'front.checkout.view');
 @endphp
 
 <head class="mb-3">
@@ -49,6 +49,8 @@ $is_green = ($current_route === 'front.product.details' || $current_route === 'f
     <link rel="stylesheet" href="{{ asset('public/front/css/privacy.css')}}">
     <link rel="stylesheet" href="{{ asset('public/front/css/about.css')}}">
     <link rel="stylesheet" href="{{ asset('public/front/css/login-regi.css')}}">
+    <link rel="stylesheet" href="{{ asset('public/front/css/cart.css')}}">
+
 
     <!-- responsive css start -->
     <link rel="stylesheet" href="{{ asset('public/front/css/responsive.css')}}">
@@ -241,7 +243,6 @@ $is_green = ($current_route === 'front.product.details' || $current_route === 'f
                                 alt="User">
                         </a>
 
-
                         @auth
                         <div class="user_menu">
 
@@ -260,7 +261,7 @@ $is_green = ($current_route === 'front.product.details' || $current_route === 'f
 
                     </div>
                     <!-- Cart with Badge -->
-                    <a href="cart.php" class="cart_icon">
+                    <a href="#" class="cart_icon">
                         <img src="<?= $is_green ? asset('public/front/images/cart-icon-black.svg') : asset('public/front/images/cart-icon.svg') ?>"
                             alt="Cart">
                         <span class="cart_badge">3</span>

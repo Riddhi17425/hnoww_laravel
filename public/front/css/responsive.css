@@ -214,18 +214,18 @@
         line-height: 28px;
     }
 
-    .pro_details_right .increment_decrement .dec_btn,
-    .pro_details_right .increment_decrement .inc_btn {
+    .increment_decrement .dec_btn,
+    .increment_decrement .inc_btn {
         width: 50px;
         height: 42px;
     }
 
-    .pro_details_right .increment_decrement .span_value {
+    .increment_decrement .span_value {
         font-size: 24px;
-        padding: 11px 30px;
+        padding: 0 30px;
     }
 
-    .pro_details_right .increment_decrement_area {
+    .increment_decrement_area {
         margin-top: 20px;
         margin-bottom: 30px;
     }
@@ -561,9 +561,9 @@
         height: 100px;
     }
 
-    .pro_details_right .increment_decrement .span_value {
+    .increment_decrement .span_value {
         font-size: 18px;
-        padding: 11px 30px;
+        padding: 0 30px;
     }
 
     .increment_decrement svg {
@@ -918,17 +918,17 @@
         margin-bottom: 10px;
     }
 
-    .pro_details_right .increment_decrement .span_value {
+    .increment_decrement .span_value {
         font-size: 16px;
-        padding: 9px 30px;
+        padding: 0 30px;
     }
 
-    .pro_details_right .increment_decrement_area {
+    .increment_decrement_area {
         margin-bottom: 25px;
     }
 
-    .pro_details_right .increment_decrement .dec_btn,
-    .pro_details_right .increment_decrement .inc_btn {
+    .increment_decrement .dec_btn,
+     .increment_decrement .inc_btn {
         width: 35px;
         height: 38px;
     }
