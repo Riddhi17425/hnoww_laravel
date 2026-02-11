@@ -26,14 +26,12 @@
 </style>
 <body>
 
-<h2>Pay with Card (AED)</h2>
-
-<input type="number" id="amount" placeholder="Amount in AED">
-<button id="payBtn">Pay</button>
-
+<h4 class="mb-4">Payment Options</h4>
 <div id="card-element"></div>
 <div id="error-message"></div>
+<button id="payBtn">Pay</button>
 
+<script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js" type="text/javascript"></script>
 {{-- <script>
     const stripe = Stripe("{{ env('STRIPE_KEY') }}");
     const elements = stripe.elements({ clientSecret: '{{env('STRIPE_SECRET')}}' });
@@ -47,7 +45,7 @@
     document.getElementById('payBtn').addEventListener('click', async () => {
         const amount = document.getElementById('amount').value;
 
-        const response = await fetch('stripe', {
+        const response = await fetch('stripe-post', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -63,7 +61,7 @@
                 card: card
             }
         });
-
+        console.log("RESULT - " + JSON.stringify(result));
         if (result.error) {
             document.getElementById('error-message').textContent = result.error.message;
         } else {
@@ -73,63 +71,85 @@
 </script> --}}
 
 <script>
-const stripe = Stripe("{{ env('STRIPE_KEY') }}"); // <--- You MUST do this once upfront
-let elements;
-let paymentElement;
-let clientSecret;
+    var sitePath = "{{ url('/') }}";
+    const stripe = Stripe("{{ env('STRIPE_KEY') }}"); // <--- You MUST do this once upfront
+    let elements;
+    let paymentElement;
+    let clientSecret;
 
-async function createPaymentIntent(amount) {
-    const response = await fetch('stripe', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        },
-        body: JSON.stringify({ amount })
-    });
-    const data = await response.json();
-    return data.client_secret;
-}
-
-async function mountPaymentElement(clientSecret) {
-    if (elements) {
-        elements.unmount(); // Clean up previous Elements if any
+    async function createPaymentIntent(amount) {
+        const response = await fetch('stripe-post', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({ amount })
+        });
+        const data = await response.json();
+        return data.client_secret;
     }
-    elements = stripe.elements({ clientSecret });
-    paymentElement = elements.create('payment');
-    paymentElement.mount('#card-element');
-}
 
-$(document).ready(function () {   
-    $('#amount').on('change', async function () {
-        const amount = $(this).val();
+    async function mountPaymentElement(clientSecret) {
+        if (elements) {
+            elements.unmount(); // Clean up previous Elements if any
+        }
+        elements = stripe.elements({ clientSecret });
 
+        //paymentElement = elements.create('payment');
+        paymentElement = elements.create('payment', {
+            layout: { type: 'tabs' }, // ✅ wallets show on top if supported
+            fields: {
+                billingDetails: {
+                    address: {
+                        country: 'never'   // ✅ Hides country dropdown
+                    }
+                }
+            },
+            defaultValues: {
+                billingDetails: {
+                    address: {
+                        country: 'AE'     // ✅ Force UAE (Dubai)
+                    }
+                }
+            }
+        });
+
+        paymentElement.mount('#card-element');
+    }
+
+    $(document).ready(async function () {
+        const amount = 10;
         if (amount && amount > 0) {
             clientSecret = await createPaymentIntent(amount);
             await mountPaymentElement(clientSecret);
             $('#error-message').text(''); // Clear errors
         }
-    });
 
-    $('#payBtn').on('click', async function () {
-        if (!clientSecret) {
-            $('#error-message').text('Please enter a valid amount first.');
-            return;
-        }
-        const { error } = await stripe.confirmPayment({
-            elements,
-            confirmParams: {
-                return_url: window.location.href // or your success page URL
-            },
+        $('#payBtn').on('click', async function () {
+            if (!clientSecret) {
+                $('#error-message').text('Please enter a valid amount first.');
+                return;
+            }
+            const { error } = await stripe.confirmPayment({
+                elements,
+                confirmParams: { 
+                    return_url: sitePath + '/payment/success',
+                    payment_method_data: {
+                        billing_details: {
+                            address: {
+                                country: 'AE' // ✅ REQUIRED since you hide the field
+                            }
+                        }
+                    }
+                },
+            });
+            if (error) {
+                $('#error-message').text(error.message);
+            }
         });
-        if (error) {
-            $('#error-message').text(error.message);
-        }
+
     });
-
-
-});
-
 </script>
 
 </body>

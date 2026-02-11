@@ -98,10 +98,11 @@ class FaqController extends Controller
      */
     public function editFaqs(string $typeId)
     {
+        $data['types'] = FaqType::where('is_active', 0)->whereNull('deleted_at')->get();
         $type = FaqType::findOrFail($typeId);
         $faqs = Faq::where('faq_type_id', $typeId)->get();
 
-        return view('admin.faq.edit', compact('type', 'faqs'));
+        return view('admin.faq.edit', compact('type', 'faqs', 'data'));
     }
 
     public function updateFaqs(Request $request, string $productId)
@@ -167,13 +168,16 @@ class FaqController extends Controller
                 if (!empty($request->faq_id[$index])) {
                     // Update existing FAQ
                     Faq::where('id', $request->faq_id[$index])->update([
+                        'is_active' => 0,
+                        'faq_type_id' => $request->type_select,
                         'question' => $question,
                         'answer'   => $request->answer[$index],
                     ]);
                 } else {
                     // Create new FAQ
                     Faq::create([
-                        'faq_type_id' => $productId,
+                        'is_active' => 0,
+                        'faq_type_id' => $request->type_select,
                         'question'    => $question,
                         'answer'      => $request->answer[$index],
                     ]);

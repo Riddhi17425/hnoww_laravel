@@ -25,6 +25,8 @@ use App\Http\Middleware\RedirectIfNotAdmin;
 //FRONT ROUTE
 Route::name('front.')->group(function () {
     Route::get('/', [FrontController::class, 'index'])->name('home');
+    Route::get('stripe', [FrontController::class, 'getStripe']);
+    Route::post('stripe-post', [FrontController::class, 'stripePost'])->name('stripe.post');
 
 	Route::get('front/auth/{page?}', [AuthController::class, 'getAuth'])->name('auth'); // used for both login & registration
     Route::post('front/register', [AuthController::class, 'submitRegister'])->name('register.post');
@@ -78,6 +80,9 @@ Route::name('front.')->group(function () {
 	Route::get('/about', [FrontController::class, 'getAbout'])->name('about'); 
 
 	// NOT MADE DYNAMIC - END
+
+	Route::get('/forgot-password', [AuthController::class, 'getForgotPassword'])->name('forgot.password');
+
 
 	Route::middleware(['auth'])->group(function () {
 

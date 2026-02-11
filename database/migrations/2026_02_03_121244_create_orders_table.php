@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('order_total', 10, 2);   
             $table->string('stripe_payment_intent')->nullable();   
             $table->string('stripe_payment_intent_client_secret')->nullable();   
-            $table->string('payment_status')->comment('pending', 'confirmed', 'failed')->nullable();   
+            $table->string('payment_status')->default('unpaid')->comment('unpaid', 'paid', 'failed')->nullable();   
             $table->timestamps();
 
             // Foreign Keys

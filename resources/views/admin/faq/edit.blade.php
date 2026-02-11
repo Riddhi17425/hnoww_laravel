@@ -26,7 +26,18 @@
         {{-- Type --}}
         <div class="mb-3">
             <label class="form-label">Type </label>
-            <input type="text" class="form-control" value="{{ $type->name }}" disabled>
+            {{-- <input type="text" class="form-control" value="{{ $type->name }}" disabled> --}}
+            <select name="type_select" id="type_select" class="form-control @error('type') is-invalid @enderror">
+                <option value="" selected disabled>Select Type</option>
+                @foreach ($data['types'] as $item)
+                    <option value="{{ $item->id }}" {{ old('type_select', $type->id ?? '') == $item->id ? 'selected' : '' }}>
+                        {{ $item->name }}
+                    </option>
+                @endforeach
+            </select>
+            @error('type')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
         {{-- FAQs --}}

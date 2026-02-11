@@ -10,15 +10,37 @@ use App\Models\{Category, Product, ProductInquiry, NewsLetter, FaqType, ContactI
 use Exception;
 use Illuminate\Validation\Rule;
 
+use App\Services\PaymentService;
+use Stripe;
+
 class FrontController extends Controller
 {
     protected $adminEmail;
     protected $adminWhatsappNo;
+    protected $paymentService;
 
-    public function __construct()
+    public function __construct(PaymentService $paymentService)
     {
         $this->adminEmail = config('global_values.admin_email');
         $this->adminWhatsappNo = config('global_values.admin_whatsapp_no');
+        $this->paymentService = $paymentService;
+    }
+
+    public function getStripe(Request $request){
+        return view('front.stripe');
+    }
+
+    public function stripePost(Request $request, PaymentService $paymentService)
+    {
+        $request->validate([
+            'amount' => 'required|numeric|min:1'
+        ]);
+
+        $intent = $paymentService->createPaymentIntent($request->amount);
+        return response()->json([
+            'client_secret' => $intent->client_secret
+        ]);
+
     }
 
     public function index(Request $request){

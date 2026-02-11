@@ -145,7 +145,7 @@ class CartController extends Controller
                 $order->order_total = $subTotal;    
                 $order->stripe_payment_intent = $request['payment_intent'] ?? null;
                 $order->stripe_payment_intent_client_secret = $request['payment_intent_client_secret'] ?? null;
-                $order->payment_status = 'confirmed';
+                $order->payment_status = 'paid';
                 $order->save();    
                 $randomNum = rand(1000, 9999);
                 $order->order_number = 'ORD-'.$order->id.'-'.auth()->id().'-'.$randomNum;

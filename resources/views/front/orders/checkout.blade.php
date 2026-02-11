@@ -283,6 +283,7 @@ async function mountPaymentElement(clientSecret) {
 
         //paymentElement = elements.create('payment');
         paymentElement = elements.create('payment', {
+            layout: { type: 'tabs' },
             fields: {
                 billingDetails: {
                     address: {
@@ -302,40 +303,37 @@ async function mountPaymentElement(clientSecret) {
         paymentElement.mount('#card-element');
     }
 
-$(document).ready(async function() {
-    const amount = @json($subTotal);
-    if (amount && amount > 0) {
-        clientSecret = await createPaymentIntent(amount);
-        await mountPaymentElement(clientSecret);
-        $('#error-message').text(''); // Clear errors
-    }
-
-    $('#payBtn').on('click', async function() {
-        if (!clientSecret) {
-            $('#error-message').text('Please enter a valid amount first.');
-            return;
+    $(document).ready(async function() {
+        const amount = @json($subTotal);
+        if (amount && amount > 0) {
+            clientSecret = await createPaymentIntent(amount);
+            await mountPaymentElement(clientSecret);
+            $('#error-message').text(''); // Clear errors
         }
-        const {
-            error
-        } = await stripe.confirmPayment({
-            elements,
-            confirmParams: {
-                return_url: sitePath + '/payment/success',
-                payment_method_data: {
-                    billing_details: {
-                        address: {
-                            country: 'AE' // ✅ REQUIRED since you hide the field
+
+        $('#payBtn').on('click', async function() {
+            if (!clientSecret) {
+                $('#error-message').text('Please enter a valid amount first.');
+                return;
+            }
+            const { error } = await stripe.confirmPayment({ elements,
+                confirmParams: {
+                    return_url: sitePath + '/payment/success',
+                    payment_method_data: {
+                        billing_details: {
+                            address: {
+                                country: 'AE' // ✅ REQUIRED since you hide the field
+                            }
                         }
                     }
-                }
-            },
+                },
+            });
+            if (error) {
+                $('#error-message').text(error.message);
+            }
         });
-        if (error) {
-            $('#error-message').text(error.message);
-        }
-    });
 
-});
+    });
 </script>
 @endpush
 

@@ -37,9 +37,9 @@
                     <div class="d-flex justify-content-between mb-2">
                         <span>Payment</span>
                         <span class="badge
-                            {{ $order->payment_status == 'confirmed' ? 'bg-success' :
+                            {{ $order->payment_status == 'paid' ? 'bg-success' :
                                ($order->payment_status == 'failed' ? 'bg-danger' : 'bg-secondary') }}">
-                            {{ ucfirst($order->payment_status ?? 'Pending') }}
+                            {{ ucfirst($order->payment_status ?? 'Un-paid') }}
                         </span>
                     </div>
 
