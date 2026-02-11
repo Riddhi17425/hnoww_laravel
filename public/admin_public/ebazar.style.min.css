@@ -23134,6 +23134,7 @@ input[type=date], input[type=time] {
   /* -webkit-box-orient: vertical; */
   flex-direction: column;
   flex-direction: row;
+  background-color: #EDEAE4;
 }
 
 /***********left icon navigation bar*********/
@@ -23184,7 +23185,8 @@ input[type=date], input[type=time] {
 /***********Sidebar Main*********/
 .sidebar {
   transition: ease 0.1s;
-  background: var(--primary-color);
+  /* background: var(--primary-color); */
+  background: #8c8a72;
   z-index: 99999;
   margin: 25px;
   height: calc(100vh - 50px);

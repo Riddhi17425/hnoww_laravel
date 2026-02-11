@@ -1,7 +1,8 @@
 @php
 $current_route = Route::currentRouteName();
 $is_green = ($current_route === 'front.product.details' || $current_route === 'front.gift.details' || $current_route ===
-'front.auth' || $current_route === 'front.cart.view' || $current_route === 'front.checkout.view');
+'front.auth' || $current_route === 'front.cart.view' || $current_route === 'front.checkout.view' || $current_route === 'front.order.view' || $current_route === 'front.order_detail.view' || $current_route === 'front.profile' || $current_route ===
+'front.get.forgot.password' || $current_route === 'front.get.reset.password');
 
 @endphp
 
@@ -247,8 +248,8 @@ $is_green = ($current_route === 'front.product.details' || $current_route === 'f
                         @auth
                         <div class="user_menu">
 
-                            <a href="#">My Profile</a>
-                            <a href="#">My Orders</a>
+                            <a href="{{route('front.profile')}}">My Profile</a>
+                            <a href="{{ route('front.order.view') }}">My Orders</a>
                             <!-- <a href="#">My Wishlist</a> -->
                             <a href="{{ route('front.logout') }}">Logout</a>
                         </div>
@@ -753,6 +754,24 @@ $is_green = ($current_route === 'front.product.details' || $current_route === 'f
     });
     </script>
 
+<script>
+    document.querySelectorAll('.has-dropdown > a').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        if (window.innerWidth < 992) {
+            e.preventDefault(); // Prevent following the "#" link
+            const parent = this.parentElement;
+            
+            // Toggle active class on the <li>
+            parent.classList.toggle('active');
+            
+            // Optional: Close other open dropdowns
+            document.querySelectorAll('.has-dropdown').forEach(item => {
+                if (item !== parent) item.classList.remove('active');
+            });
+        }
+    });
+});
+</script>
 
     <!-- Load Google Translate -->
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">

@@ -62,8 +62,8 @@
                 <p>
                     At HNOWW, every object is a gesture. A pause.
                     A moment of intention.
-                    We craft sculptural pieces that turn daily actions into quiet ceremonies where form becomes meaning,
-                    and the everyday becomes sacred.
+                    We craft sculptural pieces that turn daily actions into quiet ceremonies  where form becomes meaning,
+ and the everyday becomes sacred.
                 </p>
             </div>
 
@@ -430,7 +430,7 @@
                     </svg>
                 </span>
             </p>
-            <h2 class="title_60">Trust Builder</h2>
+            <h2 class="title_60">Crafted With Intention</h2>
         </div>
         <div class="row gy-4 gy-md-0">
             <div class="col-md-4">
@@ -506,8 +506,7 @@
                     <div class="bespoke_box_bot">
                         <p class="para">Objects that create lasting partnerships. Custom engraving available.</p>
                         <span><a href="javascript:void(0);" data-bs-toggle="modal"
-                                data-bs-target="#requestCorporateProposal" class="com_btn">Request Corporate
-                                Lookbook</a></span>
+                                data-bs-target="#requestCorporateProposal" class="com_btn">Download Corporate Lookbook</a></span>
                     </div>
                 </div>
             </div>

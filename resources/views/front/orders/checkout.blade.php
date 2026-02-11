@@ -136,7 +136,8 @@
             <!-- LEFT : Order Summary -->
             <div class="col-lg-8 col-12">
                 <div class="checkout-box">
-                    <table class="table checkout-table shopping-summery" style="--bs-table-bg:--bs-table-bg;">
+                    <div class="table-responsive">
+                        <table class="table checkout-table shopping-summery" style="--bs-table-bg:--bs-table-bg;">
                         <thead>
                             <tr class="main-hading">
                                 <th>Product</th>
@@ -162,6 +163,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
 
@@ -276,64 +278,64 @@ async function createPaymentIntent(amount) {
 }
 
 async function mountPaymentElement(clientSecret) {
-        if (elements) {
-            elements.unmount(); // Clean up previous Elements if any
-        }
-        elements = stripe.elements({ clientSecret });
+    if (elements) {
+        elements.unmount(); // Clean up previous Elements if any
+    }
+    elements = stripe.elements({ clientSecret });
 
-        //paymentElement = elements.create('payment');
-        paymentElement = elements.create('payment', {
-            layout: { type: 'tabs' },
-            fields: {
-                billingDetails: {
-                    address: {
-                        country: 'never'   // ✅ Hides country dropdown
+    //paymentElement = elements.create('payment');
+    paymentElement = elements.create('payment', {
+        layout: { type: 'tabs' },
+        fields: {
+            billingDetails: {
+                address: {
+                    country: 'never'   // ✅ Hides country dropdown
+                }
+            }
+        },
+        defaultValues: {
+            billingDetails: {
+                address: {
+                    country: 'AE'     // ✅ Force UAE (Dubai)
+                }
+            }
+        }
+    });
+
+    paymentElement.mount('#card-element');
+}
+
+$(document).ready(async function() {
+    const amount = @json($subTotal);
+    if (amount && amount > 0) {
+        clientSecret = await createPaymentIntent(amount);
+        await mountPaymentElement(clientSecret);
+        $('#error-message').text(''); // Clear errors
+    }
+
+    $('#payBtn').on('click', async function() {
+        if (!clientSecret) {
+            $('#error-message').text('Please enter a valid amount first.');
+            return;
+        }
+        const { error } = await stripe.confirmPayment({ elements,
+            confirmParams: {
+                return_url: sitePath + '/payment/success',
+                payment_method_data: {
+                    billing_details: {
+                        address: {
+                            country: 'AE' // ✅ REQUIRED since you hide the field
+                        }
                     }
                 }
             },
-            defaultValues: {
-                billingDetails: {
-                    address: {
-                        country: 'AE'     // ✅ Force UAE (Dubai)
-                    }
-                }
-            }
         });
-
-        paymentElement.mount('#card-element');
-    }
-
-    $(document).ready(async function() {
-        const amount = @json($subTotal);
-        if (amount && amount > 0) {
-            clientSecret = await createPaymentIntent(amount);
-            await mountPaymentElement(clientSecret);
-            $('#error-message').text(''); // Clear errors
+        if (error) {
+            $('#error-message').text(error.message);
         }
-
-        $('#payBtn').on('click', async function() {
-            if (!clientSecret) {
-                $('#error-message').text('Please enter a valid amount first.');
-                return;
-            }
-            const { error } = await stripe.confirmPayment({ elements,
-                confirmParams: {
-                    return_url: sitePath + '/payment/success',
-                    payment_method_data: {
-                        billing_details: {
-                            address: {
-                                country: 'AE' // ✅ REQUIRED since you hide the field
-                            }
-                        }
-                    }
-                },
-            });
-            if (error) {
-                $('#error-message').text(error.message);
-            }
-        });
-
     });
+
+});
 </script>
 @endpush
 

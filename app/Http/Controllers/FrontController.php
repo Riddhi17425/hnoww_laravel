@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DB;
 use Illuminate\Support\Facades\Mail;
-use App\Models\{Category, Product, ProductInquiry, NewsLetter, FaqType, ContactInquiry, RequestCatalogue, CorporateProposalRequest, Journal, Blessing, WeddingCatalogueRequest, GiftBlessing, Ceremonial, CeremonialInquiry, GiftShop, CorporateKit, CorporateKitRequest};
+use App\Models\{User, Category, Product, ProductInquiry, NewsLetter, FaqType, ContactInquiry, RequestCatalogue, CorporateProposalRequest, Journal, Blessing, WeddingCatalogueRequest, GiftBlessing, Ceremonial, CeremonialInquiry, GiftShop, CorporateKit, CorporateKitRequest};
 use Exception;
 use Illuminate\Validation\Rule;
 
@@ -1183,6 +1183,10 @@ class FrontController extends Controller
 
     public function bespokeWeddingHampers(){
         return view('front.bespoke-wedding-hampers');
+    }
+    public function profile(){
+        $user = User::where('id', auth()->id())->first();
+        return view('front.profile', compact('user'));
     }
     
 

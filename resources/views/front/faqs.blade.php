@@ -3,8 +3,10 @@
 <section class="hero-section_inner">
     <img class="img-fluid" src="{{ asset('public/images/front/frequently-asked-banner.png')}}" alt="him banner">
     <div class="hero_content_inner">
-        <h2 class="main_head mb-3">Frequently Asked</h2>
-        <p class="para sec_in_mb">Guidance on our materials, care rituals, and the atelier service.</p>
+        <h2 class="main_head mb-3">Questions…Answered With Care And Clarity
+</h2>
+        <p class="para sec_in_mb">Everything you need to know about our objects, ordering pathways, and processes, guided with clarity, discretion, and care.
+</p>
     </div>
 </section>
 

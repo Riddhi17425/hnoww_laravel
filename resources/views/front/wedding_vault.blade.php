@@ -2,12 +2,10 @@
 
 <section class="wedding_vault">
     <div class="container">
-        <h1 class="main_head">The H Noww Wedding Vault</h1>
-        <h2 class="wedding_h2 mb-4">A private curation of ceremonial objects, heirloom gifts, and bespoke hampers for
-            modern
-            weddings.</h2>
-        <p class="text-white">This space is reserved for brides, grooms, and planners working directly with H Noww.<br>
-            Enter your access code to explore our private Wedding Vault.</p>
+        <h1 class="main_head">The HNoww Wedding Vault</h1>
+        <h2 class="wedding_h2 mb-4">A private curation of wedding and anniversary gifts, heirloom gifts, and bespoke luxury gift hampers,Dubai for modern weddings.</h2>
+        <p class="text-white">This space is reserved for brides, grooms, and planners working directly with H Noww. <br>
+        Enter your access code to explore our private Wedding Vault.</p>
         <div class="wedding_vault_form mb-5">
             <form id="unlockWeddingVaultForm" action="{{ route('front.wedding-vault.send-email') }}" method="POST">
                 @csrf
@@ -26,7 +24,8 @@
     </div>
     <a class="wedding_btn d-none d-lg-block" href="javascript:void(0);">
         <div>
-            Don’t have a code? Request access from the H Noww Wedding Concierge.
+            Don’t have a code? Request access from the HNoww Wedding Concierge.
+           
         </div>
         <div><svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M29.9974 1L1 29.9974M29.9974 1H7.69171M29.9974 1V23.3057" stroke="white" stroke-width="2"
@@ -38,7 +37,7 @@
 
 <a class="wedding_btn  d-lg-none" href="javascript:void(0);">
     <div>
-        Don’t have a code? Request access from the H Noww Wedding Concierge.
+        Don’t have a code? Request access from the HNoww Wedding Concierge.
     </div>
     <div><svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M29.9974 1L1 29.9974M29.9974 1H7.69171M29.9974 1V23.3057" stroke="white" stroke-width="2"

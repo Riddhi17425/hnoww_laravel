@@ -175,5 +175,18 @@ class CartController extends Controller
     public function getFailed(Request $request, $orderid){
         return view('front.orders.failed');
     }
+    public function order()
+    {
+        $orderData = Order::where('user_id', auth()->id())->orderBy('id', 'desc')->get();
+
+        // Use dot notation to reach front/orders/order.php
+        return view('front.orders.order', compact('orderData'));
+    }
+    public function orderDetail($orderId)
+    {
+        $orderDetails = Order::where('id', $orderId)->with(['user', 'orderProducts'])->first();
+        // Use dot notation to reach front/orders/order.php
+        return view('front.orders.order_detail', compact('orderDetails'));
+    }
 
 }

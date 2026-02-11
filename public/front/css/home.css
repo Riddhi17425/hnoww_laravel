@@ -12,13 +12,17 @@
 
 .hero_content {
     position: absolute;
-    top: 15em;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: var(--white-color);
     text-align: center;
 }
-
+.hero_content .main_head{
+    font-size: 55px;
+    white-space:nowrap;
+    line-height: 55px;
+}
 .hero_content p {
     color: #F8F7F3;
     font-size: 18px;

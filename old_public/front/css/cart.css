@@ -1,0 +1,249 @@
+/* ===== CART TABLE BASE ===== */
+.shopping-summery {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--gold-color);
+    padding: 0px;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.shopping-summery thead tr {
+    background: var(--gold-color);
+    color: var(--white-color);
+}
+
+.shopping-summery th {
+    padding: 16px 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--white-color);
+    border-bottom: 1px solid #e5e5e5;
+    text-align: center;
+}
+
+.shopping-summery td {
+    padding: 18px 14px;
+    vertical-align: middle;
+    border-bottom: 1px solid #eee;
+    font-size: 18px;
+    text-align: center;
+}
+
+/* ===== PRODUCT IMAGE ===== */
+.shopping-summery td.image img {
+    max-width: 120px;
+    /* border-radius: 6px; */
+    object-fit: cover;
+}
+
+/* ===== PRODUCT NAME ===== */
+.product-name a {
+    text-decoration: none;
+    font-family: var(--heading-font);
+}
+
+.product-name a:hover {
+    color: var(--secondary-color);
+}
+
+/* ===== PRICE ===== */
+.unit-price,
+.row-total {
+    font-weight: 600;
+}
+
+/* ===== DELETE ICON ===== */
+.delete-cart-item svg {
+    transition:
+        transform 0.2s ease,
+        stroke 0.2s ease;
+}
+
+.delete-cart-item:hover svg {
+    transform: scale(1.1);
+}
+
+.delete-cart-item:hover path {
+    stroke: var(--secondary-color);
+}
+
+/* ===== TOTAL SECTION ===== */
+
+.total-amount ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.total-amount ul li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.total-amount ul li.last {
+    font-size: 16px;
+    font-weight: 700;
+    border-top: 1px solid #ddd;
+    margin-top: 10px;
+    padding-top: 15px;
+}
+
+/* ===== BUTTONS ===== */
+.button5 {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* ===== HOVER ROW EFFECT ===== */
+.cart-item-row:hover {
+    background: #fcfcfc;
+}
+
+/* Container Styling */
+.summary-wrapper {
+    padding: 0 20px;
+}
+
+/* Rows: Subtotal & Shipping */
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.summary-row .label {
+    /* color: #333; */
+}
+
+/* Divider Line */
+.summary-divider {
+    border: 0;
+    border-top: 1px solid var(--gold-color);
+    margin: 20px 0;
+}
+
+/* Total Row Styling */
+.total-row {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    font-variant-numeric: lining-nums;
+    font-feature-settings: "lnum";
+}
+
+/* Checkout Button */
+.btn-checkout {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border: 1px solid var(--dark-900);
+    background-color: transparent;
+    color: var(--dark-900);
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-checkout:hover {
+    background-color: var(--dark-900);
+    color: #fff;
+}
+
+/* Continue Shopping Link */
+.btn-continue {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: var(--grey-666);
+    text-decoration: none;
+    text-transform: uppercase;
+    /* font-size: 11px; */
+    letter-spacing: 1px;
+}
+
+.btn-continue:hover {
+    color: var(--dark-900);
+    text-decoration: underline;
+}
+
+/* Disclaimer Text at bottom */
+.summary-disclaimer {
+    margin-top: 20px;
+    margin-bottom: 0;
+    font-size: 14px;
+    color: var(--secondary-color);
+    font-style: italic;
+    font-family: var(--heading-font);
+}
+
+/* ===== RESPONSIVE TABLE (MOBILE) ===== */
+@media (max-width: 768px) {
+    .shopping-summery thead {
+        display: none;
+    }
+
+    .shopping-summery,
+    .shopping-summery tbody,
+    .shopping-summery tr,
+    .shopping-summery td {
+        display: block;
+        width: 100%;
+    }
+
+    .shopping-summery tr {
+        margin-bottom: 20px;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        padding: 10px;
+    }
+
+    .shopping-summery td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .shopping-summery td::before {
+        content: attr(data-title);
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: 600;
+        color: var(--dark-900);
+        text-align: left;
+    }
+
+    .shopping-summery td.image,
+    .shopping-summery td.image::before {
+        text-align: center;
+        padding-left: 0;
+    }
+}
+
+/* check out  */
+
+#card-element {
+    max-width: 100% !important;
+}
+
+.checkout-box .faq_cont .faq_cont_acco {
+    border-bottom: 1px solid #bbbbbb;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+.payment_cont .sub_head {
+    font-size: 20px;
+    line-height: 24px;
+}

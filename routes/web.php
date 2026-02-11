@@ -78,14 +78,22 @@ Route::name('front.')->group(function () {
 	Route::get('/modern-majilis', [FrontController::class, 'getModernMajilis'])->name('modern-majilis'); 
 	Route::get('/architect-study', [FrontController::class, 'getArchitectStudy'])->name('architect-study'); 
 	Route::get('/about', [FrontController::class, 'getAbout'])->name('about'); 
+	
 
 	// NOT MADE DYNAMIC - END
-
-	Route::get('/forgot-password', [AuthController::class, 'getForgotPassword'])->name('forgot.password');
-
-
+	
+	Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('get.forgot.password');
+	Route::post('/post-forgot-password', [AuthController::class, 'sendResetLink'])->name('post.forgot.password');
+	
+    Route::get('/reset-password/{token}', [AuthController::class, 'resetPassword'])->name('get.reset.password');
+    Route::post('post-reset-password', [AuthController::class, 'postResetPassword'])->name('password.update');
+    
 	Route::middleware(['auth'])->group(function () {
-
+	    Route::get('/profile', [FrontController::class, 'profile'])->name('profile'); 
+	    
+		Route::get('/order', [CartController::class, 'order'])->name('order.view');
+		Route::get('/order-detail/{orderid}', [CartController::class, 'orderDetail'])->name('order_detail.view');
+		
 		Route::get('/cart', [CartController::class, 'getCart'])->name('cart.view');
 		Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add.ajax');
 		Route::post('/cart/delete', [CartController::class, 'deleteCart'])->name('cart.delete');

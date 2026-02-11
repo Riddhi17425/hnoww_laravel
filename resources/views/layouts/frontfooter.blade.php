@@ -69,7 +69,7 @@
                                     data-bs-target="#requestWeddingCatalogue">Weddings & Celebrations</a></li>
                             <li><a href="javascript:void(0);" data-bs-toggle="modal"
                                     data-bs-target="#requestCorporateProposal">Corporate Rituals</a></li>
-                            <li><a href="#">Bespoke Commissions</a></li>
+                            <li><a href="{{route('front.bespoke.commission')}}">Bespoke Commissions</a></li>
                             <!--<li><a href="{{ route('front.ceremonials') }}">Ceremonial Objects</a></li>-->
                         </ul>
                     </div>
@@ -79,7 +79,7 @@
                     <div>
                         <h4 class="ft_head">Editions</h4>
                         <ul class="ft_menu">
-                            <li><a href="#">About</a></li>
+                            <li><a href="{{route('front.about')}}">About</a></li>
                             <li><a href="{{ route('front.journal') }}">The Journal</a></li>
                             <li><a href="{{ route('front.blessings.library') }}">The Blessing Library</a></li>
                             <!--<li><a href="">Philosophy & Craft</a></li>-->

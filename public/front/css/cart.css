@@ -188,47 +188,50 @@
 
 /* ===== RESPONSIVE TABLE (MOBILE) ===== */
 @media (max-width: 768px) {
-    .shopping-summery thead {
-        display: none;
-    }
+    .table-responsive{width:100%;overflow-x: scroll;margin-bottom:16px;}
+    .table.shopping-summery{min-width:700px;padding-bottom:5px;margin-bottom: 0;}
+    .shopping-summery td{font-size:16px;}
+    /*.shopping-summery thead {*/
+    /*    display: none;*/
+    /*}*/
 
-    .shopping-summery,
-    .shopping-summery tbody,
-    .shopping-summery tr,
-    .shopping-summery td {
-        display: block;
-        width: 100%;
-    }
+    /*.shopping-summery,*/
+    /*.shopping-summery tbody,*/
+    /*.shopping-summery tr,*/
+    /*.shopping-summery td {*/
+    /*    display: block;*/
+    /*    width: 100%;*/
+    /*}*/
 
-    .shopping-summery tr {
-        margin-bottom: 20px;
-        border: 1px solid #eee;
-        border-radius: 8px;
-        padding: 10px;
-    }
+    /*.shopping-summery tr {*/
+    /*    margin-bottom: 20px;*/
+    /*    border: 1px solid #eee;*/
+    /*    border-radius: 8px;*/
+    /*    padding: 10px;*/
+    /*}*/
 
-    .shopping-summery td {
-        text-align: right;
-        padding-left: 50%;
-        position: relative;
-    }
+    /*.shopping-summery td {*/
+    /*    text-align: right;*/
+    /*    padding-left: 50%;*/
+    /*    position: relative;*/
+    /*}*/
 
-    .shopping-summery td::before {
-        content: attr(data-title);
-        position: absolute;
-        left: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-weight: 600;
-        color: var(--dark-900);
-        text-align: left;
-    }
+    /*.shopping-summery td::before {*/
+    /*    content: attr(data-title);*/
+    /*    position: absolute;*/
+    /*    left: 15px;*/
+    /*    top: 50%;*/
+    /*    transform: translateY(-50%);*/
+    /*    font-weight: 600;*/
+    /*    color: var(--dark-900);*/
+    /*    text-align: left;*/
+    /*}*/
 
-    .shopping-summery td.image,
-    .shopping-summery td.image::before {
-        text-align: center;
-        padding-left: 0;
-    }
+    /*.shopping-summery td.image,*/
+    /*.shopping-summery td.image::before {*/
+    /*    text-align: center;*/
+    /*    padding-left: 0;*/
+    /*}*/
 }
 
 /* check out  */

@@ -10,9 +10,11 @@
 
     <div class="hero_content">
         <p class="mb-3 d-md-none" style="color: #F2D8D9;">Designed in Dubai. Made to endure.</p>
-        <h1 class="main_head">Where meaning takes shape.</h1>
-        <p>Objects crafted to turn the everyday into ceremony.</p>
-        <a href="{{ route('front.atelier') }}" class="com_btn border-0 bg-white">ENTER THE WORLD </a>
+        <!--<h1 class="main_head">Where meaning takes shape.</h1>-->
+        <h1 class="main_head">Where craft holds expressions </h1>
+        <p>Personalised gifts designed to turn the everyday into a feeling. Thoughtfully designed, customized gifts shaped by intention and form.</p>
+        <!--<p>Objects crafted to turn the everyday into ceremony.</p>-->
+        <a href="{{ route('front.atelier') }}" class="com_btn border-0 bg-white">Explore The Works</a>
     </div>
 
     <div class="hero_left_right">
@@ -153,7 +155,7 @@
         <div class="magic_wrapper">
             <h2 class="magic_head_phone" data-aos="fade-left" data-aos-delay="0" data-aos-duration="800"
                 data-aos-once="true">
-                Beauty is not decoration It is devotion.
+                Intention drives beauty. Designs, guided by intent
             </h2>
             <!-- 3️⃣ Left image (from left) -->
             <div class="text-end magic_wrapper_logo" data-aos="fade-right" data-aos-delay="600" data-aos-duration="800"
@@ -168,23 +170,23 @@
 
             <!-- 4️⃣ Text block (from right) -->
             <div data-aos="fade-left" data-aos-delay="800" data-aos-duration="800"  data-aos-once="true">
-                <h3 class="magic_wrapper_h3">Every object is an offering.</h3>
+                <h3 class="magic_wrapper_h3">Rituals are not excess, they define us.</h3>
                 <p>
-                    Every curve, every shadow, every material is chosen with intention
-                    to slow the day, gather the mind, and return us to meaning.
+                    Each piece is crafted as an emotion.
+Form, material, and shadow are considered with care, designed to slow the moment, focus the mind, and return us to what matters
                 </p>
             </div>
 
             <!-- 1️⃣ First heading (from right) -->
             <h2 class="magic_head_1" data-aos="fade-left" data-aos-delay="0" data-aos-duration="800"
                 data-aos-once="true">
-                Beauty is not decoration
+                Intention drives beauty.
             </h2>
 
             <!-- 5️⃣ Last heading (from right) -->
             <h2 class="magic_head_2" data-aos="fade-left" data-aos-delay="1000" data-aos-duration="800"
                 data-aos-once="true">
-                It is devotion.
+                Designs, guided by intent
             </h2>
 
         </div>
@@ -289,8 +291,8 @@
                     </div>
                     <div class="box_bot">
                         <div>
-                            <h3 class="sub_head">For Her — The Desert Rose</h3>
-                            <p class="mb-0">Objects for hosting, memory, and grace</p>
+                            <h3 class="sub_head">The Ritual Table</h3>
+                            <p class="mb-0">Serveware shaped with the intention to gather.</p>
                         </div>
                         <!--<span><a href="#" class="com_btn">Shop Ritual Table </a></span>-->
                     </div>
@@ -303,7 +305,7 @@
                     <div class="box_bot">
                         <div>
                             <h3 class="sub_head">The Memory Shelf</h3>
-                            <p class="mb-0">Frames & heirlooms for moments that matter.</p>
+                            <p class="mb-0">Articles that hold moments, quietly preserved.</p>
                         </div>
                         <!--<span><a href="#" class="com_btn">Shop Memory </a></span>-->
                     </div>
@@ -316,7 +318,7 @@
                     <div class="box_bot">
                         <div>
                             <h3 class="sub_head">The Gift Shop</h3>
-                            <p class="mb-0">Modern gestures under AED 500.</p>
+                            <p class="mb-0">Modern gestures, felt by design (under 500 AED)</p>
                         </div>
                         <!--<span><a href="#" class="com_btn">Explore Gifts </a></span>-->
                     </div>
@@ -329,7 +331,7 @@
                     <div class="box_bot">
                         <div>
                             <h3 class="sub_head">The Everyday Sacred</h3>
-                            <p class="mb-0">Light. Scent. Stillness.</p>
+                            <p class="mb-0">Light, scent, and stillness for daily rituals.</p>
                         </div>
                         <!--<span><a href="#" class="com_btn">Shop Sacred Objects </a></span>-->
                     </div>
@@ -358,7 +360,8 @@
                     </svg>
                 </span>
             </p>
-            <h2 class="title_60">Bespoke & Private Services</h2>
+            <!--<h2 class="title_60">Bespoke & Private Services</h2>-->
+            <h2 class="title_60">Bespoke Services</h2>
         </div>
         <div class="row gx-2 mobile_slider">
             <div class="col-md-6">
@@ -368,7 +371,7 @@
                         <p class="title_40">Weddings & Celebrations</p>
                     </div>
                     <div class="bespoke_box_bot">
-                        <p class="para">Sculptural ceremonial pieces for modern unions.</p>
+                        <p class="para">Ceremonial designs crafted to mark modern unions.</p>
                         <span><a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#requestWeddingCatalogue" class="com_btn">Request Wedding Catalogue</a></span>
                     </div>
                 </div>
@@ -383,8 +386,8 @@
                     </div>
                     <div class="bespoke_box_bot">
 
-                        <p class="para">Objects that create lasting partnerships. Custom engraving available.</p>
-                        <span><a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#requestCorporateProposal" class="com_btn">Request Corporate Lookbook</a></span>
+                        <p class="para">Articles designed to mark intentional partnerships.</p>
+                        <span><a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#requestCorporateProposal" class="com_btn"> The Corporate Edit</a></span>
                     </div>
                 </div>
             </div>
@@ -412,14 +415,15 @@
                     </svg>
                 </span>
             </p>
-            <h2 class="title_60">Editions</h2>
+            <!--<h2 class="title_60">Editions</h2>-->
+            <h2 class="title_60">House Journal</h2>
         </div>
         <div class="row mobile_slider">
             <div class="col-md-4">
                 <div class="collection_box">
                     <img class="img-fluid mb-4" src="{{ asset('public/front/images/editions1.png') }}" alt="images" loading="lazy">
                     <h3 class="sub_head">The Blessing Library</h3>
-                    <p>A collection of poetic messages for home, union, and self.</p>
+                    <p>Written blessings and words of intention for home, union, and self.</p>
                     <a href="{{ route('front.blessings.library') }}" target="_blank" class="com_btn">Explore </a>
                 </div>
             </div>
@@ -427,7 +431,7 @@
                 <div class="collection_box">
                     <img class="img-fluid mb-4" src="{{ asset('public/front/images/editions2.png') }}" alt="images" loading="lazy">
                     <h3 class="sub_head">The Journal</h3>
-                    <p>Essays on design, ritual, and the modern home.</p>
+                    <p>Reflections on design, ritual, and contemporary living.</p>
                     <a href="{{ route('front.journal') }}" target="_blank" class="com_btn">Explore</a>
                 </div>
             </div>
@@ -435,7 +439,7 @@
                 <div class="collection_box">
                     <img class="img-fluid mb-4" src="{{ asset('public/front/images/editions3.png') }}" alt="images" loading="lazy">
                     <h3 class="sub_head">Bespoke Commissions</h3>
-                    <p>Work with the Atelier to create a personal ritual object.</p>
+                    <p>Collaborative creations shaped around personal rituals and intent.</p>
                     <a href="{{ route('front.bespoke.commission') }}" target="_blank" class="com_btn">Explore</a>
                 </div>
             </div>

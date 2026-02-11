@@ -21,7 +21,7 @@
     <img class="img-fluid" src="{{asset('public/images/front/privacy_banner.png')}}" alt="privacy policy">
 
     <div class="hero_content_inner">
-        <h2 class="main_head">PRIVACY, DELIVERY & TERMS OF USE</h2>
+        <h2 class="main_head">PRIVACY POLICY</h2>
         <!--<p class="para">Protecting your information, respecting your trust.</p>-->
     </div>
 </section>
@@ -40,7 +40,7 @@
         <path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z" fill="#B58A46"/>
       </svg>
     </span>
-    <span class="sb_text">1. Privacy & Data Protection</span>
+    <span class="sb_text">1. Privacy Policy</span>
   </a>
 
   <a href="#sec2">
@@ -49,7 +49,7 @@
         <path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z" fill="#B58A46"/>
       </svg>
     </span>
-    <span class="sb_text">2. Order Types & Fulfilment Paths</span>
+    <span class="sb_text">2. Information We Collect</span>
   </a>
 
   <a href="#sec3">
@@ -58,7 +58,7 @@
         <path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z" fill="#B58A46"/>
       </svg>
     </span>
-    <span class="sb_text">3. Delivery Policy</span>
+    <span class="sb_text">3. How We Use Your Information</span>
   </a>
 
   <a href="#sec4">
@@ -67,7 +67,7 @@
         <path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z" fill="#B58A46"/>
       </svg>
     </span>
-    <span class="sb_text">4. Returns, Exchanges & Defective Items</span>
+    <span class="sb_text">4. Customization, Corporate & Ceremonial Data</span>
   </a>
 
   <a href="#sec5">
@@ -76,7 +76,7 @@
         <path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z" fill="#B58A46"/>
       </svg>
     </span>
-    <span class="sb_text">5. Cancellations</span>
+    <span class="sb_text">5. Payment Security</span>
   </a>
 
   <a href="#sec6">
@@ -85,7 +85,7 @@
         <path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z" fill="#B58A46"/>
       </svg>
     </span>
-    <span class="sb_text">6. Pricing & Availability</span>
+    <span class="sb_text">6. Sharing of Information</span>
   </a>
 
   <a href="#sec7">
@@ -94,7 +94,7 @@
         <path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z" fill="#B58A46"/>
       </svg>
     </span>
-    <span class="sb_text">7. Intellectual Property</span>
+    <span class="sb_text">7. Data Retention</span>
   </a>
 
   <a href="#sec8">
@@ -103,7 +103,7 @@
         <path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z" fill="#B58A46"/>
       </svg>
     </span>
-    <span class="sb_text">8. Limitation of Liability</span>
+    <span class="sb_text">8. Confidentiality & Discretion</span>
   </a>
 
   <a href="#sec9">
@@ -112,7 +112,7 @@
         <path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z" fill="#B58A46"/>
       </svg>
     </span>
-    <span class="sb_text">9. Governing Law</span>
+    <span class="sb_text">9. Cookies & Website Analytics</span>
   </a>
 
   <a href="#sec10">
@@ -121,7 +121,34 @@
         <path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z" fill="#B58A46"/>
       </svg>
     </span>
-    <span class="sb_text">10. Contact & Complaints</span>
+    <span class="sb_text">10. Your Rights</span>
+  </a>
+  
+  <a href="#sec11">
+    <span class="sb_icon">
+      <svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z" fill="#B58A46"/>
+      </svg>
+    </span>
+    <span class="sb_text">11. Third-Party Links</span>
+  </a>
+  
+  <a href="#sec12">
+    <span class="sb_icon">
+      <svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z" fill="#B58A46"/>
+      </svg>
+    </span>
+    <span class="sb_text">12. Policy Updates</span>
+  </a>
+  
+  <a href="#sec13">
+    <span class="sb_icon">
+      <svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z" fill="#B58A46"/>
+      </svg>
+    </span>
+    <span class="sb_text">13. Contact Us</span>
   </a>
 
 </nav>
@@ -131,250 +158,166 @@
   <main class="content">
 
         <div class="privacy_main" id="sec1">
-            <h3 class="title_40 mb_35">1. PRIVACY & DATA PROTECTION</h3>
+            <h3 class="title_40 mb_35">1. PRIVACY POLICY</h3>
            
            <div>
-                <h5 class="sub_head">Information We Collect</h5>
-                <p>We collect only information necessary to respond to enquiries and fulfil orders, including:</p>
-                <ul>
-                    <li>Name</li>
-                    <li>Company or organisation name</li>
-                    <li>Email address</li>
-                    <li>Phone number (WhatsApp preferred)</li>
-                    <li>Delivery details</li>
-                    <li>Product or curation preferences</li>
-                    <li>Customisation or branding requirements</li>
-                </ul>
-                <p>We do not collect unnecessary personal data.</p>
+                <!--<h5 class="sub_head">Information We Collect</h5>-->
+                <p>How we collect, use, and protect your information with care and discretion.</p>
+                <p>At HNoww, we value your trust and are committed to protecting your privacy. This Privacy Policy explains how we collect, use, store, and safeguard your personal information when you interact with our website, place an order, or engage with our services.
+</p>
+                <p>By using our website or services, you consent to the practices described in this Privacy Policy.</p>
            </div>
            
-            <div>
-                <h5 class="sub_head">Use of Information</h5>
-                <p>Information shared with HNOWW is used solely to:</p>
-                <ul>
-                    <li>Respond to enquiries</li>
-                    <li>Prepare proposals and quotations</li>
-                    <li>Coordinate production and delivery</li>
-                    <li>Communicate order updates</li>
-                    <li>Provide post-delivery support</li>
-                </ul>
-                <p>We do not use your information for unsolicited marketing.</p>
-           </div>
-           
-            <div>
-                <h5 class="sub_head">Confidentiality</h5>
-                <p>All enquiries and orders are treated as confidential.</p>
-                <p>Client identities, employee gifting details, and wedding-related information are never disclosed publicly without consent.</p>
-           </div>
-           
-            <div>
-                <h5 class="sub_head">Data Sharing</h5>
-                <p>We do not sell or trade personal data.</p>
-                <p>Information may be shared only when necessary with:</p>
-                <ul>
-                    <li>Production partners (for approved customisation)</li>
-                    <li>Logistics partners (for delivery)</li>
-                    <li>Payment or invoicing providers</li>
-                </ul>
-                <p>All partners are selected for reliability and confidentiality.</p>
-           </div>
-           
-            <div>
-                <h5 class="sub_head">Data Security</h5>
-                <p>We take reasonable technical and organisational measures to protect stored information. Access is limited to authorised personnel only.</p>
-           </div>
-           
-            <div>
-                <h5 class="sub_head">Your Rights</h5>
-                <p>You may request to:</p>
-                <ul>
-                    <li>review your information</li>
-                    <li>correct inaccuracies</li>
-                    <li>request deletion after order completion (subject to legal obligations)</li>
-                </ul>
-                <p>Requests may be sent to <b><a href="mailto:mail@hnoww.com">mail@hnoww.com.</a></b></p>
-           </div>
-            
         </div>
         
            <div class="privacy_main" id="sec2">
-            <h3 class="title_40 mb_35 mt_35">2. ORDER TYPES & FULFILMENT PATHS</h3>
+            <h3 class="title_40 mb_35 mt_35">2. INFORMATION WE COLLECT</h3>
            
            <div>
-                <p>HNOWW operates across three distinct order categories:</p>
-                <ol>
-                    <li><b>Retail (Ready-to-Ship)</b></li>
-                    <li><b>Curated / Corporate Orders</b></li>
-                    <li><b>Wedding & Celebration Orders</b></li>
-                </ol>
-                <p>We do not collect unnecessary personal data.</p>
+                <p>We may collect the following types of information when you interact with HNoww:</p>
+                <ul>
+                    <li>Personal details such as name, email address, phone number, and delivery address</li>
+                    <li>Order-related information, including product selections and customisation details</li>
+                    <li>Payment-related information processed securely through third-party payment providers</li>
+                    <li>Corporate or event-related details shared during concierge-led consultations</li>
+                    <li>Communications shared via email, WhatsApp, enquiry forms, or direct correspondence</li>
+                </ul>
+                <p>We only collect information that is necessary to provide our products and services effectively.</p>
            </div>
             
         </div>
         
            <div class="privacy_main" id="sec3">
-            <h3 class="title_40 mb_35 mt_60">3. DELIVERY POLICY</h3>
+            <h3 class="title_40 mb_35 mt_60">3. HOW WE USE YOUR INFORMATION</h3>
            
            <div>
-                <h5 class="sub_head">A. Retail Orders (Ready-to-Ship)</h5>
-                <p>Applies to items clearly marked “<b>Ready to Ship</b>” on the website.</p>
+                
+                <p>Your information is used solely for legitimate business purposes, including:</p>
                 <ul>
-                    <li><b>Dubai:</b> Next-day or 1–2 working days</li>
-                    <li><b>UAE (outside Dubai):</b> 2–4 working days</li>
-                    
+                    <li>Processing and fulfilling orders</li>
+                    <li>Managing customized, corporate, or wedding requests</li>
+                    <li>Coordinating deliveries and logistics</li>
+                    <li>Communicating order updates, confirmations, or enquiries</li>
+                    <li>Providing customer and concierge support</li>
+                    <li>Improving our website, services, and user experience</li>
+                    <li>Meeting legal or regulatory obligations</li>
                 </ul>
-                <p>Retail orders are delivered in HNOWW signature packaging with protective outer transit material.</p>
+                <p>HNoww does not sell, rent, or trade your personal information to third parties.</p>
            </div>
            
-            <div>
-                <h5 class="sub_head">B. Curated / Corporate Orders</h5>
-                <p>Applies to:</p>
-                <ul>
-                    <li>corporate gifting</li>
-                    <li>leadership orders</li>
-                    <li>bulk or proposal-based orders</li>
-                    <li><b>Standard production & delivery:</b> 30–45 days</li>
-                    <li>Timelines confirmed prior to production</li>
-                    <li>White-glove delivery coordination available for leadership or sensitive deliveries</li>
-                </ul>
-                <p>Retail orders are delivered in HNOWW signature packaging with protective outer transit material.</p>
-           </div>
-           
-            <div>
-                <h5 class="sub_head">C. Wedding & Celebration Orders</h5>
-                <p>Wedding and celebration orders are treated as <b>curated orders</b> .</p>
-                <ul>
-                    <li>Standard production & delivery: 30–45 days</li>
-                    <li>Timelines confirmed during consultation</li>
-                    <li>White-glove coordination may be arranged for ceremonial deliveries</li>
-                </ul>
-           </div>
-           
-            <div>
-                <h5 class="sub_head">Delivery Confirmation</h5>
-                <p>All deliveries require confirmation of receipt. Corporate and wedding deliveries are not left unattended.</p>
-           </div>
             
         </div>
         
            <div class="privacy_main" id="sec4">
-            <h3 class="title_40 mb_35 mt_35">4. RETURNS, EXCHANGES & DEFECTIVE ITEMS</h3>
+            <h3 class="title_40 mb_35 mt_35">4. CUSTOMIZATION, CORPORATE & CEREMONIAL DATA</h3>
             
              <div>
-                <h5 class="sub_head">A. Retail Returns & Exchanges (UAE-Compliant)</h5>
-                <p>For non-customised retail purchases:</p>
-                <ul>
-                    <li>Requests must be submitted within <b>7 calendar days</b> of delivery</li>
-                    <li>Items must be unused, unaltered, and in original packaging</li>
-                   
-                </ul>
-                <p>Returns are reviewed upon receipt.</p>
+                <p>Information shared for customized gifts, corporate gifting, or wedding and ceremonial orders is treated with heightened discretion. Logos, names, messages, and event details are used strictly for order fulfillment and are not reused, shared, or displayed without prior consent.
+</p>
            </div>
            
-            <div>
-                <h5 class="sub_head">B. Non-Returnable Items</h5>
-                <p>The following are <b>not eligible</b> for return or exchange:</p>
-                <ul>
-                    <li>customised or engraved items</li>
-                    <li>personalised recognition cards or inserts</li>
-                    <li>curated corporate orders once approved</li>
-                    <li>wedding or celebration items</li>
-                    <li>bulk orders</li>
-                    <li>items used, altered, or handled after delivery</li>
-                </ul>
-               
-           </div>
-           
-            <div>
-                <h5 class="sub_head">C. Damaged or Incorrect Items</h5>
-                <p>If an item arrives damaged or materially incorrect:</p>
-                <ul>
-                    <li>notify HNOWW within <b>48 hours</b> of delivery</li>
-                    <li>provide clear photographic evidence</li>
-                </ul>
-                <p>We will review and arrange repair, replacement, or resolution where appropriate.</p>
-           </div>
-           
-            <div>
-                <h5 class="sub_head">D. Compensation Rights</h5>
-                <p>Customers retain rights under UAE consumer law to seek compensation for damages resulting from product defects, where applicable.</p>
-           </div>
-            
            </div>
            
            <div class="privacy_main" id="sec5">
-             <h3 class="title_40 mb_35 mt_60">5. CANCELLATIONS</h3>
+             <h3 class="title_40 mb_35 mt_60">5. PAYMENT SECURITY</h3>
              
              <div>
-                 <p>Orders may be cancelled before production begins, subject to confirmation.</p>
-                 <p>Once production or customisation has commenced, cancellations may not be possible.</p>
-                 <p>This applies to:</p>
-                <ul>
-                    <li>curated corporate orders</li>
-                    <li>wedding and celebration orders</li>
-                </ul>
+                 <p>All payment transactions are processed through secure, encrypted third-party payment gateways. HNoww does not store or have direct access to your full payment card details.
+</p>
+                 
              </div>
            </div>
            
             <div class="privacy_main" id="sec6">
-              <h3 class="title_40 mb_35 mt_60">6. PRICING & AVAILABILITY</h3>
+              <h3 class="title_40 mb_35 mt_60">6. SHARING OF INFORMATION</h3>
               
                   <div>
-               
+               <p>We may share limited information with trusted third parties only when necessary to deliver our services, such as:
+</p>
                 <ul>
-                    <li>Retail pricing is displayed online</li>
-                    <li>Corporate and wedding pricing is shared via proposal or catalogue</li>
-                    <li>Prices and availability are confirmed prior to order approval</li>
+                    <li>Courier and logistics partners</li>
+                    <li>Payment service providers</li>
+                    <li>Technology and website service providers</li>
                 </ul>
-                <p>HNOWW reserves the right to update pricing prior to confirmation.</p>
+                <p>All third parties are required to handle your data responsibly and in accordance with applicable privacy laws.
+</p>
            </div>
             </div>
             
             <div class="privacy_main" id="sec7">
-              <h3 class="title_40 mb_35 mt_60">7. INTELLECTUAL PROPERTY</h3>
+              <h3 class="title_40 mb_35 mt_60">7. DATA RETENTION</h3>
               
                   <div>
-                      <p>All content on the HNOWW website, including text, imagery, product names, and design elements, is the property of HNOWW unless otherwise stated.</p>
-                      <p>Unauthorised use or reproduction is prohibited.</p>
+                      <p>We retain personal information only for as long as necessary to fulfil the purposes outlined in this policy, comply with legal obligations, or resolve disputes. Once data is no longer required, it is securely deleted or hidden.
+</p>
                 </div>
             </div>
             
             <div class="privacy_main" id="sec8">
-              <h3 class="title_40 mb_35 mt_60">8. LIMITATION OF LIABILITY</h3>
+              <h3 class="title_40 mb_35 mt_60">8. CONFIDENTIALITY & DISCRETION</h3>
               
                   <div>
-                      <p>HNOWW is not responsible for:</p>
-                <ul>
-                    <li>delays caused by events beyond reasonable control</li>
-                    <li>incorrect delivery details provided by the client</li>
-                    <li>normal wear resulting from use</li>
-                </ul>
-                <p>Liability is limited to the value of the item supplied, in accordance with UAE law.</p>
+                      <p>All client relationships, corporate engagements, employee gifting programs, and wedding projects are treated as confidential. Information is never shared externally without explicit consent, except where required by law.
+</p>
+                
            </div>
             </div>
             
             <div class="privacy_main" id="sec9">
-              <h3 class="title_40 mb_35 mt_60">9. GOVERNING LAW</h3>
+              <h3 class="title_40 mb_35 mt_60">9. COOKIES & WEBSITE ANALYTICS</h3>
               
                   <div>
-                      <p>These terms are governed by and construed in accordance with the laws of the <b> United Arab Emirates.</b></p>
-                      <p>Any disputes shall be subject to the jurisdiction of UAE courts.</p>
-               
-                
+                    <p>Our website may use cookies and similar technologies to enhance functionality, analyze traffic, and improve user experience. Cookies do not collect personally identifiable information unless voluntarily provided by the user.
+</p>
+                <p>You may choose to disable cookies through your browser settings; however, this may affect website performance.
+</p>
            </div>
             </div>
             
             <div class="privacy_main" id="sec10">
-              <h3 class="title_40 mb_35 mt_60">10. CONTACT & COMPLAINTS</h3>
+              <h3 class="title_40 mb_35 mt_60">10. YOUR RIGHTS</h3>
               
                   <div>
-                      <p>For enquiries, delivery coordination, returns, or concerns:</p>
-                      <p><b>Email:</b> <a href="mailto:>mail@hnoww.com">mail@hnoww.com</a></p>
-                      <p><b>WhatsApp:</b> Corporate Concierge</p>
-                      <p>We aim to respond within <b>48 hours.</b></p>
+                      <p>You have the right to:</p>
+                      <ul>
+                        <li>Request access to your personal data</li>
+                        <li>Request correction of inaccurate information</li>
+                        <li>Request deletion of your data, subject to legal and operational requirements</li>
+                        <li>Withdraw consent for certain communications</li>
+                    </ul>
+                      <p>Requests can be made by contacting us through the details provided on our website.</p>
                
-                
-           </div>
+                </div>
+            </div>
+            
+            <div class="privacy_main" id="sec11">
+              <h3 class="title_40 mb_35 mt_60">11. THIRD-PARTY LINKS</h3>
+              
+                  <div>
+                      <p>Our website may contain links to third-party websites. HNoww is not responsible for the privacy practices or content of external sites. We encourage users to review the privacy policies of any third-party websites they visit.
+</p>
+               
+                </div>
+            </div>
+            
+            <div class="privacy_main" id="sec12">
+              <h3 class="title_40 mb_35 mt_60">12. POLICY UPDATES</h3>
+              
+                  <div>
+                      <p>HNoww reserves the right to update or modify this Privacy Policy at any time. Any changes will be reflected on this page, and continued use of the website constitutes acceptance of the updated policy.
+</p>
+                      
+                </div>
+            </div>
+            
+            <div class="privacy_main" id="sec13">
+              <h3 class="title_40 mb_35 mt_60">13. CONTACT US</h3>
+              
+                  <div>
+                      <p>If you have questions about this Privacy Policy, data handling practices, or your personal information, please contact our team via the details available on the website. Our Concierge will assist you with care and discretion.
+</p>
+                      
+                </div>
             </div>
            
   </main>

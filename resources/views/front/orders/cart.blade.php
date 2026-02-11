@@ -40,11 +40,12 @@
         <!-- Shopping Cart -->
         <div class="shopping-cart">
             <div class="container">
-                <div class="row">
-                    <div class="col-8">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
                         @php $subTotal = 0; @endphp
                         <!-- Shopping Summery -->
-                        <table class="table shopping-summery" style="--bs-table-bg:--bs-table-bg;">
+                        <div class="table-responsive">
+                            <table class="table shopping-summery" style="--bs-table-bg:--bs-table-bg;">
                             <thead>
                                 <tr class="main-hading">
                                     <th>PRODUCT</th>
@@ -114,9 +115,9 @@
                                     @endforeach
                                     @else
                                     <tr>
-                                        <td class="text-center">
-                                            There are no any carts available. <a href="{{ route('front.home') }}"
-                                                class="com_btn">Continue shopping</a>
+                                        <td class="text-center" colspan="5">
+                                            <p>There are no any carts available.</p> <a href="{{ route('front.home') }}"
+                                                class="com_btn mt-2">Continue shopping</a>
                                         </td>
                                     </tr>
                                     @endif
@@ -124,6 +125,7 @@
                                 </form>
                             </tbody>
                         </table>
+                        </div>
                     </div>
                     @if($cartData->count() > 0)
                     <!-- <div class="col-4" id="calculation-section">
@@ -143,7 +145,7 @@
                        
                     </div> -->
 
-                    <div class="col-4" id="calculation-section">
+                    <div class="col-lg-4" id="calculation-section">
                         <div class="summary-wrapper">
                             <h3 class="title_40 mb-4">Summary</h3>
                             <div class="summary-details">

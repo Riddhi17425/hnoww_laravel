@@ -23,9 +23,7 @@ $monthMap = [
 
     <div class="hero_content_inner">
         <h2 class="main_head mb-3">The Art of Hosting</h2>
-        <p class="para mb-0">Hospitality is rarely about perfection. It is about the specific vibration of a room when
-            people feel held by their surroundings. It is the weight of a fork, the scent of unlit wax, and the way
-            light catches the rim of a glass</p>
+        <p class="para mb-0">Hospitality is rarely about perfection. It is about the specific vibrations of a room when people feel one with the surroundings. It is the weight of a fork, the scent of unlit wax, and the way light catches the rim of a glass.</p>
     </div>
 </section>
 <section class="mt_60">
@@ -107,7 +105,7 @@ $monthMap = [
                     </svg>
                 </span>
             </p>
-            <h2 class="title_60">Collections</h2>
+            <h2 class="title_60">2026 Editions</h2>
             <p>Publishing Schedule</p>
         </div>
 

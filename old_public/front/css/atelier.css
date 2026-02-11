@@ -1,0 +1,54 @@
+/* atelier */
+.font_34 {
+    font-family: var(--heading-font);
+    font-size: 34px;
+    line-height: 38px;
+    line-height: normal;
+    font-weight: 500;
+    color: var(--dark-900);
+}
+
+
+.origin_left {
+    position: relative;
+}
+
+.origin_left_content {
+    position: absolute;
+    top: 60px;
+    left: 60px;
+}
+
+.origin_left_content .title_40,.origin_left_content .sub_head {
+   color: var(--white-color);
+}   
+
+.atelier_origin_content {
+    padding-left: 60px;
+}
+
+.material_wrapper {
+    background: url(../../images/front/with_intention_banner.png) center / cover no-repeat;
+    /*background-blend-mode: multiply;*/
+    padding: 60px;
+}
+
+.material_img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin-bottom: 24px;
+}
+
+.material_flex .mobile_slider {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+
+.material_flex .material_slide
+{
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}

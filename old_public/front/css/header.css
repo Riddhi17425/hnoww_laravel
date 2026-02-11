@@ -1,0 +1,443 @@
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1030;
+    padding: 10px 70px;
+    border-bottom: 1px solid #b0b1b0;
+}
+
+header .navbar {
+    padding: 0;
+}
+
+.navbar_left {
+    display: flex;
+    align-items: center;
+    gap: 54px;
+}
+
+.hamburger {
+    width: 36px;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.hamburger > span {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    height: 100%;
+}
+
+.hamburger > span span {
+    display: block;
+    height: 3px;
+    background: var(--white-color);
+    transition: 0.3s ease;
+}
+
+/* Size difference */
+.hamburger > span span:nth-child(1) {
+    width: 100%;
+}
+
+.hamburger > span span:nth-child(2) {
+    width: 70%;
+}
+
+.hamburger > span span:nth-child(3) {
+    width: 50%;
+}
+
+.nav_links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav_links li {
+    display: inline-block;
+    margin: 0 20px;
+}
+
+.nav_links li a {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    color: var(--white-color);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 28px;
+    text-transform: uppercase;
+}
+
+/* original text */
+.nav_links li a span {
+    display: inline-block;
+    transition:
+        transform 0.35s ease,
+        color 0.35s ease;
+}
+
+/* duplicate text */
+.nav_links li a::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    color: var(--gold-color); /* 👈 hover color */
+    transition: transform 0.35s ease;
+}
+
+/* hover effect */
+.nav_links li a:hover span {
+    transform: translateY(-100%);
+    color: var(--gold-color);
+}
+
+.nav_links li a:hover::after {
+    transform: translateY(-100%);
+}
+
+.navbar_right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.sticky-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    transition: all 0.35s ease-in-out;
+    background: transparent;
+    box-shadow: none;
+}
+
+/* Scroll hone ke baad apply hoga */
+.header-scrolled {
+    background: var(--secondary-color);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    filter: opacity(0.95);
+}
+
+/* Hide on scroll down */
+.header-hidden {
+    transform: translateY(-100%);
+}
+
+/* Show on scroll up */
+.header-visible {
+    transform: translateY(0);
+}
+
+.navbar-toggler {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.toggler-icon {
+    width: 28px;
+    height: 2px;
+    background: var(--gold-color);
+    display: block;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.toggler-icon::before,
+.toggler-icon::after {
+    content: "";
+    width: 28px;
+    height: 2px;
+    background: var(--gold-color);
+    position: absolute;
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+.toggler-icon::before {
+    top: -8px;
+}
+
+.toggler-icon::after {
+    top: 8px;
+}
+
+/* ===== ACTIVE STATE (X) ===== */
+.navbar-toggler.active .toggler-icon {
+    background: transparent;
+}
+
+.navbar-toggler.active .toggler-icon::before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.navbar-toggler.active .toggler-icon::after {
+    transform: rotate(-45deg);
+    top: 0;
+}
+
+/* Dropdown on hover */
+.has-dropdown {
+    position: relative;
+    padding: 10px 0;
+}
+
+/* SVG arrow default */
+.dropdown-arrow {
+    margin-left: 10px;
+    transition:
+        transform 0.3s ease,
+        color 0.3s ease;
+}
+
+/* hover par rotate + color change */
+.has-dropdown:hover .dropdown-arrow {
+    transform: rotate(180deg);
+    color: var(--gold-color);
+}
+
+.has-dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 90%;
+    left: 0;
+    min-width: 220px;
+    /* background: transparent; */
+    background: url(https://intelliworkz.co/hnoww_laravel/public/front/images/ct_noise_bg.png);
+    background-color: #f9f9f9;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+    /* text-transform: none; */
+    /* padding: 10px 0; */
+}
+/* Show on hover */
+.has-dropdown:hover .dropdown-menu {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+.dropdown-menu li {
+    margin: 0;
+    width: 100%;
+}
+/* Style dropdown items */
+.dropdown-menu li a {
+    display: block;
+    padding: 7px 18px;
+    color: var(--dark-900);
+    text-decoration: none;
+    transition:
+        background 0.2s,
+        color 0.2s;
+    text-transform: capitalize;
+}
+.dropdown-menu li a:hover {
+    background: var(--secondary-color);
+    color: var(--white-color);
+}
+.has-dropdown .dropdown-menu::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 20px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #f9f9f9;
+}
+
+/*===================================== icon search login cart==================================== */
+/* NAVBAR RIGHT */
+.navbar_right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+/* ---------------- SEARCH ---------------- */
+.search_dropdown {
+    position: relative;
+}
+
+.search_box {
+    position: absolute;
+    top: 130%;
+    right: 0;
+    width: 370px;
+    background: var(--white-color);
+    border: 1px solid #e5e5e5;
+    padding: 12px;
+    display: flex;
+    gap: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease;
+    z-index: 100;
+}
+
+.search_box input {
+    flex: 1;
+    padding: 8px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.search_box button {
+    padding: 8px 14px;
+    font-size: 14px;
+    border: none;
+    background: var(--secondary-color);
+    color: var(--white-color);
+    cursor: pointer;
+}
+
+.search_dropdown:hover .search_box,
+.search_box.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ---------------- USER ---------------- */
+.user_dropdown {
+    position: relative;
+}
+
+.user_menu {
+    position: absolute;
+    top: 130%;
+    right: 0;
+    width: 190px;
+    background: url(https://intelliworkz.co/hnoww_laravel/public/front/images/ct_noise_bg.png);
+    background-color: #f9f9f9;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease;
+    z-index: 100;
+}
+
+.user_menu a {
+    display: block;
+    padding: 7px 18px;
+    color: var(--dark-900);
+    text-decoration: none;
+    transition:
+        background 0.2s,
+        color 0.2s;
+    text-transform: capitalize;
+}
+
+.user_menu a:last-child {
+    border-bottom: none;
+}
+
+.user_menu a:hover {
+    background: var(--secondary-color);
+    color: var(--white-color);
+}
+
+.user_dropdown:hover .user_menu,
+.user_menu.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* CART BADGE */
+.cart_icon {
+    position: relative;
+}
+
+.cart_badge {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    background: var(--dark-900);
+    color: var(--white-color);
+    font-size: 11px;
+    font-weight: 600;
+    min-width: 18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+
+
+
+/* Toast base */
+.alert.alert-success {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 9999;
+
+    min-width: 300px;
+    padding: 14px 42px 14px 44px; /* space for icons */
+
+    color: #fff !important;
+    background-color: var(--secondary-color, #28a745) !important;
+    border: none !important;
+
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+
+    animation: toastIn 0.5s ease forwards,
+               toastOut 0.5s ease forwards 4s;
+}
+
+/* ✓ success icon (LEFT) */
+.alert.alert-success::before {
+    content: "✓";
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* ✕ close button (RIGHT) */
+.alert.alert-success::after {
+    content: "✕";
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    font-size: 16px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.alert.alert-success::after:hover {
+    opacity: 1;
+}

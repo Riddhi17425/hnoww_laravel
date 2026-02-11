@@ -6,17 +6,14 @@
 
     <div class="hero_content_inner">
         <h2 class="main_head">The Corporate Vault</h2>
-        <p class="para my-3">Gifts of permanence for partners of consequence</p>
-        <a href="#" class="com_btn border-white bg-white" data-bs-toggle="modal" data-bs-target="#requestCorporateProposal">Request Corporate catalogue</a>
+        <p class="para my-3"> The corporate gift box of permanence for partners of consequence</p>
+        <a href="#" class="com_btn border-white bg-white" data-bs-toggle="modal" data-bs-target="#requestCorporateProposal">DOWNLOAD FULL CATALOGUE (PDF)</a>
     </div>
 </section>
 
 <section class="mt_60 request_catalogue_para">
     <div class="container">
-        <p class="text-center sub_head_inter" style="color:#666666">A curated collection of architectural desk objects,
-            ritual instruments, and heritage pieces designed for the
-            modern executive. Every object is customizable, crafted from solid materials, and engineered to earn its
-            place on a CEO's desk.</p>
+        <p class="text-center sub_head_inter" style="color:#666666">A curated collection of architectural desk objects, ritual instruments, and heritage pieces designed for the modern executive. Every corporate luxury gift is customizable, crafted from solid materials, and engineered to earn its place on a CEO's desk.</p>
     </div> 
 
 </section>
@@ -87,7 +84,7 @@
                 </span>
             </p>
             <h2 class="title_60">Corporate Kits</h2>
-            <p>Pre-designed ensembles for specific corporate milestones. Ships in one master "Vault" box.</p>
+            <p>Pre-designed luxury branded gifts for specific corporate milestones. Ships in one master 'corporate vault' box</p>
         </div>
 
         <div class="cor_kits_slider">
@@ -138,7 +135,7 @@
                 </span>
             </p>
             <h2 class="title_60">VIP Boardroom Set</h2>
-            <p>A sculptural power trio for the highest-level corporate spaces.</p>
+            <p>A scultputural power corporate gift box for the highest level corporate spaces</p>
         </div>
         <div class="vip_board">
             <div class="vip_board_lt">
@@ -146,7 +143,7 @@
             </div>
 
             <div class="vip_board_rt">
-                <h3 class="title_40">A curated triad of modern ritual objects crafted to elevate executive meetings and leadership spaces</h3>
+                <h3 class="title_40">A curated triad of modern ritual corporate gifts in UAE, crafted to elevate executive meetings and leadership spaces</h3>
                 <div class="vip_board_content">
                     <div class="vip_board_item">
                         <h4 class="sub_head">- The Hydration Ritual Set</h4>

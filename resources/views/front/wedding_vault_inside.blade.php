@@ -6,12 +6,11 @@
 
     <div class="hero_content_inner w-100">
         <div class="container">
-            <h2 class="main_head mb-3"> H Noww Wedding Concierge</h2>
-            <p class="sub_heads sec_in_mb"> Ceremonial objects, sculptural heirlooms, and bespoke gifting for the modern
-                union.
+            <h2 class="main_head mb-3"> HNoww Wedding Concierge</h2>
+            <p class="sub_heads sec_in_mb"> Ceremonial wedding and anniversary gifts, sculptural heirlooms, and bespoke gifting for the modern union.
             </p>
             <div class="d-flex flex-wrap justify-content-center gap-3 gap-md-4">
-                <a href="#" class="com_btn border-white bg-white" data-bs-toggle="modal" data-bs-target="#requestWeddingCatalogue">Request for Wedding Catalogue</a>
+                <a href="#" class="com_btn border-white bg-white" data-bs-toggle="modal" data-bs-target="#requestWeddingCatalogue">Book a Wedding Gifting Consultation</a>
                 {{-- <a href="#" class="com_btn border-white bg-white">Book a Wedding Gifting Consultation</a>
                 <a href="#" class="com_btn border-white bg-transparent text-white"> Download Wedding Vault Lookbook
                     (PDF)</a> --}}
@@ -22,14 +21,10 @@
 
 <section class="mt_60 request_catalogue_para">
     <div class="container">
-        <p class="sub_head text-center" style="color:#666666;">At H Noww, weddings are treated as living archives of a
-            family’s story.
-            The Wedding Vault is a private collection of ceremonial objects, malachite signatures, and bespoke hampers
-            curated for brides, grooms, and planners who want every ritual, every favour, and every gift to feel
-            intentional
-            and unforgettable.
-            We work with limited quantities and high-touch customization. Everything you see here is curated to be
-            photographed, kept, and passed on.
+        <p class="sub_head text-center" style="color:#666666;">At HNoww, weddings are treated as living archives of a family’s story.
+        The Wedding Vault is a private collection of ceremonial objects, malachite signatures, and bespoke luxury hampers in Dubai curated for brides, grooms, and planners who want every ritual, every favour, and every wedding or anniversay gift to feel intentional and unforgettable.
+We work with limited quantities and high-touch customization. 
+Everything you see here is curated to be photographed, kept, and passed on.
         </p>
     </div>
 </section>
@@ -53,7 +48,7 @@
                 </span>
             </p>
             <h2 class="title_60">The Wedding Vault</h2>
-            <P> Explore by collection or scroll to view everything.</P>
+            <P> Explore the luxury gift hampers in Dubai or scroll to view everything to pick the best anniversary gift</P>
         </div>
         <div class="row gy-4 g-md-5">
             @if(isset($weddingProduct) && is_countable($weddingProduct) && count($weddingProduct) > 0)
@@ -186,8 +181,10 @@
                     <div class="wedding_box">
                         <h3 class="wedding_box_head">01</h3>
                         <h5 class="sub_head mb-3">Discovery Call</h5>
-                        <p class="mb-0">Share your wedding dates, venues, guest profiles, and budget bands. We recommend a mix of
-                            objects, hampers, and favours suited to your rituals.</p>
+                        <p class="mb-0">Share your wedding dates, venues,
+                            guest profiles, and budget bands. We
+                            recommend a mix of wedding anniversaries and gifts, premium gift hampers,
+                            and favours for the ocassion.</p>
                     </div>
                 </div>
 
@@ -195,9 +192,10 @@
                     <div class="wedding_box">
                         <h3 class="wedding_box_head">02</h3>
                         <h5 class="sub_head mb-3">Curated Proposal</h5>
-                        <p class="mb-0">You receive a PDF proposal with product combinations, colour palettes, and preliminary
-                            costings,
-                            including options for different segments (family, friends, VIPs).</p>
+                        <p class="mb-0">You receive a PDF proposal with wedding and anniversary gifts, colour palettes, and
+                                preliminary costings, including premium gift hampers
+                                for different segments (family, friends,
+                                VIPs).</p>
                     </div>
                 </div>
 
@@ -205,8 +203,10 @@
                     <div class="wedding_box">
                         <h3 class="wedding_box_head">03</h3>
                         <h5 class="sub_head mb-3">Final Selection & Customization</h5>
-                        <p class="mb-0">Together, we refine quantities, personalization, packaging details, and blessing scroll copy.
-                            Once approved, production begins.</p>
+                        <p class="mb-0">Together, we refine quantities,
+                            personalization, packaging details, and
+                            blessing scroll copy. Once approved,
+                            production of the luxury wedding gifts begins.</p>
                     </div>
                 </div>
 
@@ -214,9 +214,11 @@
                     <div class="wedding_box">
                         <h3 class="wedding_box_head">04</h3>
                         <h5 class="sub_head mb-3">Production & Delivery</h5>
-                        <p class="mb-0">We execute all orders, coordinate timelines, and deliver ready-to-present hampers and
-                            objects.
-                            For Dubai weddings, on-ground coordination can be discussed.</p>
+                        <p class="mb-0">We execute all orders, coordinate
+                            timelines, and deliver ready-to-present wedding & anniversary gifts and
+                            luxury gift hampers in Dubai. For Dubai
+                            weddings, on-ground coordination can
+                            be discussed.</p>
                     </div>
                 </div>
             </div>
@@ -247,19 +249,15 @@
                 </span>
             </p>
             <h2 class="title_60 text-white mb-4">Curate Your Wedding Gifting?</h2>
-            <p class="sec_in_mb text-white">Whether you are a bride, groom, or planner, the H Noww Wedding Concierge is
-                your partner in creating <br />
-                gifts and rituals that feel as considered as the ceremony itself.</p>
+            <p class="sec_in_mb text-white">Whether you are a bride, groom, or planner, the HNoww Wedding Concierge is your partner in creating the best wedding gift,<br> that feels as close as the ceremony itself.</p>
             <div class="d-flex flex-wrap justify-content-center gap-3 gap-md-4 mb-3 mb-md-4">
                 {{-- <a href="#" class="com_btn border-white bg-white">Book a Wedding Gifting Consultation</a>
                 <a href="#" class="com_btn border-white bg-transparent text-white"> Email the H Noww Wedding
                     Concierge</a> --}}
-                <a href="#" class="com_btn border-white bg-transparent text-white" data-bs-toggle="modal" data-bs-target="#requestWeddingCatalogue"> Request Wedding Catalogue</a>
+                <a href="#" class="com_btn border-white bg-transparent text-white" data-bs-toggle="modal" data-bs-target="#requestWeddingCatalogue"> Book a Wedding Gifting Consultation</a>
             </div>
 
-            <p class="text-white mb-0"><i>H Noww Wedding Concierge — Ceremonial objects, sculptural heirlooms, and
-                    bespoke
-                    gifting for the modern union.</i></p>
+            <p class="text-white mb-0"><i>HNoww Wedding Concierge — Ceremonial objects, sculptural heirlooms, and bespoke gifting for the modern union.</i></p>
         </div>
     </div>
 
