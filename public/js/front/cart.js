@@ -140,15 +140,12 @@ $(document).on('click', '.delete-cart-item', function () {
                         updateCartCount();
                         // Check if this was the last cart item
                         if ($('#cart_item_list .cart-item-row').length === 0) {
-                            let emptyRow = `
-                                <tr class="empty-cart-row">
-                                    <td class="text-center" colspan="6">
-                                        There are no any carts available.
-                                        <a href="{{ route('front.home') }}" class="com_btn">
-                                            Continue shopping
-                                        </a>
-                                    </td>
-                                </tr>
+                            let emptyRow = `<div class="text-center">
+                                    <img class="img-fluid" style="" src="${window.appData.emptyCartImage}" alt="about us banner">
+                                    <h5 class="sub_head my-3">Your shopping bag is currently empty.</h5>
+                                    <a href="${window.appData.homeUrl}"
+                                    class="com_btn mt-2">Continue shopping</a>
+                                </div>
                             `;
                             $('#cart_item_list').append(emptyRow);
                             $('#calculation-section').remove();

@@ -244,7 +244,7 @@
                 </p>
             </div>
             <div>
-                {{-- <a href="javascript:void(0)" class="btn_2">Discuss a custom hamper brief with the H Noww team</a> --}}
+                <a href="javascript:void(0)" class="btn_2">Discuss a custom hamper brief with the H Noww team</a>
             </div>
         </div>
     </div>
