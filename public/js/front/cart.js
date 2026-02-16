@@ -147,6 +147,7 @@ $(document).on('click', '.delete-cart-item', function () {
                                     class="com_btn mt-2">Continue shopping</a>
                                 </div>
                             `;
+                            $('#cartTable').hide();
                             $('#cart_item_list').append(emptyRow);
                             $('#calculation-section').remove();
                         }

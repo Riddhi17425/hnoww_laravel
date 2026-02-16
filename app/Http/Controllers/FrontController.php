@@ -72,7 +72,7 @@ class FrontController extends Controller
 
         $corporateProduct = Product::select('id', 'product_name')->where('product_type', 2)->isActive()->notDeleted()->get();
         $weddingProduct = Product::select('id', 'product_name')->where('product_type', 3)->isActive()->notDeleted()->get();
-        $allProd = Product::isActive()->notDeleted()->get();
+        $allProd = Product::isActive()->notDeleted()->latest()->take(8)->get();
         $allGifts = GiftShop::where('is_active', 0)->whereNull('deleted_at');
         if (request()->filled('gift_for') && request()->filled('gift_for') != '') {
             $allGifts->where('gift_for', request('gift_for'));

@@ -42,8 +42,8 @@
                   @php $subTotal = 0; @endphp
                   <!-- Shopping Summery -->
                   <div class="table-responsive" id="cart_item_list">
-                      @if(isset($cartData) && count($cartData) > 0 && is_countable($cartData) > 0)
-                     <table class="table shopping-summery" style="--bs-table-bg:--bs-table-bg;">
+                     @if(isset($cartData) && count($cartData) > 0 && is_countable($cartData) > 0)
+                     <table class="table shopping-summery" id="cartTable" style="--bs-table-bg:--bs-table-bg;">
                         <thead>
                            <tr class="main-hading">
                               <th>PRODUCT</th>
