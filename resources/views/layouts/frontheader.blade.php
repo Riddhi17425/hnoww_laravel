@@ -1,7 +1,9 @@
 @php
 $current_route = Route::currentRouteName();
 $is_green = ($current_route === 'front.product.details' || $current_route === 'front.gift.details' || $current_route ===
-'front.auth' || $current_route === 'front.cart.view' || $current_route === 'front.checkout.view' || $current_route === 'front.order.view' || $current_route === 'front.order_detail.view' || $current_route === 'front.profile' || $current_route ===
+'front.auth' || $current_route === 'front.cart.view' || $current_route === 'front.checkout.view' || $current_route ===
+'front.order.view' || $current_route === 'front.order_detail.view' || $current_route === 'front.profile' ||
+$current_route ===
 'front.get.forgot.password' || $current_route === 'front.get.reset.password');
 
 @endphp
@@ -31,10 +33,10 @@ $is_green = ($current_route === 'front.product.details' || $current_route === 'f
 
     <!--Aos animation-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-    
+
     <!--country-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
-    
+
     <!-- style css start -->
     <link rel="stylesheet" href="{{ asset('public/front/css/style.css')}}">
     <link rel="stylesheet" href="{{ asset('public/front/css/header.css')}}">
@@ -95,6 +97,7 @@ $is_green = ($current_route === 'front.product.details' || $current_route === 'f
             max-width: 400px;
             margin-top: 10px;
         }
+
         #error-message {
             color: red;
             margin-top: 10px;
@@ -125,7 +128,6 @@ $is_green = ($current_route === 'front.product.details' || $current_route === 'f
         .choices__list--multiple .choices__item .choices__button:hover {
             background-color: rgba(0,0,0,0.1) !important;
         }
-
     </style>
 
 
@@ -142,7 +144,6 @@ $is_green = ($current_route === 'front.product.details' || $current_route === 'f
                     d="M63.2185 31.6093C63.2185 22.9261 56.3469 15.8463 47.7574 15.461C47.3826 6.87158 40.282 0 31.6093 0C22.9365 0 15.8359 6.87158 15.4611 15.461C6.88199 15.8359 0 22.9157 0 31.6093C0 40.3028 6.88199 47.3722 15.4611 47.7575C15.8463 56.3469 22.9365 63.2185 31.6093 63.2185C40.282 63.2185 47.3722 56.3365 47.7574 47.7575C56.3469 47.3826 63.2185 40.282 63.2185 31.6093ZM60.6365 30.3599H47.7887V17.9806C54.5561 18.345 60.0326 23.6549 60.6365 30.3599ZM45.2795 45.2899H32.8586V42.052C33.2751 40.5215 34.1705 38.3247 36.1174 36.3361C38.1581 34.2538 40.4278 33.3167 42.0207 32.8795H45.2587V45.2795H45.2691L45.2795 45.2899ZM17.9182 32.8586H21.1769C22.697 33.2334 24.8834 34.0872 26.8616 35.9925C29.1105 38.1581 29.9955 40.6464 30.339 42.0207V45.2691H17.9286V32.8482H17.9182V32.8586ZM17.9182 17.9286H30.3286V21.2082C30.0267 22.697 29.3083 24.8418 27.4967 26.8096C25.2791 29.2146 22.6346 30.0579 21.1874 30.3495H17.8973V17.9182H17.9077L17.9182 17.9286ZM31.6301 38.2934C30.9637 36.9608 29.9955 35.524 28.6107 34.1809C27.4551 33.0669 26.2473 32.2548 25.1021 31.6717C26.4972 30.995 27.9965 29.9955 29.3708 28.5066C30.4328 27.351 31.1928 26.1432 31.7238 24.9875C32.4526 26.3515 33.4937 27.8195 34.9617 29.1626C35.9821 30.11 37.1482 30.9221 38.3871 31.5676C37.0649 32.2443 35.6385 33.1918 34.3162 34.5557C33.1293 35.7947 32.2548 37.0857 31.6301 38.2934ZM42.052 30.3599C40.6256 29.9434 38.5745 29.0793 36.6796 27.3405C34.4203 25.2582 33.3688 22.8636 32.869 21.1769V17.9494H45.2899V30.3703H42.052V30.3599ZM45.2379 15.4298H32.8586V2.58205C39.5532 3.18591 44.8735 8.66235 45.2379 15.4298ZM30.3495 2.58205V15.4298H17.9702C18.3346 8.66235 23.6445 3.18591 30.3495 2.58205ZM15.4194 17.9702V30.3495H2.57164C3.1755 23.6549 8.65194 18.345 15.4194 17.9702ZM2.57164 32.8586H15.4194V45.2379C8.65194 44.8735 3.1755 39.5636 2.57164 32.8586ZM17.9598 47.7887H30.339V60.6365C23.6549 60.0326 18.345 54.5561 17.9598 47.7887ZM32.8586 60.6365V47.7887H45.2379C44.8735 54.5561 39.5636 60.0222 32.8586 60.6365ZM47.7887 45.2379V32.8586H60.6365C60.0326 39.5636 54.5561 44.8735 47.7887 45.2379Z"
                     fill="#D0C2AA" />
             </svg>
-
         </div>
     </div>
 
@@ -294,33 +295,35 @@ $is_green = ($current_route === 'front.product.details' || $current_route === 'f
                     </div>
                     <!-- Cart with Badge -->
                     <a href="{{ route('front.cart.view') }}" class="cart_icon">
-                        <img src="<?= $is_green ? asset('public/front/images/cart-icon-black.svg') : asset('public/front/images/cart-icon.svg') ?>" alt="Cart">
-                        <span id="cart-count" class="cart_badge">{{ \App\Models\Cart::where('user_id', auth()->id())->sum('quantity') ?? 0 }}</span>
+                        <img src="<?= $is_green ? asset('public/front/images/cart-icon-black.svg') : asset('public/front/images/cart-icon.svg') ?>"
+                            alt="Cart">
+                        <span id="cart-count"
+                            class="cart_badge">{{ \App\Models\Cart::where('user_id', auth()->id())->sum('quantity') ?? 0 }}</span>
                     </a>
 
                     <div class="language-select ms-lg-3">
-                    <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M16 28C18.66 27.9998 21.2446 27.1163 23.348 25.488C25.4515 23.8598 26.9546 21.5791 27.6213 19.004M16 28C13.34 27.9998 10.7554 27.1163 8.65197 25.488C6.54854 23.8598 5.04544 21.5791 4.37867 19.004M16 28C19.3133 28 22 22.6267 22 16C22 9.37334 19.3133 4 16 4M16 28C12.6867 28 10 22.6267 10 16C10 9.37334 12.6867 4 16 4M27.6213 19.004C27.868 18.044 28 17.0373 28 16C28.0033 13.9361 27.4718 11.9067 26.4573 10.1093M27.6213 19.004C24.0656 20.9752 20.0656 22.0064 16 22C11.784 22 7.82267 20.9133 4.37867 19.004M4.37867 19.004C4.12633 18.0226 3.9991 17.0133 4 16C4 13.86 4.56 11.8493 5.54267 10.1093M16 4C18.1283 3.99911 20.2186 4.56448 22.0563 5.63809C23.894 6.71169 25.4129 8.25489 26.4573 10.1093M16 4C13.8717 3.99911 11.7814 4.56448 9.94375 5.63809C8.10606 6.71169 6.58708 8.25489 5.54267 10.1093M26.4573 10.1093C23.5542 12.6239 19.8407 14.0055 16 14C12.0027 14 8.34667 12.5333 5.54267 10.1093"
-                            stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
+                        <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M16 28C18.66 27.9998 21.2446 27.1163 23.348 25.488C25.4515 23.8598 26.9546 21.5791 27.6213 19.004M16 28C13.34 27.9998 10.7554 27.1163 8.65197 25.488C6.54854 23.8598 5.04544 21.5791 4.37867 19.004M16 28C19.3133 28 22 22.6267 22 16C22 9.37334 19.3133 4 16 4M16 28C12.6867 28 10 22.6267 10 16C10 9.37334 12.6867 4 16 4M27.6213 19.004C27.868 18.044 28 17.0373 28 16C28.0033 13.9361 27.4718 11.9067 26.4573 10.1093M27.6213 19.004C24.0656 20.9752 20.0656 22.0064 16 22C11.784 22 7.82267 20.9133 4.37867 19.004M4.37867 19.004C4.12633 18.0226 3.9991 17.0133 4 16C4 13.86 4.56 11.8493 5.54267 10.1093M16 4C18.1283 3.99911 20.2186 4.56448 22.0563 5.63809C23.894 6.71169 25.4129 8.25489 26.4573 10.1093M16 4C13.8717 3.99911 11.7814 4.56448 9.94375 5.63809C8.10606 6.71169 6.58708 8.25489 5.54267 10.1093M26.4573 10.1093C23.5542 12.6239 19.8407 14.0055 16 14C12.0027 14 8.34667 12.5333 5.54267 10.1093"
+                                stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
 
-                    <div class="dropdown-wrapper notranslate">
-                        <input type="text" id="dropdownInput" class="dropdown-input-lan" placeholder="Select Language"
-                            readonly />
-                        <div class="dropdown-list" id="dropdownList">
-                            <div class="search-box">
-                                <input type="text" id="searchInput" placeholder="Search language..." />
+                        <div class="dropdown-wrapper notranslate">
+                            <input type="text" id="dropdownInput" class="dropdown-input-lan"
+                                placeholder="Select Language" readonly />
+                            <div class="dropdown-list" id="dropdownList">
+                                <div class="search-box">
+                                    <input type="text" id="searchInput" placeholder="Search language..." />
+                                </div>
+                                <div class="list-items" id="listItems"></div>
                             </div>
-                            <div class="list-items" id="listItems"></div>
                         </div>
+                        <div id="google_translate_element" style="display:none;"></div>
                     </div>
-                    <div id="google_translate_element" style="display:none;"></div>
-                </div>
 
                 </div>
 
-                
+
             </div>
 
         </nav>
@@ -784,24 +787,24 @@ $is_green = ($current_route === 'front.product.details' || $current_route === 'f
     });
     </script>
 
-<script>
+    <script>
     document.querySelectorAll('.has-dropdown > a').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        if (window.innerWidth < 992) {
-            e.preventDefault(); // Prevent following the "#" link
-            const parent = this.parentElement;
-            
-            // Toggle active class on the <li>
-            parent.classList.toggle('active');
-            
-            // Optional: Close other open dropdowns
-            document.querySelectorAll('.has-dropdown').forEach(item => {
-                if (item !== parent) item.classList.remove('active');
-            });
-        }
+        anchor.addEventListener('click', function(e) {
+            if (window.innerWidth < 992) {
+                e.preventDefault(); // Prevent following the "#" link
+                const parent = this.parentElement;
+
+                // Toggle active class on the <li>
+                parent.classList.toggle('active');
+
+                // Optional: Close other open dropdowns
+                document.querySelectorAll('.has-dropdown').forEach(item => {
+                    if (item !== parent) item.classList.remove('active');
+                });
+            }
+        });
     });
-});
-</script>
+    </script>
 
     <!-- Load Google Translate -->
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">

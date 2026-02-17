@@ -190,18 +190,18 @@ Curated in Dubai, for those who understand that legacy is built quietly.
         <div class="founder_main">
 
             <div class="founder_text_1">
-                <h2 data-aos="fade-left" data-aos-delay="0" data-aos-duration="800" data-aos-once="true">
+                <h2>
                     Founder
                 </h2>
                 <p class="mb-0">viral kotecha</p>
             </div>
 
-            <div data-aos="zoom-in" data-aos-delay="400" data-aos-duration="800" data-aos-once="true">
+            <div>
                 <img src="{{ asset('public/images/front/hnoww-women.png') }}" alt="" class="img-fluid">
             </div>
 
             <div class="founder_text_2">
-                <h2 data-aos="fade-left" data-aos-delay="1000" data-aos-duration="800" data-aos-once="true">
+                <h2>
                     HNOWW
                 </h2>
             </div>

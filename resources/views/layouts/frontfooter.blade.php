@@ -83,7 +83,7 @@
                             <li><a href="{{ route('front.journal') }}">The Journal</a></li>
                             <li><a href="{{ route('front.blessings.library') }}">The Blessing Library</a></li>
                             <!--<li><a href="">Philosophy & Craft</a></li>-->
-                            <li><a href="{{ route('front.atelier') }}">Explore The Atelier</a></li>
+                            <li><a href="{{ route('front.atelier') }}">The Atelier</a></li>
                         </ul>
                     </div>
                 </div>
@@ -170,7 +170,7 @@
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 <!--Aos animation-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 
 <!-- Load Google Translate script -->

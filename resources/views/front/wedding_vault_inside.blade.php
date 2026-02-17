@@ -2,7 +2,7 @@
 
 <!-- hero section -->
 <section class="hero-section_inner">
-    <img class="img-fluid" src="{{asset('public/images/front/wedding_vault.png')}}" alt="him banner">
+    <img class="img-fluid" src="{{asset('public/front/images/wedding_vault.webp')}}" alt=" banner">
 
     <div class="hero_content_inner w-100">
         <div class="container">

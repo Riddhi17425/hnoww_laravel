@@ -9,7 +9,7 @@
 }
 
 .wedding_h2 {
-    color: #F2D8D9;
+    color: var(--white-color);
     font-family: var(--heading-font);
     font-size: 34px;
     font-style: italic;

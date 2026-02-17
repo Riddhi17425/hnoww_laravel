@@ -25,7 +25,7 @@
     .magic_wrapper h2,
     .founder_main .founder_text_1 h2,
     .founder_main .founder_text_2 h2 {
-        font-size: 100px;
+        font-size: 80px;
     }
 
     .magic_wrapper_h3 {
@@ -38,7 +38,7 @@
     }
 
     .gesture_title {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .gesture_filter {
@@ -110,7 +110,7 @@
     }
 
     #reg_login {
-    margin-top: 20px;
+        margin-top: 20px;
     }
 
     .privacy_nav_jump .sidebar {
@@ -144,13 +144,13 @@
     }
 
     .mt_120 {
-        margin-top: 90px;
+        margin-top: 80px;
     }
 
     .magic_wrapper h2,
     .founder_main .founder_text_1 h2,
     .founder_main .founder_text_2 h2 {
-        font-size: 90px;
+        font-size: 70px;
     }
 
     .desire_slider.slick-initialized .slick-slide {
@@ -166,7 +166,7 @@
     }
 
     .mb_120 {
-        margin-bottom: 90px;
+        margin-bottom: 80px;
     }
 
     .ft_top_right h2 {
@@ -381,9 +381,9 @@
         gap: 25px;
     }
 
-    #reg_login .reg_login_child {
+    /* #reg_login .reg_login_child {
         height: 700px;
-    }
+    } */
 
     .formBx .ct_input {
         margin-bottom: 30px;
@@ -406,17 +406,19 @@
         /*white-space: nowrap;*/
         line-height: 45px;
     }
-    .magic_wrapper{padding: 80px 0;}
+    .magic_wrapper {
+        padding: 80px 0;
+    }
     .container {
         max-width: 1190px !important;
     }
 
-     .formBx .ct_input {
+    .formBx .ct_input {
         margin-bottom: 30px;
     }
 
     #reg_login .reg_login_child {
-    height: 650px;
+        height: 560px;
     }
 
     .practice_content .sub_head_inter {
@@ -485,7 +487,7 @@
     .magic_wrapper h2,
     .founder_main .founder_text_1 h2,
     .founder_main .founder_text_2 h2 {
-        font-size: 80px;
+        font-size: 60px;
     }
 
     .magic_wrapper_h3 {
@@ -511,7 +513,7 @@
     }
 
     .mt_120 {
-        margin-top: 80px;
+        margin-top: 70px;
     }
 
     .hnow_footer {
@@ -771,6 +773,24 @@
     .privacy_nav_jump .sidebar {
         width: 45%;
     }
+
+    .gesture_title {
+        font-size: 18px;
+    }
+
+    .gesture_filter select {
+        font-size: 16px;
+    }
+
+    #reg_login .reg_login_child .user .formBx .ct_form input {
+        margin-top: 0px;
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    #reg_login .reg_login_child .user .formBx {
+        padding: 25px;
+    }
 }
 
 /*=========================                  =========================
@@ -799,7 +819,7 @@
     .magic_wrapper h2,
     .founder_main .founder_text_1 h2,
     .founder_main .founder_text_2 h2 {
-        font-size: 70px;
+        font-size: 52px;
     }
 
     .magic_wrapper_h3 {
@@ -846,12 +866,12 @@
     }
 
     .gesture_title {
-        font-size: 20px;
+        font-size: 16px;
     }
 
     .gesture_filter select {
         padding-right: 55px;
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .gesture_filter select {
@@ -935,7 +955,7 @@
     }
 
     .increment_decrement .dec_btn,
-     .increment_decrement .inc_btn {
+    .increment_decrement .inc_btn {
         width: 35px;
         height: 38px;
     }
@@ -1040,6 +1060,14 @@
     .month_box p {
         font-size: 12px;
     }
+
+    #reg_login .reg_login_child {
+        height: 500px;
+    }
+
+    #reg_login .reg_login_child .user .formBx .ct_form .row {
+        --bs-gutter-x: 25px;
+    }
 }
 
 /*=========================                  =========================
@@ -1091,7 +1119,7 @@
 
     .hero_content {
         width: 100%;
-        padding:0 7px;
+        padding: 0 7px;
     }
 
     .mt_120 {
@@ -1654,35 +1682,34 @@
         margin-bottom: 15px;
     }
 
-    .user_menu
-    {
+    .user_menu {
         left: 0px;
     }
 
-    #reg_login
-    {
+    #reg_login {
         padding: 0;
     }
 
-        #reg_login .reg_login_child {
+    /* #reg_login .reg_login_child {
         height: 640px;
+    } */
+
+    .has-dropdown .dropdown-menu {
+        position: static;
     }
-    
-    .has-dropdown .dropdown-menu
-    {
-       position: static;
-    }
-    
+
     .hero_content .main_head {
         font-size: 32px;
         line-height: 34px;
-        margin:20px 0;
+        margin: 20px 0;
     }
-    
-    .desire_box_top_child
-    {
-        opacity:1;
-        position:static;
+
+    .desire_box_top_child {
+        opacity: 1;
+        position: static;
     }
-    
+
+    .material_flex {
+        display: block;
+    }
 }
