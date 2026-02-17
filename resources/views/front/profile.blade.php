@@ -62,4 +62,5 @@
             </div>
         </div>
     </div>
-</section
+</section>
+@include('layouts.frontfooter')
