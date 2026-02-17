@@ -24,13 +24,25 @@ class BlessingController extends Controller
             $query = $query->where('is_active', (int)$request->status);
         }       
         return Datatables::of($query) 
-            ->editColumn('blessing_of', function ($result) use($blessingOf) {
-                if(isset($result->blessing_of)){
-                    return $blessingOf[$result->blessing_of];
-                }else{
-                   return '-';
-                }  
-            })       
+            // ->editColumn('blessing_of', function ($result) use($blessingOf) {
+            //     if(isset($result->blessing_of)){
+            //         return $blessingOf[$result->blessing_of];
+            //     }else{
+            //        return '-';
+            //     }  
+            // })    
+            ->editColumn('blessing_of', function ($result) use ($blessingOf) {
+                if (!empty($result->blessing_of)) {
+                    $values = explode(',', $result->blessing_of);
+                    $formatted = collect($values)->map(function ($value) use ($blessingOf) {
+                        return isset($blessingOf[$value])
+                            ? ucwords($blessingOf[$value])
+                            : ucfirst(str_replace('_', ' ', $value));
+                    })->implode(', ');
+                    return $formatted;
+                }
+                return '-';
+            })   
             ->editColumn('description', function ($result) {
                 if(isset($result->description)){
                     return $result->description;
@@ -84,15 +96,20 @@ class BlessingController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'blessing_of' => 'required|in:'.implode(',', array_keys(config('global_values.blessing_of'))),
+            // 'blessing_of' => 'required|in:'.implode(',', array_keys(config('global_values.blessing_of'))),
+            'blessing_of' => 'required|array',
+            'blessing_of.*' => 'in:' . implode(',', array_keys(config('global_values.blessing_of'))),
             'title'       => 'required|string|max:255',
             'sub_title'   => 'required|string|max:255',
             'description' => 'required|string',
             'image'       => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'audio_file'  => 'required|mimes:mp3,wav|max:10240', // max 10MB
+            'audio_file'  => 'nullable|mimes:mp3,wav|max:10240', // max 10MB
         ], [
-            'blessing_of.required' => 'Please select a blessing type.',
-            'blessing_of.in'       => 'Please select a valid blessing type.',
+            // 'blessing_of.required' => 'Please select a blessing type.',
+            // 'blessing_of.in'       => 'Please select a valid blessing type.',
+            'blessing_of.required' => 'Please select at least one blessing type.',
+            'blessing_of.array' => 'Invalid blessing selection format.',
+            'blessing_of.*.in' => 'Please select a valid blessing type.',
 
             'title.required'       => 'The title is required.',
             'title.string'         => 'The title must be a valid text.',
@@ -120,7 +137,7 @@ class BlessingController extends Controller
         }
 
         $blessing = new Blessing();
-        $blessing->blessing_of = $request->blessing_of;
+        $blessing->blessing_of = $request->blessing_of ? implode(',', $request->blessing_of) : null;
         $blessing->title = $request->title;
         $blessing->sub_title = $request->sub_title;
         $blessing->description = $request->description;
@@ -172,15 +189,20 @@ class BlessingController extends Controller
     { 
         $blessing = Blessing::findOrFail($id);
         $validator = Validator::make($request->all(), [
-            'blessing_of' => 'required|in:'.implode(',', array_keys(config('global_values.blessing_of'))),
+            //'blessing_of' => 'required|in:'.implode(',', array_keys(config('global_values.blessing_of'))),
+            'blessing_of' => 'required|array',
+            'blessing_of.*' => 'in:' . implode(',', array_keys(config('global_values.blessing_of'))),
             'title'       => 'required|string|max:255',
             'sub_title'   => 'required|string|max:255',
             'description' => 'required|string',
             'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'audio_file'  => 'nullable|mimes:mp3,wav|max:10240',
         ], [
-            'blessing_of.required' => 'Please select a blessing type.',
-            'blessing_of.in'       => 'Please select a valid blessing type.',
+            // 'blessing_of.required' => 'Please select a blessing type.',
+            // 'blessing_of.in'       => 'Please select a valid blessing type.',
+            'blessing_of.required' => 'Please select at least one blessing type.',
+            'blessing_of.array' => 'Invalid blessing selection format.',
+            'blessing_of.*.in' => 'Please select a valid blessing type.',
 
             'title.required'       => 'The title is required.',
             'title.string'         => 'The title must be a valid text.',
@@ -205,7 +227,7 @@ class BlessingController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $blessing->blessing_of = $request->blessing_of;
+        $blessing->blessing_of = $request->blessing_of ? implode(',', $request->blessing_of) : null;
         $blessing->title = $request->title;
         $blessing->sub_title = $request->sub_title;
         $blessing->description = $request->description;

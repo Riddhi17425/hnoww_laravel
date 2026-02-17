@@ -88,11 +88,11 @@ class FrontController extends Controller
         return view('front.home', compact('herProduct', 'himProduct', 'homeProduct', 'corporateProduct', 'weddingProduct', 'allProd', 'allGifts'));
     }
 
-    public function getList(Request $request, $catSlug){
+    public function getList(Request $request, $catSlug, $from = null){
         $category = Category::where('category_url', $catSlug)->first();
         $catProducts = Product::select('id', 'category_id', 'product_url', 'product_name', 'short_description', 'list_page_img', 'is_active', 'deleted_at')->where('category_id', $category->id)->where('product_type', 1)->isActive()->notDeleted()->get();
-      
-        return view('front.list', compact('category', 'catProducts'));
+
+        return view('front.list', compact('category', 'catProducts', 'catSlug', 'from'));
     }
 
     public function getProductDetails(Request $request, $productSlug){
@@ -933,7 +933,7 @@ class FrontController extends Controller
     public function getBlessings(Request $request, $blessingsOf = NULL){
         $blessings = Blessing::where('is_active', 0)->whereNull('deleted_at');
         if(isset($blessingsOf) && $blessingsOf != NULL){
-            $blessings = $blessings->where('blessing_of', $blessingsOf); 
+            $blessings = $blessings->whereRaw("FIND_IN_SET(?, blessing_of)", [$blessingsOf]);
         }
         $blessings = $blessings->orderBy('id', 'DESC')->get();
  

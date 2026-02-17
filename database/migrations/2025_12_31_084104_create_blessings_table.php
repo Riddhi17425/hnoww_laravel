@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('blessings', function (Blueprint $table) {
             $table->id();
-            $table->string('blessing_of')->nullable();
+            $table->string('blessing_of', 500)->nullable();
             $table->string('title')->nullable();
             $table->string('sub_title')->nullable();
             $table->string('description', 500)->nullable();

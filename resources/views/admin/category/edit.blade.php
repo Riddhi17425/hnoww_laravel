@@ -102,6 +102,49 @@
                                     </div>
                                 @endif
                             </div>
+
+                            <hr><h5>The World Section Fields</h5>
+                            {{-- THE WORLD SECTION FIELDS --}}
+                            <div class="col-md-6">
+                                <label class="form-label">Heading First</label>
+                                <input type="text" name="magic_heading_first" class="form-control" value="{{ old('magic_heading_first', $category->magic_heading_first) }}">
+                                @error('magic_heading_first')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Heading Second</label>
+                                <input type="text" name="magic_heading_second" class="form-control" value="{{ old('magic_heading_second', $category->magic_heading_second) }}">
+                                @error('magic_heading_second')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Title</label>
+                                <input type="text" name="magic_title" class="form-control" value="{{ old('magic_title', $category->magic_title) }}">
+                                @error('magic_title')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Image</label>
+                                <input type="file" name="magic_image" class="form-control">
+                                @error('magic_image')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                                @if($category->magic_image)
+                                    <div class="mt-2">
+                                        <img src="{{ url('public/images/admin/category_magic/'.$category->magic_image) }}" alt="Magic Image" width="250">
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Description</label>
+                                <textarea name="magic_description" class="form-control" rows="3">{{ old('magic_description', $category->magic_description) }}</textarea>
+                                @error('magic_description')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
                         </div>
                         <div class="col-md-12 mt-3">
                             <button type="submit" class="btn btn-primary py-2 px-5 text-uppercase btn-set-task w-sm-100">Update</button>

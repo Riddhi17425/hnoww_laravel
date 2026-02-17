@@ -11,6 +11,50 @@
     </div>
 </section>
 
+@if(isset($from)&& $from != null && strtolower($from) == 'worlds')
+<section class="about">
+    <div class="container">
+        <div class="magic_wrapper">
+            <h2 class="magic_head_phone" data-aos="fade-left" data-aos-delay="0" data-aos-duration="800"
+                data-aos-once="true">
+                @if(isset($category->magic_heading_first)){{$category->magic_heading_first}}@else Intention drives beauty. @endif @if(isset($category->magic_heading_second)){{$category->magic_heading_second}}@else Designs, guided by intent @endif
+            </h2>
+            <!-- 3️⃣ Left image (from left) -->
+            <div class="text-end magic_wrapper_logo" data-aos="fade-right" data-aos-delay="600" data-aos-duration="800"
+                data-aos-once="true">
+                <img src="{{ asset('public/front/images/home_magic_left.svg') }}" loading="lazy" alt="" class="img-fluid">
+            </div>
+
+            <!-- 2️⃣ Center image (scale 0 → 1) -->
+            <div data-aos="zoom-in" data-aos-delay="400" data-aos-duration="800" data-aos-once="true">
+                {{-- Need to make dynamic --}}
+                <img src="{{ asset('public/front/images/home_magic.png') }}" loading="lazy" alt="" class="img-fluid">
+            </div>
+
+            <!-- 4️⃣ Text block (from right) -->
+            <div data-aos="fade-left" data-aos-delay="800" data-aos-duration="800"  data-aos-once="true">
+                <h3 class="magic_wrapper_h3">@if(isset($category->magic_title)){{$category->magic_title}}@endif</h3>
+                <p>
+                    @if(isset($category->magic_description)){{$category->magic_description}} @endif
+                </p>
+            </div>
+
+            <!-- 1️⃣ First heading (from right) -->
+            <h2 class="magic_head_1" data-aos="fade-left" data-aos-delay="0" data-aos-duration="800"
+                data-aos-once="true">
+                @if(isset($category->magic_heading_first)){{$category->magic_heading_first}}@endif
+            </h2>
+
+            <!-- 5️⃣ Last heading (from right) -->
+            <h2 class="magic_head_2" data-aos="fade-left" data-aos-delay="1000" data-aos-duration="800"
+                data-aos-once="true">@if(isset($category->magic_heading_second)){{$category->magic_heading_second}}@endif
+            </h2>
+
+        </div>
+    </div>
+</section>
+@endif
+
 <section class="mt_60">
     <div class="container">
         <div class="him_wrapper">
@@ -96,7 +140,19 @@
                         </svg>
 
                     </span>
-                    <span>Build His Ritual.</span>
+                    <span>
+                        @if(isset($catSlug) && $catSlug != null)
+                            @if(strtolower($catSlug) == 'for-home')
+                            Craft Your Majlis.
+                            @endif
+                            @if(strtolower($catSlug) == 'for-her')
+                            Objects chosen with care, designed to be lived with.
+                            @endif
+                            @if(strtolower($catSlug) == 'for-him')
+                            Build His Ritual.
+                            @endif
+                        @endif
+                    </span>
                     <span>
                         <svg width="146" height="11" viewBox="0 0 146 11" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -115,7 +171,7 @@
                 </p>
             </div>
             <div>
-                <a href="javascript:void(0);" class="btn_2">SHOP GIFTS FOR {{$category ? $category->category_name : '' }}</a>
+                <a href="javascript:void(0);" class="btn_2">SHOP GIFTS {{$category ? $category->category_name : '' }}</a>   
             </div>
         </div>
     </div>

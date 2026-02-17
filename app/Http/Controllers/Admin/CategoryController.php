@@ -152,6 +152,10 @@ class CategoryController extends Controller
             'meta_description',
             'category_url',
             'category_type',
+            'magic_heading_first',
+            'magic_heading_second',
+            'magic_title',
+            'magic_description'
         ]);
 
         if ($request->hasFile('banner_image')) {
@@ -163,6 +167,12 @@ class CategoryController extends Controller
             $imageName = $image->getClientOriginalName();
             $image->move(public_path('images/admin/category_banner'), $imageName);
             $data['banner_image'] = $imageName;
+        }
+        if ($request->hasFile('magic_image')) {
+            $image = $request->file('magic_image');
+            $imageName = $image->getClientOriginalName();
+            $image->move(public_path('images/admin/category_magic'), $imageName);
+            $data['magic_image'] = $imageName;
         }
         $data['is_active'] = 0;
         Category::create($data);
@@ -226,6 +236,10 @@ class CategoryController extends Controller
             'meta_description',
             'category_url',
             'category_type',
+            'magic_heading_first',
+            'magic_heading_second',
+            'magic_title',
+            'magic_description'
         ]);
 
         if ($request->hasFile('banner_image')) {
@@ -241,6 +255,12 @@ class CategoryController extends Controller
             // if ($category->banner_image && file_exists(public_path('images/admin/category_banner/'.$category->banner_image))) {
             //     unlink(public_path('images/admin/category_banner/'.$category->banner_image));
             // }
+        }
+        if ($request->hasFile('magic_image')) {
+            $image = $request->file('magic_image');
+            $imageName = $image->getClientOriginalName();
+            $image->move(public_path('images/admin/category_magic'), $imageName);
+            $data['magic_image'] = $imageName;
         }
         $category->update($data);
 

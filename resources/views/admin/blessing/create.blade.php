@@ -16,9 +16,9 @@
     <form action="{{ route('admin.blessings.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row g-3">
-            <div class="col-md-2">
+            <div class="col-md-12">
                 <label class="form-label">Blessing Of</label><span class="text-danger">*</span>
-                <select name="blessing_of" class="form-control">
+                <select id="blessing_of" name="blessing_of[]" multiple class="form-control">
                     <option value="">-- Select Blessing Of --</option>
                     @foreach(config('global_values.blessing_of') as $key => $blessing)
                         <option value="{{ $key }}"
