@@ -20,19 +20,18 @@
                 @if(isset($category->magic_heading_first)){{$category->magic_heading_first}}@else Intention drives beauty. @endif @if(isset($category->magic_heading_second)){{$category->magic_heading_second}}@else Designs, guided by intent @endif
             </h2>
             <!-- 3️⃣ Left image (from left) -->
-            <div class="text-end magic_wrapper_logo" data-aos="fade-right" data-aos-delay="600" data-aos-duration="800"
-                data-aos-once="true">
+            <div class="text-end magic_wrapper_logo">
                 <img src="{{ asset('public/front/images/home_magic_left.svg') }}" loading="lazy" alt="" class="img-fluid">
             </div>
 
             <!-- 2️⃣ Center image (scale 0 → 1) -->
-            <div data-aos="zoom-in" data-aos-delay="400" data-aos-duration="800" data-aos-once="true">
+            <div>
                 {{-- Need to make dynamic --}}
                 <img src="{{ asset('public/front/images/home_magic.png') }}" loading="lazy" alt="" class="img-fluid">
             </div>
 
             <!-- 4️⃣ Text block (from right) -->
-            <div data-aos="fade-left" data-aos-delay="800" data-aos-duration="800"  data-aos-once="true">
+            <div>
                 <h3 class="magic_wrapper_h3">@if(isset($category->magic_title)){{$category->magic_title}}@endif</h3>
                 <p>
                     @if(isset($category->magic_description)){{$category->magic_description}} @endif
@@ -40,14 +39,12 @@
             </div>
 
             <!-- 1️⃣ First heading (from right) -->
-            <h2 class="magic_head_1" data-aos="fade-left" data-aos-delay="0" data-aos-duration="800"
-                data-aos-once="true">
+            <h2 class="magic_head_1">
                 @if(isset($category->magic_heading_first)){{$category->magic_heading_first}}@endif
             </h2>
 
             <!-- 5️⃣ Last heading (from right) -->
-            <h2 class="magic_head_2" data-aos="fade-left" data-aos-delay="1000" data-aos-duration="800"
-                data-aos-once="true">@if(isset($category->magic_heading_second)){{$category->magic_heading_second}}@endif
+            <h2 class="magic_head_2">@if(isset($category->magic_heading_second)){{$category->magic_heading_second}}@endif
             </h2>
 
         </div>

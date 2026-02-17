@@ -58,10 +58,10 @@ Everything you see here is curated to be photographed, kept, and passed on.
                             <div>
                                 <img class="w-100 mb-2 mb-md-4" src="{{ asset('public/images/admin/product_list/'.$val->list_page_img) }}" alt="{{ $val->product_name ?? 'Product Image' }}">
                             </div>
-                            <div class="box_bot mb-3">
+                            <div class="desire_box_bot_child">
                                 <div>
                                     <h3 class="sub_head">{{ $val->product_name ?? '' }} </h3>
-                                    <p class="mb-0">{!! $val->short_description ?? '' !!}</p>
+                                    <p>{!! $val->short_description ?? '' !!}</p>
                                 </div>
                                 <a href="{{ route('front.product.details', $val->product_url) }}">
                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
