@@ -41,41 +41,37 @@
 <section class="about">
     <div class="container">
         <div class="magic_wrapper">
-            <h2 class="magic_head_phone" data-aos="fade-left" data-aos-delay="0" data-aos-duration="800"
-                data-aos-once="true">
+            <h2 class="magic_head_phone">
                 Beauty is not decoration It is devotion.
             </h2>
             <!-- 3️⃣ Left image (from left) -->
-            <div class="text-end magic_wrapper_logo" data-aos="fade-right" data-aos-delay="600" data-aos-duration="800"
-                data-aos-once="true">
+            <div class="text-end magic_wrapper_logo">
                 <img src="{{ asset('public/front/images/home_magic_left.svg') }}" alt="" class="img-fluid">
             </div>
 
             <!-- 2️⃣ Center image (scale 0 → 1) -->
-            <div data-aos="zoom-in" data-aos-delay="400" data-aos-duration="800" data-aos-once="true">
+            <div>
                 <img src="{{ asset('public/front/images/home_magic.png') }}" alt="" class="img-fluid">
             </div>
 
             <!-- 4️⃣ Text block (from right) -->
-            <div data-aos="fade-left" data-aos-delay="800" data-aos-duration="800" data-aos-once="true">
+            <div>
                 <h3 class="magic_wrapper_h3">Designed in Dubai. Rooted in ritual. Made to endure.</h3>
                 <p>
                     At HNOWW, every object is a gesture. A pause.
                     A moment of intention.
-                    We craft sculptural pieces that turn daily actions into quiet ceremonies  where form becomes meaning,
- and the everyday becomes sacred.
+                    We craft sculptural pieces that turn daily actions into quiet ceremonies where form becomes meaning,
+                    and the everyday becomes sacred.
                 </p>
             </div>
 
             <!-- 1️⃣ First heading (from right) -->
-            <h2 class="magic_head_1" data-aos="fade-left" data-aos-delay="0" data-aos-duration="800"
-                data-aos-once="true">
+            <h2 class="magic_head_1">
                 Beauty is not decoration
             </h2>
 
             <!-- 5️⃣ Last heading (from right) -->
-            <h2 class="magic_head_2" data-aos="fade-left" data-aos-delay="1000" data-aos-duration="800"
-                data-aos-once="true">
+            <h2 class="magic_head_2">
                 It is devotion.
             </h2>
 
@@ -269,8 +265,11 @@
                 </span>
             </p>
             <h2 class="title_60 mb-4">Bespoke Rituals</h2>
+            <p>Commission custom ceremonial objects, heirlooms, and sacred gifts.
+                Our atelier collaborates with <br> families, designers, and couples to create one-of-a-kind pieces
+                for</p>
 
-            <div class="row align-items-center px-3 text-start">
+            <!-- <div class="row align-items-center px-3 text-start">
                 <div class="col-md-6 mb-3 mb-md-0">
                     <p class="mb-0">Commission custom ceremonial objects, heirlooms, and sacred gifts.
                         Our atelier collaborates with families, designers, and couples to create one-of-a-kind pieces
@@ -278,9 +277,9 @@
                     </p>
                 </div>
                 <div class="col-md-6 text-md-end col-md-6">
-                <a href="javascript:void(0);" class="com_btn">View Bespoke Portfolio  </a>
-            </div>
-            </div>
+                    <a href="javascript:void(0);" class="com_btn">View Bespoke Portfolio </a>
+                </div>
+            </div> -->
         </div>
 
 
@@ -323,7 +322,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="desire_box">
                 <img class="w-100 mb-4" src="{{asset('public/images/front/Bespoke-Rituals5.webp')}}" alt="images">
                 <div class="d-flex justify-content-between align-items-center">
@@ -360,58 +359,55 @@
                 <h2 class="title_60">With Intention</h2>
                 <p>Our objects are made in small batches using natural materials:</p>
             </div>
-            <div class="material_flex">
-                <div class="mobile_slider">
+            <div class="material_flex mobile_slider">
 
-                    <div class="material_slide text-center">
-                        <div class="material_img">
-                            <img src="{{asset('public/images/front/natural-stone.png')}}" alt="natural-stone"
-                                class="img-fluid" loading="lazy">
-                        </div>
-                        <h6 class="sub_head">Natural stone</h6>
+                <div class="material_slide text-center">
+                    <div class="material_img">
+                        <img src="{{asset('public/images/front/natural-stone.png')}}" alt="natural-stone"
+                            class="img-fluid" loading="lazy">
                     </div>
+                    <h6 class="sub_head">Natural stone</h6>
+                </div>
 
 
-                    <div class="material_slide text-center">
-                        <div class="material_img">
-                            <img src="{{asset('public/images/front/natural-stone2.png')}}" alt="natural-stone"
-                                class="img-fluid" loading="lazy">
-                        </div>
-                        <h6 class="sub_head">Brass</h6>
+                <div class="material_slide text-center">
+                    <div class="material_img">
+                        <img src="{{asset('public/images/front/natural-stone2.png')}}" alt="natural-stone"
+                            class="img-fluid" loading="lazy">
                     </div>
+                    <h6 class="sub_head">Brass</h6>
+                </div>
 
-                    <div class="material_slide text-center">
-                        <div class="material_img">
-                            <img src="{{asset('public/images/front/natural-stone3.png')}}" alt="natural-stone"
-                                class="img-fluid" loading="lazy">
-                        </div>
-                        <h6 class="sub_head">Malachite</h6>
+                <div class="material_slide text-center">
+                    <div class="material_img">
+                        <img src="{{asset('public/images/front/natural-stone3.png')}}" alt="natural-stone"
+                            class="img-fluid" loading="lazy">
                     </div>
+                    <h6 class="sub_head">Malachite</h6>
+                </div>
 
-                    <div class="material_slide text-center">
-                        <div class="material_img">
-                            <img src="{{asset('public/images/front/natural-stone4.png')}}" alt="natural-stone"
-                                class="img-fluid" loading="lazy">
-                        </div>
-                        <h6 class="sub_head">Rose Quartz</h6>
+                <div class="material_slide text-center">
+                    <div class="material_img">
+                        <img src="{{asset('public/images/front/natural-stone4.png')}}" alt="natural-stone"
+                            class="img-fluid" loading="lazy">
                     </div>
+                    <h6 class="sub_head">Rose Quartz</h6>
+                </div>
 
-                    <div class="material_slide text-center">
-                        <div class="material_img">
-                            <img src="{{asset('public/images/front/natural-stone5.png')}}" alt="natural-stone"
-                                class="img-fluid" loading="lazy">
-                        </div>
-                        <h6 class="sub_head">Silver Metal</h6>
+                <div class="material_slide text-center">
+                    <div class="material_img">
+                        <img src="{{asset('public/images/front/natural-stone5.png')}}" alt="natural-stone"
+                            class="img-fluid" loading="lazy">
                     </div>
+                    <h6 class="sub_head">Silver Metal</h6>
+                </div>
 
-                    <div class="material_slide text-center">
-                        <div class="material_img">
-                            <img src="{{asset('public/images/front/natural-stone6.png')}}" alt="natural-stone"
-                                class="img-fluid" loading="lazy">
-                        </div>
-                        <h6 class="sub_head">Leather</h6>
+                <div class="material_slide text-center">
+                    <div class="material_img">
+                        <img src="{{asset('public/images/front/natural-stone6.png')}}" alt="natural-stone"
+                            class="img-fluid" loading="lazy">
                     </div>
-
+                    <h6 class="sub_head">Leather</h6>
                 </div>
             </div>
             <p class="text-center mb-0">We work with artisans whose hands understand the language of weight, stone, and
@@ -497,12 +493,15 @@
             <div class="col-md-6">
                 <div class="bespoke_box">
                     <div class="bespoke_box_top">
-                        <img class="img-fluid" src="{{ asset('public/images/front/bespoke1.webp') }}" alt="images" loading="lazy">
+                        <img class="img-fluid" src="{{ asset('public/images/front/bespoke1.webp') }}" alt="images"
+                            loading="lazy">
                         <p class="title_40">Weddings & Celebrations</p>
                     </div>
                     <div class="bespoke_box_bot">
                         <p class="para">Ceremonial designs crafted to mark modern unions.</p>
-                        <span><a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#requestWeddingCatalogue" class="com_btn">Request Wedding Catalogue</a></span>
+                        <span><a href="javascript:void(0);" data-bs-toggle="modal"
+                                data-bs-target="#requestWeddingCatalogue" class="com_btn">Request Wedding
+                                Catalogue</a></span>
                     </div>
                 </div>
             </div>
@@ -511,13 +510,16 @@
                 <div class="bespoke_box">
 
                     <div class="bespoke_box_top_2">
-                        <img class="img-fluid" src="{{ asset('public/images/front/bespoke2.webp') }}" alt="images" loading="lazy">
+                        <img class="img-fluid" src="{{ asset('public/images/front/bespoke2.webp') }}" alt="images"
+                            loading="lazy">
                         <p class="title_40">Corporate Rituals</p>
                     </div>
                     <div class="bespoke_box_bot">
 
                         <p class="para">Articles designed to mark intentional partnerships.</p>
-                        <span><a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#requestCorporateProposal" class="com_btn"> The Corporate Edit</a></span>
+                        <span><a href="javascript:void(0);" data-bs-toggle="modal"
+                                data-bs-target="#requestCorporateProposal" class="com_btn"> The Corporate
+                                Edit</a></span>
                     </div>
                 </div>
             </div>

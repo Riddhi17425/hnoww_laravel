@@ -40,7 +40,7 @@
     margin-bottom: 24px;
 }
 
-.material_flex .mobile_slider {
+.material_flex {
     display: flex;
     justify-content: space-between;
     margin-bottom: 50px;

@@ -15,7 +15,7 @@
 <section class="mt_80">
     <div class="container">
 
-        <div class="section_header text-start">
+        <div class="section_header">
             <div class="gesture_filter">
                 <div class="gesture_filter_child">
                     <h3 class="gesture_title">choosing a gift for</h3>

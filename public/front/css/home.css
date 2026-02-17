@@ -63,7 +63,7 @@
 .gesture_filter {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content:center;
     gap: 34px;
 }
 
@@ -75,10 +75,11 @@
 
 .gesture_title {
     color: var(--dark-900);
-    font-size: 34px;
+    font-size: 28px;
     font-weight: 500;
     text-transform: uppercase;
     text-align: center;
+    margin-bottom: 0;
 }
 
 .gesture_filter select {
@@ -340,10 +341,9 @@
 .magic_wrapper h2 {
     font-family: var(--heading-font);
     color: var(--dark-900);
-    font-size: 120px;
-    font-style: normal;
+    font-size: 90px;
     font-weight: 500;
-    line-height: normal;
+    line-height: 90px;
 }
 
 .magic_wrapper_h3 {
@@ -363,8 +363,8 @@
     gap: 60px;
     position: relative;
     padding: 100px 0;
-    margin: 50px 0;
-    margin-bottom:0px;
+    /* margin: 50px 0; */
+    /* margin-bottom:0px; */
 }
 
 .magic_wrapper img {
@@ -374,14 +374,14 @@
 
 .magic_head_1 {
     position: absolute;
-    top: 0;
+    top: .4em;
     left: 0;
     z-index: 2;
 }
 
 .magic_head_2 {
     position: absolute;
-    bottom: 0;
+    bottom: .6em;
     right: 0;
     z-index: 2;
 }
