@@ -26,7 +26,7 @@ input:focus {
 .hnow_footer {
     background: url('../images/ft_bg.png') center/cover no-repeat,
         #EDEAE4;
-    padding: 40px 0;
+    padding-top: 40px;
 }
 
 .ft_newsletter {
@@ -129,7 +129,7 @@ input:focus {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 24px;
+    padding: 24px 0;
 }
 
 .ft_privacy {
@@ -147,11 +147,12 @@ input:focus {
     display: flex;
     gap: 2rem;
     text-transform: uppercase;
+    margin-bottom:0px;
 }
 
 .ft_social ul li:first-child {
-    list-style: none;
-    margin-left: -20px;
+    /*list-style: none;*/
+    /*margin-left: -20px;*/
     /* optional for alignment */
 }
 

@@ -123,12 +123,12 @@ class ProductController extends Controller
             //'list_img' => 'required|image|mimes:jpg,jpeg,png,webp|max:5120',
             'detail_imgs'       => 'nullable|array|min:1',
             'detail_imgs.*'     => 'image|mimes:jpg,jpeg,png,webp|max:5120',
-            'short_note' => 'required|string|max:255',
+            'short_note' => 'nullable|string|max:255',
             'short_description' => 'nullable|string|max:500',
             'large_description' => 'nullable|string|max:5000',
             'dimensions' => 'nullable|string|max:5000',
-            'meta_title' => 'required|string|max:255',
-            'meta_description' => 'required|string|max:1000',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:1000',
         ], [
             'category_id.required' => 'Category is required.',
             'category_id.exists' => 'Selected category does not exist.',
@@ -161,10 +161,10 @@ class ProductController extends Controller
             'large_description.max' => 'Product large description cannot exceed 5000 characters.',
             'dimensions.string' => 'Product Dimension must be a valid string.',
             'dimensions.max' => 'Product Dimension cannot exceed 5000 characters.',
-            'meta_title.required' => 'Meta title is required.',
+            //'meta_title.required' => 'Meta title is required.',
             'meta_title.string' => 'Meta title must be a valid string.',
             'meta_title.max' => 'Meta title cannot exceed 255 characters.',
-            'meta_description.required' => 'Meta description is required.',
+            //'meta_description.required' => 'Meta description is required.',
             'meta_description.string' => 'Meta description must be a valid string.',
             'meta_description.max' => 'Meta description cannot exceed 1000 characters.'
         ]);
@@ -176,7 +176,7 @@ class ProductController extends Controller
 
         $data = $request->only([
             'category_id', 'product_name', 'product_price', 'short_description', 'large_description',
-            'meta_title', 'meta_description', 'product_url', 'dimensions', 'moq', 'short_note', 'product_stock'
+            'meta_title', 'meta_description', 'product_url', 'dimensions', 'moq', 'short_note', 'product_stock', 'care_maintenance'
         ]);
 
         // STORE LIST PAGE IMAGE (SINGLE)
@@ -250,12 +250,12 @@ class ProductController extends Controller
             // DETAIL IMAGES: required ONLY if not exists
             'detail_imgs' => empty($product->detail_page_imgs) ? 'required|array|min:1': 'nullable|array',
             'detail_imgs.*' => 'image|mimes:jpg,jpeg,png,webp|max:5120',
-            'short_note' => 'required|string|max:255',
+            'short_note' => 'nullable|string|max:255',
             'short_description' => 'nullable|string|max:500',
             'large_description' => 'nullable|string|max:5000',
             'dimensions' => 'nullable|string|max:5000',
-            'meta_title' => 'required|string|max:255',
-            'meta_description' => 'required|string|max:1000',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:1000',
         ], [
             'category_id.required' => 'Category is required.',
             'category_id.exists' => 'Selected category does not exist.',
@@ -287,10 +287,10 @@ class ProductController extends Controller
             'large_description.max' => 'Product large description cannot exceed 5000 characters.',
             'dimensions.string' => 'Product Dimension must be a valid string.',
             'dimensions.max' => 'Product Dimension cannot exceed 5000 characters.',
-            'meta_title.required' => 'Meta title is required.',
+            //'meta_title.required' => 'Meta title is required.',
             'meta_title.string' => 'Meta title must be a valid string.',
             'meta_title.max' => 'Meta title cannot exceed 255 characters.',
-            'meta_description.required' => 'Meta description is required.',
+            //'meta_description.required' => 'Meta description is required.',
             'meta_description.string' => 'Meta description must be a valid string.',
             'meta_description.max' => 'Meta description cannot exceed 1000 characters.'
         ]);
@@ -303,7 +303,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $data = $request->only([
             'category_id', 'product_name', 'product_price', 'short_description', 'large_description',
-            'meta_title', 'meta_description', 'product_url', 'dimensions', 'moq', 'short_note', 'product_stock'
+            'meta_title', 'meta_description', 'product_url', 'dimensions', 'moq', 'short_note', 'product_stock', 'care_maintenance'
         ]);
         if ($request->hasFile('list_img')) {
             // delete old file

@@ -22,9 +22,9 @@
             {{-- <div id="vaultMessage" class="auto-hide" style="color: green; margin-top: 7px;"></div> --}}
         </div>
     </div>
-    <a class="wedding_btn d-none d-lg-block" href="javascript:void(0);">
+    <a class="wedding_btn d-none d-lg-flex" href="javascript:void(0);">
         <div>
-            Don’t have a code? Request access from the HNoww Wedding Concierge.
+            Don’t have a code? Request access from the HNoww Wedding Concierge.1
            
         </div>
         <div><svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -35,9 +35,9 @@
     </a>
 </section>
 
-<a class="wedding_btn  d-lg-none" href="javascript:void(0);">
+<a class="wedding_btn d-lg-none" href="javascript:void(0);">
     <div>
-        Don’t have a code? Request access from the HNoww Wedding Concierge.
+        Don’t have a code? Request access from the HNoww Wedding Concierge.2
     </div>
     <div><svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M29.9974 1L1 29.9974M29.9974 1H7.69171M29.9974 1V23.3057" stroke="white" stroke-width="2"

@@ -12,7 +12,7 @@
     </div>
 </section>
 
-<section class="mt_80 d-none">
+<section class="mt_80">
     <div class="container">
 
         <div class="section_header text-start">
@@ -154,7 +154,7 @@
                     </svg>
                 </span>
             </p>
-            <h2 class="title_60">Signature Pairings</h2>
+            <h2 class="title_60">First Gesture</h2>
         </div>
         <div class="gift_box">
             <div class="gift_box_lt">

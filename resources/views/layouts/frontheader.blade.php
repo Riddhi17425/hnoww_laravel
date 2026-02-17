@@ -31,6 +31,10 @@ $is_green = ($current_route === 'front.product.details' || $current_route === 'f
 
     <!--Aos animation-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    
+    <!--country-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
+    
     <!-- style css start -->
     <link rel="stylesheet" href="{{ asset('public/front/css/style.css')}}">
     <link rel="stylesheet" href="{{ asset('public/front/css/header.css')}}">
@@ -105,7 +109,7 @@ $is_green = ($current_route === 'front.product.details' || $current_route === 'f
 <body class="<?= $is_green ? 'theme-green' : 'theme-white' ?>">
 
     <!-- Page Loader -->
-    <div id="page-loader" class="loader-overlay d-none">
+    <div id="page-loader" class="loader-overlay">
         <div class="loader-box">
             <svg width="100%" height="100%" viewBox="-3 -3 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path

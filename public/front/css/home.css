@@ -10,9 +10,15 @@
     /* height: 100vh; */
 }
 
+.hero-section img
+{
+    filter: brightness(0.7);
+}
+
+
 .hero_content {
     position: absolute;
-    top: 30%;
+    top: 16em;
     left: 50%;
     transform: translate(-50%, -50%);
     color: var(--white-color);
@@ -20,8 +26,9 @@
 }
 .hero_content .main_head{
     font-size: 55px;
-    white-space:nowrap;
+    /*white-space:nowrap;*/
     line-height: 55px;
+    /*margin-bottom:14px;*/
 }
 .hero_content p {
     color: #F8F7F3;
@@ -43,7 +50,7 @@
 }
 
 .hero_left_right .sub_head {
-    color: #F2D8D9;
+    color: var(--white-color);
 }
 
 .about
@@ -283,9 +290,15 @@
 /* curated rituals */
 
 .curated_rituals_box .box_bot {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    /*display: flex;*/
+    /*gap:15px;*/
+    /*justify-content: space-between;*/
+    /*align-items: center;*/
+}
+
+.curated_rituals_box .box_bot .com_btn
+{
+    margin-top:10px;
 }
 
 

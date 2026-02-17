@@ -2,14 +2,14 @@
 @include('layouts.frontheader')
 <!-- hero section -->
 <section class="hero-section">
-    <img class="img-fluid" src="{{ asset('public/front/images/hero-banner.jpg') }}" alt="images" loading="lazy">
+    <img class="img-fluid" src="{{ asset('public/images/front/hero-banner.webp') }}" alt="images" loading="lazy">
     <!-- <video autoplay muted loop class="hero_video">
         <source src="{{ asset('public/front/images/hero-video.mp4') }}" type="video/mp4">
         Your browser does not support the video tag.
     </video> -->
 
     <div class="hero_content">
-        <p class="mb-3 d-md-none" style="color: #F2D8D9;">Designed in Dubai. Made to endure.</p>
+        <p class="mb-0 d-md-none" style="color: #F2D8D9;">Designed in Dubai. Made to endure.</p>
         <!--<h1 class="main_head">Where meaning takes shape.</h1>-->
         <h1 class="main_head">Where craft holds expressions </h1>
         <p>Personalised gifts designed to turn the everyday into a feeling. Thoughtfully designed, customized gifts shaped by intention and form.</p>
@@ -21,13 +21,13 @@
         <span><svg xmlns="http://www.w3.org/2000/svg" width="63" height="6" viewBox="0 0 63 6" fill="none">
                 <path
                     d="M5.33332 2.66669C5.33332 1.19393 4.13942 2.03451e-05 2.66666 2.03451e-05C1.1939 2.03451e-05 -1.01725e-05 1.19393 -1.01725e-05 2.66669C-1.01725e-05 4.13945 1.1939 5.33335 2.66666 5.33335C4.13942 5.33335 5.33332 4.13945 5.33332 2.66669ZM62.6667 2.66669V2.16669L2.66666 2.16669V2.66669V3.16669L62.6667 3.16669V2.66669Z"
-                    fill="#F2D8D9" />
+                    fill="white" />
             </svg></span>
         <p class="sub_head mb-0">Designed in Dubai. Made to endure.</p><span><svg xmlns="http://www.w3.org/2000/svg"
                 width="63" height="6" viewBox="0 0 63 6" fill="none">
                 <path
                     d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.03451e-05 60 2.03451e-05C58.5272 2.03451e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669L0 3.16669L60 3.16669V2.66669V2.16669L0 2.16669L0 2.66669Z"
-                    fill="#F2D8D9" />
+                    fill="white" />
             </svg></span>
     </div>
 </section>
@@ -110,13 +110,13 @@
                     </svg>
                 </span>
             </p>
-            <h2 class="title_60">Collections</h2>
+            <h2 class="title_60">Curated Expressions</h2>
         </div>
         <div class="row gy-4 gy-md-0">
             <div class="col-md-4">
                 <div class="collection_box">
                     <div class="">
-                        <img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/front/images/collections1.png') }}" alt="images" loading="lazy">
+                        <img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/images/front/collections1.webp') }}" alt="images" loading="lazy">
                     </div>
                     <h3 class="sub_head">For Her — {{$herProduct[0]->product_name ?? ''}}</h3>
                     <p>@if(isset($herProduct[0]->short_description)){!! $herProduct[0]->short_description !!}@endif</p>
@@ -126,7 +126,7 @@
             <div class="col-md-4">
                 <div class="collection_box">
                     <div class="">
-                        <img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/front/images/collections2.png') }}" alt="images" loading="lazy">
+                        <img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/images/front/collections2.webp') }}" alt="images" loading="lazy">
                     </div>
                     <h3 class="sub_head">For Him — {{$himProduct[0]->product_name ?? ''}}</h3>
                     <p>@if(isset($himProduct[0]->short_description)){!! $himProduct[0]->short_description !!}@endif</p>
@@ -136,7 +136,7 @@
             <div class="col-md-4">
                 <div class="collection_box">
                     <div class="">
-                        <img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/front/images/collections3.png') }}" alt="images" loading="lazy">
+                        <img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/images/front/collections3.webp') }}" alt="images" loading="lazy">
                     </div>
                     <h3 class="sub_head">For Home — {{$homeProduct[0]->product_name ?? ''}}</h3>
                     <p>@if(isset($homeProduct[0]->short_description)){!! $homeProduct[0]->short_description !!}@endif</p>
@@ -147,7 +147,40 @@
     </div>
 </section>
 
+<section class="mt_80">
+    <div class="container">
+        <div class="section_header">
+            <p class="sub_head mb-0">
+                <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z"
+                            fill="#B58A46" />
+                    </svg>
+                </span>
+                <span>The</span>
+                <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z"
+                            fill="#B58A46" />
+                    </svg>
+                </span>
+            </p>
+            <h2 class="title_60">Valet Tray</h2>
+        </div>
+        <div class="gift_box">
+            <div class="gift_box_lt">
+                <img class="img-fluid" src="{{asset('public/images/front/valet_tray_home.png')}}" alt="images">
+            </div>
 
+            <div class="gift_box_rt">
+                <h3 class="gift_head">Carved in natural marble for <br/> leadership desks</h3>
+                <h6 class="mt-3" style="color:var(--gold-color);">LIMITED EDITION — 50</h6>
+                <p class="sub_head_inter">A sculptural object for the architect of industry. Minimal, grounded, and rare.</p>
+                <a href="{{ route('front.blessings.library') }}" target="_blank" class="com_btn"> Explore The Architect’s Study </a>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- about -->
 <section class="about">
@@ -230,13 +263,13 @@ Form, material, and shadow are considered with care, designed to slow the moment
                         </span>
                         <div class="desire_box_top_child">
                              <!--style="background: linear-gradient(180deg, rgba(4, 51, 25, 0) 32%, #8c8a72 95%), url('{{ isset($val->list_page_img) ? asset('public/images/admin/product_list/'.$val->list_page_img) : asset('public/images/front/desire2.png') }}') center/cover no-repeat;"-->
-                            <a href="jsvascript:void(0);" class="desire_box_top_child_inner">
+                            <a href="jsvascript:void(0);" class="desire_box_top_child_inner" data-bs-toggle="modal" data-bs-target="#productInquiry" data-product-name="{{ $val->product_name }}" data-product-id="{{ $val->id }}">
                                 <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
                                     <path
                                         d="M0.5 4.5H18.5M0.5 4.5V16.5C0.5 17.6046 1.39543 18.5 2.5 18.5H16.5C17.6046 18.5 18.5 17.6046 18.5 16.5V4.5M0.5 4.5L2.46327 1.00974C2.64039 0.69486 2.97357 0.5 3.33485 0.5H15.6652C16.0264 0.5 16.3596 0.69486 16.5367 1.00974L18.5 4.5M12.5 8.5C12.5 10.1569 11.1569 11.5 9.5 11.5C7.8431 11.5 6.5 10.1569 6.5 8.5"
                                         stroke="white" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                                <span data-bs-toggle="modal" data-bs-target="#productInquiry" data-product-name="{{ $val->product_name }}" data-product-id="{{ $val->id }}">Enquire Now</span>
+                                <span>Enquire Now</span>
                             </a>
                         </div>
 
@@ -287,53 +320,53 @@ Form, material, and shadow are considered with care, designed to slow the moment
             <div class="col-md-6">
                 <div class="curated_rituals_box">
                     <div>
-                        <img class="w-100 mb-4" src="{{ asset('public/front/images/rurated-rituals1.png') }}" alt="images" loading="lazy">
+                        <img class="w-100 mb-4" src="{{ asset('public/images/front/rurated-rituals1.webp') }}" alt="images" loading="lazy">
                     </div>
                     <div class="box_bot">
                         <div>
                             <h3 class="sub_head">The Ritual Table</h3>
                             <p class="mb-0">Serveware shaped with the intention to gather.</p>
                         </div>
-                        <!--<span><a href="#" class="com_btn">Shop Ritual Table </a></span>-->
+                        <span><a href="#" class="com_btn">Explore The Table </a></span>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="curated_rituals_box">
-                    <img class="w-100 mb-4" src="{{ asset('public/front/images/rurated-rituals2.png') }}" alt="images" loading="lazy">
+                    <img class="w-100 mb-4" src="{{ asset('public/images/front/rurated-rituals2.webp') }}" alt="images" loading="lazy">
                     <div class="box_bot">
                         <div>
-                            <h3 class="sub_head">The Memory Shelf</h3>
-                            <p class="mb-0">Articles that hold moments, quietly preserved.</p>
+                            <h3 class="sub_head">Modern Majlis</h3>
+                            <p class="mb-0">A contemporary space for gathering with quiet presence.</p>
                         </div>
-                        <!--<span><a href="#" class="com_btn">Shop Memory </a></span>-->
+                        <span><a href="#" class="com_btn">Explore Modern Majlis </a></span>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="curated_rituals_box">
-                    <img class="w-100 mb-4" src="{{ asset('public/front/images/rurated-rituals3.png') }}" alt="images" loading="lazy">
+                    <img class="w-100 mb-4" src="{{ asset('public/images/front/rurated-rituals3.webp') }}" alt="images" loading="lazy">
                     <div class="box_bot">
                         <div>
                             <h3 class="sub_head">The Gift Shop</h3>
                             <p class="mb-0">Modern gestures, felt by design (under 500 AED)</p>
                         </div>
-                        <!--<span><a href="#" class="com_btn">Explore Gifts </a></span>-->
+                        <span><a href="#" class="com_btn">The Art Of Gifting</a></span>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="curated_rituals_box">
-                    <img class="w-100 mb-4" src="{{ asset('public/front/images/rurated-rituals4.png') }}" alt="images" loading="lazy">
+                    <img class="w-100 mb-4" src="{{ asset('public/images/front/rurated-rituals4.webp') }}" alt="images" loading="lazy">
                     <div class="box_bot">
                         <div>
-                            <h3 class="sub_head">The Everyday Sacred</h3>
-                            <p class="mb-0">Light, scent, and stillness for daily rituals.</p>
+                            <h3 class="sub_head">Desert Rose</h3>
+                            <p class="mb-0">Soft forms shaped by warmth and intention.</p>
                         </div>
-                        <!--<span><a href="#" class="com_btn">Shop Sacred Objects </a></span>-->
+                        <span class="mt-2"><a href="#" class="com_btn">Explore </a></span>
                     </div>
                 </div>
             </div>
@@ -367,7 +400,7 @@ Form, material, and shadow are considered with care, designed to slow the moment
             <div class="col-md-6">
                 <div class="bespoke_box">
                     <div class="bespoke_box_top">
-                        <img class="img-fluid" src="{{ asset('public/front/images/bespoke1.png') }}" alt="images" loading="lazy">
+                        <img class="img-fluid" src="{{ asset('public/images/front/bespoke1.webp') }}" alt="images" loading="lazy">
                         <p class="title_40">Weddings & Celebrations</p>
                     </div>
                     <div class="bespoke_box_bot">
@@ -381,7 +414,7 @@ Form, material, and shadow are considered with care, designed to slow the moment
                 <div class="bespoke_box">
 
                     <div class="bespoke_box_top_2">
-                        <img class="img-fluid" src="{{ asset('public/front/images/bespoke2.png') }}" alt="images" loading="lazy">
+                        <img class="img-fluid" src="{{ asset('public/images/front/bespoke2.webp') }}" alt="images" loading="lazy">
                         <p class="title_40">Corporate Rituals</p>
                     </div>
                     <div class="bespoke_box_bot">

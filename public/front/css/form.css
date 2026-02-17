@@ -136,24 +136,24 @@
 
 /* Fullscreen modal white background */
 .corporate_vault_modal .modal-content {
-    background-color: #F8F7F3;
+    /*background-color: #F8F7F3;*/
     height: 100vh;
-    overflow: hidden;
-    width: 90vw;
-    margin: 0 auto;
+    /*overflow: hidden;*/
+    /*width: 100vw;*/
+    /*margin: 0 auto;*/
     /* outer scroll disable */
 }
 
 /* Enable vertical scroll only */
 .corporate_vault_modal .modal-body {
-    overflow-y: auto;
-    overflow-x: hidden;
-    max-height: calc(100vh - 80px);
+    /*overflow-y: auto;*/
+    /*overflow-x: hidden;*/
+    /*max-height: calc(100vh - 80px);*/
     /* close button space */
 }
 
 /* Optional – smooth scroll */
 .corporate_vault_modal .modal-body {
-    scrollbar-width: thin;
+    /*scrollbar-width: thin;*/
 
 }

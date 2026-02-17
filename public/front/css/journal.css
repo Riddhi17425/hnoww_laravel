@@ -20,10 +20,20 @@
     position: relative;
 }
 
-.month_box svg {
+ .month_box svg {
     position: absolute;
     right: 10px;
     bottom: 10px;
+}
+
+.month_box .green_svg
+{
+     transition: .6s;
+}
+
+.month_box .green_svg:hover
+{
+    rotate: 135deg;
 }
 
 .montheditions_lt

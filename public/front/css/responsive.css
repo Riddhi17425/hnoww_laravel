@@ -400,10 +400,10 @@
 ===========================                  ===========================*/
 
 @media (max-width: 1441px) {
-    .hero_content {top: 28%;}
+    /*.hero_content {top: 28%;}*/
     .hero_content .main_head {
         font-size: 45px;
-        white-space: nowrap;
+        /*white-space: nowrap;*/
         line-height: 45px;
     }
     .magic_wrapper{padding: 80px 0;}
@@ -515,7 +515,7 @@
     }
 
     .hnow_footer {
-        padding: 30px 0;
+        padding-top: 30px;
     }
 
     .ft_head {
@@ -1091,9 +1091,7 @@
 
     .hero_content {
         width: 100%;
-        top: 15em;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        padding:0 7px;
     }
 
     .mt_120 {
@@ -1328,7 +1326,7 @@
 
     .ft_bottom {
         flex-direction: column;
-        margin-top: 20px;
+        padding: 20px 0;
         text-align: center;
     }
 
@@ -1338,9 +1336,9 @@
         margin: 15px 0;
     }
 
-    .hnow_footer {
-        padding-bottom: 0;
-    }
+    /*.hnow_footer {*/
+    /*    padding-bottom: 0;*/
+    /*}*/
 
     .ct_grid {
         grid-template-columns: repeat(1, 1fr);
@@ -1392,8 +1390,9 @@
     .wedding_vault {
         padding-top: 100px;
         padding-bottom: 30px;
-        height: 100vh;
+        height: auto;
         background-size: cover;
+        background-position-x: center;
     }
 
     .wedding_vault_form input {
@@ -1668,4 +1667,22 @@
         #reg_login .reg_login_child {
         height: 640px;
     }
+    
+    .has-dropdown .dropdown-menu
+    {
+       position: static;
+    }
+    
+    .hero_content .main_head {
+        font-size: 32px;
+        line-height: 34px;
+        margin:20px 0;
+    }
+    
+    .desire_box_top_child
+    {
+        opacity:1;
+        position:static;
+    }
+    
 }

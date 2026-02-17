@@ -2,7 +2,7 @@
 
 <!-- hero section -->
 <section class="hero-section_inner">
-    <img class="img-fluid" src="{{asset('public/images/front/about-banner.png')}}" alt="about us banner">
+    <img class="img-fluid" src="{{asset('public/images/front/about-banner.webp')}}" alt="about us banner">
 
     <div class="hero_content_inner">
         <h2 class="main_head">Gifting Shaped By Intent</h2>

@@ -1,5 +1,7 @@
 .wedding_vault {
-    background: url('../images/wedding_vault.png'), no-repeat center center/contain;
+    background: url('../images/wedding_vault.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
     padding-top: 150px;
     text-align: center;
     height: 100vh;
@@ -21,7 +23,8 @@
     border: 1px solid #F8F8F4;
     background: rgba(200, 181, 141, 0.30);
     text-align: center;
-    margin: 34px auto 24px auto;
+    /*margin: 34px auto 24px auto;*/
+    margin: 0px auto 14px auto;
     color: #fff;
 
     font-size: 24px;
@@ -40,7 +43,7 @@
     background-color: var(--secondary-color);
     text-align: center;
     color: white;
-    display: flex !important;
+    display: flex;
     flex-direction: column;
     gap: 14px;
     align-items: center;

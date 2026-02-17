@@ -96,7 +96,7 @@ class FrontController extends Controller
     }
 
     public function getProductDetails(Request $request, $productSlug){
-        $product = Product::select('id', 'category_id', 'product_name', 'product_price', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'large_description', 'dimensions', 'detail_page_imgs', 'moq', 'short_note', 'product_stock')->where('product_url', $productSlug)->isActive()->notDeleted()->first();
+        $product = Product::select('id', 'category_id', 'product_name', 'product_price', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'large_description', 'dimensions', 'detail_page_imgs', 'moq', 'short_note', 'product_stock', 'care_maintenance')->where('product_url', $productSlug)->isActive()->notDeleted()->first();
         $productDetailImages = $product->detail_page_imgs ? json_decode($product->detail_page_imgs) : '';
         $productTab = $product->tabs ?? [];
         if(!isset($product) && $product == ''){

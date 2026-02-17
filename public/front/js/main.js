@@ -85,44 +85,41 @@ $(document).ready(function () {
                 {
                     breakpoint: 768,
                     settings: {
-                        slidesToShow: 3,
+                        slidesToShow: 1,
                         centerPadding: "40px",
+                        centerMode: false
                     },
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 1,
-                        centerPadding: "0px",
-                    },
-                },
+                }
             ],
         });
     }
+if ($(".corporate_slider").length) {
 
-    if ($(".corporate_slider").length) {
-        $(".corporate_slider").slick({
-            slidesToShow: 3,
-            arrows: false,
-            dots: true,
-            autoplay: true,
-            autoplaySpeed: 2500,
-            responsive: [
-                {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 2,
-                    },
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 1,
-                    },
-                },
-            ],
-        });
-    }
+  $(".corporate_slider").slick({
+    slidesToShow: 3,
+    arrows: false,
+    dots: true,
+    autoplay: true,
+    autoplaySpeed: 2500,
+    responsive: [
+        {
+            breakpoint: 992,
+            settings: {
+                slidesToShow: 1
+            }
+        },
+        {
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 1
+            }
+        }
+    ]
+});
+
+
+}
+
 
     if ($(".cor_kits_slider").length) {
         $(".cor_kits_slider").slick({

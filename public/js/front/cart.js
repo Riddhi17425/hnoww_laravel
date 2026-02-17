@@ -67,7 +67,7 @@ $(document).on('click', '.add_to_cart_btn', function () {
             if(response.status){
                 Swal.fire({
                     icon: 'success',
-                    title: 'Success',
+                    title: 'Successravi',
                     text: response.message,
                     //timer: 3000,
                     showConfirmButton: true,

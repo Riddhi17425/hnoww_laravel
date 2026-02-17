@@ -105,7 +105,7 @@
                         </div>
                      </div>
                      <div class="col-12 text-center">
-                        <button type="submit" class="com_btn">REQUEST WEDDING CATALOGUE</button>
+                        <button type="submit" class="com_btn bg-transparent">REQUEST WEDDING CATALOGUE</button>
                      </div>
                   </div>
                 </form>

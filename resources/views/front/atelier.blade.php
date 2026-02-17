@@ -157,7 +157,7 @@
         <div class="row gy-4 gy-md-0">
             <div class="col-md-4">
                 <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/blessing-library1.png')}}"
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/blessing-library1.webp')}}"
                         alt="images">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
@@ -169,7 +169,7 @@
             </div>
             <div class="col-md-4">
                 <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/blessing-library2.png')}}"
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/blessing-library2.webp')}}"
                         alt="images">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
@@ -181,7 +181,7 @@
             </div>
             <div class="col-md-4">
                 <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/blessing-library3.png')}}"
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/blessing-library3.webp')}}"
                         alt="images">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
@@ -270,16 +270,16 @@
             </p>
             <h2 class="title_60 mb-4">Bespoke Rituals</h2>
 
-            <div class="row align-items-center px-3">
-                <div class="col-md-12 text-center mb-3 mb-md-0">
+            <div class="row align-items-center px-3 text-start">
+                <div class="col-md-6 mb-3 mb-md-0">
                     <p class="mb-0">Commission custom ceremonial objects, heirlooms, and sacred gifts.
                         Our atelier collaborates with families, designers, and couples to create one-of-a-kind pieces
                         for
                     </p>
                 </div>
-                {{-- <div class="text-md-end col-md-6">
+                <div class="col-md-6 text-md-end col-md-6">
                 <a href="javascript:void(0);" class="com_btn">View Bespoke Portfolio  </a>
-            </div> --}}
+            </div>
             </div>
         </div>
 
@@ -288,7 +288,7 @@
         <div class="corporate_slider">
 
             <div class="desire_box">
-                <img class="w-100 mb-4" src="{{asset('public/images/front/Bespoke-Rituals1.png')}}" alt="images">
+                <img class="w-100 mb-4" src="{{asset('public/images/front/Bespoke-Rituals1.webp')}}" alt="images">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <h3 class="sub_head">Weddings & Pheras</h3>
@@ -297,7 +297,7 @@
                 </div>
             </div>
             <div class="desire_box">
-                <img class="w-100 mb-4" src="{{asset('public/images/front/Bespoke-Rituals2.png')}}" alt="images">
+                <img class="w-100 mb-4" src="{{asset('public/images/front/Bespoke-Rituals2.webp')}}" alt="images">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <h3 class="sub_head">Milestone Celebrations</h3>
@@ -306,7 +306,7 @@
                 </div>
             </div>
             <div class="desire_box">
-                <img class="w-100 mb-4" src="{{asset('public/images/front/Bespoke-Rituals3.png')}}" alt="images">
+                <img class="w-100 mb-4" src="{{asset('public/images/front/Bespoke-Rituals3.webp')}}" alt="images">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <h3 class="sub_head">New Homes</h3>
@@ -315,10 +315,20 @@
                 </div>
             </div>
             <div class="desire_box">
-                <img class="w-100 mb-4" src="{{asset('public/images/front/Bespoke-Rituals1.png')}}" alt="images">
+                <img class="w-100 mb-4" src="{{asset('public/images/front/Bespoke-Rituals4.webp')}}" alt="images">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h3 class="sub_head">New Homes</h3>
+                        <h3 class="sub_head">Corporate Rituals</h3>
+
+                    </div>
+                </div>
+            </div>
+            
+            <div class="desire_box">
+                <img class="w-100 mb-4" src="{{asset('public/images/front/Bespoke-Rituals5.webp')}}" alt="images">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h3 class="sub_head">Spiritual or Personal altars</h3>
 
                     </div>
                 </div>
@@ -459,8 +469,10 @@
     </div>
 </section>
 
-<!--The Collections -->
-<section class="mt_80">
+
+
+<!--The Bespoke & Private Services -->
+<section class="mt_120">
     <div class="container-fluid">
         <div class="section_header">
             <p class="sub_head mb-0">
@@ -478,20 +490,19 @@
                     </svg>
                 </span>
             </p>
-            <h2 class="title_60">Bespoke & Private Services</h2>
+            <!--<h2 class="title_60">Bespoke & Private Services</h2>-->
+            <h2 class="title_60">Bespoke Services</h2>
         </div>
-        <div class="row gy-4 gy-md-0 gx-2">
+        <div class="row gx-2 mobile_slider">
             <div class="col-md-6">
                 <div class="bespoke_box">
                     <div class="bespoke_box_top">
-                        <img class="img-fluid" src="{{asset('public/images/front/bespoke1.png')}}" alt="images">
+                        <img class="img-fluid" src="{{ asset('public/images/front/bespoke1.webp') }}" alt="images" loading="lazy">
                         <p class="title_40">Weddings & Celebrations</p>
                     </div>
                     <div class="bespoke_box_bot">
-                        <p class="para">Sculptural ceremonial pieces for modern unions.</p>
-                        <span><a href="javascript:void(0);" data-bs-toggle="modal"
-                                data-bs-target="#requestWeddingCatalogue" class="com_btn">Request Wedding
-                                Catalogue</a></span>
+                        <p class="para">Ceremonial designs crafted to mark modern unions.</p>
+                        <span><a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#requestWeddingCatalogue" class="com_btn">Request Wedding Catalogue</a></span>
                     </div>
                 </div>
             </div>
@@ -500,13 +511,13 @@
                 <div class="bespoke_box">
 
                     <div class="bespoke_box_top_2">
-                        <img class="img-fluid" src="{{asset('public/images/front/bespoke2.png')}}" alt="images">
+                        <img class="img-fluid" src="{{ asset('public/images/front/bespoke2.webp') }}" alt="images" loading="lazy">
                         <p class="title_40">Corporate Rituals</p>
                     </div>
                     <div class="bespoke_box_bot">
-                        <p class="para">Objects that create lasting partnerships. Custom engraving available.</p>
-                        <span><a href="javascript:void(0);" data-bs-toggle="modal"
-                                data-bs-target="#requestCorporateProposal" class="com_btn">Download Corporate Lookbook</a></span>
+
+                        <p class="para">Articles designed to mark intentional partnerships.</p>
+                        <span><a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#requestCorporateProposal" class="com_btn"> The Corporate Edit</a></span>
                     </div>
                 </div>
             </div>
@@ -514,6 +525,7 @@
         </div>
     </div>
 </section>
+
 
 <section class="cta_footer mt_120">
     <div class="container">

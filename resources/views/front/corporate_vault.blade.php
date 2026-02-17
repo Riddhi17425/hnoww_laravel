@@ -239,12 +239,29 @@
                                 </linearGradient>
                             </defs>
                         </svg>
-
                     </span>
+                    
+                    <span>Tell us about your requirement.</span>
+                    <span>
+                        <svg width="146" height="11" viewBox="0 0 146 11" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M134.667 5.33325C134.667 8.27877 137.054 10.6666 140 10.6666C142.946 10.6666 145.333 8.27877 145.333 5.33325C145.333 2.38773 142.946 -8.13802e-05 140 -8.13802e-05C137.054 -8.13802e-05 134.667 2.38773 134.667 5.33325ZM0 5.33325L0 6.33325L140 6.33325V5.33325V4.33325L0 4.33325L0 5.33325Z"
+                                fill="url(#paint0_linear_32_114)" />
+                            <defs>
+                                <linearGradient id="paint0_linear_32_114" x1="0" y1="5.83325" x2="140" y2="5.83325"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#F8F7F3" stop-opacity="0" />
+                                    <stop offset="1" stop-color="#F8F7F3" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </span>
+                    
                 </p>
             </div>
             <div>
-                <a href="javascript:void(0)" class="btn_2">Discuss a custom hamper brief with the H Noww team</a>
+               <a href="javascript:void(0)" class="btn_2">REQUEST CORPORATE QUOTE </a> 
             </div>
         </div>
     </div>

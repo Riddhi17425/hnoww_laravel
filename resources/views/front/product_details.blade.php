@@ -88,7 +88,7 @@
         <div class="pro_details_right">
             <h2 class="main_head">{{ $product->product_name ?? '' }}</h2>
             <p class="">{{ $product->short_note ?? '' }}</p>
-            <p class="sub_head_inter para">{!! $product->short_description ?? '' !!}</p>
+            <!--<p class="sub_head_inter para">{!! $product->short_description ?? '' !!}</p>-->
             <h4 class="sub_head_inter">AED {{ $product->product_price ?? '' }} @if(isset($product->moq)) | MOQ
                 {{$product->moq }} @endif</h4>
 
@@ -162,6 +162,7 @@
             </div>
             @endif
 
+            @if(isset($product->care_maintenance) && $product->care_maintenance != '')
             <div>
                 <div class="d-flex align-items-center gap-3 mt-4 mb-2">
                     <span>
@@ -175,8 +176,9 @@
                         <p class="mb-0 sub_head">Care and maintenance</p>
                     </span>
                 </div>
-                <p class="m-0">Wipe with a soft dry cloth.</p>
+                <p class="m-0">{!! $product->care_maintenance ?? '' !!}</p>
             </div>
+            @endif
         </div>
     </div>
     </div>

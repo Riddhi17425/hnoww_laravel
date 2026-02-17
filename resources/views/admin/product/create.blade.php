@@ -107,6 +107,12 @@
                 <textarea name="dimensions" id="dimensions" class="form-control" rows="4">{{ old('dimensions') }}</textarea>
                 @error('dimensions') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
+            
+            <div class="col-md-12">
+                <label class="form-label">Care & Maintenance</label>
+                <textarea name="care_maintenance" id="care_maintenance" class="form-control" rows="3">{{ old('care_maintenance') }}</textarea>
+                @error('care_maintenance') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
 
             <div class="col-md-12">
                 <label class="form-label">Meta Title</label><span class="text-danger">*</span>
@@ -206,7 +212,24 @@ $(document).ready(function() {
             ['help', ['help']]
         ]
     });
+    $('#care_maintenance').summernote({
+        placeholder: 'Enter Product Description here...',
+        height: 300,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['insert', ['link', 'picture', 'hr']],
+            ['view', ['fullscreen', 'codeview']],
+            ['help', ['help']]
+        ]
+    });
+    
 });
+
 </script>
 
 @endpush

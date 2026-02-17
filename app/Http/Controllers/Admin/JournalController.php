@@ -79,7 +79,7 @@ class JournalController extends Controller
             'feature_title'        => 'required|string|max:255',
             'feature_description'        => 'required|string|max:500',
             'description'  => 'required|string|max:2000',
-            'image'        => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image'        => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ], [
             'month_name.required'  => 'The month name is required.',
             'month_name.in'       => 'Please select a valid month.',
@@ -162,7 +162,7 @@ class JournalController extends Controller
             'feature_title'        => 'required|string|max:255',
             'feature_description'        => 'required|string|max:500',
             'description'  => 'required|string|max:2000',
-            'image'        => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image'        => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ], [
             'month_name.required'  => 'The month name is required.',
             'month_name.in'       => 'Please select a valid month.',

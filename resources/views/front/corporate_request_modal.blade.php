@@ -3,11 +3,14 @@
     tabindex="-1" aria-labelledby="requestCorporateProposalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen modal-dialog-centered">
         <div class="modal-content">
-            <div class="container">
+            
                 <div class="text-center my-4">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    
+                    <div class="container">
+                    
                     <form method="POST" action="{{ route('front.store.corporate.proposal.request') }}" id="requestCorporateProposalForm" class="ct_form">
                     @csrf
                         <div class="row">
@@ -117,13 +120,14 @@
                             </div>
 
                             <div class="col-12 text-center">
-                                <button type="submit" class="com_btn">REQUEST CORPORATE QUOTE</button>
+                                <button type="submit" class="com_btn bg-transparent">REQUEST CORPORATE QUOTE</button>
                             </div>
 
                         </div>
                     </form>
+                   </div>
                 </div>
-            </div>
+           
         </div>
     </div>
 </div>
