@@ -96,3 +96,11 @@ $(document).on('click', '.delete-blessing', function () {
         }
     });
 });
+
+var element = $('#blessing_of')[0];  // get raw DOM element from jQuery object
+var choices = new Choices(element, {
+    removeItemButton: true,  // shows an "x" to deselect each selected option
+    placeholder: true,
+    placeholderValue: 'Select Blessing For',
+    searchEnabled: true,
+});

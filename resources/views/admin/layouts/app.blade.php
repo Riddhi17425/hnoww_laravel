@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://unpkg.com/cropperjs@1.5.13/dist/cropper.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
     @stack('custom_styles')
     <style>
         /* Chrome, Safari, Edge, Opera */
@@ -35,6 +36,31 @@
         /* Firefox */
         input[type=number] {
             -moz-appearance: textfield;
+        }
+
+        /* MULTI SELECT DROPDOWN */
+        /* Remove outer box */
+        .choices {
+            margin-bottom: 0;
+        }
+        .choices__inner {
+            border: none !important;
+            border-radius: 0 !important;
+            padding: 6px 0 !important;
+            min-height: auto !important;
+        }
+        /* Change selected tag background */
+        .choices__list--multiple .choices__item {
+            background-color: #c9a96a !important;  
+            border: none !important;
+            color: #fff !important;  
+        }
+        /* Change remove (X) button color */
+        .choices__list--multiple .choices__item .choices__button {
+            border-left: 1px solid rgba(255,255,255,0.4) !important;
+        }
+        .choices__list--multiple .choices__item .choices__button:hover {
+            background-color: rgba(0,0,0,0.1) !important;
         }
     </style>
 </head>
@@ -259,6 +285,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
     <script src="https://unpkg.com/cropperjs@1.5.13/dist/cropper.min.js"></script>
     <script src="{!! asset('public/js/front/custom_validations.js') !!}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
 
     @stack('custom_scripts')
     <script>

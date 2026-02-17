@@ -375,30 +375,6 @@
     </div>
 </div>
 
-<div class="modal fade audio_modal" id="loginRequiredModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="productInquiryLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Login Required</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <p class="m-3">Please login to continue and add items to your cart.</p>
-            </div>
-            <div class="modal-footer justify-content-center">
-                <a href="{{ route('front.auth', 'login') }}" class="com_btn">
-                    Login Now
-                </a>
-                <button type="button" class="com_btn" data-bs-dismiss="modal">
-                    Cancel
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 @push('script')
 <script src="{{ asset('public/js/front/cart.js') }} "></script>
 

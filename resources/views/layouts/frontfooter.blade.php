@@ -52,9 +52,9 @@
                     <div>
                         <h4 class="ft_head">The Worlds</h4>
                         <ul class="ft_menu">
-                            <li><a href="#">The Architect’s Study</a></li>
-                            <li><a href="#">The The Desert Rose</a></li>
-                            <li><a href="#">The Modern Majlis</a></li>
+                            <li><a href="{{ route('front.list', ['for-him', 'worlds']) }}">The Architect’s Study</a></li>
+                            <li><a href="{{ route('front.list', ['for-her', 'worlds']) }}">The The Desert Rose</a></li>
+                            <li><a href="{{ route('front.list', ['for-home', 'worlds']) }}">The Modern Majlis</a></li>
                             <li><a href="#">The Ritual Table</a></li>
                             <li><a href="#">The Table As Landscape</a></li>
                         </ul>
@@ -124,6 +124,30 @@
         </div>
     </div>
 </footer>
+<div class="modal fade audio_modal" id="loginRequiredModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="productInquiryLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Login Required</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p class="m-3">Please login to continue and add items to your cart.</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <a href="{{ route('front.auth', 'login') }}" class="com_btn">
+                    Login Now
+                </a>
+                <button type="button" class="com_btn" data-bs-dismiss="modal">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @include('front.corporate_request_modal')
 @include('front.wedding_request_modal')
 <!-- jquery js start -->

@@ -66,7 +66,7 @@
                 @endforeach
             @else
                 <div class="text-center">
-                    <img class="mb-2 mb-md-4" height="250px" width="250px" src="{{asset('public/images/not_found.avif')}}" alt="images">
+                    <img class="mb-2 mb-md-4" height="250px" width="250px" src="{{asset('public/images/product-not-found.png')}}" alt="images">
                 </div>
             @endif
         </div>

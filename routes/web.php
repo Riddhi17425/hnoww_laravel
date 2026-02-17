@@ -33,7 +33,7 @@ Route::name('front.')->group(function () {
 	Route::get('front/login', [AuthController::class, 'getLogin'])->name('login'); //un-used
     Route::post('front/login', [AuthController::class, 'submitLogin'])->name('login.post');
 
-    Route::get('list/{category_slug}', [FrontController::class, 'getList'])->name('list');
+    Route::get('list/{category_slug}/{from?}', [FrontController::class, 'getList'])->name('list');
     Route::get('product-details/{product_slug}', [FrontController::class, 'getProductDetails'])->name('product.details');
     Route::post('store-product-inquiry', [FrontController::class, 'storeProductInquiry'])->name('store.product.inquiry');
     Route::post('/check-email-unique', [FrontController::class, 'checkEmailUnique'])

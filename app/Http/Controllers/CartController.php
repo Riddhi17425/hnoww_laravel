@@ -25,7 +25,7 @@ class CartController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'product_id' => 'required|exists:products,id',
-            'quantity'   => 'required|integer|min:1',
+            'quantity'   => 'nullable|integer|min:1',
             'cart_id'    => 'nullable|exists:carts,id', // Optional if updating
         ]);
         if ($validator->fails()) {
@@ -37,7 +37,7 @@ class CartController extends Controller
 
         $product = Product::findOrFail($request->product_id);
         $cart = Cart::where('user_id', auth()->id())->where('product_id', $product->id)->first();
-        $requestedQty = $request->quantity;
+        $requestedQty = $request->quantity ?? 1;
         if(isset($request->cart_id) && $request->cart_id != ''){
             $totalQty = $requestedQty;   
         }else{

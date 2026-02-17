@@ -65,43 +65,69 @@ $current_route ===
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
 
     <style>
-    .modal-square .modal-content {
-        border-radius: 0 !important;
-        /* removes rounded corners */
-    }
+        .modal-square .modal-content {
+            border-radius: 0 !important;
+            /* removes rounded corners */
+        }
 
-    /*For Error Message*/
-    .invalid-feedback {
-        color: red;
-        font-size: 15px;
-        margin-top: 2px;
-    }
+        /*For Error Message*/
+        .invalid-feedback {
+            color: red;
+            font-size: 15px;
+            margin-top: 2px;
+        }
 
-    /* Highlight invalid input fields */
-    .is-invalid {
-        border-color: red;
-    }
+        /* Highlight invalid input fields */
+        .is-invalid {
+            border-color: red;
+        }
 
-    .error {
-        color: red;
-    }
+        .error {
+            color: red;
+        }
 
-    #dropdownInput::placeholder {
-        color: white;
-    }
+        #dropdownInput::placeholder {
+            color: white;
+        }
 
-    #card-element {
-        border: 1px solid #ccc;
-        padding: 12px;
-        border-radius: 6px;
-        max-width: 400px;
-        margin-top: 10px;
-    }
+        #card-element {
+            border: 1px solid #ccc;
+            padding: 12px;
+            border-radius: 6px;
+            max-width: 400px;
+            margin-top: 10px;
+        }
 
-    #error-message {
-        color: red;
-        margin-top: 10px;
-    }
+        #error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+        /* MULTI SELECT DROPDOWN */
+        /* Remove outer box */
+        .choices {
+            margin-bottom: 0;
+        }
+        .choices__inner {
+            background: transparent !important;
+            border: none !important;
+            border-radius: 0 !important;
+            padding: 6px 0 !important;
+            min-height: auto !important;
+        }
+        /* Change selected tag background */
+        .choices__list--multiple .choices__item {
+            background-color: #c9a96a !important;  
+            border: none !important;
+            color: #fff !important;  
+        }
+        /* Change remove (X) button color */
+        .choices__list--multiple .choices__item .choices__button {
+            border-left: 1px solid rgba(255,255,255,0.4) !important;
+        }
+        .choices__list--multiple .choices__item .choices__button:hover {
+            background-color: rgba(0,0,0,0.1) !important;
+        }
     </style>
 
 
@@ -161,9 +187,9 @@ $current_route ===
                             </svg>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">The Architect’s Study</a></li>
-                            <li><a href="#">The The Desert Rose</a></li>
-                            <li><a href="#">The Modern Majlis</a></li>
+                            <li><a href="{{ route('front.list', ['for-him', 'worlds']) }}">The Architect’s Study</a></li>
+                            <li><a href="{{ route('front.list', ['for-her', 'worlds']) }}">The The Desert Rose</a></li>
+                            <li><a href="{{ route('front.list', ['for-home', 'worlds']) }}">The Modern Majlis</a></li>
                             <li><a href="#">The Ritual Table</a></li>
                             <li><a href="#">The Table As Landscape</a></li>
                         </ul>
