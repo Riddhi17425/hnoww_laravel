@@ -109,8 +109,8 @@ class CategoryController extends Controller
             'category_name' => 'required|string|max:255',
             'category_type' => 'required',
             'category_url' => 'required|string|max:255|unique:categories,category_url',
-            'meta_title' => 'required|string|max:255',
-            'meta_description' => 'required|string|max:255',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:255',
             'banner_image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
         ], [
             'category_name.required' => 'Category name is required.',
@@ -124,11 +124,11 @@ class CategoryController extends Controller
             'category_url.max' => 'Category URL cannot exceed 255 characters.',
             'category_url.unique' => 'This category URL is already taken.',
 
-            'meta_title.required' => 'Meta title is required.',
+            //'meta_title.required' => 'Meta title is required.',
             'meta_title.string' => 'Meta title must be a valid string.',
             'meta_title.max' => 'Meta title cannot exceed 255 characters.',
 
-            'meta_description.required' => 'Meta description is required.',
+            //'meta_description.required' => 'Meta description is required.',
             'meta_description.string' => 'Meta description must be a valid string.',
             'meta_description.max' => 'Meta description cannot exceed 255 characters.',
 
@@ -193,8 +193,8 @@ class CategoryController extends Controller
             'category_name' => 'required|string|max:255',
             'category_type' => 'required',
             'category_url' => 'required|string|max:255|unique:categories,category_url,' . $id,
-            'meta_title' => 'required|string|max:255',
-            'meta_description' => 'required|string|max:255',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:255',
             'banner_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ], [
             'category_name.required' => 'Category name is required.',
@@ -208,11 +208,11 @@ class CategoryController extends Controller
             'category_url.max' => 'Category URL cannot exceed 255 characters.',
             'category_url.unique' => 'This category URL is already taken.',
 
-            'meta_title.required' => 'Meta title is required.',
+            //'meta_title.required' => 'Meta title is required.',
             'meta_title.string' => 'Meta title must be a valid string.',
             'meta_title.max' => 'Meta title cannot exceed 255 characters.',
 
-            'meta_description.required' => 'Meta description is required.',
+            //'meta_description.required' => 'Meta description is required.',
             'meta_description.string' => 'Meta description must be a valid string.',
             'meta_description.max' => 'Meta description cannot exceed 255 characters.',
 

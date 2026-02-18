@@ -99,7 +99,7 @@
                     </ul>
             </li>
 
-            <li class="{{ request()->routeIs('admin.ceremonials*') ? '' : 'collapsed' }}">
+            {{-- <li class="{{ request()->routeIs('admin.ceremonials*') ? '' : 'collapsed' }}">
                 <a class="m-link {{ request()->routeIs('admin.ceremonials*') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#ceremonials" href="#">
                     <i class="icofont-box fs-5"></i> <span>Ceremonials</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
                 <!-- Menu: Sub menu ul -->
@@ -107,7 +107,7 @@
                     <li><a class="ms-link {{ request()->routeIs('admin.ceremonials.index') ? 'active' : '' }}" href="{{ route('admin.ceremonials.index') }}">Ceremonial List</a></li>
                     <li><a class="ms-link {{ request()->routeIs('admin.ceremonials.create') ? 'active' : '' }}" href="{{ route('admin.ceremonials.create') }}">Ceremonial Add</a></li>
                 </ul>
-            </li>
+            </li> --}}
 
             <li class="{{ request()->routeIs('admin.faqs*') ? '' : 'collapsed' }}">
                 <a class="m-link {{ request()->routeIs('admin.faqs.*') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-faqs" href="#">
