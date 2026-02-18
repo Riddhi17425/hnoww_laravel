@@ -45,7 +45,7 @@ class FrontController extends Controller
 
     public function index(Request $request){
         $selectFields = [
-            'id', 'category_id', 'product_name', 'short_description', 'is_active', 'deleted_at'
+            'id', 'category_id', 'product_name', 'short_description', 'is_active', 'deleted_at', 'product_url', 'list_page_img'
         ];
 
         $herProduct = Product::select($selectFields)->isActive()->notDeleted()
@@ -53,21 +53,21 @@ class FrontController extends Controller
                 $q->where('category_url', 'for-her')
                 ->where('is_active', 0)
                 ->whereNull('deleted_at');
-            })->with('category')->get();
+            })->with('category')->orderBy('id', 'DESC')->get();
 
         $himProduct = Product::select($selectFields)->isActive()->notDeleted()
             ->whereHas('category', function($q){
                 $q->where('category_url', 'for-him')
                 ->where('is_active', 0)
                 ->whereNull('deleted_at');
-            })->with('category')->get();
+            })->with('category')->orderBy('id', 'DESC')->get();
 
         $homeProduct = Product::select($selectFields)->isActive()->notDeleted()
             ->whereHas('category', function($q){
                 $q->where('category_url', 'for-home')
                 ->where('is_active', 0)
                 ->whereNull('deleted_at');
-            })->with('category')->get();
+            })->with('category')->orderBy('id', 'DESC')->get();
             
 
         $corporateProduct = Product::select('id', 'product_name')->where('product_type', 2)->isActive()->notDeleted()->get();
@@ -84,8 +84,19 @@ class FrontController extends Controller
         if (request()->ajax()) {
             return view('front.partials.gift-list', compact('allGifts'))->render();
         }
+        
+        // Take 2 items from each collection
+        $herProductsSubset = $herProduct->take(2);
+        $himProductsSubset = $himProduct->take(2);
+        $homeProductsSubset = $homeProduct->take(2);
+        // Merge them into a single collection
+        $combinedProducts = $herProductsSubset
+            ->merge($himProductsSubset)
+            ->merge($homeProductsSubset);
+        // If you want a plain array instead of collection
+        $desiredProductsArray = $combinedProducts->values()->all();
 
-        return view('front.home', compact('herProduct', 'himProduct', 'homeProduct', 'corporateProduct', 'weddingProduct', 'allProd', 'allGifts'));
+        return view('front.home', compact('herProduct', 'himProduct', 'homeProduct', 'corporateProduct', 'weddingProduct', 'allProd', 'allGifts', 'desiredProductsArray'));
     }
 
     public function getList(Request $request, $catSlug, $from = null){

@@ -256,8 +256,8 @@
     </div>
     <div class="desire_slider">
 
-        @if(isset($allProd) && is_countable($allProd) && count($allProd) > 0)
-        @foreach($allProd as $key => $val)
+        @if(isset($desiredProductsArray) && is_countable($desiredProductsArray) && count($desiredProductsArray) > 0)
+        @foreach($desiredProductsArray as $key => $val)
         <div class="desire_box">
             <div class="desire_box_top mb-4">
                 <img class="img-fluid img_1"
@@ -307,7 +307,7 @@
 </section>
 
 <!--The Curated Rituals -->
-<section class="mt_120">
+{{-- <section class="mt_120">
     <div class="container">
         <div class="section_header">
             <p class="sub_head mb-0">
@@ -387,7 +387,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 
 <!--The Bespoke & Private Services -->
 <section class="mt_120">
