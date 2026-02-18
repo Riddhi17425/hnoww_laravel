@@ -1034,14 +1034,16 @@ class FrontController extends Controller
     }
 
     public function getWeddingVaultInside(Request $request){
-        $weddingProduct = Product::select('id', 'product_name', 'short_description', 'list_page_img', 'product_url')->where('product_type', 3)->isActive()->notDeleted()->get();
+        // $weddingProduct = Product::select('id', 'product_name', 'short_description', 'list_page_img', 'product_url')->where('product_type', 3)->isActive()->notDeleted()->get();
+        $weddingCategory = Category::select('id', 'category_name', 'title', 'banner_image', 'category_url', 'category_type')->where('category_type', 3)->isActive()->notDeleted()->get();
 
-        return view('front.wedding_vault_inside', compact('weddingProduct'));
+        return view('front.wedding_vault_inside', compact('weddingCategory'));
     }
 
-    public function getCeremonials(){
-        $ceremonials = Ceremonial::whereNull('deleted_at')->where('is_active', 0)->get();
-        return view('front.ceremonials', compact('ceremonials'));
+    public function getCeremonials($categoryId = null){
+        $products = Product::select('id', 'category_id', 'product_url', 'product_name', 'short_description', 'list_page_img', 'is_active', 'deleted_at')->whereNull('deleted_at')->where('is_active', 0)->where('category_id', $categoryId)->get();
+        
+        return view('front.ceremonials', compact('products'));
     }
 
     public function storeCeremonialInquiry(Request $request){
