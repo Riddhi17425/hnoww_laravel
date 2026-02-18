@@ -204,7 +204,6 @@ header .navbar {
 
 /* hover par rotate + color change */
 
-
 .has-dropdown .dropdown-menu {
     display: none;
     position: absolute;
@@ -212,7 +211,7 @@ header .navbar {
     left: 0;
     min-width: 220px;
     /* background: transparent; */
-    background: url(https://intelliworkz.co/hnoww_laravel/public/front/images/ct_noise_bg.png);
+    background: url(../images/ct_noise_bg.png);
     background-color: #f9f9f9;
     z-index: 1000;
     opacity: 0;
@@ -231,14 +230,14 @@ header .navbar {
         transform: translateY(0);
     }
     .has-dropdown:hover .dropdown-arrow {
-    transform: rotate(180deg);
-    color: var(--gold-color);
-}
+        transform: rotate(180deg);
+        color: var(--gold-color);
+    }
 }
 .has-dropdown.active .dropdown-menu {
-        display: block;
-        opacity: 1;
-    }
+    display: block;
+    opacity: 1;
+}
 /*.has-dropdown:hover .dropdown-menu {*/
 /*    display: block;*/
 /*    opacity: 1;*/
@@ -389,9 +388,6 @@ header .navbar {
     border-radius: 50%;
 }
 
-
-
-
 /* Toast base */
 .alert.alert-success {
     position: fixed;
@@ -412,8 +408,9 @@ header .navbar {
 
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 
-    animation: toastIn 0.5s ease forwards,
-               toastOut 0.5s ease forwards 4s;
+    animation:
+        toastIn 0.5s ease forwards,
+        toastOut 0.5s ease forwards 4s;
 }
 
 /* ✓ success icon (LEFT) */
