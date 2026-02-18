@@ -1,7 +1,7 @@
-<div class="row gy-4 gy-md-0">
+<div class="row">
 @if($allGifts->isNotEmpty())
     @foreach ($allGifts as $val)
-        <div class="col-md-4">
+        <div class="col-md-4 mb-4">
             <div class="gesture_box">
                 <img class="img-fluid mb-2 mb-md-4"
                      src="{{ asset('public/images/admin/gifts/product_list/'.$val->list_page_img) }}">

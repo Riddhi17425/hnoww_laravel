@@ -123,15 +123,16 @@ class GiftShopController extends Controller
             'to_celebrate' => ['required', Rule::in($toCelebrate)],
             'product_name' => 'required|string|max:255',
             'product_price' => 'required|string|max:255',
-            'product_url' => 'required|string|max:255|unique:products,product_url',
+            //'product_url' => 'required|string|max:255|unique:gift_shops,product_url',
+            'product_url' => 'required|string|max:255',
             'list_img' => 'required|image|mimes:jpg,jpeg,png,webp|max:5120',
-            'detail_imgs'       => 'required|array|min:1',
+            'detail_imgs'       => 'nullable|array|min:1',
             'detail_imgs.*'     => 'image|mimes:jpg,jpeg,png,webp|max:5120',
             'short_description' => 'required|string|max:500',
             'large_description' => 'nullable|string|max:5000',
             'dimensions' => 'nullable|string|max:5000',
-            'meta_title' => 'required|string|max:255',
-            'meta_description' => 'required|string|max:1000',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:1000',
         ], [
             'gift_for.in' => 'Invalid gift recipient selected.',
             'to_celebrate.in' => 'Invalid celebration type selected.',
@@ -146,7 +147,7 @@ class GiftShopController extends Controller
             'product_url.required' => 'Gift URL is required.',
             'product_url.string' => 'Gift URL must be a valid string.',
             'product_url.max' => 'Gift URL cannot exceed 255 characters.',
-            'product_url.unique' => 'This product URL is already taken.',
+            //'product_url.unique' => 'This product URL is already taken.',
             'list_img.required' => 'Please upload the list page image.',
             'list_img.image'    => 'The list page file must be a valid image.',
             'list_img.mimes'    => 'The list page image must be a JPG, JPEG, PNG, or WEBP file.',
@@ -161,10 +162,10 @@ class GiftShopController extends Controller
             'large_description.max' => 'Gift large description cannot exceed 5000 characters.',
             'dimensions.string' => 'Gift Dimension must be a valid string.',
             'dimensions.max' => 'Gift Dimension cannot exceed 5000 characters.',
-            'meta_title.required' => 'Meta title is required.',
+            //'meta_title.required' => 'Meta title is required.',
             'meta_title.string' => 'Meta title must be a valid string.',
             'meta_title.max' => 'Meta title cannot exceed 255 characters.',
-            'meta_description.required' => 'Meta description is required.',
+            //'meta_description.required' => 'Meta description is required.',
             'meta_description.string' => 'Meta description must be a valid string.',
             'meta_description.max' => 'Meta description cannot exceed 1000 characters.'
         ]);
@@ -226,15 +227,15 @@ class GiftShopController extends Controller
             'to_celebrate' => ['required', Rule::in($toCelebrate)],
             'product_name' => 'required|string|max:255',
             'product_price' => 'required|string|max:255',
-            'product_url' => 'required|string|max:255|unique:products,product_url',
+            //'product_url' => 'required|string|max:255|unique:gift_shops,product_url',
             'list_img' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
             'detail_imgs'       => 'nullable|array|min:1',
             'detail_imgs.*'     => 'image|mimes:jpg,jpeg,png,webp|max:5120',
             'short_description' => 'required|string|max:500',
             'large_description' => 'nullable|string|max:5000',
             'dimensions' => 'nullable|string|max:5000',
-            'meta_title' => 'required|string|max:255',
-            'meta_description' => 'required|string|max:1000',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:1000',
         ], [
             'gift_for.in' => 'Invalid gift recipient selected.',
             'to_celebrate.in' => 'Invalid celebration type selected.',
@@ -249,7 +250,7 @@ class GiftShopController extends Controller
             'product_url.required' => 'Gift URL is required.',
             'product_url.string' => 'Gift URL must be a valid string.',
             'product_url.max' => 'Gift URL cannot exceed 255 characters.',
-            'product_url.unique' => 'This product URL is already taken.',
+            //'product_url.unique' => 'This product URL is already taken.',
             'list_img.image'    => 'The list page file must be a valid image.',
             'list_img.mimes'    => 'The list page image must be a JPG, JPEG, PNG, or WEBP file.',
             'list_img.max'      => 'The list page image size must not exceed 5 MB.',
@@ -262,10 +263,10 @@ class GiftShopController extends Controller
             'large_description.max' => 'Gift large description cannot exceed 5000 characters.',
             'dimensions.string' => 'Gift Dimension must be a valid string.',
             'dimensions.max' => 'Gift Dimension cannot exceed 5000 characters.',
-            'meta_title.required' => 'Meta title is required.',
+            //'meta_title.required' => 'Meta title is required.',
             'meta_title.string' => 'Meta title must be a valid string.',
             'meta_title.max' => 'Meta title cannot exceed 255 characters.',
-            'meta_description.required' => 'Meta description is required.',
+            //'meta_description.required' => 'Meta description is required.',
             'meta_description.string' => 'Meta description must be a valid string.',
             'meta_description.max' => 'Meta description cannot exceed 1000 characters.'
         ]);
@@ -338,7 +339,7 @@ class GiftShopController extends Controller
         $images = json_decode($gift->detail_page_imgs, true);
         if (isset($images[$request->index])) {
             $path = public_path('images/admin/gifts/product_detail/'.$images[$request->index]);
-            if (file_exists($path)) unlink($path);
+            // if (file_exists($path)) unlink($path);
             unset($images[$request->index]);
             $gift->detail_page_imgs = json_encode(array_values($images));
             $gift->save();
@@ -354,7 +355,7 @@ class GiftShopController extends Controller
         if ($images) {
             foreach ($images as $img) {
                 $path = public_path('images/admin/gifts/product_detail/'.$img);
-                if (file_exists($path)) unlink($path);
+                // if (file_exists($path)) unlink($path);
             }
         }
         $gift->detail_page_imgs = null;
@@ -363,4 +364,13 @@ class GiftShopController extends Controller
         return response()->json(['success' => true]);
     }
 
+    public function destroy(GiftShop $giftshop)
+    {
+        $giftshop->delete();
+
+        return response()->json([
+            'result' => true,
+            'message' => "Data Deleted."
+        ]);
+    }
 }
