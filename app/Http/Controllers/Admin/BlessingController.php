@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 
+use Illuminate\Support\Facades\Http;
+// use Illuminate\Support\Facades\Storage;
+
 class BlessingController extends Controller
 {
     public function index()
@@ -103,7 +106,8 @@ class BlessingController extends Controller
             'sub_title'   => 'required|string|max:255',
             'description' => 'required|string',
             'image'       => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'audio_file'  => 'nullable|mimes:mp3,wav|max:10240', // max 10MB
+            // 'audio_file'  => 'required|mimes:mp3,wav|max:10240', // max 10MB
+            'audio_content' => 'required|max:700',
         ], [
             // 'blessing_of.required' => 'Please select a blessing type.',
             // 'blessing_of.in'       => 'Please select a valid blessing type.',
@@ -127,21 +131,25 @@ class BlessingController extends Controller
             'image.mimes'          => 'The image must be jpeg, png, jpg, or gif.',
             'image.max'            => 'The image size may not be greater than 2MB.',
 
-            'audio_file.required'  => 'An audio file is required.',
-            'audio_file.mimes'     => 'The audio file must be mp3 or wav.',
-            'audio_file.max'       => 'The audio file size may not be greater than 10MB.',
+            // 'audio_file.required'  => 'An audio file is required.',
+            // 'audio_file.mimes'     => 'The audio file must be mp3 or wav.',
+            // 'audio_file.max'       => 'The audio file size may not be greater than 10MB.',
+            'audio_content.required' => 'The Audio Content is required.',
+            'audio_content.max'      => 'The Audio content may not be greater than 700 characters.',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        $content = $request->audio_content ?? null;
         $blessing = new Blessing();
         $blessing->blessing_of = $request->blessing_of ? implode(',', $request->blessing_of) : null;
         $blessing->title = $request->title;
         $blessing->sub_title = $request->sub_title;
         $blessing->description = $request->description;
         $blessing->is_active = 0;
+        $blessing->audio_content = $content;
         $blessing->save();
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -150,14 +158,41 @@ class BlessingController extends Controller
             $blessing->image = $imageName;
         }
 
-        if ($request->hasFile('audio_file')) {
-            $audio = $request->file('audio_file');
-            $audioName = $audio->getClientOriginalName();
-            $audio->move(public_path('images/admin/blessing/audios/'), $audioName);
-            $blessing->audio_file = $audioName;
-        }
+        // OLD CODE
+        // if ($request->hasFile('audio_file')) {
+        //     $audio = $request->file('audio_file');
+        //     $audioName = $audio->getClientOriginalName();
+        //     $audio->move(public_path('images/admin/blessing/audios/'), $audioName);
+        //     $blessing->audio_file = $audioName;
+        // }
 
-        $blessing->save();
+        // NEW CODE (Converted Text to Audio file)
+        if(isset($content) && $content != null){
+            $folderPath = public_path('images/admin/blessing/audios/');
+            if (!file_exists($folderPath)) {
+                mkdir($folderPath, 0755, true);
+            }
+            // Split text into chunks (max 180 characters)
+            $chunks = str_split($content, 180);
+            $audioName = 'audio_'.$blessing->id.'_'.time().'.mp3';
+            $fullPath = $folderPath.$audioName;
+            $finalAudio = '';
+            foreach($chunks as $chunk){
+                $text = urlencode($chunk);
+                $url = "https://translate.googleapis.com/translate_tts?ie=UTF-8&q={$text}&tl=en&client=gtx";
+                $response = Http::withHeaders([
+                    'User-Agent' => 'Mozilla/5.0'
+                ])->get($url);
+                if($response->successful()){
+                    $finalAudio .= $response->body();
+                }
+            }
+            if($finalAudio != ''){
+                file_put_contents($fullPath, $finalAudio);
+                $blessing->audio_file = $audioName;
+                $blessing->save();
+            }
+        }
 
         return redirect()->route('admin.blessings.index')->with('success', 'Blessing added successfully!');
     }
@@ -196,7 +231,8 @@ class BlessingController extends Controller
             'sub_title'   => 'required|string|max:255',
             'description' => 'required|string',
             'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'audio_file'  => 'nullable|mimes:mp3,wav|max:10240',
+            //'audio_file'  => 'nullable|mimes:mp3,wav|max:10240',
+            'audio_content' => 'required|max:700',
         ], [
             // 'blessing_of.required' => 'Please select a blessing type.',
             // 'blessing_of.in'       => 'Please select a valid blessing type.',
@@ -219,19 +255,23 @@ class BlessingController extends Controller
             'image.mimes'          => 'The image must be jpeg, png, jpg, or gif.',
             'image.max'            => 'The image size may not be greater than 2MB.',
 
-            'audio_file.mimes'     => 'The audio file must be mp3 or wav.',
-            'audio_file.max'       => 'The audio file size may not be greater than 10MB.',
+            // 'audio_file.mimes'     => 'The audio file must be mp3 or wav.',
+            // 'audio_file.max'       => 'The audio file size may not be greater than 10MB.',
+            'audio_content.required' => 'The Audio Content is required.',
+            'audio_content.max'      => 'The Audio content may not be greater than 700 characters.',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
+        
+        $content = $request->audio_content ?? null;
         $blessing->blessing_of = $request->blessing_of ? implode(',', $request->blessing_of) : null;
         $blessing->title = $request->title;
         $blessing->sub_title = $request->sub_title;
         $blessing->description = $request->description;
-
+        $blessing->audio_content = $content;
+        $blessing->save();
         if ($request->hasFile('image')) {
             // Remove old image
             // if($blessing->image && file_exists(public_path('images/admin/blessing/images/'.$blessing->image))){
@@ -243,21 +283,60 @@ class BlessingController extends Controller
             $blessing->image = $imageName;
         }
 
-        if ($request->hasFile('audio_file')) {
-            // Remove old audio
-            // if($blessing->audio_file && file_exists(public_path('audio/blessings/'.$blessing->audio_file))){
-            //     unlink(public_path('audio/blessings/'.$blessing->audio_file));
-            // }
-            $audio = $request->file('audio_file');
-            $audioName = $audio->getClientOriginalName();
-            $audio->move(public_path('images/admin/blessing/audios/'), $audioName);
-            $blessing->audio_file = $audioName;
+        // OLD CODE
+        // if ($request->hasFile('audio_file')) {
+        //     // Remove old audio
+        //     // if($blessing->audio_file && file_exists(public_path('audio/blessings/'.$blessing->audio_file))){
+        //     //     unlink(public_path('audio/blessings/'.$blessing->audio_file));
+        //     // }
+        //     $audio = $request->file('audio_file');
+        //     $audioName = $audio->getClientOriginalName();
+        //     $audio->move(public_path('images/admin/blessing/audios/'), $audioName);
+        //     $blessing->audio_file = $audioName;
+        // }
+
+        // NEW CODE (Converted Text to Audio file)
+        if(isset($content) && $content != null){
+            $folderPath = public_path('images/admin/blessing/audios/');
+            // Create folder if it doesn't exist
+            if (!file_exists($folderPath)) {
+                mkdir($folderPath, 0755, true);
+            }
+            // Remove old audio file if exists
+            if($blessing->audio_file && file_exists($folderPath.$blessing->audio_file)){
+                unlink($folderPath.$blessing->audio_file);
+            }
+            // Split content into safe chunks (<200 characters per request)
+            $chunks = explode("\n", wordwrap($content, 180));
+            $audioName = 'audio_'.$blessing->id.'_'.time().'.mp3';
+            $fullPath = $folderPath.$audioName;
+            $finalAudio = '';
+            foreach($chunks as $chunk){
+                $text = urlencode($chunk);
+                // Use reliable Google API endpoint
+                $url = "https://translate.googleapis.com/translate_tts?ie=UTF-8&q={$text}&tl=en&client=gtx";
+                $response = Http::withHeaders([
+                    'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+                ])->get($url);
+                if($response->successful()){
+                    $finalAudio .= $response->body();
+                } else {
+                    \Log::error('TTS request failed', [
+                        'status' => $response->status(),
+                        'text' => $chunk
+                    ]);
+                }
+            }
+            if($finalAudio != ''){
+                // Save new audio
+                file_put_contents($fullPath, $finalAudio);
+                // Update database
+                $blessing->audio_file = $audioName;
+                $blessing->save();
+            }   
         }
 
-        $blessing->save();
-
         return redirect()->route('admin.blessings.index')->with('success', 'Blessing updated successfully!');
-
     }
 
     public function destroy(Blessing $blessing)
