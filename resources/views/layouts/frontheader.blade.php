@@ -13,7 +13,8 @@ $current_route ===
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('public/images/front/favicon.png') }}">
-    <title>HNOWW</title>
+    <title>{{ $meta_title ?? 'HNOWW' }}</title>
+    <meta name="description" content="{{ $meta_description ?? 'Default Description' }}">
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

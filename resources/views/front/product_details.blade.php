@@ -1,4 +1,8 @@
-@include('layouts.frontheader')
+@include('layouts.frontheader', [
+    'meta_title' => $product->meta_title ?? $product->name,
+    'meta_description' => $product->meta_description ?? \Illuminate\Support\Str::limit(strip_tags($product->description), 160)
+])
+
 <style>
 .theme-green .header-scrolled {
     background: #EDEAE4;
