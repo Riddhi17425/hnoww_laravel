@@ -46,7 +46,7 @@ class AuthController extends Controller
         Session::put('user',$data['r_email']);
         if($check){
             request()->session()->flash('success','Successfully registered');
-            return redirect()->route('front.auth', 'register');
+            return redirect()->route('front.auth', 'login');
         }
         else{
             request()->session()->flash('error','Please try again!');
@@ -151,5 +151,23 @@ class AuthController extends Controller
         return back();
     }
 
+    public function cookieConsent(Request $request){
+        $consent = $request->input('consent');
+        if (!in_array($consent, ['accepted', 'rejected'])) {
+            return response()->json(['error' => 'Invalid choice'], 400);
+        }
+        return response()->json(['success' => true])->cookie(
+            'cookie_consent',
+            $consent,
+            //60 * 24 * 180 // 6 Months
+            60 * 24 * 30, // 30 days
+            '/',
+            null,
+            true,   // Secure (HTTPS only)
+            false,  // HttpOnly (false so JS can read if needed)
+            false,
+            'Lax'
+        );
+    }
 
 }

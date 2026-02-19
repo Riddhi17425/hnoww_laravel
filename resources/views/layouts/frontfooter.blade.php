@@ -278,6 +278,62 @@ window.open("{{ session('whatsapp_url') }}", "_blank");
 </script>
 @stack('script')
 
+
+@if(!request()->cookie('cookie_consent'))
+<div id="cookie-banner" style="
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #111827;
+    color: white;
+    padding: 20px;
+    z-index: 9999;
+">
+    <div style="max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center;">
+        <p style="margin: 0;">
+            We use cookies to improve your experience.
+        </p>
+        <div>
+            <button onclick="setConsent('accepted')" style="
+                background: #10b981;
+                color: white;
+                border: none;
+                padding: 8px 14px;
+                margin-right: 10px;
+                cursor: pointer;
+            ">Accept All</button>
+            <button onclick="setConsent('rejected')" style="
+                background: #ef4444;
+                color: white;
+                border: none;
+                padding: 8px 14px;
+                cursor: pointer;
+            ">Reject All</button>
+        </div>
+    </div>
+</div>
+<script>
+// FOR ACCEPT OR REJECT COOKIE CONSENT
+function setConsent(value) {
+    var sitePath = "{{ url('/') }}";
+    var cookieUrl = sitePath + 'front/cookie-consent';
+    fetch(cookieUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({ consent: value })
+    })
+    .then(response => response.json())
+    .then(() => {
+        location.reload();
+    });
+}
+</script>
+@endif
+
 </body>
 
 </html>

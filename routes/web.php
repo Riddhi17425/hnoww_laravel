@@ -10,7 +10,7 @@ use App\Http\Controllers\{FrontController, AuthController, CartController};
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\{AdminController, CategoryController, ProductController, ProductTabController, ProductImageController, FaqController, JournalController, BlessingController, CeremonialController, GiftShopController, CorporateKitController, UserController};
 use App\Http\Middleware\RedirectIfNotAdmin;
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -107,6 +107,8 @@ Route::name('front.')->group(function () {
 
 		Route::get('front/logout', [AuthController::class, 'logout'])->name('logout');
 	});
+
+	Route::post('/cookie-consent', [AuthController::class, 'cookieConsent']);
 
 });
   

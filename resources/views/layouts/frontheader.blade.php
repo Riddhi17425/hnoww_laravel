@@ -137,6 +137,14 @@ $current_route ===
 
 
     @stack('style')
+
+    @if(request()->cookie('cookie_consent') === 'accepted')
+    <!-- Example Analytics Script -->
+    <script>
+        console.log("Analytics loaded because user accepted cookies");
+    </script>
+    @endif
+
 </head>
 
 <body class="<?= $is_green ? 'theme-green' : 'theme-white' ?>">
