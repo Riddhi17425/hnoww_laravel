@@ -266,14 +266,10 @@
                     alt="{{ $val->product_name ?? 'Product Image' }}" loading="lazy">
                 <span class="icon_hert">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="28" viewBox="0 0 30 28" fill="none">
-                        {{-- <path class="heart-path"
-                                    d="M22.1426 1C23.0312 1.00003 23.9132 1.19019 24.7393 1.56152C25.5655 1.93295 26.3221 2.4794 26.9629 3.1748V3.17578C27.6039 3.87135 28.1169 4.70101 28.4678 5.62012C28.8187 6.53946 29 7.52807 29 8.52734C28.9999 9.52647 28.8187 10.5144 28.4678 11.4336C28.1607 12.2379 27.7296 12.9738 27.1973 13.6113L26.9629 13.8789L15 26.8594L3.03711 13.8789C1.74115 12.4726 1.0001 10.5486 1 8.52734C1 6.50595 1.74106 4.58125 3.03711 3.1748C4.33058 1.77138 6.0665 1.00001 7.85742 1C9.64834 1 11.3843 1.7714 12.6777 3.1748L14.2646 4.89648L15 5.69434L15.7354 4.89648L17.3213 3.1748C17.9622 2.47924 18.7195 1.933 19.5459 1.56152C20.3719 1.19024 21.254 1 22.1426 1Z"
-                                    stroke="#B58A46" stroke-width="2" /> --}}
                     </svg>
                 </span>
                 <div class="desire_box_top_child">
-                    <!--style="background: linear-gradient(180deg, rgba(4, 51, 25, 0) 32%, #8c8a72 95%), url('{{ isset($val->list_page_img) ? asset('public/images/admin/product_list/'.$val->list_page_img) : asset('public/images/front/desire2.png') }}') center/cover no-repeat;"-->
-                    <a href="jsvascript:void(0);" class="desire_box_top_child_inner" data-bs-toggle="modal"
+                    {{-- <a href="jsvascript:void(0);" class="desire_box_top_child_inner" data-bs-toggle="modal"
                         data-bs-target="#productInquiry" data-product-name="{{ $val->product_name }}"
                         data-product-id="{{ $val->id }}">
                         <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
@@ -282,9 +278,16 @@
                                 stroke="white" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                         <span>Enquire Now</span>
+                    </a> --}}
+                    <a href="jsvascript:void(0);" class="desire_box_top_child_inner @auth add_to_cart_btn @endauth" @auth data-product-id="{{ $val->id }}" @else  data-bs-toggle="modal" data-bs-target="#loginRequiredModal" @endauth>
+                        <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
+                            <path
+                                d="M0.5 4.5H18.5M0.5 4.5V16.5C0.5 17.6046 1.39543 18.5 2.5 18.5H16.5C17.6046 18.5 18.5 17.6046 18.5 16.5V4.5M0.5 4.5L2.46327 1.00974C2.64039 0.69486 2.97357 0.5 3.33485 0.5H15.6652C16.0264 0.5 16.3596 0.69486 16.5367 1.00974L18.5 4.5M12.5 8.5C12.5 10.1569 11.1569 11.5 9.5 11.5C7.8431 11.5 6.5 10.1569 6.5 8.5"
+                                stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span>Add to Cart</span>
                     </a>
                 </div>
-
             </div>
 
             <div class="desire_box_bot_child">
@@ -610,6 +613,62 @@ $(document).ready(function() {
         $('#product_id').val(productId);
     });
 });
+
+$(document).on('click', '.add_to_cart_btn', function () {
+    let productId = $(this).data('product-id');
+    let qty = 1;
+    $.ajax({
+        url: sitePath + '/cart/add',
+        method: "POST",
+        data: {
+            product_id: productId,
+            quantity: qty
+        },
+        success: function (response) {
+            if(response.status){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: response.message,
+                    showConfirmButton: true,
+                    confirmButtonColor: '#B58A46',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        let currentCount = parseInt($('#cart-count').text()) || 0;
+                        let addedQty = parseInt($('#product-qty').val()) || 1;
+                        $('#cart-count').text(currentCount + addedQty);
+                        $('#cart-count').show();
+                    }
+                });
+            } else {
+                var message = response.message;
+                var availableQty = response.data.available_stock;
+                var alreadyAddedQty = response.data.already_in_cart;
+                if(availableQty > 0){
+                    message += " Total Stock Quantity is "+availableQty;
+                }
+                if(alreadyAddedQty > 0){
+                    message += " Your cart has already "+alreadyAddedQty+" QTY added";
+                }
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Warning',
+                    text: message,
+                    showConfirmButton: true,
+                    confirmButtonColor: '#B58A46',
+                });
+            }
+        },
+        error: function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Something went wrong!',
+            });
+        }
+    });
+});
+
 </script>
 @endpush
 

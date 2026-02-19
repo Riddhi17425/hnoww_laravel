@@ -13,7 +13,8 @@ $current_route ===
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('public/images/front/favicon.png') }}">
-    <title>HNOWW</title>
+    <title>{{ $meta_title ?? 'HNOWW' }}</title>
+    <meta name="description" content="{{ $meta_description ?? 'Default Description' }}">
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -809,8 +810,53 @@ $current_route ===
             }
         });
     });
+
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const navLinks = document.querySelectorAll('.mega-menu .category-list li a'); 
+    // ↑ Replace selector with your actual category link selector in the header dropdown
+
+    function resetColors() {
+        navLinks.forEach((link, index) => {
+            if (index === 0) {
+                link.style.color = 'red'; // First stays red by default
+            } else {
+                link.style.color = ''; // Others revert to default (black via CSS)
+            }
+        });
+    }
+
+    navLinks.forEach((link) => {
+        link.addEventListener('mouseenter', function () {
+            // Remove red from all
+            navLinks.forEach(l => l.style.color = '');
+            // Set hovered to red
+            this.style.color = 'red';
+        });
+
+        link.addEventListener('mouseleave', function () {
+            // When mouse leaves a link, check if any sibling is hovered
+            // If not, reset to default (first = red)
+            setTimeout(() => {
+                const anyHovered = [...navLinks].some(l => l.matches(':hover'));
+                if (!anyHovered) resetColors();
+            }, 50);
+        });
+    });
+
+    // When mega menu closes/opens, reset to first = red
+    const productsMenuTrigger = document.querySelector('a[href*="Products"], .nav-item.has-dropdown'); 
+    // ↑ Replace with your actual Products nav trigger selector
+
+    if (productsMenuTrigger) {
+        productsMenuTrigger.addEventListener('mouseenter', resetColors);
+    }
+});
     </script>
 
     <!-- Load Google Translate -->
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
     </script>
+
+    

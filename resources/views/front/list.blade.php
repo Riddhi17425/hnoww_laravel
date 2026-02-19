@@ -1,4 +1,7 @@
-@include('layouts.frontheader')
+@include('layouts.frontheader', [
+    'meta_title' => $category->meta_title ?? $category->name,
+    'meta_description' => $category->meta_description ?? \Illuminate\Support\Str::limit(strip_tags($category->description), 160)
+])
 
 <!-- hero section -->
 <section class="hero-section_inner">
