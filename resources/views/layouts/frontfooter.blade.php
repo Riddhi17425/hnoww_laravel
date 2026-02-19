@@ -42,7 +42,7 @@
                             <li><a href="{{ route('front.list', 'for-her') }}">For Her</a></li>
                             <li><a href="{{ route('front.list', 'for-him') }}">For Him</a></li>
                             <li><a href="{{ route('front.list', 'for-home') }}">For Home</a></li>
-                            <li><a href="{{ route('front.giftshop') }}">The Gift Shop</a></li>
+                            {{-- <li><a href="{{ route('front.giftshop') }}">The Gift Shop</a></li> --}}
                             <!--<li><a href="javascript:void(0)">Festive Collections</a></li>-->
                         </ul>
                     </div>
@@ -52,9 +52,9 @@
                     <div>
                         <h4 class="ft_head">The Worlds</h4>
                         <ul class="ft_menu">
-                            <li><a href="{{ route('front.list', ['for-him', 'worlds']) }}">The Architect’s Study</a></li>
+                            {{-- <li><a href="{{ route('front.list', ['for-him', 'worlds']) }}">The Architect’s Study</a></li>
                             <li><a href="{{ route('front.list', ['for-her', 'worlds']) }}">The The Desert Rose</a></li>
-                            <li><a href="{{ route('front.list', ['for-home', 'worlds']) }}">The Modern Majlis</a></li>
+                            <li><a href="{{ route('front.list', ['for-home', 'worlds']) }}">The Modern Majlis</a></li> --}}
                             <li><a href="#">The Ritual Table</a></li>
                             <li><a href="#">The Table As Landscape</a></li>
                         </ul>
@@ -70,6 +70,8 @@
                             <li><a href="javascript:void(0);" data-bs-toggle="modal"
                                     data-bs-target="#requestCorporateProposal">Corporate Rituals</a></li>
                             <li><a href="{{route('front.bespoke.commission')}}">Bespoke Commissions</a></li>
+                            <li><a href="{{route('front.wedding.vault')}}">Wedding Vault</a></li>
+                            <li><a href="{{route('front.corporate.vault')}}">Corporate Vault Inside</a></li>
                             <!--<li><a href="{{ route('front.ceremonials') }}">Ceremonial Objects</a></li>-->
                         </ul>
                     </div>
@@ -105,12 +107,12 @@
         </div>
         <div class="ft_bottom">
             <div class="ym_cpy">
-                All rights reserved. ©HNOWW <?php echo date("Y"); ?>. Designed in Dubai.
+                All rights reserved. <a href="{{ route('front.home') }}">©HNOWW</a> <?php echo date("Y"); ?>. Designed in Dubai.
             </div>
 
             <div class="ft_privacy">
                 <a></a>
-                <a href="{{ route('front.privacy') }}" target="_blank">Privacy Policy</a>
+                <a href="{{ route('front.privacy') }}">Privacy Policy</a>
             </div>
             <div class="ft_social">
                 <ul>

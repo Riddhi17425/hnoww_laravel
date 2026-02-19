@@ -141,7 +141,7 @@ $current_route ===
 <body class="<?= $is_green ? 'theme-green' : 'theme-white' ?>">
 
     <!-- Page Loader -->
-    <div id="page-loader" class="loader-overlay">
+    {{-- <div id="page-loader" class="loader-overlay">
         <div class="loader-box">
             <svg width="100%" height="100%" viewBox="-3 -3 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -149,7 +149,7 @@ $current_route ===
                     fill="#D0C2AA" />
             </svg>
         </div>
-    </div>
+    </div> --}}
 
     <header class="sticky-header <?= $is_green ? 'theme-green' : 'theme-white' ?>">
 
@@ -191,10 +191,10 @@ $current_route ===
                             </svg>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ route('front.list', ['for-him', 'worlds']) }}">The Architect’s Study</a>
+                            {{-- <li><a href="{{ route('front.list', ['for-him', 'worlds']) }}">The Architect’s Study</a>
                             </li>
                             <li><a href="{{ route('front.list', ['for-her', 'worlds']) }}">The The Desert Rose</a></li>
-                            <li><a href="{{ route('front.list', ['for-home', 'worlds']) }}">The Modern Majlis</a></li>
+                            <li><a href="{{ route('front.list', ['for-home', 'worlds']) }}">The Modern Majlis</a></li> --}}
                             <li><a href="#">The Ritual Table</a></li>
                             <li><a href="#">The Table As Landscape</a></li>
                         </ul>

@@ -6,8 +6,11 @@
         <p>Hello {{ $name ?? 'User' }},</p>
 
         <p>
-            Thank you. </br>A member of the HNOWW Corporate Concierge will review your request and respond if aligned.
+            Thank you. <br/>
+            We review bespoke enquiries slowly and intentionally. <br/>
+            If your request aligns with our practice, a member of the Atelier will be in touch.
         </p>
+
 
         <p style="margin-top: 20px;">
             Thanks & Regards,<br>

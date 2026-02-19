@@ -51,19 +51,19 @@ Everything you see here is curated to be photographed, kept, and passed on.
             <P> Explore the luxury gift hampers in Dubai or scroll to view everything to pick the best anniversary gift</P>
         </div>
         <div class="row gy-4 g-md-5">
-            @if(isset($weddingProduct) && is_countable($weddingProduct) && count($weddingProduct) > 0)
-                @foreach($weddingProduct as $key => $val)
+            @if(isset($weddingCategory) && is_countable($weddingCategory) && count($weddingCategory) > 0)
+                @foreach($weddingCategory as $key => $val)
                     <div class="col-md-4">
                         <div class="curated_rituals_box">
                             <div>
-                                <img class="w-100 mb-2 mb-md-4" src="{{ asset('public/images/admin/product_list/'.$val->list_page_img) }}" alt="{{ $val->product_name ?? 'Product Image' }}">
+                                <img class="w-100 mb-2 mb-md-4" src="{{ asset('public/images/admin/category_banner/'.$val->banner_image) }}" alt="{{ $val->category_name ?? 'Category Image' }}">
                             </div>
                             <div class="desire_box_bot_child">
                                 <div>
-                                    <h3 class="sub_head">{{ $val->product_name ?? '' }} </h3>
-                                    <p>{!! $val->short_description ?? '' !!}</p>
+                                    <h3 class="sub_head">{{ $val->category_name ?? '' }} </h3>
+                                    <p>{!! $val->description ?? '' !!}</p>
                                 </div>
-                                <a href="{{ route('front.product.details', $val->product_url) }}">
+                                <a href="{{ route('front.ceremonials', $val->id) }}" target="_blank">
                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
                                         <path d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
                                             stroke="#8c8a72" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />

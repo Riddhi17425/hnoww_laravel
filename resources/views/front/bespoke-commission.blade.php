@@ -219,7 +219,7 @@ alt="{{ $val->product_name ?? 'Product Image' }}">
                 <p class="cta_ft_center">Commission slots for Q1 2026 are <br /> currently open.</p>
             </div>
             <div>
-                <a href="javascript:void(0)" class="btn_2">Begin Your Journey</a>
+                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#bespokeCommission" class="btn_2">Begin Your Journey</a>
             </div>
         </div>
     </div>
@@ -289,8 +289,151 @@ alt="{{ $val->product_name ?? 'Product Image' }}">
     </div>
 </div>
 
+<div class="modal fade wedding_catalogue_modal" id="bespokeCommission" data-bs-backdrop="static" data-bs-keyboard="false"
+     tabindex="-1" aria-labelledby="bespokeCommissionLabel" aria-hidden="true">
+   <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+      <div class="modal-content">
+         <div class="text-center my-4">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <div class="text-center">
+                <h4>Begin a Bespoke Conversation</h4><br/>
+                <p>We accept a limited number of bespoke commissions each year. This form begins a conversation — not an order.</p>
+            </div>
+            <hr/>
+            <div class="container">
+               <form method="POST" action="{{ route('front.store.bespoke.commission.request') }}" id="bespokeCommissionForm" class="ct_form">
+                  @csrf
+                  <div class="row">
+
+                     <!-- Full Name -->
+                     <div class="col-lg-4">
+                        <div class="ct_input">
+                           <label class="sub_head">Full Name <span class="text-danger">*</span></label>
+                           <input type="text" name="bc_full_name" placeholder="Enter your Full Name" id="bc_full_name" 
+                                  oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();" 
+                                  value="{{ old('bc_full_name') }}">
+                           @error('bc_full_name') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
+                     </div>
+
+                     <!-- Email -->
+                     <div class="col-lg-4">
+                        <div class="ct_input">
+                           <label class="sub_head">Email Address<span class="text-danger">*</span></label>
+                           <input type="email" placeholder="Enter your Email Address" name="bc_email" id="bc_email" value="{{ old('bc_email') }}">
+                           @error('bc_email') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
+                     </div>
+
+                     <!-- Phone -->
+                     <div class="col-lg-4">
+                        <div class="ct_input">
+                           <label class="sub_head">Phone Number </label>
+                           <input type="text" name="bc_phone" placeholder="Enter your WhatsApp Phone Number" id="bc_phone" 
+                                  oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);" value="{{ old('bc_phone') }}">
+                           @error('bc_phone') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
+                     </div>
+
+                     <!-- Intended Timeline -->
+                     <div class="col-lg-3">
+                        <div class="ct_input">
+                           <label class="sub_head">Intended Timeline <span class="text-danger">*</span></label>
+                           <select name="bc_timeline" id="bc_timeline">
+                              <option value="">Select</option>
+                              @foreach(config('global_values.timeline') as $key => $value)
+                                 <option value="{{ $key }}" {{ old('bc_timeline') == $key ? 'selected' : '' }}>{{ $value }}</option>
+                              @endforeach
+                           </select>
+                           @error('bc_timeline') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
+                     </div>
+
+                     <!-- Budget Comfort Range -->
+                     <div class="col-lg-3">
+                        <div class="ct_input">
+                           <label class="sub_head">Budget Comfort Range <span class="text-danger">*</span></label>
+                           <select name="bc_budget" id="bc_budget">
+                              <option value="">Select</option>
+                              @foreach(config('global_values.budget_range') as $key => $value)
+                                 <option value="{{ $key }}" {{ old('bc_budget') == $key ? 'selected' : '' }}>{{ $value }}</option>
+                              @endforeach
+                           </select>
+                           @error('bc_budget') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
+                     </div>
+
+                     <!-- Type of Commission -->
+                     <div class="col-lg-3">
+                        <div class="ct_input">
+                           <label class="sub_head">Type of Commission <span class="text-danger">*</span></label>
+                           <select name="bc_type_of_commission" id="bc_type_of_commission">
+                              <option value="">Select</option>
+                              @foreach(config('global_values.commission_type') as $key => $value)
+                                 <option value="{{ $key }}" {{ old('bc_type_of_commission') == $key ? 'selected' : '' }}>
+                                    {{ $value }}
+                                 </option>
+                              @endforeach
+                              <option value="other" {{ old('bc_type_of_commission') == 'other' ? 'selected' : '' }}>Other</option>
+                           </select>
+                           @error('bc_type_of_commission') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
+                     </div>
+
+                     <!-- Other Commission Text Field (Initially hidden) -->
+                     <div class="col-lg-3" id="other_commission_field" style="display: {{ old('bc_type_of_commission') == 'other' ? 'block' : 'none' }};">
+                        <div class="ct_input">
+                           <label class="sub_head">Please specify</label>
+                           <input type="text" name="bc_type_of_commission_other" placeholder="Enter Type of Commission" value="{{ old('bc_type_of_commission_other') }}">
+                           @error('bc_type_of_commission_other') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
+                     </div>
+
+                     <!-- Message -->
+                     <div class="col-12">
+                        <div class="ct_input">
+                           <label class="sub_head">What are you hoping to create ? <span class="text-danger">*</span></label>
+                           <textarea name="bc_customer_hoping_to_create" placeholder="Enter Message" rows="3">{{ old('bc_customer_hoping_to_create') }}</textarea>
+                           @error('bc_customer_hoping_to_create') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
+                     </div>
+
+                     <!-- Anything else -->
+                     <div class="col-12">
+                        <div class="ct_input">
+                           <label class="sub_head">Anything else we should know? </label>
+                           <textarea name="bc_additional_message" placeholder="Enter Message">{{ old('bc_additional_message') }}</textarea>
+                        </div>
+                     </div>
+
+                     <div class="col-12 text-center">
+                        <button type="submit" class="com_btn bg-transparent">Submit Bespoke Enquiry</button>
+                     </div>
+
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
 @push('script')
 <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const commissionSelect = document.getElementById('bc_type_of_commission');
+    const otherField = document.getElementById('other_commission_field');
+    commissionSelect.addEventListener('change', function () {
+        if(this.value === 'other'){
+            otherField.style.display = 'block';
+        } else {
+            otherField.style.display = 'none';
+        }
+    });
+});
+
 $(document).ready(function() {
     $('#productInquiry').on('show.bs.modal', function(event) {
         let button = $(event.relatedTarget);
@@ -301,6 +444,137 @@ $(document).ready(function() {
         $('#product_id').val(productId);
     });
 });
+
+$("#bespokeCommissionForm").validate({
+    ignore: [],
+    rules: {
+        bc_full_name: {
+            required: true,
+            minlength: 2,
+            maxlength: 50,
+            lettersonly: true
+        },
+
+        bc_email: {
+            required: true,
+            email: true,
+            noSpamEmail: true, 
+            uniqueEmail: "bespoke_commission_enquiries" 
+        },
+
+        bc_phone: {
+            digits: true,
+            minlength: 8,
+            maxlength: 15
+        },
+
+        bc_type_of_commission: {
+            required: true
+        },
+
+        bc_type_of_commission_other: {
+            required: function () {
+                return $("#bc_type_of_commission").val() === "other";
+            },
+            minlength: 2,
+            maxlength: 100
+        },
+
+        bc_customer_hoping_to_create: {
+            required: true,
+            minlength: 10,
+            maxlength: 1000
+        },
+
+        bc_timeline: {
+            required: true
+        },
+
+        bc_budget: {
+            required: true
+        },
+
+        bc_additional_message: {
+            maxlength: 500
+        }
+    },
+
+    messages: {
+        bc_full_name: {
+            required: "Please enter your full name",
+            minlength: "Full name must be at least 2 characters",
+            maxlength: "Full name cannot exceed 50 characters",
+            lettersonly: "Full name can only contain letters and spaces"
+        },
+
+        bc_email: {
+            required: "Please enter your email address",
+            email: "Please enter a valid email address"
+        },
+
+        bc_phone: {
+            digits: "Phone number must contain only digits",
+            minlength: "Phone number is too short",
+            maxlength: "Phone number is too long"
+        },
+
+        bc_type_of_commission: {
+            required: "Please select type of commission"
+        },
+
+        bc_type_of_commission_other: {
+            required: "Please specify the type of commission",
+            minlength: "Please enter at least 2 characters",
+            maxlength: "Maximum 100 characters allowed"
+        },
+
+        bc_customer_hoping_to_create: {
+            required: "Please tell us what you are hoping to create",
+            minlength: "Message must be at least 10 characters",
+            maxlength: "Message cannot exceed 1000 characters"
+        },
+
+        bc_timeline: {
+            required: "Please select intended timeline"
+        },
+
+        bc_budget: {
+            required: "Please select budget comfort range"
+        },
+
+        bc_additional_message: {
+            maxlength: "Additional message cannot exceed 500 characters"
+        }
+    },
+
+    errorElement: "small",
+
+    errorPlacement: function (error, element) {
+        error.addClass("text-danger");
+        error.insertAfter(element);
+    },
+
+    highlight: function (element) {
+        $(element).addClass("is-invalid").removeClass("is-valid");
+    },
+
+    unhighlight: function (element) {
+        $(element).addClass("is-valid").removeClass("is-invalid");
+    },
+
+    submitHandler: function (form) {
+        if (!bcFormSubmitted) {
+            bcFormSubmitted = true;
+            const btn = $(form).find('button[type="submit"]');
+            if (btn.length) {
+                btn.prop("disabled", true).text("Submitting...");
+            }
+
+            form.submit();
+        }
+    }
+});
+
 </script>
 @endpush
 

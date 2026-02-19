@@ -8,7 +8,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    
+                    <div class="text-center">
+                        <h4>Corporate Gifting Enquiry</h4><br/>
+                        <p>We work with organisations seeking meaningful, long-term gifting ,designed to be kept rather than discarded.</p>
+                    </div>
+                    <hr/>
                     <div class="container">
                     
                     <form method="POST" action="{{ route('front.store.corporate.proposal.request') }}" id="requestCorporateProposalForm" class="ct_form">
@@ -16,7 +20,7 @@
                         <div class="row">
 
                             <!-- Full Name -->
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="ct_input">
                                     <label class="sub_head">Full Name <span class="text-danger">*</span></label>
                                     <input type="text" name="full_name" id="full_name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();" placeholder="Enter your Full Name" value="{{ old('full_name') }}">
@@ -25,25 +29,32 @@
                             </div>
 
                             <!-- Company -->
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="ct_input">
-                                    <label class="sub_head">Company Organization <span class="text-danger">*</span></label>
+                                    <label class="sub_head">Company Name <span class="text-danger">*</span></label>
                                     <input type="text" name="company_name" placeholder="Enter your Company Organization Name" id="company_name" value="{{ old('company_name') }}">
                                     @error('company_name') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                             </div>
-
+                            <div class="col-lg-4">
+                                <div class="ct_input">
+                                    <label class="sub_head">Role / Designation <span class="text-danger">*</span></label>
+                                    <input type="text" name="role" placeholder="Enter your Role" id="role" value="{{ old('role') }}">
+                                    @error('role') <small class="text-danger">{{ $message }}</small> @enderror
+                                </div>
+                            </div>
+                            
                             <!-- Phone -->
-                            <div class="col-lg-6">
+                            {{-- <div class="col-lg-6">
                                 <div class="ct_input">
                                     <label class="sub_head">Phone Number <span class="text-danger">*</span></label>
                                     <input type="text" name="phone" id="phone" placeholder="Enter your WhatsApp Phone Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);" value="{{ old('phone') }}">
                                     @error('phone') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <!-- Email -->
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <div class="ct_input">
                                     <label class="sub_head">Email <span class="text-danger">*</span></label>
                                     <input type="email" name="email" placeholder="Enter your Email Address" id="email" value="{{ old('email') }}">
@@ -52,7 +63,7 @@
                             </div>
 
                             <!-- Product of Interest (MULTISELECT) -->
-                            <div class="col-lg-4">
+                            {{-- <div class="col-lg-4">
                                 <div class="ct_input">
                                     <label class="sub_head">Product of Interest <span class="text-danger">*</span></label>
                                     <select id="product_of_interest" name="product_of_interest[]" multiple>
@@ -67,12 +78,12 @@
                                     <div id="product_error"></div>
                                     @error('product_of_interest') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <!-- Quantity Range -->
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <div class="ct_input">
-                                    <label class="sub_head">Quantity Range <span class="text-danger">*</span></label>
+                                    <label class="sub_head">Quantity Range </label>
                                     <select name="quantity_range" id="quantity_range">
                                         <option value="">Select</option>
                                         @foreach(config('global_values.quality_range') as $key => $value)
@@ -84,32 +95,98 @@
                                     @error('quantity_range') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                             </div>
+                            <div class="col-lg-3">
+                                <div class="ct_input">
+                                    <label class="sub_head">Budget Comfort (per unit) </label>
+                                    <select name="corporate_budget" id="corporate_budget">
+                                        <option value="">Select</option>
+                                        @foreach(config('global_values.corporate_budget') as $key => $value)
+                                            <option value="{{ $key }}" {{ old('corporate_budget') == $key ? 'selected' : '' }}>
+                                                {{ $value }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('corporate_budget') <small class="text-danger">{{ $message }}</small> @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="ct_input">
+                                    <label class="sub_head">Timeline </label>
+                                    <select name="timeline" id="timeline">
+                                        <option value="">Select</option>
+                                        @foreach(config('global_values.corporate_timeline') as $key => $value)
+                                            <option value="{{ $key }}" {{ old('timeline') == $key ? 'selected' : '' }}>
+                                                {{ $value }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('timeline') <small class="text-danger">{{ $message }}</small> @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-4 mb-4">
+                                <label class="form-label fw-bold d-block"> Nature of Requirement <span class="text-danger">*</span></label>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox"
+                                                id="ceremonial"
+                                                name="nature_of_requirement[]"
+                                                value="Client / Partner Gifting">
+                                    <label class="form-check-label" for="ceremonial">Client / Partner Gifting</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox"
+                                                id="favours"
+                                                name="nature_of_requirement[]"
+                                                value="Leadership / Board Gifts">
+                                    <label class="form-check-label" for="favours">Leadership / Board Gifts</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox"
+                                                id="legacy"
+                                                name="nature_of_requirement[]"
+                                                value="Employee Recognition">
+                                    <label class="form-check-label" for="legacy">Employee Recognition</label>
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox"
+                                                id="hampers"
+                                                name="nature_of_requirement[]"
+                                                value="Milestone / Deal Closure">
+                                    <label class="form-check-label" for="hampers">Milestone / Deal Closure</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox"
+                                                id="unsure"
+                                                name="nature_of_requirement[]"
+                                                value="Hospitality / Guest Experience">
+                                    <label class="form-check-label" for="unsure"> Hospitality / Guest Experience</label>
+                                </div>
+                            </div>
 
                             <!-- Budget -->
-                            <div class="col-lg-4">
+                            {{-- <div class="col-lg-4">
                                 <div class="ct_input">
                                     <label class="sub_head">Approximate Budget</label>
                                     <input type="text" placeholder="Enter Approximate Budget" name="budget" id="budget" value="{{ old('budget') }}">
                                     @error('budget') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <!-- Branding -->
-                            <div class="col-lg-6">
+                            {{-- <div class="col-lg-6">
                                 <div class="ct_input">
                                     <label class="sub_head">Branding Requirements</label>
                                     <input type="text" placeholder="e.g. Logo etching, Custom box colour" name="branding_requirements" id="branding_requirements" value="{{ old('branding_requirements') }}">
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <!-- Delivery Date -->
-                            <div class="col-lg-6">
+                            {{-- <div class="col-lg-6">
                                 <div class="ct_input">
                                     <label class="sub_head">Delivery Timeline <span class="text-danger">*</span></label>
                                     <input type="date" name="delivery_date" id="delivery_date" value="{{ old('delivery_date') }}">
                                     @error('delivery_date') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <!-- Message -->
                             <div class="col-12">
@@ -120,7 +197,7 @@
                             </div>
 
                             <div class="col-12 text-center">
-                                <button type="submit" class="com_btn bg-transparent">REQUEST CORPORATE QUOTE</button>
+                                <button type="submit" class="com_btn bg-transparent">Submit Corporate Enquiry</button>
                             </div>
 
                         </div>

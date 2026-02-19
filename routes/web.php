@@ -53,8 +53,9 @@ Route::name('front.')->group(function () {
 	Route::post('store-corporate-proposal-request', [FrontController::class, 'storeCorporateProposalRequest'])->name('store.corporate.proposal.request');
 	Route::post('store-corporate-kit-request', [FrontController::class, 'storeCorporateKitRequest'])->name('store.corporate.kit.request');
     Route::post('store-wedding-catelogue-request', [FrontController::class, 'storeWeddingCatalogueRequest'])->name('store.wedding.catelogue.request');
+	Route::post('store-bespoke-commission-request', [FrontController::class, 'storeBespokeCommissionRequest'])->name('store.bespoke.commission.request');
 
-	Route::get('/ceremonials', [FrontController::class, 'getCeremonials'])->name('ceremonials');
+	Route::get('/ceremonials/{category_id?}', [FrontController::class, 'getCeremonials'])->name('ceremonials');
 	Route::post('store-ceremonial-inquiry', [FrontController::class, 'storeCeremonialInquiry'])->name('store.ceremonial.inquiry');
 	Route::get('/gift-shop', [FrontController::class, 'getGiftShop'])->name('giftshop');
     Route::get('gift-details/{product_slug}', [FrontController::class, 'getGiftDetails'])->name('gift.details');

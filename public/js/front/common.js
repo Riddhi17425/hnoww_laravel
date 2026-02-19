@@ -1,45 +1,138 @@
-var element = $('#product_of_interest')[0];  // get raw DOM element from jQuery object
-var choices = new Choices(element, {
-    removeItemButton: true,  // shows an "x" to deselect each selected option
-    placeholder: true,
-    placeholderValue: 'Select products',
-    searchEnabled: true,
-});
+// var element = $('#product_of_interest')[0];  // get raw DOM element from jQuery object
+// var choices = new Choices(element, {
+//     removeItemButton: true,  // shows an "x" to deselect each selected option
+//     placeholder: true,
+//     placeholderValue: 'Select products',
+//     searchEnabled: true,
+// });
 
-var element = $('#w_product_of_interest')[0];  // get raw DOM element from jQuery object
-var choices = new Choices(element, {
-    removeItemButton: true,  // shows an "x" to deselect each selected option
-    placeholder: true,
-    placeholderValue: 'Select products',
-    searchEnabled: true,
-});
-
-var element = $('#k_product_of_interest')[0];  // get raw DOM element from jQuery object
-var choices = new Choices(element, {
-    removeItemButton: true,  // shows an "x" to deselect each selected option
-    placeholder: true,
-    placeholderValue: 'Select products',
-    searchEnabled: true,
-});
+// var element = $('#w_product_of_interest')[0];  // get raw DOM element from jQuery object
+// var choices = new Choices(element, {
+//     removeItemButton: true,  // shows an "x" to deselect each selected option
+//     placeholder: true,
+//     placeholderValue: 'Select products',
+//     searchEnabled: true,
+// });
 
 
 var cFormSubmitted = false;
+// $("#requestCorporateProposalForm").validate({
+//     ignore: [],
+//     rules: { 
+//         full_name: { 
+//             required: true, 
+//             minlength: 2, 
+//             maxlength: 50, 
+//             lettersonly: true 
+//         },
+//         company_name: { 
+//             required: true 
+//         },
+//         phone: { 
+//             required: true, 
+//             number: true, 
+//             validPhone: true 
+//         },
+//         email: { 
+//             required: true, 
+//             email: true, 
+//             noSpamEmail: true, 
+//             uniqueEmail: "corporate_proposal_requests" 
+//         },
+//         'product_of_interest[]': { 
+//             required: true 
+//         },
+//         quantity_range: { 
+//             required: true 
+//         },
+//         delivery_date: { 
+//             required: true, 
+//             date: true, 
+//             minDate: true 
+//         },
+//         message:{
+//             maxlength:500,
+//         }
+//     },
+//     messages: {
+//         full_name: {
+//             required: "Please enter your full name",
+//             minlength: "Full name must be at least 2 characters",
+//             maxlength: "Full name cannot exceed 50 characters",
+//             lettersonly: "Full name can only contain letters and spaces"
+//         },
+//         company_name: {
+//             required: "Please enter your company or organization name"
+//         },
+//         phone: {
+//             required: "Please enter your phone number",
+//             number: "Phone number must contain only digits",
+//             validPhone: "Enter a valid phone number"
+//         },
+//         email: {
+//             required: "Please enter your email address",
+//             email: "Please enter a valid email address",
+//             noSpamEmail: "This email address is not allowed",
+//             uniqueEmail: "This email is already used"
+//         },
+//         'product_of_interest[]': {
+//             required: "Please select at least one product of interest"
+//         },
+//         quantity_range: {
+//             required: "Please select a quantity range"
+//         },
+//         delivery_date: {
+//             required: "Please select a delivery date",
+//             date: "Enter a valid date",
+//             minDate: "Delivery date must be after today"
+//         },
+//         message:{
+//             maxlength: "Message cannot exceed 50 characters",
+//         }
+//     },
+//     errorElement: 'div',
+//     errorPlacement: function(error, element) {
+//         if (element.attr('name') === 'product_of_interest[]') {
+//             $('#product_error').append(error);
+//         } else {
+//             error.insertAfter(element);
+//         }
+//     },
+//     highlight: function(element) {
+//         $(element).addClass('is-invalid').removeClass('is-valid');
+//     },
+//     unhighlight: function(element) {
+//         $(element).addClass('is-valid').removeClass('is-invalid');
+//     },
+//     submitHandler: function(form) {
+//         if (!cFormSubmitted) {
+//             cFormSubmitted = true;
+//             const btn = $(form).find('button[type="submit"]');
+//             if (btn.length) {
+//                 btn.prop('disabled', true).text('Submitting...');
+//             }
+//             form.submit();
+//         }
+//     }
+// });
+
 $("#requestCorporateProposalForm").validate({
     ignore: [],
     rules: { 
         full_name: { 
             required: true, 
             minlength: 2, 
-            maxlength: 50, 
+            maxlength: 100, 
             lettersonly: true 
         },
         company_name: { 
-            required: true 
+            required: true,
+            minlength: 2,
+            maxlength: 150
         },
-        phone: { 
-            required: true, 
-            number: true, 
-            validPhone: true 
+        role: {
+            required: true,
+            maxlength: 100
         },
         email: { 
             required: true, 
@@ -47,35 +140,38 @@ $("#requestCorporateProposalForm").validate({
             noSpamEmail: true, 
             uniqueEmail: "corporate_proposal_requests" 
         },
-        'product_of_interest[]': { 
-            required: true 
+        'nature_of_requirement[]': { 
+            required: true,
+            minlength: 1
         },
         quantity_range: { 
             required: true 
         },
-        delivery_date: { 
-            required: true, 
-            date: true, 
-            minDate: true 
+        corporate_budget: { 
+            required: true 
+        },
+        timeline: { 
+            required: true 
         },
         message:{
-            maxlength:500,
+            maxlength: 500,
         }
     },
     messages: {
         full_name: {
             required: "Please enter your full name",
             minlength: "Full name must be at least 2 characters",
-            maxlength: "Full name cannot exceed 50 characters",
+            maxlength: "Full name cannot exceed 100 characters",
             lettersonly: "Full name can only contain letters and spaces"
         },
         company_name: {
-            required: "Please enter your company or organization name"
+            required: "Please enter your company or organization name",
+            minlength: "Company name must be at least 2 characters",
+            maxlength: "Company name cannot exceed 150 characters"
         },
-        phone: {
-            required: "Please enter your phone number",
-            number: "Phone number must contain only digits",
-            validPhone: "Enter a valid phone number"
+        role: {
+            required: "Please enter your role or designation",
+            maxlength: "Role cannot exceed 100 characters"
         },
         email: {
             required: "Please enter your email address",
@@ -83,25 +179,32 @@ $("#requestCorporateProposalForm").validate({
             noSpamEmail: "This email address is not allowed",
             uniqueEmail: "This email is already used"
         },
-        'product_of_interest[]': {
-            required: "Please select at least one product of interest"
+        phone: {
+            required: "Please enter your phone number",
+            number: "Phone number must contain only digits",
+            validPhone: "Enter a valid phone number"
+        },
+        'nature_of_requirement[]': {
+            required: "Please select at least one nature of requirement",
+            minlength: "Please select at least one nature of requirement"
         },
         quantity_range: {
             required: "Please select a quantity range"
         },
-        delivery_date: {
-            required: "Please select a delivery date",
-            date: "Enter a valid date",
-            minDate: "Delivery date must be after today"
+        corporate_budget: {
+            required: "Please select a budget comfort"
+        },
+        timeline: {
+            required: "Please select a timeline"
         },
         message:{
-            maxlength: "Message cannot exceed 50 characters",
+            maxlength: "Message cannot exceed 500 characters"
         }
     },
     errorElement: 'div',
     errorPlacement: function(error, element) {
-        if (element.attr('name') === 'product_of_interest[]') {
-            $('#product_error').append(error);
+        if (element.attr('name') === 'nature_of_requirement[]') {
+            element.closest('.col-lg-4').append(error);
         } else {
             error.insertAfter(element);
         }
@@ -124,85 +227,183 @@ $("#requestCorporateProposalForm").validate({
     }
 });
 
+
 var wFormSubmitted = false;
+// $("#requestWeddingCatalogueForm").validate({
+//     ignore: [],
+//     rules: { 
+//         w_full_name: { 
+//             required: true, 
+//             minlength: 2, 
+//             maxlength: 50, 
+//             lettersonly: true 
+//         },
+//         w_company_name: { 
+//             required: true 
+//         },
+//         w_phone: { 
+//             required: true, 
+//             number: true, 
+//             validPhone: true 
+//         },
+//         w_email: { 
+//             required: true, 
+//             email: true, 
+//             noSpamEmail: true, 
+//             uniqueEmail: "corporate_proposal_requests" 
+//         },
+//         'w_product_of_interest[]': { 
+//             required: true 
+//         },
+//         w_quantity_range: { 
+//             required: true 
+//         },
+//         w_delivery_date: { 
+//             required: true, 
+//             date: true, 
+//             minDate: true 
+//         },
+//         w_message:{
+//             maxlength:500,
+//         }
+//     },
+//     messages: {
+//         w_full_name: {
+//             required: "Please enter your full name",
+//             minlength: "Full name must be at least 2 characters",
+//             maxlength: "Full name cannot exceed 50 characters",
+//             lettersonly: "Full name can only contain letters and spaces"
+//         },
+//         w_company_name: {
+//             required: "Please enter your company or organization name"
+//         },
+//         w_phone: {
+//             required: "Please enter your phone number",
+//             number: "Phone number must contain only digits",
+//             validPhone: "Enter a valid phone number"
+//         },
+//         w_email: {
+//             required: "Please enter your email address",
+//             email: "Please enter a valid email address",
+//             noSpamEmail: "This email address is not allowed",
+//             uniqueEmail: "This email is already used"
+//         },
+//         'w_product_of_interest[]': {
+//             required: "Please select at least one product of interest"
+//         },
+//         w_quantity_range: {
+//             required: "Please select a quantity range"
+//         },
+//         w_delivery_date: {
+//             required: "Please select a delivery date",
+//             date: "Enter a valid date",
+//             minDate: "Delivery date must be after today"
+//         },
+//         w_message:{
+//             maxlength: "Message cannot exceed 50 characters",
+//         }
+//     },
+//     errorElement: 'div',
+//     errorPlacement: function(error, element) {
+//         if (element.attr('name') === 'w_product_of_interest[]') {
+//             $('#w_product_error').append(error);
+//         } else {
+//             error.insertAfter(element);
+//         }
+//     },
+//     highlight: function(element) {
+//         $(element).addClass('is-invalid').removeClass('is-valid');
+//     },
+//     unhighlight: function(element) {
+//         $(element).addClass('is-valid').removeClass('is-invalid');
+//     },
+//     submitHandler: function(form) {
+//         if (!wFormSubmitted) {
+//             wFormSubmitted = true;
+//             const btn = $(form).find('button[type="submit"]');
+//             if (btn.length) {
+//                 btn.prop('disabled', true).text('Submitting...');
+//             }
+//             form.submit();
+//         }
+//     }
+// });
+
 $("#requestWeddingCatalogueForm").validate({
     ignore: [],
-    rules: { 
-        w_full_name: { 
-            required: true, 
-            minlength: 2, 
-            maxlength: 50, 
-            lettersonly: true 
+    rules: {
+        w_full_name: {
+            required: true,
+            minlength: 2,
+            maxlength: 100,
+            lettersonly: true
         },
-        w_company_name: { 
-            required: true 
+        // w_phone: {
+        //     required: true,
+        //     number: true,
+        //     minlength: 7,
+        //     maxlength: 15
+        // },
+        w_email: {
+            required: true,
+            email: true,
+            maxlength: 150
         },
-        w_phone: { 
-            required: true, 
-            number: true, 
-            validPhone: true 
+        w_role: {
+            required: true
         },
-        w_email: { 
-            required: true, 
-            email: true, 
-            noSpamEmail: true, 
-            uniqueEmail: "corporate_proposal_requests" 
+        'w_looking_for[]': {
+            required: true,
+            minlength: 1
         },
-        'w_product_of_interest[]': { 
-            required: true 
+        w_wedding_date: {
+            //required: true,
+            date: true,
+            minDate: true
         },
-        w_quantity_range: { 
-            required: true 
-        },
-        w_delivery_date: { 
-            required: true, 
-            date: true, 
-            minDate: true 
-        },
-        w_message:{
-            maxlength:500,
+        // w_guest_count: {
+        //     required: true
+        // },
+        // w_budget_band: {
+        //     required: true
+        // },
+        w_message: {
+            maxlength: 500
         }
     },
     messages: {
         w_full_name: {
             required: "Please enter your full name",
             minlength: "Full name must be at least 2 characters",
-            maxlength: "Full name cannot exceed 50 characters",
-            lettersonly: "Full name can only contain letters and spaces"
+            maxlength: "Full name cannot exceed 100 characters"
         },
-        w_company_name: {
-            required: "Please enter your company or organization name"
-        },
-        w_phone: {
-            required: "Please enter your phone number",
-            number: "Phone number must contain only digits",
-            validPhone: "Enter a valid phone number"
-        },
+        // w_phone: {
+        //     required: "Please enter your phone number"
+        // },
         w_email: {
-            required: "Please enter your email address",
-            email: "Please enter a valid email address",
-            noSpamEmail: "This email address is not allowed",
-            uniqueEmail: "This email is already used"
+            required: "Please enter your email"
         },
-        'w_product_of_interest[]': {
-            required: "Please select at least one product of interest"
+        w_role: {
+            required: "Please select your role"
         },
-        w_quantity_range: {
-            required: "Please select a quantity range"
+        'w_looking_for[]': {
+            required: "Please select at least one option"
         },
-        w_delivery_date: {
-            required: "Please select a delivery date",
-            date: "Enter a valid date",
-            minDate: "Delivery date must be after today"
+        w_wedding_date: {
+            //required: "Please select wedding date",
+            minDate: "Wedding date cannot be in the past"
         },
-        w_message:{
-            maxlength: "Message cannot exceed 50 characters",
-        }
+        // w_guest_count: {
+        //     required: "Please select guest count"
+        // },
+        // w_budget_band: {
+        //     required: "Please select budget band"
+        // }
     },
     errorElement: 'div',
     errorPlacement: function(error, element) {
-        if (element.attr('name') === 'w_product_of_interest[]') {
-            $('#w_product_error').append(error);
+        if (element.attr('name') === 'w_looking_for[]') {
+            $('#w_looking_for_error').append(error);
         } else {
             error.insertAfter(element);
         }

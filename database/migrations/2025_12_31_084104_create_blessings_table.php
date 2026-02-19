@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('sub_title')->nullable();
             $table->string('description', 500)->nullable();
             $table->string('image')->nullable();
+            $table->string('audio_content', 700)->nullable();
             $table->string('audio_file')->nullable();
             $table->tinyInteger('is_active')->default(1)->comment("0 = Active 1 = In-active");
             $table->softDeletes();

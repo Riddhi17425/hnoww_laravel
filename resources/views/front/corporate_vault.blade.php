@@ -526,6 +526,14 @@
 @push('script')
 <script>
 $(document).ready(function() {
+    var element = $('#k_product_of_interest')[0];  // get raw DOM element from jQuery object
+    var choices = new Choices(element, {
+        removeItemButton: true,  // shows an "x" to deselect each selected option
+        placeholder: true,
+        placeholderValue: 'Select products',
+        searchEnabled: true,
+    });
+
     $('#corporate_category').on('change', function() {
         var slug = $(this).val(); // get selected value
         if (slug) {

@@ -12,14 +12,14 @@
 <section class="mt_60">
     <div class="container">
         <div class="him_wrapper">
-            @if(isset($ceremonials) && is_countable($ceremonials) && count($ceremonials) > 0)
-            @foreach($ceremonials as $key => $val)
+            @if(isset($products) && is_countable($products) && count($products) > 0)
+            @foreach($products as $key => $val)
                 <div>
                     <div class="mb-2 mb-md-4 ceremonial_box">
-                        <img class="img-fluid" src="{{asset('public/images/admin/ceremonial/'.$val->image)}}" alt="him_prod">
+                        <img class="img-fluid" src="{{asset('public/images/admin/product_list/'.$val->list_page_img)}}" alt="wedding_prod">
 
                         <div class="inquire_bespoke">
-                            <a href="javascript:void(0);" class="inquire_link" data-bs-toggle="modal" data-bs-target="#ceremonialInquiry" data-ceremonial-name="{{ $val->title }}" data-ceremonial-id="{{ $val->id }}">
+                            <a href="javascript:void(0);" class="inquire_link" data-bs-toggle="modal" data-bs-target="#ceremonialInquiry" data-ceremonial-name="{{ $val->product_name }}" data-ceremonial-id="{{ $val->id }}">
                                 Inquire for <br> Ceremonial <br>
                                 <span>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="39" height="39" viewBox="0 0 39 39"
@@ -34,14 +34,14 @@
                         </div>
                     </div>
 
-                    <h3 class="sub_head">{{$val->title ?? ''}}</h3>
+                    <h3 class="sub_head">{{$val->product_name ?? ''}}</h3>
                     {{-- <p class="mb-0">
                         A ceremonial beginning, held in form. 
                     </p> --}}
                     <p class="my-3">
-                    {!! $val->description ?? '' !!}
+                    {!! $val->short_description ?? '' !!}
                     </p>
-                    <a href="javascript:void(0);" class="com_btn" data-bs-toggle="modal" data-bs-target="#ceremonialInquiry" data-ceremonial-name="{{ $val->title }}" data-ceremonial-id="{{ $val->id }}">Available through the H Noww Wedding Concierge.</a>
+                    <a href="javascript:void(0);" class="com_btn" data-bs-toggle="modal" data-bs-target="#ceremonialInquiry" data-ceremonial-name="{{ $val->product_name }}" data-ceremonial-id="{{ $val->id }}">Available through the H Noww Wedding Concierge.</a>
                 </div>
             @endforeach
             @endif

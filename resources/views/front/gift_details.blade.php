@@ -76,7 +76,7 @@
                     </div>
                     @endif
 
-                    <div>
+                    {{-- <div>
                         <div class="d-flex align-items-center gap-3 mt-4 mb-2">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 30 28"
@@ -91,7 +91,7 @@
                             </span>
                         </div>
                         <p class="m-0">Wipe with a soft dry cloth.</p>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

@@ -5,7 +5,24 @@ return [
     'admin_whatsapp_no' => '916354910945',
     'contact_enquiry_type' => ['bespoke_commission' => 'Bespoke Commissions', 'general_enquiery' => 'General Enquiry', 'support' => 'Support'],
     'request_catalogue_interest' => ['private_collection1' => 'Private Collection1', 'private_collection2' => 'Private Collection2'],
-    'quality_range' => ['20_50' => '20-50', '50_100' => '50–100', '100_300' => '100–300', '300_500' => '300–500', '500_plus' => '500+'],
+    'quality_range' => [
+        'under_20' => 'Under 20',
+        '20_50'    => '20-50',
+        '50_100'   => '50-100',
+        '100_plus' => '100+',
+    ],
+    'corporate_budget' => [
+        'to_be_discussed' => 'To be discussed',
+        'under_300'     => 'Under AED 300',
+        '300_750'     => 'AED 300-750',
+        '750_1500'     => 'AED 750-1500',
+        '1500_plus'      => 'AED 1500+',
+    ],
+    'corporate_timeline' => [
+        'flexible'   => 'Flexible',
+        '2_4_weeks'  => '2-4 weeks',
+        '1_3_months' => '1-3 months',
+    ],
     'months' => ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November','December'],
     
     // 'blessing_of' => ['love' => 'Love', 'strength' => 'Strength', 'renewal' => 'Renewal', 'devotion' => 'Devotion'],
@@ -50,5 +67,42 @@ return [
     ],
 
     'gift_price_range' => ['0-500' => 'Under AED 500', '501-1000' => '501-1000', '1001-1500' => '1000-1500', '1501-2000' => '1501-2000', '2000-0' => 'Above AED 2000'],
-    
+    'commission_type' => [
+        'personal' => 'Personal / Heirloom',
+        'wedding' => 'Wedding-related',
+        'corporate' => 'Corporate / Institutiona',
+        'other' => 'Other (please specify)',
+    ],
+    'timeline' => [
+        'flexible' => 'Flexible',
+        'within3months' => 'Within 3 months',
+        '3-6_months' => '3-6 months',
+        '6+months' => '6+ months',
+    ],
+    'budget_range' => [
+        'to_be_discussed' => 'To be discussed',
+        'under5000' => 'Under AED 5,000',
+        'aed_5000_10000' => 'AED 5,000-10,000',
+        'aed_10000_25000' => 'AED 10,000-25,000',
+    ],
+    'wedding_role' => [
+        'bride' => 'Bride',
+        'groom' => 'Groom',
+        'family_member' => 'Family Member',
+        'wedding_planner' => 'Wedding Planner',
+        'other' => 'Other',
+    ],
+    'wedding_guest_count' => [
+        "Under 50" => "Under 50",
+        "50-150" => "50-150",
+        "150-300" => "150-300",
+        "300+" => "300+"
+    ],
+    'wedding_budget' => [
+        "To be discussed" => "To be discussed",
+        "Under AED 10,000" => "Under AED 10,000",
+        "AED 10,000-25,000" => "AED 10,000-25,000",
+        "AED 25,000-50,000" => "AED 25,000-50,000",
+        "AED 50,000+" => "AED 50,000+"
+    ],
 ];

@@ -6,10 +6,12 @@
         <p>Hello {{ $name ?? 'User' }},</p>
 
         <p>
-            Your Wedding Catalogue Request has been send Successfully.
+            Thank you.<br/>
+            Our Wedding Concierge will review your details and reach out if aligned.<br/>
+            Vault access is shared only after an initial conversation.
         </p>
 
-        <table width="100%" cellpadding="8" cellspacing="0" border="1" style="border-collapse: collapse; margin-top: 15px;">
+        {{-- <table width="100%" cellpadding="8" cellspacing="0" border="1" style="border-collapse: collapse; margin-top: 15px;">
             <tr>
                 <td width="30%"><strong>Full Name</strong></td>
                 <td>{{ $name }}</td>
@@ -50,7 +52,7 @@
                 <td><strong>Message</strong></td>
                 <td>{{ $message_data ?? 'N/A' }}</td>
             </tr>
-        </table>
+        </table> --}}
 
         <p style="margin-top: 20px;">
             Thanks & Regards,<br>

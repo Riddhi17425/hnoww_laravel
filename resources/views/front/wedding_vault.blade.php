@@ -24,7 +24,7 @@
     </div>
     <a class="wedding_btn d-none d-lg-flex" href="javascript:void(0);">
         <div>
-            Don’t have a code? Request access from the HNoww Wedding Concierge.1
+            Don’t have a code? Request access from the HNoww Wedding Concierge.
            
         </div>
         <div><svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">

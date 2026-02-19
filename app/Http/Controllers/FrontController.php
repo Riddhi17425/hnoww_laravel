@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DB;
 use Illuminate\Support\Facades\Mail;
-use App\Models\{User, Category, Product, ProductInquiry, NewsLetter, FaqType, ContactInquiry, RequestCatalogue, CorporateProposalRequest, Journal, Blessing, WeddingCatalogueRequest, GiftBlessing, Ceremonial, CeremonialInquiry, GiftShop, CorporateKit, CorporateKitRequest};
+use App\Models\{User, Category, Product, ProductInquiry, NewsLetter, FaqType, ContactInquiry, RequestCatalogue, CorporateProposalRequest, Journal, Blessing, WeddingCatalogueRequest, GiftBlessing, Ceremonial, CeremonialInquiry, GiftShop, CorporateKit, CorporateKitRequest, BespokeCommissionEnquiry};
 use Exception;
 use Illuminate\Validation\Rule;
 
 use App\Services\PaymentService;
 use Stripe;
+use Illuminate\Support\Facades\Log;
 
 class FrontController extends Controller
 {
@@ -45,7 +46,7 @@ class FrontController extends Controller
 
     public function index(Request $request){
         $selectFields = [
-            'id', 'category_id', 'product_name', 'short_description', 'is_active', 'deleted_at'
+            'id', 'category_id', 'product_name', 'short_description', 'is_active', 'deleted_at', 'product_url', 'list_page_img'
         ];
 
         $herProduct = Product::select($selectFields)->isActive()->notDeleted()
@@ -53,26 +54,26 @@ class FrontController extends Controller
                 $q->where('category_url', 'for-her')
                 ->where('is_active', 0)
                 ->whereNull('deleted_at');
-            })->with('category')->get();
+            })->with('category')->orderBy('id', 'DESC')->get();
 
         $himProduct = Product::select($selectFields)->isActive()->notDeleted()
             ->whereHas('category', function($q){
                 $q->where('category_url', 'for-him')
                 ->where('is_active', 0)
                 ->whereNull('deleted_at');
-            })->with('category')->get();
+            })->with('category')->orderBy('id', 'DESC')->get();
 
         $homeProduct = Product::select($selectFields)->isActive()->notDeleted()
             ->whereHas('category', function($q){
                 $q->where('category_url', 'for-home')
                 ->where('is_active', 0)
                 ->whereNull('deleted_at');
-            })->with('category')->get();
+            })->with('category')->orderBy('id', 'DESC')->get();
             
 
         $corporateProduct = Product::select('id', 'product_name')->where('product_type', 2)->isActive()->notDeleted()->get();
         $weddingProduct = Product::select('id', 'product_name')->where('product_type', 3)->isActive()->notDeleted()->get();
-        $allProd = Product::isActive()->notDeleted()->latest()->take(8)->get();
+        //$allProd = Product::isActive()->notDeleted()->latest()->take(8)->get();
         $allGifts = GiftShop::where('is_active', 0)->whereNull('deleted_at');
         if (request()->filled('gift_for') && request()->filled('gift_for') != '') {
             $allGifts->where('gift_for', request('gift_for'));
@@ -84,8 +85,19 @@ class FrontController extends Controller
         if (request()->ajax()) {
             return view('front.partials.gift-list', compact('allGifts'))->render();
         }
+        
+        // Take 2 items from each collection
+        $herProductsSubset = $herProduct->take(2);
+        $himProductsSubset = $himProduct->take(2);
+        $homeProductsSubset = $homeProduct->take(2);
+        // Merge them into a single collection
+        $combinedProducts = $herProductsSubset
+            ->merge($himProductsSubset)
+            ->merge($homeProductsSubset);
+        // If you want a plain array instead of collection
+        $desiredProductsArray = $combinedProducts->values()->all();
 
-        return view('front.home', compact('herProduct', 'himProduct', 'homeProduct', 'corporateProduct', 'weddingProduct', 'allProd', 'allGifts'));
+        return view('front.home', compact('herProduct', 'himProduct', 'homeProduct', 'corporateProduct', 'weddingProduct', /*'allProd',*/ 'allGifts', 'desiredProductsArray'));
     }
 
     public function getList(Request $request, $catSlug, $from = null){
@@ -305,6 +317,8 @@ class FrontController extends Controller
             $exists = DB::table('corporate_kit_requests')->where('email', $email)->exists();
         } elseif($table === 'users') {
             $exists = DB::table('users')->where('email', $email)->exists();
+        } elseif($table === 'bespoke_commission_enquiries') {
+            $exists = DB::table('bespoke_commission_enquiries')->where('email', $email)->exists();
         }
 
         return response()->json([
@@ -554,36 +568,76 @@ class FrontController extends Controller
 
     public function storeCorporateProposalRequest(Request $request){
         $qualityRange = config('global_values.quality_range');
+        $corporateBudget = config('global_values.corporate_budget');
+        $timeline = config('global_values.corporate_timeline');
+        // $rules = [
+        //     'full_name'             => 'required|string|min:2|max:100',
+        //     'company_name'          => 'required|string|min:2|max:150',
+        //     'phone'                 => 'required|regex:/^[0-9\s\-\+\(\)]+$/|min:7|max:20',
+        //     'email'                 => 'required|email|max:150',
+        //     'product_of_interest'   => 'nullable|array',
+        //     'product_of_interest.*' => 'string',
+        //     'quantity_range'        => 'required|string',
+        //     'budget'                => 'nullable|string|max:100',
+        //     'branding_requirements' => 'nullable|string|max:255',
+        //     'delivery_date'         => 'required|date|after_or_equal:today',
+        //     'message'               => 'nullable|string|max:500',
+        // ];
+        // $messages = [
+        //     'full_name.required'             => 'Full Name is required.',
+        //     'full_name.min'                  => 'Full Name must be at least 2 characters.',
+        //     'full_name.max'                  => 'Full Name cannot be longer than 100 characters.',
+        //     'company_name.required'          => 'Company Organization is required.',
+        //     'phone.required'                 => 'Phone Number is required.',
+        //     'phone.regex'                   => 'Phone Number format is invalid.',
+        //     'phone.min'                     => 'Phone Number is too short.',
+        //     'phone.max'                     => 'Phone Number is too long.',
+        //     'email.required'                => 'Email Address is required.',
+        //     'email.email'                   => 'Email must be a valid email address.',
+        //     'quantity_range.required'       => 'Quantity Range is required.',
+        //     'quantity_range.in'             => 'Selected Quantity Range is invalid.',
+        //     'delivery_date.required'        => 'Delivery Timeline is required.',
+        //     'delivery_date.date'            => 'Delivery Timeline must be a valid date.',
+        //     'delivery_date.after_or_equal'  => 'Delivery Timeline cannot be in the past.',
+        //     'message.max'                   => 'Message cannot exceed 500 characters.',
+        // ];
         $rules = [
             'full_name'             => 'required|string|min:2|max:100',
             'company_name'          => 'required|string|min:2|max:150',
-            'phone'                 => 'required|regex:/^[0-9\s\-\+\(\)]+$/|min:7|max:20',
+            'role'                  => 'required|string|max:100',
+            //'phone'                 => 'nullable|regex:/^[0-9\s\-\+\(\)]+$/|min:7|max:20',
             'email'                 => 'required|email|max:150',
-            'product_of_interest'   => 'nullable|array',
-            'product_of_interest.*' => 'string',
-            'quantity_range'        => 'required|string',
-            'budget'                => 'nullable|string|max:100',
-            'branding_requirements' => 'nullable|string|max:255',
-            'delivery_date'         => 'required|date|after_or_equal:today',
+            'nature_of_requirement'   => 'required|array|min:1',
+            'nature_of_requirement.*' => 'string|max:150',
+            'quantity_range'        => 'required|string|max:50',
+            'corporate_budget'      => 'required|string|max:100',
+            'timeline'              => 'required|string|max:50',
             'message'               => 'nullable|string|max:500',
         ];
         $messages = [
-            'full_name.required'             => 'Full Name is required.',
-            'full_name.min'                  => 'Full Name must be at least 2 characters.',
-            'full_name.max'                  => 'Full Name cannot be longer than 100 characters.',
-            'company_name.required'          => 'Company Organization is required.',
-            'phone.required'                 => 'Phone Number is required.',
-            'phone.regex'                   => 'Phone Number format is invalid.',
-            'phone.min'                     => 'Phone Number is too short.',
-            'phone.max'                     => 'Phone Number is too long.',
-            'email.required'                => 'Email Address is required.',
-            'email.email'                   => 'Email must be a valid email address.',
-            'quantity_range.required'       => 'Quantity Range is required.',
-            'quantity_range.in'             => 'Selected Quantity Range is invalid.',
-            'delivery_date.required'        => 'Delivery Timeline is required.',
-            'delivery_date.date'            => 'Delivery Timeline must be a valid date.',
-            'delivery_date.after_or_equal'  => 'Delivery Timeline cannot be in the past.',
-            'message.max'                   => 'Message cannot exceed 500 characters.',
+            'full_name.required'         => 'Full Name is required.',
+            'full_name.min'              => 'Full Name must be at least 2 characters.',
+            'full_name.max'              => 'Full Name cannot be longer than 100 characters.',
+            'company_name.required'      => 'Company Name is required.',
+            'company_name.min'           => 'Company Name must be at least 2 characters.',
+            'company_name.max'           => 'Company Name cannot exceed 150 characters.',
+            'role.required'              => 'Role / Designation is required.',
+            'role.max'                   => 'Role cannot exceed 100 characters.',
+            // 'phone.regex'                => 'Phone Number format is invalid.',
+            // 'phone.min'                  => 'Phone Number is too short.',
+            // 'phone.max'                  => 'Phone Number is too long.',
+            'email.required'             => 'Email Address is required.',
+            'email.email'                => 'Email must be a valid email address.',
+            'nature_of_requirement.required'   => 'Please select at least one Nature of Requirement.',
+            'nature_of_requirement.array'      => 'Invalid Nature of Requirement selection.',
+            'nature_of_requirement.*.max'      => 'Each selected Nature of Requirement cannot exceed 150 characters.',
+            'quantity_range.required'    => 'Please select a Quantity Range.',
+            'quantity_range.max'         => 'Quantity Range cannot exceed 50 characters.',
+            'corporate_budget.required' => 'Please select a Budget Comfort.',
+            'corporate_budget.max'      => 'Budget Comfort cannot exceed 100 characters.',
+            'timeline.required'         => 'Please select a Timeline.',
+            'timeline.max'              => 'Timeline cannot exceed 50 characters.',
+            'message.max'                => 'Message cannot exceed 500 characters.',
         ];
 
         // Validate the request
@@ -598,48 +652,70 @@ class FrontController extends Controller
         $data = $request->only([
             'full_name', 
             'company_name', 
-            'phone', 
+            'role', 
             'email', 
             'quantity_range', 
-            'budget', 
-            'branding_requirements', 
-            'delivery_date', 
+            'corporate_budget', 
+            'timeline', 
             'message'
         ]); 
 
         // Convert array to string for product_of_interest if needed (or save JSON)
-        if ($request->has('product_of_interest')) {
-            $data['product_of_interest'] = json_encode($request->input('product_of_interest'));
+        // if ($request->has('product_of_interest')) {
+        //     $data['product_of_interest'] = json_encode($request->input('product_of_interest'));
+        // } else {
+        //     $data['product_of_interest'] = null;
+        // }
+
+        if ($request->has('nature_of_requirement')) {
+            $data['nature_of_requirement'] = json_encode($request->input('nature_of_requirement'));
         } else {
-            $data['product_of_interest'] = null;
+            $data['nature_of_requirement'] = null;
         }
 
         CorporateProposalRequest::create($data);
-
-        $commaSeparatedProducts = '';
-        $productIds = $request->product_of_interest;
-        $productNames = Product::whereIn('id', $productIds)->pluck('product_name')->toArray();
-        if(isset($productNames) && is_countable($productNames) && count($productNames) > 0){
-            $commaSeparatedProducts = implode(', ', $productNames);
+        $commaSeparatedRequirements = '';
+        $requirements = $request->nature_of_requirement;
+        if (isset($requirements) && is_countable($requirements) && count($requirements) > 0) {
+            $commaSeparatedRequirements = implode(', ', $requirements);
         }
+
+        // $commaSeparatedProducts = '';
+        // $productIds = $request->product_of_interest;
+        // $productNames = Product::whereIn('id', $productIds)->pluck('product_name')->toArray();
+        // if(isset($productNames) && is_countable($productNames) && count($productNames) > 0){
+        //     $commaSeparatedProducts = implode(', ', $productNames);
+        // }
 
         // SEND MAIL TO USER AND ADMIN
         $adminEmail = $this->adminEmail;
         $userEmail = $request->email;
+        $qualityRange = $qualityRange[$request->quantity_range];
+        $corporateBudget = $corporateBudget[$request->corporate_budget];
+        $timeline = $timeline[$request->timeline];
         $data = [
-            'name'        => $request->full_name,
-            'company_name'        => $request->company_name,
-            'phone'        => $request->phone,
-            'email'       => $request->email,
-            'product_of_interest' => $commaSeparatedProducts,
-            'quantity_range'  => $qualityRange[$request->quantity_range],
-            'budget'  => $request->budget,
-            'branding_requirements'  => $request->branding_requirements,
-            'delivery_date'  => $request->delivery_date,
-            'message_data'     => $request->message ?? NULL,
+            // 'name'        => $request->full_name,
+            // 'company_name'        => $request->company_name,
+            // 'phone'        => $request->phone,
+            // 'email'       => $request->email,
+            // 'product_of_interest' => $commaSeparatedProducts,
+            // 'quantity_range'  => $qualityRange[$request->quantity_range],
+            // 'budget'  => $request->budget,
+            // 'branding_requirements'  => $request->branding_requirements,
+            // 'delivery_date'  => $request->delivery_date,
+            // 'message_data'     => $request->message ?? NULL,
+            'name'                   => $request->full_name,
+            'company_name'           => $request->company_name,
+            'role'                   => $request->role,
+            'email'                  => $request->email,
+            'quantity_range'         => $qualityRange,
+            'corporate_budget'       => $corporateBudget,
+            'timeline'               => $timeline,
+            'nature_of_requirement'  => $commaSeparatedRequirements,
+            'message_data'           => $request->message ?? null,
         ];
 
-        try {
+        //try {
             Mail::send('email.admin.corporate_proposal_request', $data, function ($message) use ($adminEmail) {
                 $message->to($this->adminEmail)->subject('New Corporate Proposal Request Received');
             });
@@ -647,24 +723,36 @@ class FrontController extends Controller
             Mail::send('email.front.corporate_proposal_request', $data, function ($message) use ($userEmail) {
                 $message->to($userEmail)->subject('Corporate Proposal Request send Successfully');
             });
-        } catch (Exception $e) {
-            Log::error('Inquiry Mail sending failed: '.$e->getMessage());
-        }
+        // } catch (Exception $e) {
+        //     Log::error('Inquiry Mail sending failed: '.$e->getMessage());
+        // }
 
         // SEND WHATSAPP MESSAGE TO ADMIN
         //$message = 'New Corporate Proposal Request is placed using email - '.$request->email;
+        // $message = "📩 *New Corporate Proposal Request*\n\n" .
+        //         "*Full Name:* {$request->full_name}\n" .
+        //         "*Company Name:* {$request->company_name}\n" .
+        //         "*Phone:* {$request->phone}\n" .
+        //         "*Email:* {$request->email}\n" .
+        //         "*Product of Interest:* " . ($commaSeparatedProducts ?? 'N/A') . "\n" .
+        //         "*Quantity Range:* {$qualityRange[$request->quantity_range]}\n" .
+        //         "*Budget:* {$request->budget}\n" .
+        //         "*Branding Requirements:* {$request->branding_requirements}\n" .
+        //         "*Delivery Date:* {$request->delivery_date}\n" .
+        //         "*Message:* " . ($request->message ?? 'N/A') . "\n\n" .
+        //         "— HNoWW";
         $message = "📩 *New Corporate Proposal Request*\n\n" .
-                "*Full Name:* {$request->full_name}\n" .
-                "*Company Name:* {$request->company_name}\n" .
-                "*Phone:* {$request->phone}\n" .
-                "*Email:* {$request->email}\n" .
-                "*Product of Interest:* " . ($commaSeparatedProducts ?? 'N/A') . "\n" .
-                "*Quantity Range:* {$qualityRange[$request->quantity_range]}\n" .
-                "*Budget:* {$request->budget}\n" .
-                "*Branding Requirements:* {$request->branding_requirements}\n" .
-                "*Delivery Date:* {$request->delivery_date}\n" .
-                "*Message:* " . ($request->message ?? 'N/A') . "\n\n" .
-                "— HNoWW";
+                    "*Full Name:* {$request->full_name}\n" .
+                    "*Company Name:* {$request->company_name}\n" .
+                    "*Role / Designation:* {$request->role}\n" .
+                    "*Email:* {$request->email}\n" .
+                    "*Quantity Range:* {$qualityRange}\n" .
+                    "*Budget Comfort:* {$corporateBudget}\n" .
+                    "*Timeline:* {$timeline}\n" .
+                    "*Nature of Requirement:* " . ($commaSeparatedRequirements ?? 'N/A') . "\n" .
+                    "*Message:* " . ($request->message ?? 'N/A') . "\n\n" .
+                    "— HNoWW";
+
         try {
             $url = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode($message);
             //return redirect()->away($url);
@@ -801,37 +889,93 @@ class FrontController extends Controller
     }
 
     public function storeWeddingCatalogueRequest(Request $request){
-        $qualityRange = config('global_values.quality_range');
+        // $qualityRange = config('global_values.quality_range');
+        $weddingRole = config('global_values.wedding_role');
         $rules = [
-            'w_full_name'             => 'required|string|min:2|max:100',
-            'w_company_name'          => 'required|string|min:2|max:150',
-            'w_phone'                 => 'required|regex:/^[0-9\s\-\+\(\)]+$/|min:7|max:20',
-            'w_email'                 => 'required|email|max:150',
-            'w_product_of_interest'   => 'nullable|array',
-            'w_product_of_interest.*' => 'string',
-            'w_quantity_range'        => 'required|string',
-            'w_budget'                => 'nullable|string|max:100',
-            'w_branding_requirements' => 'nullable|string|max:255',
-            'w_delivery_date'         => 'required|date|after_or_equal:today',
-            'w_message'               => 'nullable|string|max:500',
+            // 'w_full_name'             => 'required|string|min:2|max:100',
+            // 'w_company_name'          => 'required|string|min:2|max:150',
+            // 'w_phone'                 => 'required|regex:/^[0-9\s\-\+\(\)]+$/|min:7|max:20',
+            // 'w_email'                 => 'required|email|max:150',
+            // 'w_product_of_interest'   => 'nullable|array',
+            // 'w_product_of_interest.*' => 'string',
+            // 'w_quantity_range'        => 'required|string',
+            // 'w_budget'                => 'nullable|string|max:100',
+            // 'w_branding_requirements' => 'nullable|string|max:255',
+            // 'w_delivery_date'         => 'required|date|after_or_equal:today',
+            // 'w_message'               => 'nullable|string|max:500',
+
+            'w_full_name'      => 'required|string|min:2|max:100',
+            //'w_phone'          => 'nullable|regex:/^[0-9]+$/|min:7|max:15',
+            'w_email'          => 'required|email|max:150',
+            'w_role'           => 'required|string|max:100',
+            'w_location'       => 'nullable|string|max:150',
+            'w_wedding_date'   => 'required|date|after_or_equal:today',
+            'w_looking_for'    => 'required|array|min:1',
+            'w_looking_for.*'  => 'string|max:150',
+            'w_guest_count'    => 'required|string|max:50',
+            'w_budget_band'    => 'required|string|max:100',
+            'w_message'        => 'nullable|string|max:500',
         ];
+        // $messages = [
+        //     'w_full_name.required'             => 'Full Name is required.',
+        //     'w_full_name.min'                  => 'Full Name must be at least 2 characters.',
+        //     'w_full_name.max'                  => 'Full Name cannot be longer than 100 characters.',
+        //     'w_company_name.required'          => 'Company Organization is required.',
+        //     'w_phone.required'                 => 'Phone Number is required.',
+        //     'w_phone.regex'                   => 'Phone Number format is invalid.',
+        //     'w_phone.min'                     => 'Phone Number is too short.',
+        //     'w_phone.max'                     => 'Phone Number is too long.',
+        //     'w_email.required'                => 'Email Address is required.',
+        //     'w_email.email'                   => 'Email must be a valid email address.',
+        //     'w_quantity_range.required'       => 'Quantity Range is required.',
+        //     'w_quantity_range.in'             => 'Selected Quantity Range is invalid.',
+        //     'w_delivery_date.required'        => 'Delivery Timeline is required.',
+        //     'w_delivery_date.date'            => 'Delivery Timeline must be a valid date.',
+        //     'w_delivery_date.after_or_equal'  => 'Delivery Timeline cannot be in the past.',
+        //     'w_message.max'                   => 'Message cannot exceed 500 characters.',
+        // ];
         $messages = [
-            'w_full_name.required'             => 'Full Name is required.',
-            'w_full_name.min'                  => 'Full Name must be at least 2 characters.',
-            'w_full_name.max'                  => 'Full Name cannot be longer than 100 characters.',
-            'w_company_name.required'          => 'Company Organization is required.',
-            'w_phone.required'                 => 'Phone Number is required.',
-            'w_phone.regex'                   => 'Phone Number format is invalid.',
-            'w_phone.min'                     => 'Phone Number is too short.',
-            'w_phone.max'                     => 'Phone Number is too long.',
-            'w_email.required'                => 'Email Address is required.',
-            'w_email.email'                   => 'Email must be a valid email address.',
-            'w_quantity_range.required'       => 'Quantity Range is required.',
-            'w_quantity_range.in'             => 'Selected Quantity Range is invalid.',
-            'w_delivery_date.required'        => 'Delivery Timeline is required.',
-            'w_delivery_date.date'            => 'Delivery Timeline must be a valid date.',
-            'w_delivery_date.after_or_equal'  => 'Delivery Timeline cannot be in the past.',
-            'w_message.max'                   => 'Message cannot exceed 500 characters.',
+            'w_full_name.required' => 'Full Name is required.',
+            'w_full_name.string'   => 'Full Name must be a valid text.',
+            'w_full_name.min'      => 'Full Name must be at least 2 characters.',
+            'w_full_name.max'      => 'Full Name cannot exceed 100 characters.',
+
+            // 'w_phone.required' => 'Phone Number is required.',
+            // 'w_phone.regex'    => 'Phone Number must contain only digits.',
+            // 'w_phone.min'      => 'Phone Number must be at least 7 digits.',
+            // 'w_phone.max'      => 'Phone Number cannot exceed 15 digits.',
+
+            'w_email.required' => 'Email Address is required.',
+            'w_email.email'    => 'Please enter a valid Email Address.',
+            'w_email.max'      => 'Email Address cannot exceed 150 characters.',
+
+            'w_role.required' => 'Please select your Role.',
+            'w_role.string'   => 'Role must be valid.',
+            'w_role.max'      => 'Role cannot exceed 100 characters.',
+
+            'w_location.string' => 'Wedding Location must be valid text.',
+            'w_location.max'    => 'Wedding Location cannot exceed 150 characters.',
+
+            'w_wedding_date.required' => 'Wedding Date is required.',
+            'w_wedding_date.date'     => 'Please select a valid Wedding Date.',
+            'w_wedding_date.after_or_equal' => 'Wedding Date cannot be in the past.',
+
+            'w_looking_for.required' => 'Please select at least one option.',
+            'w_looking_for.array'    => 'Invalid selection for What you are looking for.',
+            'w_looking_for.min'      => 'Please select at least one option.',
+            'w_looking_for.*.string' => 'Invalid selection value.',
+            'w_looking_for.*.max'    => 'Selection value is too long.',
+
+            'w_guest_count.required' => 'Please select the Approximate Guest Count.',
+            'w_guest_count.string'   => 'Guest Count must be valid.',
+            'w_guest_count.max'      => 'Guest Count cannot exceed 50 characters.',
+
+            'w_budget_band.required' => 'Please select the Budget Band.',
+            'w_budget_band.string'   => 'Budget Band must be valid.',
+            'w_budget_band.max'      => 'Budget Band cannot exceed 100 characters.',
+
+            'w_message.string' => 'Message must be valid text.',
+            'w_message.max'    => 'Message cannot exceed 500 characters.',
         ];
 
         // Validate the request
@@ -841,51 +985,52 @@ class FrontController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-       
+        $role = $request->w_role ? $weddingRole[$request->w_role] : '-';
+        $weddingDate = $request->w_wedding_date ?? null;
+        $lookingFor = is_array($request->w_looking_for) ? implode(', ', $request->w_looking_for) : $request->w_looking_for;
         $data = [
-            'full_name' => $request->w_full_name,
-            'company_name' => $request->w_company_name,
-            'phone' => $request->w_phone,
-            'email' => $request->w_email,
-            'quantity_range' => $request->w_quantity_range,
-            'budget' => $request->w_budget,
-            'branding_requirements' => $request->w_branding_requirements,
-            'delivery_date' => $request->w_delivery_date,
-            'message' => $request->w_message,
+            // 'full_name' => $request->w_full_name,
+            // 'company_name' => $request->w_company_name,
+            // 'phone' => $request->w_phone,
+            // 'email' => $request->w_email,
+            // 'quantity_range' => $request->w_quantity_range,
+            // 'budget' => $request->w_budget,
+            // 'branding_requirements' => $request->w_branding_requirements,
+            // 'delivery_date' => $request->w_delivery_date,
+            // 'message' => $request->w_message,
+            'full_name'      => $request->w_full_name,
+            //'phone'          => $request->w_phone,
+            'email'          => $request->w_email,
+            'role'           => $role,
+            'location'       => $request->w_location,
+            'wedding_date'   => $weddingDate,
+            'looking_for'    => $lookingFor,
+            'guest_count'    => $request->w_guest_count,
+            'budget_band'    => $request->w_budget_band,
+            'message_note'        => $request->w_message,
         ];
 
         // Convert array to string for product_of_interest if needed (or save JSON)
-        if ($request->has('w_product_of_interest')) {
-            $data['product_of_interest'] = json_encode($request->input('w_product_of_interest'));
-        } else {
-            $data['product_of_interest'] = null;
-        }
+        // if ($request->has('w_product_of_interest')) {
+        //     $data['product_of_interest'] = json_encode($request->input('w_product_of_interest'));
+        // } else {
+        //     $data['product_of_interest'] = null;
+        // }
 
         WeddingCatalogueRequest::create($data);
 
-        $commaSeparatedProducts = '';
-        $productIds = $request->w_product_of_interest;
-        $productNames = Product::whereIn('id', $productIds)->pluck('product_name')->toArray();
-        if(isset($productNames) && is_countable($productNames) && count($productNames) > 0){
-            $commaSeparatedProducts = implode(', ', $productNames);
-        }
+        // $commaSeparatedProducts = '';
+        // $productIds = $request->w_product_of_interest;
+        // $productNames = Product::whereIn('id', $productIds)->pluck('product_name')->toArray();
+        // if(isset($productNames) && is_countable($productNames) && count($productNames) > 0){
+        //     $commaSeparatedProducts = implode(', ', $productNames);
+        // }
 
         // SEND MAIL TO USER AND ADMIN
         $adminEmail = $this->adminEmail;
         $userEmail = $request->w_email;
-        $data = [
-            'name'        => $request->w_full_name,
-            'company_name'        => $request->w_company_name,
-            'phone'        => $request->w_phone,
-            'email'       => $request->w_email,
-            'product_of_interest' => $commaSeparatedProducts,
-            'quantity_range'  => $qualityRange[$request->w_quantity_range],
-            'budget'  => $request->w_budget,
-            'branding_requirements'  => $request->w_branding_requirements,
-            'delivery_date'  => $request->w_delivery_date,
-            'message_data'     => $request->w_message ?? NULL,
-        ];
-
+        $weddingDate = $request->w_wedding_date ? date('d-m-Y', strtotime($request->w_wedding_date)) : '-';
+        $data['wedding_date'] = $weddingDate;
         try {
             Mail::send('email.admin.wedding_catalogue_request', $data, function ($message) use ($adminEmail) {
                 $message->to($this->adminEmail)->subject('New Wedding Catalogue Request Received');
@@ -897,21 +1042,32 @@ class FrontController extends Controller
         } catch (Exception $e) {
             Log::error('Inquiry Mail sending failed: '.$e->getMessage());
         }
-
+        
         // SEND WHATSAPP MESSAGE TO ADMIN
-        //$message = 'New Wedding Catalogue Request is placed using email - '.$request->w_email;
-        $message = "📩 *New Wedding Catalogue Request*\n\n" .
-                "*Full Name:* {$request->w_full_name}\n" .
-                "*Company Name:* {$request->w_company_name}\n" .
-                "*Phone:* {$request->w_phone}\n" .
-                "*Email:* {$request->w_email}\n" .
-                "*Product of Interest:* " . ($commaSeparatedProducts ?? 'N/A') . "\n" .
-                "*Quantity Range:* {$qualityRange[$request->w_quantity_range]}\n" .
-                "*Budget:* {$request->w_budget}\n" .
-                "*Branding Requirements:* {$request->w_branding_requirements}\n" .
-                "*Delivery Date:* {$request->w_delivery_date}\n" .
-                "*Message:* " . ($request->w_message ?? 'N/A') . "\n\n" .
-                "— HNoWW";
+        // $message = "📩 *New Wedding Catalogue Request*\n\n" .
+        //         "*Full Name:* {$request->w_full_name}\n" .
+        //         "*Company Name:* {$request->w_company_name}\n" .
+        //         "*Phone:* {$request->w_phone}\n" .
+        //         "*Email:* {$request->w_email}\n" .
+        //         "*Product of Interest:* " . ($commaSeparatedProducts ?? 'N/A') . "\n" .
+        //         "*Quantity Range:* {$qualityRange[$request->w_quantity_range]}\n" .
+        //         "*Budget:* {$request->w_budget}\n" .
+        //         "*Branding Requirements:* {$request->w_branding_requirements}\n" .
+        //         "*Delivery Date:* {$request->w_delivery_date}\n" .
+        //         "*Message:* " . ($request->w_message ?? 'N/A') . "\n\n" .
+        //         "— HNoWW";
+        $message = "📩 *New Wedding Consultation Request*\n\n" .
+            "*Full Name:* {$request->w_full_name}\n" .
+            //"*Phone:* {$request->w_phone}\n" .
+            "*Email:* {$request->w_email}\n" .
+            "*Role:* {$role}\n" .
+            "*Wedding Location:* " . ($request->w_location ?? 'N/A') . "\n" .
+            "*Wedding Date:* {$weddingDate}\n" .
+            "*Looking For:* " . ($lookingFor) . "\n" .
+            "*Guest Count:* {$request->w_guest_count}\n" .
+            "*Budget Band:* {$request->w_budget_band}\n" .
+            "*Message:* " . ($request->w_message ?? 'N/A') . "\n\n" .
+            "— HNoWW";
 
         try {
             $url = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode($message);
@@ -922,6 +1078,110 @@ class FrontController extends Controller
         }
 
         return redirect()->back()->with('success', 'Wedding Catalogue request submitted successfully.');
+    }
+
+    public function storeBespokeCommissionRequest(Request $request){
+        $commissionType = config('global_values.commission_type');
+        $timelineValues = config('global_values.timeline');
+        $budgetValues = config('global_values.budget_range');
+
+        // Validation rules
+        $rules = [
+            'bc_full_name'                  => 'required|string|min:2|max:100',
+            'bc_email'                      => 'required|email|max:150',
+            'bc_phone'                      => 'required|regex:/^[0-9\s\-\+\(\)]+$/|min:7|max:20',
+            'bc_type_of_commission'          => 'required|string',
+            'bc_type_of_commission_other'    => 'required_if:bc_type_of_commission,other|max:150',
+            'bc_message'                     => 'nullable|string|max:500',
+            'bc_timeline'                    => 'required|string',
+            'bc_budget'                      => 'required|string',
+            'bc_additional_message'          => 'nullable|string|max:500',
+        ];
+
+        // Custom messages
+        $messages = [
+            'bc_full_name.required' => 'Full Name is required.',
+            'bc_full_name.min' => 'Full Name must be at least 2 characters.',
+            'bc_full_name.max' => 'Full Name cannot be longer than 100 characters.',
+            'bc_email.required' => 'Email Address is required.',
+            'bc_email.email' => 'Email must be a valid email address.',
+            'bc_phone.required' => 'Phone Number is required.',
+            'bc_phone.regex' => 'Phone Number format is invalid.',
+            'bc_phone.min' => 'Phone Number is too short.',
+            'bc_phone.max' => 'Phone Number is too long.',
+            'bc_type_of_commission.required' => 'Type of Commission is required.',
+            'bc_type_of_commission_other.required_if' => 'Please specify your commission type.',
+            'bc_timeline.required' => 'Intended Timeline is required.',
+            'bc_budget.required' => 'Budget Comfort Range is required.',
+            'bc_message.max' => 'Message cannot exceed 500 characters.',
+            'bc_additional_message.max' => 'Additional Message cannot exceed 500 characters.',
+        ];
+
+        // Validate request
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Prepare data for saving
+        $data = [
+            'full_name' => $request->bc_full_name,
+            'email' => $request->bc_email,
+            'phone' => $request->bc_phone,
+            'type_of_commission' => $request->bc_type_of_commission === 'other' 
+                                    ? $request->bc_type_of_commission_other 
+                                    : $commissionType[$request->bc_type_of_commission] ?? $request->bc_type_of_commission,
+            'customer_hoping_to_create' => $request->bc_customer_hoping_to_create,
+            'timeline' => $timelineValues[$request->bc_timeline] ?? $request->bc_timeline,
+            'budget' => $budgetValues[$request->bc_budget] ?? $request->bc_budget,
+            'additional_message' => $request->bc_additional_message,
+        ];
+
+        // Save to database
+        BespokeCommissionEnquiry::create($data);
+
+        // Prepare email data
+        $adminEmail = $this->adminEmail; // Set in controller
+        $userEmail = $request->bc_email;
+        $emailData = $data;
+
+        try {
+            // Send email to admin
+            Mail::send('email.admin.bespoke_commission_request', $emailData, function ($message) use ($adminEmail) {
+                $message->to($adminEmail)->subject('New Bespoke Commission Request Received');
+            });
+
+            // Send email to user
+            Mail::send('email.front.bespoke_commission_request', $emailData, function ($message) use ($userEmail) {
+                $message->to($userEmail)->subject('Bespoke Commission Request Submitted Successfully');
+            });
+        } catch (\Exception $e) {
+            Log::error('Bespoke Commission Mail sending failed: ' . $e->getMessage());
+        }
+
+        // Send WhatsApp notification to admin
+        //if(isset($request->bc_phone) && $request->bc_phone != '') {
+            try {
+                $messageText = "📩 *New Bespoke Commission Request*\n\n" .
+                            "*Full Name:* {$request->bc_full_name}\n" .
+                            "*Email:* {$request->bc_email}\n" .
+                            "*Phone:* {$request->bc_phone}\n" .
+                            "*Type of Commission:* {$data['type_of_commission']}\n" .
+                            "*Timeline:* {$data['timeline']}\n" .
+                            "*Budget:* {$data['budget']}\n" .
+                            "*Customer hoping to create:* " . ($request->bc_customer_hoping_to_create ?? 'N/A') . "\n" .
+                            "*Additional Info:* " . ($request->bc_additional_message ?? 'N/A');
+
+                $waUrl = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode($messageText);
+                return back()->with('whatsapp_url', $waUrl);
+            } catch (\Exception $e) {
+                Log::error('Bespoke Commission WhatsApp sending failed: '.$e->getMessage());
+            }
+        //}
+
+        return redirect()->back()->with('success', 'Thank you.</br> We review bespoke enquiries slowly and intentionally.</br>If your request aligns with our practice, a member of the Atelier will be in touch.');
     }
 
     public function getJournal(Request $request){
@@ -1034,14 +1294,16 @@ class FrontController extends Controller
     }
 
     public function getWeddingVaultInside(Request $request){
-        $weddingProduct = Product::select('id', 'product_name', 'short_description', 'list_page_img', 'product_url')->where('product_type', 3)->isActive()->notDeleted()->get();
+        // $weddingProduct = Product::select('id', 'product_name', 'short_description', 'list_page_img', 'product_url')->where('product_type', 3)->isActive()->notDeleted()->get();
+        $weddingCategory = Category::select('id', 'category_name', 'title', 'banner_image', 'category_url', 'category_type')->where('category_type', 3)->isActive()->notDeleted()->get();
 
-        return view('front.wedding_vault_inside', compact('weddingProduct'));
+        return view('front.wedding_vault_inside', compact('weddingCategory'));
     }
 
-    public function getCeremonials(){
-        $ceremonials = Ceremonial::whereNull('deleted_at')->where('is_active', 0)->get();
-        return view('front.ceremonials', compact('ceremonials'));
+    public function getCeremonials($categoryId = null){
+        $products = Product::select('id', 'category_id', 'product_url', 'product_name', 'short_description', 'list_page_img', 'is_active', 'deleted_at')->whereNull('deleted_at')->where('is_active', 0)->where('category_id', $categoryId)->get();
+        
+        return view('front.ceremonials', compact('products'));
     }
 
     public function storeCeremonialInquiry(Request $request){

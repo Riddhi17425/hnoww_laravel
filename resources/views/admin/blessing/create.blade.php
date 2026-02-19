@@ -54,10 +54,16 @@
                 @error('image') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
-            <div class="col-md-6">
+            {{-- <div class="col-md-6">
                 <label class="form-label">Audio File</label><span class="text-danger">*</span>
                 <input type="file" name="audio_file" class="form-control">
                 @error('audio_file') <span class="text-danger">{{ $message }}</span> @enderror
+            </div> --}}
+
+            <div class="col-md-12">
+                <label class="form-label">Audio Content</label><span class="text-danger">*</span>
+                <textarea name="audio_content" id="audio_content" class="form-control" rows="10">{{ old('audio_content') }}</textarea>
+                @error('audio_content') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
             <div class="col-md-12">
