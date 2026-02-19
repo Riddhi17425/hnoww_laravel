@@ -8,7 +8,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    
+                    <div class="text-center">
+                        <h4>Corporate Gifting Enquiry</h4><br/>
+                        <p>We work with organisations seeking meaningful, long-term gifting ,designed to be kept rather than discarded.</p>
+                    </div>
+                    <hr/>
                     <div class="container">
                     
                     <form method="POST" action="{{ route('front.store.corporate.proposal.request') }}" id="requestCorporateProposalForm" class="ct_form">

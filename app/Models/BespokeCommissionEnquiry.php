@@ -5,12 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class WeddingCatalogueRequest extends Model
+class BespokeCommissionEnquiry extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
-    protected $casts = [
-        'looking_for' => 'array',
-    ];
 }

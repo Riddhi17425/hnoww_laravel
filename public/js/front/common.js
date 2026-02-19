@@ -125,104 +125,174 @@ $("#requestCorporateProposalForm").validate({
 });
 
 var wFormSubmitted = false;
+// $("#requestWeddingCatalogueForm").validate({
+//     ignore: [],
+//     rules: { 
+//         w_full_name: { 
+//             required: true, 
+//             minlength: 2, 
+//             maxlength: 50, 
+//             lettersonly: true 
+//         },
+//         w_company_name: { 
+//             required: true 
+//         },
+//         w_phone: { 
+//             required: true, 
+//             number: true, 
+//             validPhone: true 
+//         },
+//         w_email: { 
+//             required: true, 
+//             email: true, 
+//             noSpamEmail: true, 
+//             uniqueEmail: "corporate_proposal_requests" 
+//         },
+//         'w_product_of_interest[]': { 
+//             required: true 
+//         },
+//         w_quantity_range: { 
+//             required: true 
+//         },
+//         w_delivery_date: { 
+//             required: true, 
+//             date: true, 
+//             minDate: true 
+//         },
+//         w_message:{
+//             maxlength:500,
+//         }
+//     },
+//     messages: {
+//         w_full_name: {
+//             required: "Please enter your full name",
+//             minlength: "Full name must be at least 2 characters",
+//             maxlength: "Full name cannot exceed 50 characters",
+//             lettersonly: "Full name can only contain letters and spaces"
+//         },
+//         w_company_name: {
+//             required: "Please enter your company or organization name"
+//         },
+//         w_phone: {
+//             required: "Please enter your phone number",
+//             number: "Phone number must contain only digits",
+//             validPhone: "Enter a valid phone number"
+//         },
+//         w_email: {
+//             required: "Please enter your email address",
+//             email: "Please enter a valid email address",
+//             noSpamEmail: "This email address is not allowed",
+//             uniqueEmail: "This email is already used"
+//         },
+//         'w_product_of_interest[]': {
+//             required: "Please select at least one product of interest"
+//         },
+//         w_quantity_range: {
+//             required: "Please select a quantity range"
+//         },
+//         w_delivery_date: {
+//             required: "Please select a delivery date",
+//             date: "Enter a valid date",
+//             minDate: "Delivery date must be after today"
+//         },
+//         w_message:{
+//             maxlength: "Message cannot exceed 50 characters",
+//         }
+//     },
+//     errorElement: 'div',
+//     errorPlacement: function(error, element) {
+//         if (element.attr('name') === 'w_product_of_interest[]') {
+//             $('#w_product_error').append(error);
+//         } else {
+//             error.insertAfter(element);
+//         }
+//     },
+//     highlight: function(element) {
+//         $(element).addClass('is-invalid').removeClass('is-valid');
+//     },
+//     unhighlight: function(element) {
+//         $(element).addClass('is-valid').removeClass('is-invalid');
+//     },
+//     submitHandler: function(form) {
+//         if (!wFormSubmitted) {
+//             wFormSubmitted = true;
+//             const btn = $(form).find('button[type="submit"]');
+//             if (btn.length) {
+//                 btn.prop('disabled', true).text('Submitting...');
+//             }
+//             form.submit();
+//         }
+//     }
+// });
+
 $("#requestWeddingCatalogueForm").validate({
     ignore: [],
-    rules: { 
-        w_full_name: { 
-            required: true, 
-            minlength: 2, 
-            maxlength: 50, 
-            lettersonly: true 
+    rules: {
+        w_full_name: {
+            required: true,
+            minlength: 2,
+            maxlength: 100,
+            lettersonly: true
         },
-        w_company_name: { 
-            required: true 
+        w_phone: {
+            required: true,
+            number: true,
+            minlength: 7,
+            maxlength: 15
         },
-        w_phone: { 
-            required: true, 
-            number: true, 
-            validPhone: true 
+        w_email: {
+            required: true,
+            email: true,
+            maxlength: 150
         },
-        w_email: { 
-            required: true, 
-            email: true, 
-            noSpamEmail: true, 
-            uniqueEmail: "corporate_proposal_requests" 
+        w_role: {
+            required: true
         },
-        'w_product_of_interest[]': { 
-            required: true 
+        'w_looking_for[]': {
+            required: true
         },
-        w_quantity_range: { 
-            required: true 
+        w_wedding_date: {
+            required: true,
+            date: true,
+            minDate: true
         },
-        w_delivery_date: { 
-            required: true, 
-            date: true, 
-            minDate: true 
+        w_guest_count: {
+            required: true
         },
-        w_message:{
-            maxlength:500,
+        w_budget_band: {
+            required: true
+        },
+        w_message: {
+            maxlength: 500
         }
     },
     messages: {
         w_full_name: {
-            required: "Please enter your full name",
-            minlength: "Full name must be at least 2 characters",
-            maxlength: "Full name cannot exceed 50 characters",
-            lettersonly: "Full name can only contain letters and spaces"
-        },
-        w_company_name: {
-            required: "Please enter your company or organization name"
+            required: "Please enter your full name"
         },
         w_phone: {
-            required: "Please enter your phone number",
-            number: "Phone number must contain only digits",
-            validPhone: "Enter a valid phone number"
+            required: "Please enter your phone number"
         },
         w_email: {
-            required: "Please enter your email address",
-            email: "Please enter a valid email address",
-            noSpamEmail: "This email address is not allowed",
-            uniqueEmail: "This email is already used"
+            required: "Please enter your email"
         },
-        'w_product_of_interest[]': {
-            required: "Please select at least one product of interest"
+        w_role: {
+            required: "Please select your role"
         },
-        w_quantity_range: {
-            required: "Please select a quantity range"
+        'w_looking_for[]': {
+            required: "Please select at least one option"
         },
-        w_delivery_date: {
-            required: "Please select a delivery date",
-            date: "Enter a valid date",
-            minDate: "Delivery date must be after today"
+        w_wedding_date: {
+            required: "Please select wedding date",
+            minDate: "Wedding date cannot be in the past"
         },
-        w_message:{
-            maxlength: "Message cannot exceed 50 characters",
+        w_guest_count: {
+            required: "Please select guest count"
+        },
+        w_budget_band: {
+            required: "Please select budget band"
         }
     },
-    errorElement: 'div',
-    errorPlacement: function(error, element) {
-        if (element.attr('name') === 'w_product_of_interest[]') {
-            $('#w_product_error').append(error);
-        } else {
-            error.insertAfter(element);
-        }
-    },
-    highlight: function(element) {
-        $(element).addClass('is-invalid').removeClass('is-valid');
-    },
-    unhighlight: function(element) {
-        $(element).addClass('is-valid').removeClass('is-invalid');
-    },
-    submitHandler: function(form) {
-        if (!wFormSubmitted) {
-            wFormSubmitted = true;
-            const btn = $(form).find('button[type="submit"]');
-            if (btn.length) {
-                btn.prop('disabled', true).text('Submitting...');
-            }
-            form.submit();
-        }
-    }
 });
 
 $( document ).ready(function() {

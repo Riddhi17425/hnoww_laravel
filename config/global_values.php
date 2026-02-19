@@ -50,5 +50,42 @@ return [
     ],
 
     'gift_price_range' => ['0-500' => 'Under AED 500', '501-1000' => '501-1000', '1001-1500' => '1000-1500', '1501-2000' => '1501-2000', '2000-0' => 'Above AED 2000'],
-    
+    'commission_type' => [
+        'personal' => 'Personal / Heirloom',
+        'wedding' => 'Wedding-related',
+        'corporate' => 'Corporate / Institutiona',
+        'other' => 'Other (please specify)',
+    ],
+    'timeline' => [
+        'flexible' => 'Flexible',
+        'within3months' => 'Within 3 months',
+        '3-6_months' => '3-6 months',
+        '6+months' => '6+ months',
+    ],
+    'budget_range' => [
+        'to_be_discussed' => 'To be discussed',
+        'under5000' => 'Under AED 5,000',
+        'aed_5000_10000' => 'AED 5,000-10,000',
+        'aed_10000_25000' => 'AED 10,000-25,000',
+    ],
+    'wedding_role' => [
+        'bride' => 'Bride',
+        'groom' => 'Groom',
+        'family_member' => 'Family Member',
+        'wedding_planner' => 'Wedding Planner',
+        'other' => 'Other',
+    ],
+    'wedding_guest_count' => [
+        "Under 50" => "Under 50",
+        "50-150" => "50-150",
+        "150-300" => "150-300",
+        "300+" => "300+"
+    ],
+    'wedding_budget' => [
+        "To be discussed" => "To be discussed",
+        "Under AED 10,000" => "Under AED 10,000",
+        "AED 10,000-25,000" => "AED 10,000-25,000",
+        "AED 25,000-50,000" => "AED 25,000-50,000",
+        "AED 50,000+" => "AED 50,000+"
+    ],
 ];

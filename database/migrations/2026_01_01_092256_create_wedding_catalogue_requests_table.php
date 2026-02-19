@@ -13,15 +13,25 @@ return new class extends Migration
     {
         Schema::create('wedding_catalogue_requests', function (Blueprint $table) {
             $table->id();
+            // $table->string('full_name', 100);
+            // $table->string('company_name', 150);
+            // $table->string('phone', 20);
+            // $table->string('email', 150);
+            // $table->json('product_of_interest')->nullable(); // JSON to store multiple selected products
+            // $table->string('quantity_range', 20)->nullable();
+            // $table->string('budget', 100)->nullable();
+            // $table->string('branding_requirements', 255)->nullable();
+            // $table->date('delivery_date')->nullable();
+            // $table->text('message')->nullable();
             $table->string('full_name', 100);
-            $table->string('company_name', 150);
-            $table->string('phone', 20);
+            $table->string('phone', 15);
             $table->string('email', 150);
-            $table->json('product_of_interest')->nullable(); // JSON to store multiple selected products
-            $table->string('quantity_range', 20)->nullable();
-            $table->string('budget', 100)->nullable();
-            $table->string('branding_requirements', 255)->nullable();
-            $table->date('delivery_date')->nullable();
+            $table->string('role', 100);
+            $table->string('location', 150)->nullable();
+            $table->date('wedding_date');
+            $table->json('looking_for'); // multiple checkboxes
+            $table->string('guest_count', 50);
+            $table->string('budget_band', 100);
             $table->text('message')->nullable();
             $table->timestamps();
         });
