@@ -30,15 +30,15 @@
                         @endforeach
                         @endif
                         {{-- <button class="nav-link" data-bs-toggle="tab" data-bs-target="#img2">
-                            <img src="{{ asset('public/images/front/desire1.png')}}" alt="Sample Product">
+                            <img src="{{ asset('public/images/front/desire1.webp')}}" alt="Sample Product">
                         </button>
 
                         <button class="nav-link" data-bs-toggle="tab" data-bs-target="#img3">
-                            <img src="{{ asset('public/images/front/desire2.png')}}" alt="Sample Product">
+                            <img src="{{ asset('public/images/front/desire2.webp')}}" alt="Sample Product">
                         </button>
 
                         <button class="nav-link" data-bs-toggle="tab" data-bs-target="#img4">
-                            <img src="{{ asset('public/images/front/desire3.png')}}" alt="Sample Product">
+                            <img src="{{ asset('public/images/front/desire3.webp')}}" alt="Sample Product">
                         </button> --}}
                     </div>
 
@@ -59,7 +59,7 @@
 
                         {{-- <div class="tab-pane fade" id="img2">
                             <div class="zoom-container">
-                                <img class="zoom-image img-fluid" src="{{ asset('public/images/front/desire1.png')}}"
+                                <img class="zoom-image img-fluid" src="{{ asset('public/images/front/desire1.webp')}}"
                         alt="Sample Product">
                         <div class="zoom-lens"></div>
                     </div>
@@ -67,7 +67,7 @@
 
                 <div class="tab-pane fade" id="img3">
                     <div class="zoom-container">
-                        <img class="zoom-image img-fluid" src="{{ asset('public/images/front/desire2.png')}}"
+                        <img class="zoom-image img-fluid" src="{{ asset('public/images/front/desire2.webp')}}"
                             alt="Sample Product">
                         <div class="zoom-lens"></div>
                     </div>
@@ -75,7 +75,7 @@
 
                 <div class="tab-pane fade" id="img4">
                     <div class="zoom-container">
-                        <img class="zoom-image img-fluid" src="{{ asset('public/images/front/desire3.png')}}"
+                        <img class="zoom-image img-fluid" src="{{ asset('public/images/front/desire3.webp')}}"
                             alt="Sample Product">
                         <div class="zoom-lens"></div>
                     </div>
@@ -259,7 +259,7 @@
             <div class="col-md-4">
                 <a class="him_prod" href="{{ route('front.product.details', $val->product_url) }}">
                     <div class="him_prod_top mb-2 mb-md-4">
-                        {{-- <img class="img-fluid img_1" src="{{ asset('public/images/front/desire1.png')}}"
+                        {{-- <img class="img-fluid img_1" src="{{ asset('public/images/front/desire1.webp')}}"
                         alt="him_prod"> --}}
                         <img class="img-fluid img_1"
                             src="{{ isset($val->list_page_img) ? asset('public/images/admin/product_list/'.$val->list_page_img) : '' }}"
@@ -278,7 +278,7 @@
             {{-- <div class="col-md-4">
                 <a class="him_prod" href="javascript:void(0)">
                     <div class="him_prod_top mb-2 mb-md-4">
-                        <img class="img-fluid img_1" src="{{ asset('public/images/front/desire2.png')}}"
+                        <img class="img-fluid img_1" src="{{ asset('public/images/front/desire2.webp')}}"
             alt="him_prod">
         </div>
 
@@ -293,7 +293,7 @@
     <div class="col-md-4">
         <a class="him_prod" href="javascript:void(0)">
             <div class="him_prod_top mb-2 mb-md-4">
-                <img class="img-fluid img_1" src="{{ asset('public/images/front/desire3.png')}}" alt="him_prod">
+                <img class="img-fluid img_1" src="{{ asset('public/images/front/desire3.webp')}}" alt="him_prod">
             </div>
 
             <div>

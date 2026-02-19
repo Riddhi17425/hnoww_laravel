@@ -24,7 +24,7 @@
 
                 {{-- SIGN IN --}}
                 <div class="user signinBx">
-                    <div class="imgBx"><img src="{{ asset('public/front/images/login.png')}}" alt="images" /></div>
+                    <div class="imgBx"><img src="{{ asset('public/images/front/login.webp')}}" alt="images" /></div>
                     <div class="formBx">
                         <!--sign form-->
                         <div class="ct_form">
@@ -222,7 +222,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="imgBx"><img src="{{ asset('public/front/images/login.png')}}" alt="images" /></div>
+                    <div class="imgBx"><img src="{{ asset('public/images/front/login.webp')}}" alt="images" /></div>
                 </div>
 
             </div>

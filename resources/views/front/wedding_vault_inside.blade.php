@@ -2,7 +2,7 @@
 
 <!-- hero section -->
 <section class="hero-section_inner">
-    <img class="img-fluid" src="{{asset('public/front/images/wedding_vault.webp')}}" alt=" banner">
+    <img class="img-fluid" src="{{asset('public/images/front/wedding_vault.webp')}}" alt=" banner">
 
     <div class="hero_content_inner w-100">
         <div class="container">
@@ -80,7 +80,7 @@ Everything you see here is curated to be photographed, kept, and passed on.
 
             {{-- <div class="col-md-4">
                 <div class="curated_rituals_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault2.png')}}" alt="images">
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault2.webp')}}" alt="images">
                     <div class="box_bot">
                         <div>
                             <h3 class="sub_head">The Desk Ceremony Set </h3>
@@ -92,7 +92,7 @@ Everything you see here is curated to be photographed, kept, and passed on.
 
             <div class="col-md-4">
                 <div class="curated_rituals_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault3.png')}}" alt="images">
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault3.webp')}}" alt="images">
                     <div class="box_bot">
                         <div>
                             <h3 class="sub_head">The Modern Majlis Set </h3>
@@ -104,7 +104,7 @@ Everything you see here is curated to be photographed, kept, and passed on.
 
             <div class="col-md-4">
                 <div class="curated_rituals_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault4.png')}}" alt="images">
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault4.webp')}}" alt="images">
                     <div class="box_bot">
                         <div>
                             <h3 class="sub_head">The Everyday Sacred</h3>
@@ -116,7 +116,7 @@ Everything you see here is curated to be photographed, kept, and passed on.
 
             <div class="col-md-4">
                 <div class="curated_rituals_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault5.png')}}" alt="images">
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault5.webp')}}" alt="images">
                     <div class="box_bot">
                         <div>
                             <h3 class="sub_head">The Everyday Sacred</h3>
@@ -128,7 +128,7 @@ Everything you see here is curated to be photographed, kept, and passed on.
 
             <div class="col-md-4">
                 <div class="curated_rituals_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault6.png')}}" alt="images">
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault6.webp')}}" alt="images">
                     <div class="box_bot">
                         <div>
                             <h3 class="sub_head">The Everyday Sacred</h3>
@@ -140,7 +140,7 @@ Everything you see here is curated to be photographed, kept, and passed on.
 
             <div class="col-md-4">
                 <div class="curated_rituals_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault7.png')}}" alt="images">
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault7.webp')}}" alt="images">
                     <div class="box_bot">
                         <div>
                             <h3 class="sub_head">The Everyday Sacred</h3>

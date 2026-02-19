@@ -3,7 +3,7 @@
 <section class="hero-section">
     <img class="img-fluid" src="{{ asset('public/images/front/hero-banner.webp') }}" alt="images" loading="lazy">
     <!-- <video autoplay muted loop class="hero_video">
-        <source src="{{ asset('public/front/images/hero-video.mp4') }}" type="video/mp4">
+        <source src="{{ asset('public/images/front/hero-video.mp4') }}" type="video/mp4">
         Your browser does not support the video tag.
     </video> -->
 
@@ -176,7 +176,7 @@
         </div>
         <div class="gift_box">
             <div class="gift_box_lt">
-                <img class="img-fluid" src="{{asset('public/images/front/valet_tray_home.png')}}" alt="images">
+                <img class="img-fluid" src="{{asset('public/images/front/valet_tray_home.webp')}}" alt="images">
             </div>
 
             <div class="gift_box_rt">
@@ -200,13 +200,14 @@
             </h2>
             <!-- 3️⃣ Left image (from left) -->
             <div class="text-end magic_wrapper_logo">
-                <img src="{{ asset('public/front/images/home_magic_left.svg') }}" loading="lazy" alt=""
+                <img src="{{ asset('public/images/front/home_magic_left.svg') }}" loading="lazy" alt=""
                     class="img-fluid">
             </div>
 
             <!-- 2️⃣ Center image (scale 0 → 1) -->
-            <div>
-                <img src="{{ asset('public/front/images/home_magic.png') }}" loading="lazy" alt="" class="img-fluid">
+            <div class="magic_wrapper_center">
+                <img src="{{ asset('public/images/front/home_magic.webp') }}" loading="lazy" alt="" class="img-fluid">
+                <p class="magic_wrapper_p"> Ritual is the first luxury.</p>
             </div>
 
             <!-- 4️⃣ Text block (from right) -->
@@ -478,7 +479,7 @@
         <div class="row mobile_slider">
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-4" src="{{ asset('public/front/images/editions1.png') }}" alt="images"
+                    <img class="img-fluid mb-4" src="{{ asset('public/images/front/editions1.webp') }}" alt="images"
                         loading="lazy">
                     <h3 class="sub_head">The Blessing Library</h3>
                     <p>Written blessings and words of intention for home, union, and self.</p>
@@ -487,7 +488,7 @@
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-4" src="{{ asset('public/front/images/editions2.png') }}" alt="images"
+                    <img class="img-fluid mb-4" src="{{ asset('public/images/front/editions2.webp') }}" alt="images"
                         loading="lazy">
                     <h3 class="sub_head">The Journal</h3>
                     <p>Reflections on design, ritual, and contemporary living.</p>
@@ -496,7 +497,7 @@
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-4" src="{{ asset('public/front/images/editions3.png') }}" alt="images"
+                    <img class="img-fluid mb-4" src="{{ asset('public/images/front/editions3.webp') }}" alt="images"
                         loading="lazy">
                     <h3 class="sub_head">Bespoke Commissions</h3>
                     <p>Collaborative creations shaped around personal rituals and intent.</p>

@@ -2,7 +2,7 @@
 
 <!-- hero section -->
 <section class="hero-section_inner">
-    <img class="img-fluid" src="{{ asset('public/images/front/for-him-banner.png')}}" alt="him banner">
+    <img class="img-fluid" src="{{ asset('public/images/front/for-him-banner.webp')}}" alt="him banner">
 
     <div class="hero_content_inner">
         <h2 class="main_head">{{$category ? $category->category_name : '' }}</h2>
@@ -21,13 +21,14 @@
             </h2>
             <!-- 3️⃣ Left image (from left) -->
             <div class="text-end magic_wrapper_logo">
-                <img src="{{ asset('public/front/images/home_magic_left.svg') }}" loading="lazy" alt="" class="img-fluid">
+                <img src="{{ asset('public/images/front/home_magic_left.svg') }}" loading="lazy" alt="" class="img-fluid">
             </div>
 
             <!-- 2️⃣ Center image (scale 0 → 1) -->
-            <div>
+            <div class="magic_wrapper_center">
                 {{-- Need to make dynamic --}}
-                <img src="{{ asset('public/front/images/home_magic.png') }}" loading="lazy" alt="" class="img-fluid">
+                <img src="{{ asset('public/images/front/home_magic.webp') }}" loading="lazy" alt="image" class="img-fluid">
+                <p class="magic_wrapper_p mb-0"> Ritual is the first luxury.</p>
             </div>
 
             <!-- 4️⃣ Text block (from right) -->
@@ -59,7 +60,7 @@
                 @foreach($catProducts as $key => $val)
                     <div class="him_prod">
                         <div class="him_prod_top mb-2 mb-md-4">
-                            {{-- <img class="img-fluid img_1" src="{{ asset('public/images/front/desire1.png')}}" alt="him_prod"> --}}
+                            {{-- <img class="img-fluid img_1" src="{{ asset('public/images/front/desire1.webp')}}" alt="him_prod"> --}}
                             <img class="img-fluid img_1" src="{{ isset($val->list_page_img) ? asset('public/images/admin/product_list/'.$val->list_page_img) : '' }}" alt="{{ $val->product_name ?? 'Product Image' }}">
                         </div>
                             <div>
@@ -74,7 +75,7 @@
             @endif
             {{-- <div class="him_prod">
                 <div class="him_prod_top  mb-2 mb-md-4">
-                    <img class="img-fluid img_1" src="{{ asset('public/images/front/desire2.png')}}" alt="him_prod">
+                    <img class="img-fluid img_1" src="{{ asset('public/images/front/desire2.webp')}}" alt="him_prod">
                 </div>
               
                     <div>
@@ -88,7 +89,7 @@
             </div>
             <div class="him_prod">
                 <div class="him_prod_top mb-2 mb-md-4">
-                    <img class="img-fluid img_1" src="{{ asset('public/images/front/desire3.png')}}" alt="him_prod">
+                    <img class="img-fluid img_1" src="{{ asset('public/images/front/desire3.webp')}}" alt="him_prod">
                 </div>
                     <div>
                         <h3 class="sub_head">The Hybrid Totem</h3>
@@ -101,7 +102,7 @@
             </div>
             <div class="him_prod">
                 <div class="him_prod_top mb-2 mb-md-4">
-                    <img class="img-fluid img_1" src="{{ asset('public/images/front/desire4.png')}}" alt="him_prod">
+                    <img class="img-fluid img_1" src="{{ asset('public/images/front/desire4.webp')}}" alt="him_prod">
                 </div>
                     <div>
                         <h3 class="sub_head">The Wireless Courtyard</h3>

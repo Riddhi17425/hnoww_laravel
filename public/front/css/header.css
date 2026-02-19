@@ -211,7 +211,7 @@ header .navbar {
     left: 0;
     min-width: 220px;
     /* background: transparent; */
-    background: url(../images/ct_noise_bg.png);
+    background: url(../../images/front/ct_noise_bg.webp);
     background-color: #f9f9f9;
     z-index: 1000;
     opacity: 0;
@@ -334,7 +334,7 @@ header .navbar {
     top: 130%;
     right: 0;
     width: 190px;
-    background: url(https://intelliworkz.co/hnoww_laravel/public/front/images/ct_noise_bg.png);
+    background: url(https://intelliworkz.co/hnoww_laravel/public/images/front/ct_noise_bg.webp);
     background-color: #f9f9f9;
     opacity: 0;
     visibility: hidden;

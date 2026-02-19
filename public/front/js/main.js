@@ -304,13 +304,23 @@ document.querySelectorAll(".read-more-btn").forEach((btn) => {
     btn.addEventListener("click", function () {
         const wrapper = this.previousElementSibling;
 
-        wrapper.classList.toggle("expanded");
-
-        this.textContent = wrapper.classList.contains("expanded")
-            ? "Read Less"
-            : "Read More";
+        if (!wrapper.classList.contains("expanded")) {
+            // OPEN
+            wrapper.style.maxHeight = wrapper.scrollHeight + "px";
+            wrapper.classList.add("expanded");
+            this.textContent = "Read Less";
+        } else {
+            // CLOSE
+            wrapper.style.maxHeight = wrapper.scrollHeight + "px"; 
+            requestAnimationFrame(() => {
+                wrapper.style.maxHeight = "90px";
+            });
+            wrapper.classList.remove("expanded");
+            this.textContent = "Read More";
+        }
     });
 });
+
 
 // ---------------------------- login ------------------------
 

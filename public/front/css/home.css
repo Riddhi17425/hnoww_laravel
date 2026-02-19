@@ -67,7 +67,7 @@
 .gesture_filter_child {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 15px;
 }
 
 .gesture_title {
@@ -88,7 +88,8 @@
     font-weight: 400;
     line-height: 28px;
     text-transform: none;
-    background: url("../images/down_arr.svg") no-repeat right 0px center / 16px;
+    background: url("../../images/front/down_arr.svg") no-repeat right 0px
+        center / 16px;
     appearance: none;
     cursor: pointer;
     padding-bottom: 8px;
@@ -100,8 +101,8 @@
 
 .gesture_filter .dropdown:focus {
     outline: none;
-    background: url("../images/down_arr_yello.svg") no-repeat right 0px center /
-        16px;
+    background: url("../../images/front/down_arr_yello.svg") no-repeat right 0px
+        center / 16px;
     border-bottom: 1px solid var(--gold-color);
 }
 
@@ -338,6 +339,28 @@
     font-weight: 600;
     line-height: 48px;
     margin-bottom: 20px;
+}
+
+.magic_wrapper_center {
+    position: relative;
+}
+
+.magic_wrapper_center .magic_wrapper_p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-bottom: 0;
+    z-index: 1;
+
+    color: var(--dark-900);
+    font-family: var(--heading-font);
+    font-size: 34px;
+    /* line-height: 34px; */
+    font-style: italic;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
 }
 
 .magic_wrapper {

@@ -1,7 +1,7 @@
 @include('layouts.frontheader')
 
 <section class="hero-section_inner">
-    <img class="img-fluid" src="{{asset('public/images/front/blessing-library-banner.png')}}" alt="him banner">
+    <img class="img-fluid" src="{{asset('public/images/front/blessing-library-banner.webp')}}" alt="him banner">
 
     <div class="hero_content_inner">
         <h2 class="main_head mb-3">The Blessing Detail</h2>

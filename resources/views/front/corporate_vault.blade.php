@@ -2,7 +2,7 @@
 
 <!-- hero section -->
 <section class="hero-section_inner">
-    <img class="img-fluid" src="{{asset('public/images/front/corporate-vault-banner.png')}}" alt="him banner">
+    <img class="img-fluid" src="{{asset('public/images/front/corporate-vault-banner.webp')}}" alt="him banner">
 
     <div class="hero_content_inner">
         <h2 class="main_head">The Corporate Vault</h2>
@@ -64,7 +64,7 @@
             @endforeach
             @else
             <div class="desire_box">
-                <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/product-not-found.png')}}" alt="images">
+                <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/product-not-found.webp')}}" alt="images">
             </div>
             @endif
         </div>
@@ -81,13 +81,14 @@
             <!-- 3️⃣ Left image (from left) -->
             <div class="text-end magic_wrapper_logo"
                >
-                <img src="{{ asset('public/front/images/home_magic_left.svg') }}" loading="lazy" alt=""
+                <img src="{{ asset('public/images/front/home_magic_left.svg') }}" loading="lazy" alt=""
                     class="img-fluid">
             </div>
 
             <!-- 2️⃣ Center image (scale 0 → 1) -->
-            <div>
-                <img src="{{ asset('public/front/images/home_magic.png') }}" loading="lazy" alt="" class="img-fluid">
+            <div class="magic_wrapper_center">
+                <img src="{{ asset('public/images/front/home_magic.webp') }}" loading="lazy" alt="" class="img-fluid">
+                <p class="magic_wrapper_p"> Ritual is the first luxury.</p>
             </div>
 
             <!-- 4️⃣ Text block (from right) -->
@@ -145,7 +146,7 @@
             <div class="slider">
                 <div class="corporatekits">
                     <div>
-                        <img class="img-fluid" src="{{asset('public/images/front/corporate-kits.png')}}" alt="images">
+                        <img class="img-fluid" src="{{asset('public/images/front/corporate-kits.webp')}}" alt="images">
                     </div>
 
                     <div class="corporate_kit_content">
@@ -195,7 +196,7 @@
         </div>
         <div class="vip_board">
             <div class="vip_board_lt">
-                <img class="img-fluid" src="{{asset('public/images/front/signature-pairings.png')}}" alt="images">
+                <img class="img-fluid" src="{{asset('public/images/front/signature-pairings.webp')}}" alt="images">
             </div>
 
             <div class="vip_board_rt">
@@ -251,7 +252,7 @@
         </div>
         <div class="gift_box">
             <div class="gift_box_lt">
-                <img class="img-fluid" src="{{asset('public/images/front/valet_tray_home.png')}}" alt="images">
+                <img class="img-fluid" src="{{asset('public/images/front/valet_tray_home.webp')}}" alt="images">
             </div>
 
             <div class="gift_box_rt">
@@ -293,7 +294,7 @@
         <div class="row gy-4 gy-md-0">
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/builder1.png')}}"
+                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/builder1.webp')}}"
                         alt="images">
                     <h3 class="sub_head">The Recognition Standard</h3>
                     <p class="mb-0">Representation begins with considered company-led recognition.
@@ -303,7 +304,7 @@
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/builder2.png')}}"
+                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/builder2.webp')}}"
                         alt="images">
                     <h3 class="sub_head">The Packaging Standard</h3>
                     <p class="mb-0">Signature velvet boxes designed for permanence, not transit.
@@ -312,7 +313,7 @@
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/builder3.png')}}"
+                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/builder3.webp')}}"
                         alt="images">
                     <h3 class="sub_head">Lead Time</h3>
                     <p class="mb-0">Production 30–45 days. Rush requests available.</p>

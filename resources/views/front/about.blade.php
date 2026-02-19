@@ -15,7 +15,7 @@
             <div class="col-lg-6">
                 <div class="abiout_left">
                     <div class="abiout_left_tp">
-                        <img src="{{ asset('public/front/images/home_magic_left.svg') }}" alt="" class="img-fluid">
+                        <img src="{{ asset('public/images/front/home_magic_left.svg') }}" alt="" class="img-fluid">
                         <p class="sub_head mb-0">In a fast-moving world, we believe objects should still hold meaning.
 </p>
                     </div>
@@ -33,7 +33,7 @@
             <div class="col-lg-6">
                 <div class="abiout_right">
                     <div class="abiout_left_tp">
-                        <img src="{{ asset('public/images/front/about-fabe.png') }}" alt="" class="img-fluid">
+                        <img src="{{ asset('public/images/front/about-fabe.webp') }}" alt="" class="img-fluid">
                         <p class="sub_head mb-0">At HNoww, we move beyond conventional gifting to objects chosen for meaning.
 </p>
                     </div>
@@ -78,7 +78,7 @@
         <div class="row gy-4 gy-md-0">
             <div class="col-md-4">
                 <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/framework1.png')}}" alt="images">
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/framework1.webp')}}" alt="images">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h3 class="sub_head">Environment</h3>
@@ -90,7 +90,7 @@
             </div>
             <div class="col-md-4">
                 <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/framework2.png')}}" alt="images">
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/framework2.webp')}}" alt="images">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h3 class="sub_head">Ritual</h3>
@@ -101,7 +101,7 @@
             </div>
             <div class="col-md-4">
                 <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/framework3.png')}}" alt="images">
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/framework3.webp')}}" alt="images">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h3 class="sub_head">Result</h3>
@@ -171,7 +171,7 @@ Curated in Dubai, for those who understand that legacy is built quietly.
         </div>
         <div class="row align-items-center gy-4 gy-md-0">
             <div class="col-md-6">
-                <img class="img-fluid" src="{{asset('public/images/front/practIce-about.png')}}" alt="images">
+                <img class="img-fluid" src="{{asset('public/images/front/practIce-about.webp')}}" alt="images">
             </div>
 
             <div class="col-md-6 practice_content ps-lg-5">
@@ -197,7 +197,7 @@ Curated in Dubai, for those who understand that legacy is built quietly.
             </div>
 
             <div>
-                <img src="{{ asset('public/images/front/hnoww-women.png') }}" alt="" class="img-fluid">
+                <img src="{{ asset('public/images/front/hnoww-women.webp') }}" alt="" class="img-fluid">
             </div>
 
             <div class="founder_text_2">

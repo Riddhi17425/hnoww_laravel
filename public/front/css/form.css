@@ -2,7 +2,7 @@
 .contact_box {
     padding: 40px 60px;
     position: relative;
-    background: url('../images/ct_noise_bg.png') repeat;
+    background: url("../../images/front/ct_noise_bg.webp") repeat;
     /* font-size: 24px; */
     line-height: normal;
     font-family: var(--heading-font);
@@ -18,12 +18,11 @@
     width: 228px;
     height: 243px;
     z-index: -1;
-    background: url('../images/ct_design.svg') no-repeat center;
+    background: url("../../images/front/ct_design.svg") no-repeat center;
 }
 
 .contact_box .sub_head {
     color: var(--gold-color);
-
 }
 
 .ct_grid {
@@ -33,7 +32,7 @@
     row-gap: 24px;
 }
 
-.ct_grid>div:first-child {
+.ct_grid > div:first-child {
     border-right: 1px solid var(--gold-color);
 }
 
@@ -81,7 +80,6 @@
     resize: none;
 }
 
-
 .ct_form select:focus-visible,
 .ct_form textarea:focus-visible,
 .ct_form input:focus-visible {
@@ -90,6 +88,19 @@
 
 .ct_input {
     margin-bottom: 60px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: unset !important;
+    -webkit-text-fill-color: var(--grey-666) !important;
+}
+
+/* 4. Autofill fix you mentioned */
+input:-webkit-autofill {
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 .ct_input .dropdown {
@@ -115,7 +126,7 @@
 }
 
 .dropdown-toggle::after {
-    display: none
+    display: none;
 }
 
 .dropdown-toggle {
@@ -128,9 +139,8 @@
 
 .btn.show,
 .btn:active {
-    border: none
+    border: none;
 }
-
 
 /* form css */
 
@@ -155,5 +165,4 @@
 /* Optional – smooth scroll */
 .corporate_vault_modal .modal-body {
     /*scrollbar-width: thin;*/
-
 }

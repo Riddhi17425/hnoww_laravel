@@ -18,7 +18,7 @@
 
 <!-- hero section -->
 <section class="hero-section_inner">
-    <img class="img-fluid" src="{{asset('public/images/front/privacy_banner.png')}}" alt="privacy policy">
+    <img class="img-fluid" src="{{asset('public/images/front/privacy_banner.webp')}}" alt="privacy policy">
 
     <div class="hero_content_inner">
         <h2 class="main_head">PRIVACY POLICY</h2>

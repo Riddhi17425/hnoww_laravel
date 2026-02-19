@@ -1,7 +1,7 @@
 @include('layouts.frontheader')
 <!-- hero section -->
 <section class="hero-section_inner">
-    <img class="img-fluid" src="{{asset('public/images/front/ceremonial-objects-banner.png')}}" alt="him banner">
+    <img class="img-fluid" src="{{asset('public/images/front/ceremonial-objects-banner.webp')}}" alt="him banner">
 
     <div class="hero_content_inner">
         <h2 class="main_head"> Ceremonial Objects</h2>
@@ -49,7 +49,7 @@
             {{-- <!-- Item 2 -->
             <div>
                 <div class="mb-2 mb-md-4 ceremonial_box">
-                    <img class="img-fluid" src="{{asset('public/images/front/ceremonial2.png')}}" alt="him_prod">
+                    <img class="img-fluid" src="{{asset('public/images/front/ceremonial2.webp')}}" alt="him_prod">
 
                     <div class="inquire_bespoke">
                         <a href="#" class="inquire_link">
@@ -82,7 +82,7 @@
             <!-- Item 2 -->
             <div>
                 <div class="mb-2 mb-md-4 ceremonial_box">
-                    <img class="img-fluid" src="{{asset('public/images/front/ceremonial3.png')}}" alt="him_prod">
+                    <img class="img-fluid" src="{{asset('public/images/front/ceremonial3.webp')}}" alt="him_prod">
 
                     <div class="inquire_bespoke">
                         <a href="#" class="inquire_link">
@@ -111,7 +111,7 @@
             <!-- Item 2 -->
             <div>
                 <div class="mb-2 mb-md-4 ceremonial_box">
-                    <img class="img-fluid" src="{{asset('public/images/front/ceremonial4.png')}}" alt="him_prod">
+                    <img class="img-fluid" src="{{asset('public/images/front/ceremonial4.webp')}}" alt="him_prod">
 
                     <div class="inquire_bespoke">
                         <a href="#" class="inquire_link">
@@ -140,7 +140,7 @@
             <!-- Item 2 -->
             <div>
                 <div class="mb-2 mb-md-4 ceremonial_box">
-                    <img class="img-fluid" src="{{asset('public/images/front/ceremonial5.png')}}" alt="him_prod">
+                    <img class="img-fluid" src="{{asset('public/images/front/ceremonial5.webp')}}" alt="him_prod">
 
                     <div class="inquire_bespoke">
                         <a href="#" class="inquire_link">
@@ -169,7 +169,7 @@
             <!-- Item 2 -->
             <div>
                 <div class="mb-2 mb-md-4 ceremonial_box">
-                    <img class="img-fluid" src="{{asset('public/images/front/ceremonial6.png')}}" alt="him_prod">
+                    <img class="img-fluid" src="{{asset('public/images/front/ceremonial6.webp')}}" alt="him_prod">
 
                     <div class="inquire_bespoke">
                         <a href="#" class="inquire_link">

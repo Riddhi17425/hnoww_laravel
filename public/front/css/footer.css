@@ -24,7 +24,7 @@ input:focus {
 }
 
 .hnow_footer {
-    background: url('../images/ft_bg.png') center/cover no-repeat,
+    background: url('../../images/front/ft_bg.webp') center/cover no-repeat,
         #EDEAE4;
     padding-top: 40px;
 }

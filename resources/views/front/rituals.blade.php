@@ -1,7 +1,7 @@
 @include('layouts.frontheader')
 <!-- hero section -->
 <section class="hero-section_inner">
-    <img class="img-fluid" src="{{asset('public/images/front/her-banner.png')}}" alt="her banner">
+    <img class="img-fluid" src="{{asset('public/images/front/her-banner.webp')}}" alt="her banner">
 
     <div class="hero_content_inner">
         <h2 class="main_head">The Ritual Table</h2>
@@ -18,7 +18,7 @@
         <div class="him_wrapper">
             <a class="him_prod" href="javascript:void(0)">
                 <div class="him_prod_top mb-4">
-                    <img class="img-fluid img_1" src="{{asset('public/images/front/desire1.png')}}" alt="him_prod">
+                    <img class="img-fluid img_1" src="{{asset('public/images/front/desire1.webp')}}" alt="him_prod">
                     <span class="icon_hert">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="28" viewBox="0 0 30 28" fill="none">
                             <path class="heart-path"
@@ -38,7 +38,7 @@
             </a>
             <a class="him_prod" href="javascript:void(0)">
                 <div class="him_prod_top  mb-2 mb-md-4">
-                    <img class="img-fluid img_1" src="{{asset('public/images/front/desire2.png')}}" alt="him_prod">
+                    <img class="img-fluid img_1" src="{{asset('public/images/front/desire2.webp')}}" alt="him_prod">
                     <span class="icon_hert">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="28" viewBox="0 0 30 28" fill="none">
                             <path class="heart-path"
@@ -66,7 +66,7 @@
             <div class="col-md-4">
                 <a class="him_prod" href="javascript:void(0)">
                     <div class="him_prod_top  mb-2 mb-md-4">
-                        <img class="img-fluid img_1" src="{{asset('public/images/front/desire1.png')}}" alt="him_prod">
+                        <img class="img-fluid img_1" src="{{asset('public/images/front/desire1.webp')}}" alt="him_prod">
                         <span class="icon_hert">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="28" viewBox="0 0 30 28"
                                 fill="none">
@@ -89,7 +89,7 @@
             <div class="col-md-4">
                 <a class="him_prod" href="javascript:void(0)">
                     <div class="him_prod_top  mb-2 mb-md-4">
-                        <img class="img-fluid img_1" src="{{asset('public/images/front/desire2.png')}}" alt="him_prod">
+                        <img class="img-fluid img_1" src="{{asset('public/images/front/desire2.webp')}}" alt="him_prod">
                         <span class="icon_hert">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="28" viewBox="0 0 30 28"
                                 fill="none">
@@ -112,7 +112,7 @@
             <div class="col-md-4">
                 <a class="him_prod" href="javascript:void(0)">
                     <div class="him_prod_top  mb-2 mb-md-4">
-                        <img class="img-fluid img_1" src="{{asset('public/images/front/desire3.png')}}" alt="him_prod">
+                        <img class="img-fluid img_1" src="{{asset('public/images/front/desire3.webp')}}" alt="him_prod">
                         <span class="icon_hert">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="28" viewBox="0 0 30 28"
                                 fill="none">

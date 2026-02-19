@@ -2,7 +2,7 @@
 
 <!-- hero section -->
 <section class="hero-section_inner">
-    <img class="img-fluid" src="{{asset('public/images/front/atelier-banner.png')}}" alt="him banner">
+    <img class="img-fluid" src="{{asset('public/images/front/atelier-banner.webp')}}" alt="him banner">
 
     <div class="hero_content_inner">
         <h2 class="main_head">The Atelier</h2>
@@ -20,9 +20,10 @@
 <!--            <div class="text-end magic_wrapper_logo">-->
 <!--                <img src="{{asset('public/images/front/home_magic_left.svg')}}" alt="">-->
 <!--            </div>-->
-<!--            <div>-->
-<!--                <img src="{{asset('public/images/front/home_magic.png')}}" alt="" class="img-fluid">-->
-<!--            </div>-->
+<!--            <div class="magic_wrapper_center">
+                <img src="{{ asset('public/images/front/home_magic.webp') }}" loading="lazy" alt="" class="img-fluid">
+                <p class="magic_wrapper_p"> Ritual is the first luxury.</p>
+            </div>-->
 <!--            <div>-->
 <!--                <h3 class="magic_wrapper_h3">Designed in Dubai. Rooted in ritual. Made to endure.</h3>-->
 <!--                <p>At HNOWW, every object is a gesture. A pause.-->
@@ -46,12 +47,13 @@
             </h2>
             <!-- 3️⃣ Left image (from left) -->
             <div class="text-end magic_wrapper_logo">
-                <img src="{{ asset('public/front/images/home_magic_left.svg') }}" alt="" class="img-fluid">
+                <img src="{{ asset('public/images/front/home_magic_left.svg') }}" alt="" class="img-fluid">
             </div>
 
             <!-- 2️⃣ Center image (scale 0 → 1) -->
-            <div>
-                <img src="{{ asset('public/front/images/home_magic.png') }}" alt="" class="img-fluid">
+             <div class="magic_wrapper_center">
+                <img src="{{ asset('public/images/front/home_magic.webp') }}" loading="lazy" alt="" class="img-fluid">
+                <p class="magic_wrapper_p"> Ritual is the first luxury.</p>
             </div>
 
             <!-- 4️⃣ Text block (from right) -->
@@ -104,7 +106,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="origin_left">
-                        <img class="img-fluid" src="{{asset('public/images/front/bespoke1.png')}}" alt="images">
+                        <img class="img-fluid" src="{{asset('public/images/front/bespoke1.webp')}}" alt="images">
                         <div class="origin_left_content">
                             <p class="title_40">HNOWW was born from a simple belief:</p>
                             <p class="sub_head">that life becomes richer when lived with intention.</p>
@@ -218,21 +220,21 @@
         <div class="row gy-4 gy-md-0">
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/Journal1.png')}}"
+                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/Journal1.webp')}}"
                         alt="images">
                     <h3 class="sub_head mb-0">Why We Chose Travertine: A Study in Stone</h3>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/Journal2.png')}}"
+                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/Journal2.webp')}}"
                         alt="images">
                     <h3 class="sub_head mb-0">The Ritual of Hosting: The Table as Ceremony</h3>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/Journal3.png')}}"
+                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/Journal3.webp')}}"
                         alt="images">
                     <h3 class="sub_head mb-0">Objects of Memory: Creating a Personal Shrine at Home</h3>
                 </div>
@@ -363,7 +365,7 @@
 
                 <div class="material_slide text-center">
                     <div class="material_img">
-                        <img src="{{asset('public/images/front/natural-stone.png')}}" alt="natural-stone"
+                        <img src="{{asset('public/images/front/natural-stone.webp')}}" alt="natural-stone"
                             class="img-fluid" loading="lazy">
                     </div>
                     <h6 class="sub_head">Natural stone</h6>
@@ -372,7 +374,7 @@
 
                 <div class="material_slide text-center">
                     <div class="material_img">
-                        <img src="{{asset('public/images/front/natural-stone2.png')}}" alt="natural-stone"
+                        <img src="{{asset('public/images/front/natural-stone2.webp')}}" alt="natural-stone"
                             class="img-fluid" loading="lazy">
                     </div>
                     <h6 class="sub_head">Brass</h6>
@@ -380,7 +382,7 @@
 
                 <div class="material_slide text-center">
                     <div class="material_img">
-                        <img src="{{asset('public/images/front/natural-stone3.png')}}" alt="natural-stone"
+                        <img src="{{asset('public/images/front/natural-stone3.webp')}}" alt="natural-stone"
                             class="img-fluid" loading="lazy">
                     </div>
                     <h6 class="sub_head">Malachite</h6>
@@ -388,7 +390,7 @@
 
                 <div class="material_slide text-center">
                     <div class="material_img">
-                        <img src="{{asset('public/images/front/natural-stone4.png')}}" alt="natural-stone"
+                        <img src="{{asset('public/images/front/natural-stone4.webp')}}" alt="natural-stone"
                             class="img-fluid" loading="lazy">
                     </div>
                     <h6 class="sub_head">Rose Quartz</h6>
@@ -396,7 +398,7 @@
 
                 <div class="material_slide text-center">
                     <div class="material_img">
-                        <img src="{{asset('public/images/front/natural-stone5.png')}}" alt="natural-stone"
+                        <img src="{{asset('public/images/front/natural-stone5.webp')}}" alt="natural-stone"
                             class="img-fluid" loading="lazy">
                     </div>
                     <h6 class="sub_head">Silver Metal</h6>
@@ -404,7 +406,7 @@
 
                 <div class="material_slide text-center">
                     <div class="material_img">
-                        <img src="{{asset('public/images/front/natural-stone6.png')}}" alt="natural-stone"
+                        <img src="{{asset('public/images/front/natural-stone6.webp')}}" alt="natural-stone"
                             class="img-fluid" loading="lazy">
                     </div>
                     <h6 class="sub_head">Leather</h6>
@@ -441,21 +443,24 @@
         <div class="row gy-4 gy-md-0">
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/values1.png')}}" alt="images">
+                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/values1.webp')}}"
+                        alt="images">
                     <h3 class="sub_head">Ritual First</h3>
                     <p class="mb-0">Objects designed for meaning, not decoration.</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/values2.png')}}" alt="images">
+                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/values2.webp')}}"
+                        alt="images">
                     <h3 class="sub_head">Sculptural Purity</h3>
                     <p class="mb-0">Form, weight, and shadow shape our vocabulary.</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/values3.png')}}" alt="images">
+                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/values3.webp')}}"
+                        alt="images">
                     <h3 class="sub_head">Small Batch Craft</h3>
                     <p class="mb-0">Limited editions. Slow production. Enduring quality.</p>
                 </div>
