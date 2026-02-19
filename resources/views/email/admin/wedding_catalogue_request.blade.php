@@ -78,10 +78,10 @@
                 <td>{{ $full_name }}</td>
             </tr>
 
-            <tr>
+            {{-- <tr>
                 <td><strong>Phone No.</strong></td>
                 <td>{{ $phone }}</td>
-            </tr>
+            </tr> --}}
 
             <tr>
                 <td><strong>Email</strong></td>

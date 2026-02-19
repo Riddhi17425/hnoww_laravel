@@ -6,10 +6,10 @@
         <p>Hello {{ $name ?? 'User' }},</p>
 
         <p>
-            Your Contact inquiry has been send Successfully.
+            Thank you. </br> A member of the HNOWW Corporate Concierge will review your request and respond if aligned.
         </p>
 
-        <table width="100%" cellpadding="8" cellspacing="0" border="1" style="border-collapse: collapse; margin-top: 15px;">
+        {{-- <table width="100%" cellpadding="8" cellspacing="0" border="1" style="border-collapse: collapse; margin-top: 15px;">
             <tr>
                 <td width="30%"><strong>Full Name</strong></td>
                 <td>{{ $name }}</td>
@@ -30,7 +30,7 @@
                 <td><strong>Message</strong></td>
                 <td>{{ $message_data ?? 'N/A' }}</td>
             </tr>
-        </table>
+        </table> --}}
 
         <p style="margin-top: 20px;">
             Thanks & Regards,<br>

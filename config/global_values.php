@@ -5,7 +5,24 @@ return [
     'admin_whatsapp_no' => '916354910945',
     'contact_enquiry_type' => ['bespoke_commission' => 'Bespoke Commissions', 'general_enquiery' => 'General Enquiry', 'support' => 'Support'],
     'request_catalogue_interest' => ['private_collection1' => 'Private Collection1', 'private_collection2' => 'Private Collection2'],
-    'quality_range' => ['20_50' => '20-50', '50_100' => '50–100', '100_300' => '100–300', '300_500' => '300–500', '500_plus' => '500+'],
+    'quality_range' => [
+        'under_20' => 'Under 20',
+        '20_50'    => '20-50',
+        '50_100'   => '50-100',
+        '100_plus' => '100+',
+    ],
+    'corporate_budget' => [
+        'to_be_discussed' => 'To be discussed',
+        'under_300'     => 'Under AED 300',
+        '300_750'     => 'AED 300-750',
+        '750_1500'     => 'AED 750-1500',
+        '1500_plus'      => 'AED 1500+',
+    ],
+    'corporate_timeline' => [
+        'flexible'   => 'Flexible',
+        '2_4_weeks'  => '2-4 weeks',
+        '1_3_months' => '1-3 months',
+    ],
     'months' => ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November','December'],
     
     // 'blessing_of' => ['love' => 'Love', 'strength' => 'Strength', 'renewal' => 'Renewal', 'devotion' => 'Devotion'],

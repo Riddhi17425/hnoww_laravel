@@ -24,14 +24,14 @@ return new class extends Migration
             // $table->date('delivery_date')->nullable();
             // $table->text('message')->nullable();
             $table->string('full_name', 100);
-            $table->string('phone', 15);
+            $table->string('phone', 15)->nullable();
             $table->string('email', 150);
-            $table->string('role', 100);
+            $table->string('role', 100)->nullable();
             $table->string('location', 150)->nullable();
-            $table->date('wedding_date');
-            $table->json('looking_for'); // multiple checkboxes
-            $table->string('guest_count', 50);
-            $table->string('budget_band', 100);
+            $table->date('wedding_date')->nullable();
+            $table->json('looking_for')->nullable();
+            $table->string('guest_count', 50)->nullable();
+            $table->string('budget_band', 100)->nullable();
             $table->text('message')->nullable();
             $table->timestamps();
         });

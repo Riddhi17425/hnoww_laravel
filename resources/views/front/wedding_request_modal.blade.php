@@ -31,13 +31,13 @@
                         </div>
                      </div>
                      <!-- Phone -->
-                     <div class="col-lg-4">
+                     {{-- <div class="col-lg-4">
                         <div class="ct_input">
                            <label class="sub_head">Phone Number </label>
                            <input type="text" name="w_phone" placeholder="Enter your WhatsApp Phone Number" id="w_phone" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);" value="{{ old('w_phone') }}">
                            @error('w_phone') <small class="text-danger">{{ $message }}</small> @enderror
                         </div>
-                     </div>
+                     </div> --}}
                      <!-- Email -->
                      <div class="col-lg-4">
                         <div class="ct_input">
@@ -84,7 +84,7 @@
                            <input class="form-check-input" type="checkbox"
                                     id="ceremonial"
                                     name="w_looking_for[]"
-                                    value="Ceremonial / ritual objects" required>
+                                    value="Ceremonial / ritual objects">
                            <label class="form-check-label" for="ceremonial">
                                  Ceremonial / ritual objects
                            </label>
@@ -129,6 +129,7 @@
                                  Unsure — need guidance
                            </label>
                         </div>
+                        <div id="w_looking_for_error"></div>
                      </div>
                      <div class="col-lg-4 mb-4">
                         <label class="form-label fw-bold">

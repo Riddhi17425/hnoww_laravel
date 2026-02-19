@@ -568,36 +568,76 @@ class FrontController extends Controller
 
     public function storeCorporateProposalRequest(Request $request){
         $qualityRange = config('global_values.quality_range');
+        $corporateBudget = config('global_values.corporate_budget');
+        $timeline = config('global_values.corporate_timeline');
+        // $rules = [
+        //     'full_name'             => 'required|string|min:2|max:100',
+        //     'company_name'          => 'required|string|min:2|max:150',
+        //     'phone'                 => 'required|regex:/^[0-9\s\-\+\(\)]+$/|min:7|max:20',
+        //     'email'                 => 'required|email|max:150',
+        //     'product_of_interest'   => 'nullable|array',
+        //     'product_of_interest.*' => 'string',
+        //     'quantity_range'        => 'required|string',
+        //     'budget'                => 'nullable|string|max:100',
+        //     'branding_requirements' => 'nullable|string|max:255',
+        //     'delivery_date'         => 'required|date|after_or_equal:today',
+        //     'message'               => 'nullable|string|max:500',
+        // ];
+        // $messages = [
+        //     'full_name.required'             => 'Full Name is required.',
+        //     'full_name.min'                  => 'Full Name must be at least 2 characters.',
+        //     'full_name.max'                  => 'Full Name cannot be longer than 100 characters.',
+        //     'company_name.required'          => 'Company Organization is required.',
+        //     'phone.required'                 => 'Phone Number is required.',
+        //     'phone.regex'                   => 'Phone Number format is invalid.',
+        //     'phone.min'                     => 'Phone Number is too short.',
+        //     'phone.max'                     => 'Phone Number is too long.',
+        //     'email.required'                => 'Email Address is required.',
+        //     'email.email'                   => 'Email must be a valid email address.',
+        //     'quantity_range.required'       => 'Quantity Range is required.',
+        //     'quantity_range.in'             => 'Selected Quantity Range is invalid.',
+        //     'delivery_date.required'        => 'Delivery Timeline is required.',
+        //     'delivery_date.date'            => 'Delivery Timeline must be a valid date.',
+        //     'delivery_date.after_or_equal'  => 'Delivery Timeline cannot be in the past.',
+        //     'message.max'                   => 'Message cannot exceed 500 characters.',
+        // ];
         $rules = [
             'full_name'             => 'required|string|min:2|max:100',
             'company_name'          => 'required|string|min:2|max:150',
-            'phone'                 => 'required|regex:/^[0-9\s\-\+\(\)]+$/|min:7|max:20',
+            'role'                  => 'required|string|max:100',
+            //'phone'                 => 'nullable|regex:/^[0-9\s\-\+\(\)]+$/|min:7|max:20',
             'email'                 => 'required|email|max:150',
-            'product_of_interest'   => 'nullable|array',
-            'product_of_interest.*' => 'string',
-            'quantity_range'        => 'required|string',
-            'budget'                => 'nullable|string|max:100',
-            'branding_requirements' => 'nullable|string|max:255',
-            'delivery_date'         => 'required|date|after_or_equal:today',
+            'nature_of_requirement'   => 'required|array|min:1',
+            'nature_of_requirement.*' => 'string|max:150',
+            'quantity_range'        => 'required|string|max:50',
+            'corporate_budget'      => 'required|string|max:100',
+            'timeline'              => 'required|string|max:50',
             'message'               => 'nullable|string|max:500',
         ];
         $messages = [
-            'full_name.required'             => 'Full Name is required.',
-            'full_name.min'                  => 'Full Name must be at least 2 characters.',
-            'full_name.max'                  => 'Full Name cannot be longer than 100 characters.',
-            'company_name.required'          => 'Company Organization is required.',
-            'phone.required'                 => 'Phone Number is required.',
-            'phone.regex'                   => 'Phone Number format is invalid.',
-            'phone.min'                     => 'Phone Number is too short.',
-            'phone.max'                     => 'Phone Number is too long.',
-            'email.required'                => 'Email Address is required.',
-            'email.email'                   => 'Email must be a valid email address.',
-            'quantity_range.required'       => 'Quantity Range is required.',
-            'quantity_range.in'             => 'Selected Quantity Range is invalid.',
-            'delivery_date.required'        => 'Delivery Timeline is required.',
-            'delivery_date.date'            => 'Delivery Timeline must be a valid date.',
-            'delivery_date.after_or_equal'  => 'Delivery Timeline cannot be in the past.',
-            'message.max'                   => 'Message cannot exceed 500 characters.',
+            'full_name.required'         => 'Full Name is required.',
+            'full_name.min'              => 'Full Name must be at least 2 characters.',
+            'full_name.max'              => 'Full Name cannot be longer than 100 characters.',
+            'company_name.required'      => 'Company Name is required.',
+            'company_name.min'           => 'Company Name must be at least 2 characters.',
+            'company_name.max'           => 'Company Name cannot exceed 150 characters.',
+            'role.required'              => 'Role / Designation is required.',
+            'role.max'                   => 'Role cannot exceed 100 characters.',
+            // 'phone.regex'                => 'Phone Number format is invalid.',
+            // 'phone.min'                  => 'Phone Number is too short.',
+            // 'phone.max'                  => 'Phone Number is too long.',
+            'email.required'             => 'Email Address is required.',
+            'email.email'                => 'Email must be a valid email address.',
+            'nature_of_requirement.required'   => 'Please select at least one Nature of Requirement.',
+            'nature_of_requirement.array'      => 'Invalid Nature of Requirement selection.',
+            'nature_of_requirement.*.max'      => 'Each selected Nature of Requirement cannot exceed 150 characters.',
+            'quantity_range.required'    => 'Please select a Quantity Range.',
+            'quantity_range.max'         => 'Quantity Range cannot exceed 50 characters.',
+            'corporate_budget.required' => 'Please select a Budget Comfort.',
+            'corporate_budget.max'      => 'Budget Comfort cannot exceed 100 characters.',
+            'timeline.required'         => 'Please select a Timeline.',
+            'timeline.max'              => 'Timeline cannot exceed 50 characters.',
+            'message.max'                => 'Message cannot exceed 500 characters.',
         ];
 
         // Validate the request
@@ -612,48 +652,70 @@ class FrontController extends Controller
         $data = $request->only([
             'full_name', 
             'company_name', 
-            'phone', 
+            'role', 
             'email', 
             'quantity_range', 
-            'budget', 
-            'branding_requirements', 
-            'delivery_date', 
+            'corporate_budget', 
+            'timeline', 
             'message'
         ]); 
 
         // Convert array to string for product_of_interest if needed (or save JSON)
-        if ($request->has('product_of_interest')) {
-            $data['product_of_interest'] = json_encode($request->input('product_of_interest'));
+        // if ($request->has('product_of_interest')) {
+        //     $data['product_of_interest'] = json_encode($request->input('product_of_interest'));
+        // } else {
+        //     $data['product_of_interest'] = null;
+        // }
+
+        if ($request->has('nature_of_requirement')) {
+            $data['nature_of_requirement'] = json_encode($request->input('nature_of_requirement'));
         } else {
-            $data['product_of_interest'] = null;
+            $data['nature_of_requirement'] = null;
         }
 
         CorporateProposalRequest::create($data);
-
-        $commaSeparatedProducts = '';
-        $productIds = $request->product_of_interest;
-        $productNames = Product::whereIn('id', $productIds)->pluck('product_name')->toArray();
-        if(isset($productNames) && is_countable($productNames) && count($productNames) > 0){
-            $commaSeparatedProducts = implode(', ', $productNames);
+        $commaSeparatedRequirements = '';
+        $requirements = $request->nature_of_requirement;
+        if (isset($requirements) && is_countable($requirements) && count($requirements) > 0) {
+            $commaSeparatedRequirements = implode(', ', $requirements);
         }
+
+        // $commaSeparatedProducts = '';
+        // $productIds = $request->product_of_interest;
+        // $productNames = Product::whereIn('id', $productIds)->pluck('product_name')->toArray();
+        // if(isset($productNames) && is_countable($productNames) && count($productNames) > 0){
+        //     $commaSeparatedProducts = implode(', ', $productNames);
+        // }
 
         // SEND MAIL TO USER AND ADMIN
         $adminEmail = $this->adminEmail;
         $userEmail = $request->email;
+        $qualityRange = $qualityRange[$request->quantity_range];
+        $corporateBudget = $corporateBudget[$request->corporate_budget];
+        $timeline = $timeline[$request->timeline];
         $data = [
-            'name'        => $request->full_name,
-            'company_name'        => $request->company_name,
-            'phone'        => $request->phone,
-            'email'       => $request->email,
-            'product_of_interest' => $commaSeparatedProducts,
-            'quantity_range'  => $qualityRange[$request->quantity_range],
-            'budget'  => $request->budget,
-            'branding_requirements'  => $request->branding_requirements,
-            'delivery_date'  => $request->delivery_date,
-            'message_data'     => $request->message ?? NULL,
+            // 'name'        => $request->full_name,
+            // 'company_name'        => $request->company_name,
+            // 'phone'        => $request->phone,
+            // 'email'       => $request->email,
+            // 'product_of_interest' => $commaSeparatedProducts,
+            // 'quantity_range'  => $qualityRange[$request->quantity_range],
+            // 'budget'  => $request->budget,
+            // 'branding_requirements'  => $request->branding_requirements,
+            // 'delivery_date'  => $request->delivery_date,
+            // 'message_data'     => $request->message ?? NULL,
+            'name'                   => $request->full_name,
+            'company_name'           => $request->company_name,
+            'role'                   => $request->role,
+            'email'                  => $request->email,
+            'quantity_range'         => $qualityRange,
+            'corporate_budget'       => $corporateBudget,
+            'timeline'               => $timeline,
+            'nature_of_requirement'  => $commaSeparatedRequirements,
+            'message_data'           => $request->message ?? null,
         ];
 
-        try {
+        //try {
             Mail::send('email.admin.corporate_proposal_request', $data, function ($message) use ($adminEmail) {
                 $message->to($this->adminEmail)->subject('New Corporate Proposal Request Received');
             });
@@ -661,24 +723,36 @@ class FrontController extends Controller
             Mail::send('email.front.corporate_proposal_request', $data, function ($message) use ($userEmail) {
                 $message->to($userEmail)->subject('Corporate Proposal Request send Successfully');
             });
-        } catch (Exception $e) {
-            Log::error('Inquiry Mail sending failed: '.$e->getMessage());
-        }
+        // } catch (Exception $e) {
+        //     Log::error('Inquiry Mail sending failed: '.$e->getMessage());
+        // }
 
         // SEND WHATSAPP MESSAGE TO ADMIN
         //$message = 'New Corporate Proposal Request is placed using email - '.$request->email;
+        // $message = "📩 *New Corporate Proposal Request*\n\n" .
+        //         "*Full Name:* {$request->full_name}\n" .
+        //         "*Company Name:* {$request->company_name}\n" .
+        //         "*Phone:* {$request->phone}\n" .
+        //         "*Email:* {$request->email}\n" .
+        //         "*Product of Interest:* " . ($commaSeparatedProducts ?? 'N/A') . "\n" .
+        //         "*Quantity Range:* {$qualityRange[$request->quantity_range]}\n" .
+        //         "*Budget:* {$request->budget}\n" .
+        //         "*Branding Requirements:* {$request->branding_requirements}\n" .
+        //         "*Delivery Date:* {$request->delivery_date}\n" .
+        //         "*Message:* " . ($request->message ?? 'N/A') . "\n\n" .
+        //         "— HNoWW";
         $message = "📩 *New Corporate Proposal Request*\n\n" .
-                "*Full Name:* {$request->full_name}\n" .
-                "*Company Name:* {$request->company_name}\n" .
-                "*Phone:* {$request->phone}\n" .
-                "*Email:* {$request->email}\n" .
-                "*Product of Interest:* " . ($commaSeparatedProducts ?? 'N/A') . "\n" .
-                "*Quantity Range:* {$qualityRange[$request->quantity_range]}\n" .
-                "*Budget:* {$request->budget}\n" .
-                "*Branding Requirements:* {$request->branding_requirements}\n" .
-                "*Delivery Date:* {$request->delivery_date}\n" .
-                "*Message:* " . ($request->message ?? 'N/A') . "\n\n" .
-                "— HNoWW";
+                    "*Full Name:* {$request->full_name}\n" .
+                    "*Company Name:* {$request->company_name}\n" .
+                    "*Role / Designation:* {$request->role}\n" .
+                    "*Email:* {$request->email}\n" .
+                    "*Quantity Range:* {$qualityRange}\n" .
+                    "*Budget Comfort:* {$corporateBudget}\n" .
+                    "*Timeline:* {$timeline}\n" .
+                    "*Nature of Requirement:* " . ($commaSeparatedRequirements ?? 'N/A') . "\n" .
+                    "*Message:* " . ($request->message ?? 'N/A') . "\n\n" .
+                    "— HNoWW";
+
         try {
             $url = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode($message);
             //return redirect()->away($url);
@@ -831,7 +905,7 @@ class FrontController extends Controller
             // 'w_message'               => 'nullable|string|max:500',
 
             'w_full_name'      => 'required|string|min:2|max:100',
-            'w_phone'          => 'required|regex:/^[0-9]+$/|min:7|max:15',
+            //'w_phone'          => 'nullable|regex:/^[0-9]+$/|min:7|max:15',
             'w_email'          => 'required|email|max:150',
             'w_role'           => 'required|string|max:100',
             'w_location'       => 'nullable|string|max:150',
@@ -866,10 +940,10 @@ class FrontController extends Controller
             'w_full_name.min'      => 'Full Name must be at least 2 characters.',
             'w_full_name.max'      => 'Full Name cannot exceed 100 characters.',
 
-            'w_phone.required' => 'Phone Number is required.',
-            'w_phone.regex'    => 'Phone Number must contain only digits.',
-            'w_phone.min'      => 'Phone Number must be at least 7 digits.',
-            'w_phone.max'      => 'Phone Number cannot exceed 15 digits.',
+            // 'w_phone.required' => 'Phone Number is required.',
+            // 'w_phone.regex'    => 'Phone Number must contain only digits.',
+            // 'w_phone.min'      => 'Phone Number must be at least 7 digits.',
+            // 'w_phone.max'      => 'Phone Number cannot exceed 15 digits.',
 
             'w_email.required' => 'Email Address is required.',
             'w_email.email'    => 'Please enter a valid Email Address.',
@@ -925,7 +999,7 @@ class FrontController extends Controller
             // 'delivery_date' => $request->w_delivery_date,
             // 'message' => $request->w_message,
             'full_name'      => $request->w_full_name,
-            'phone'          => $request->w_phone,
+            //'phone'          => $request->w_phone,
             'email'          => $request->w_email,
             'role'           => $role,
             'location'       => $request->w_location,
@@ -984,7 +1058,7 @@ class FrontController extends Controller
         //         "— HNoWW";
         $message = "📩 *New Wedding Consultation Request*\n\n" .
             "*Full Name:* {$request->w_full_name}\n" .
-            "*Phone:* {$request->w_phone}\n" .
+            //"*Phone:* {$request->w_phone}\n" .
             "*Email:* {$request->w_email}\n" .
             "*Role:* {$role}\n" .
             "*Wedding Location:* " . ($request->w_location ?? 'N/A') . "\n" .
