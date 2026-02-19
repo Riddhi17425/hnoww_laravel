@@ -205,7 +205,6 @@ Curated in Dubai, for those who understand that legacy is built quietly.
                     HNOWW
                 </h2>
             </div>
-
         </div>
     </div>
 </section>
