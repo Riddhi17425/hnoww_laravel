@@ -19,11 +19,13 @@ $monthMap = [
 @endphp
 <!-- hero section -->
 <section class="hero-section_inner">
-    <img class="img-fluid" src="{{asset('public/images/front/journal-banner.png')}}" alt="journal banner">
+    <img class="img-fluid" src="{{asset('public/images/front/journal-banner.webp')}}" alt="journal banner">
 
     <div class="hero_content_inner">
         <h2 class="main_head mb-3">The Art of Hosting</h2>
-        <p class="para mb-0">Hospitality is rarely about perfection. It is about the specific vibrations of a room when people feel one with the surroundings. It is the weight of a fork, the scent of unlit wax, and the way light catches the rim of a glass.</p>
+        <p class="para mb-0">Hospitality is rarely about perfection. It is about the specific vibrations of a room when
+            people feel one with the surroundings. It is the weight of a fork, the scent of unlit wax, and the way light
+            catches the rim of a glass.</p>
     </div>
 </section>
 <section class="mt_60">
@@ -149,29 +151,30 @@ $monthMap = [
                     <img class="img-fluid"
                         src="{{ asset('public/images/admin/journal/detail_images/'.$val->detail_img) }}">
 
-                    <a href="#" class="com_btn">
+                    <a class="com_btn">
                         <span class="ms-2">{{ $val->month_name }}</span>
                     </a>
                 </div>
             </div>
 
             <div class="col-md-6">
-                                <div class="montheditions_rt">
-                                    <h3 class="sub_head mb-md-3">{{ $val->title }}</h3>
-            @if(isset($val->feature_title))<p class="montheditions_para">Feature: {{$val->feature_title}}</p>@endif
-            @if(isset($val->feature_description))<p>{{$val->feature_description ?? '' }}</p>@endif
+                <div class="montheditions_rt">
+                    <h3 class="sub_head mb-md-3">{{ $val->title }}</h3>
+                    @if(isset($val->feature_title))<p class="montheditions_para">Feature: {{$val->feature_title}}</p>
+                    @endif
+                    @if(isset($val->feature_description))<p>{{$val->feature_description ?? '' }}</p>@endif
 
-            <div class="content-wrap">
-                <h3 class="sub_head mt-md-4 mb-md-3">The Practice:</h3>
-                <!--<p class="montheditions_para">Teach readers to curate a reflective moment � candles, scent, a silver bowl, a note of intention.</p>
+                    <div class="content-wrap">
+                        <h3 class="sub_head mt-md-4 mb-md-3">The Practice:</h3>
+                        <!--<p class="montheditions_para">Teach readers to curate a reflective moment � candles, scent, a silver bowl, a note of intention.</p>
                                         <p class="sub_head_inter mb-0">Ritual as self-care through design..</p> -->
-                {!! $val->description !!}
-            </div>
-            <a href="javascript:void(0)" class="read-more-btn">Read More</a>
+                        {!! $val->description !!}
+                    </div>
+                    <a href="javascript:void(0)" class="read-more-btn">Read More</a>
 
-        </div>
-        </div> 
-       
+                </div>
+            </div>
+
 
         </div>
         </div>

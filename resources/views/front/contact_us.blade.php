@@ -1,7 +1,7 @@
 @include('layouts.frontheader')
 
 <section class="hero-section_inner">
-    <img class="img-fluid" src="{{ asset('public/images/front/contact-banner.png')}}" alt="him banner">
+    <img class="img-fluid" src="{{ asset('public/images/front/contact-banner.webp')}}" alt="him banner">
 
     <div class="hero_content_inner">
         <h2 class="main_head mb-3">The Studio</h2>
@@ -39,11 +39,13 @@
                     <div class="ct_grid">
                         <div>
                             <h3 class="sub_head">WhatsApp</h3>
-                            <p class="mb-0"><a href="javascript:void(0)">+971 50 950 927 (Immediate assistance)</a></p>
+                            <p class="mb-0">
+                                <a href="tel:+97150950927">+971 50 950 927</a> <br /> <span>(Immediate
+                                    assistance)</span></p>
                         </div>
                         <div>
                             <h3 class="sub_head">Email</h3>
-                            <p class="mb-0"><a href="javascript:void(0)">studio@hnoww.com</a></p>
+                            <p class="mb-0"><a href="mailto:studio@hnoww.com">studio@hnoww.com</a></p>
                         </div>
                         <div>
                             <h3 class="sub_head">Hours</h3>
@@ -95,7 +97,7 @@
 
 <section class="mt_80 d-none d-lg-block">
     <div class="container">
-        <img src="{{ asset('public/images/front/contact_img.png') }}" alt="contact" loading="lazy" class="img-fluid">
+        <img src="{{ asset('public/images/front/contact_img.webp') }}" alt="contact" loading="lazy" class="img-fluid">
     </div>
 </section>
 
@@ -127,9 +129,11 @@
                     <div class="col-lg-6">
                         <div class="ct_input">
                             <label for="full_name" class="sub_head">Full Name</label> <span class="text-danger">*</span>
-                            <input type="text" id="full_name" name="full_name" value="{{ old('full_name') }}" placeholder="Enter your Full Name" pattern="[A-Za-z\s]{2,50}" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();">
+                            <input type="text" id="full_name" name="full_name" value="{{ old('full_name') }}"
+                                placeholder="Enter your Full Name" pattern="[A-Za-z\s]{2,50}"
+                                oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();">
                             @error('full_name')
-                                <small class="text-danger">{{ $message }}</small>
+                            <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                     </div>
@@ -138,15 +142,11 @@
                     <div class="col-lg-6">
                         <div class="ct_input">
                             <label for="email" class="sub_head">Email Address</label> <span class="text-danger">*</span>
-                            <input type="email"
-                                id="email"
-                                name="email"
-                                value="{{ old('email') }}"
-                                placeholder="Enter your Email Address"
-                            >
+                            <input type="email" id="email" name="email" value="{{ old('email') }}"
+                                placeholder="Enter your Email Address">
 
                             @error('email')
-                                <small class="text-danger">{{ $message }}</small>
+                            <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                     </div>
@@ -155,11 +155,12 @@
                     <div class="col-lg-6">
                         <div class="ct_input">
                             <label for="phone" class="sub_head">Phone Number</label> <span class="text-danger">*</span>
-                            <input type="text" id="phone" name="phone" value="{{ old('phone') }}" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);" placeholder="Enter your Phone Number" 
-                            >
+                            <input type="text" id="phone" name="phone" value="{{ old('phone') }}"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
+                                placeholder="Enter your Phone Number">
 
                             @error('phone')
-                                <small class="text-danger">{{ $message }}</small>
+                            <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                     </div>
@@ -172,14 +173,14 @@
                             <select name="enquiry_type">
                                 <option value="">Select Enquiry</option>
                                 @foreach($enquiryType as $key => $val)
-                                    <option value="{{ $key }}" {{ old('enquiry_type') }}>
-                                        {{ $val }}
-                                    </option>
+                                <option value="{{ $key }}" {{ old('enquiry_type') }}>
+                                    {{ $val }}
+                                </option>
                                 @endforeach
                             </select>
 
                             @error('enquiry_type')
-                                <small class="text-danger">{{ $message }}</small>
+                            <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                     </div>
@@ -188,10 +189,11 @@
                     <div class="col-12">
                         <div class="ct_input">
                             <label for="message" class="sub_head">The Message</label>
-                            <textarea id="message" name="message" placeholder="How can we assist you today?" rows="1">{{ old('message') }}</textarea>
+                            <textarea id="message" name="message" placeholder="How can we assist you today?"
+                                rows="1">{{ old('message') }}</textarea>
 
                             @error('message')
-                                <small class="text-danger">{{ $message }}</small>
+                            <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                     </div>
@@ -211,7 +213,7 @@
 @push('script')
 <script>
 var formSubmitted = false;
-$( document ).ready(function() {
+$(document).ready(function() {
     $("#contactInquiryForm").validate({
         rules: {
             full_name: {
@@ -254,7 +256,7 @@ $( document ).ready(function() {
             phone: {
                 required: "Please enter your Contact number"
             },
-            enquiry_type:{
+            enquiry_type: {
                 required: "Please select Enquiry Type"
             },
             message: {
@@ -267,7 +269,7 @@ $( document ).ready(function() {
             // if (element.attr("name") === "g-recaptcha-response") {
             //     error.insertAfter(".g-recaptcha"); 
             // } else {
-                error.insertAfter(element);
+            error.insertAfter(element);
             //}
         },
         highlight: function(element) {
@@ -288,7 +290,6 @@ $( document ).ready(function() {
         }
     });
 });
-
 </script>
 @endpush
 @include('layouts.frontfooter')

@@ -392,6 +392,10 @@
     .formBx .ct_form .row {
         --bs-gutter-x: 40px;
     }
+
+    .magic_wrapper_center .magic_wrapper_p {
+        font-size: 26px;
+    }
 }
 
 /*=========================                  =========================
@@ -740,8 +744,8 @@
         font-size: 13px;
     }
 
-    .montheditions_rt .content-wrap {
-        max-height: 150px;
+    /* .montheditions_rt .content-wrap {
+        max-height: 90px;
         overflow: hidden;
         transition: max-height 0.4s ease;
         position: relative;
@@ -763,6 +767,39 @@
         width: 100%;
         height: 40px;
         background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #faf9f6);
+    } */
+
+    .montheditions_rt .content-wrap {
+        max-height: 90px;
+        overflow: hidden;
+        transition: max-height 0.45s ease;
+        position: relative;
+    }
+
+    .montheditions_rt .content-wrap.expanded {
+        max-height: 1000px;
+    }
+
+    .montheditions_rt .read-more-btn {
+        display: inline-block;
+        margin-top: 8px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .montheditions_rt .content-wrap:not(.expanded)::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 40px;
+        pointer-events: none;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #faf9f6);
+    }
+
+    .montheditions_rt .content-wrap.expanded::after {
+        display: none;
     }
 
     .whatsapp-float img {
@@ -790,6 +827,10 @@
 
     #reg_login .reg_login_child .user .formBx {
         padding: 25px;
+    }
+
+    .magic_wrapper_center .magic_wrapper_p {
+        font-size: 22px;
     }
 }
 
@@ -875,8 +916,9 @@
     }
 
     .gesture_filter select {
-        background: url(../images/down_arr.svg) no-repeat right 0px center /
-            14px;
+        background: url(../../images/front/down_arr.svg) no-repeat right 0px
+            center / 14px;
+
         padding-bottom: 2px;
     }
 
@@ -1068,6 +1110,12 @@
     #reg_login .reg_login_child .user .formBx .ct_form .row {
         --bs-gutter-x: 25px;
     }
+
+
+     .magic_wrapper_center .magic_wrapper_p {
+        /* font-size: 20px; */
+    }
+
 }
 
 /*=========================                  =========================
@@ -1175,7 +1223,12 @@
     }
 
     .magic_wrapper img {
-        width: 50%;
+        width: 70%;
+    }
+
+    .magic_wrapper_center .magic_wrapper_p
+    {
+        font-size: 16px;
     }
 
     .sub_head {
@@ -1712,4 +1765,6 @@
     .material_flex {
         display: block;
     }
+
+
 }

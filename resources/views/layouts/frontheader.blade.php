@@ -12,7 +12,7 @@ $current_route ===
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="image/x-icon" href="{{ asset('public/front/images/favicon.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('public/images/front/favicon.png') }}">
     <title>HNOWW</title>
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -156,8 +156,8 @@ $current_route ===
         <nav class="navbar navbar-expand-lg">
             <div class="navbar_left">
                 <a href="{{ route('front.home') }}"><img class="header_logo" src="{{ $is_green 
-                            ? asset('public/front/images/header-green.svg') 
-                            : asset('public/front/images/header-logo.svg') }}" alt="Logo"></a>
+                            ? asset('public/images/front/header-green.svg') 
+                            : asset('public/images/front/header-logo.svg') }}" alt="Logo"></a>
             </div>
             <span class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
                 aria-label="Toggle navigation">
@@ -249,13 +249,13 @@ $current_route ===
                 </ul>
                 <!-- <div class="navbar_right">
                     <a href=""><img
-                            src=" <?= $is_green ? asset('public/front/images/serach-icon-black.svg') : asset('public/front/images/search-icon.svg') ?>"
+                            src=" <?= $is_green ? asset('public/images/front/serach-icon-black.svg') : asset('public/images/front/search-icon.svg') ?>"
                         alt="Search"></a>
                     <a href=""><img
-                            src="<?= $is_green ? asset('public/front/images/user-icon-black.svg') : asset('public/front/images/user-icon.svg') ?>"
+                            src="<?= $is_green ? asset('public/images/front/user-icon-black.svg') : asset('public/images/front/user-icon.svg') ?>"
                             alt="User"></a>
                     <a href=""><img
-                            src="<?= $is_green ? asset('public/front/images/cart-icon-black.svg') : asset('public/front/images/cart-icon.svg') ?>"
+                            src="<?= $is_green ? asset('public/images/front/cart-icon-black.svg') : asset('public/images/front/cart-icon.svg') ?>"
                             alt="Cart"></a>
                 </div> -->
 
@@ -264,7 +264,7 @@ $current_route ===
                     <!-- Search Dropdown -->
                     <!-- <div class="search_dropdown">
                     <a href="javascript:void(0)" class="search_icon">
-                        <img src=" <?= $is_green ? asset('public/front/images/serach-icon-black.svg') : asset('public/front/images/search-icon.svg') ?>"
+                        <img src=" <?= $is_green ? asset('public/images/front/serach-icon-black.svg') : asset('public/images/front/search-icon.svg') ?>"
                             alt="Search">
                     </a>
 
@@ -277,7 +277,7 @@ $current_route ===
                     <!-- User Dropdown -->
                     <div class="user_dropdown">
                         <a href="javascript:void(0)" class="user_icon">
-                            <img src="<?= $is_green ? asset('public/front/images/user-icon-black.svg') : asset('public/front/images/user-icon.svg') ?>"
+                            <img src="<?= $is_green ? asset('public/images/front/user-icon-black.svg') : asset('public/images/front/user-icon.svg') ?>"
                                 alt="User">
                         </a>
 
@@ -300,7 +300,7 @@ $current_route ===
                     </div>
                     <!-- Cart with Badge -->
                     <a href="{{ route('front.cart.view') }}" class="cart_icon">
-                        <img src="<?= $is_green ? asset('public/front/images/cart-icon-black.svg') : asset('public/front/images/cart-icon.svg') ?>"
+                        <img src="<?= $is_green ? asset('public/images/front/cart-icon-black.svg') : asset('public/images/front/cart-icon.svg') ?>"
                             alt="Cart">
                         <span id="cart-count"
                             class="cart_badge">{{ \App\Models\Cart::where('user_id', auth()->id())->sum('quantity') ?? 0 }}</span>

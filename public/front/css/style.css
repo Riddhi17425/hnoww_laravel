@@ -243,7 +243,7 @@ a {
 
 /* cta footer css */
 .cta_footer {
-    background-image: url(../images/ctafooter.png);
+    background-image: url(../../images/front/ctafooter.webp);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -414,7 +414,7 @@ a {
 /* show */
 .language-select .dropdown-list.show {
     display: block;
-    background: url(../images/ct_noise_bg.png);
+    background: url(../../images/front/ct_noise_bg.webp);
 }
 
 /* ================= Search ================= */

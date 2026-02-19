@@ -117,7 +117,7 @@
                      </table>
                      @else
                      <div class="text-center">
-                           <img class="img-fluid" style="" src="{{asset('public/images/front/emty_cart.png')}}" alt="about us banner">
+                           <img class="img-fluid" style="" src="{{asset('public/images/front/emty_cart.webp')}}" alt="about us banner">
                         <h5 class="sub_head my-3">Your shopping bag is currently empty.</h5>
                         <a href="{{ route('front.home') }}"
                            class="com_btn mt-2">Continue shopping</a>

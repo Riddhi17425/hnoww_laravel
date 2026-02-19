@@ -1,6 +1,6 @@
 @include('layouts.frontheader')
 <section class="hero-section_inner">
-    <img class="img-fluid" src="{{ asset('public/images/front/digital-editions-banner.png')}}" alt="him banner">
+    <img class="img-fluid" src="{{ asset('public/images/front/digital-editions-banner.webp')}}" alt="him banner">
     <div class="hero_content_inner">
         <h2 class="main_head mb-3">The 2025 Digital Editions</h2>
         <p class="para sec_in_mb">A curated study of our latest rituals, objects, and bespoke services.</p>

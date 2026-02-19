@@ -4,7 +4,7 @@
             <div class="ft_head_wrapper">
                 <div>
                     <a href="javascript:void(0)" target="_blank">
-                        <img src="{{ asset('public/front/images/footer-logo.svg') }}" alt="hnow"
+                        <img src="{{ asset('public/images/front/footer-logo.svg') }}" alt="hnow"
                             class="img-fluid footer_logo">
                     </a>
                 </div>
@@ -139,7 +139,7 @@
                 <a href="{{ route('front.auth', 'login') }}" class="com_btn">
                     Login Now
                 </a>
-                <button type="button" class="com_btn" data-bs-dismiss="modal">
+                <button type="button" class="com_btn bg-transparent" data-bs-dismiss="modal">
                     Cancel
                 </button>
             </div>

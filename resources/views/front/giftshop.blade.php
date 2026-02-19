@@ -2,7 +2,7 @@
 
 <!-- hero section -->
 <section class="hero-section_inner">
-    <img class="img-fluid" src="{{asset('public/images/front/giftshop-banner.png')}}" alt="him banner">
+    <img class="img-fluid" src="{{asset('public/images/front/giftshop-banner.webp')}}" alt="him banner">
 
     <div class="hero_content_inner">
         <h2 class="main_head mb-3">The Gift Shop</h2>
@@ -81,7 +81,7 @@
             <div class="col-md-6">
                 <div class="curated_rituals_box">
                     <div>
-                        <img class="w-100 mb-4" src="{{asset('public/images/front/rurated-rituals1.png')}}" alt="images">
+                        <img class="w-100 mb-4" src="{{asset('public/images/front/rurated-rituals1.webp')}}" alt="images">
                     </div>
                     <div class="box_bot">
                         <div>
@@ -95,7 +95,7 @@
 
             <div class="col-md-6">
                 <div class="curated_rituals_box">
-                    <img class="w-100 mb-4" src="{{asset('public/images/front/rurated-rituals2.png')}}" alt="images">
+                    <img class="w-100 mb-4" src="{{asset('public/images/front/rurated-rituals2.webp')}}" alt="images">
                     <div class="box_bot">
                         <div>
                             <h3 class="sub_head">The Desk Ceremony Set </h3>
@@ -108,7 +108,7 @@
 
             <div class="col-md-6">
                 <div class="curated_rituals_box">
-                    <img class="w-100 mb-4" src="{{asset('public/images/front/rurated-rituals3.png')}}" alt="images">
+                    <img class="w-100 mb-4" src="{{asset('public/images/front/rurated-rituals3.webp')}}" alt="images">
                     <div class="box_bot">
                         <div>
                             <h3 class="sub_head">The Modern Majlis Set </h3>
@@ -121,7 +121,7 @@
 
             <div class="col-md-6">
                 <div class="curated_rituals_box">
-                    <img class="w-100 mb-4" src="{{asset('public/images/front/rurated-rituals4.png')}}" alt="images">
+                    <img class="w-100 mb-4" src="{{asset('public/images/front/rurated-rituals4.webp')}}" alt="images">
                     <div class="box_bot">
                         <div>
                             <h3 class="sub_head">The Everyday Sacred</h3>
@@ -158,7 +158,7 @@
         </div>
         <div class="gift_box">
             <div class="gift_box_lt">
-                <img class="img-fluid" src="{{asset('public/images/front/signature-pairings.png')}}" alt="images">
+                <img class="img-fluid" src="{{asset('public/images/front/signature-pairings.webp')}}" alt="images">
             </div>
 
             <div class="gift_box_rt">

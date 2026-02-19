@@ -10,7 +10,7 @@
     }
 </style>
 <section class="hero-section_inner">
-    <img class="img-fluid" src="{{asset('public/images/front/blessing-library-banner.png')}}" alt="him banner">
+    <img class="img-fluid" src="{{asset('public/images/front/blessing-library-banner.webp')}}" alt="him banner">
 
     <div class="hero_content_inner">
         <h2 class="main_head mb-3">The Blessing Library</h2>
@@ -66,7 +66,7 @@
                 @endforeach
             @else
                 <div class="text-center">
-                    <img class="mb-2 mb-md-4" height="250px" width="250px" src="{{asset('public/images/product-not-found.png')}}" alt="images">
+                    <img class="mb-2 mb-md-4" height="250px" width="250px" src="{{asset('public/images/product-not-found.webp')}}" alt="images">
                 </div>
             @endif
         </div>

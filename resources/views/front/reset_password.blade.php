@@ -87,7 +87,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="imgBx"><img src="{{ asset('public/front/images/login.png')}}" alt="images" /></div>
+                    <div class="imgBx"><img src="{{ asset('public/images/front/login.webp')}}" alt="images" /></div>
                 </div>
 
             </div>

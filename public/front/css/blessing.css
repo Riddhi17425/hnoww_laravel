@@ -46,7 +46,7 @@
 }
 
 .audio-card {
-    background: url(../images/ct_noise_bg.png) no-repeat center / cover;
+    background: url(../../images/front/ct_noise_bg.webp) no-repeat center / cover;
     padding: 40px;
     display: flex;
     gap: 25px;

@@ -1,7 +1,7 @@
 @include('layouts.frontheader')
 <!-- hero section -->
 <section class="hero-section_inner">
-    <img class="img-fluid" src="{{asset('public/images/front/bespoke-banner.png')}}" alt="images">
+    <img class="img-fluid" src="{{asset('public/images/front/bespoke-banner.webp')}}" alt="images">
 
     <div class="hero_content_inner">
         <h2 class="main_head">Bespoke Commissions</h2>
@@ -20,12 +20,13 @@
             </h2>
             <!-- 3️⃣ Left image (from left) -->
             <div class="text-end magic_wrapper_logo">
-                <img src="{{ asset('public/front/images/home_magic_left.svg') }}" alt="" class="img-fluid">
+                <img src="{{ asset('public/images/front/home_magic_left.svg') }}" alt="" class="img-fluid">
             </div>
 
             <!-- 2️⃣ Center image (scale 0 → 1) -->
-            <div>
-                <img src="{{ asset('public/front/images/about-private.png') }}" alt="" class="img-fluid">
+            <div class="magic_wrapper_center">
+                <img src="{{ asset('public/images/front/home_magic.webp') }}" loading="lazy" alt="" class="img-fluid">
+                <p class="magic_wrapper_p"> Ritual is the first luxury.</p>
             </div>
 
             <!-- 4️⃣ Text block (from right) -->
@@ -143,7 +144,7 @@ alt="{{ $val->product_name ?? 'Product Image' }}">
         <div class="row mobile_slider">
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-4" src="{{ asset('public/front/images/scope-of-worka1.png') }}"
+                    <img class="img-fluid mb-4" src="{{ asset('public/images/front/scope-of-worka1.webp') }}"
                         alt="images">
                     <h3 class="sub_head">Wedding Rituals</h3>
                     <p>Custom trousseau trunks, ring ceremony trays, and bridal party gifting suites that honor the
@@ -153,7 +154,7 @@ alt="{{ $val->product_name ?? 'Product Image' }}">
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-4" src="{{ asset('public/front/images/scope-of-worka2.png') }}"
+                    <img class="img-fluid mb-4" src="{{ asset('public/images/front/scope-of-worka2.webp') }}"
                         alt="images">
                     <h3 class="sub_head">Family Heirloom</h3>
                     <p>Legacy objects for newborns, ancestry boxes, and milestone anniversary gifts designed to be
@@ -163,7 +164,7 @@ alt="{{ $val->product_name ?? 'Product Image' }}">
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-4" src="{{ asset('public/front/images/scope-of-worka3.png') }}"
+                    <img class="img-fluid mb-4" src="{{ asset('public/images/front/scope-of-worka3.webp') }}"
                         alt="images">
                     <h3 class="sub_head">Corporate Legacy</h3>
                     <p>Sculptural deal toys, founder’s gifts, and architectural desk artifacts for partners of

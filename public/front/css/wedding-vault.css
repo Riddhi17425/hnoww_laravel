@@ -1,5 +1,5 @@
 .wedding_vault {
-    background: url('../images/wedding_vault.webp');
+    background: url('../../images/front/wedding_vault.webp');
     background-repeat: no-repeat;
     background-size: cover;
     padding-top: 150px;
@@ -79,7 +79,7 @@
     position: absolute;
     right: -7px;
     bottom: 0;
-    background: url(../images/ct_design.svg);
+    background: url(../../images/front/ct_design.svg);
     background-repeat: no-repeat;
     background-size: contain;
     height: 100px;

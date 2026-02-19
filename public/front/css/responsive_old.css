@@ -681,7 +681,7 @@
     }
 
     .gesture_filter select {
-        background: url(../images/down_arr.svg) no-repeat right 0px center / 14px;
+        background: url(../../images/front/down_arr.svg) no-repeat right 0px center / 14px;
         padding-bottom: 2px;
     }
 

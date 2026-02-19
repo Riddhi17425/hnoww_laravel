@@ -1,7 +1,7 @@
 @include('layouts.frontheader')
 <!-- hero section -->
 <section class="hero-section_inner">
-    <img class="img-fluid" src="{{asset('public/images/front/bespoke-banner.png')}}" alt="him banner">
+    <img class="img-fluid" src="{{asset('public/images/front/bespoke-banner.webp')}}" alt="him banner">
 
     <div class="hero_content_inner">
         <h2 class="main_head">Bespoke Wedding Hampers</h2>
@@ -14,21 +14,21 @@
         <div class="row gy-4 gy-md-0">
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/bespoke3.png')}}" alt="images">
+                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/bespoke3.webp')}}" alt="images">
                     <h3 class="sub_head">For Her — The Desert Rose</h3>
                     <p class="mb-0">Objects for hosting, memory, and grace</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/bespoke4.png')}}" alt="images">
+                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/bespoke4.webp')}}" alt="images">
                     <h3 class="sub_head">For Her — The Desert Rose</h3>
                     <p class="mb-0">Objects for hosting, memory, and grace</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/bespoke5.png')}}" alt="images">
+                    <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/bespoke5.webp')}}" alt="images">
                     <h3 class="sub_head">For Her — The Desert Rose</h3>
                     <p class="mb-0">Objects for hosting, memory, and grace</p>
                 </div>
@@ -42,14 +42,14 @@
         <div class="row gy-2 gy-md-0">
             <div class="col-md-6">
                 <div class="collection_box">
-                    <img class="img-fluid  mb-2 mb-md-4" src="{{asset('public/images/front/bespoke4.png')}}" alt="images">
+                    <img class="img-fluid  mb-2 mb-md-4" src="{{asset('public/images/front/bespoke4.webp')}}" alt="images">
                     <h3 class="sub_head">For Her — The Desert Rose</h3>
                     <p class="mb-0">Objects for hosting, memory, and grace</p>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="collection_box">
-                    <img class="img-fluid  mb-2 mb-md-4" src="{{asset('public/images/front/bespoke5.png')}}" alt="images">
+                    <img class="img-fluid  mb-2 mb-md-4" src="{{asset('public/images/front/bespoke5.webp')}}" alt="images">
                     <h3 class="sub_head">For Her — The Desert Rose</h3>
                     <p class="mb-0">Objects for hosting, memory, and grace</p>
                 </div>

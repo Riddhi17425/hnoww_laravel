@@ -28,7 +28,7 @@
 }
 
 .material_wrapper {
-    background: url(../../images/front/with_intention_banner.png) center / cover no-repeat;
+    background: url(../../images/front/with_intention_banner.webp) center / cover no-repeat;
     /*background-blend-mode: multiply;*/
     padding: 60px;
 }
