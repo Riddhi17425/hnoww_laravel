@@ -292,7 +292,7 @@ window.open("{{ session('whatsapp_url') }}", "_blank");
 ">
     <div style="max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center;">
         <p style="margin: 0;">
-            We use cookies to improve your experience.
+            We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. <a href="javascript:void(0);">Learn more about our cookie policy.</a>
         </p>
         <div>
             <button onclick="setConsent('accepted')" style="
