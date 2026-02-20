@@ -1,11 +1,11 @@
 @include('layouts.frontheader')
 <!-- hero section -->
 <section class="hero-section">
-    <img class="img-fluid" src="{{ asset('public/images/front/hero-banner.webp') }}" alt="images" loading="lazy">
-    <!-- <video autoplay muted loop class="hero_video">
+    <!-- <img class="img-fluid" src="{{ asset('public/images/front/hero-banner.webp') }}" alt="images" loading="lazy"> -->
+    <video autoplay muted loop class="hero_video">
         <source src="{{ asset('public/images/front/hero-video.mp4') }}" type="video/mp4">
         Your browser does not support the video tag.
-    </video> -->
+    </video>
 
     <div class="hero_content">
         <p class="mb-0 d-md-none" style="color: #F2D8D9;">Designed in Dubai. Made to endure.</p>
