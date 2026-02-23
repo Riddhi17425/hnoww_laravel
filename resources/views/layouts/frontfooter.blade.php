@@ -289,6 +289,7 @@ window.open("{{ session('whatsapp_url') }}", "_blank");
     color: white;
     padding: 20px;
     z-index: 9999;
+    display:none;
 ">
     <div style="max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center;">
         <p style="margin: 0;">

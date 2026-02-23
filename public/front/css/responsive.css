@@ -1103,9 +1103,9 @@
         font-size: 12px;
     }
 
-    #reg_login .reg_login_child {
+    /* #reg_login .reg_login_child {
         height: 500px;
-    }
+    } */
 
     #reg_login .reg_login_child .user .formBx .ct_form .row {
         --bs-gutter-x: 25px;

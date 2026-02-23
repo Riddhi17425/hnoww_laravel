@@ -17,16 +17,22 @@
                     <div class="abiout_left_tp">
                         <img src="{{ asset('public/images/front/home_magic_left.svg') }}" alt="" class="img-fluid">
                         <p class="sub_head mb-0">In a fast-moving world, we believe objects should still hold meaning.
-</p>
+                        </p>
                     </div>
 
-                    <p class="mb-0">Dubai moves quickly. Transactions are instant. Communication is constant. Efficiency shapes how we live and work. Yet in this pace, something essential is often overlooked, the physical objects that ground our spaces, express values, and give form to relationships.
-</p>
-                    <p class="sub_head my-3" style="color: var(--secondary-color);"><i>I founded HNoww with a simple belief: objects are not neutral.</i></p>
-                    <p>What we place on a desk, a table, or in someone’s hands carries meaning. Objects influence how we decide, how we gather, and how we remember.
-</p>
-                    <p class="mb-0">The desk you work at shapes focus. The table you host builds trust. And when we give, we are not simply offering an object. We are shaping memory, perception, and continuity through what is chosen and how it is held.
-</p>
+                    <p class="mb-0">Dubai moves quickly. Transactions are instant. Communication is constant. Efficiency
+                        shapes how we live and work. Yet in this pace, something essential is often overlooked, the
+                        physical objects that ground our spaces, express values, and give form to relationships.
+                    </p>
+                    <p class="sub_head my-3" style="color: var(--secondary-color);"><i>I founded HNoww with a simple
+                            belief: objects are not neutral.</i></p>
+                    <p>What we place on a desk, a table, or in someone’s hands carries meaning. Objects influence how we
+                        decide, how we gather, and how we remember.
+                    </p>
+                    <p class="mb-0">The desk you work at shapes focus. The table you host builds trust. And when we
+                        give, we are not simply offering an object. We are shaping memory, perception, and continuity
+                        through what is chosen and how it is held.
+                    </p>
                 </div>
             </div>
 
@@ -34,16 +40,22 @@
                 <div class="abiout_right">
                     <div class="abiout_left_tp">
                         <img src="{{ asset('public/images/front/about-fabe.webp') }}" alt="" class="img-fluid">
-                        <p class="sub_head mb-0">At HNoww, we move beyond conventional gifting to objects chosen for meaning.
-</p>
+                        <p class="sub_head mb-0">At HNoww, we move beyond conventional gifting to objects chosen for
+                            meaning.
+                        </p>
                     </div>
 
-                    <p>We do not believe in disposable gifts, generic gestures, or objects chosen to perform for a moment. We curate with permanence in mind, objects meant to stay, to be lived with, and to hold relevance over time.
-</p>
-                    <p class="mb-0">Every piece in the HNoww collection is selected for its presence, not its excess. Whether it is the weight of a desk object, the balance of a hosting piece, or the restraint of a form, each object is designed to feel grounded and considered, not fleeting.
-</p>
-                    <p class="sub_head mt-3 mb-0" style="color: var(--secondary-color);"><i>Symbolic luxury is not defined by cost.
- <br />
+                    <p>We do not believe in disposable gifts, generic gestures, or objects chosen to perform for a
+                        moment. We curate with permanence in mind, objects meant to stay, to be lived with, and to hold
+                        relevance over time.
+                    </p>
+                    <p class="mb-0">Every piece in the HNoww collection is selected for its presence, not its excess.
+                        Whether it is the weight of a desk object, the balance of a hosting piece, or the restraint of a
+                        form, each object is designed to feel grounded and considered, not fleeting.
+                    </p>
+                    <p class="sub_head mt-3 mb-0" style="color: var(--secondary-color);"><i>Symbolic luxury is not
+                            defined by cost.
+                            <br />
                             It is defined by intent made visible.</i></p>
 
                 </div>
@@ -73,7 +85,7 @@
             </p>
             <h2 class="title_60">Framework</h2>
             <p>HNoww is guided by three principles that inform every object we curate and every decision we make.
-</p>
+            </p>
         </div>
         <div class="row gy-4 gy-md-0">
             <div class="col-md-4">
@@ -82,8 +94,10 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h3 class="sub_head">Environment</h3>
-                            <p class="mb-0">Physical surroundings shape behaviour. We curate objects that bring gravity to the office, clarity to the desk, and warmth to the home, grounding everyday spaces with intention and balance.
-</p>
+                            <p class="mb-0">Physical surroundings shape behaviour. We curate objects that bring gravity
+                                to the office, clarity to the desk, and warmth to the home, grounding everyday spaces
+                                with intention and balance.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -94,7 +108,9 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h3 class="sub_head">Ritual</h3>
-                            <p class="mb-0">We honour the Gulf tradition of Karam; generosity expressed with discretion, respect, and foresight. Our objects translate this cultural understanding into a modern, restrained language, where giving is thoughtful rather than performative.</p>
+                            <p class="mb-0">We honour the Gulf tradition of Karam; generosity expressed with discretion,
+                                respect, and foresight. Our objects translate this cultural understanding into a modern,
+                                restrained language, where giving is thoughtful rather than performative.</p>
                         </div>
                     </div>
                 </div>
@@ -105,8 +121,10 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
                             <h3 class="sub_head">Result</h3>
-                            <p class="mb-0">We do not measure success by the unboxing moment. We measure it by what remains. Objects that stay on the desk. Pieces that continue to be used, trusted, and lived with over time.
-</p>
+                            <p class="mb-0">We do not measure success by the unboxing moment. We measure it by what
+                                remains. Objects that stay on the desk. Pieces that continue to be used, trusted, and
+                                lived with over time.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -138,11 +156,13 @@
 
         <div class="exists_content">
             <div class="col-lg-10 m-auto">
-                <p class="sub_head_inter">HNOWW exists to help individuals, families, and organisations choose with intention.
- Not louder gestures, but considered ones. Not more objects, but the right ones.
-We curate objects that bring clarity to moments of giving, pieces chosen with care, restraint, and relevance. Designed to endure, not to impress.
-Curated in Dubai, for those who understand that legacy is built quietly.
-</p>
+                <p class="sub_head_inter">HNOWW exists to help individuals, families, and organisations choose with
+                    intention.
+                    Not louder gestures, but considered ones. Not more objects, but the right ones.
+                    We curate objects that bring clarity to moments of giving, pieces chosen with care, restraint, and
+                    relevance. Designed to endure, not to impress.
+                    Curated in Dubai, for those who understand that legacy is built quietly.
+                </p>
                 <p class="sub_head">Environment. Ritual. Result.</p>
             </div>
         </div>
@@ -177,8 +197,10 @@ Curated in Dubai, for those who understand that legacy is built quietly.
             <div class="col-md-6 practice_content ps-lg-5">
                 <p class="sub_head_inter">HNOWW curates sculptural objects for three environments:</p>
                 <h4 class="title_40">The Desk. The Home. The Intentional Gift.</h4>
-                <p class="small_heasd">We work with stone, metal, and heritage materials to create objects designed to remain in use, in presence, and in memory. Each piece is shaped to live with you over time, grounding everyday moments with clarity and purpose.
-</p>
+                <p class="small_heasd">We work with stone, metal, and heritage materials to create objects designed to
+                    remain in use, in presence, and in memory. Each piece is shaped to live with you over time,
+                    grounding everyday moments with clarity and purpose.
+                </p>
             </div>
 
         </div>
