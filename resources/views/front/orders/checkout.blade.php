@@ -170,8 +170,7 @@
             <!-- RIGHT : Price Summary + Payment -->
             <div class="col-lg-4 col-12">
                 <div class="checkout-box summary-wrapper">
-                    <h5 class="sub_head mb-4">Payment
-                        Summary</h5>
+                    <h5 class="sub_head mb-4">Payment Summary</h5>
 
                     <div class="summary-details">
                         <div class="summary-row">
@@ -188,10 +187,9 @@
                     </div>
 
                     <div class="payment_cont">
-                        <h5 class="sub_head mb-4">Payment
-                            Options</h5>
+                        <h5 class="sub_head mb-4">Payment Options</h5>
 
-                        <div class="faq_cont">
+                        {{-- <div class="faq_cont">
                             <div class="faq_cont_acco">
                                 <h6 class="according_head sub_head" data-bs-toggle="collapse"
                                     data-bs-target="#collapse-1-1" aria-expanded="false" aria-controls="collapse-1-1">
@@ -200,12 +198,12 @@
 
                                 <div id="collapse-1-1" class="accordion-collapse collapse"
                                     data-bs-parent="#accordion-1">
-                                    <div class="accordion-body">
+                                    <div class="accordion-body"> --}}
                                         <div id="card-element"></div>
                                         <div id="error-message"></div>
-                                    </div>
+                                    {{-- </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             {{-- <div class="faq_cont_acco">
                                 <h6 class="according_head sub_head" data-bs-toggle="collapse"
