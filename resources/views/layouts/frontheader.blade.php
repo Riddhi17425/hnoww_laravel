@@ -150,7 +150,7 @@ $current_route ===
 <body class="<?= $is_green ? 'theme-green' : 'theme-white' ?>">
 
     <!-- Page Loader -->
-    {{-- <div id="page-loader" class="loader-overlay">
+     <div id="page-loader" class="loader-overlay">
         <div class="loader-box">
             <svg width="100%" height="100%" viewBox="-3 -3 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -158,14 +158,14 @@ $current_route ===
                     fill="#D0C2AA" />
             </svg>
         </div>
-    </div> --}}
+    </div> 
 
     <header class="sticky-header <?= $is_green ? 'theme-green' : 'theme-white' ?>">
 
         <nav class="navbar navbar-expand-lg">
             <div class="navbar_left">
                 <a href="{{ route('front.home') }}"><img class="header_logo" src="{{ $is_green 
-                            ? asset('public/images/front/header-green.svg') 
+                            ? asset('public/images/front/home_magic_left.svg') 
                             : asset('public/images/front/header-logo.svg') }}" alt="Logo"></a>
             </div>
             <span class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mainNavbar"

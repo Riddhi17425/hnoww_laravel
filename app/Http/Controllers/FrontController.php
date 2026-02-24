@@ -1451,7 +1451,10 @@ class FrontController extends Controller
         $user = User::where('id', auth()->id())->first();
         return view('front.profile', compact('user'));
     }
-    
+
+     public function getEditions(){
+        return view('front.editions');
+    }
 
 
 }
