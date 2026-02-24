@@ -161,6 +161,10 @@ class CartController extends Controller
                     $cart->delete();
                 }  
             }
+
+            // SEND MAIL 
+            // SEND WHATSAPP MESSSAGE
+            
             return redirect()->route('front.get.success', $order->id);
         }else{
             return redirect()->route('front.get.failed', $order->id);

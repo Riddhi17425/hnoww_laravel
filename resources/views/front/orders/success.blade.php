@@ -4,7 +4,7 @@
 
     <div class="hero_content_inner">
         <h2 class="main_head">Your Order is Confirmed</h2>
-        <a href="{{ route('front.home') }}" class="com_btn">Back to Home</a>
+        <a href="{{ route('front.home') }}" class="com_btn"><span class="text-light">Back to Home</span></a>
     </div>
 </section>
 

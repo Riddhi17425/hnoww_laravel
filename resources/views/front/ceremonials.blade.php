@@ -4,8 +4,8 @@
     <img class="img-fluid" src="{{asset('public/images/front/ceremonial-objects-banner.webp')}}" alt="him banner">
 
     <div class="hero_content_inner">
-        <h2 class="main_head"> Ceremonial Objects</h2>
-        <p class="para mb-0">Objects that anchor your rituals in beauty and meaning.</p>
+        <h2 class="main_head"> {{$category ? $category->category_name : 'Ceremonial Objects'}}</h2>
+        <p class="para mb-0">{{$category ? $category->description : 'Objects that anchor your rituals in beauty and meaning.'}} </p>
     </div>
 </section>
 
@@ -38,6 +38,9 @@
                     {{-- <p class="mb-0">
                         A ceremonial beginning, held in form. 
                     </p> --}}
+                    <p class="">
+                    {{ $product->short_note ?? '' }}
+                    </p>
                     <p class="my-3">
                     {!! $val->short_description ?? '' !!}
                     </p>
