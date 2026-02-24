@@ -395,6 +395,11 @@
 
     .magic_wrapper_center .magic_wrapper_p {
         font-size: 26px;
+        line-height: 28px;
+    }
+
+    .home_gift_box {
+        padding: 50px 0;
     }
 }
 
@@ -404,7 +409,9 @@
 ===========================                  ===========================*/
 
 @media (max-width: 1441px) {
-    /*.hero_content {top: 28%;}*/
+    .hero_content {
+        top: 13em;
+    }
     .hero_content .main_head {
         font-size: 45px;
         /*white-space: nowrap;*/
@@ -831,6 +838,16 @@
 
     .magic_wrapper_center .magic_wrapper_p {
         font-size: 22px;
+        line-height: 24px;
+    }
+
+    .home_gift_box {
+        padding: 35px 0;
+    }
+
+    .archive_box .archive_box_inner {
+        flex-direction: column;
+        align-items: start !important;
     }
 }
 
@@ -842,6 +859,10 @@
 @media (max-width: 1281px) {
     .container {
         max-width: 1070px !important;
+    }
+
+    .hero_content {
+        top: 12em;
     }
 
     .header_logo {
@@ -1111,11 +1132,9 @@
         --bs-gutter-x: 25px;
     }
 
-
-     .magic_wrapper_center .magic_wrapper_p {
+    .magic_wrapper_center .magic_wrapper_p {
         /* font-size: 20px; */
     }
-
 }
 
 /*=========================                  =========================
@@ -1129,7 +1148,7 @@
     }
 
     .sticky-header {
-        background: var(--secondary-color);
+        /* background: var(--secondary-color); */
     }
 
     .nav_links li {
@@ -1226,9 +1245,9 @@
         width: 70%;
     }
 
-    .magic_wrapper_center .magic_wrapper_p
-    {
+    .magic_wrapper_center .magic_wrapper_p {
         font-size: 16px;
+        line-height: 20px;
     }
 
     .sub_head {
@@ -1766,5 +1785,23 @@
         display: block;
     }
 
+    .home_gift_box .gift_box_rt {
+        width: 100% !important;
+        text-align: center;
+    }
 
+    .home_gift_box {
+        background: url(../../images/front/valet_tray_home_mobail.webp);
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 600px;
+    }
+
+    .hero_content {
+        top: 14em;
+    }
+
+    .hero-section .com_btn {
+        bottom: 12em;
+    }
 }

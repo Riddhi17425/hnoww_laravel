@@ -29,7 +29,7 @@
                             <form method="POST" id="forgotPasswordForm" action="{{ route('front.post.forgot.password') }}">
                             @csrf
                                 <div class="ct_input">
-                                    <label for="email">Enter Email Address</label>
+                                    <!-- <label class="sub_head mb-3" for="email">Enter Email Address</label> -->
                                     <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="Enter Email Address">
                                     @error('email')
                                         <small class="text-danger">{{ $message }}</small>

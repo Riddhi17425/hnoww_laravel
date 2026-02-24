@@ -51,7 +51,7 @@
             </div>
 
             <!-- 2️⃣ Center image (scale 0 → 1) -->
-             <div class="magic_wrapper_center">
+            <div class="magic_wrapper_center">
                 <img src="{{ asset('public/images/front/home_magic.webp') }}" loading="lazy" alt="" class="img-fluid">
                 <p class="magic_wrapper_p"> Ritual is the first luxury.</p>
             </div>
@@ -106,7 +106,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="origin_left">
-                        <img class="img-fluid" src="{{asset('public/images/front/bespoke1.webp')}}" alt="images">
+                        <img class="img-fluid" src="{{asset('public/images/front/weddings1.webp')}}" alt="images">
                         <div class="origin_left_content">
                             <p class="title_40">HNOWW was born from a simple belief:</p>
                             <p class="sub_head">that life becomes richer when lived with intention.</p>
@@ -119,7 +119,8 @@
                         <p class="sub_head_inter" style="color:unset;"> Inspired by the rituals of our culture hosting,
                             gifting, gathering, lighting a flame, offering sweets, preserving moments we reimagine these
                             gestures through culptural design.</p>
-                        <p class="font_34 mt-4">Every curve, weight, and material is chosen with purpose:</p>
+                        <p class="sub_head_inter" style="color:unset;">Every curve, weight, and material is chosen with
+                            purpose:</p>
                         <p class="sub_head_inter" style="color:unset;">Stone for grounding, silver for memory, malachite
                             for depth, Brass for stillness. </p>
                         <p class="magic_wrapper_h3 mt-4">HNOWW is not an object brand. It is a movement back to meaning.
