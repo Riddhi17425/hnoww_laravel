@@ -121,7 +121,7 @@
                         <img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/images/front/collections1.webp') }}"
                             alt="images" loading="lazy">
                     </div>
-                    <h3 class="sub_head">For Her — {{$herProduct[0]->product_name ?? ''}}</h3>
+                    <h3 class="sub_head">For Her {{-- — {{$herProduct[0]->product_name ?? ''}} --}}</h3>
                     <p>@if(isset($herProduct[0]->short_description)){!! $herProduct[0]->short_description !!}@endif</p>
                     <a href="{{ route('front.list', 'for-her') }}" target="_blank" class="com_btn">Explore Her World</a>
                 </div>
@@ -132,7 +132,7 @@
                         <img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/images/front/collections2.webp') }}"
                             alt="images" loading="lazy">
                     </div>
-                    <h3 class="sub_head">For Him — {{$himProduct[0]->product_name ?? ''}}</h3>
+                    <h3 class="sub_head">For Him {{-- — {{$himProduct[0]->product_name ?? ''}} --}}</h3>
                     <p>@if(isset($himProduct[0]->short_description)){!! $himProduct[0]->short_description !!}@endif</p>
                     <a href="{{ route('front.list', 'for-him') }}" target="_blank" class="com_btn">Explore Him World</a>
                 </div>
@@ -143,7 +143,7 @@
                         <img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/images/front/collections3.webp') }}"
                             alt="images" loading="lazy">
                     </div>
-                    <h3 class="sub_head">For Home — {{$homeProduct[0]->product_name ?? ''}}</h3>
+                    <h3 class="sub_head">For Home {{-- — {{$homeProduct[0]->product_name ?? ''}} --}}</h3>
                     <p>@if(isset($homeProduct[0]->short_description)){!! $homeProduct[0]->short_description !!}@endif
                     </p>
                     <a href="{{ route('front.list', 'for-home') }}" target="_blank" class="com_btn">Explore Home

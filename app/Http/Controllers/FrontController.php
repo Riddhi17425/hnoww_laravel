@@ -1301,9 +1301,10 @@ class FrontController extends Controller
     }
 
     public function getCeremonials($categoryId = null){
-        $products = Product::select('id', 'category_id', 'product_url', 'product_name', 'short_description', 'list_page_img', 'is_active', 'deleted_at')->whereNull('deleted_at')->where('is_active', 0)->where('category_id', $categoryId)->get();
+        $products = Product::select('id', 'category_id', 'product_url', 'product_name', 'short_note', 'short_description', 'list_page_img', 'is_active', 'deleted_at')->whereNull('deleted_at')->where('is_active', 0)->where('category_id', $categoryId)->get();
+        $category = Category::select('id', 'category_name', 'description')->where('id', $categoryId)->first();
         
-        return view('front.ceremonials', compact('products'));
+        return view('front.ceremonials', compact('products', 'category'));
     }
 
     public function storeCeremonialInquiry(Request $request){
