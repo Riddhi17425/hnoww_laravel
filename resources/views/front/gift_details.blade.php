@@ -24,9 +24,15 @@
                         @if(isset($productDetailImages) && $productDetailImages != '')
                         @foreach($productDetailImages as $key => $val)
                         <button class="nav-link @if($key == 0) active @endif" data-bs-toggle="tab"
-                            data-bs-target="#img1_{{ $key }}"> {{-- ✅ fix here --}}
-                            <img src="{{ asset('public/images/admin/gifts/product_detail/'.$val)}}"
-                                alt="Sample Product">
+                            data-bs-target="#img1_{{ $key }}"> 
+                            @php
+                                $imagePath = public_path('images/admin/gifts/product_detail/' . $val);
+                            @endphp
+                            @if(isset($val) && $val != '' && file_exists($imagePath))
+                                <img src="{{ asset('public/images/admin/gifts/product_detail/'.$val)}}" alt="Sample Product">
+                            @else
+                                <img class="img-fluid" src="{{asset('public/noimg.jpg')}}" alt="no image found">
+                            @endif
                         </button>
                         @endforeach
                         @endif
@@ -36,11 +42,15 @@
                         @if(isset($productDetailImages) && $productDetailImages != '')
                         @foreach($productDetailImages as $key => $val)
                         <div class="tab-pane fade show @if($key == 0) active @endif" id="img1_{{ $key }}">
-                            {{-- ✅ fix here --}}
                             <div class="zoom-container">
-                                <img class="zoom-image img-fluid"
-                                    src="{{ asset('public/images/admin/gifts/product_detail/'.$val)}}"
-                                    alt="Product Detail Image">
+                                @php
+                                    $imagePath = public_path('images/admin/gifts/product_detail/' . $val);
+                                @endphp
+                                @if(isset($val) && $val != '' && file_exists($imagePath))
+                                    <img class="zoom-image img-fluid" src="{{ asset('public/images/admin/gifts/product_detail/'.$val)}}" alt="Gift Product Detail Image">
+                                @else
+                                    <img class="img-fluid" src="{{asset('public/noimg.jpg')}}" alt="no image found">
+                                @endif
                                 <div class="zoom-lens"></div>
                             </div>
                         </div>
