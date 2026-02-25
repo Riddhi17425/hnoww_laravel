@@ -56,7 +56,14 @@ Everything you see here is curated to be photographed, kept, and passed on.
                     <div class="col-md-4">
                         <div class="curated_rituals_box">
                             <div>
-                                <img class="w-100 mb-2 mb-md-4" src="{{ asset('public/images/admin/category_banner/'.$val->banner_image) }}" alt="{{ $val->category_name ?? 'Category Image' }}">
+                                @php
+                                    $imagePath = public_path('images/admin/category_banner/' . $val->banner_image);
+                                @endphp
+                                @if(isset($val->banner_image) && $val->banner_image != '' && file_exists($imagePath))
+                                    <img class="w-100 mb-2 mb-md-4" src="{{ asset('public/images/admin/category_banner/'.$val->banner_image) }}" alt="{{ $val->category_name ?? 'Category Image' }}">
+                                @else
+                                    <img class="w-100 mb-2 mb-md-4" src="{{ asset('public/noimg.jpg') }}" alt='No Image Found'>
+                                @endif
                             </div>
                             <div class="desire_box_bot_child">
                                 <div>

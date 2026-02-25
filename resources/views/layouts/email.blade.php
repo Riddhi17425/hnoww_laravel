@@ -111,7 +111,7 @@
                 <!-- Footer -->
                 <tr>
                     <td class="email-footer">
-                        &copy; {{ date('Y') }} Armstrong. All rights reserved.
+                        &copy; {{ date('Y') }} HNoWW. All rights reserved.
                     </td>
                 </tr>
             </table>

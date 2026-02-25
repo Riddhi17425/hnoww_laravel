@@ -28,62 +28,39 @@
                         @if(isset($productDetailImages) && $productDetailImages != '')
                         @foreach($productDetailImages as $key => $val)
                         <button class="nav-link @if($key == 0) active @endif" data-bs-toggle="tab"
-                            data-bs-target="#img1_{{ $key }}"> {{-- ✅ fix here --}}
-                            <img src="{{ asset('public/images/admin/product_detail/'.$val)}}" alt="Sample Product">
+                            data-bs-target="#img1_{{ $key }}">
+                            @php
+                                $imagePath = public_path('images/admin/product_detail/' . $val);
+                            @endphp
+                            @if(isset($val) && $val != '' && file_exists($imagePath))
+                                <img src="{{ asset('public/images/admin/product_detail/'.$val)}}" alt="Sample Product">
+                            @else
+                                <img class="img-fluid" src="{{asset('public/noimg.jpg')}}" alt="no image found">
+                            @endif
                         </button>
                         @endforeach
                         @endif
-                        {{-- <button class="nav-link" data-bs-toggle="tab" data-bs-target="#img2">
-                            <img src="{{ asset('public/images/front/desire1.webp')}}" alt="Sample Product">
-                        </button>
-
-                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#img3">
-                            <img src="{{ asset('public/images/front/desire2.webp')}}" alt="Sample Product">
-                        </button>
-
-                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#img4">
-                            <img src="{{ asset('public/images/front/desire3.webp')}}" alt="Sample Product">
-                        </button> --}}
                     </div>
 
                     <div class="tab-content">
                         @if(isset($productDetailImages) && $productDetailImages != '')
                         @foreach($productDetailImages as $key => $val)
                         <div class="tab-pane fade show @if($key == 0) active @endif" id="img1_{{ $key }}">
-                            {{-- ✅ fix here --}}
                             <div class="zoom-container">
-                                <img class="zoom-image img-fluid"
-                                    src="{{ asset('public/images/admin/product_detail/'.$val)}}"
+                                @php
+                                    $imagePath = public_path('images/admin/product_detail/' . $val);
+                                @endphp
+                                @if(isset($val) && $val != '' && file_exists($imagePath))
+                                    <img class="zoom-image img-fluid" src="{{ asset('public/images/admin/product_detail/'.$val)}}"
                                     alt="Product Detail Image">
+                                @else
+                                    <img class="img-fluid" src="{{asset('public/noimg.jpg')}}" alt="no image found">
+                                @endif
                                 <div class="zoom-lens"></div>
                             </div>
                         </div>
                         @endforeach
                         @endif
-
-                        {{-- <div class="tab-pane fade" id="img2">
-                            <div class="zoom-container">
-                                <img class="zoom-image img-fluid" src="{{ asset('public/images/front/desire1.webp')}}"
-                        alt="Sample Product">
-                        <div class="zoom-lens"></div>
-                    </div>
-                </div>
-
-                <div class="tab-pane fade" id="img3">
-                    <div class="zoom-container">
-                        <img class="zoom-image img-fluid" src="{{ asset('public/images/front/desire2.webp')}}"
-                            alt="Sample Product">
-                        <div class="zoom-lens"></div>
-                    </div>
-                </div>
-
-                <div class="tab-pane fade" id="img4">
-                    <div class="zoom-container">
-                        <img class="zoom-image img-fluid" src="{{ asset('public/images/front/desire3.webp')}}"
-                            alt="Sample Product">
-                        <div class="zoom-lens"></div>
-                    </div>
-                </div> --}}
             </div>
 
         </div>
@@ -263,11 +240,16 @@
             <div class="col-md-4">
                 <a class="him_prod" href="{{ route('front.product.details', $val->product_url) }}">
                     <div class="him_prod_top mb-2 mb-md-4">
-                        {{-- <img class="img-fluid img_1" src="{{ asset('public/images/front/desire1.webp')}}"
-                        alt="him_prod"> --}}
-                        <img class="img-fluid img_1"
+                        @php
+                            $imagePath = public_path('images/admin/product_list/' . $val->list_page_img);
+                        @endphp
+                        @if(isset($val->list_page_img) && $val->list_page_img != '' && file_exists($imagePath))
+                            <img class="img-fluid img_1"
                             src="{{ isset($val->list_page_img) ? asset('public/images/admin/product_list/'.$val->list_page_img) : '' }}"
                             alt="{{ $val->product_name ?? 'Product Image' }}">
+                        @else
+                            <img class="img-fluid" src="{{asset('public/noimg.jpg')}}" alt="no image found">
+                        @endif
                     </div>
                     <div>
                         <div>

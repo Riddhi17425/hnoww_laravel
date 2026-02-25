@@ -16,8 +16,14 @@
             @foreach($products as $key => $val)
                 <div>
                     <div class="mb-2 mb-md-4 ceremonial_box">
-                        <img class="img-fluid" src="{{asset('public/images/admin/product_list/'.$val->list_page_img)}}" alt="wedding_prod">
-
+                        @php
+                            $imagePath = public_path('images/admin/product_list/' . $val->list_page_img);
+                        @endphp
+                        @if(isset($val->list_page_img) && $val->list_page_img != '' && file_exists($imagePath))
+                            <img class="img-fluid" src="{{asset('public/images/admin/product_list/'.$val->list_page_img)}}" alt="wedding_prod">
+                        @else
+                            <img class="img-fluid" src="{{asset('public/noimg.jpg')}}" alt="no image found">
+                        @endif
                         <div class="inquire_bespoke">
                             <a href="javascript:void(0);" class="inquire_link" data-bs-toggle="modal" data-bs-target="#ceremonialInquiry" data-ceremonial-name="{{ $val->product_name }}" data-ceremonial-id="{{ $val->id }}">
                                 Inquire for <br> Ceremonial <br>
