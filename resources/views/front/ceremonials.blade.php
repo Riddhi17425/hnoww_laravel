@@ -16,7 +16,10 @@
             @foreach($products as $key => $val)
                 <div>
                     <div class="mb-2 mb-md-4 ceremonial_box">
-                        @if(isset($val->list_page_img) && $val->list_page_img != '')
+                        @php
+                            $imagePath = public_path('images/admin/product_list/' . $val->list_page_img);
+                        @endphp
+                        @if(isset($val->list_page_img) && $val->list_page_img != '' && file_exists($imagePath))
                             <img class="img-fluid" src="{{asset('public/images/admin/product_list/'.$val->list_page_img)}}" alt="wedding_prod">
                         @else
                             <img class="img-fluid" src="{{asset('public/noimg.jpg')}}" alt="no image found">

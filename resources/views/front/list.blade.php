@@ -63,8 +63,10 @@
                 @foreach($catProducts as $key => $val)
                     <div class="him_prod">
                         <div class="him_prod_top mb-2 mb-md-4">
-                            {{-- <img class="img-fluid img_1" src="{{ asset('public/images/front/desire1.webp')}}" alt="him_prod"> --}}
-                            @if(isset($val->list_page_img) && $val->list_page_img != '')
+                            @php
+                                $imagePath = public_path('images/admin/product_list/' . $val->list_page_img);
+                            @endphp
+                            @if(isset($val->list_page_img) && $val->list_page_img != '' && file_exists($imagePath))
                                 <img class="img-fluid img_1" src="{{ isset($val->list_page_img) ? asset('public/images/admin/product_list/'.$val->list_page_img) : '' }}" alt="{{ $val->product_name ?? 'Product Image' }}">
                             @else
                                 <img class="w-100 mb-2 mb-md-4" src="{{ asset('public/noimg.jpg') }}" alt='No Image Found'>
