@@ -32,7 +32,6 @@
       height: 100vh;
       overflow-y: auto;
       padding: 20px 5px;
-      width:30%;
     }
     
 .privacy_nav_jump .sidebar a {
@@ -69,5 +68,6 @@
     .privacy_nav_jump .content {
       /*flex: 1;*/
       padding:10px 40px;
+      width: 100%;
      
     }

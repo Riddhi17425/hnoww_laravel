@@ -1,0 +1,24 @@
+/* ===================== Edition page css ====================== */
+
+.archive_box hr {
+    color: #ddd;
+    margin: 16px 0;
+}
+
+.archive_box .archive_box_inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.archive_box .archive_box_inner {
+    color: var(--secondary-color);
+}
+
+.origin_left video {
+    width: 100%;
+    height: 750px;
+    object-fit: cover;
+}
+
+

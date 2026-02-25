@@ -146,8 +146,8 @@
                 <div class="audio-card d-grid">
                      <form method="POST" id="giftBlessingForm" action="{{ route('front.store.gift.blessing') }}">
                 @csrf
-                <div class="modal-header px-0 pt-0">
-                    <h5 class="modal-title">Gift This Blessing</h5>
+                <div class="modal-header px-0 pt-0 border-0">
+                    <h5 class="title_40">Gift This Blessing</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
 

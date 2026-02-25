@@ -59,6 +59,7 @@ $current_route ===
     <link rel="stylesheet" href="{{ asset('public/front/css/about.css')}}">
     <link rel="stylesheet" href="{{ asset('public/front/css/login-regi.css')}}">
     <link rel="stylesheet" href="{{ asset('public/front/css/cart.css')}}">
+    <link rel="stylesheet" href="{{ asset('public/front/css/smallpage.css')}}">
 
 
     <!-- responsive css start -->
@@ -150,7 +151,7 @@ $current_route ===
 <body class="<?= $is_green ? 'theme-green' : 'theme-white' ?>">
 
     <!-- Page Loader -->
-     <div id="page-loader" class="loader-overlay">
+     <div id="page-loader" class="loader-overlay d-none">
         <div class="loader-box">
             <svg width="100%" height="100%" viewBox="-3 -3 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -191,10 +192,15 @@ $current_route ===
                         </a>
                     </li>
 
-                    <li class="has-dropdown">
+                    <li>
+                        <a href="{{ route('front.editions') }}" data-text="edition">
+                            <span>edition</span>
+                        </a>
+                    </li>
+
+                    <li class="has-dropdown d-none">
                         <a href="#" data-text="The Worlds">
                             <span>The Worlds</span>
-                            <!-- SVG ARROW -->
                             <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
                                 <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                             </svg>

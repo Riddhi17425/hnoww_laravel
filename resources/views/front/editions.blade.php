@@ -1,22 +1,5 @@
 @include('layouts.frontheader')
 
-<style>
-.archive_box hr {
-    color: #ddd;
-    margin: 16px 0;
-}
-
-.archive_box .archive_box_inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.archive_box .archive_box_inner {
-    color: var(--secondary-color);
-}
-</style>
-
 <!-- hero section -->
 <section class="hero-section_inner">
     <img class="img-fluid" src="{{asset('public/images/front/editions-banner.webp')}}" alt="images">
@@ -61,16 +44,22 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="origin_left">
-                        <img class="img-fluid" src="{{asset('public/images/front/aara-sec1.webp')}}" alt="images">
+                        <!-- <img class="img-fluid" src="{{asset('public/images/front/aara-sec1.webp')}}" alt="images"> -->
+                        <video autoplay muted loop>
+                            <source src="{{ asset('public/images/front/aara-video-sec1.mp4') }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                 </div>
 
                 <div class="col-lg-5">
                     <div class="atelier_origin_content">
                         <h3 class="title_40 mb-3">Season I — The Table as Landscape</h3>
-                        <p class="sub_head_inter" style="color:unset;">This Edition explores how objects can shape space.</p>
+                        <p class="sub_head_inter" style="color:unset;">This Edition explores how objects can shape
+                            space.</p>
 
-                        <p class="sub_head_inter" style="color:unset;">Through restraint, weight, and placement, HNOWW objects move beyond the shelf — becoming structural elements within an environment.</p>
+                        <p class="sub_head_inter" style="color:unset;">Through restraint, weight, and placement, HNOWW
+                            objects move beyond the shelf — becoming structural elements within an environment.</p>
                         <p class="magic_wrapper_h3 mt-4">Created in collaboration with Aara, this chapter examines how
                             florals respond when objects lead.
                         </p>
@@ -103,7 +92,7 @@
             </p>
             <h2 class="title_60">Archive</h2>
         </div>
-        <div class="row">
+        <div class="row gy-4 gy-lg-0">
             <div class="col-md-4">
                 <div class="archive_box">
                     <img class="w-100 mb-3" src="{{ asset('public/images/front/archive1.webp') }}" alt="images">

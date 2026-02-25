@@ -110,7 +110,7 @@ input:focus {
 
 .ft_center_wrapper {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     border: 1px solid var(--gold-color);
     /* height: 280px; */
 }

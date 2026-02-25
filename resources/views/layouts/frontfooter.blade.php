@@ -3,7 +3,7 @@
         <div class="ft_top">
             <div class="ft_head_wrapper">
                 <div>
-                    <a href="javascript:void(0)" target="_blank">
+                    <a href="{{ route('front.home') }}">
                         <img src="{{ asset('public/images/front/footer-logo.svg') }}" alt="hnow"
                             class="img-fluid footer_logo">
                     </a>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
 
-                <div class="ft_center_box">
+                <!-- <div class="ft_center_box">
                     <div>
                         <h4 class="ft_head">The Worlds</h4>
                         <ul class="ft_menu">
@@ -59,7 +59,7 @@
                             <li><a href="#">The Table As Landscape</a></li>
                         </ul>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="ft_center_box">
                     <div>

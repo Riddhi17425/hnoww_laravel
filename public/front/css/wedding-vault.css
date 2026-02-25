@@ -127,3 +127,8 @@
     top: 0;
     right: 0;
 }
+
+.wedding_gifting .sub_head svg path
+{
+    fill: #fff;
+}

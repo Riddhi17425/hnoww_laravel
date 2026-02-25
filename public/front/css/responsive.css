@@ -401,6 +401,18 @@
     .home_gift_box {
         padding: 50px 0;
     }
+
+    .origin_left video {
+        height: 650px;
+    }
+
+    .hospitality_img .hospitality_img_overlay {
+        padding: 30px;
+    }
+
+    .hospitality_img_overlay .title_36 {
+        font-size: 28px;
+    }
 }
 
 /*=========================                  =========================
@@ -849,6 +861,23 @@
         flex-direction: column;
         align-items: start !important;
     }
+
+    .origin_left video {
+        height: 550px;
+    }
+
+    .material_flex {
+        margin-bottom: 30px;
+    }
+
+    .hospitality_img_overlay .title_36 {
+        font-size: 24px;
+    }
+
+    .cor_kits_cont .sub_head {
+        font-size: 20px;
+        line-height: 28px;
+    }
 }
 
 /*=========================                  =========================
@@ -1134,6 +1163,15 @@
 
     .magic_wrapper_center .magic_wrapper_p {
         /* font-size: 20px; */
+    }
+
+    .origin_left video {
+        height: 500px;
+    }
+
+    .cor_kits_cont .sub_head {
+        font-size: 18px;
+        line-height: 24px;
     }
 }
 
@@ -1803,5 +1841,25 @@
 
     .hero-section .com_btn {
         bottom: 12em;
+    }
+
+    .origin_left video {
+        height: 400px;
+    }
+
+    .archive_box hr {
+        margin: 10px 0;
+    }
+
+    .privacy_nav_jump {
+        height: auto;
+    }
+
+    .cor_kits_cont {
+        position: absolute;
+        top: 7%;
+        left: 7%;
+        right: 7%;
+        transform: translate(0, 0);
     }
 }

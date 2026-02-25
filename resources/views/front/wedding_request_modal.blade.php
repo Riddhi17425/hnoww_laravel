@@ -43,8 +43,8 @@
                 <div class="container">
 
                     <div class="text-center mb-5">
-                        <h4 class="title_60 mb-3">Wedding Gifting Consultation</h4>
-                        <p class="sub_head " style="font-family: var(--heading-font); font-style: italic;">
+                        <h4 class="title_60 mb-3" style="color: var(--dark-900)">Wedding Gifting Consultation</h4>
+                        <p class="sub_head_inter"  style="font-family: var(--heading-font); font-style: italic;">
                             HNOWW weddings are treated as living archives of a family's story. <br> This form helps us
                             understand how to curate your rituals with care.
                         </p>
@@ -100,7 +100,7 @@
                 <div class="col-lg-6">
                     <div class="ct_input">
                         <label class="sub_head">Wedding Location</label>
-                        <input type="text" name="w_location" placeholder="Enter Approximate Budget" id="w_location"
+                        <input type="text" name="w_location" placeholder="Enter Wedding Location" id="w_location"
                             value="{{ old('w_location') }}">
                         @error('w_location') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>

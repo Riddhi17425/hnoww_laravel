@@ -1,211 +1,302 @@
+<style>
+/* Container check */
+.form_check_main_modal {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* Hidden Input */
+.custom_check_input {
+    display: none !important;
+}
+
+/* Base Label Style */
+.custom_check_label {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid var(--gold-color) !important;
+    border-radius: 50px;
+    background-color: transparent;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* THE WORKING STATE */
+/* Input check hone par Label ka style badlo */
+.custom_check_input:checked+.custom_check_label {
+    background-color: var(--gold-color) !important;
+    color: white !important;
+}
+</style>
+
 <!-- Corporate Request -->
-<div class="modal fade corporate_vault_modal" id="requestCorporateProposal" data-bs-backdrop="static" data-bs-keyboard="false"
-    tabindex="-1" aria-labelledby="requestCorporateProposalLabel" aria-hidden="true">
+<div class="modal fade corporate_vault_modal" id="requestCorporateProposal" data-bs-backdrop="static"
+    data-bs-keyboard="false" tabindex="-1" aria-labelledby="requestCorporateProposalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen modal-dialog-centered">
         <div class="modal-content">
-            
-                <div class="text-center my-4">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="text-center">
-                        <h4>Corporate Gifting Enquiry</h4><br/>
-                        <p>We work with organisations seeking meaningful, long-term gifting ,designed to be kept rather than discarded.</p>
+
+            <div class="text-center my-4">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+
+                    <div class="text-center mb-5">
+                        <h4 class="title_60 mb-3" style="color: var(--dark-900)">Corporate Gifting Enquiry</h4>
+                        <p class="sub_head_inter" style="font-family: var(--heading-font); font-style: italic;">
+                            We work with organisations seeking meaningful, long-term gifting , <br> designed to be kept
+                            rather
+                            than
+                            discarded.
+                        </p>
                     </div>
-                    <hr/>
-                    <div class="container">
-                    
-                    <form method="POST" action="{{ route('front.store.corporate.proposal.request') }}" id="requestCorporateProposalForm" class="ct_form">
-                    @csrf
+
+                    <form method="POST" action="{{ route('front.store.corporate.proposal.request') }}"
+                        id="requestCorporateProposalForm" class="ct_form">
+                        @csrf
                         <div class="row">
 
                             <!-- Full Name -->
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="ct_input">
                                     <label class="sub_head">Full Name <span class="text-danger">*</span></label>
-                                    <input type="text" name="full_name" id="full_name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();" placeholder="Enter your Full Name" value="{{ old('full_name') }}">
+                                    <input type="text" name="full_name" id="full_name"
+                                        oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();"
+                                        placeholder="Enter your Full Name" value="{{ old('full_name') }}">
                                     @error('full_name') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                             </div>
 
                             <!-- Company -->
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="ct_input">
                                     <label class="sub_head">Company Name <span class="text-danger">*</span></label>
-                                    <input type="text" name="company_name" placeholder="Enter your Company Organization Name" id="company_name" value="{{ old('company_name') }}">
+                                    <input type="text" name="company_name"
+                                        placeholder="Enter your Company Organization Name" id="company_name"
+                                        value="{{ old('company_name') }}">
                                     @error('company_name') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+
+                             <!-- Email -->
+                <div class="col-lg-6">
+                    <div class="ct_input">
+                        <label class="sub_head">Email <span class="text-danger">*</span></label>
+                        <input type="email" name="email" placeholder="Enter your Email Address" id="email"
+                            value="{{ old('email') }}">
+                        @error('email') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+                </div>
+
+                            <div class="col-lg-6">
                                 <div class="ct_input">
-                                    <label class="sub_head">Role / Designation <span class="text-danger">*</span></label>
-                                    <input type="text" name="role" placeholder="Enter your Role" id="role" value="{{ old('role') }}">
+                                    <label class="sub_head">Role / Designation <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="role" placeholder="Enter your Role" id="role"
+                                        value="{{ old('role') }}">
                                     @error('role') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                             </div>
-                            
+
                             <!-- Phone -->
                             {{-- <div class="col-lg-6">
                                 <div class="ct_input">
                                     <label class="sub_head">Phone Number <span class="text-danger">*</span></label>
                                     <input type="text" name="phone" id="phone" placeholder="Enter your WhatsApp Phone Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);" value="{{ old('phone') }}">
-                                    @error('phone') <small class="text-danger">{{ $message }}</small> @enderror
-                                </div>
-                            </div> --}}
+                            @error('phone') <small class="text-danger">{{ $message }}</small> @enderror
+                        </div>
+                </div> --}}
 
-                            <!-- Email -->
-                            <div class="col-lg-3">
-                                <div class="ct_input">
-                                    <label class="sub_head">Email <span class="text-danger">*</span></label>
-                                    <input type="email" name="email" placeholder="Enter your Email Address" id="email" value="{{ old('email') }}">
-                                    @error('email') <small class="text-danger">{{ $message }}</small> @enderror
-                                </div>
-                            </div>
 
-                            <!-- Product of Interest (MULTISELECT) -->
-                            {{-- <div class="col-lg-4">
+                <!-- Product of Interest (MULTISELECT) -->
+                {{-- <div class="col-lg-6">
                                 <div class="ct_input">
                                     <label class="sub_head">Product of Interest <span class="text-danger">*</span></label>
                                     <select id="product_of_interest" name="product_of_interest[]" multiple>
                                         @if(isset($corporateProduct) && is_countable($corporateProduct) && count($corporateProduct) > 0)
                                             @foreach($corporateProduct as $value)
-                                                <option value="{{ $value->id }}" {{ collect(old('product_of_interest'))->contains($value->id) ? 'selected' : '' }}>
-                                                    {{ $value->product_name }}
-                                                </option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                    <div id="product_error"></div>
-                                    @error('product_of_interest') <small class="text-danger">{{ $message }}</small> @enderror
-                                </div>
-                            </div> --}}
+                                                <option value="{{ $value->id }}"
+                {{ collect(old('product_of_interest'))->contains($value->id) ? 'selected' : '' }}>
+                {{ $value->product_name }}
+                </option>
+                @endforeach
+                @endif
+                </select>
+                <div id="product_error"></div>
+                @error('product_of_interest') <small class="text-danger">{{ $message }}</small> @enderror
+            </div>
+        </div> --}}
 
-                            <!-- Quantity Range -->
-                            <div class="col-lg-3">
-                                <div class="ct_input">
-                                    <label class="sub_head">Quantity Range </label>
-                                    <select name="quantity_range" id="quantity_range">
-                                        <option value="">Select</option>
-                                        @foreach(config('global_values.quality_range') as $key => $value)
-                                            <option value="{{ $key }}" {{ old('quantity_range') == $key ? 'selected' : '' }}>
-                                                {{ $value }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('quantity_range') <small class="text-danger">{{ $message }}</small> @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="ct_input">
-                                    <label class="sub_head">Budget Comfort (per unit) </label>
-                                    <select name="corporate_budget" id="corporate_budget">
-                                        <option value="">Select</option>
-                                        @foreach(config('global_values.corporate_budget') as $key => $value)
-                                            <option value="{{ $key }}" {{ old('corporate_budget') == $key ? 'selected' : '' }}>
-                                                {{ $value }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('corporate_budget') <small class="text-danger">{{ $message }}</small> @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="ct_input">
-                                    <label class="sub_head">Timeline </label>
-                                    <select name="timeline" id="timeline">
-                                        <option value="">Select</option>
-                                        @foreach(config('global_values.corporate_timeline') as $key => $value)
-                                            <option value="{{ $key }}" {{ old('timeline') == $key ? 'selected' : '' }}>
-                                                {{ $value }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('timeline') <small class="text-danger">{{ $message }}</small> @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-4 mb-4">
-                                <label class="form-label fw-bold d-block"> Nature of Requirement <span class="text-danger">*</span></label>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox"
-                                                id="ceremonial"
-                                                name="nature_of_requirement[]"
-                                                value="Client / Partner Gifting">
-                                    <label class="form-check-label" for="ceremonial">Client / Partner Gifting</label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox"
-                                                id="favours"
-                                                name="nature_of_requirement[]"
-                                                value="Leadership / Board Gifts">
-                                    <label class="form-check-label" for="favours">Leadership / Board Gifts</label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox"
-                                                id="legacy"
-                                                name="nature_of_requirement[]"
-                                                value="Employee Recognition">
-                                    <label class="form-check-label" for="legacy">Employee Recognition</label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input" type="checkbox"
-                                                id="hampers"
-                                                name="nature_of_requirement[]"
-                                                value="Milestone / Deal Closure">
-                                    <label class="form-check-label" for="hampers">Milestone / Deal Closure</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox"
-                                                id="unsure"
-                                                name="nature_of_requirement[]"
-                                                value="Hospitality / Guest Experience">
-                                    <label class="form-check-label" for="unsure"> Hospitality / Guest Experience</label>
-                                </div>
-                            </div>
+        <!-- Quantity Range -->
+        <div class="col-lg-4">
+            <div class="ct_input">
+                <label class="sub_head">Quantity Range </label>
+                <select name="quantity_range" id="quantity_range">
+                    <option value="">Select</option>
+                    @foreach(config('global_values.quality_range') as $key => $value)
+                    <option value="{{ $key }}" {{ old('quantity_range') == $key ? 'selected' : '' }}>
+                        {{ $value }}
+                    </option>
+                    @endforeach
+                </select>
+                @error('quantity_range') <small class="text-danger">{{ $message }}</small> @enderror
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="ct_input">
+                <label class="sub_head">Budget Comfort (per unit) </label>
+                <select name="corporate_budget" id="corporate_budget">
+                    <option value="">Select</option>
+                    @foreach(config('global_values.corporate_budget') as $key => $value)
+                    <option value="{{ $key }}" {{ old('corporate_budget') == $key ? 'selected' : '' }}>
+                        {{ $value }}
+                    </option>
+                    @endforeach
+                </select>
+                @error('corporate_budget') <small class="text-danger">{{ $message }}</small> @enderror
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="ct_input">
+                <label class="sub_head">Timeline </label>
+                <select name="timeline" id="timeline">
+                    <option value="">Select</option>
+                    @foreach(config('global_values.corporate_timeline') as $key => $value)
+                    <option value="{{ $key }}" {{ old('timeline') == $key ? 'selected' : '' }}>
+                        {{ $value }}
+                    </option>
+                    @endforeach
+                </select>
+                @error('timeline') <small class="text-danger">{{ $message }}</small> @enderror
+            </div>
+        </div>
+        <!-- <div class="col-lg-12">
+            <label class="form-label fw-bold d-block"> Nature of Requirement <span class="text-danger">*</span></label>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="ceremonial" name="nature_of_requirement[]"
+                    value="Client / Partner Gifting">
+                <label class="form-check-label" for="ceremonial">Client / Partner Gifting</label>
+            </div>
+            2
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="favours" name="nature_of_requirement[]"
+                    value="Leadership / Board Gifts">
+                <label class="form-check-label" for="favours">Leadership / Board Gifts</label>
+            </div>
+            3
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="legacy" name="nature_of_requirement[]"
+                    value="Employee Recognition">
+                <label class="form-check-label" for="legacy">Employee Recognition</label>
+            </div>
 
-                            <!-- Budget -->
-                            {{-- <div class="col-lg-4">
+            4
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="hampers" name="nature_of_requirement[]"
+                    value="Milestone / Deal Closure">
+                <label class="form-check-label" for="hampers">Milestone / Deal Closure</label>
+            </div>
+
+            5
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="unsure" name="nature_of_requirement[]"
+                    value="Hospitality / Guest Experience">
+                <label class="form-check-label" for="unsure"> Hospitality / Guest Experience</label>
+            </div>
+        </div> -->
+
+        <div class="col-lg-12">
+            <div class="ct_input">
+                <label class="sub_head">
+                    Nature of Requirement <span class="text-danger">*</span>
+                </label>
+
+                <div class="form_check_main_modal">
+
+                    <div class="form_check_item">
+                        <input type="checkbox" id="ceremonial" name="nature_of_requirement[]"
+                            value="Client / Partner Gifting" class="custom_check_input">
+                        <label class="custom_check_label" for="ceremonial"> Ceremonial / ritual
+                            objects</label>
+                    </div>
+
+                    <div class="form_check_item">
+                        <input type="checkbox" id="favours" name="nature_of_requirement[]"
+                            value="Wedding favours / guest gifts" class="custom_check_input">
+                        <label class="custom_check_label" for="favours">Wedding favours / guest
+                            gifts</label>
+                    </div>
+
+                    <div class="form_check_item">
+                        <input type="checkbox" id="legacy" name="nature_of_requirement[]" value="Family / legacy pieces"
+                            class="custom_check_input">
+                        <label class="custom_check_label" for="legacy"> Family / legacy pieces</label>
+                    </div>
+
+                    <div class="form_check_item">
+                        <input type="checkbox" id="hampers" name="nature_of_requirement[]" value="Bespoke hampers"
+                            class="custom_check_input">
+                        <label class="custom_check_label" for="hampers"> Bespoke hampers</label>
+                    </div>
+
+                    <div class="form_check_item">
+                        <input type="checkbox" id="unsure" name="nature_of_requirement[]" value="Unsure — need guidance"
+                            class="custom_check_input">
+                        <label class="custom_check_label" for="unsure"> Unsure — need guidance</label>
+                    </div>
+                </div>
+
+            </div>
+            <!-- <div id="w_looking_for_error"></div> -->
+        </div>
+
+
+        <!-- Budget -->
+        {{-- <div class="col-lg-4">
                                 <div class="ct_input">
                                     <label class="sub_head">Approximate Budget</label>
                                     <input type="text" placeholder="Enter Approximate Budget" name="budget" id="budget" value="{{ old('budget') }}">
-                                    @error('budget') <small class="text-danger">{{ $message }}</small> @enderror
-                                </div>
-                            </div> --}}
+        @error('budget') <small class="text-danger">{{ $message }}</small> @enderror
+    </div>
+</div> --}}
 
-                            <!-- Branding -->
-                            {{-- <div class="col-lg-6">
+<!-- Branding -->
+{{-- <div class="col-lg-6">
                                 <div class="ct_input">
                                     <label class="sub_head">Branding Requirements</label>
                                     <input type="text" placeholder="e.g. Logo etching, Custom box colour" name="branding_requirements" id="branding_requirements" value="{{ old('branding_requirements') }}">
-                                </div>
-                            </div> --}}
+</div>
+</div> --}}
 
-                            <!-- Delivery Date -->
-                            {{-- <div class="col-lg-6">
+<!-- Delivery Date -->
+{{-- <div class="col-lg-6">
                                 <div class="ct_input">
                                     <label class="sub_head">Delivery Timeline <span class="text-danger">*</span></label>
                                     <input type="date" name="delivery_date" id="delivery_date" value="{{ old('delivery_date') }}">
-                                    @error('delivery_date') <small class="text-danger">{{ $message }}</small> @enderror
-                                </div>
-                            </div> --}}
+@error('delivery_date') <small class="text-danger">{{ $message }}</small> @enderror
+</div>
+</div> --}}
 
-                            <!-- Message -->
-                            <div class="col-12">
-                                <div class="ct_input">
-                                    <label class="sub_head">Message / Notes</label>
-                                    <textarea name="message" placeholder="Enter Message" id="message">{{ old('message') }}</textarea>
-                                </div>
-                            </div>
-
-                            <div class="col-12 text-center">
-                                <button type="submit" class="com_btn bg-transparent">Submit Corporate Enquiry</button>
-                            </div>
-
-                        </div>
-                    </form>
-                   </div>
-                </div>
-           
-        </div>
+<!-- Message -->
+<div class="col-12">
+    <div class="ct_input">
+        <label class="sub_head">Message / Notes</label>
+        <textarea name="message" placeholder="Enter Message" id="message" rows="1">{{ old('message') }}</textarea>
     </div>
 </div>
 
+<div class="col-12 text-center">
+    <button type="submit" class="com_btn bg-transparent">Submit Corporate Enquiry</button>
+</div>
+
+</div>
+</form>
+</div>
+</div>
+
+</div>
+</div>
+</div>
