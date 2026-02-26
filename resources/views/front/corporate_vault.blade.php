@@ -47,7 +47,7 @@
             <h2 class="title_60">The Desk</h2>
             <p><b>For environments where decisions are made.</b> Objects designed to sit within executive workspaces —
                 not to decorate them.</p>
-            <a href="#" class="com_btn">ENQUIRE ABOUT DESK OBJECTS</a>
+            <a href="#" class="com_btn" data-bs-toggle="modal" data-bs-target="#productInquiry">ENQUIRE ABOUT DESK OBJECTS </a>
         </div>
         <div class="row gy-4 gy-lg-0">
             <div class="col-md-4">
@@ -313,7 +313,7 @@
             <h2 class="title_60">Ritual & Hospitality Objects</h2>
             <p><b>For welcome, respect, and shared presence.</b> Objects designed for hosting — interpreted with modern
                 restraint.</p>
-            <a href="#" class="com_btn">ENQUIRE ABOUT FRAMES</a>
+            <a href="#" class="com_btn"> ENQUIRE ABOUT RITUAL OBJECTS</a>
         </div>
         <div class="row gy-4 gy-lg-0">
             <div class="col-md-4">
@@ -529,6 +529,70 @@
     </div>
 </section>
 
+<div class="modal fade audio_modal" id="productInquiry" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="productInquiryLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="audio-card d-grid">
+                    <div class="modal-header px-0">
+                        <h5 class="modal-title" id="productInquiryLabel">Product Inquiry</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="POST" id="productInquiryForm" action="{{ route('front.store.product.inquiry') }}">
+                        @csrf
+                        <input type="hidden" value="" name="inquiry_for">
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" name="name" value="{{ old('name') }}" placeholder="Enter Name"
+                                oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();"
+                                class="form-control @error('name') is-invalid @enderror">
+                            @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <label class="form-label">Inquiry For Product</label>
+                        <select id="enquiry_for" name="enquiry_for">
+                            <option value="">Select Product</option>
+                            <option></option>
+                        </select>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" placeholder="Enter Your Email Address"
+                                value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror">
 
+                            @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Contact Number</label>
+                            <input type="text" name="contact_no" placeholder="Enter your Whatsapp Phone Number"
+                                value="{{ old('contact_no') }}"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
+                                class="form-control @error('contact_no') is-invalid @enderror">
+
+                            @error('contact_no')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Message</label>
+                            <textarea name="message" rows="4" placeholder="Enter Message"
+                                class="form-control @error('message') is-invalid @enderror">{{ old('message') }}</textarea>
+                            @error('message')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="com_btn" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="com_btn">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @include('layouts.frontfooter')
