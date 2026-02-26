@@ -126,6 +126,7 @@ if ($(".corporate_slider").length) {
             slidesToShow: 1,
             arrows: false,
             dots: true,
+            fade:true,
             autoplay: true,
             autoplaySpeed: 2500,
         });

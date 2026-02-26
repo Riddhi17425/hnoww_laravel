@@ -552,7 +552,7 @@ class FrontController extends Controller
     }
 
     public function getCorporateVault(Request $request, $catSlug = NULL){
-        $categories = Category::where('category_type', 2)->where('is_active', 0)->whereNull('deleted_at')->get();
+        $categories = Category::where('category_type', 2)->with('products')->where('is_active', 0)->whereNull('deleted_at')->get();
         $selectedCategory = Category::where('category_url', $catSlug)->first();
         $products = Product::where('product_type', 2)->isActive()->notDeleted();
         if($catSlug != NULL && $selectedCategory != ''){
@@ -564,6 +564,7 @@ class FrontController extends Controller
         $corporateKits = CorporateKit::isActive()->notDeleted()->get();
 
         return view('front.corporate_vault', compact('categories', 'products', 'corporateProduct', 'weddingProduct', 'corporateKits'));
+        // return view('front.corporate_vault_new_static', compact('categories', 'products', 'corporateProduct', 'weddingProduct', 'corporateKits'));
     }
 
     public function storeCorporateProposalRequest(Request $request){
