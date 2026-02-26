@@ -48,9 +48,9 @@
                 </span>
             </p>
             <h2 class="title_60">{{ $v->category_name ?? '' }}</h2>
-            <p><b>{!! $v->description ?? '' !!}</b></p>
+            <p>{!! $v->description ?? '' !!}</p>
                 {{-- data-bs-toggle="modal" data-bs-target="#productInquiry" --}}
-            <a href="#" class="com_btn" data-category="{{ $v->id }}"> {{ $v->button_text ?? '' }}</a>
+            <a href="#" class="com_btn corporate-product" data-category="{{ $v->id }}"> {{ $v->button_text ?? '' }}</a>
         </div>
 
         <div class="row gy-4 gy-lg-0">
@@ -663,64 +663,149 @@
     </div>
 </section>
 
-<div class="modal fade audio_modal" id="productInquiry" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="productInquiryLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+<!-- Corporate Product Request -->
+<div class="modal fade corporate_vault_modal" id="requestCorporateProduct" data-bs-backdrop="static"
+    data-bs-keyboard="false" tabindex="-1" aria-labelledby="requestCorporateProductLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-body">
-                <div class="audio-card d-grid">
-                    <div class="modal-header px-0">
-                        <h5 class="modal-title" id="productInquiryLabel">Product Inquiry</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form method="POST" id="productInquiryForm" action="{{ route('front.store.product.inquiry') }}">
+            
+                <div class="modal-body">
+                    <div class="container">
+                <div class="text-center my-4">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <form method="POST" action="{{ route('front.store.corporate.kit.request') }}" id="requestCorporateProductForm" class="ct_form">
                         @csrf
-                        <input type="hidden" value="" name="inquiry_for">
-                        <div class="mb-3">
-                            <label class="form-label">Name</label>
-                            <input type="text" name="name" value="{{ old('name') }}" placeholder="Enter Name"
-                                oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();"
-                                class="form-control @error('name') is-invalid @enderror">
-                            @error('name')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <label class="form-label">Inquiry For Product</label>
-                        <select id="enquiry_for" name="enquiry_for">
-                            <option value="">Select Product</option>
-                            <option></option>
-                        </select>
-                        <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" name="email" placeholder="Enter Your Email Address"
-                                value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror">
+                        <div class="row">
+                            <!-- Full Name -->
+                            <div class="col-lg-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Full Name <span class="text-danger">*</span></label>
+                                    <input type="text" name="ck_full_name" id="ck_full_name"
+                                        oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();"
+                                        placeholder="Enter your Full Name" value="{{ old('ck_full_name') }}">
+                                    @error('ck_full_name') <small class="text-danger">{{ $message }}</small> @enderror
+                                </div>
+                            </div>
 
-                            @error('email')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Contact Number</label>
-                            <input type="text" name="contact_no" placeholder="Enter your Whatsapp Phone Number"
-                                value="{{ old('contact_no') }}"
-                                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
-                                class="form-control @error('contact_no') is-invalid @enderror">
+                            <!-- Company -->
+                            <div class="col-lg-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Company Organization <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="ck_company_name"
+                                        placeholder="Enter your Company Organization Name" id="ck_company_name"
+                                        value="{{ old('ck_company_name') }}">
+                                    @error('ck_company_name') <small class="text-danger">{{ $message }}</small> @enderror
+                                </div>
+                            </div>
 
-                            @error('contact_no')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Message</label>
-                            <textarea name="message" rows="4" placeholder="Enter Message"
-                                class="form-control @error('message') is-invalid @enderror">{{ old('message') }}</textarea>
-                            @error('message')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="com_btn" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="com_btn">Submit</button>
+                            <!-- Phone -->
+                            <div class="col-lg-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Phone Number <span class="text-danger">*</span></label>
+                                    <input type="text" name="ck_phone" id="ck_phone"
+                                        placeholder="Enter your WhatsApp Phone Number"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
+                                        value="{{ old('phone') }}">
+                                    @error('ck_phone') <small class="text-danger">{{ $message }}</small> @enderror
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="col-lg-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Email <span class="text-danger">*</span></label>
+                                    <input type="email" name="ck_email" placeholder="Enter your Email Address"
+                                        id="ck_email" value="{{ old('ck_email') }}">
+                                    @error('ck_email') <small class="text-danger">{{ $message }}</small> @enderror
+                                </div>
+                            </div>
+
+                            <!-- Product of Interest (MULTISELECT) -->
+                            <div class="col-lg-4">
+                                <div class="ct_input">
+                                    <label class="sub_head">Product of Interest <span
+                                            class="text-danger">*</span></label>
+                                    <select id="ck_product_of_interest" name="ck_product_of_interest[]" multiple>
+                                        @if(isset($corporateKits) && is_countable($corporateKits) &&
+                                        count($corporateKits) > 0)
+                                        @foreach($corporateKits as $value)
+                                        <option value="{{ $value->id }}"
+                                            {{ collect(old('ck_product_of_interest'))->contains($value->id) ? 'selected' : '' }}>
+                                            {{ $value->title }}
+                                        </option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                    <div id="product_kit_error"></div>
+                                    @error('ck_product_of_interest') <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <!-- Quantity Range -->
+                            <div class="col-lg-4">
+                                <div class="ct_input">
+                                    <label class="sub_head">Quantity Range <span class="text-danger">*</span></label>
+                                    <select name="ck_quantity_range" id="ck_quantity_range">
+                                        <option value="">Select</option>
+                                        @foreach(config('global_values.quality_range') as $key => $value)
+                                        <option value="{{ $key }}"
+                                            {{ old('ck_quantity_range') == $key ? 'selected' : '' }}>
+                                            {{ $value }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                    @error('ck_quantity_range') <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <!-- Budget -->
+                            <div class="col-lg-4">
+                                <div class="ct_input">
+                                    <label class="sub_head">Approximate Budget</label>
+                                    <input type="text" placeholder="Enter Approximate Budget" name="ck_budget"
+                                        id="ck_budget" value="{{ old('ck_budget') }}">
+                                    @error('ck_budget') <small class="text-danger">{{ $message }}</small> @enderror
+                                </div>
+                            </div>
+
+                            <!-- Branding -->
+                            <div class="col-lg-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Branding Requirements</label>
+                                    <input type="text" placeholder="e.g. Logo etching, Custom box colour"
+                                        name="ck_branding_requirements" id="ck_branding_requirements"
+                                        value="{{ old('ck_branding_requirements') }}">
+                                </div>
+                            </div>
+
+                            <!-- Delivery Date -->
+                            <div class="col-lg-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Delivery Timeline <span class="text-danger">*</span></label>
+                                    <input type="date" name="ck_delivery_date" id="ck_delivery_date"
+                                        value="{{ old('ck_delivery_date') }}">
+                                    @error('ck_delivery_date') <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <!-- Message -->
+                            <div class="col-12">
+                                <div class="ct_input">
+                                    <label class="sub_head">Message / Notes</label>
+                                    <textarea name="ck_message" placeholder="Enter Message"
+                                        id="ck_message">{{ old('ck_message') }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-12 text-center">
+                                <button type="submit" class="com_btn">REQUEST CORPORATE QUOTE</button>
+                            </div>
+
                         </div>
                     </form>
                 </div>
@@ -728,7 +813,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- Corporate Kit Request -->
 <div class="modal fade corporate_vault_modal" id="requestCorporateKitProposal" data-bs-backdrop="static"
