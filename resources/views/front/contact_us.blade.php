@@ -41,7 +41,8 @@
                             <h3 class="sub_head">WhatsApp</h3>
                             <p class="mb-0">
                                 <a href="tel:+97150950927">+971 50 950 927</a> <br /> <span>(Immediate
-                                    assistance)</span></p>
+                                    assistance)</span>
+                            </p>
                         </div>
                         <div>
                             <h3 class="sub_head">Email</h3>
@@ -81,7 +82,8 @@
                     <div>
                         <div class="mb-4">
                             <h3 class="sub_head">Location</h3>
-                            <p class="mb-0"><a href="javascript:void(0)">Dubai Design District, Building 7.</a></p>
+                            <p class="mb-0"><a href="https://maps.app.goo.gl/GcNVEWJPTW3xotjN6">Dubai Design District,
+                                    Building 7.</a></p>
                         </div>
                         <div>
                             <h3 class="sub_head">By Appointment Only</h3>

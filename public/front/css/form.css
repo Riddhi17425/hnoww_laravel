@@ -166,3 +166,13 @@ input:-webkit-autofill {
 .corporate_vault_modal .modal-body {
     /*scrollbar-width: thin;*/
 }
+
+.ct_form input {
+    transition: all 0.3s ease-in-out;
+}
+
+.ct_form input:hover,
+.ct_form select:hover,
+.ct_form textarea:hover {
+    border-color: var(--heading-font);
+}

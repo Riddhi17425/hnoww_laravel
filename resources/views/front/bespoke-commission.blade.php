@@ -10,14 +10,12 @@
     </div>
 </section>
 
-
-
 <!-- about -->
-<section class="about">
+<section class="about mt_35">
     <div class="container">
         <div class="magic_wrapper">
             <h2 class="magic_head_phone">
-                True luxury
+                Beauty is not decoration is personal.
             </h2>
             <!-- 3️⃣ Left image (from left) -->
             <div class="text-end magic_wrapper_logo">
@@ -49,7 +47,6 @@
             <h2 class="magic_head_2">
                 is personal.
             </h2>
-
         </div>
     </div>
 </section>
@@ -122,7 +119,7 @@ alt="{{ $val->product_name ?? 'Product Image' }}">
 
 
 <!--The Editions -->
-<section class="mt_120 mb_120">
+<section class="mt_35 mb_120">
     <div class="container">
         <div class="section_header">
             <p class="sub_head mb-0">
@@ -304,7 +301,8 @@ alt="{{ $val->product_name ?? 'Product Image' }}">
                     <div class="text-center mb-5">
                         <h4 class="title_60 mb-3" style="color: var(--dark-900)">Begin a Bespoke Conversation</h4>
                         <p class="sub_head_inter" style="font-family: var(--heading-font); font-style: italic;">
-                            We accept a limited number of bespoke commissions each year. <br>  This form begins a conversation
+                            We accept a limited number of bespoke commissions each year. <br> This form begins a
+                            conversation
                             — not an order.
                         </p>
                     </div>
@@ -430,8 +428,8 @@ alt="{{ $val->product_name ?? 'Product Image' }}">
                             <div class="col-12">
                                 <div class="ct_input">
                                     <label class="sub_head">Anything else we should know? </label>
-                                    <textarea name="bc_additional_message"
-                                        placeholder="Enter Message" rows="1">{{ old('bc_additional_message') }}</textarea>
+                                    <textarea name="bc_additional_message" placeholder="Enter Message"
+                                        rows="1">{{ old('bc_additional_message') }}</textarea>
                                 </div>
                             </div>
 

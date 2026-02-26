@@ -39,7 +39,7 @@
 <!--</section>-->
 <!-- about -->
 
-<section class="about">
+<section class="about mt_35">
     <div class="container">
         <div class="magic_wrapper">
             <h2 class="magic_head_phone">
@@ -76,13 +76,12 @@
             <h2 class="magic_head_2">
                 It is devotion.
             </h2>
-
         </div>
     </div>
 </section>
 
 
-<section class="mt_80 ">
+<section class="mt_35">
     <div class=" container-fluid origin_wrapper">
         <div class="section_header">
             <p class="sub_head mb-0">

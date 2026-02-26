@@ -4,7 +4,7 @@ $is_green = ($current_route === 'front.product.details' || $current_route === 'f
 'front.auth' || $current_route === 'front.cart.view' || $current_route === 'front.checkout.view' || $current_route ===
 'front.order.view' || $current_route === 'front.order_detail.view' || $current_route === 'front.profile' ||
 $current_route ===
-'front.get.forgot.password' || $current_route === 'front.get.reset.password' || $current_route === 'front.thankyou');
+'front.get.forgot.password' || $current_route === 'front.get.reset.password' );
 
 @endphp
 

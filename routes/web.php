@@ -103,7 +103,7 @@ Route::name('front.')->group(function () {
 		Route::get('/checkout', [CartController::class, 'getCheckout'])->name('checkout.view');
 		Route::post('/checkout/process', [CartController::class, 'checkoutProcess'])->name('checkout.process');
 		Route::get('/payment/success', [CartController::class, 'paymentSuccess'])->name('payment.success');
-		Route::get('/get/success/{orderid}', [CartController::class, 'getSuccess'])->name('get.success');
+		Route::get('/get/success/{orderid?}', [CartController::class, 'getSuccess'])->name('get.success');
 		Route::get('/get/failed/{orderid}', [CartController::class, 'getFailed'])->name('get.failed');
 
 		Route::get('front/logout', [AuthController::class, 'logout'])->name('logout');
