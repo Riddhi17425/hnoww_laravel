@@ -15,7 +15,7 @@
                     
                     <tr>
                         <td align="center">
-                            <img src="http://localhost/hnoww_laravel/public/images/front/corporate-vault-banner.webp" alt="HNOWW The Ritual of Artful Giving" width="600" style="display: block; width: 100%; max-width: 600px; height: auto;">
+                            <img src="{{ asset('public/images/front/emails-banner.png') }}" alt="HNOWW The Ritual of Artful Giving" width="600" style="display: block; width: 100%; max-width: 600px; height: auto;">
                         </td>
                     </tr>
 
@@ -29,9 +29,9 @@
                             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
                                     <td align="center" style="font-family: Arial, sans-serif; font-size: 15px; color: #ffffff;">
-                                        <span style="display: inline-block; vertical-align: middle;">&#9993; studio@hnoww.com</span>
+                                        <span style="display: inline-block; vertical-align: middle; color: #ffffff;">&#9993; studio@hnoww.com</span>
                                         <span style="display: inline-block; color: #666666; margin: 0 15px; vertical-align: middle;">|</span>
-                                        <span style="display: inline-block; vertical-align: middle;">&#128222; +971 50 950 927</span>
+                                        <span style="display: inline-block; vertical-align: middle; color: #ffffff;">&#128222; +971 50 950 927</span>
                                     </td>
                                 </tr>
                             </table>

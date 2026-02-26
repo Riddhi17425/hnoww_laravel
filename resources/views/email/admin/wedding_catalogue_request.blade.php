@@ -145,7 +145,7 @@
         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 40px;">
             <tr>
                 <td width="120" valign="top">
-                    <img src="https://via.placeholder.com/120x120/1a2b3c/ffffff?text=Product" alt="The Gathering"
+                    <img src="{{ asset('public/images/front/emails-card.png') }}" alt="The Gathering"
                         width="120" style="display: block; max-width: 120px; border: 1px solid #eeeeee;">
                 </td>
                 <td valign="top" style="padding-left: 20px;">
