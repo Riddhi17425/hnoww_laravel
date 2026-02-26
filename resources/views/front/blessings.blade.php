@@ -205,7 +205,8 @@
 
                         <div class="mt-3 d-flex justify-content-center gap-2">
                             <a class="com_btn" data-bs-toggle="modal" data-bs-target="#blessingPopup"
-                                style="cursor: pointer;"><span><- </span> Back</a>
+                                style="cursor: pointer;"><span>
+                                    <- </span> Back</a>
                             <button type="submit" class="com_btn bg-transparent">Send Gift</button>
                         </div>
                     </form>
