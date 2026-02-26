@@ -6,7 +6,8 @@
 
     <div class="hero_content_inner w-100">
         <div class="container">
-            <h2 class="main_head mb-3"> HNoww Wedding Concierge</h2>
+            {{-- <h2 class="main_head mb-3"> HNoww Wedding Concierge</h2> --}}
+            <h2 class="main_head mb-3"> HNoww Wedding Vault</h2>
             <p class="sub_heads sec_in_mb"> Ceremonial wedding and anniversary gifts, sculptural heirlooms, and bespoke gifting for the modern union.
             </p>
             <div class="d-flex flex-wrap justify-content-center gap-3 gap-md-4">

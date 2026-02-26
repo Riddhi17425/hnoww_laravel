@@ -47,7 +47,7 @@
             <h2 class="title_60">The Desk</h2>
             <p><b>For environments where decisions are made.</b> Objects designed to sit within executive workspaces —
                 not to decorate them.</p>
-            <a href="#" class="com_btn" data-bs-toggle="modal" data-bs-target="#productInquiry">ENQUIRE ABOUT DESK OBJECTS </a>
+            <a href="#" class="com_btn" data-bs-toggle="modal" data-bs-target="#productInquiry" data-product="desk_objects"> ENQUIRE ABOUT DESK OBJECTS</a>
         </div>
         <div class="row gy-4 gy-lg-0">
             <div class="col-md-4">
