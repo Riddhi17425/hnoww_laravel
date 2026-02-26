@@ -59,14 +59,14 @@
                             <p>Silver and stone forms designed to hold presence without excess.</p>
                         </div>
 
-                        <a href="#">
+                        <!-- <a href="#">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
                                 <path
                                     d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
                                     stroke="#8c8a72" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             </div>
@@ -79,14 +79,14 @@
                             <p class="mb-0">Weighted metal pieces that introduce order and restraint to the desk.</p>
                         </div>
 
-                        <a href="#">
+                        <!-- <a href="#">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
                                 <path
                                     d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
                                     stroke="#8c8a72" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             </div>
@@ -99,14 +99,14 @@
                             <p class="mb-0">Stone and metal forms that anchor the workspace physically and visually.</p>
                         </div>
 
-                        <a href="#">
+                        <!-- <a href="#">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
                                 <path
                                     d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
                                     stroke="#8c8a72" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             </div>
@@ -149,14 +149,14 @@
                             <p>Given as markers of trust and continuity.</p>
                         </div>
 
-                        <a href="#">
+                        <!-- <a href="#">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
                                 <path
                                     d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
                                     stroke="#8c8a72" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             </div>
@@ -171,14 +171,14 @@
                                 trend.</p>
                         </div>
 
-                        <a href="#">
+                        <!-- <a href="#">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
                                 <path
                                     d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
                                     stroke="#8c8a72" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             </div>
@@ -192,7 +192,7 @@
                             <p class="mb-0">Curated ensembles designed for leaders who move across roles, regions, and
                                 responsibilities.</p>
                         </div>
-
+<!-- 
                         <a href="#">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
                                 <path
@@ -200,7 +200,7 @@
                                     stroke="#8c8a72" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             </div>
@@ -243,14 +243,14 @@
                             <p>Sculptural hydration vessels with architectural clarity.</p>
                         </div>
 
-                        <a href="#">
+                        <!-- <a href="#">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
                                 <path
                                     d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
                                     stroke="#8c8a72" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             </div>
@@ -264,14 +264,14 @@
                             <p class="mb-0">Weighted metal and stone pieces designed to remain on hosting tables.</p>
                         </div>
 
-                        <a href="#">
+                        <!-- <a href="#">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
                                 <path
                                     d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
                                     stroke="#8c8a72" stroke-width="1.5" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
             </div>
@@ -376,8 +376,8 @@
                     <p>– Organiser</p>
                 </div>
 
-                <a href="#" class="com_btn border-white">Request for CORPORATE CATALOGUE</a>
-
+                <a href="#" class="com_btn border-white" data-bs-toggle="modal"
+                    data-bs-target="#requestCorporateProposal">Request for CORPORATE CATALOGUE</a>
             </div>
         </div>
     </div>

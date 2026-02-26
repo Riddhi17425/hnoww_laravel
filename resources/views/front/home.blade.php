@@ -7,13 +7,13 @@
         Your browser does not support the video tag.
     </video>
 
-     <video autoplay muted loop class="hero_video d-lg-none">
+    <video autoplay muted loop class="hero_video d-lg-none">
         <source src="{{ asset('public/images/front/hero-video-mobaile.mp4') }}" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
     <div class="hero_content">
-        <p class="mb-0 d-md-none" style="color: #F2D8D9;">Designed in Dubai. Made to endure.</p>
+        <p class="mb-0 d-md-none">Designed in Dubai. Made to endure.</p>
         <!--<h1 class="main_head">Where meaning takes shape.</h1>-->
         <h1 class="main_head">Where craft holds expressions </h1>
         <p>Personalised gifts designed to turn the everyday into a feeling. Thoughtfully designed, customized gifts

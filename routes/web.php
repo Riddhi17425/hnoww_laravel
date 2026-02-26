@@ -79,6 +79,7 @@ Route::name('front.')->group(function () {
 	Route::get('/architect-study', [FrontController::class, 'getArchitectStudy'])->name('architect-study'); 
 	Route::get('/about', [FrontController::class, 'getAbout'])->name('about'); 
 	Route::get('/editions', [FrontController::class, 'getEditions'])->name('editions'); 
+	Route::get('/thankyou', [FrontController::class, 'getThankYou'])->name('thankyou'); 
 	
 
 	// NOT MADE DYNAMIC - END

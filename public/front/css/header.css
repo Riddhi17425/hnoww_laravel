@@ -11,6 +11,10 @@ header .navbar {
     padding: 0;
 }
 
+.header_logo {
+    width: 140px;
+}
+
 .navbar_left {
     display: flex;
     align-items: center;

@@ -1456,5 +1456,9 @@ class FrontController extends Controller
         return view('front.editions');
     }
 
+     public function getThankYou(){
+        return view('front.orders.thankyou');
+    }
+
 
 }

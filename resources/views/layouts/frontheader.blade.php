@@ -4,7 +4,7 @@ $is_green = ($current_route === 'front.product.details' || $current_route === 'f
 'front.auth' || $current_route === 'front.cart.view' || $current_route === 'front.checkout.view' || $current_route ===
 'front.order.view' || $current_route === 'front.order_detail.view' || $current_route === 'front.profile' ||
 $current_route ===
-'front.get.forgot.password' || $current_route === 'front.get.reset.password');
+'front.get.forgot.password' || $current_route === 'front.get.reset.password' || $current_route === 'front.thankyou');
 
 @endphp
 
@@ -193,8 +193,8 @@ $current_route ===
                     </li>
 
                     <li>
-                        <a href="{{ route('front.editions') }}" data-text="edition">
-                            <span>edition</span>
+                        <a href="{{ route('front.editions') }}" data-text="editions">
+                            <span>editions</span>
                         </a>
                     </li>
 

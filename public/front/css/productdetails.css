@@ -6,21 +6,20 @@
     color: var(--dark-900);
 }
 
-.theme-green header .hamburger>span span {
+.theme-green header .hamburger > span span {
     background: var(--dark-900);
 }
 
 .theme-green header #dropdownInput::placeholder {
-    color:var(--dark-900);
+    color: var(--dark-900);
 }
 
 .theme-green header .language-select svg path {
     stroke: var(--dark-900);
 }
 
-.theme-green header .language-select .dropdown-input-lan
-{
-     color:var(--dark-900);
+.theme-green header .language-select .dropdown-input-lan {
+    color: var(--dark-900);
 }
 
 /* first section  */
@@ -67,7 +66,7 @@
     color: var(--grey-666);
 }
 
- .increment_decrement_area {
+.increment_decrement_area {
     display: flex;
     align-items: center;
     gap: 24px;
@@ -78,20 +77,19 @@
 .increment_decrement {
     display: inline-flex;
     align-items: center;
-    border: 1px solid #EDEAE4;
+    border: 1px solid #edeae4;
 }
 
 .increment_decrement .dec_btn,
 .increment_decrement .inc_btn {
-    background: #EDEAE4;
+    background: #edeae4;
     width: 50px;
     height: 55px;
     border: none;
     transition: all 0.2s ease-in;
 }
 
-
- .increment_decrement .dec_btn:hover,
+.increment_decrement .dec_btn:hover,
 .increment_decrement .inc_btn:hover {
     background: var(--secondary-color);
 }

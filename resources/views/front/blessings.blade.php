@@ -1,13 +1,12 @@
 @include('layouts.frontheader')
-@php // print_r(request()->segment(2)); die; 
+@php // print_r(request()->segment(2)); die;
 @endphp
 
 <style>
-    .form-control:focus
-    {
-            border-color: #8c8a72;
-            box-shadow:unset;
-    }
+.form-control:focus {
+    border-color: #8c8a72;
+    box-shadow: unset;
+}
 </style>
 <section class="hero-section_inner">
     <img class="img-fluid" src="{{asset('public/images/front/blessing-library-banner.webp')}}" alt="him banner">
@@ -28,9 +27,9 @@
                     <select class="dropdown" id="blessing_of">
                         <option value="">All</option>
                         @foreach(config('global_values.blessing_of') as $key => $label)
-                            <option value="{{ $key }}" {{ request()->segment(2) == $key ? 'selected' : '' }}>
-                                {{ $label }}
-                            </option>
+                        <option value="{{ $key }}" {{ request()->segment(2) == $key ? 'selected' : '' }}>
+                            {{ $label }}
+                        </option>
                         @endforeach
                     </select>
                 </div>
@@ -39,42 +38,41 @@
 
         <div class="row">
             @if(isset($blessings) && is_countable($blessings) && count($blessings) > 0)
-                @foreach($blessings as $key => $val)
-                    <div class="col-md-4 mb-4">
-                        <div class="gesture_box open-blessing"
-                                data-bs-toggle="modal"
-                                data-bs-target="#blessingPopup"
-                                data-id="{{ $val->id }}"
-                                data-title="{{ $val->title }}"
-                                data-subtitle="{{ $val->sub_title }}"
-                                data-description="{{ strip_tags($val->description) }}"
-                                data-image="{{ asset('public/images/admin/blessing/images/'.$val->image) }}"
-                                data-audio="{{ asset('public/images/admin/blessing/audios/'.$val->audio_file) }}"
-                            >
-                            <img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/images/admin/blessing/images/'.$val->image) }}" alt="images">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <h3 class="sub_head">{{ $val->title ?? '' }}</h3>
-                                    <p class="mb-0">{{ $val->sub_title ?? '' }}</p>
-                                </div>
-                                <div>
-                                    <img style="cursor: pointer;" src="{{asset('public/images/front/volume.svg')}}" alt="" width="33" height="30">
-                                </div>
-                            </div>
+            @foreach($blessings as $key => $val)
+            <div class="col-md-4 mb-4">
+                <div class="gesture_box open-blessing" data-bs-toggle="modal" data-bs-target="#blessingPopup"
+                    data-id="{{ $val->id }}" data-title="{{ $val->title }}" data-subtitle="{{ $val->sub_title }}"
+                    data-description="{{ strip_tags($val->description) }}"
+                    data-image="{{ asset('public/images/admin/blessing/images/'.$val->image) }}"
+                    data-audio="{{ asset('public/images/admin/blessing/audios/'.$val->audio_file) }}">
+                    <img class="img-fluid mb-2 mb-md-4"
+                        src="{{ asset('public/images/admin/blessing/images/'.$val->image) }}" alt="images">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h3 class="sub_head">{{ $val->title ?? '' }}</h3>
+                            <p class="mb-0">{{ $val->sub_title ?? '' }}</p>
+                        </div>
+                        <div>
+                            <img style="cursor: pointer;" src="{{asset('public/images/front/volume.svg')}}" alt=""
+                                width="33" height="30">
                         </div>
                     </div>
-                @endforeach
-            @else
-                <div class="text-center">
-                    <img class="mb-2 mb-md-4" height="250px" width="250px" src="{{asset('public/images/product-not-found.webp')}}" alt="images">
                 </div>
+            </div>
+            @endforeach
+            @else
+            <div class="text-center">
+                <img class="mb-2 mb-md-4" height="250px" width="250px"
+                    src="{{asset('public/images/product-not-found.webp')}}" alt="images">
+            </div>
             @endif
         </div>
     </div>
 </section>
 
 <!-- Blessing Detail Modal -->
-<div class="modal fade audio_modal" id="blessingPopup" tabindex="-1" aria-labelledby="blessingPopupLabel" aria-hidden="true">
+<div class="modal fade audio_modal" id="blessingPopup" tabindex="-1" aria-labelledby="blessingPopupLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-body">
@@ -90,7 +88,8 @@
                                 <h6 id="modalSubTitle" class="song_phrase"></h6>
                             </div>
                             <div>
-                                <img src="{{asset('public/images/front/volume.svg')}}" alt="volume" width="33" height="30">
+                                <img src="{{asset('public/images/front/volume.svg')}}" alt="volume" width="33"
+                                    height="30">
                             </div>
                         </div>
 
@@ -122,8 +121,8 @@
 
                         <a href="javascript:void(0);" class="com_btn" id="giftBtn">GIFT THIS BLESSING</a>
                         <div class="audio-links mt-4">
-                            <a href="#" onclick="openShare()">Share this <svg width="20" height="22" viewBox="0 0 20 22" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
+                            <a href="#" onclick="openShare()">Share this <svg width="20" height="22" viewBox="0 0 20 22"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M12.75 5.25L6.75 8.75M6.75 12.75L12.75 16.25M15.75 6.75C14.0931 6.75 12.75 5.40685 12.75 3.75C12.75 2.09315 14.0931 0.75 15.75 0.75C17.4069 0.75 18.75 2.09315 18.75 3.75C18.75 5.40685 17.4069 6.75 15.75 6.75ZM15.75 20.75C14.0931 20.75 12.75 19.4069 12.75 17.75C12.75 16.0931 14.0931 14.75 15.75 14.75C17.4069 14.75 18.75 16.0931 18.75 17.75C18.75 19.4069 17.4069 20.75 15.75 20.75ZM3.75 13.75C2.09315 13.75 0.75 12.4069 0.75 10.75C0.75 9.0931 2.09315 7.75 3.75 7.75C5.40685 7.75 6.75 9.0931 6.75 10.75C6.75 12.4069 5.40685 13.75 3.75 13.75Z"
                                         stroke="#c7b58c" stroke-width="1.5" stroke-linecap="round"
@@ -144,60 +143,74 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="audio-card d-grid">
-                     <form method="POST" id="giftBlessingForm" action="{{ route('front.store.gift.blessing') }}">
-                @csrf
-                <div class="modal-header px-0 pt-0 border-0">
-                    <h5 class="title_40">Gift This Blessing</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
+                    <form method="POST" id="giftBlessingForm" action="{{ route('front.store.gift.blessing') }}"
+                        class="ct_form">
+                        @csrf
+                        <div class="modal-header border-0 px-0 pt-0">
+                            <h5 class="title_40">Gift This Blessing</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
 
-                    <input type="hidden" name="blessing_id" id="giftBlessingId">
-                    
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h6>From</h6>
-                            <div class="mb-3">
-                                <input type="text" name="from_name" class="form-control mb-2" placeholder="Name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();">
-                            </div>
-                            <div class="mb-3">
-                                <input type="email" name="from_email" class="form-control mb-2" placeholder="Email">
-                            </div>
-                            <div class="mb-3">
-                                <input type="text" name="from_phone" class="form-control mb-3" placeholder="Phone" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);">
-                            </div>
-                                
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <h6>To</h6>
-                            
-                            <div class="mb-3">
-                                 <input type="text" name="to_name" class="form-control mb-2" placeholder="Name" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();">
-                            </div>
-                            <div class="mb-3">
-                                 <input type="email" name="to_email" class="form-control mb-2" placeholder="Email">
-                            </div>
-                            <div class="mb-3">
-                                <input type="text" name="to_phone" class="form-control mb-2" placeholder="Phone" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);">
-                            </div>
-                                 
-                        </div>
-                        
-                        <div class="col-md-12">
-                             <textarea id="#" rows="3" placeholder="Nots" class="form-control mb-2 valid" aria-invalid="false">                                 
-                             </textarea>
-                        </div>
-                    </div>
+                        <input type="hidden" name="blessing_id" id="giftBlessingId">
 
-                    <div class="mt-3 d-flex justify-content-center gap-2">
-                         <a class="com_btn"  data-bs-toggle="modal" data-bs-target="#blessingPopup" style="cursor: pointer;"><span><-</span> Back</a>
-                        <button type="submit" class="com_btn bg-transparent">Send Gift</button>
-                    </div>
-                   
-            </form>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="ct_input">
+                                    <h6 class="sub_head">Your Details</h6>
+                                </div>
+                                <div class="ct_input">
+                                    <label class="sub_head">Name</label>
+                                    <input type="text" name="from_name" placeholder="Enter your Name"
+                                        oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();">
+                                </div>
+                                <div class="ct_input">
+                                    <label class="sub_head">Email</label>
+                                    <input type="email" name="from_email" placeholder="Enter your Email">
+                                </div>
+                                <div class="ct_input">
+                                    <label class="sub_head">Phone</label>
+                                    <input type="text" name="from_phone" placeholder="Enter your Phone Number"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="ct_input">
+                                    <h6 class="sub_head">Recipient's Details</h6>
+                                </div>
+
+                                <div class="ct_input">
+                                    <label class="sub_head">Name</label>
+                                    <input type="text" name="to_name" placeholder="Enter the Name"
+                                        oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();">
+                                </div>
+                                <div class="ct_input">
+                                    <label class="sub_head">Email</label>
+                                    <input type="email" name="to_email" placeholder="Email">
+                                </div>
+                                <div class="ct_input">
+                                    <label class="sub_head">Phone</label>
+                                    <input type="text" name="to_phone" placeholder="Enter Phone Number"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);">
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-12">
+                                <label class="sub_head">Message/Nots</label>
+                                <textarea name="w_message" placeholder="Nots" id="#" rows="1"
+                                    aria-invalid="false"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 d-flex justify-content-center gap-2">
+                            <a class="com_btn" data-bs-toggle="modal" data-bs-target="#blessingPopup"
+                                style="cursor: pointer;"><span><- </span> Back</a>
+                            <button type="submit" class="com_btn bg-transparent">Send Gift</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-           
         </div>
     </div>
 </div>
@@ -231,7 +244,7 @@ playBtn.addEventListener("click", async () => {
 });
 
 function openShare() {
-    const url = sitePath + '/blessings-detail/'+currentBlessingId;
+    const url = sitePath + '/blessings-detail/' + currentBlessingId;
 
     if (navigator.share) {
         navigator.share({
@@ -287,7 +300,7 @@ function formatTime(time) {
 }
 
 // Open blessing modal & load data
-document.addEventListener('click', function (e) {
+document.addEventListener('click', function(e) {
     const card = e.target.closest('.open-blessing');
     if (!card) return;
 
@@ -320,8 +333,9 @@ document.addEventListener('click', function (e) {
 $(document).ready(function() {
     $('#blessing_of').on('change', function() {
         var slug = $(this).val();
-        if(slug) {
-            window.location.href = "{{ route('front.blessings.library', ':slug') }}".replace(':slug', slug);
+        if (slug) {
+            window.location.href = "{{ route('front.blessings.library', ':slug') }}".replace(':slug',
+                slug);
         } else {
             window.location.href = "{{ route('front.blessings.library') }}";
         }
@@ -329,7 +343,7 @@ $(document).ready(function() {
 });
 
 // ========== UPDATED GIFT BUTTON LOGIC ==========
-$('#giftBtn').on('click', function () {
+$('#giftBtn').on('click', function() {
     if (!currentBlessingId) {
         alert('Please select a blessing');
         return;
@@ -351,12 +365,38 @@ $('#giftBtn').on('click', function () {
 var formSubmitted = false;
 $('#giftBlessingForm').validate({
     rules: {
-        from_name: { required: true, minlength: 2, maxlength: 50, lettersonly: true },
-        from_email: { required: true, email: true, noSpamEmail: true, uniqueEmail: "contact_inquiries" },
-        from_phone: { required: true, validPhone: true },
-        to_name: { required: true, minlength: 2, maxlength: 50, lettersonly: true },
-        to_email: { required: true, email: true, noSpamEmail: true, uniqueEmail: "contact_inquiries" },
-        to_phone: { required: true, validPhone: true },
+        from_name: {
+            required: true,
+            minlength: 2,
+            maxlength: 50,
+            lettersonly: true
+        },
+        from_email: {
+            required: true,
+            email: true,
+            noSpamEmail: true,
+            uniqueEmail: "contact_inquiries"
+        },
+        from_phone: {
+            required: true,
+            validPhone: true
+        },
+        to_name: {
+            required: true,
+            minlength: 2,
+            maxlength: 50,
+            lettersonly: true
+        },
+        to_email: {
+            required: true,
+            email: true,
+            noSpamEmail: true,
+            uniqueEmail: "contact_inquiries"
+        },
+        to_phone: {
+            required: true,
+            validPhone: true
+        },
     },
     messages: {
         from_name: {
@@ -370,7 +410,9 @@ $('#giftBlessingForm').validate({
             email: "Please enter a valid email address",
             noSpamEmail: "This email address is not allowed",
         },
-        from_phone: { required: "Please enter your Contact number" },
+        from_phone: {
+            required: "Please enter your Contact number"
+        },
         to_name: {
             required: "Please enter recipient's Full name",
             minlength: "Name must be at least 2 characters",
@@ -382,9 +424,11 @@ $('#giftBlessingForm').validate({
             email: "Please enter a valid email address",
             noSpamEmail: "This email address is not allowed",
         },
-        to_phone: { required: "Please enter recipient's Contact number" },
+        to_phone: {
+            required: "Please enter recipient's Contact number"
+        },
     },
-    submitHandler: function (form) {
+    submitHandler: function(form) {
         if (!formSubmitted) {
             formSubmitted = true;
             const btn = $(form).find('button[type="submit"]');
@@ -395,7 +439,7 @@ $('#giftBlessingForm').validate({
                 url: "{{ route('front.store.gift.blessing') }}",
                 method: "POST",
                 data: $(form).serialize(),
-                success: function (res) {
+                success: function(res) {
                     alert(res.message);
                     $('#giftBlessingModal').modal('hide');
                     form.reset();
@@ -403,12 +447,12 @@ $('#giftBlessingForm').validate({
                         window.open(res.whatsapp_url, '_blank');
                     }
                 },
-                error: function () {
+                error: function() {
                     alert('Something went wrong');
                     formSubmitted = false;
                     btn.prop('disabled', false).text('Send Gift');
                 },
-                complete: function () {
+                complete: function() {
                     formSubmitted = false;
                     btn.prop('disabled', false).text('Send Gift');
                 }

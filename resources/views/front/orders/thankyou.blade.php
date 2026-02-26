@@ -1,0 +1,10 @@
+@include('layouts.frontheader')
+<section class="hero-section_inner">
+    <img class="img-fluid" src="{{asset('public/images/front/atelier-banner.webp')}}" alt="him banner">
+
+    <div class="hero_content_inner">
+        <h2 class="main_head">Than you </h2>
+        <a href="{{ route('front.home') }}" class="com_btn"><span class="text-light">Back to Home</span></a>
+    </div>
+</section>
+@include('layouts.frontfooter')
