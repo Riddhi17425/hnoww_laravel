@@ -192,7 +192,7 @@
                             <p class="mb-0">Curated ensembles designed for leaders who move across roles, regions, and
                                 responsibilities.</p>
                         </div>
-<!-- 
+                        <!-- 
                         <a href="#">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
                                 <path
@@ -208,6 +208,89 @@
     </div>
 </section>
 
+<section class="mt_120 mb_120">
+    <div class="container">
+        <div class="section_header">
+            <p class="sub_head mb-0">
+                <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z"
+                            fill="#B58A46" />
+                    </svg>
+                </span>
+                <span>Collections</span>
+                <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z"
+                            fill="#B58A46" />
+                    </svg>
+                </span>
+            </p>
+            <h2 class="title_60">Frames & Memory Objects</h2>
+            <p> <b>For moments that deserve to be kept visible.</b> Architectural frames designed to hold photographs,
+                certificates, or milestones — without sentimentality.</p>
+            <a href="#" class="com_btn">ENQUIRE ABOUT FRAMES</a>
+        </div>
+        <div class="row gy-4 gy-lg-0">
+            <div class="col-md-4">
+                <div class="desire_box">
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/memory1.webp')}}"
+                        alt="images">
+                    <div class="desire_box_bot_child">
+                        <div>
+                            <h3 class="sub_head">Silver Grid Frames</h3>
+                            <p>Clean architectural lines in polished silver.</p>
+                        </div>
+
+                        <!-- <a href="#">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                <path
+                                    d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
+                                    stroke="#8c8a72" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </a> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="desire_box">
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/memory2.webp')}}"
+                        alt="images">
+                    <div class="desire_box_bot_child">
+                        <div>
+                            <h3 class="sub_head">Malachite & Stone Frames</h3>
+                            <p class="mb-0">Sculptural compositions for leadership offices and private spaces.</p>
+                        </div>
+
+                        <!-- <a href="#">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                <path
+                                    d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
+                                    stroke="#8c8a72" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </a> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="desire_box">
+                    <div class="hospitality_img">
+                        <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/hospitality3.webp')}}"
+                            alt="images">
+                        <div class="hospitality_img_overlay">
+                            <h3 class="title_36">These objects are not decorative.
+                                <p></p>
+                                They are intended to <b>mark moments without diminishing them.</b>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <section class="mt_120 mb_120">
     <div class="container">
