@@ -22,4 +22,9 @@ class Category extends Model
         return $query->whereNull('categories.deleted_at');
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'category_id');
+    }
+
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\{Category, Product};
 use DataTables;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -108,17 +109,21 @@ class CategoryController extends Controller
         $validator = Validator::make($request->all(), [
             'category_name' => 'required|string|max:255',
             'category_type' => 'required',
-            'category_url' => 'required|string|max:255|unique:categories,category_url',
+            'category_url' => ['required', 'string', 'max:255',
+                Rule::unique('categories', 'category_url')
+                    ->where(function ($query) use ($request) {
+                        return $query->where('category_type', $request->category_type);
+                    }),
+            ],
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:255',
-            'banner_image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'banner_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'button_text' => 'required_if:category_type,2|string|max:255',
         ], [
             'category_name.required' => 'Category name is required.',
             'category_name.string' => 'Category name must be a valid string.',
             'category_name.max' => 'Category name cannot exceed 255 characters.',
-
             'category_type.required' => 'Category type is required.',
-
             'category_url.required' => 'Category URL is required.',
             'category_url.string' => 'Category URL must be a valid string.',
             'category_url.max' => 'Category URL cannot exceed 255 characters.',
@@ -132,7 +137,7 @@ class CategoryController extends Controller
             'meta_description.string' => 'Meta description must be a valid string.',
             'meta_description.max' => 'Meta description cannot exceed 255 characters.',
 
-            'banner_image.required' => 'Banner image name is required.',
+            //'banner_image.required' => 'Banner image name is required.',
             'banner_image.image' => 'Banner image must be a valid image.',
             'banner_image.mimes' => 'Banner image must be a file of type: jpg, jpeg, png, webp.',
             'banner_image.max' => 'Banner image size must not exceed 2MB.',
@@ -155,7 +160,8 @@ class CategoryController extends Controller
             'magic_heading_first',
             'magic_heading_second',
             'magic_title',
-            'magic_description'
+            'magic_description',
+            'button_text'
         ]);
 
         if ($request->hasFile('banner_image')) {
@@ -191,11 +197,18 @@ class CategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'category_name' => 'required|string|max:255',
-            'category_type' => 'required',
-            'category_url' => 'required|string|max:255|unique:categories,category_url,' . $id,
+            'category_type' => 'required|in:1,2,3',
+            // 'category_url' => 'required|string|max:255|unique:categories,category_url,' . $id,
+            'category_url' => ['required', 'string', 'max:255',
+                Rule::unique('categories', 'category_url')
+                    ->where(function ($query) use ($request) {
+                        return $query->where('category_type', $request->category_type);
+                    })->ignore($id),
+            ],
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:255',
             'banner_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'button_text' => 'required_if:category_type,2|string|max:255',
         ], [
             'category_name.required' => 'Category name is required.',
             'category_name.string' => 'Category name must be a valid string.',
@@ -239,7 +252,8 @@ class CategoryController extends Controller
             'magic_heading_first',
             'magic_heading_second',
             'magic_title',
-            'magic_description'
+            'magic_description',
+            'button_text'
         ]);
 
         if ($request->hasFile('banner_image')) {

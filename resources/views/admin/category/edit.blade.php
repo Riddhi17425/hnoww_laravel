@@ -102,6 +102,13 @@
                                     </div>
                                 @endif
                             </div>
+                            <div class="col-md-12">
+                                <label class="form-label">Button Text (Use for only Category Products)</label><span class="text-danger">*</span>
+                                <input type="text" name="button_text" class="form-control" value="{{ old('button_text', $category->button_text) }}">
+                                @error('button_text')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
 
                             <hr><h5>The World Section Fields</h5>
                             {{-- THE WORLD SECTION FIELDS --}}

@@ -27,6 +27,7 @@ class CreateCategoriesTable extends Migration
             $table->string('magic_image')->nullable();
             $table->string('magic_description', 500)->nullable();
             $table->tinyInteger('category_type')->default(0)->comment("0 = Basic 1 = Corporate 2 = Wedding");
+            $table->string('button_text', 500)->nullable();
             $table->tinyInteger('is_active')->default(1)->comment("0 = Active 1 = In-active");
             $table->softDeletes();
             $table->timestamps();

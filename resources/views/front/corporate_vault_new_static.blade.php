@@ -6,7 +6,7 @@
     <div class="hero_content_inner">
         <h2 class="main_head">The Corporate Vault</h2>
         <p class="para my-3">Objects designed to remain.</p>
-        <a href="#" class="com_btn bg-white border-0" data-bs-toggle="modal"
+        <a href="#" class="com_btn border-white bg-white" data-bs-toggle="modal"
             data-bs-target="#requestCorporateProposal">Request for CORPORATE CATALOGUE</a>
     </div>
 </section>
@@ -25,115 +25,8 @@
     </div>
 </section>
 
-{{-- DYNAMIC --}}
-@if(isset($categories) && is_countable($categories) && count($categories) > 0)
 
-@foreach($categories as $k => $v)
 <section class="mt_120 mb_120">
-    <div class="container">
-        <div class="section_header">
-            <p class="sub_head mb-0">
-                <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z"
-                            fill="#B58A46" />
-                    </svg>
-                </span>
-                <span>Collections</span>
-                <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z"
-                            fill="#B58A46" />
-                    </svg>
-                </span>
-            </p>
-            <h2 class="title_60">{{ $v->category_name ?? '' }}</h2>
-            <p><b>{!! $v->description ?? '' !!}</b></p>
-                {{-- data-bs-toggle="modal" data-bs-target="#productInquiry" --}}
-            <a href="#" class="com_btn" data-category="{{ $v->id }}"> {{ $v->button_text ?? '' }}</a>
-        </div>
-
-        <div class="row gy-4 gy-lg-0">
-            @if(isset($v->products) && is_countable($v->products) && count($v->products) > 0)
-                @foreach($v->products as $key => $val)
-                @if(($k == 0 || $k == 1) && $key == 3)
-                    @break
-                {{-- @elseif(($k == 2 || $k == 3) && $key == 3)
-                    @break --}}
-                @endif
-                <div class="col-md-4">
-                    <div class="desire_box">
-                        <img class="w-100 mb-2 mb-md-4" src="{{ asset('public/images/admin/product_list/'.$val->list_page_img) }}" alt="images">
-                        <div class="desire_box_bot_child">
-                            <div>
-                                <h3 class="sub_head">{{ $val->product_name ?? '' }}</h3>
-                                <p class="mb-0">{!! $val->short_description ?? '' !!}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @if($k == 2 && $key == 1)
-                 <div class="col-md-4">
-                    <div class="desire_box">
-                        <div class="hospitality_img">
-                            <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/hospitality3.webp')}}"
-                                alt="images">
-                            <div class="hospitality_img_overlay">
-                                <h3 class="title_36">These objects are not decorative.
-                                    <p></p>
-                                    They are intended to <b>mark moments without diminishing them.</b>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endif
-                @if($k == 3 && $key == 1)
-                <div class="col-md-4">
-                    <div class="desire_box">
-                        <div class="hospitality_img">
-                            <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/hospitality3.webp')}}"
-                                alt="images">
-                            <div class="hospitality_img_overlay">
-                                <h3 class="title_36">These pieces respect Gulf traditions of <b>karam, </b> interpreted for
-                                    contemporary spaces.</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endif
-                @endforeach
-            @endif
-            {{-- <div class="col-md-4">
-                <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/desk2.webp')}}" alt="images">
-                    <div class="desire_box_bot_child">
-                        <div>
-                            <h3 class="sub_head">Pen Holders & Organisers</h3>
-                            <p class="mb-0">Weighted metal pieces that introduce order and restraint to the desk.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/desk3.webp')}}" alt="images">
-                    <div class="desire_box_bot_child">
-                        <div>
-                            <h3 class="sub_head">Paperweights & Coasters</h3>
-                            <p class="mb-0">Stone and metal forms that anchor the workspace physically and visually.</p>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-        </div>
-    </div>
-</section>
-@endforeach
-
-@else
-{{-- STATIC --}}
-{{-- <section class="mt_120 mb_120">
     <div class="container">
         <div class="section_header">
             <p class="sub_head mb-0">
@@ -219,9 +112,10 @@
             </div>
         </div>
     </div>
-</section> --}}
+</section>
 
-{{-- <section class="mt_120 mb_120">
+
+<section class="mt_120 mb_120">
     <div class="container">
         <div class="section_header">
             <p class="sub_head mb-0">
@@ -340,7 +234,8 @@
         <div class="row gy-4 gy-lg-0">
             <div class="col-md-4">
                 <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/memory1.webp')}}" alt="images">
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/memory1.webp')}}"
+                        alt="images">
                     <div class="desire_box_bot_child">
                         <div>
                             <h3 class="sub_head">Silver Grid Frames</h3>
@@ -360,7 +255,8 @@
             </div>
             <div class="col-md-4">
                 <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/memory2.webp')}}" alt="images">
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/memory2.webp')}}"
+                        alt="images">
                     <div class="desire_box_bot_child">
                         <div>
                             <h3 class="sub_head">Malachite & Stone Frames</h3>
@@ -396,7 +292,7 @@
     </div>
 </section>
 
-<section class="mt_120 mb_35">
+<section class="mt_120 mb_120">
     <div class="container">
         <div class="section_header">
             <p class="sub_head mb-0">
@@ -476,14 +372,13 @@
             </div>
         </div>
     </div>
-</section> --}}
-@endif
+</section>
 
-<section class="about">
+<section class="about mt_120">
     <div class="container">
         <div class="magic_wrapper">
             <h2 class="magic_head_phone">
-                Containment & Presentation
+                Containment &
             </h2>
             <!-- 3️⃣ Left image (from left) -->
             <div class="text-end magic_wrapper_logo">
@@ -520,9 +415,8 @@
         </div>
     </div>
 </section>
-@if(isset($corporateKits) && count($corporateKits) && count($corporateKits) > 0)
- 
-<section class="mt_35">
+
+<section class="mt_120">
     <div class="container">
         <div class="section_header">
             <p class="sub_head mb-0">
@@ -544,61 +438,33 @@
             <p>Pre-designed ensembles for specific corporate milestones. Ships in one master "Vault" box.</p>
         </div>
 
-        <div class="cor_kits_slider">
-            @foreach($corporateKits as $key => $val)
-                <div class="cor_kts">
-                    <picture>
-                        <source media="(min-width: 768px)" srcset="{{ asset('public/images/front/corpotat-kits.webp') }}">
-                        <img class="img-fluid" src="{{ asset('public/images/front/corporate-kits-phone.webp') }}"
-                            alt="Description" style="width:auto;">
-                    </picture>
-                    <div class="cor_kits_cont">
-                        <div>
-                            <h3 class="title_40">{{ $val->title ?? '' }}</h3>
-                            <p>{!! $val->short_description !!}</p>
-                        </div>
-                        <div class="sub_head my-4">
-                            <p>{!! $val->large_description !!}</p>
-                            {{-- <p class="mb-1">Contains:</p>
-                            <p class="mb-1"> – Card Holder</p>
-                            <p class="mb-1">– Pen Holder</p>
-                            <p>– Organiser</p> --}}
-                        </div>
+        <div class="cor_kts">
 
-                        {{-- <a href="#" class="com_btn border-white" data-bs-toggle="modal"
-                            data-bs-target="#requestCorporateProposal">Request for CORPORATE CATALOGUE</a> --}}
-                        <a href="#" class="com_btn border-white" data-bs-toggle="modal" data-bs-target="#requestCorporateKitProposal">Request for CORPORATE CATALOGUE</a>
-                    </div>
+            <picture>
+                <source media="(min-width: 768px)" srcset="{{ asset('public/images/front/corpotat-kits.webp') }}">
+
+                <img class="img-fluid" src="{{ asset('public/images/front/corporate-kits-phone.webp') }}"
+                    alt="Description" style="width:auto;">
+            </picture>
+            <div class="cor_kits_cont">
+                <div>
+                    <h3 class="title_40">The Executive Desk Suite</h3>
+                    <p>A weighted triad for leadership workspaces.
+                    </p>
                 </div>
-            @endforeach
-            {{-- <div class="cor_kts">
-                <picture>
-                    <source media="(min-width: 768px)" srcset="{{ asset('public/images/front/corpotat-kits.webp') }}">
-                    <img class="img-fluid" src="{{ asset('public/images/front/corporate-kits-phone.webp') }}"
-                        alt="Description" style="width:auto;">
-                </picture>
-                <div class="cor_kits_cont">
-                    <div>
-                        <h3 class="title_40">The Executive Desk Suite</h3>
-                        <p>A weighted triad for leadership workspaces.
-                        </p>
-                    </div>
-                    <div class="sub_head my-4">
-                        <p class="mb-1">Contains:</p>
-                        <p class="mb-1"> – Card Holder</p>
-                        <p class="mb-1">– Pen Holder</p>
-                        <p>– Organiser</p>
-                    </div>
-
-                    <a href="#" class="com_btn border-white" data-bs-toggle="modal"
-                        data-bs-target="#requestCorporateProposal">Request for CORPORATE CATALOGUE</a>
+                <div class="sub_head my-4">
+                    <p class="mb-1">Contains:</p>
+                    <p class="mb-1"> – Card Holder</p>
+                    <p class="mb-1">– Pen Holder</p>
+                    <p>– Organiser</p>
                 </div>
-            </div> --}}
 
+                <a href="#" class="com_btn border-white" data-bs-toggle="modal"
+                    data-bs-target="#requestCorporateProposal">Request for CORPORATE CATALOGUE</a>
+            </div>
         </div>
     </div>
 </section>
-@endif
 
 <section class="mt_120">
     <div class="container">

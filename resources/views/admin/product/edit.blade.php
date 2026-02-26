@@ -206,6 +206,10 @@ const corporateCategories = @json($corporateCategories);
 const weddingCategories = @json($weddingCategories);
 
 $(document).ready(function() {
+    $('form').on('submit', function () {
+        $('#short_description').val($('#short_description').summernote('code'));
+    });
+    
     $('#short_description').summernote({
         placeholder: 'Enter Product Description here...',
         height: 300,

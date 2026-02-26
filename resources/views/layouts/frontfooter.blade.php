@@ -65,12 +65,12 @@
                     <div>
                         <h4 class="ft_head">Services</h4>
                         <ul class="ft_menu">
-                            <li><a href="javascript:void(0);" data-bs-toggle="modal"
+                            {{-- <li><a href="javascript:void(0);" data-bs-toggle="modal"
                                     data-bs-target="#requestWeddingCatalogue">Weddings & Celebrations</a></li>
                             <li><a href="javascript:void(0);" data-bs-toggle="modal"
-                                    data-bs-target="#requestCorporateProposal">Corporate Rituals</a></li>
+                                    data-bs-target="#requestCorporateProposal">Corporate Rituals</a></li> --}}
                             <li><a href="{{route('front.bespoke.commission')}}">Bespoke Commissions</a></li>
-                            <li><a href="{{route('front.wedding.vault')}}">Wedding Vault</a></li>
+                            <li><a href="{{route('front.wedding.vault.inside')}}">Wedding Vault</a></li>
                             <li><a href="{{route('front.corporate.vault')}}">Corporate Vault Inside</a></li>
                             <!--<li><a href="{{ route('front.ceremonials') }}">Ceremonial Objects</a></li>-->
                         </ul>
