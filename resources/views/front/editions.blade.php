@@ -227,8 +227,10 @@
                 <p class="cta_ft_center">Each proposal is <br /> reviewed with care.</p>
             </div>
             <div>
-                <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#bespokeCommission"
-                    class="btn_2">Start a Conversation</a>
+                <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20your%20services"
+                target="_blank" class="btn_2"> Start a Conversation </a>
+                {{-- <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#bespokeCommission"
+                    class="btn_2">Start a Conversation</a> --}}
             </div>
         </div>
     </div>
