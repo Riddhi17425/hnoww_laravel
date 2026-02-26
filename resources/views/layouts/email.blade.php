@@ -1,122 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HNoWW EMAIL</title>
-<style>
-    /* Reset */
-    body, table, td, a {
-        -webkit-text-size-adjust: 100%;
-        -ms-text-size-adjust: 100%;
-    }
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Helvetica', Arial, sans-serif;
-        background-color: #F8F7F3;
-    }
-    table {
-        border-collapse: collapse !important;
-    }
-
-    /* Container */
-    .email-wrapper {
-        width: 100%;
-        padding: 20px 0;
-        background-color: #F8F7F3;
-    }
-    .email-content {
-        max-width: 600px;
-        margin: 0 auto;
-        background-color: #ffffff;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    }
-
-    /* Header */
-    .email-header {
-        background-color: #b58a46;
-        color: #ffffff;
-        text-align: center;
-        padding: 30px 20px;
-    }
-    .email-header h1 {
-        margin: 0;
-        font-size: 28px;
-    }
-
-    /* Body */
-    .email-body {
-        padding: 30px 25px;
-        color: #555555;
-        font-size: 16px;
-        line-height: 1.6;
-    }
-    .email-body p {
-        margin-bottom: 20px;
-    }
-    .email-body .btn {
-        display: inline-block;
-        background-color: #b58a46;
-        color: #ffffff !important;
-        text-decoration: none;
-        padding: 12px 25px;
-        border-radius: 8px;
-        font-weight: bold;
-        transition: background-color 0.3s ease;
-    }
-    .email-body .btn:hover {
-        background-color: #b58a46;
-    }
-
-    /* Footer */
-    .email-footer {
-        text-align: center;
-        font-size: 12px;
-        color: #999999;
-        padding: 20px;
-    }
-
-    /* Responsive */
-    @media screen and (max-width: 620px) {
-        .email-header h1 {
-            font-size: 24px;
-        }
-        .email-body {
-            font-size: 14px;
-            padding: 20px;
-        }
-        .email-body .btn {
-            padding: 10px 20px;
-        }
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HNOWW - Order Summary</title>
 </head>
-<body>
-<table class="email-wrapper" width="100%">
-    <tr>
-        <td>
-            <table class="email-content" width="100%">
-                <!-- Header -->
-                <tr>
-                    <td class="email-header">
-                        <h1>Welcome to HNoWW!</h1>
-                    </td>
-                </tr>
+<body style="margin: 0; padding: 0; background-color: #f4f4f4; font-family: Arial, sans-serif;">
+
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f4f4f4;">
+        <tr>
+            <td align="center" style="padding: 20px 0;">
+                
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" style="background-color: #ffffff; width: 600px; max-width: 600px; border-collapse: collapse; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                    
+                    <tr>
+                        <td align="center">
+                            <img src="http://localhost/hnoww_laravel/public/images/front/corporate-vault-banner.webp" alt="HNOWW The Ritual of Artful Giving" width="600" style="display: block; width: 100%; max-width: 600px; height: auto;">
+                        </td>
+                    </tr>
 
                 @yield('content')
 
                 <!-- Footer -->
-                <tr>
-                    <td class="email-footer">
-                        &copy; {{ date('Y') }} HNoWW. All rights reserved.
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-</table>
+                 <tr>
+                        <td style="background-color: #222222; padding: 30px 20px; text-align: center;">
+                            <p style="margin: 0 0 15px 0; font-family: Arial, sans-serif; font-size: 16px; color: #ffffff;">If you have any urgent questions, feel free to contact us</p>
+                            
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td align="center" style="font-family: Arial, sans-serif; font-size: 15px; color: #ffffff;">
+                                        <span style="display: inline-block; vertical-align: middle;">&#9993; studio@hnoww.com</span>
+                                        <span style="display: inline-block; color: #666666; margin: 0 15px; vertical-align: middle;">|</span>
+                                        <span style="display: inline-block; vertical-align: middle;">&#128222; +971 50 950 927</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="background-color: #ffffff; padding: 20px; text-align: center; border-top: 1px solid #eeeeee;">
+                            <p style="margin: 0; font-family: Arial, sans-serif; font-size: 12px; color: #999999;">All Rights Reserved. &copy;HNOWW 2026. Designed in Dubai.</p>
+                        </td>
+                    </tr>
+
+                </table>
+                </td>
+        </tr>
+    </table>
 </body>
 </html>
