@@ -6,7 +6,7 @@
     <div class="hero_content_inner">
         <h2 class="main_head">The Corporate Vault</h2>
         <p class="para my-3">Objects designed to remain.</p>
-        <a href="#" class="com_btn border-white bg-white" data-bs-toggle="modal"
+        <a href="#" class="com_btn bg-white border-0" data-bs-toggle="modal"
             data-bs-target="#requestCorporateProposal">Request for CORPORATE CATALOGUE</a>
     </div>
 </section>
@@ -340,8 +340,7 @@
         <div class="row gy-4 gy-lg-0">
             <div class="col-md-4">
                 <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/memory1.webp')}}"
-                        alt="images">
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/memory1.webp')}}" alt="images">
                     <div class="desire_box_bot_child">
                         <div>
                             <h3 class="sub_head">Silver Grid Frames</h3>
@@ -361,8 +360,7 @@
             </div>
             <div class="col-md-4">
                 <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/memory2.webp')}}"
-                        alt="images">
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/memory2.webp')}}" alt="images">
                     <div class="desire_box_bot_child">
                         <div>
                             <h3 class="sub_head">Malachite & Stone Frames</h3>
@@ -398,7 +396,7 @@
     </div>
 </section>
 
-<section class="mt_120 mb_120">
+<section class="mt_120 mb_35">
     <div class="container">
         <div class="section_header">
             <p class="sub_head mb-0">
@@ -481,11 +479,11 @@
 </section> --}}
 @endif
 
-<section class="about mt_120">
+<section class="about">
     <div class="container">
         <div class="magic_wrapper">
             <h2 class="magic_head_phone">
-                Containment &
+                Containment & Presentation
             </h2>
             <!-- 3️⃣ Left image (from left) -->
             <div class="text-end magic_wrapper_logo">
@@ -522,9 +520,9 @@
         </div>
     </div>
 </section>
-
 @if(isset($corporateKits) && count($corporateKits) && count($corporateKits) > 0)
-<section class="mt_120">
+ 
+<section class="mt_35">
     <div class="container">
         <div class="section_header">
             <p class="sub_head mb-0">

@@ -76,7 +76,8 @@
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-body">
-                <div class="audio-card">
+                <div class="audio-card position-relative">
+
                     <div class="audio-image">
                         <img id="modalImage" src="" alt="blessing image" loading="lazy" class="img-fluid">
                     </div>
@@ -131,6 +132,9 @@
                             </a>
                         </div>
                     </div>
+
+                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
             </div>
         </div>
