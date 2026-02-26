@@ -523,6 +523,7 @@
     </div>
 </section>
 
+@if(isset($corporateKits) && count($corporateKits) && count($corporateKits) > 0)
 <section class="mt_120">
     <div class="container">
         <div class="section_header">
@@ -546,59 +547,60 @@
         </div>
 
         <div class="cor_kits_slider">
+            @foreach($corporateKits as $key => $val)
+                <div class="cor_kts">
+                    <picture>
+                        <source media="(min-width: 768px)" srcset="{{ asset('public/images/front/corpotat-kits.webp') }}">
+                        <img class="img-fluid" src="{{ asset('public/images/front/corporate-kits-phone.webp') }}"
+                            alt="Description" style="width:auto;">
+                    </picture>
+                    <div class="cor_kits_cont">
+                        <div>
+                            <h3 class="title_40">{{ $val->title ?? '' }}</h3>
+                            <p>{!! $val->short_description !!}</p>
+                        </div>
+                        <div class="sub_head my-4">
+                            <p>{!! $val->large_description !!}</p>
+                            {{-- <p class="mb-1">Contains:</p>
+                            <p class="mb-1"> – Card Holder</p>
+                            <p class="mb-1">– Pen Holder</p>
+                            <p>– Organiser</p> --}}
+                        </div>
 
-        <div class="cor_kts">
-            <picture>
-                <source media="(min-width: 768px)" srcset="{{ asset('public/images/front/corpotat-kits.webp') }}">
-                <img class="img-fluid" src="{{ asset('public/images/front/corporate-kits-phone.webp') }}"
-                    alt="Description" style="width:auto;">
-            </picture>
-            <div class="cor_kits_cont">
-                <div>
-                    <h3 class="title_40">The Executive Desk Suite</h3>
-                    <p>A weighted triad for leadership workspaces.
-                    </p>
+                        {{-- <a href="#" class="com_btn border-white" data-bs-toggle="modal"
+                            data-bs-target="#requestCorporateProposal">Request for CORPORATE CATALOGUE</a> --}}
+                        <a href="#" class="com_btn border-white" data-bs-toggle="modal" data-bs-target="#requestCorporateKitProposal">Request for CORPORATE CATALOGUE</a>
+                    </div>
                 </div>
-                <div class="sub_head my-4">
-                    <p class="mb-1">Contains:</p>
-                    <p class="mb-1"> – Card Holder</p>
-                    <p class="mb-1">– Pen Holder</p>
-                    <p>– Organiser</p>
-                </div>
+            @endforeach
+            {{-- <div class="cor_kts">
+                <picture>
+                    <source media="(min-width: 768px)" srcset="{{ asset('public/images/front/corpotat-kits.webp') }}">
+                    <img class="img-fluid" src="{{ asset('public/images/front/corporate-kits-phone.webp') }}"
+                        alt="Description" style="width:auto;">
+                </picture>
+                <div class="cor_kits_cont">
+                    <div>
+                        <h3 class="title_40">The Executive Desk Suite</h3>
+                        <p>A weighted triad for leadership workspaces.
+                        </p>
+                    </div>
+                    <div class="sub_head my-4">
+                        <p class="mb-1">Contains:</p>
+                        <p class="mb-1"> – Card Holder</p>
+                        <p class="mb-1">– Pen Holder</p>
+                        <p>– Organiser</p>
+                    </div>
 
-                <a href="#" class="com_btn border-white" data-bs-toggle="modal"
-                    data-bs-target="#requestCorporateProposal">Request for CORPORATE CATALOGUE</a>
-            </div>
+                    <a href="#" class="com_btn border-white" data-bs-toggle="modal"
+                        data-bs-target="#requestCorporateProposal">Request for CORPORATE CATALOGUE</a>
+                </div>
+            </div> --}}
+
         </div>
-
-          <div class="cor_kts">
-            <picture>
-                <source media="(min-width: 768px)" srcset="{{ asset('public/images/front/corpotat-kits.webp') }}">
-                <img class="img-fluid" src="{{ asset('public/images/front/corporate-kits-phone.webp') }}"
-                    alt="Description" style="width:auto;">
-            </picture>
-            <div class="cor_kits_cont">
-                <div>
-                    <h3 class="title_40">The Executive Desk Suite</h3>
-                    <p>A weighted triad for leadership workspaces.
-                    </p>
-                </div>
-                <div class="sub_head my-4">
-                    <p class="mb-1">Contains:</p>
-                    <p class="mb-1"> – Card Holder</p>
-                    <p class="mb-1">– Pen Holder</p>
-                    <p>– Organiser</p>
-                </div>
-
-                <a href="#" class="com_btn border-white" data-bs-toggle="modal"
-                    data-bs-target="#requestCorporateProposal">Request for CORPORATE CATALOGUE</a>
-            </div>
-        </div>
-
-          </div>
-        
     </div>
 </section>
+@endif
 
 <section class="mt_120">
     <div class="container">
