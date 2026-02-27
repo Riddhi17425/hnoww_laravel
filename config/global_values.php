@@ -106,22 +106,5 @@ return [
         "AED 50,000+" => "AED 50,000+"
     ],
 
-    // 'desk_objects' => [
-    //     "card_holders" => "Card Holders",
-    //     "pen_holders" => "Pen Holders & Organisers",
-    //     "paperweights" => "Paperweights & Coasters",
-    // ],
-    // 'writing_objects' => [
-    //     "silver_plated_bookmarks" => "Silver-Plated Bookmarks",
-    //     "writing_sets_ledgers" => "Writing Sets & Ledgers",
-    //     "voyager_sets" => "Voyager Sets",
-    // ],
-    // 'frames_objects' => [
-    //     "card_holders" => "Silver Grid Frames",
-    //     "pen_holders" => "Malachite & Stone Frames",
-    // ],
-    // 'ritual_objects' => [
-    //     "card_holders" => "Glassware & Carafes",
-    //     "pen_holders" => "Coasters & Table Objects",
-    // ]
+    
 ];

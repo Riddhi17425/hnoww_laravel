@@ -66,7 +66,7 @@
                             </div>
                             <div class="col-md-12">
                                 <label class="form-label">Category Description</label>
-                                <textarea name="description" class="form-control" rows="4">{{ old('description', $category->description) }}</textarea>
+                                <textarea name="description" id="description" class="form-control" rows="4">{{ old('description', $category->description) }}</textarea>
                                 @error('description')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -167,6 +167,22 @@
 @push('custom_scripts')
 <script>
 $(document).ready(function() {
+    $('#description').summernote({
+        placeholder: 'Enter Product Description here...',
+        height: 200,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['insert', ['link', 'picture', 'hr']],
+            ['view', ['fullscreen', 'codeview']],
+            ['help', ['help']]
+        ]
+    });
+
     // Slug auto-generate
     $('#category_name').on('input', function() {
         var name = $(this).val();

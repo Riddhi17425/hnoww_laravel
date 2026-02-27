@@ -26,7 +26,14 @@ class CategoryController extends Controller
         if (isset($request->category_type) && $request->category_type != '') {
             $query = $query->where('category_type', (int)$request->category_type);
         }       
-        return Datatables::of($query)      
+        return Datatables::of($query)    
+            ->editColumn('description', function ($result) use ($catType){
+                if(isset($result->description)){
+                    return $result->description;
+                }else{
+                   return '-';
+                }  
+            })   
             ->editColumn('category_type', function ($result) use ($catType){
                 if(isset($result->category_type)){
                     return $catType[$result->category_type];
@@ -68,7 +75,7 @@ class CategoryController extends Controller
                 ';
             })    
             //->escapeColumns([])  
-            ->rawColumns(['status', 'action', 'banner_image'])
+            ->rawColumns(['status', 'action', 'banner_image', 'description'])
             ->make(true);
     }
 
