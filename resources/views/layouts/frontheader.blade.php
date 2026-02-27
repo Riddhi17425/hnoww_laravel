@@ -14,7 +14,8 @@ $current_route ===
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('public/images/front/favicon.png') }}">
     <title>{{ $meta_title ?? 'HNOWW' }}</title>
-    <meta name="description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}">
+    <meta name="description"
+        content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}">
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -119,14 +120,26 @@ $current_route ===
         min-height: auto !important;
     }
 
-    /* Change selected tag background */
+
+    .ct_form input {
+        width: 100% !important;
+    }
+
+    .choices__inner {
+        padding: 0px 0 !important;
+    }
+
+    .choices__input {
+            margin-bottom: 0px !important;
+    /* padding: 0px 0 0px 0px !important; */
+}
+
     .choices__list--multiple .choices__item {
         background-color: #c9a96a !important;
         border: none !important;
         color: #fff !important;
     }
 
-    /* Change remove (X) button color */
     .choices__list--multiple .choices__item .choices__button {
         border-left: 1px solid rgba(255, 255, 255, 0.4) !important;
     }
@@ -142,7 +155,7 @@ $current_route ===
     @if(request()->cookie('cookie_consent') === 'accepted')
     <!-- Example Analytics Script -->
     <script>
-        console.log("Analytics loaded because user accepted cookies");
+    console.log("Analytics loaded because user accepted cookies");
     </script>
     @endif
 
@@ -151,7 +164,7 @@ $current_route ===
 <body class="<?= $is_green ? 'theme-green' : 'theme-white' ?>">
 
     <!-- Page Loader -->
-     <div id="page-loader" class="loader-overlay d-none">
+    <div id="page-loader" class="loader-overlay">
         <div class="loader-box">
             <svg width="100%" height="100%" viewBox="-3 -3 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -159,7 +172,7 @@ $current_route ===
                     fill="#D0C2AA" />
             </svg>
         </div>
-    </div> 
+    </div>
 
     <header class="sticky-header <?= $is_green ? 'theme-green' : 'theme-white' ?>">
 
@@ -206,21 +219,22 @@ $current_route ===
                             </svg>
                         </a>
                         <ul class="dropdown-menu">
-                            {{-- <li><a href="{{ route('front.list', ['for-him', 'worlds']) }}">The Architect’s Study</a>
-                            </li>
-                            <li><a href="{{ route('front.list', ['for-her', 'worlds']) }}">The The Desert Rose</a></li>
-                            <li><a href="{{ route('front.list', ['for-home', 'worlds']) }}">The Modern Majlis</a></li> --}}
-                            <li><a href="#">The Ritual Table</a></li>
-                            <li><a href="#">The Table As Landscape</a></li>
-                        </ul>
+                            {{-- <li><a href="{{ route('front.list', ['for-him', 'worlds']) }}">The Architect’s
+                            Study</a>
                     </li>
-                    <li>
-                        <a href="{{ route('front.atelier') }}" data-text="the atelier">
-                            <span>the atelier</span>
-                        </a>
-                    </li>
+                    <li><a href="{{ route('front.list', ['for-her', 'worlds']) }}">The The Desert Rose</a></li>
+                    <li><a href="{{ route('front.list', ['for-home', 'worlds']) }}">The Modern Majlis</a></li> --}}
+                    <li><a href="#">The Ritual Table</a></li>
+                    <li><a href="#">The Table As Landscape</a></li>
+                </ul>
+                </li>
+                <li>
+                    <a href="{{ route('front.atelier') }}" data-text="the atelier">
+                        <span>the atelier</span>
+                    </a>
+                </li>
 
-                    <!-- @auth
+                <!-- @auth
                     <li class="has-dropdown">
                         <a href="#" data-text="My Account">
                             <span>My Account</span>
@@ -827,50 +841,48 @@ $current_route ===
 
 
 
-    document.addEventListener("DOMContentLoaded", function () {
-    const navLinks = document.querySelectorAll('.mega-menu .category-list li a'); 
-    // ↑ Replace selector with your actual category link selector in the header dropdown
+    document.addEventListener("DOMContentLoaded", function() {
+        const navLinks = document.querySelectorAll('.mega-menu .category-list li a');
+        // ↑ Replace selector with your actual category link selector in the header dropdown
 
-    function resetColors() {
-        navLinks.forEach((link, index) => {
-            if (index === 0) {
-                link.style.color = 'red'; // First stays red by default
-            } else {
-                link.style.color = ''; // Others revert to default (black via CSS)
-            }
-        });
-    }
+        function resetColors() {
+            navLinks.forEach((link, index) => {
+                if (index === 0) {
+                    link.style.color = 'red'; // First stays red by default
+                } else {
+                    link.style.color = ''; // Others revert to default (black via CSS)
+                }
+            });
+        }
 
-    navLinks.forEach((link) => {
-        link.addEventListener('mouseenter', function () {
-            // Remove red from all
-            navLinks.forEach(l => l.style.color = '');
-            // Set hovered to red
-            this.style.color = 'red';
+        navLinks.forEach((link) => {
+            link.addEventListener('mouseenter', function() {
+                // Remove red from all
+                navLinks.forEach(l => l.style.color = '');
+                // Set hovered to red
+                this.style.color = 'red';
+            });
+
+            link.addEventListener('mouseleave', function() {
+                // When mouse leaves a link, check if any sibling is hovered
+                // If not, reset to default (first = red)
+                setTimeout(() => {
+                    const anyHovered = [...navLinks].some(l => l.matches(':hover'));
+                    if (!anyHovered) resetColors();
+                }, 50);
+            });
         });
 
-        link.addEventListener('mouseleave', function () {
-            // When mouse leaves a link, check if any sibling is hovered
-            // If not, reset to default (first = red)
-            setTimeout(() => {
-                const anyHovered = [...navLinks].some(l => l.matches(':hover'));
-                if (!anyHovered) resetColors();
-            }, 50);
-        });
+        // When mega menu closes/opens, reset to first = red
+        const productsMenuTrigger = document.querySelector('a[href*="Products"], .nav-item.has-dropdown');
+        // ↑ Replace with your actual Products nav trigger selector
+
+        if (productsMenuTrigger) {
+            productsMenuTrigger.addEventListener('mouseenter', resetColors);
+        }
     });
-
-    // When mega menu closes/opens, reset to first = red
-    const productsMenuTrigger = document.querySelector('a[href*="Products"], .nav-item.has-dropdown'); 
-    // ↑ Replace with your actual Products nav trigger selector
-
-    if (productsMenuTrigger) {
-        productsMenuTrigger.addEventListener('mouseenter', resetColors);
-    }
-});
     </script>
 
     <!-- Load Google Translate -->
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
     </script>
-
-    

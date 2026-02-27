@@ -62,7 +62,7 @@ Route::name('front.')->group(function () {
 	Route::get('/privacy', [FrontController::class, 'getprivacy'])->name('privacy');
 
     Route::get('/corporate-vault/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
-	Route::get('/get-products-by-category/{id}', [FrontController::class, 'getProductsByCategory'])->name('get.products.by.category');
+	Route::get('/get-products-by-category', [FrontController::class, 'getProductsByCategory'])->name('get.products.by.category');
     Route::get('/wedding-vault', [FrontController::class, 'getWeddingVault'])->name('wedding.vault');
 	Route::post('/wedding-vault/send-email', [FrontController::class, 'sendUnlockWeddingEmail'])->name('wedding-vault.send-email');
 	Route::post('/wedding-vault/verify-otp', [FrontController::class, 'verifyWeddingVaultOtp'])->name('wedding-vault.verify-otp');
