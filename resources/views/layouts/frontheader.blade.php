@@ -108,44 +108,86 @@ $current_route ===
 
     /* MULTI SELECT DROPDOWN */
     /* Remove outer box */
-    .choices {
-        margin-bottom: 0;
-    }
-
-    .choices__inner {
-        background: transparent !important;
+    /* 1. Main Container - Yahan hum sirf structure set kar rahe hain, border hata di hai */
+    .choices[data-type*="select-multiple"] .choices__inner {
+        display: flex !important;
+        flex-direction: column !important;
+        /* Elements ko upar-niche set karne ke liye */
+        background-color: transparent !important;
         border: none !important;
+        /* MAIN FIX: Bahar wali line hata di */
         border-radius: 0 !important;
-        padding: 6px 0 !important;
+        padding: 0 !important;
         min-height: auto !important;
+        box-shadow: none !important;
     }
 
-
-    .ct_form input {
-        width: 100% !important;
-    }
-
-    .choices__inner {
-        padding: 0px 0 !important;
-    }
-
-    .choices__input {
-            margin-bottom: 0px !important;
-    /* padding: 0px 0 0px 0px !important; */
-}
-
-    .choices__list--multiple .choices__item {
-        background-color: #c9a96a !important;
+    /* 2. Placeholder Text & Line - Line ab sirf is text ke niche aayegi */
+    .choices__input.choices__input--cloned {
+        order: 1 !important;
+        /* Text ko sabse upar rakhna */
         border: none !important;
-        color: #fff !important;
+        border-bottom: 1px solid #d4c5ab !important;
+        /* MAIN FIX: Line yahan lagayi hai */
+        width: 100% !important;
+        min-width: 100% !important;
+        background: transparent !important;
+        color: #6c757d !important;
+        font-size: 16px !important;
+        padding: 0 25px 8px 0 !important;
+        /* Niche aur right me space */
+
+        /* Arrow Icon (Size thik kar diya hai) */
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+        background-repeat: no-repeat !important;
+        background-position: right center !important;
+        background-size: 16px !important;
+        /* Arrow ko chota rakha hai */
     }
 
-    .choices__list--multiple .choices__item .choices__button {
-        border-left: 1px solid rgba(255, 255, 255, 0.4) !important;
+    /* 3. Focus State - Click karne par line dark blue ho jayegi */
+    .choices.is-focused .choices__input--cloned {
+        border-bottom: 1px solid #0a1f44 !important;
     }
 
-    .choices__list--multiple .choices__item .choices__button:hover {
-        background-color: rgba(0, 0, 0, 0.1) !important;
+    /* 4. Selected Items Container (Buttons ko line ke niche lane ke liye) */
+    .choices__list--multiple {
+        order: 2 !important;
+        /* MAIN FIX: Buttons ko line ke niche bhej diya */
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+        padding-top: 10px !important;
+        /* Line aur buttons ke beech ka gap */
+        border: bottom 1px solid #d4c5ab !important;
+        /* Optional: Line ko thoda aur highlight karne ke liye */
+    }
+
+    /* 5. Individual Buttons (Tags) ka design */
+    .choices__inner .choices__item--selectable {
+        background-color: #f8f6f0 !important;
+        border: 1px solid #d4c5ab !important;
+        color: #0a1f44 !important;
+        border-radius: 4px !important;
+        padding: 4px 8px !important;
+        margin: 0 !important;
+        font-size: 14px !important;
+    }
+
+    /* 6. Dropdown List jo open hoti hai */
+    .choices__list--dropdown {
+        border: 1px solid #d4c5ab !important;
+        border-radius: 0 0 8px 8px !important;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05) !important;
+        background-color: #ffffff !important;
+        margin-top: 0 !important;
+        z-index: 99 !important;
+    }
+
+    /* 7. Dropdown me Hover karne par Blue Highlight */
+    .choices__list--dropdown .choices__item--selectable.is-highlighted {
+        background-color: #1a73e8 !important;
+        color: #ffffff !important;
     }
     </style>
 

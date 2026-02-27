@@ -38,6 +38,7 @@
 
 .ct_form .row {
     --bs-gutter-x: 60px;
+    align-items: center;
 }
 
 .ct_form input {
