@@ -61,8 +61,8 @@ Route::name('front.')->group(function () {
 	Route::get('/bespoke-commission', [FrontController::class, 'getBespokeCommission'])->name('bespoke.commission');
 	Route::get('/privacy', [FrontController::class, 'getprivacy'])->name('privacy');
 
-	//NOT VISIBLE DIRECTLY ON SITE IT VISIBLE TO ONLY VIP CLIENTS
     Route::get('/corporate-vault/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
+	Route::get('/get-products-by-category/{id}', [FrontController::class, 'getProductsByCategory'])->name('get.products.by.category');
     Route::get('/wedding-vault', [FrontController::class, 'getWeddingVault'])->name('wedding.vault');
 	Route::post('/wedding-vault/send-email', [FrontController::class, 'sendUnlockWeddingEmail'])->name('wedding-vault.send-email');
 	Route::post('/wedding-vault/verify-otp', [FrontController::class, 'verifyWeddingVaultOtp'])->name('wedding-vault.verify-otp');
@@ -72,7 +72,6 @@ Route::name('front.')->group(function () {
 	// NOT MADE DYNAMIC - START
 	Route::get('/rituals', [FrontController::class, 'getRituals'])->name('rituals'); 
 	Route::get('/bespoke-wedding-hampers', [FrontController::class, 'bespokeWeddingHampers'])->name('bespoke.wedding.hampers');
-
 	Route::get('/everyday-sacred', [FrontController::class, 'getEverydaySacred'])->name('everyday-sacred'); 
 	Route::get('/memory-shelf', [FrontController::class, 'getMemoryShelf'])->name('memory-shelf'); 
 	Route::get('/modern-majilis', [FrontController::class, 'getModernMajilis'])->name('modern-majilis'); 
