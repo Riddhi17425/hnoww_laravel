@@ -1,4 +1,7 @@
 @include('layouts.frontheader')
+
+
+
 <!-- hero section -->
 <section class="hero-section_inner">
     <img class="img-fluid" src="{{asset('public/images/front/corporate-vault-banner.webp')}}" alt="him banner">
@@ -49,84 +52,85 @@
             </p>
             <h2 class="title_60">{{ $v->category_name ?? '' }}</h2>
             <p><b>{!! $v->description ?? '' !!}</b></p>
-                {{-- data-bs-toggle="modal" data-bs-target="#productInquiry" --}}
+            {{-- data-bs-toggle="modal" data-bs-target="#productInquiry" --}}
             <a href="#" class="com_btn" data-category="{{ $v->id }}"> {{ $v->button_text ?? '' }}</a>
         </div>
 
         <div class="row gy-4 gy-lg-0">
             @if(isset($v->products) && is_countable($v->products) && count($v->products) > 0)
-                @foreach($v->products as $key => $val)
-                @if(($k == 0 || $k == 1) && $key == 3)
-                    @break
-                {{-- @elseif(($k == 2 || $k == 3) && $key == 3)
+            @foreach($v->products as $key => $val)
+            @if(($k == 0 || $k == 1) && $key == 3)
+            @break
+            {{-- @elseif(($k == 2 || $k == 3) && $key == 3)
                     @break --}}
-                @endif
-                <div class="col-md-4">
-                    <div class="desire_box">
-                        <img class="w-100 mb-2 mb-md-4" src="{{ asset('public/images/admin/product_list/'.$val->list_page_img) }}" alt="images">
-                        <div class="desire_box_bot_child">
-                            <div>
-                                <h3 class="sub_head">{{ $val->product_name ?? '' }}</h3>
-                                <p class="mb-0">{!! $val->short_description ?? '' !!}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @if($k == 2 && $key == 1)
-                 <div class="col-md-4">
-                    <div class="desire_box">
-                        <div class="hospitality_img">
-                            <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/hospitality3.webp')}}"
-                                alt="images">
-                            <div class="hospitality_img_overlay">
-                                <h3 class="title_36">These objects are not decorative.
-                                    <p></p>
-                                    They are intended to <b>mark moments without diminishing them.</b>
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endif
-                @if($k == 3 && $key == 1)
-                <div class="col-md-4">
-                    <div class="desire_box">
-                        <div class="hospitality_img">
-                            <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/hospitality3.webp')}}"
-                                alt="images">
-                            <div class="hospitality_img_overlay">
-                                <h3 class="title_36">These pieces respect Gulf traditions of <b>karam, </b> interpreted for
-                                    contemporary spaces.</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endif
-                @endforeach
             @endif
-            {{-- <div class="col-md-4">
+            <div class="col-md-4">
                 <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/desk2.webp')}}" alt="images">
+                    <img class="w-100 mb-2 mb-md-4"
+                        src="{{ asset('public/images/admin/product_list/'.$val->list_page_img) }}" alt="images">
                     <div class="desire_box_bot_child">
                         <div>
-                            <h3 class="sub_head">Pen Holders & Organisers</h3>
-                            <p class="mb-0">Weighted metal pieces that introduce order and restraint to the desk.</p>
+                            <h3 class="sub_head">{{ $val->product_name ?? '' }}</h3>
+                            <p class="mb-0">{!! $val->short_description ?? '' !!}</p>
                         </div>
                     </div>
                 </div>
             </div>
+            @if($k == 2 && $key == 1)
             <div class="col-md-4">
                 <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/desk3.webp')}}" alt="images">
-                    <div class="desire_box_bot_child">
-                        <div>
-                            <h3 class="sub_head">Paperweights & Coasters</h3>
-                            <p class="mb-0">Stone and metal forms that anchor the workspace physically and visually.</p>
+                    <div class="hospitality_img">
+                        <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/hospitality3.webp')}}"
+                            alt="images">
+                        <div class="hospitality_img_overlay">
+                            <h3 class="title_36">These objects are not decorative.
+                                <p></p>
+                                They are intended to <b>mark moments without diminishing them.</b>
+                            </h3>
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
+            @endif
+            @if($k == 3 && $key == 1)
+            <div class="col-md-4">
+                <div class="desire_box">
+                    <div class="hospitality_img">
+                        <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/hospitality3.webp')}}"
+                            alt="images">
+                        <div class="hospitality_img_overlay">
+                            <h3 class="title_36">These pieces respect Gulf traditions of <b>karam, </b> interpreted for
+                                contemporary spaces.</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+            @endforeach
+            @endif
+            {{-- <div class="col-md-4">
+                <div class="desire_box">
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/desk2.webp')}}" alt="images">
+            <div class="desire_box_bot_child">
+                <div>
+                    <h3 class="sub_head">Pen Holders & Organisers</h3>
+                    <p class="mb-0">Weighted metal pieces that introduce order and restraint to the desk.</p>
+                </div>
+            </div>
         </div>
+    </div>
+    <div class="col-md-4">
+        <div class="desire_box">
+            <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/desk3.webp')}}" alt="images">
+            <div class="desire_box_bot_child">
+                <div>
+                    <h3 class="sub_head">Paperweights & Coasters</h3>
+                    <p class="mb-0">Stone and metal forms that anchor the workspace physically and visually.</p>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+    </div>
     </div>
 </section>
 @endforeach
@@ -160,13 +164,13 @@
             <div class="col-md-4">
                 <div class="desire_box">
                     <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/desk1.webp')}}" alt="images">
-                    <div class="desire_box_bot_child">
-                        <div>
-                            <h3 class="sub_head">Card Holders</h3>
-                            <p>Silver and stone forms designed to hold presence without excess.</p>
-                        </div>
+<div class="desire_box_bot_child">
+    <div>
+        <h3 class="sub_head">Card Holders</h3>
+        <p>Silver and stone forms designed to hold presence without excess.</p>
+    </div>
 
-                        <!-- <a href="#">
+    <!-- <a href="#">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
                                 <path
                                     d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
@@ -174,19 +178,19 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </a> -->
-                    </div>
-                </div>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+    <div class="desire_box">
+        <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/desk2.webp')}}" alt="images">
+        <div class="desire_box_bot_child">
+            <div>
+                <h3 class="sub_head">Pen Holders & Organisers</h3>
+                <p class="mb-0">Weighted metal pieces that introduce order and restraint to the desk.</p>
             </div>
-            <div class="col-md-4">
-                <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/desk2.webp')}}" alt="images">
-                    <div class="desire_box_bot_child">
-                        <div>
-                            <h3 class="sub_head">Pen Holders & Organisers</h3>
-                            <p class="mb-0">Weighted metal pieces that introduce order and restraint to the desk.</p>
-                        </div>
 
-                        <!-- <a href="#">
+            <!-- <a href="#">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
                                 <path
                                     d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
@@ -194,31 +198,31 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </a> -->
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/desk3.webp')}}" alt="images">
-                    <div class="desire_box_bot_child">
-                        <div>
-                            <h3 class="sub_head">Paperweights & Coasters</h3>
-                            <p class="mb-0">Stone and metal forms that anchor the workspace physically and visually.</p>
-                        </div>
-
-                        <!-- <a href="#">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                                <path
-                                    d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
-                                    stroke="#8c8a72" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </a> -->
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
+</div>
+<div class="col-md-4">
+    <div class="desire_box">
+        <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/desk3.webp')}}" alt="images">
+        <div class="desire_box_bot_child">
+            <div>
+                <h3 class="sub_head">Paperweights & Coasters</h3>
+                <p class="mb-0">Stone and metal forms that anchor the workspace physically and visually.</p>
+            </div>
+
+            <!-- <a href="#">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                <path
+                                    d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
+                                    stroke="#8c8a72" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </a> -->
+        </div>
+    </div>
+</div>
+</div>
+</div>
 </section> --}}
 
 {{-- <section class="mt_120 mb_120">
@@ -248,14 +252,14 @@
             <div class="col-md-4">
                 <div class="desire_box">
                     <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/images-here.webp')}}"
-                        alt="images">
-                    <div class="desire_box_bot_child">
-                        <div>
-                            <h3 class="sub_head">Silver-Plated Bookmarks</h3>
-                            <p>Given as markers of trust and continuity.</p>
-                        </div>
+alt="images">
+<div class="desire_box_bot_child">
+    <div>
+        <h3 class="sub_head">Silver-Plated Bookmarks</h3>
+        <p>Given as markers of trust and continuity.</p>
+    </div>
 
-                        <!-- <a href="#">
+    <!-- <a href="#">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
                                 <path
                                     d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
@@ -263,21 +267,20 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </a> -->
-                    </div>
-                </div>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+    <div class="desire_box">
+        <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/images-here.webp')}}" alt="images">
+        <div class="desire_box_bot_child">
+            <div>
+                <h3 class="sub_head">Writing Sets & Ledgers</h3>
+                <p class="mb-0">Journals paired with metal accents, selected for longevity rather than
+                    trend.</p>
             </div>
-            <div class="col-md-4">
-                <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/images-here.webp')}}"
-                        alt="images">
-                    <div class="desire_box_bot_child">
-                        <div>
-                            <h3 class="sub_head">Writing Sets & Ledgers</h3>
-                            <p class="mb-0">Journals paired with metal accents, selected for longevity rather than
-                                trend.</p>
-                        </div>
 
-                        <!-- <a href="#">
+            <!-- <a href="#">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
                                 <path
                                     d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
@@ -285,20 +288,19 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </a> -->
-                    </div>
-                </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="desire_box">
+        <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/images-here.webp')}}" alt="images">
+        <div class="desire_box_bot_child">
+            <div>
+                <h3 class="sub_head">Voyager Sets</h3>
+                <p class="mb-0">Curated ensembles designed for leaders who move across roles, regions, and
+                    responsibilities.</p>
             </div>
-            <div class="col-md-4">
-                <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/images-here.webp')}}"
-                        alt="images">
-                    <div class="desire_box_bot_child">
-                        <div>
-                            <h3 class="sub_head">Voyager Sets</h3>
-                            <p class="mb-0">Curated ensembles designed for leaders who move across roles, regions, and
-                                responsibilities.</p>
-                        </div>
-                        <!-- 
+            <!-- 
                         <a href="#">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
                                 <path
@@ -307,11 +309,11 @@
                                     stroke-linejoin="round" />
                             </svg>
                         </a> -->
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
+</div>
+</div>
+</div>
 </section>
 
 <section class="mt_120 mb_120">
@@ -335,7 +337,8 @@
             <h2 class="title_60">Frames & Memory Objects</h2>
             <p> <b>For moments that deserve to be kept visible.</b> Architectural frames designed to hold photographs,
                 certificates, or milestones — without sentimentality.</p>
-            <a href="#" class="com_btn" data-bs-toggle="modal" data-bs-target="#productInquiry" data-product="frames_objects"> ENQUIRE ABOUT FRAMES</a>
+            <a href="#" class="com_btn" data-bs-toggle="modal" data-bs-target="#productInquiry"
+                data-product="frames_objects"> ENQUIRE ABOUT FRAMES</a>
         </div>
         <div class="row gy-4 gy-lg-0">
             <div class="col-md-4">
@@ -417,7 +420,8 @@
             <h2 class="title_60">Ritual & Hospitality Objects</h2>
             <p><b>For welcome, respect, and shared presence.</b> Objects designed for hosting — interpreted with modern
                 restraint.</p>
-            <a href="#" class="com_btn" data-bs-toggle="modal" data-bs-target="#productInquiry" data-product="ritual_objects"> ENQUIRE ABOUT RITUAL OBJECTS</a>
+            <a href="#" class="com_btn" data-bs-toggle="modal" data-bs-target="#productInquiry"
+                data-product="ritual_objects"> ENQUIRE ABOUT RITUAL OBJECTS</a>
         </div>
         <div class="row gy-4 gy-lg-0">
             <div class="col-md-4">
@@ -521,7 +525,7 @@
     </div>
 </section>
 @if(isset($corporateKits) && count($corporateKits) && count($corporateKits) > 0)
- 
+
 <section class="mt_35">
     <div class="container">
         <div class="section_header">
@@ -546,32 +550,7 @@
 
         <div class="cor_kits_slider">
             @foreach($corporateKits as $key => $val)
-                <div class="cor_kts">
-                    <picture>
-                        <source media="(min-width: 768px)" srcset="{{ asset('public/images/front/corpotat-kits.webp') }}">
-                        <img class="img-fluid" src="{{ asset('public/images/front/corporate-kits-phone.webp') }}"
-                            alt="Description" style="width:auto;">
-                    </picture>
-                    <div class="cor_kits_cont">
-                        <div>
-                            <h3 class="title_40">{{ $val->title ?? '' }}</h3>
-                            <p>{!! $val->short_description !!}</p>
-                        </div>
-                        <div class="sub_head my-4">
-                            <p>{!! $val->large_description !!}</p>
-                            {{-- <p class="mb-1">Contains:</p>
-                            <p class="mb-1"> – Card Holder</p>
-                            <p class="mb-1">– Pen Holder</p>
-                            <p>– Organiser</p> --}}
-                        </div>
-
-                        {{-- <a href="#" class="com_btn border-white" data-bs-toggle="modal"
-                            data-bs-target="#requestCorporateProposal">Request for CORPORATE CATALOGUE</a> --}}
-                        <a href="#" class="com_btn border-white" data-bs-toggle="modal" data-bs-target="#requestCorporateKitProposal">Request for CORPORATE CATALOGUE</a>
-                    </div>
-                </div>
-            @endforeach
-            {{-- <div class="cor_kts">
+            <div class="cor_kts">
                 <picture>
                     <source media="(min-width: 768px)" srcset="{{ asset('public/images/front/corpotat-kits.webp') }}">
                     <img class="img-fluid" src="{{ asset('public/images/front/corporate-kits-phone.webp') }}"
@@ -579,23 +558,49 @@
                 </picture>
                 <div class="cor_kits_cont">
                     <div>
-                        <h3 class="title_40">The Executive Desk Suite</h3>
-                        <p>A weighted triad for leadership workspaces.
-                        </p>
+                        <h3 class="title_40">{{ $val->title ?? '' }}</h3>
+                        <p>{!! $val->short_description !!}</p>
                     </div>
                     <div class="sub_head my-4">
-                        <p class="mb-1">Contains:</p>
-                        <p class="mb-1"> – Card Holder</p>
-                        <p class="mb-1">– Pen Holder</p>
-                        <p>– Organiser</p>
+                        <p>{!! $val->large_description !!}</p>
+                        {{-- <p class="mb-1">Contains:</p>
+                            <p class="mb-1"> – Card Holder</p>
+                            <p class="mb-1">– Pen Holder</p>
+                            <p>– Organiser</p> --}}
                     </div>
 
+                    {{-- <a href="#" class="com_btn border-white" data-bs-toggle="modal"
+                            data-bs-target="#requestCorporateProposal">Request for CORPORATE CATALOGUE</a> --}}
                     <a href="#" class="com_btn border-white" data-bs-toggle="modal"
-                        data-bs-target="#requestCorporateProposal">Request for CORPORATE CATALOGUE</a>
+                        data-bs-target="#requestCorporateKitProposal">Request for CORPORATE CATALOGUE</a>
                 </div>
-            </div> --}}
+            </div>
+            @endforeach
+            {{-- <div class="cor_kts">
+                <picture>
+                    <source media="(min-width: 768px)" srcset="{{ asset('public/images/front/corpotat-kits.webp') }}">
+            <img class="img-fluid" src="{{ asset('public/images/front/corporate-kits-phone.webp') }}" alt="Description"
+                style="width:auto;">
+            </picture>
+            <div class="cor_kits_cont">
+                <div>
+                    <h3 class="title_40">The Executive Desk Suite</h3>
+                    <p>A weighted triad for leadership workspaces.
+                    </p>
+                </div>
+                <div class="sub_head my-4">
+                    <p class="mb-1">Contains:</p>
+                    <p class="mb-1"> – Card Holder</p>
+                    <p class="mb-1">– Pen Holder</p>
+                    <p>– Organiser</p>
+                </div>
 
-        </div>
+                <a href="#" class="com_btn border-white" data-bs-toggle="modal"
+                    data-bs-target="#requestCorporateProposal">Request for CORPORATE CATALOGUE</a>
+            </div>
+        </div> --}}
+
+    </div>
     </div>
 </section>
 @endif
@@ -735,13 +740,14 @@
     data-bs-keyboard="false" tabindex="-1" aria-labelledby="requestCorporateKitProposalLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen modal-dialog-centered">
         <div class="modal-content">
-            
-                <div class="modal-body">
-                    <div class="container">
-                <div class="text-center my-4">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                    <form method="POST" action="{{ route('front.store.corporate.kit.request') }}" id="requestCorporateKitProposalForm" class="ct_form">
+
+            <div class="modal-body">
+                <div class="container">
+                    <div class="text-center my-4">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="POST" action="{{ route('front.store.corporate.kit.request') }}"
+                        id="requestCorporateKitProposalForm" class="ct_form">
                         @csrf
                         <div class="row">
                             <!-- Full Name -->
@@ -763,7 +769,8 @@
                                     <input type="text" name="ck_company_name"
                                         placeholder="Enter your Company Organization Name" id="ck_company_name"
                                         value="{{ old('ck_company_name') }}">
-                                    @error('ck_company_name') <small class="text-danger">{{ $message }}</small> @enderror
+                                    @error('ck_company_name') <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -864,13 +871,13 @@
                             <div class="col-12">
                                 <div class="ct_input">
                                     <label class="sub_head">Message / Notes</label>
-                                    <textarea name="ck_message" placeholder="Enter Message"
-                                        id="ck_message">{{ old('ck_message') }}</textarea>
+                                    <textarea name="ck_message" placeholder="Enter Message" id="ck_message"
+                                        rows="1">{{ old('ck_message') }}</textarea>
                                 </div>
                             </div>
 
                             <div class="col-12 text-center">
-                                <button type="submit" class="com_btn">REQUEST CORPORATE QUOTE</button>
+                                <button type="submit" class="com_btn bg-transparent">REQUEST CORPORATE QUOTE</button>
                             </div>
 
                         </div>
@@ -883,116 +890,116 @@
 
 @push('script')
 <script>
-    $(document).ready(function() {
-        var element = $('#ck_product_of_interest')[0];  // get raw DOM element from jQuery object
-        var choices = new Choices(element, {
-            removeItemButton: true,  // shows an "x" to deselect each selected option
-            placeholder: true,
-            placeholderValue: 'Select products',
-            searchEnabled: true,
-        });
-
-        $("#requestCorporateKitProposalForm").validate({
-            ignore: [],
-            rules: {
-                ck_full_name: {
-                    required: true,
-                    minlength: 2,
-                    maxlength: 50,
-                    lettersonly: true
-                },
-                ck_company_name: {
-                    required: true
-                },
-                ck_phone: {
-                    required: true,
-                    number: true,
-                    validPhone: true
-                },
-                ck_email: {
-                    required: true,
-                    email: true,
-                    noSpamEmail: true,
-                    uniqueEmail: "corporate_kit_requests"
-                },
-                'ck_product_of_interest[]': {
-                    required: true
-                },
-                ck_quantity_range: {
-                    required: true
-                },
-                ck_delivery_date: {
-                    required: true,
-                    date: true,
-                    minDate: true
-                },
-                ck_message: {
-                    maxlength: 500,
-                }
-            },
-            messages: {
-                ck_full_name: {
-                    required: "Please enter your full name",
-                    minlength: "Full name must be at least 2 characters",
-                    maxlength: "Full name cannot exceed 50 characters",
-                    lettersonly: "Full name can only contain letters and spaces"
-                },
-                ck_company_name: {
-                    required: "Please enter your company or organization name"
-                },
-                ck_phone: {
-                    required: "Please enter your phone number",
-                    number: "Phone number must contain only digits",
-                    validPhone: "Enter a valid phone number"
-                },
-                ck_email: {
-                    required: "Please enter your email address",
-                    email: "Please enter a valid email address",
-                    noSpamEmail: "This email address is not allowed",
-                    uniqueEmail: "This email is already used"
-                },
-                'ck_product_of_interest[]': {
-                    required: "Please select at least one product of interest"
-                },
-                ck_quantity_range: {
-                    required: "Please select a quantity range"
-                },
-                ck_delivery_date: {
-                    required: "Please select a delivery date",
-                    date: "Enter a valid date",
-                    minDate: "Delivery date must be after today"
-                },
-                ck_message: {
-                    maxlength: "Message cannot exceed 50 characters",
-                }
-            },
-            errorElement: 'div',
-            errorPlacement: function(error, element) {
-                if (element.attr('name') === 'product_of_interest[]') {
-                    $('#product_kit_error').append(error);
-                } else {
-                    error.insertAfter(element);
-                }
-            },
-            highlight: function(element) {
-                $(element).addClass('is-invalid').removeClass('is-valid');
-            },
-            unhighlight: function(element) {
-                $(element).addClass('is-valid').removeClass('is-invalid');
-            },
-            submitHandler: function(form) {
-                if (!cFormSubmitted) {
-                    cFormSubmitted = true;
-                    const btn = $(form).find('button[type="submit"]');
-                    if (btn.length) {
-                        btn.prop('disabled', true).text('Submitting...');
-                    }
-                    form.submit();
-                }
-            }
-        });
-
+$(document).ready(function() {
+    var element = $('#ck_product_of_interest')[0]; // get raw DOM element from jQuery object
+    var choices = new Choices(element, {
+        removeItemButton: true, // shows an "x" to deselect each selected option
+        placeholder: true,
+        placeholderValue: 'Select products',
+        searchEnabled: true,
     });
+
+    $("#requestCorporateKitProposalForm").validate({
+        ignore: [],
+        rules: {
+            ck_full_name: {
+                required: true,
+                minlength: 2,
+                maxlength: 50,
+                lettersonly: true
+            },
+            ck_company_name: {
+                required: true
+            },
+            ck_phone: {
+                required: true,
+                number: true,
+                validPhone: true
+            },
+            ck_email: {
+                required: true,
+                email: true,
+                noSpamEmail: true,
+                uniqueEmail: "corporate_kit_requests"
+            },
+            'ck_product_of_interest[]': {
+                required: true
+            },
+            ck_quantity_range: {
+                required: true
+            },
+            ck_delivery_date: {
+                required: true,
+                date: true,
+                minDate: true
+            },
+            ck_message: {
+                maxlength: 500,
+            }
+        },
+        messages: {
+            ck_full_name: {
+                required: "Please enter your full name",
+                minlength: "Full name must be at least 2 characters",
+                maxlength: "Full name cannot exceed 50 characters",
+                lettersonly: "Full name can only contain letters and spaces"
+            },
+            ck_company_name: {
+                required: "Please enter your company or organization name"
+            },
+            ck_phone: {
+                required: "Please enter your phone number",
+                number: "Phone number must contain only digits",
+                validPhone: "Enter a valid phone number"
+            },
+            ck_email: {
+                required: "Please enter your email address",
+                email: "Please enter a valid email address",
+                noSpamEmail: "This email address is not allowed",
+                uniqueEmail: "This email is already used"
+            },
+            'ck_product_of_interest[]': {
+                required: "Please select at least one product of interest"
+            },
+            ck_quantity_range: {
+                required: "Please select a quantity range"
+            },
+            ck_delivery_date: {
+                required: "Please select a delivery date",
+                date: "Enter a valid date",
+                minDate: "Delivery date must be after today"
+            },
+            ck_message: {
+                maxlength: "Message cannot exceed 50 characters",
+            }
+        },
+        errorElement: 'div',
+        errorPlacement: function(error, element) {
+            if (element.attr('name') === 'product_of_interest[]') {
+                $('#product_kit_error').append(error);
+            } else {
+                error.insertAfter(element);
+            }
+        },
+        highlight: function(element) {
+            $(element).addClass('is-invalid').removeClass('is-valid');
+        },
+        unhighlight: function(element) {
+            $(element).addClass('is-valid').removeClass('is-invalid');
+        },
+        submitHandler: function(form) {
+            if (!cFormSubmitted) {
+                cFormSubmitted = true;
+                const btn = $(form).find('button[type="submit"]');
+                if (btn.length) {
+                    btn.prop('disabled', true).text('Submitting...');
+                }
+                form.submit();
+            }
+        }
+    });
+
+});
 </script>
 @endpush
 @include('layouts.frontfooter')

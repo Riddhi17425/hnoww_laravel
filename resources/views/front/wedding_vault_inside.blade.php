@@ -55,7 +55,7 @@ Everything you see here is curated to be photographed, kept, and passed on.
             @if(isset($weddingCategory) && is_countable($weddingCategory) && count($weddingCategory) > 0)
                 @foreach($weddingCategory as $key => $val)
                     <div class="col-md-4">
-                        <div class="curated_rituals_box">
+                        <div class="desire_box">
                             <div>
                                 @php
                                     $imagePath = public_path('images/admin/category_banner/' . $val->banner_image);
@@ -87,7 +87,7 @@ Everything you see here is curated to be photographed, kept, and passed on.
             @endif
 
             {{-- <div class="col-md-4">
-                <div class="curated_rituals_box">
+                <div class="desire_box">
                     <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault2.webp')}}" alt="images">
                     <div class="box_bot">
                         <div>
