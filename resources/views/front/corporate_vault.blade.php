@@ -673,59 +673,141 @@ alt="images">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
-                <div class="audio-card d-grid">
-                    <div class="modal-header px-0">
-                        <h5 class="modal-title" id="productInquiryLabel">Product Inquiry</h5>
+                <div class="container">
+                    <div class="text-center my-4">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form method="POST" id="productInquiryForm" action="{{ route('front.store.product.inquiry') }}">
+                    <form method="POST" action="{{ route('front.store.corporate.kit.request') }}" id="requestCorporateProductForm" class="ct_form">
                         @csrf
-                        <input type="hidden" value="" name="inquiry_for">
-                        <div class="mb-3">
-                            <label class="form-label">Name</label>
-                            <input type="text" name="name" value="{{ old('name') }}" placeholder="Enter Name"
-                                oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();"
-                                class="form-control @error('name') is-invalid @enderror">
-                            @error('name')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <label class="form-label">Inquiry For Product</label>
-                        <select id="enquiry_for" name="enquiry_for">
-                            <option value="">Select Product</option>
-                            <option></option>
-                        </select>
-                        <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" name="email" placeholder="Enter Your Email Address"
-                                value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror">
+                        <div class="row">
+                            <!-- Full Name -->
+                            <div class="col-lg-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Full Name <span class="text-danger">*</span></label>
+                                    <input type="text" name="cp_full_name" id="cp_full_name"
+                                        oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();"
+                                        placeholder="Enter your Full Name" value="{{ old('cp_full_name') }}">
+                                    @error('cp_full_name') <small class="text-danger">{{ $message }}</small> @enderror
+                                </div>
+                            </div>
 
-                            @error('email')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Contact Number</label>
-                            <input type="text" name="contact_no" placeholder="Enter your Whatsapp Phone Number"
-                                value="{{ old('contact_no') }}"
-                                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
-                                class="form-control @error('contact_no') is-invalid @enderror">
+                            <!-- Company -->
+                            <div class="col-lg-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Company Organization <span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" name="cp_company_name"
+                                        placeholder="Enter your Company Organization Name" id="cp_company_name"
+                                        value="{{ old('cp_company_name') }}">
+                                    @error('cp_company_name') <small class="text-danger">{{ $message }}</small> @enderror
+                                </div>
+                            </div>
 
-                            @error('contact_no')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Message</label>
-                            <textarea name="message" rows="4" placeholder="Enter Message"
-                                class="form-control @error('message') is-invalid @enderror">{{ old('message') }}</textarea>
-                            @error('message')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="com_btn" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="com_btn">Submit</button>
+                            <!-- Phone -->
+                            <div class="col-lg-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Phone Number <span class="text-danger">*</span></label>
+                                    <input type="text" name="cp_phone" id="cp_phone"
+                                        placeholder="Enter your WhatsApp Phone Number"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
+                                        value="{{ old('phone') }}">
+                                    @error('cp_phone') <small class="text-danger">{{ $message }}</small> @enderror
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="col-lg-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Email <span class="text-danger">*</span></label>
+                                    <input type="email" name="cp_email" placeholder="Enter your Email Address"
+                                        id="cp_email" value="{{ old('cp_email') }}">
+                                    @error('cp_email') <small class="text-danger">{{ $message }}</small> @enderror
+                                </div>
+                            </div>
+
+                            <!-- Product of Interest (MULTISELECT) -->
+                            <div class="col-lg-4">
+                                <div class="ct_input">
+                                    <label class="sub_head">Product of Interest <span
+                                            class="text-danger">*</span></label>
+                                    <select id="cp_product_of_interest" name="cp_product_of_interest[]" multiple>
+                                        @if(isset($corporateKits) && is_countable($corporateKits) &&
+                                        count($corporateKits) > 0)
+                                        @foreach($corporateKits as $value)
+                                        <option value="{{ $value->id }}"
+                                            {{ collect(old('cp_product_of_interest'))->contains($value->id) ? 'selected' : '' }}>
+                                            {{ $value->title }}
+                                        </option>
+                                        @endforeach
+                                        @endif
+                                    </select>
+                                    <div id="product_kit_error"></div>
+                                    @error('cp_product_of_interest') <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <!-- Quantity Range -->
+                            <div class="col-lg-4">
+                                <div class="ct_input">
+                                    <label class="sub_head">Quantity Range <span class="text-danger">*</span></label>
+                                    <select name="cp_quantity_range" id="cp_quantity_range">
+                                        <option value="">Select</option>
+                                        @foreach(config('global_values.quality_range') as $key => $value)
+                                        <option value="{{ $key }}"
+                                            {{ old('cp_quantity_range') == $key ? 'selected' : '' }}>
+                                            {{ $value }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                    @error('cp_quantity_range') <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <!-- Budget -->
+                            <div class="col-lg-4">
+                                <div class="ct_input">
+                                    <label class="sub_head">Approximate Budget</label>
+                                    <input type="text" placeholder="Enter Approximate Budget" name="cp_budget"
+                                        id="cp_budget" value="{{ old('cp_budget') }}">
+                                    @error('cp_budget') <small class="text-danger">{{ $message }}</small> @enderror
+                                </div>
+                            </div>
+
+                            <!-- Branding -->
+                            <div class="col-lg-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Branding Requirements</label>
+                                    <input type="text" placeholder="e.g. Logo etching, Custom box colour"
+                                        name="cp_branding_requirements" id="cp_branding_requirements"
+                                        value="{{ old('cp_branding_requirements') }}">
+                                </div>
+                            </div>
+
+                            <!-- Delivery Date -->
+                            <div class="col-lg-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Delivery Timeline <span class="text-danger">*</span></label>
+                                    <input type="date" name="cp_delivery_date" id="cp_delivery_date"
+                                        value="{{ old('cp_delivery_date') }}">
+                                    @error('cp_delivery_date') <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <!-- Message -->
+                            <div class="col-12">
+                                <div class="ct_input">
+                                    <label class="sub_head">Message / Notes</label>
+                                    <textarea name="cp_message" placeholder="Enter Message"
+                                        id="cp_message">{{ old('cp_message') }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-12 text-center">
+                                <button type="submit" class="com_btn">REQUEST CORPORATE QUOTE</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -890,14 +972,146 @@ alt="images">
 
 @push('script')
 <script>
-$(document).ready(function() {
-    var element = $('#ck_product_of_interest')[0]; // get raw DOM element from jQuery object
-    var choices = new Choices(element, {
-        removeItemButton: true, // shows an "x" to deselect each selected option
-        placeholder: true,
-        placeholderValue: 'Select products',
-        searchEnabled: true,
-    });
+    $(document).ready(function() {
+        var element = $('#ck_product_of_interest')[0];  // get raw DOM element from jQuery object
+        var choices = new Choices(element, {
+            removeItemButton: true,  // shows an "x" to deselect each selected option
+            placeholder: true,
+            placeholderValue: 'Select products',
+            searchEnabled: true,
+        });
+
+        $("#requestCorporateKitProposalForm").validate({
+            ignore: [],
+            rules: {
+                ck_full_name: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 50,
+                    lettersonly: true
+                },
+                ck_company_name: {
+                    required: true
+                },
+                ck_phone: {
+                    required: true,
+                    number: true,
+                    validPhone: true
+                },
+                ck_email: {
+                    required: true,
+                    email: true,
+                    noSpamEmail: true,
+                    uniqueEmail: "corporate_kit_requests"
+                },
+                'ck_product_of_interest[]': {
+                    required: true
+                },
+                ck_quantity_range: {
+                    required: true
+                },
+                ck_delivery_date: {
+                    required: true,
+                    date: true,
+                    minDate: true
+                },
+                ck_message: {
+                    maxlength: 500,
+                }
+            },
+            messages: {
+                ck_full_name: {
+                    required: "Please enter your full name",
+                    minlength: "Full name must be at least 2 characters",
+                    maxlength: "Full name cannot exceed 50 characters",
+                    lettersonly: "Full name can only contain letters and spaces"
+                },
+                ck_company_name: {
+                    required: "Please enter your company or organization name"
+                },
+                ck_phone: {
+                    required: "Please enter your phone number",
+                    number: "Phone number must contain only digits",
+                    validPhone: "Enter a valid phone number"
+                },
+                ck_email: {
+                    required: "Please enter your email address",
+                    email: "Please enter a valid email address",
+                    noSpamEmail: "This email address is not allowed",
+                    uniqueEmail: "This email is already used"
+                },
+                'ck_product_of_interest[]': {
+                    required: "Please select at least one product of interest"
+                },
+                ck_quantity_range: {
+                    required: "Please select a quantity range"
+                },
+                ck_delivery_date: {
+                    required: "Please select a delivery date",
+                    date: "Enter a valid date",
+                    minDate: "Delivery date must be after today"
+                },
+                ck_message: {
+                    maxlength: "Message cannot exceed 50 characters",
+                }
+            },
+            errorElement: 'div',
+            errorPlacement: function(error, element) {
+                if (element.attr('name') === 'product_of_interest[]') {
+                    $('#product_kit_error').append(error);
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            highlight: function(element) {
+                $(element).addClass('is-invalid').removeClass('is-valid');
+            },
+            unhighlight: function(element) {
+                $(element).addClass('is-valid').removeClass('is-invalid');
+            },
+            submitHandler: function(form) {
+                if (!cFormSubmitted) {
+                    cFormSubmitted = true;
+                    const btn = $(form).find('button[type="submit"]');
+                    if (btn.length) {
+                        btn.prop('disabled', true).text('Submitting...');
+                    }
+                    form.submit();
+                }
+            }
+        });
+
+        $('.corporate-product').on('click', function (e) {
+            e.preventDefault();
+
+            let categoryId = $(this).data('category');
+            // Clear old options
+            $('#cp_product_of_interest').html('');
+            // Open modal
+            $('#requestCorporateProduct').modal('show');
+
+            // Fetch products based on category
+            $.ajax({
+                url: "{{ route('front.get.products.by.category') }}",
+                type: "GET",
+                data: { category_id: categoryId },
+                success: function (response) {
+                    if (response.length > 0) {
+                        $.each(response, function (key, product) {
+                            $('#cp_product_of_interest').append(
+                                `<option value="${product.id}">${product.product_name}</option>`
+                            );
+                        });
+                    } else {
+                        $('#cp_product_of_interest').append(
+                            `<option value="">No products available</option>`
+                        );
+                    }
+                }
+            });
+
+        });
+
 
     $("#requestCorporateKitProposalForm").validate({
         ignore: [],

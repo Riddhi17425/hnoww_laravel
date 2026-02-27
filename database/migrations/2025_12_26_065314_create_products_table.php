@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('short_note')->nullable();
             $table->string('short_description', 700)->nullable();
             $table->string('product_price');
-            $table->unsignedInteger('product_stock')->default(0)->after('product_price');
+            $table->unsignedInteger('product_stock')->default(0);
             $table->text('large_description')->nullable();
             $table->string('dimensions', 5000)->nullable();
             $table->string('meta_title')->nullable();
@@ -29,6 +29,7 @@ return new class extends Migration
             $table->json('detail_page_imgs')->nullable();
             $table->tinyInteger('product_type')->default(0)->comment("0 = Basic 1 = Corporate 2 = Wedding");
             $table->tinyInteger('is_active')->default(1)->comment("0 = Active 1 = In-active");
+            $table->string('care_maintenance', 500)->nullable();
             $table->softDeletes();
             $table->timestamps();
 

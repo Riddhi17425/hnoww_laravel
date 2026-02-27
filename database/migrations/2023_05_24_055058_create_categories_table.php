@@ -22,7 +22,8 @@ class CreateCategoriesTable extends Migration
             $table->string('meta_description')->nullable();
             $table->string('banner_image')->nullable();
             $table->string('category_url')->nullable();
-            $table->string('magic_heading')->nullable();
+            $table->string('magic_heading_first')->nullable();
+            $table->string('magic_heading_second')->nullable();
             $table->string('magic_title')->nullable();
             $table->string('magic_image')->nullable();
             $table->string('magic_description', 500)->nullable();

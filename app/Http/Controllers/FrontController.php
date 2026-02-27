@@ -564,7 +564,12 @@ class FrontController extends Controller
         $corporateKits = CorporateKit::isActive()->notDeleted()->get();
 
         return view('front.corporate_vault', compact('categories', 'products', 'corporateProduct', 'weddingProduct', 'corporateKits'));
-        // return view('front.corporate_vault_new_static', compact('categories', 'products', 'corporateProduct', 'weddingProduct', 'corporateKits'));
+    }
+
+    public function getProductsByCategory(Request $request, $id){
+        $products = Product::where('category_id', $id)->select('id', 'product_name')->get();
+
+        return response()->json($products);
     }
 
     public function storeCorporateProposalRequest(Request $request){
