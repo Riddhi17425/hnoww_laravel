@@ -71,7 +71,7 @@
                                     data-bs-target="#requestCorporateProposal">Corporate Rituals</a></li> --}}
                             <li><a href="{{route('front.bespoke.commission')}}">Bespoke Commissions</a></li>
                             <li><a href="{{route('front.wedding.vault.inside')}}">Wedding Vault</a></li>
-                            <li><a href="{{route('front.corporate.vault')}}">Corporate Vault Inside</a></li>
+                            <li><a href="{{route('front.corporate.vault')}}">Corporate Vault</a></li>
                             <!--<li><a href="{{ route('front.ceremonials') }}">Ceremonial Objects</a></li>-->
                         </ul>
                     </div>

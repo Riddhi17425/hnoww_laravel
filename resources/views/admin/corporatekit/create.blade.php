@@ -35,10 +35,15 @@
                 @error('moq') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <label class="form-label">Image</label><span class="text-danger">*</span>
                 <input type="file" name="image" id="image" class="form-control" value="{{ old('image') }}">
                 @error('image') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Mobile Image</label><span class="text-danger">*</span>
+                <input type="file" name="mobile_image" id="mobile_image" class="form-control" value="{{ old('mobile_image') }}">
+                @error('mobile_image') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
             <div class="col-md-12">
@@ -60,7 +65,7 @@
     </form>
 </div>
 
-<!-- Cropper Modal -->
+<!-- Cropper Modal for Image -->
 <div class="modal fade" id="cropperModal" tabindex="-1">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
@@ -82,6 +87,30 @@
         </div>
     </div>
 </div>
+
+<!-- Cropper Modal for Mobile Image -->
+<div class="modal fade" id="cropperMobileImageModal" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Crop Image</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="img-container">
+                    <img id="cropperModalImage" style="max-width: 100%;">
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="cropMobileImageBtn">Crop</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @push('custom_scripts')

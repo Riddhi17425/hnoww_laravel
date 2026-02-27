@@ -98,6 +98,7 @@ class CorporateKitController extends Controller
             'moq' => 'required|max:255',
             'price_range' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:5120',
+            'mobile_image' => 'required|image|mimes:jpg,jpeg,png,webp|max:5120',
             'short_description' => 'required|string|max:500',
             'large_description' => 'nullable|string|max:5000',
         ], [
@@ -113,6 +114,10 @@ class CorporateKitController extends Controller
             'image.image'    => 'The image must be a valid image.',
             'image.mimes'    => 'The image must be a JPG, JPEG, PNG, or WEBP file.',
             'image.max'      => 'The image size must not exceed 5 MB.',
+            'mobile_image.required' => 'Please upload the Mobile image.',
+            'mobile_image.image'    => 'The image must be a valid image.',
+            'mobile_image.mimes'    => 'The image must be a JPG, JPEG, PNG, or WEBP file.',
+            'mobile_image.max'      => 'The image size must not exceed 5 MB.',
             'short_description.required' => 'Short description is Required.',
             'short_description.string' => 'Short description must be a valid string.',
             'short_description.max' => 'Short description cannot exceed 500 characters.',
@@ -129,17 +134,25 @@ class CorporateKitController extends Controller
             'title', 'short_description', 'large_description', 'image', 'price_range', 'moq'
         ]);
 
-        $imageName = null;
+        $imageName = $mobileImage = null;
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $originalName = $file->getClientOriginalName();
             $path = public_path('images/admin/corporatekit/');
-
             $file->move($path, $originalName);
             $imageName = $originalName;
         }
-
         $data['image'] = $imageName;
+
+        if ($request->hasFile('mobile_image')) {
+            $file = $request->file('mobile_image');
+            $originalName = $file->getClientOriginalName();
+            $path = public_path('images/admin/corporatekit/mobile_image/');
+            $file->move($path, $originalName);
+            $mobileImage = $originalName;
+        }
+        $data['image'] = $imageName;
+        $data['mobile_image'] = $mobileImage;
         $data['is_active'] = 0; // default active
 
         CorporateKit::create($data);
@@ -161,6 +174,7 @@ class CorporateKitController extends Controller
             'moq' => 'required|max:255',
             'price_range' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
+            'mobile_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
             'short_description' => 'required|string|max:500',
             'large_description' => 'nullable|string|max:5000',
         ], [
@@ -175,6 +189,9 @@ class CorporateKitController extends Controller
             'image.image'    => 'The image must be a valid image.',
             'image.mimes'    => 'The image must be a JPG, JPEG, PNG, or WEBP file.',
             'image.max'      => 'The image size must not exceed 5 MB.',
+            'mobile_image.image'    => 'The image must be a valid Mobile image.',
+            'mobile_image.mimes'    => 'The image must be a JPG, JPEG, PNG, or WEBP file.',
+            'mobile_image.max'      => 'The image size must not exceed 5 MB.',
             'short_description.required' => 'Short description is Required.',
             'short_description.string' => 'Short description must be a valid string.',
             'short_description.max' => 'Short description cannot exceed 500 characters.',
@@ -194,6 +211,12 @@ class CorporateKitController extends Controller
             $imageName = $imageFile->getClientOriginalName();
             $imageFile->move(public_path('images/admin/corporatekit/'), $imageName);
             $data['image'] = $imageName;
+        }
+        if ($request->hasFile('mobile_image')) {
+            $imageFile = $request->file('mobile_image');
+            $imageName = $imageFile->getClientOriginalName();
+            $imageFile->move(public_path('images/admin/corporatekit/mobile_image/'), $imageName);
+            $data['mobile_image'] = $imageName;
         }
         
         $corporateKit->update($data);
