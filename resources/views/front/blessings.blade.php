@@ -7,6 +7,17 @@
     border-color: #8c8a72;
     box-shadow: unset;
 }
+
+.bles_modal_close {
+    top: 22px;
+    right: 22px;
+}
+
+@media (max-width: 767px) {
+    .bles_modal_close {
+        filter: invert(1);
+    }
+}
 </style>
 <section class="hero-section_inner">
     <img class="img-fluid" src="{{asset('public/images/front/blessing-library-banner.webp')}}" alt="him banner">
@@ -133,7 +144,7 @@
                         </div>
                     </div>
 
-                    <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal"
+                    <button type="button" class="btn-close position-absolute bles_modal_close " data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
             </div>

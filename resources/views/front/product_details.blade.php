@@ -19,7 +19,7 @@
 }
 </style>
 
-<section class="mt_60 mt-5">
+<section class="mt_60">
     <div class="container">
         <div class="row">
             <div class="col-lg-7">

@@ -8,7 +8,7 @@ $current_route ===
 
 @endphp
 
-<head class="mb-3">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -107,8 +107,6 @@ $current_route ===
     }
 
     /* MULTI SELECT DROPDOWN */
-    /* Remove outer box */
-    /* 1. Main Container - Yahan hum sirf structure set kar rahe hain, border hata di hai */
     .choices[data-type*="select-multiple"] .choices__inner {
         display: flex !important;
         flex-direction: column !important;
@@ -119,7 +117,12 @@ $current_route ===
         border-radius: 0 !important;
         padding: 0 !important;
         min-height: auto !important;
-        box-shadow: none !important;
+        /* box-shadow: none !important; */
+    }
+
+    .choices[data-type*=select-multiple] .choices__button,
+    .choices[data-type*=text] .choices__button {
+        border: none !important;
     }
 
     /* 2. Placeholder Text & Line - Line ab sirf is text ke niche aayegi */
@@ -127,8 +130,7 @@ $current_route ===
         order: 1 !important;
         /* Text ko sabse upar rakhna */
         border: none !important;
-        border-bottom: 1px solid #d4c5ab !important;
-        /* MAIN FIX: Line yahan lagayi hai */
+        border-bottom: 1px solid #c7b58c !important;
         width: 100% !important;
         min-width: 100% !important;
         background: transparent !important;
@@ -136,6 +138,7 @@ $current_route ===
         font-size: 16px !important;
         padding: 0 25px 8px 0 !important;
         /* Niche aur right me space */
+        cursor: default;
 
         /* Arrow Icon (Size thik kar diya hai) */
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
@@ -158,16 +161,13 @@ $current_route ===
         flex-wrap: wrap !important;
         gap: 8px !important;
         padding-top: 10px !important;
-        /* Line aur buttons ke beech ka gap */
-        border: bottom 1px solid #d4c5ab !important;
-        /* Optional: Line ko thoda aur highlight karne ke liye */
     }
 
     /* 5. Individual Buttons (Tags) ka design */
     .choices__inner .choices__item--selectable {
-        background-color: #f8f6f0 !important;
+        background-color: #d4c5ab !important;
         border: 1px solid #d4c5ab !important;
-        color: #0a1f44 !important;
+        /* color: #0a1f44 !important; */
         border-radius: 4px !important;
         padding: 4px 8px !important;
         margin: 0 !important;

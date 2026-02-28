@@ -71,7 +71,7 @@
                                     data-bs-target="#requestCorporateProposal">Corporate Rituals</a></li> --}}
                             <li><a href="{{route('front.bespoke.commission')}}">Bespoke Commissions</a></li>
                             <li><a href="{{route('front.wedding.vault.inside')}}">Wedding Vault</a></li>
-                            <li><a href="{{route('front.corporate.vault')}}">Corporate Vault Inside</a></li>
+                            <li><a href="{{route('front.corporate.vault')}}">Corporate Vault</a></li>
                             <!--<li><a href="{{ route('front.ceremonials') }}">Ceremonial Objects</a></li>-->
                         </ul>
                     </div>
@@ -79,8 +79,9 @@
 
                 <div class="ft_center_box">
                     <div>
-                        <h4 class="ft_head">Editions</h4>
+                        <h4 class="ft_head">Links</h4>
                         <ul class="ft_menu">
+                            <li><a href="{{route('front.editions')}}">Editions</a></li>
                             <li><a href="{{route('front.about')}}">About</a></li>
                             <li><a href="{{ route('front.journal') }}">The Journal</a></li>
                             <li><a href="{{ route('front.blessings.library') }}">The Blessing Library</a></li>

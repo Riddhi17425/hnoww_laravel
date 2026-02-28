@@ -19,6 +19,7 @@
         <p>Personalised gifts designed to turn the everyday into a feeling. Thoughtfully designed, customized gifts
             shaped by intention and form.</p>
         <!--<p>Objects crafted to turn the everyday into ceremony.</p>-->
+        <a href="{{ route('front.atelier') }}" class="com_btn border-0 bg-white d-lg-none">Explore The Works</a>
     </div>
 
     <div class="hero_left_right">
@@ -35,7 +36,7 @@
             </svg></span>
     </div>
 
-    <a href="{{ route('front.atelier') }}" class="com_btn border-0 bg-white">Explore The Works</a>
+    <a href="{{ route('front.atelier') }}" class="com_btn border-0 bg-white d-none d-lg-block">Explore The Works</a>
 
 
 </section>

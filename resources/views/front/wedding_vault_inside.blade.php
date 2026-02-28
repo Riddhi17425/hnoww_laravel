@@ -2,16 +2,19 @@
 
 <!-- hero section -->
 <section class="hero-section_inner">
-    <img class="img-fluid" src="{{asset('public/images/front/wedding_vault.webp')}}" alt=" banner">
+    <img class="img-fluid" src="{{asset('public/images/front/Banner_wedding2.webp')}}" alt=" banner">
 
     <div class="hero_content_inner w-100">
         <div class="container">
             {{-- <h2 class="main_head mb-3"> HNoww Wedding Concierge</h2> --}}
             <h2 class="main_head mb-3"> HNoww Wedding Vault</h2>
-            <p class="sub_heads sec_in_mb"> Ceremonial wedding and anniversary gifts, sculptural heirlooms, and bespoke gifting for the modern union.
+            <p class="sub_heads sec_in_mb"> Ceremonial wedding and anniversary gifts, <br /> sculptural heirlooms, and
+                bespoke
+                gifting for the modern union.
             </p>
             <div class="d-flex flex-wrap justify-content-center gap-3 gap-md-4">
-                <a href="#" class="com_btn border-white bg-white" data-bs-toggle="modal" data-bs-target="#requestWeddingCatalogue">Book a Wedding Gifting Consultation</a>
+                <a href="#" class="com_btn border-white bg-white" data-bs-toggle="modal"
+                    data-bs-target="#requestWeddingCatalogue">Book a Wedding Gifting Consultation</a>
                 {{-- <a href="#" class="com_btn border-white bg-white">Book a Wedding Gifting Consultation</a>
                 <a href="#" class="com_btn border-white bg-transparent text-white"> Download Wedding Vault Lookbook
                     (PDF)</a> --}}
@@ -22,10 +25,13 @@
 
 <section class="mt_60 request_catalogue_para">
     <div class="container">
-        <p class="sub_head text-center" style="color:#666666;">At HNoww, weddings are treated as living archives of a family’s story.
-        The Wedding Vault is a private collection of ceremonial objects, malachite signatures, and bespoke luxury hampers in Dubai curated for brides, grooms, and planners who want every ritual, every favour, and every wedding or anniversay gift to feel intentional and unforgettable.
-We work with limited quantities and high-touch customization. 
-Everything you see here is curated to be photographed, kept, and passed on.
+        <p class="sub_head_inter text-center" style="color:#666666;">At HNoww, weddings are treated as living archives
+            of a family’s story.
+            The Wedding Vault is a private collection of ceremonial objects, malachite signatures, and bespoke luxury
+            hampers in Dubai curated for brides, grooms, and planners who want every ritual, every favour, and every
+            wedding or anniversay gift to feel intentional and unforgettable.
+            We work with limited quantities and high-touch customization.
+            Everything you see here is curated to be photographed, kept, and passed on.
         </p>
     </div>
 </section>
@@ -49,115 +55,122 @@ Everything you see here is curated to be photographed, kept, and passed on.
                 </span>
             </p>
             <h2 class="title_60">The Wedding Vault</h2>
-            <P> Explore the luxury gift hampers in Dubai or scroll to view everything to pick the best anniversary gift</P>
+            <P> Explore the luxury gift hampers in Dubai or scroll to view everything to pick the best anniversary gift
+            </P>
         </div>
         <div class="row gy-4 g-md-5">
             @if(isset($weddingCategory) && is_countable($weddingCategory) && count($weddingCategory) > 0)
-                @foreach($weddingCategory as $key => $val)
-                    <div class="col-md-4">
-                        <div class="desire_box">
-                            <div>
-                                @php
-                                    $imagePath = public_path('images/admin/category_banner/' . $val->banner_image);
-                                @endphp
-                                @if(isset($val->banner_image) && $val->banner_image != '' && file_exists($imagePath))
-                                    <img class="w-100 mb-2 mb-md-4" src="{{ asset('public/images/admin/category_banner/'.$val->banner_image) }}" alt="{{ $val->category_name ?? 'Category Image' }}">
-                                @else
-                                    <img class="w-100 mb-2 mb-md-4" src="{{ asset('public/noimg.jpg') }}" alt='No Image Found'>
-                                @endif
-                            </div>
-                            <div class="desire_box_bot_child">
-                                <div>
-                                    <h3 class="sub_head">{{ $val->category_name ?? '' }} </h3>
-                                    <p>{!! $val->description ?? '' !!}</p>
-                                </div>
-                                <a href="{{ route('front.ceremonials', $val->id) }}" target="_blank">
-                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                                        <path d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
-                                            stroke="#8c8a72" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                </a>
-                            </div>
-                            {{-- <div> --}}
-                                {{-- <a href="{{ route('front.product.details', $val->product_url) }}" class="com_btn">VIEW Details </a> --}}
-                            {{-- </div> --}}
-                        </div>
+            @foreach($weddingCategory as $key => $val)
+            <div class="col-md-4">
+                <div class="desire_box">
+                    <div>
+                        @php
+                        $imagePath = public_path('images/admin/category_banner/' . $val->banner_image);
+                        @endphp
+                        @if(isset($val->banner_image) && $val->banner_image != '' && file_exists($imagePath))
+                        <img class="w-100 mb-2 mb-md-4"
+                            src="{{ asset('public/images/admin/category_banner/'.$val->banner_image) }}"
+                            alt="{{ $val->category_name ?? 'Category Image' }}">
+                        @else
+                        <img class="w-100 mb-2 mb-md-4" src="{{ asset('public/noimg.jpg') }}" alt='No Image Found'>
+                        @endif
                     </div>
-                @endforeach
+                    <div class="desire_box_bot_child">
+                        <div>
+                            <h3 class="sub_head">{{ $val->category_name ?? '' }} </h3>
+                            <p>{!! $val->description ?? '' !!}</p>
+                        </div>
+                        <a href="{{ route('front.ceremonials', $val->id) }}" target="_blank">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                <path
+                                    d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
+                                    stroke="#8c8a72" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                    </div>
+                    {{-- <div> --}}
+                    {{-- <a href="{{ route('front.product.details', $val->product_url) }}" class="com_btn">VIEW Details
+                    </a> --}}
+                    {{-- </div> --}}
+                </div>
+            </div>
+            @endforeach
             @endif
 
             {{-- <div class="col-md-4">
                 <div class="desire_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault2.webp')}}" alt="images">
-                    <div class="box_bot">
-                        <div>
-                            <h3 class="sub_head">The Desk Ceremony Set </h3>
-                            <p class="mb-0">Frames & heirlooms for moments that matter.</p>
-                        </div>
-                    </div>
+                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault2.webp')}}"
+            alt="images">
+            <div class="box_bot">
+                <div>
+                    <h3 class="sub_head">The Desk Ceremony Set </h3>
+                    <p class="mb-0">Frames & heirlooms for moments that matter.</p>
                 </div>
             </div>
-
-            <div class="col-md-4">
-                <div class="curated_rituals_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault3.webp')}}" alt="images">
-                    <div class="box_bot">
-                        <div>
-                            <h3 class="sub_head">The Modern Majlis Set </h3>
-                            <p class="mb-0">Modern gestures under AED 500.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="curated_rituals_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault4.webp')}}" alt="images">
-                    <div class="box_bot">
-                        <div>
-                            <h3 class="sub_head">The Everyday Sacred</h3>
-                            <p class="mb-0">Light. Scent. Stillness.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="curated_rituals_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault5.webp')}}" alt="images">
-                    <div class="box_bot">
-                        <div>
-                            <h3 class="sub_head">The Everyday Sacred</h3>
-                            <p class="mb-0">Light. Scent. Stillness.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="curated_rituals_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault6.webp')}}" alt="images">
-                    <div class="box_bot">
-                        <div>
-                            <h3 class="sub_head">The Everyday Sacred</h3>
-                            <p class="mb-0">Light. Scent. Stillness.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="curated_rituals_box">
-                    <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault7.webp')}}" alt="images">
-                    <div class="box_bot">
-                        <div>
-                            <h3 class="sub_head">The Everyday Sacred</h3>
-                            <p class="mb-0">Light. Scent. Stillness.</p>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
         </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="curated_rituals_box">
+            <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault3.webp')}}" alt="images">
+            <div class="box_bot">
+                <div>
+                    <h3 class="sub_head">The Modern Majlis Set </h3>
+                    <p class="mb-0">Modern gestures under AED 500.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="curated_rituals_box">
+            <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault4.webp')}}" alt="images">
+            <div class="box_bot">
+                <div>
+                    <h3 class="sub_head">The Everyday Sacred</h3>
+                    <p class="mb-0">Light. Scent. Stillness.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="curated_rituals_box">
+            <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault5.webp')}}" alt="images">
+            <div class="box_bot">
+                <div>
+                    <h3 class="sub_head">The Everyday Sacred</h3>
+                    <p class="mb-0">Light. Scent. Stillness.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="curated_rituals_box">
+            <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault6.webp')}}" alt="images">
+            <div class="box_bot">
+                <div>
+                    <h3 class="sub_head">The Everyday Sacred</h3>
+                    <p class="mb-0">Light. Scent. Stillness.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="curated_rituals_box">
+            <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/wedding-vault7.webp')}}" alt="images">
+            <div class="box_bot">
+                <div>
+                    <h3 class="sub_head">The Everyday Sacred</h3>
+                    <p class="mb-0">Light. Scent. Stillness.</p>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+    </div>
     </div>
 </section>
 
@@ -200,10 +213,11 @@ Everything you see here is curated to be photographed, kept, and passed on.
                     <div class="wedding_box">
                         <h3 class="wedding_box_head">02</h3>
                         <h5 class="sub_head mb-3">Curated Proposal</h5>
-                        <p class="mb-0">You receive a PDF proposal with wedding and anniversary gifts, colour palettes, and
-                                preliminary costings, including premium gift hampers
-                                for different segments (family, friends,
-                                VIPs).</p>
+                        <p class="mb-0">You receive a PDF proposal with wedding and anniversary gifts, colour palettes,
+                            and
+                            preliminary costings, including premium gift hampers
+                            for different segments (family, friends,
+                            VIPs).</p>
                     </div>
                 </div>
 
@@ -257,15 +271,18 @@ Everything you see here is curated to be photographed, kept, and passed on.
                 </span>
             </p>
             <h2 class="title_60 text-white mb-4">Curate Your Wedding Gifting?</h2>
-            <p class="sec_in_mb text-white">Whether you are a bride, groom, or planner, the HNoww Wedding Concierge is your partner in creating the best wedding gift,<br> that feels as close as the ceremony itself.</p>
+            <p class="sec_in_mb text-white">Whether you are a bride, groom, or planner, the HNoww Wedding Concierge is
+                your partner in creating the best wedding gift,<br> that feels as close as the ceremony itself.</p>
             <div class="d-flex flex-wrap justify-content-center gap-3 gap-md-4 mb-3 mb-md-4">
                 {{-- <a href="#" class="com_btn border-white bg-white">Book a Wedding Gifting Consultation</a>
                 <a href="#" class="com_btn border-white bg-transparent text-white"> Email the H Noww Wedding
                     Concierge</a> --}}
-                <a href="#" class="com_btn border-white bg-transparent text-white" data-bs-toggle="modal" data-bs-target="#requestWeddingCatalogue"> Book a Wedding Gifting Consultation</a>
+                <a href="#" class="com_btn border-white bg-transparent text-white" data-bs-toggle="modal"
+                    data-bs-target="#requestWeddingCatalogue"> Book a Wedding Gifting Consultation</a>
             </div>
 
-            <p class="text-white mb-0"><i>HNoww Wedding Concierge — Ceremonial objects, sculptural heirlooms, and bespoke gifting for the modern union.</i></p>
+            <p class="text-white mb-0"><i>HNoww Wedding Concierge — Ceremonial objects, sculptural heirlooms, and
+                    bespoke gifting for the modern union.</i></p>
         </div>
     </div>
 
