@@ -241,7 +241,7 @@
                     Message:</td>
                 <td
                     style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">
-                    {{ $message_data ?? '' }}</td>
+                    {{ $message_note ?? '' }}</td>
             </tr>
         </table>
 

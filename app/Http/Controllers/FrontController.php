@@ -898,6 +898,7 @@ class FrontController extends Controller
     }
 
     public function storeCorporateKitRequest(Request $request){
+        
         $qualityRange = config('global_values.quality_range');
         $rules = [
             'k_full_name'             => 'required|string|min:2|max:100',
@@ -934,11 +935,12 @@ class FrontController extends Controller
         // Validate the request
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
+            echo '<pre>'; print_r($validator->errors()); die;
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
         }
-       
+       echo "<pre>"; print_r($request->all()); die;
         $data = [
             'full_name' => $request->k_full_name,
             'company_name' => $request->k_company_name,
