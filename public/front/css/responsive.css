@@ -1801,7 +1801,8 @@
     }
 
     .user_menu {
-        left: 0px;
+        /* left: 0px; */
+        top:100%;
     }
 
     #reg_login {
