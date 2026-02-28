@@ -157,55 +157,102 @@ if (decBtn) {
     });
 }
 
-document.querySelectorAll(".zoom-container").forEach((container) => {
-    const img = container.querySelector(".zoom-image");
-    const lens = container.querySelector(".zoom-lens");
+// document.querySelectorAll(".zoom-container").forEach((container) => {
+//     const img = container.querySelector(".zoom-image");
+//     const lens = container.querySelector(".zoom-lens");
 
-    if (!img || !lens) return;
+//     if (!img || !lens) return;
 
-    const zoom = 2; // zoom strength (2x)
+//     const zoom = 2; // zoom strength (2x)
 
-    container.addEventListener("mousemove", (e) => {
-        lens.style.display = "block";
+//     container.addEventListener("mousemove", (e) => {
+//         lens.style.display = "block";
 
-        const rect = container.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+//         const rect = container.getBoundingClientRect();
+//         const x = e.clientX - rect.left;
+//         const y = e.clientY - rect.top;
 
-        const lensW = lens.offsetWidth / 2;
-        const lensH = lens.offsetHeight / 2;
+//         const lensW = lens.offsetWidth / 2;
+//         const lensH = lens.offsetHeight / 2;
 
-        let posX = x - lensW;
-        let posY = y - lensH;
+//         let posX = x - lensW;
+//         let posY = y - lensH;
 
-        // boundaries
-        posX = Math.max(
-            0,
-            Math.min(posX, container.clientWidth - lens.offsetWidth),
-        );
-        posY = Math.max(
-            0,
-            Math.min(posY, container.clientHeight - lens.offsetHeight),
-        );
+//         // boundaries
+//         posX = Math.max(
+//             0,
+//             Math.min(posX, container.clientWidth - lens.offsetWidth),
+//         );
+//         posY = Math.max(
+//             0,
+//             Math.min(posY, container.clientHeight - lens.offsetHeight),
+//         );
 
-        lens.style.left = posX + "px";
-        lens.style.top = posY + "px";
+//         lens.style.left = posX + "px";
+//         lens.style.top = posY + "px";
 
-        // Correct background position
-        const bgPosX = -(posX * zoom);
-        const bgPosY = -(posY * zoom);
+//         // Correct background position
+//         const bgPosX = -(posX * zoom);
+//         const bgPosY = -(posY * zoom);
 
-        lens.style.backgroundImage = `url(${img.src})`;
-        lens.style.backgroundSize = `${container.clientWidth * zoom}px ${container.clientHeight * zoom}px`;
-        lens.style.backgroundPosition = `${bgPosX}px ${bgPosY}px`;
-    });
+//         lens.style.backgroundImage = `url(${img.src})`;
+//         lens.style.backgroundSize = `${container.clientWidth * zoom}px ${container.clientHeight * zoom}px`;
+//         lens.style.backgroundPosition = `${bgPosX}px ${bgPosY}px`;
+//     });
 
-    container.addEventListener("mouseleave", () => {
-        lens.style.display = "none";
-    });
-});
+//     container.addEventListener("mouseleave", () => {
+//         lens.style.display = "none";
+//     });
+// });
 
 // ------
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Sabhi zoom containers ko select karein
+    document.querySelectorAll(".zoom-container").forEach((container) => {
+        const img = container.querySelector(".zoom-image");
+        const lens = container.querySelector(".zoom-lens");
+
+        // Agar image ya lens nahi hai toh aage mat badho
+        if (!img || !lens) return;
+
+        const zoom = 2; // zoom strength (2x)
+
+        container.addEventListener("mousemove", (e) => {
+            lens.style.display = "block"; // Pehle lens show karein taaki width calculate ho sake
+
+            const rect = container.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const lensW = lens.offsetWidth / 2;
+            const lensH = lens.offsetHeight / 2;
+
+            let posX = x - lensW;
+            let posY = y - lensH;
+
+            // Boundaries (Lens container ke baahar na jaye)
+            posX = Math.max(0, Math.min(posX, container.clientWidth - lens.offsetWidth));
+            posY = Math.max(0, Math.min(posY, container.clientHeight - lens.offsetHeight));
+
+            lens.style.left = posX + "px";
+            lens.style.top = posY + "px";
+
+            // Correct background position
+            const bgPosX = -(posX * zoom);
+            const bgPosY = -(posY * zoom);
+
+            lens.style.backgroundImage = `url('${img.src}')`; // Quotes add kiye hain safe URL ke liye
+            lens.style.backgroundSize = `${container.clientWidth * zoom}px ${container.clientHeight * zoom}px`;
+            lens.style.backgroundPosition = `${bgPosX}px ${bgPosY}px`;
+        });
+
+        container.addEventListener("mouseleave", () => {
+            lens.style.display = "none";
+        });
+    });
+});
 
 $(document).on("click", ".icon_hert", function (e) {
     e.preventDefault();

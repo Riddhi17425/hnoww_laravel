@@ -1863,15 +1863,20 @@
 
     .cor_kits_cont {
         position: absolute;
-        top: 7%;
-        left: 7%;
-        right: 7%;
+        top: 0;
+        left: 0;
         transform: translate(0, 0);
         width: 100%;
+        padding:25px;
     }
 
     .theme-white .sticky-header {
         background: var(--secondary-color);
         padding-bottom: 20px;
+    }
+
+    .cor_kits_cont .sub_head {
+        font-size: 16px;
+        /* line-height: 24px; */
     }
 }
