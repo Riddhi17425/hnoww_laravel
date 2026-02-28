@@ -127,8 +127,8 @@
             <div class="col-md-4">
                 <div class="collection_box">
                     <div class="">
-                        <img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/images/front/collections1.webp') }}"
-                            alt="images" loading="lazy">
+                        <a href="{{ route('front.list', 'for-her') }}" target="_blank"><img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/images/front/collections1.webp') }}"
+                            alt="images" loading="lazy"></a>
                     </div>
                     <h3 class="sub_head">For Her {{-- — {{$herProduct[0]->product_name ?? ''}} --}}</h3>
                     <p>@if(isset($herProduct[0]->short_description)){!! $herProduct[0]->short_description !!}@endif</p>
@@ -138,8 +138,8 @@
             <div class="col-md-4">
                 <div class="collection_box">
                     <div class="">
-                        <img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/images/front/collections2.webp') }}"
-                            alt="images" loading="lazy">
+                        <a href="{{ route('front.list', 'for-him') }}" target="_blank"><img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/images/front/collections2.webp') }}"
+                            alt="images" loading="lazy"></a>
                     </div>
                     <h3 class="sub_head">For Him {{-- — {{$himProduct[0]->product_name ?? ''}} --}}</h3>
                     <p>@if(isset($himProduct[0]->short_description)){!! $himProduct[0]->short_description !!}@endif</p>
@@ -149,8 +149,8 @@
             <div class="col-md-4">
                 <div class="collection_box">
                     <div class="">
-                        <img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/images/front/collections3.webp') }}"
-                            alt="images" loading="lazy">
+                        <a href="{{ route('front.list', 'for-home') }}" target="_blank"><img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/images/front/collections3.webp') }}"
+                            alt="images" loading="lazy"></a>
                     </div>
                     <h3 class="sub_head">For Home {{-- — {{$homeProduct[0]->product_name ?? ''}} --}}</h3>
                     <p>@if(isset($homeProduct[0]->short_description)){!! $homeProduct[0]->short_description !!}@endif
@@ -490,8 +490,8 @@ alt="images" loading="lazy">
         <div class="row mobile_slider">
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-4" src="{{ asset('public/images/front/editions1.webp') }}" alt="images"
-                        loading="lazy">
+                    <a href="{{ route('front.blessings.library') }}" target="_blank"><img class="img-fluid mb-4" src="{{ asset('public/images/front/editions1.webp') }}" alt="images"
+                        loading="lazy"></a>
                     <h3 class="sub_head">The Blessing Library</h3>
                     <p>Written blessings and words of intention for home, union, and self.</p>
                     <a href="{{ route('front.blessings.library') }}" target="_blank" class="com_btn">Explore </a>
@@ -499,8 +499,8 @@ alt="images" loading="lazy">
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-4" src="{{ asset('public/images/front/editions2.webp') }}" alt="images"
-                        loading="lazy">
+                    <a href="{{ route('front.journal') }}" target="_blank"><img class="img-fluid mb-4" src="{{ asset('public/images/front/editions2.webp') }}" alt="images"
+                        loading="lazy"></a>
                     <h3 class="sub_head">The Journal</h3>
                     <p>Reflections on design, ritual, and contemporary living.</p>
                     <a href="{{ route('front.journal') }}" target="_blank" class="com_btn">Explore</a>
@@ -508,8 +508,8 @@ alt="images" loading="lazy">
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
-                    <img class="img-fluid mb-4" src="{{ asset('public/images/front/editions3.webp') }}" alt="images"
-                        loading="lazy">
+                    <a href="{{ route('front.bespoke.commission') }}" target="_blank"><img class="img-fluid mb-4" src="{{ asset('public/images/front/editions3.webp') }}" alt="images"
+                        loading="lazy"></a>
                     <h3 class="sub_head">Bespoke Commissions</h3>
                     <p>Collaborative creations shaped around personal rituals and intent.</p>
                     <a href="{{ route('front.bespoke.commission') }}" target="_blank" class="com_btn">Explore</a>

@@ -343,7 +343,7 @@ class FrontController extends Controller
 
         try {
             // Save to database
-            $newsletter = Newsletter::create([
+            $newsletter = NewsLetter::create([
                 'email' => $request->newsletter_email,
             ]);
 
@@ -984,11 +984,11 @@ class FrontController extends Controller
         ];
 
         try {
-            Mail::send('email.admin.wedding_catalogue_request', $data, function ($message) use ($adminEmail) {
+            Mail::send('email.admin.corporate_kit_request', $data, function ($message) use ($adminEmail) {
                 $message->to($this->adminEmail)->subject('New Corporate Kit Request Received');
             });
        
-            Mail::send('email.front.wedding_catalogue_request', $data, function ($message) use ($userEmail) {
+            Mail::send('email.front.corporate_kit_request', $data, function ($message) use ($userEmail) {
                 $message->to($userEmail)->subject('Corporate Kit Request send Successfully');
             });
         } catch (Exception $e) {
