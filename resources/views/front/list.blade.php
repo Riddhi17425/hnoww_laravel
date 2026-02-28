@@ -67,13 +67,13 @@
                                 $imagePath = public_path('images/admin/product_list/' . $val->list_page_img);
                             @endphp
                             @if(isset($val->list_page_img) && $val->list_page_img != '' && file_exists($imagePath))
-                                <img class="img-fluid img_1" src="{{ isset($val->list_page_img) ? asset('public/images/admin/product_list/'.$val->list_page_img) : '' }}" alt="{{ $val->product_name ?? 'Product Image' }}">
+                                <a href="{{ route('front.product.details', $val->product_url) }}"><img class="img-fluid img_1" src="{{ isset($val->list_page_img) ? asset('public/images/admin/product_list/'.$val->list_page_img) : '' }}" alt="{{ $val->product_name ?? 'Product Image' }}"></a>
                             @else
-                                <img class="w-100 mb-2 mb-md-4" src="{{ asset('public/noimg.jpg') }}" alt='No Image Found'>
+                                <a href="{{ route('front.product.details', $val->product_url) }}"><img class="w-100 mb-2 mb-md-4" src="{{ asset('public/noimg.jpg') }}" alt='No Image Found'></a>
                             @endif
                         </div>
                             <div>
-                                <h3 class="sub_head">{{ $val->product_name ?? '' }}</h3>
+                                <h3 class="sub_head"><a href="{{ route('front.product.details', $val->product_url) }}">{{ $val->product_name ?? '' }}</a></h3>
                                 <p class>{!! $val->short_description ?? '' !!}</p>
                             </div>
                         <div>

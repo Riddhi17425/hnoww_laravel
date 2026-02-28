@@ -68,11 +68,11 @@
                         $imagePath = public_path('images/admin/category_banner/' . $val->banner_image);
                         @endphp
                         @if(isset($val->banner_image) && $val->banner_image != '' && file_exists($imagePath))
-                        <img class="w-100 mb-2 mb-md-4"
+                        <a href="{{ route('front.ceremonials', $val->id) }}" target="_blank"><img class="w-100 mb-2 mb-md-4"
                             src="{{ asset('public/images/admin/category_banner/'.$val->banner_image) }}"
-                            alt="{{ $val->category_name ?? 'Category Image' }}">
+                            alt="{{ $val->category_name ?? 'Category Image' }}"></a>
                         @else
-                        <img class="w-100 mb-2 mb-md-4" src="{{ asset('public/noimg.jpg') }}" alt='No Image Found'>
+                        <a href="{{ route('front.ceremonials', $val->id) }}" target="_blank"><img class="w-100 mb-2 mb-md-4" src="{{ asset('public/noimg.jpg') }}" alt='No Image Found'></a>
                         @endif
                     </div>
                     <div class="desire_box_bot_child">

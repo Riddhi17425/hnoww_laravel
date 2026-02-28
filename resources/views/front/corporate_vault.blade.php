@@ -204,20 +204,8 @@
         <div class="cor_kits_slider">
             @foreach($corporateKits as $key => $val)
             <div class="cor_kts">
-                <picture>
-                    {{-- <source media="(min-width: 768px)" srcset="{{ asset('public/images/front/corpotat-kits.webp') }}">
-                    <img class="img-fluid" src="{{ asset('public/images/front/corporate-kits-phone.webp') }}"
-                        alt="Description" style="width:auto;"> --}}
-                    <source media="(min-width: 768px)" srcset="{{ asset('public/images/admin/corporatekit/'.$val->image) }}" type="image/webp">
-                    <img class="img-fluid" src="{{ asset('public/images/admin/corporatekit/mobile_image/'.$val->mobile_image) }}"
-                        alt="corporate kit image" style="width:auto;">
-                </picture>
-
-                 {{-- <img  class="img-fluid d-none d-lg-block" src="{{ asset('images/admin/corporatekit/mobile_image/'.$val->mobile_image) }}" alt="">
-                 <img  class="img-fluid d-lg-none" src="{{ asset('images/admin/corporatekit/mobile_image/'.$val->mobile_image) }}" alt="">
-
-                <h1 class="img-fluid d-none d-lg-block">ravi</h1>
-                <h1 class="img-fluid d-lg-none">jadav</h1> --}}
+                        <img  class="img-fluid d-none d-lg-block" src="{{ asset('public/images/admin/corporatekit/'.$val->image) }}" alt="">
+                        <img  class="img-fluid d-lg-none" src="{{ asset('public/images/admin/corporatekit/mobile_image/'.$val->mobile_image) }}" alt="">
 
                 <div class="cor_kits_cont">
                     <div>
