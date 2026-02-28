@@ -447,6 +447,7 @@ alt="{{ $val->product_name ?? 'Product Image' }}">
 
 @push('script')
 <script>
+var bcFormSubmitted = false;
 document.addEventListener('DOMContentLoaded', function() {
     const commissionSelect = document.getElementById('bc_type_of_commission');
     const otherField = document.getElementById('other_commission_field');

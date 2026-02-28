@@ -319,6 +319,8 @@ class FrontController extends Controller
             $exists = DB::table('users')->where('email', $email)->exists();
         } elseif($table === 'bespoke_commission_enquiries') {
             $exists = DB::table('bespoke_commission_enquiries')->where('email', $email)->exists();
+        } elseif($table === 'ceremonial_inquiries') {
+            $exists = DB::table('ceremonial_inquiries')->where('email', $email)->exists();
         }
 
         return response()->json([
@@ -1445,7 +1447,7 @@ class FrontController extends Controller
     public function storeCeremonialInquiry(Request $request){
         $validator = Validator::make($request->all(), [
             'name'        => 'required|string|max:255',
-            'ceremonial_id'  => 'required|exists:ceremonials,id',
+            'ceremonial_id'  => 'required|exists:products,id',
             'email'       => 'required|email|max:255|unique:ceremonial_inquiries,email',
             'contact_no'  => 'nullable|string|max:15',
             'message'     => 'nullable|string',
@@ -1471,19 +1473,19 @@ class FrontController extends Controller
             'contact_no'  => $request->contact_no,
             'message'     => $request->message ?? NULL,
         ]);
-        $ceremonial = Ceremonial::where('id', $request->ceremonial_id)->first();
+        $ceremonial = Product::where('id', $request->ceremonial_id)->first();
         // SEND MAIL TO USER AND ADMIN
         $adminEmail = $this->adminEmail;
         $userEmail = $request->email;
         $data = [
             'name'        => $request->name ?? '',
-            'ceremonial'  => $ceremonial->title ?? '',
+            'ceremonial'  => $ceremonial->product_name ?? '',
             'email'       => $request->email ?? '',
             'contact_no'  => $request->contact_no ?? '',
             'message_data'     => $request->message ?? NULL,
         ];
 
-        //try {
+        try {
             Mail::send('email.admin.ceremonial_inquiry', $data, function ($message) use ($adminEmail) {
                 $message->to($this->adminEmail)->subject('New Ceremonial Inquiry Received');
             });
@@ -1491,9 +1493,9 @@ class FrontController extends Controller
             Mail::send('email.front.ceremonial_inquiry', $data, function ($message) use ($userEmail) {
                 $message->to($userEmail)->subject('Product Ceremonial send Successfully');
             });
-        // } catch (Exception $e) {
-        //     Log::error('Ceremonial Inquiry Mail sending failed: '.$e->getMessage());
-        // }
+        } catch (Exception $e) {
+            Log::error('Ceremonial Inquiry Mail sending failed: '.$e->getMessage());
+        }
 
         // SEND WHATSAPP MESSAGE TO ADMIN
         //$message = 'New Product inquiry is placed using email - '.$request->email;
@@ -1501,17 +1503,17 @@ class FrontController extends Controller
             "*Name:* {$request->name}\n" .
             "*Email:* {$request->email}\n" .
             "*Contact No:* {$request->contact_no}\n" .
-            "*Ceremonial:* {$ceremonial->title}\n" .
+            "*Ceremonial:* {$ceremonial->product_name}\n" .
             "*Message:* " . ($request->message ?? 'N/A') . "\n\n" .
             "— HNoWW";
 
-        //try {
+        try {
             $url = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode($message);
             //return redirect()->away($url);
             return back()->with('whatsapp_url', $url);
-        // } catch (Exception $e) {
-        //     Log::error('Ceremonial Inquiry Whatsapp message sending failed: '.$e->getMessage());
-        // }
+        } catch (Exception $e) {
+            Log::error('Ceremonial Inquiry Whatsapp message sending failed: '.$e->getMessage());
+        }
         return back()->with('success', 'Your Ceremonial inquiry has been submitted successfully!');
     }
 

@@ -37,6 +37,9 @@
                                 </div>
                                 <div class="text-center">
                                     <button class="com_btn bg-transparent w-100" type="submit">Verify</button>
+                                    <div class="mt-3">
+                                        <p>Want to Login? <a href="{{ route('front.auth', 'login') }}" style="color:var(--dark-900);"><u> Sign In</u></a></p>
+                                    </div>
                                 </div>
                             </form>
                         </div>

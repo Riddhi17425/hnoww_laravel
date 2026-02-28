@@ -396,6 +396,7 @@
 @push('script')
 <script>
 $(document).ready(function () {
+    var cmFormSubmitted = false;
     $('#ceremonialInquiry').on('show.bs.modal', function (event) {
         let button = $(event.relatedTarget);
         let ceremonialName = button.data('ceremonial-name');
@@ -464,8 +465,8 @@ $(document).ready(function () {
             $(element).addClass('is-valid').removeClass('is-invalid');
         },
         submitHandler: function(form) {
-            if (!formSubmitted) {
-                formSubmitted = true;
+            if (!cmFormSubmitted) {
+                cmFormSubmitted = true;
                 const btn = $(form).find('button[type="submit"]');
                 if (btn.length) {
                     btn.prop('disabled', true).text('Submitting...');
