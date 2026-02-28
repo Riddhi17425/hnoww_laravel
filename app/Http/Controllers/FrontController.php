@@ -770,6 +770,133 @@ class FrontController extends Controller
         return redirect()->back()->with('success', 'Corporate proposal request submitted successfully.');
     }
 
+    public function storeCorporateProductRequest(Request $request){
+        $qualityRange = config('global_values.quality_range');
+        $corporateBudget = config('global_values.corporate_budget');
+        $timeline = config('global_values.corporate_timeline');
+        $rules = [
+            'cp_full_name'             => 'required|string|min:2|max:100',
+            'cp_company_name'          => 'required|string|min:2|max:150',
+            'cp_phone'                 => 'required|regex:/^[0-9\s\-\+\(\)]+$/|min:7|max:20',
+            'cp_email'                 => 'required|email|max:150',
+            'cp_product_of_interest'   => 'nullable|array',
+            'cp_product_of_interest.*' => 'string',
+            'cp_quantity_range'        => 'required|string',
+            'cp_corporate_budget'      => 'nullable|string|max:100',
+            'cp_branding_requirements' => 'nullable|string|max:255',
+            'cp_delivery_date'         => 'required',
+            'cp_message'               => 'nullable|string|max:500',
+        ];
+        $messages = [
+            'cp_full_name.required'             => 'Full Name is required.',
+            'cp_full_name.min'                  => 'Full Name must be at least 2 characters.',
+            'cp_full_name.max'                  => 'Full Name cannot be longer than 100 characters.',
+            'cp_company_name.required'          => 'Company Organization is required.',
+            'cp_phone.required'                 => 'Phone Number is required.',
+            'cp_phone.regex'                   => 'Phone Number format is invalid.',
+            'cp_phone.min'                     => 'Phone Number is too short.',
+            'cp_phone.max'                     => 'phone Number is too long.',
+            'cp_email.required'                => 'Email Address is required.',
+            'cp_email.email'                   => 'Email must be a valid email address.',
+            'cp_quantity_range.required'       => 'Quantity Range is required.',
+            'cp_quantity_range.in'             => 'Selected Quantity Range is invalid.',
+            'cp_delivery_date.required'        => 'Delivery Timeline is required.',
+            'cp_message.max'                   => 'Message cannot exceed 500 characters.',
+        ];
+ 
+        // Validate the request
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+ 
+        // Save the data (example: assuming you have a model CorporateProposal)
+        $data = [
+            'full_name' => $request->cp_full_name,
+            'company_name' => $request->cp_company_name,
+            'phone' => $request->cp_phone,
+            'email' => $request->cp_email,
+            'quantity_range' => $request->cp_quantity_range,
+            'corporate_budget' => $request->cp_corporate_budget,
+            'branding_requirements' => $request->cp_branding_requirements,
+            'delivery_date' => $request->cp_delivery_date,
+            'message' => $request->cp_message
+        ];
+ 
+        // Convert array to string for cp_product_of_interest if needed (or save JSON)
+        if ($request->has('cp_product_of_interest')) {
+            $data['product_of_interest'] = json_encode($request->input('cp_product_of_interest'));
+        } else {
+            $data['product_of_interest'] = null;
+        }
+ 
+        CorporateProposalRequest::create($data);
+ 
+        $commaSeparatedProducts = '';
+        $productIds = $request->cp_product_of_interest;
+        $productNames = Product::whereIn('id', $productIds)->pluck('product_name')->toArray();
+        if(isset($productNames) && is_countable($productNames) && count($productNames) > 0){
+            $commaSeparatedProducts = implode(', ', $productNames);
+        }
+        // SEND MAIL TO USER AND ADMIN
+        $adminEmail = $this->adminEmail;
+        $userEmail = $request->cp_email;
+        $qualityRange = $qualityRange[$request->cp_quantity_range];
+        $corporate_budget = $corporateBudget[$request->cp_corporate_budget];
+        $timeline = $timeline[$request->cp_delivery_date];
+        $data = [
+            'name'        => $request->cp_full_name,
+            'company_name'        => $request->cp_company_name,
+            'phone'        => $request->cp_phone,
+            'email'       => $request->cp_email,
+            'product_of_interest' => $commaSeparatedProducts,
+            'quantity_range'  => $qualityRange,
+            'corporate_budget'  => $corporate_budget,
+            'branding_requirements'  => $request->cp_branding_requirements,
+            'delivery_date'  => $timeline,
+            'message_data'     => $request->cp_message ?? NULL,
+        ];
+ 
+        //try {
+            Mail::send('email.admin.corporate_product_request', $data, function ($message) use ($adminEmail) {
+                $message->to($this->adminEmail)->subject('New Corporate Product Request Received');
+            });
+       
+            Mail::send('email.front.corporate_product_request', $data, function ($message) use ($userEmail) {
+                $message->to($userEmail)->subject('Corporate Product Request send Successfully');
+            });
+        // } catch (Exception $e) {
+        //     Log::error('Inquiry Mail sending failed: '.$e->getMessage());
+        // }
+ 
+        // SEND WHATSAPP MESSAGE TO ADMIN
+        $message = 'New Corporate Product Request is placed using email - '.$request->cp_email;
+        $message = "📩 *New Corporate Proposal Request*\n\n" .
+                "*Full Name:* {$request->cp_full_name}\n" .
+                "*Company Name:* {$request->cp_company_name}\n" .
+                "*Phone:* {$request->cp_phone}\n" .
+                "*Email:* {$request->cp_email}\n" .
+                "*Product of Interest:* " . ($commaSeparatedProducts ?? 'N/A') . "\n" .
+                "*Quantity Range:* {$qualityRange}\n" .
+                "*Corporate Budget:* {$corporate_budget}\n" .
+                "*Branding Requirements:* {$request->cp_branding_requirements}\n" .
+                "*Delivery Date:* {$timeline}\n" .
+                "*Message:* " . ($request->cp_message ?? 'N/A') . "\n\n" .
+                "— HNoWW";
+ 
+        //try {
+            $url = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode($message);
+            //return redirect()->away($url);
+            return back()->with('whatsapp_url', $url);
+        // } catch (Exception $e) {
+        //     Log::error('Inquiry Whatsapp message sending failed: '.$e->getMessage());
+        // }
+ 
+        return redirect()->back()->with('success', 'Corporate product request submitted successfully.');
+    }
+
     public function storeCorporateKitRequest(Request $request){
         $qualityRange = config('global_values.quality_range');
         $rules = [

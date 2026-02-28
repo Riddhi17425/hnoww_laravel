@@ -2,20 +2,14 @@
 
 @section('content')
 <tr>
-    <td class="email-body">
-        <p>Hello {{ $name ?? 'User' }},</p>
-
-        <p>
+    <td style="padding: 40px;">
+        <h1 style="margin: 0 0 10px 0; font-family: 'Times New Roman', Times, serif; font-size: 28px; color: #222222; font-weight: bold;">Hello {{ $name ?? 'User' }},</h1>
+        <p style="margin: 0 0 40px 0; font-family: Arial, sans-serif; font-size: 16px; color: #777777;">
             Thank you. <br/>
             We review bespoke enquiries slowly and intentionally. <br/>
             If your request aligns with our practice, a member of the Atelier will be in touch.
         </p>
 
-
-        <p style="margin-top: 20px;">
-            Thanks & Regards,<br>
-            <strong>HNoWW</strong>
-        </p>
     </td>
 </tr>
 @endsection

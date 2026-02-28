@@ -342,8 +342,9 @@
                     <div class="text-center my-4">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form method="POST" action="{{ route('front.store.corporate.proposal.request') }}" id="requestCorporateProposalForm" class="ct_form">
+                    <form method="POST" action="{{ route('front.store.corporate.product.request') }}" id="requestCorporateProductForm" class="ct_form">
                         @csrf
+                        
                         <div class="row">
                             <!-- Full Name -->
                             <div class="col-lg-6">
@@ -435,8 +436,14 @@
                             <div class="col-lg-4">
                                 <div class="ct_input">
                                     <label class="sub_head">Approximate Budget</label>
-                                    <input type="text" placeholder="Enter Approximate Budget" name="cp_corporate_budget"
-                                        id="cp_corporate_budget" value="{{ old('cp_corporate_budget') }}">
+                                    <select name="cp_corporate_budget" id="cp_corporate_budget">
+                                        <option value="">Select</option>
+                                        @foreach(config('global_values.corporate_budget') as $key => $value)
+                                        <option value="{{ $key }}" {{ old('cp_corporate_budget') == $key ? 'selected' : '' }}>
+                                            {{ $value }}
+                                        </option>
+                                        @endforeach
+                                    </select>
                                     @error('cp_corporate_budget') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                             </div>
@@ -455,10 +462,15 @@
                             <div class="col-lg-6">
                                 <div class="ct_input">
                                     <label class="sub_head">Delivery Timeline <span class="text-danger">*</span></label>
-                                    <input type="date" name="cp_delivery_date" id="cp_delivery_date"
-                                        value="{{ old('cp_delivery_date') }}">
-                                    @error('cp_delivery_date') <small class="text-danger">{{ $message }}</small>
-                                    @enderror
+                                    <select name="cp_delivery_date" id="cp_delivery_date">
+                                        <option value="">Select</option>
+                                        @foreach(config('global_values.corporate_timeline') as $key => $value)
+                                        <option value="{{ $key }}" {{ old('cp_delivery_date') == $key ? 'selected' : '' }}>
+                                            {{ $value }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                    @error('cp_delivery_date') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                             </div>
 
@@ -466,8 +478,7 @@
                             <div class="col-12">
                                 <div class="ct_input">
                                     <label class="sub_head">Message / Notes</label>
-                                    <textarea name="cp_message" placeholder="Enter Message"
-                                        id="cp_message" rows="1">{{ old('cp_message') }}</textarea>
+                                    <textarea name="cp_message" placeholder="Enter Message" id="cp_message" rows="1">{{ old('cp_message') }}</textarea>
                                 </div>
                             </div>
 
@@ -649,8 +660,8 @@
             searchEnabled: true,
         });
         $('#cp_product_of_interest').on('change', function () {
-    $(this).valid();
-});
+            $(this).valid();
+        });
 
         var elementCp = $('#cp_product_of_interest')[0];  // get raw DOM element from jQuery object
         var choicesCp = new Choices(elementCp, {
@@ -658,6 +669,29 @@
             placeholder: true,
             placeholderValue: 'Select products',
             searchEnabled: true,
+        });
+
+        // Before modal opens
+        $('#requestCorporateProduct').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var categoryId = button.data('category');
+            if (!categoryId) return;
+            choicesCp.removeActiveItems();   // remove selected values
+            choicesCp.clearChoices();        // remove old dropdown options
+            $.ajax({
+                url: sitePath + '/get-products-by-category/' + categoryId,
+                type: 'GET',
+                success: function (response) {
+                    let newOptions = [];
+                    response.forEach(function (product) {
+                        newOptions.push({
+                            value: product.id,
+                            label: product.product_name
+                        });
+                    });
+                    choicesCp.setChoices(newOptions, 'value', 'label', true);
+                }
+            });
         });
 
         $("#requestCorporateKitProposalForm").validate({
@@ -760,7 +794,7 @@
             }
         });
 
-        $("#requestCorporateProposalForm").validate({
+        $("#requestCorporateProductForm").validate({
             ignore: [],
             rules: { 
                 cp_full_name: { 
@@ -789,12 +823,6 @@
                     required: true,
                 },
                 cp_quantity_range: { 
-                    required: true 
-                },
-                cp_corporate_budget: { 
-                    required: true 
-                },
-                cp_branding_requirements: { 
                     required: true 
                 },
                 cp_delivery_date: { 
@@ -833,12 +861,6 @@
                 },
                 cp_quantity_range: {
                     required: "Please select a quantity range"
-                },
-                cp_corporate_budget: {
-                    required: "Please select a budget comfort"
-                },
-                cp_branding_requirements: {
-                    required: "Please select a timeline"
                 },
                 cp_delivery_date:{
                     required: "Please select a Delivery Date"
