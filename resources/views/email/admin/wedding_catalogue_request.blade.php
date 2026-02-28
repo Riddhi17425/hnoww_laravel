@@ -139,10 +139,9 @@
         <h1
             style="margin: 0 0 10px 0; font-family: 'Times New Roman', Times, serif; font-size: 28px; color: #222222; font-weight: bold;">
             Hello Admin,</h1>
-        <p style="margin: 0 0 40px 0; font-family: Arial, sans-serif; font-size: 16px; color: #777777;">A request for a
-            bespoke corporate proposal has arrived.</p>
+        <p style="margin: 0 0 40px 0; font-family: Arial, sans-serif; font-size: 16px; color: #777777;">A new Wedding Consultation Request has been received. The details are provided below:</p>
 
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 40px;">
+        {{-- <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 40px;">
             <tr>
                 <td width="120" valign="top">
                     <img src="{{ asset('public/images/front/emails-card.png') }}" alt="The Gathering"
@@ -163,11 +162,11 @@
                         sculptural vessel for shared presence.</p>
                 </td>
             </tr>
-        </table>
+        </table> --}}
 
-        <h2
+        {{-- <h2
             style="margin: 0 0 20px 0; font-family: 'Times New Roman', Times, serif; font-size: 24px; color: #222222; font-weight: bold;">
-            Your Order Summary</h2>
+            Your Order Summary</h2> --}}
 
         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%"
             style="border-collapse: collapse;">
@@ -177,23 +176,7 @@
                     Full Name:</td>
                 <td width="65%"
                     style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">
-                    Oswald Test</td>
-            </tr>
-            <tr>
-                <td
-                    style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #888888;">
-                    Company Name:</td>
-                <td
-                    style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">
-                    Test Company</td>
-            </tr>
-            <tr>
-                <td
-                    style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #888888;">
-                    Role / Designation:</td>
-                <td
-                    style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">
-                    TESTT</td>
+                    {{ $full_name }}</td>
             </tr>
             <tr>
                 <td
@@ -201,47 +184,64 @@
                     Email:</td>
                 <td
                     style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">
-                    webdeveloper9.intelliworkz@gmail.com</td>
+                    {{ $email }}</td>
             </tr>
             <tr>
                 <td
                     style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #888888;">
-                    Budget Comfort:</td>
+                    Role.</td>
                 <td
                     style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">
-                    20-50</td>
+                    {{ $role }}</td>
+            </tr>
+            
+            <tr>
+                <td
+                    style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #888888;">
+                    Wedding Location</td>
+                <td
+                    style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">
+                    {{ $location ?? '' }}</td>
             </tr>
             <tr>
                 <td
                     style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #888888;">
-                    Timeline:</td>
+                    Wedding Date:</td>
                 <td
                     style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">
-                    Under AED 300</td>
+                    {{ $wedding_date }}</td>
             </tr>
             <tr>
                 <td
                     style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #888888;">
-                    Nature of Requirement:</td>
+                    Looking For:</td>
                 <td
                     style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">
-                    1-3 months</td>
+                    {{ $looking_for }}</td>
             </tr>
             <tr>
                 <td
                     style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #888888;">
-                    Message / Notes:</td>
+                    Approximate Guest Count:</td>
                 <td
                     style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">
-                    Client / Partner Gifting, Leadership / Board Gifts, Employee Recognition</td>
+                    {{ $guest_count }}</td>
             </tr>
             <tr>
                 <td
                     style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #888888;">
-                    Email:</td>
+                    Budget Band (overall):</td>
                 <td
                     style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">
-                    TEST</td>
+                    {{ $budget_band }}</td>
+            </tr>
+            <tr>
+                <td
+                    style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #888888;">
+                    Message:</td>
+                <td
+                    style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">
+                    {{ $message_note ?? '' }}</td>
             </tr>
         </table>
 

@@ -29,9 +29,9 @@
                             <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                                 <tr>
                                     <td align="center" style="font-family: Arial, sans-serif; font-size: 15px; color: #ffffff;">
-                                        <span style="display: inline-block; vertical-align: middle; color: #ffffff;">&#9993; studio@hnoww.com</span>
+                                        <span style="display: inline-block; vertical-align: middle; color: #ffffff;"><img src="{{asset('public/images/front/emails-emails.png')}}"> studio@hnoww.com</span>
                                         <span style="display: inline-block; color: #666666; margin: 0 15px; vertical-align: middle;">|</span>
-                                        <span style="display: inline-block; vertical-align: middle; color: #ffffff;">&#128222; +971 50 950 927</span>
+                                        <a href="tel:97150950927" style="display: inline-block; vertical-align: middle; color: #ffffff;"><img src="{{asset('public/images/front/emails-phone.png')}}"> +971 50 950 927</a>
                                     </td>
                                 </tr>
                             </table>

@@ -343,7 +343,7 @@ class FrontController extends Controller
 
         try {
             // Save to database
-            $newsletter = Newsletter::create([
+            $newsletter = NewsLetter::create([
                 'email' => $request->newsletter_email,
             ]);
 
@@ -898,6 +898,7 @@ class FrontController extends Controller
     }
 
     public function storeCorporateKitRequest(Request $request){
+        
         $qualityRange = config('global_values.quality_range');
         $rules = [
             'k_full_name'             => 'required|string|min:2|max:100',
@@ -934,11 +935,12 @@ class FrontController extends Controller
         // Validate the request
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
+            echo '<pre>'; print_r($validator->errors()); die;
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
         }
-       
+       echo "<pre>"; print_r($request->all()); die;
         $data = [
             'full_name' => $request->k_full_name,
             'company_name' => $request->k_company_name,
@@ -984,11 +986,11 @@ class FrontController extends Controller
         ];
 
         try {
-            Mail::send('email.admin.wedding_catalogue_request', $data, function ($message) use ($adminEmail) {
+            Mail::send('email.admin.corporate_kit_request', $data, function ($message) use ($adminEmail) {
                 $message->to($this->adminEmail)->subject('New Corporate Kit Request Received');
             });
        
-            Mail::send('email.front.wedding_catalogue_request', $data, function ($message) use ($userEmail) {
+            Mail::send('email.front.corporate_kit_request', $data, function ($message) use ($userEmail) {
                 $message->to($userEmail)->subject('Corporate Kit Request send Successfully');
             });
         } catch (Exception $e) {
