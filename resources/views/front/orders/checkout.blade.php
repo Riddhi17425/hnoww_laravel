@@ -13,6 +13,131 @@
     .sticky-header {
         /*background: #EDEAE4;*/
     }
+
+}
+
+@media (max-width: 768px) {
+    /* Table structure ko block mein badalna */
+    .shopping-summery, 
+    .shopping-summery tbody, 
+    .checkout-table-row, 
+    .checkout-table-row td {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    .summary-wrapper
+    {
+        padding:0px;
+    }
+
+    /* Header hide karna */
+    .shopping-summery thead {
+        display: none !important;
+    }
+
+    /* Har row ko ek card banana */
+    .checkout-table-row {
+        position: relative !important;
+        padding: 15px 15px 15px 115px !important; /* Left space for image */
+        margin-bottom: 20px !important;
+        /* border: 1px solid #f0f0f0 !important;
+        border-radius: 12px !important;
+        background: #fff !important;
+        min-height: 125px !important;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.03); */
+    }
+
+    /* 1. Image (Left Side) */
+    .checkout-table-row td:first-child {
+        position: absolute !important;
+        top: 15px !important;
+        left: 15px !important;
+        width: 85px !important;
+        padding: 0 !important;
+        border: none !important;
+    }
+
+    .checkout-table-row td:first-child img {
+        width: 85px !important;
+        height: 85px !important;
+        object-fit: cover;
+        /* border-radius: 8px; */
+    }
+
+    /* 2. Product Name (Top Middle) */
+    .checkout-table-row td:nth-child(2) {
+        padding: 0 35px 5px 0 !important; /* Space for trash icon */
+        text-align: left !important;
+        border: none !important;
+        font-weight: 700;
+        font-size: 16px;
+        color: #1a1a1a;
+        font-family: var(--heading-font);
+    }
+
+    /* 3. Unit Price (Name ke niche) */
+    .checkout-table-row td:nth-child(4) { /* Price column */
+        padding: 0 !important;
+        text-align: left !important;
+        border: none !important;
+        color: #777;
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    /* 4. Quantity Pill (Bottom Left) */
+    .checkout-table-row td:nth-child(3) { /* Quantity column */
+        padding: 5px 0 0 0 !important;
+        border: none !important;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    /* Quantity Pill Shape */
+    .increment_decrement {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid #eee;
+        border-radius: 30px; /* Pill Shape */
+        padding: 3px 12px;
+        background: #fdfdfd;
+    }
+
+    /* 5. Total Price (Bottom Right) */
+    .checkout-table-row td:nth-child(5) { /* Total column */
+        position: absolute !important;
+        bottom: 15px !important;
+        right: 15px !important;
+        padding: 0 !important;
+        border: none !important;
+        width: auto !important;
+    }
+
+    .checkout-table-row td:nth-child(5):before {
+        content: "AED "; /* Currency prefix agar chahiye */
+        font-size: 12px;
+    }
+
+    .checkout-table-row td:nth-child(5) {
+        font-size: 18px;
+        font-weight: 700;
+        color: #b5a48b; /* Gold shade */
+    }
+
+    /* 6. Trash Icon (Top Right) - Agar aapne add kiya hai */
+    .checkout-table-row td:last-child {
+        position: static !important;
+        top: 10px !important;
+        right: 10px !important;
+        padding: 0 !important;
+        border: none !important;
+    }
+
+    /* Labels hide karna */
+    .checkout-table-row td:before {
+        display: none !important;
+    }
 }
 </style>
 
@@ -149,7 +274,7 @@
                         </thead>
                         <tbody>
                             @foreach($cartItems as $item)
-                            <tr>
+                            <tr class="checkout-table-row">
                                 <td><a href="{{ route('front.product.details', $item->product->product_url) }}"><img
                                             class="img-fluid img_1"
                                             src="{{ isset($item->product->list_page_img) ? asset('public/images/admin/product_list/'.$item->product->list_page_img) : '' }}"
@@ -175,7 +300,7 @@
                     <div class="summary-details">
                         <div class="summary-row">
                             <span class="label">Subtotal</span>
-                            <span class="value">{{ number_format($subTotal, 2) }} AED</span>
+                            <span class="value"><span class="d-lg-none">AED</span> <br />{{ number_format($subTotal, 2) }} AED</span>
                         </div>
                     </div>
 

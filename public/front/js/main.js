@@ -370,5 +370,20 @@ document.querySelectorAll(".read-more-btn").forEach((btn) => {
 });
 
 
-// ---------------------------- login ------------------------
+// ---------------------------- user drop down ------------------------
+document.addEventListener("DOMContentLoaded", function () {
+    const userIcon = document.querySelector(".user_icon");
+    const userMenu = document.querySelector(".user_menu");
 
+    userIcon.addEventListener("click", function (e) {
+        e.preventDefault();
+        userMenu.classList.toggle("open");
+    });
+
+    // Outside click se close ho
+    document.addEventListener("click", function (e) {
+        if (!e.target.closest(".user_dropdown")) {
+            userMenu.classList.remove("open");
+        }
+    });
+});

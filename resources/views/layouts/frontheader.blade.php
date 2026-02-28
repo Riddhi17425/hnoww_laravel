@@ -224,10 +224,47 @@ $current_route ===
                             ? asset('public/images/front/home_magic_left.svg') 
                             : asset('public/images/front/header-logo.svg') }}" alt="Logo"></a>
             </div>
-            <span class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
-                aria-label="Toggle navigation">
-                <span class="toggler-icon"></span>
-            </span>
+
+            <div class="d-flex gap-3 align-items-center">
+                <!-- User Dropdown -->
+                <div class="user_dropdown d-lg-none">
+                    <a href="javascript:void(0)" class="user_icon">
+                        <img src="<?= $is_green ? asset('public/images/front/user-icon-black.svg') : asset('public/images/front/user-icon.svg') ?>"
+                            alt="User">
+                    </a>
+
+                    @auth
+                    <div class="user_menu">
+
+                        <a href="{{route('front.profile')}}">My Profile</a>
+                        <a href="{{ route('front.order.view') }}">My Orders</a>
+                        <!-- <a href="#">My Wishlist</a> -->
+                        <a href="{{ route('front.logout') }}">Logout</a>
+                    </div>
+                    @else
+                    <div class="user_menu">
+                        <a href="{{ route('front.auth', 'login') }}">Login</a>
+                        <a href="{{ route('front.auth', 'register') }}">Register</a>
+                    </div>
+                    @endauth
+
+
+                </div>
+
+                <!-- Cart with Badge -->
+                <a href="{{ route('front.cart.view') }}" class="cart_icon d-lg-none">
+                    <img src="<?= $is_green ? asset('public/images/front/cart-icon-black.svg') : asset('public/images/front/cart-icon.svg') ?>"
+                        alt="Cart">
+                    <span id="cart-count"
+                        class="cart_badge">{{ \App\Models\Cart::where('user_id', auth()->id())->sum('quantity') ?? 0 }}</span>
+                </a>
+
+                <span class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                    aria-label="Toggle navigation">
+                    <span class="toggler-icon"></span>
+                </span>
+            </div>
+
 
             <div class="collapse navbar-collapse justify-content-between" id="mainNavbar">
                 <ul class="mx-auto nav_links">
@@ -346,7 +383,7 @@ $current_route ===
                 </div> -->
 
                     <!-- User Dropdown -->
-                    <div class="user_dropdown">
+                    <div class="user_dropdown d-none d-lg-block">
                         <a href="javascript:void(0)" class="user_icon">
                             <img src="<?= $is_green ? asset('public/images/front/user-icon-black.svg') : asset('public/images/front/user-icon.svg') ?>"
                                 alt="User">
@@ -370,7 +407,7 @@ $current_route ===
 
                     </div>
                     <!-- Cart with Badge -->
-                    <a href="{{ route('front.cart.view') }}" class="cart_icon">
+                    <a href="{{ route('front.cart.view') }}" class="cart_icon d-none d-lg-block">
                         <img src="<?= $is_green ? asset('public/images/front/cart-icon-black.svg') : asset('public/images/front/cart-icon.svg') ?>"
                             alt="Cart">
                         <span id="cart-count"
