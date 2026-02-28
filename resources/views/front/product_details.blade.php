@@ -53,10 +53,12 @@
                                 @if(isset($val) && $val != '' && file_exists($imagePath))
                                     <img class="zoom-image img-fluid" src="{{ asset('public/images/admin/product_detail/'.$val)}}"
                                     alt="Product Detail Image">
+                                    <div class="zoom-lens"></div>
                                 @else
                                     <img class="img-fluid" src="{{asset('public/noimg.jpg')}}" alt="no image found">
+                                    <div class="zoom-lens"></div>
                                 @endif
-                                <div class="zoom-lens"></div>
+                                {{-- <div class="zoom-lens"></div> --}}
                             </div>
                         </div>
                         @endforeach

@@ -152,6 +152,40 @@ $('#image').on('change', function (e) {
     reader.readAsDataURL(file);
 });
 
+$('#mobile_image').on('change', function (e) {
+    let file = e.target.files[0];
+    if (!file) return;
+    activeInput = this;
+
+    // Store original image type & extension & name
+    originalImageType = file.type; // image/png, image/jpeg, image/webp
+    originalImageName = file.name; // keep original name
+
+    let reader = new FileReader();
+    reader.onload = function (event) {
+        $('#cropperModalImage').attr('src', event.target.result);
+        $('#cropperMobileImageModal').modal('show');
+
+        if (cropper) {
+            cropper.destroy();
+        }
+
+        cropper = new Cropper(document.getElementById('cropperModalImage'), {
+            viewMode: 1,
+            autoCropArea: 1,
+            responsive: true,
+            dragMode: 'move',
+            background: false,
+            movable: true,
+            zoomable: true,
+            scalable: false,
+            minContainerWidth: 900,
+            minContainerHeight: 500,
+        });
+    };
+    reader.readAsDataURL(file);
+});
+
 $('#cropImageBtn').on('click', function () {
     if (!cropper) return;
     cropper.getCroppedCanvas({
@@ -175,6 +209,35 @@ $('#cropImageBtn').on('click', function () {
         activeInput.files = dataTransfer.files;
 
         $('#cropperModal').modal('hide');
+        cropper.destroy();
+        cropper = null;
+
+    }, originalImageType, 1); // keep original type & max quality
+});
+
+$('#cropMobileImageBtn').on('click', function () {
+    if (!cropper) return;
+    cropper.getCroppedCanvas({
+        imageSmoothingEnabled: true,
+        imageSmoothingQuality: 'high',
+    }).toBlob(function (blob) {
+
+        // Use original file name
+        const file = new File(
+            [blob],
+            originalImageName,
+            {
+                type: originalImageType,
+                lastModified: Date.now()
+            }
+        );
+
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(file);
+        // Replace original input file
+        activeInput.files = dataTransfer.files;
+
+        $('#cropperMobileImageModal').modal('hide');
         cropper.destroy();
         cropper = null;
 

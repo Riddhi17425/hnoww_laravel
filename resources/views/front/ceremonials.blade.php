@@ -254,7 +254,7 @@
     </div>
 </section>
 
-<div class="modal fade audio_modal" id="ceremonialInquiry" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ceremonialInquiryLabel" aria-hidden="true">
+{{-- <div class="modal fade audio_modal" id="ceremonialInquiry" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ceremonialInquiryLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
@@ -315,6 +315,78 @@
                             <button type="submit" class="com_btn">Submit</button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> --}}
+<div class="modal fade audio_modal" id="ceremonialInquiry" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="ceremonialInquiryLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="audio-card d-grid">
+                    <div class="modal-header px-0 border-0">
+                        <h5 class="title_40" id="productInquiryLabel">Product Inquiry</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="ct_form">
+                        <form method="POST" id="ceremonialInquiryForm" action="{{ route('front.store.ceremonial.inquiry') }}">
+                            @csrf
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="ct_input">
+                                        <label class="sub_head">Name</label>
+                                        <input type="text"
+                                            name="name"
+                                            value="{{ old('name') }}" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();"
+                                            class="form-control @error('name') is-invalid @enderror">
+                                        @error('name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="ct_input">
+                                        <label class="sub_head">Inquiry For Ceremonial</label>
+                                        <input type="text" class="form-control mb-3" id="ceremonial_name" value="" disabled>
+                                        <input type="hidden" name="ceremonial_id" id="ceremonial_id" value="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="ct_input">
+                                        <label class="sub_head">Email</label>
+                                        <input type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror">
+                                        @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="ct_input">
+                                        <label class="sub_head">Contact Number</label>
+                                            <input type="text" name="contact_no" value="{{ old('contact_no') }}" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);" class="form-control @error('contact_no') is-invalid @enderror">
+                                        @error('contact_no')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="ct_input">
+                                        <label class="sub_head">Message</label>
+                                        <textarea name="message" rows="3" class="form-control @error('message') is-invalid @enderror">{{ old('message') }}</textarea>
+                                    @error('message')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 text-center">
+                                    <button type="button" class="com_btn bg-transparent"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="com_btn bg-transparent ms-2">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

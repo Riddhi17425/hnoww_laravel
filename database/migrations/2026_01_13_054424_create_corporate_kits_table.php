@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('short_description', 500)->nullable();
             $table->string('large_description', 1500)->nullable();
             $table->string('image')->nullable();
+            $table->string('mobile_image')->nullable();
             $table->string('price_range')->nullable();
             $table->string('moq')->nullable();
             $table->tinyInteger('is_active')->default(1)->comment("0 = Active 1 = In-active");

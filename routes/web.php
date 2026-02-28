@@ -50,6 +50,7 @@ Route::name('front.')->group(function () {
 
 	Route::get('/atelier', [FrontController::class, 'getAtelier'])->name('atelier');
 	Route::post('store-corporate-proposal-request', [FrontController::class, 'storeCorporateProposalRequest'])->name('store.corporate.proposal.request');
+	Route::post('store-corporate-product-request', [FrontController::class, 'storeCorporateProductRequest'])->name('store.corporate.product.request');
 	Route::post('store-corporate-kit-request', [FrontController::class, 'storeCorporateKitRequest'])->name('store.corporate.kit.request');
     Route::post('store-wedding-catelogue-request', [FrontController::class, 'storeWeddingCatalogueRequest'])->name('store.wedding.catelogue.request');
 	Route::post('store-bespoke-commission-request', [FrontController::class, 'storeBespokeCommissionRequest'])->name('store.bespoke.commission.request');
@@ -62,7 +63,7 @@ Route::name('front.')->group(function () {
 	Route::get('/privacy', [FrontController::class, 'getprivacy'])->name('privacy');
 
     Route::get('/corporate-vault/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
-	Route::get('/get-products-by-category', [FrontController::class, 'getProductsByCategory'])->name('get.products.by.category');
+	Route::get('/get-products-by-category/{category_id}', [FrontController::class, 'getProductsByCategory'])->name('get.products.by.category');
     Route::get('/wedding-vault', [FrontController::class, 'getWeddingVault'])->name('wedding.vault');
 	Route::post('/wedding-vault/send-email', [FrontController::class, 'sendUnlockWeddingEmail'])->name('wedding-vault.send-email');
 	Route::post('/wedding-vault/verify-otp', [FrontController::class, 'verifyWeddingVaultOtp'])->name('wedding-vault.verify-otp');
