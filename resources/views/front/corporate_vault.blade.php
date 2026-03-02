@@ -32,6 +32,7 @@
 @if(isset($categories) && is_countable($categories) && count($categories) > 0)
 
 @foreach($categories as $k => $v)
+@if(isset($v->products) && is_countable($v->products) && count($v->products) > 0)
 <section class="mt_120 mb_120">
     <div class="container">
         <div class="section_header">
@@ -79,8 +80,8 @@
             <div class="col-md-4">
                 <div class="desire_box">
                     <div class="hospitality_img">
-                        <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/hospitality3.webp')}}"
-                            alt="images">
+                        {{-- <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/hospitality3.webp')}}" alt="images"> --}}
+                        <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/hospitality3.webp')}}" alt="images">
                         <div class="hospitality_img_overlay">
                             <h3 class="title_36">These objects are not decorative.
                                 <p></p>
@@ -132,6 +133,7 @@
     </div>
     </div>
 </section>
+@endif
 @endforeach
 
 @endif

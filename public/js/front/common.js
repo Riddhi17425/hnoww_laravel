@@ -540,5 +540,52 @@ $( document ).ready(function() {
     });
 
 
+    $("#whatsapForm").validate({
+    rules: { 
+        phone: { 
+            required: true, 
+        },
+        message: { 
+            required: true,
+            minlength: 2,
+            maxlength: 150
+        },
+    },
+    messages: {
+        phone: {
+            required: "Please enter Phone No.",
+        },
+        message: {
+            required: "Please enter Message",
+            minlength: "Message must be at least 2 characters",
+            maxlength: "Message cannot exceed 150 characters"
+        },
+    },
+    errorElement: 'div',
+    errorPlacement: function(error, element) {
+        // if (element.attr('name') === 'nature_of_requirement[]') {
+        //     element.closest('.col-lg-4').append(error);
+        // } else {
+            error.insertAfter(element);
+       // }
+    },
+    highlight: function(element) {
+        $(element).addClass('is-invalid').removeClass('is-valid');
+    },
+    unhighlight: function(element) {
+        $(element).addClass('is-valid').removeClass('is-invalid');
+    },
+    submitHandler: function(form) {
+        // if (!cFormSubmitted) {
+            // cFormSubmitted = true;
+            // const btn = $(form).find('button[type="submit"]');
+            // if (btn.length) {
+            //     btn.prop('disabled', true).text('Submitting...');
+            // }
+            form.submit();
+        // }
+    }
+});
+
 
 });

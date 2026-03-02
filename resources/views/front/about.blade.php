@@ -215,7 +215,7 @@
                 <h2>
                     Founder
                 </h2>
-                <p class="mb-0">viral kotecha</p>
+                <p class="mb-0">Viral Kotecha</p>
             </div>
 
             <div>

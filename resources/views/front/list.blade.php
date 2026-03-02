@@ -178,7 +178,7 @@
                 </p>
             </div>
             <div>
-                <a href="javascript:void(0);" class="btn_2">SHOP GIFTS {{$category ? $category->category_name : '' }}</a>   
+                {{-- <a href="javascript:void(0);" class="btn_2">SHOP GIFTS {{$category ? $category->category_name : '' }}</a>    --}}
             </div>
         </div>
     </div>

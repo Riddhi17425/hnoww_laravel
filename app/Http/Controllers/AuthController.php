@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{User};
+use App\Models\{User, WhatsappInquiry};
 use Auth;
 use Session;
 use Hash;
 use Illuminate\Support\Facades\Validator;
-
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -168,6 +168,54 @@ class AuthController extends Controller
             false,
             'Lax'
         );
+    }
+// Hello @~Sal Ma'am, We have done all changes as you mentioned except whatsapp message integration
+    public function whatsaapInquiry(Request $request){
+        $validator = Validator::make($request->all(), [
+            'number' => 'required',
+            'message' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        WhatsappInquiry::create([
+            'number'  => $request->number,
+            'message'  => $request->message,
+        ]);
+    
+        $timestamp = Carbon::now()->format('Y-m-d H:i:s');
+        // Google Sheet expects:
+        $sheetsData = [
+            'form_type' => 'whatsapp inquiry',
+            'contact'   => $request->number,
+            'message'  => $request->message,
+            'date'      => $timestamp,
+        ];
+    
+        // Send to Google Sheets
+        try {
+            Http::withHeaders(['Content-Type' => 'application/json'])
+                ->post('https://script.google.com/macros/s/AKfycbyiWRofXVf9V0lj8xKffnzl3ygyRIzPh_EJ2FvgPmClfgJWU0xHe0hE63BaLDCSVjfE/exec', 
+                    $sheetsData
+                );
+        } catch (\Exception $e) {
+            \Log::error('Google Sheets Exception (WhatsApp Inquiry):', [
+                'message'   => $e->getMessage(),
+                'trace'     => $e->getTraceAsString(),
+                'data_sent' => $sheetsData
+            ]);
+        }
+    
+        // Redirect to WhatsApp
+        $number = $request->number;
+        $message = 'Inquiry from the website with Phone No. - '. $number.' and Message - '. $request->message;
+        $whatsappUrl = "https://api.whatsapp.com/send/?phone={$number}&text=" . urlencode($message);
+    
+        //     const fullMessage = `Inquiry from ${countryName} (+${dialCode}): ${message}`;
+//     const url = `https://wa.me/${businessNumber}?text=${encodeURIComponent(fullMessage)}`;
+
+        return redirect()->away($whatsappUrl);
     }
 
 }

@@ -175,13 +175,19 @@
             <h4>HNOWW</h4>
             <p>ARTFUL GIVING • GLOBAL INQUIRY</p>
         </div>
-        <div class="wa-body">
-            <input type="tel" id="wa-phone">
-
-            <textarea id="wa-textarea" placeholder="How may we assist with your bespoke request?"></textarea>
-
-            <button class="wa-send" onclick="sendWAMessage()">Start Chat</button>
-        </div>
+        <form method="POST" action="{{ route('front.whatsaap.inquiry') }}" id="whatsapForm">
+          @csrf
+            <div class="wa-body">
+                <input type="tel" name="phone" id="wa-phone" oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,15);" required>
+                <textarea id="wa-textarea" name="message" placeholder="How may we assist with your bespoke request?" required></textarea>
+                <!--Hidden fields -->
+                <input type="hidden" name="number" id="wa_full_phone">
+                <input type="hidden" name="country" id="wa_country_name">
+                
+                <button class="wa-send" type="submit">Start Chat</button>
+                {{-- <button class="wa-send" type="submit" onclick="sendWAMessage()">Start Chat</button> --}}
+            </div>
+        </form>
     </div>
 </div>
 
@@ -189,10 +195,23 @@
 <script>
 // Initialize the professional country picker
 const phoneInput = document.querySelector("#wa-phone");
+const countryNameField = document.querySelector("#wa_country_name");
+const fullPhoneField = document.querySelector("#wa_full_phone");
+
 const iti = window.intlTelInput(phoneInput, {
-    initialCountry: "in", // Default to India
+    initialCountry: "ae", // Default to India
     separateDialCode: true,
     utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+});
+
+const form = document.getElementById("whatsapForm");
+form.addEventListener("submit", function (e) {
+    const countryData = iti.getSelectedCountryData();
+    const dialCode = countryData.dialCode;
+    const countryName = countryData.name;
+    const phoneNumber = phoneInput.value.replace(/\s+/g, "");
+    fullPhoneField.value = `+${dialCode}${phoneNumber}`;
+    countryNameField.value = countryName;
 });
 
 function toggleWAModal() {
@@ -200,19 +219,18 @@ function toggleWAModal() {
     modal.style.display = (modal.style.display === 'block') ? 'none' : 'block';
 }
 
-function sendWAMessage() {
-    // REPLACE WITH YOUR ACTUAL BUSINESS PHONE
-    const businessNumber = "919876543210";
+// function sendWAMessage() {
+//     // REPLACE WITH YOUR ACTUAL BUSINESS PHONE
+//     const businessNumber = "919876543210";
 
-    const countryData = iti.getSelectedCountryData();
-    const countryName = countryData.name;
-    const dialCode = countryData.dialCode;
-    const message = document.getElementById('wa-textarea').value;
+//     const countryData = iti.getSelectedCountryData();
+//     const countryName = countryData.name;
+//     const dialCode = countryData.dialCode;
+//     const message = document.getElementById('wa-textarea').value;
+//     const fullMessage = `Inquiry from ${countryName} (+${dialCode}): ${message}`;
+//     const url = `https://wa.me/${businessNumber}?text=${encodeURIComponent(fullMessage)}`;
 
-    const fullMessage = `Inquiry from ${countryName} (+${dialCode}): ${message}`;
-    const url = `https://wa.me/${businessNumber}?text=${encodeURIComponent(fullMessage)}`;
-
-    window.open(url, '_blank');
-    toggleWAModal();
-}
+//     //window.open(url, '_blank');
+//     toggleWAModal();
+// }
 </script>

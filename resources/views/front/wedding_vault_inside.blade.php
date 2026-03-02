@@ -68,11 +68,11 @@
                         $imagePath = public_path('images/admin/category_banner/' . $val->banner_image);
                         @endphp
                         @if(isset($val->banner_image) && $val->banner_image != '' && file_exists($imagePath))
-                        <a href="{{ route('front.ceremonials', $val->id) }}" target="_blank"><img class="w-100 mb-2 mb-md-4"
+                        <a href="{{ route('front.ceremonials', $val->id) }}"><img class="w-100 mb-2 mb-md-4"
                             src="{{ asset('public/images/admin/category_banner/'.$val->banner_image) }}"
                             alt="{{ $val->category_name ?? 'Category Image' }}"></a>
                         @else
-                        <a href="{{ route('front.ceremonials', $val->id) }}" target="_blank"><img class="w-100 mb-2 mb-md-4" src="{{ asset('public/noimg.jpg') }}" alt='No Image Found'></a>
+                        <a href="{{ route('front.ceremonials', $val->id) }}"><img class="w-100 mb-2 mb-md-4" src="{{ asset('public/noimg.jpg') }}" alt='No Image Found'></a>
                         @endif
                     </div>
                     <div class="desire_box_bot_child">
@@ -80,7 +80,7 @@
                             <h3 class="sub_head">{{ $val->category_name ?? '' }} </h3>
                             <p>{!! $val->description ?? '' !!}</p>
                         </div>
-                        <a href="{{ route('front.ceremonials', $val->id) }}" target="_blank">
+                        <a href="{{ route('front.ceremonials', $val->id) }}">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
                                 <path
                                     d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"

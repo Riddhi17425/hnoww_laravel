@@ -210,8 +210,8 @@
 
 <section class="cta_footer mt_120">
     <div class="container">
-        <div class="cta_ftwrapper">
-            <div>
+        {{-- <div class="cta_ftwrapper"> --}}
+            {{-- <div>
                 <p class="sub_head mb-0">
                     <span>
                         <svg width="146" height="11" viewBox="0 0 146 11" fill="none"
@@ -249,8 +249,8 @@
             </div>
             <div>
                 <a href="javascript:void(0)" class="btn_2">SHOP GIFTS FOR HIM</a>
-            </div>
-        </div>
+            </div> --}}
+        {{-- </div> --}}
     </div>
 </section>
 

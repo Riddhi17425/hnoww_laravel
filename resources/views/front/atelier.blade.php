@@ -192,7 +192,7 @@
         </div>
 
         <div class="mt_35 text-center">
-            <a href="{{ route('front.blessings.library') }}" target="_blank" class="com_btn"> Explore All Blessings </a>
+            <a href="{{ route('front.blessings.library') }}" class="com_btn"> Explore All Blessings </a>
         </div>
     </div>
 </section>
@@ -242,7 +242,7 @@
         </div>
 
         <div class="mt_35 text-center">
-            <a href="{{ route('front.journal') }}" target="_blank" class="com_btn">Read the Journal </a>
+            <a href="{{ route('front.journal') }}" class="com_btn">Read the Journal </a>
         </div>
 
     </div>

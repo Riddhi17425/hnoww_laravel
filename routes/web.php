@@ -110,6 +110,7 @@ Route::name('front.')->group(function () {
 	});
 
 	Route::post('/cookie-consent', [AuthController::class, 'cookieConsent']);
+	Route::post('/whatsaap-inquiry', [AuthController::class, 'whatsaapInquiry'])->name('whatsaap.inquiry');
 
 });
   

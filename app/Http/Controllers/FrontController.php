@@ -554,7 +554,9 @@ class FrontController extends Controller
     }
 
     public function getCorporateVault(Request $request, $catSlug = NULL){
-        $categories = Category::where('category_type', 2)->with('products')->where('is_active', 0)->whereNull('deleted_at')->get();
+        $categories = Category::where('category_type', 2)->with(['products' => function ($query) {
+            $query->where('is_active', 0)->whereNull('deleted_at');
+        }])->where('is_active', 0)->whereNull('deleted_at')->get();
         $selectedCategory = Category::where('category_url', $catSlug)->first();
         $products = Product::where('product_type', 2)->isActive()->notDeleted();
         if($catSlug != NULL && $selectedCategory != ''){

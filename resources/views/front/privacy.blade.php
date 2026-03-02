@@ -336,7 +336,7 @@
 
 <section class="cta_footer mt_120">
     <div class="container">
-        <div class="cta_ftwrapper">
+        {{-- <div class="cta_ftwrapper">
             <div>
                 <p class="sub_head mb-0">
                     <span>
@@ -377,9 +377,9 @@
                 <p class="cta_ft_center">Our Concierge will curate three <br /> perfect options for you.</p>
             </div>
             <div>
-                {{-- <a href="javascript:void(0)" class="btn_2">Begin Your Journey </a> --}}
+                <a href="javascript:void(0)" class="btn_2">Begin Your Journey </a>
             </div>
-        </div>
+        </div> --}}
     </div>
 </section>
 
