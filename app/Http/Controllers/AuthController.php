@@ -180,10 +180,10 @@ class AuthController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        WhatsappInquiry::create([
-            'number'  => $request->number,
-            'message'  => $request->message,
-        ]);
+        // WhatsappInquiry::create([
+        //     'number'  => $request->number,
+        //     'message'  => $request->message,
+        // ]);
     
         $timestamp = Carbon::now()->format('Y-m-d H:i:s');
         // Google Sheet expects:
@@ -197,9 +197,12 @@ class AuthController extends Controller
         // Send to Google Sheets
         try {
             Http::withHeaders(['Content-Type' => 'application/json'])
-                ->post('https://script.google.com/macros/s/AKfycbxMKJUNU4XdEuck4ouI-ntzHHooiMuOKsdxEBdAB8KL1hvLXMpDJbK4B10KR2VsSRNLZg/exec', 
+                ->post('https://script.google.com/macros/s/AKfycbwC1jNkkBNUH9lJsOtG5gk5DZePCISChsgcTNzE-_v8e2FJdSjs_eI3JLmLB-ZZ5GCZ/exec', 
                     $sheetsData
                 );
+            if ($response->failed()) {
+                \Log::error('Google Sheet request failed: '.$response->body());
+            }
         } catch (\Exception $e) {
             \Log::error('Google Sheets Exception (WhatsApp Inquiry):', [
                 'message'   => $e->getMessage(),
@@ -207,7 +210,7 @@ class AuthController extends Controller
                 'data_sent' => $sheetsData
             ]);
         }
-    
+
         // Redirect to WhatsApp
         $number = $request->number;
         $message = 'Inquiry from the website with Phone No. - '. $number.' and Message - '. $request->message;

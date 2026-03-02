@@ -203,7 +203,7 @@ $(document).on('change', '.input-number', function() {
     }, 300); // debounce
 });
 window.appData = {
-    emptyCartImage: "{{ asset('public/images/front/emty_cart.png') }}",
+    emptyCartImage: "{{ asset('public/images/front/emty_cart.webp') }}",
     homeUrl: "{{ route('front.home') }}"
 };
 </script>

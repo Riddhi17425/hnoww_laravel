@@ -255,8 +255,7 @@ $current_route ===
                 <a href="{{ route('front.cart.view') }}" class="cart_icon d-lg-none">
                     <img src="<?= $is_green ? asset('public/images/front/cart-icon-black.svg') : asset('public/images/front/cart-icon.svg') ?>"
                         alt="Cart">
-                    <span id="cart-count"
-                        class="cart_badge">{{ \App\Models\Cart::where('user_id', auth()->id())->sum('quantity') ?? 0 }}</span>
+                    <span id="cart-count" class="cart-total cart_badge">{{ \App\Models\Cart::where('user_id', auth()->id())->sum('quantity') ?? 0 }}</span>
                 </a>
 
                 <span class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
@@ -408,10 +407,8 @@ $current_route ===
                     </div>
                     <!-- Cart with Badge -->
                     <a href="{{ route('front.cart.view') }}" class="cart_icon d-none d-lg-block">
-                        <img src="<?= $is_green ? asset('public/images/front/cart-icon-black.svg') : asset('public/images/front/cart-icon.svg') ?>"
-                            alt="Cart">
-                        <span id="cart-count"
-                            class="cart_badge">{{ \App\Models\Cart::where('user_id', auth()->id())->sum('quantity') ?? 0 }}</span>
+                        <img src="<?= $is_green ? asset('public/images/front/cart-icon-black.svg') : asset('public/images/front/cart-icon.svg') ?>" alt="Cart">
+                        <span id="cart-count" class="cart-total cart_badge">{{ \App\Models\Cart::where('user_id', auth()->id())->sum('quantity') ?? 0 }}</span>
                     </a>
 
                     <div class="language-select ms-lg-3">

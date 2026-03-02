@@ -645,9 +645,13 @@ $(document).on('click', '.add_to_cart_btn', function() {
                     confirmButtonColor: '#B58A46',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        let currentCount = parseInt($('#cart-count').text()) || 0;
-                        let addedQty = parseInt($('#product-qty').val()) || 1;
-                        $('#cart-count').text(currentCount + addedQty);
+                        // Reload the page when OK button is clicked
+                        //location.reload();
+                        // let currentCount = parseInt($('#cart-count').text()) || 0;
+                        // let addedQty = parseInt($('#product-qty').val()) || 1;
+                        // $('#cart-count').text(currentCount + addedQty);
+                        let newCount = response.cart_count || 0;
+                        $('.cart-total').text(newCount).show();
                         $('#cart-count').show();
                     }
                 });

@@ -179,7 +179,7 @@ class BlessingController extends Controller
             $finalAudio = '';
             foreach($chunks as $chunk){
                 $text = urlencode($chunk);
-                $url = "https://translate.googleapis.com/translate_tts?ie=UTF-8&q={$text}&tl=en&client=gtx";
+                $url = "https://translate.googleapis.com/translate_tts?ie=UTF-8&q={$text}&tl=en-IN&client=gtx";
                 $response = Http::withHeaders([
                     'User-Agent' => 'Mozilla/5.0'
                 ])->get($url);
@@ -314,7 +314,7 @@ class BlessingController extends Controller
             foreach($chunks as $chunk){
                 $text = urlencode($chunk);
                 // Use reliable Google API endpoint
-                $url = "https://translate.googleapis.com/translate_tts?ie=UTF-8&q={$text}&tl=en&client=gtx";
+                $url = "https://translate.googleapis.com/translate_tts?ie=UTF-8&q={$text}&tl=en-IN&client=gtx";
                 $response = Http::withHeaders([
                     'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
                 ])->get($url);

@@ -164,7 +164,7 @@
                         </div>
                     </div>
                     <div class="mt-4">
-                        <a href="{{ route('front.order.view') }}" class="com_btn add_to_cart_btn" data-product-id="9"> Back to Order</a>
+                        <a href="{{ route('front.order.view') }}" class="com_btn" data-product-id="9"> Back to Order</a>
                     </div>
                 </div>
             </div>

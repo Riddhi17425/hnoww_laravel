@@ -83,7 +83,8 @@ class CartController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => 'Product added to cart successfully!'
+            'message' => 'Product added to cart successfully!',
+            'cart_count' => Cart::where('user_id', auth()->id())->sum('quantity'),
         ]);
     }
 

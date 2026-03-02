@@ -338,8 +338,9 @@
                                         <label class="sub_head">Name</label>
                                         <input type="text"
                                             name="name"
+                                            placeholder="Enter Name"
                                             value="{{ old('name') }}" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();"
-                                            class="form-control @error('name') is-invalid @enderror">
+                                            class="@error('name') is-invalid @enderror">
                                         @error('name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -348,14 +349,14 @@
                                 <div class="col-lg-6">
                                     <div class="ct_input">
                                         <label class="sub_head">Inquiry For Ceremonial</label>
-                                        <input type="text" class="form-control mb-3" id="ceremonial_name" value="" disabled>
+                                        <input type="text" class="mb-3" id="ceremonial_name" value="" disabled>
                                         <input type="hidden" name="ceremonial_id" id="ceremonial_id" value="">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="ct_input">
                                         <label class="sub_head">Email</label>
-                                        <input type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror">
+                                        <input type="email" placeholder="Enter Email" name="email" value="{{ old('email') }}" class="@error('email') is-invalid @enderror">
                                         @error('email')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -364,7 +365,7 @@
                                 <div class="col-lg-6">
                                     <div class="ct_input">
                                         <label class="sub_head">Contact Number</label>
-                                            <input type="text" name="contact_no" value="{{ old('contact_no') }}" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);" class="form-control @error('contact_no') is-invalid @enderror">
+                                            <input type="text" placeholder="Enter Contact Number" name="contact_no" value="{{ old('contact_no') }}" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);" class="@error('contact_no') is-invalid @enderror">
                                         @error('contact_no')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -373,7 +374,7 @@
                                 <div class="col-lg-12">
                                     <div class="ct_input">
                                         <label class="sub_head">Message</label>
-                                        <textarea name="message" rows="3" class="form-control @error('message') is-invalid @enderror">{{ old('message') }}</textarea>
+                                        <textarea name="message" placeholder="Enter Message" rows="1" @error('message') is-invalid @enderror>{{ old('message') }}</textarea>
                                     @error('message')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
