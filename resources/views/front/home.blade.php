@@ -493,7 +493,7 @@ alt="images" loading="lazy">
                     <a href="{{ route('front.blessings.library') }}"><img class="img-fluid mb-4" src="{{ asset('public/images/front/editions1.webp') }}" alt="images"
                         loading="lazy"></a>
                     <h3 class="sub_head">The Blessing Library</h3>
-                    <p>Written blessings and words of intention for home, union, and self.</p>
+                    <p style="height:40px;">Written blessings and words of intention for home, union, and self.</p>
                     <a href="{{ route('front.blessings.library') }}" class="com_btn">Explore </a>
                 </div>
             </div>
@@ -502,7 +502,7 @@ alt="images" loading="lazy">
                     <a href="{{ route('front.journal') }}"><img class="img-fluid mb-4" src="{{ asset('public/images/front/editions2.webp') }}" alt="images"
                         loading="lazy"></a>
                     <h3 class="sub_head">The Journal</h3>
-                    <p>Reflections on design, ritual, and contemporary living.</p>
+                    <p style="height:40px;">Reflections on design, ritual, and contemporary living.</p>
                     <a href="{{ route('front.journal') }}" class="com_btn">Explore</a>
                 </div>
             </div>
@@ -511,7 +511,7 @@ alt="images" loading="lazy">
                     <a href="{{ route('front.bespoke.commission') }}"><img class="img-fluid mb-4" src="{{ asset('public/images/front/editions3.webp') }}" alt="images"
                         loading="lazy"></a>
                     <h3 class="sub_head">Bespoke Commissions</h3>
-                    <p>Collaborative creations shaped around personal rituals and intent.</p>
+                    <p style="height:40px;">Collaborative creations shaped around personal rituals and intent.</p>
                     <a href="{{ route('front.bespoke.commission') }}" class="com_btn">Explore</a>
                 </div>
             </div>

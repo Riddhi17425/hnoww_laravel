@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 
 class AuthController extends Controller
 {
@@ -196,7 +197,7 @@ class AuthController extends Controller
         // Send to Google Sheets
         try {
             Http::withHeaders(['Content-Type' => 'application/json'])
-                ->post('https://script.google.com/macros/s/AKfycbyiWRofXVf9V0lj8xKffnzl3ygyRIzPh_EJ2FvgPmClfgJWU0xHe0hE63BaLDCSVjfE/exec', 
+                ->post('https://script.google.com/macros/s/AKfycbxMKJUNU4XdEuck4ouI-ntzHHooiMuOKsdxEBdAB8KL1hvLXMpDJbK4B10KR2VsSRNLZg/exec', 
                     $sheetsData
                 );
         } catch (\Exception $e) {
@@ -211,10 +212,7 @@ class AuthController extends Controller
         $number = $request->number;
         $message = 'Inquiry from the website with Phone No. - '. $number.' and Message - '. $request->message;
         $whatsappUrl = "https://api.whatsapp.com/send/?phone={$number}&text=" . urlencode($message);
-    
-        //     const fullMessage = `Inquiry from ${countryName} (+${dialCode}): ${message}`;
-//     const url = `https://wa.me/${businessNumber}?text=${encodeURIComponent(fullMessage)}`;
-
+   
         return redirect()->away($whatsappUrl);
     }
 

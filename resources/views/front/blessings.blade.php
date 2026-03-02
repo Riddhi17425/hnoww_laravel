@@ -212,8 +212,8 @@
                             </div>
 
                             <div class="col-md-12">
-                                <label class="sub_head">Message/Nots</label>
-                                <textarea name="w_message" placeholder="Nots" id="#" rows="1"
+                                <label class="sub_head">Message/Notes</label>
+                                <textarea name="w_message" placeholder="Notes" id="#" rows="1"
                                     aria-invalid="false"></textarea>
                             </div>
                         </div>
