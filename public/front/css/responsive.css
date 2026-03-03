@@ -222,7 +222,8 @@
 
     .increment_decrement .span_value {
         font-size: 24px;
-        padding: 0 30px;
+        /* padding: 0 30px; */
+        width: 70px;
     }
 
     .increment_decrement_area {
@@ -600,7 +601,7 @@
 
     .increment_decrement .span_value {
         font-size: 18px;
-        padding: 0 30px;
+        /* padding: 0 30px; */
     }
 
     .increment_decrement svg {
@@ -1044,7 +1045,7 @@
 
     .increment_decrement .span_value {
         font-size: 16px;
-        padding: 0 30px;
+        /* padding: 0 30px; */
     }
 
     .increment_decrement_area {
@@ -1884,5 +1885,9 @@
     .cor_kits_cont .sub_head {
         font-size: 16px;
         /* line-height: 24px; */
+    }
+
+        .increment_decrement .span_value {
+        width: 60px;
     }
 }

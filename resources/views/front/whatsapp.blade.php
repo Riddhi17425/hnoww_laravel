@@ -11,6 +11,7 @@
 
 /* Floating Button */
 /* Floating Button Updated */
+
 .wa-button {
     background-color: var(--dark-900);
     width: 60px;
