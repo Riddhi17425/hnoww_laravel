@@ -539,7 +539,7 @@ $( document ).ready(function() {
         });
     });
 
-
+    var whatsappFormSubmitted = false;
     $("#whatsapForm").validate({
     rules: { 
         phone: { 
@@ -576,14 +576,14 @@ $( document ).ready(function() {
         $(element).addClass('is-valid').removeClass('is-invalid');
     },
     submitHandler: function(form) {
-        // if (!cFormSubmitted) {
-            // cFormSubmitted = true;
-            // const btn = $(form).find('button[type="submit"]');
-            // if (btn.length) {
-            //     btn.prop('disabled', true).text('Submitting...');
-            // }
+        if (!whatsappFormSubmitted) {
+            whatsappFormSubmitted = true;
+            const btn = $(form).find('button[type="submit"]');
+            if (btn.length) {
+                btn.prop('disabled', true).text('Submitting...');
+            }
             form.submit();
-        // }
+        }
     }
 });
 
