@@ -17,18 +17,18 @@
 }
 
 @media (max-width: 768px) {
+
     /* Table structure ko block mein badalna */
-    .shopping-summery, 
-    .shopping-summery tbody, 
-    .checkout-table-row, 
+    .shopping-summery,
+    .shopping-summery tbody,
+    .checkout-table-row,
     .checkout-table-row td {
         display: block !important;
         width: 100% !important;
     }
 
-    .summary-wrapper
-    {
-        padding:0px;
+    .summary-wrapper {
+        padding: 0px;
     }
 
     /* Header hide karna */
@@ -39,7 +39,8 @@
     /* Har row ko ek card banana */
     .checkout-table-row {
         position: relative !important;
-        padding: 15px 15px 15px 115px !important; /* Left space for image */
+        padding: 15px 15px 15px 115px !important;
+        /* Left space for image */
         margin-bottom: 20px !important;
         /* border: 1px solid #f0f0f0 !important;
         border-radius: 12px !important;
@@ -67,7 +68,8 @@
 
     /* 2. Product Name (Top Middle) */
     .checkout-table-row td:nth-child(2) {
-        padding: 0 35px 5px 0 !important; /* Space for trash icon */
+        padding: 0 35px 5px 0 !important;
+        /* Space for trash icon */
         text-align: left !important;
         border: none !important;
         font-weight: 700;
@@ -77,7 +79,8 @@
     }
 
     /* 3. Unit Price (Name ke niche) */
-    .checkout-table-row td:nth-child(4) { /* Price column */
+    .checkout-table-row td:nth-child(4) {
+        /* Price column */
         padding: 0 !important;
         text-align: left !important;
         border: none !important;
@@ -87,7 +90,8 @@
     }
 
     /* 4. Quantity Pill (Bottom Left) */
-    .checkout-table-row td:nth-child(3) { /* Quantity column */
+    .checkout-table-row td:nth-child(3) {
+        /* Quantity column */
         padding: 5px 0 0 0 !important;
         border: none !important;
         display: flex;
@@ -99,13 +103,15 @@
         display: inline-flex;
         align-items: center;
         border: 1px solid #eee;
-        border-radius: 30px; /* Pill Shape */
+        border-radius: 30px;
+        /* Pill Shape */
         padding: 3px 12px;
         background: #fdfdfd;
     }
 
     /* 5. Total Price (Bottom Right) */
-    .checkout-table-row td:nth-child(5) { /* Total column */
+    .checkout-table-row td:nth-child(5) {
+        /* Total column */
         position: absolute !important;
         bottom: 15px !important;
         right: 15px !important;
@@ -115,14 +121,16 @@
     }
 
     .checkout-table-row td:nth-child(5):before {
-        content: "AED "; /* Currency prefix agar chahiye */
+        content: "AED ";
+        /* Currency prefix agar chahiye */
         font-size: 12px;
     }
 
     .checkout-table-row td:nth-child(5) {
         font-size: 18px;
         font-weight: 700;
-        color: #b5a48b; /* Gold shade */
+        color: #b5a48b;
+        /* Gold shade */
     }
 
     /* 6. Trash Icon (Top Right) - Agar aapne add kiya hai */
@@ -138,6 +146,7 @@
     .checkout-table-row td:before {
         display: none !important;
     }
+
 }
 </style>
 
@@ -257,98 +266,119 @@
         </div>
 
         @if($cartItems->count() > 0)
-        <div class="row gx-lg-5">
+        <div class="row gy-3 gy-lg-0 gx-lg-5">
             <!-- LEFT : Order Summary -->
             <div class="col-lg-8 col-12">
                 <div class="checkout-box">
                     <div class="checkout-box">
                         <div class="ct_form">
                             @if($userAddresses->count() > 0)
-                            <p class="sub_head mb-2">Choose an Existing Address OR Add a New Address</p>
+                            <h3 class="sub_head mb-3">Choose an Existing Address OR Add a New Address</h3>
 
-                                <div class="row g-3 address-selection mb-3">
-                                    @foreach($userAddresses as $address)
-                                        <div class="col-lg-6 col-md-6 col-12">
-                                            <label class="address-card border p-3 rounded d-flex justify-content-between align-items-start h-100" style="cursor:pointer;">
-                                                
-                                                <div>
-                                                    <strong>{{ $address->name }}</strong><br>
-                                                    {{ $address->address_line1 }}, {{ $address->address_line2 }}<br>
-                                                    {{ $address->emirate }}<br>
-                                                    {{ $address->contact_no }}<br>
-                                                    @if($address->landmark) 
-                                                        Landmark: {{ $address->landmark }} 
-                                                    @endif
-                                                </div>
+                            <div class="row address-selection mb-3 gy-4 gy-lg-0" style="--bs-gutter-x: 20px;">
+                                @foreach($userAddresses as $address)
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <label
+                                        class="address-card border p-3 rounded d-flex justify-content-between align-items-start h-100"
+                                        style="cursor:pointer;">
 
-                                                <input type="radio" name="selected_address" value="{{ $address->id }}">
-                                            </label>
+                                        <div>
+                                            <strong>{{ $address->name }}</strong><br>
+                                            {{ $address->address_line1 }}, {{ $address->address_line2 }}<br>
+                                            {{ $address->emirate }}<br>
+                                            {{ $address->contact_no }}<br>
+                                            @if($address->landmark)
+                                            Landmark: {{ $address->landmark }}
+                                            @endif
                                         </div>
-                                    @endforeach
+
+                                        <input class="check_box_new" type="checkbox" name="selected_address" value="{{ $address->id }}">
+                                    </label>
                                 </div>
+                                @endforeach
+                            </div>
                             @endif
 
                             <!-- Add New Address Button -->
-                            <button type="button" id="addNewAddressBtn" class="com_btn mb-3">Add New Address</button>
+                            <button type="button" id="addNewAddressBtn" class="com_btn mb-3 bg-transparent">Add New Address</button>
 
                             <!-- Address Form -->
-                            <form method="POST" id="productInquiryForm" action="{{ route('front.store.product.inquiry') }}">
+                            <form method="POST" id="productInquiryForm"
+                                action="{{ route('front.store.product.inquiry') }}">
                                 @csrf
 
                                 <div id="addressFormWrapper" style="display:none;">
-                                    <div class="row">
-                                        <div class="col-lg-4">
+                                    <div class="row" style="--bs-gutter-x: 35px;">
+                                        <div class="col-lg-6">
                                             <div class="ct_input">
                                                 <label class="sub_head">Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="name" placeholder="Enter Name" value="{{ old('name') }}" 
-                                                    oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();" 
+                                                <input type="text" name="name" placeholder="Enter Name"
+                                                    value="{{ old('name') }}"
+                                                    oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();"
                                                     class="@error('name') is-invalid @enderror">
-                                                @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                                @error('name') <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-6">
                                             <div class="ct_input">
-                                                <label class="sub_head">Contact Number <span class="text-danger">*</span></label>
-                                                <input type="text" name="contact_no" placeholder="Enter contact Number" value="{{ old('contact_no') }}" 
-                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);" 
+                                                <label class="sub_head">Contact Number <span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" name="contact_no" placeholder="Enter contact Number"
+                                                    value="{{ old('contact_no') }}"
+                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
                                                     class="@error('contact_no') is-invalid @enderror">
-                                                @error('contact_no') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                                @error('contact_no') <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-6">
                                             <div class="ct_input">
-                                                <label class="sub_head">Emirate <span class="text-danger">*</span></label>
-                                                <input type="text" name="emirate" placeholder="Enter Emirate" value="{{ old('emirate') }}" 
+                                                <label class="sub_head">Emirate <span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" name="emirate" placeholder="Enter Emirate"
+                                                    value="{{ old('emirate') }}"
                                                     class="@error('emirate') is-invalid @enderror">
-                                                @error('emirate') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                                @error('emirate') <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
 
                                         <div class="col-lg-6">
-                                            <div class="ct_input">
-                                                <label class="sub_head">Address Line 1 <span class="text-danger">*</span></label>
-                                                <input type="text" name="address_line1" placeholder="Enter Address Line 1" class="fw-medium" value="">
-                                                @error('address_line1') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <div class="ct_input">
-                                                <label class="sub_head">Address Line 2 <span class="text-danger">*</span></label>
-                                                <input type="text" name="address_line2" placeholder="Enter Address Line 2" class="fw-medium" value="">
-                                                @error('address_line2') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-12">
                                             <div class="ct_input">
                                                 <label class="sub_head">Landmark</label>
-                                                <textarea name="landmark" placeholder="Enter Landmark" rows="1" class="@error('landmark') is-invalid @enderror">{{ old('landmark') }}</textarea>
-                                                @error('landmark') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                                <textarea name="landmark" placeholder="Enter Landmark" rows="1"
+                                                    class="@error('landmark') is-invalid @enderror">{{ old('landmark') }}</textarea>
+                                                @error('landmark') <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="ct_input">
+                                                <label class="sub_head">Address Line 1 <span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" name="address_line1"
+                                                    placeholder="Enter Address Line 1" class="fw-medium" value="">
+                                                @error('address_line1') <div class="invalid-feedback">{{ $message }}
+                                                </div> @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="ct_input">
+                                                <label class="sub_head">Address Line 2 <span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" name="address_line2"
+                                                    placeholder="Enter Address Line 2" class="fw-medium" value="">
+                                                @error('address_line2') <div class="invalid-feedback">{{ $message }}
+                                                </div> @enderror
+                                            </div>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </form>
@@ -366,101 +396,106 @@
                                     <option value="">-- Choose Existing Address --</option>
                                     @foreach($userAddresses as $address)
                                         <option value="{{ $address->id }}">
-                                            {{ $address->address_line1 }}, {{ $address->address_line2 }}, {{ $address->emirate }}
-                                        </option>
-                                    @endforeach
-                                    <option value="new">Add New Address</option>
-                                </select>
-                            </div>
-                        @endif
-
-                        <form method="POST" id="productInquiryForm" action="{{ route('front.store.product.inquiry') }}">
-                            @csrf
-
-                            <div id="addressFormWrapper" style="{{ $userAddresses->count() > 0 ? 'display:none;' : '' }}">
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="ct_input">
-                                            <label class="sub_head">Name <span class="text-danger">*</span></label>
-                                            <input type="text" name="name" placeholder="Enter Name" value="{{ old('name') }}" 
-                                                oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();" 
-                                                class="@error('name') is-invalid @enderror">
-                                            @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4">
-                                        <div class="ct_input">
-                                            <label class="sub_head">Contact Number <span class="text-danger">*</span></label>
-                                            <input type="text" name="contact_no" placeholder="Enter contact Number" value="{{ old('contact_no') }}" 
-                                                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);" 
-                                                class="@error('contact_no') is-invalid @enderror">
-                                            @error('contact_no') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4">
-                                        <div class="ct_input">
-                                            <label class="sub_head">Emirate <span class="text-danger">*</span></label>
-                                            <input type="text" name="emirate" placeholder="Enter Emirate" value="{{ old('emirate') }}" 
-                                                class="@error('emirate') is-invalid @enderror">
-                                            @error('emirate') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12">
-                                        <div class="ct_input">
-                                            <label class="sub_head">Address Line 1 <span class="text-danger">*</span></label>
-                                            <input type="text" name="address_line1" placeholder="Enter Address Line 1" class="fw-medium" value="">
-                                            @error('address_line1') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12">
-                                        <div class="ct_input">
-                                            <label class="sub_head">Address Line 2 <span class="text-danger">*</span></label>
-                                            <input type="text" name="address_line2" placeholder="Enter Address Line 2" class="fw-medium" value="">
-                                            @error('address_line2') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-12">
-                                        <div class="ct_input">
-                                            <label class="sub_head">Landmark</label>
-                                            <textarea name="landmark" placeholder="Enter Landmark" rows="1" class="@error('landmark') is-invalid @enderror">{{ old('landmark') }}</textarea>
-                                            @error('landmark') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
-                </div> --}}
+                {{ $address->address_line1 }}, {{ $address->address_line2 }}, {{ $address->emirate }}
+                </option>
+                @endforeach
+                <option value="new">Add New Address</option>
+                </select>
             </div>
-            <!-- RIGHT : Price Summary + Payment -->
-            <div class="col-lg-4 col-12">
-                <div class="checkout-box summary-wrapper">
-                    <h5 class="sub_head mb-4">Payment Summary</h5>
+            @endif
 
-                    <div class="summary-details">
-                        <div class="summary-row">
-                            <span class="label">Subtotal</span>
-                            <span class="value"><span class="d-lg-none">AED</span> <br />{{ number_format($subTotal, 2) }} AED</span>
+            <form method="POST" id="productInquiryForm" action="{{ route('front.store.product.inquiry') }}">
+                @csrf
+
+                <div id="addressFormWrapper" style="{{ $userAddresses->count() > 0 ? 'display:none;' : '' }}">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="ct_input">
+                                <label class="sub_head">Name <span class="text-danger">*</span></label>
+                                <input type="text" name="name" placeholder="Enter Name" value="{{ old('name') }}"
+                                    oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();"
+                                    class="@error('name') is-invalid @enderror">
+                                @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="ct_input">
+                                <label class="sub_head">Contact Number <span class="text-danger">*</span></label>
+                                <input type="text" name="contact_no" placeholder="Enter contact Number"
+                                    value="{{ old('contact_no') }}"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
+                                    class="@error('contact_no') is-invalid @enderror">
+                                @error('contact_no') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="ct_input">
+                                <label class="sub_head">Emirate <span class="text-danger">*</span></label>
+                                <input type="text" name="emirate" placeholder="Enter Emirate"
+                                    value="{{ old('emirate') }}" class="@error('emirate') is-invalid @enderror">
+                                @error('emirate') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="ct_input">
+                                <label class="sub_head">Address Line 1 <span class="text-danger">*</span></label>
+                                <input type="text" name="address_line1" placeholder="Enter Address Line 1"
+                                    class="fw-medium" value="">
+                                @error('address_line1') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="ct_input">
+                                <label class="sub_head">Address Line 2 <span class="text-danger">*</span></label>
+                                <input type="text" name="address_line2" placeholder="Enter Address Line 2"
+                                    class="fw-medium" value="">
+                                @error('address_line2') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="ct_input">
+                                <label class="sub_head">Landmark</label>
+                                <textarea name="landmark" placeholder="Enter Landmark" rows="1"
+                                    class="@error('landmark') is-invalid @enderror">{{ old('landmark') }}</textarea>
+                                @error('landmark') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                            </div>
                         </div>
                     </div>
+                </div>
+            </form>
 
-                    <hr class="summary-divider">
+        </div>
+    </div> --}}
+    </div>
+    <!-- RIGHT : Price Summary + Payment -->
+    <div class="col-lg-4 col-12">
+        <div class="checkout-box summary-wrapper">
+            <h5 class="sub_head mb-4">Payment Summary</h5>
 
-                    <div class="summary-row total-row">
-                        <span class="sub_head">You Pay</span>
-                        <span class="sub_head" id="you-pay">{{ number_format($subTotal, 2) }} AED</span>
-                    </div>
+            <div class="summary-details">
+                <div class="summary-row">
+                    <span class="label">Subtotal</span>
+                    <span class="value"><span class="d-lg-none">AED</span> <br />{{ number_format($subTotal, 2) }}
+                        AED</span>
+                </div>
+            </div>
 
-                    <div class="payment_cont">
-                        <h5 class="sub_head mb-4">Payment Options</h5>
+            <hr class="summary-divider">
 
-                        {{-- <div class="faq_cont">
+            <div class="summary-row total-row">
+                <span class="sub_head">You Pay</span>
+                <span class="sub_head" id="you-pay">{{ number_format($subTotal, 2) }} AED</span>
+            </div>
+
+            <div class="payment_cont">
+                <h5 class="sub_head mb-4">Payment Options</h5>
+
+                {{-- <div class="faq_cont">
                             <div class="faq_cont_acco">
                                 <h6 class="according_head sub_head" data-bs-toggle="collapse"
                                     data-bs-target="#collapse-1-1" aria-expanded="false" aria-controls="collapse-1-1">
@@ -470,13 +505,13 @@
                                 <div id="collapse-1-1" class="accordion-collapse collapse"
                                     data-bs-parent="#accordion-1">
                                     <div class="accordion-body"> --}}
-                                        <div id="card-element"></div>
-                                        <div id="error-message"></div>
-                                    {{-- </div>
+                <div id="card-element"></div>
+                <div id="error-message"></div>
+                {{-- </div>
                                 </div>
                             </div> --}}
 
-                            {{-- <div class="faq_cont_acco">
+                {{-- <div class="faq_cont_acco">
                                 <h6 class="according_head sub_head" data-bs-toggle="collapse"
                                     data-bs-target="#collapse-1-2" aria-expanded="false" aria-controls="collapse-1-2">
                                     option 2
@@ -493,36 +528,38 @@
                                 </div>
                             </div> --}}
 
-                        </div>
-                    </div>
+            </div>
 
-                    <!-- Stripe Placeholder -->
-                    
-                        <button type="button" id="payBtn" class="com_btn w-100 bg-transparent">
-                            Pay Securely
-                        </button>
+             <button type="button" id="payBtn" class="com_btn w-100 bg-transparent">
+            Pay Securely
+        </button>
 
-                        {{-- <button type="submit" id="addressValidateBtn" class="com_btn w-100 bg-transparent">
+        {{-- <button type="submit" id="addressValidateBtn" class="com_btn w-100 bg-transparent">
                             Pay Securely
                         </button> --}}
-                
 
-                    <!-- <a href="{{ route('front.home') }}" class="com_btn text-center mt-3 w-100">
+
+        <!-- <a href="{{ route('front.home') }}" class="com_btn text-center mt-3 w-100">
                         Continue Shopping
                     </a> -->
-                    <a href="{{ route('front.home') }}" class="btn-continue">
-                        CONTINUE SHOPPING
-                    </a>
+        <a href="{{ route('front.home') }}" class="btn-continue">
+            CONTINUE SHOPPING
+        </a>
+        </div>
 
-                </div>
-            </div>
-        </div>
-        @else
-        <div class="text-center">
-            <p>No Orders are Found</p>
-            <a href="{{ route('front.home') }}" class="com_btn">Continue Shopping</a>
-        </div>
-        @endif
+        <!-- Stripe Placeholder -->
+
+       
+
+    </div>
+    </div>
+    </div>
+    @else
+    <div class="text-center">
+        <p>No Orders are Found</p>
+        <a href="{{ route('front.home') }}" class="com_btn">Continue Shopping</a>
+    </div>
+    @endif
     </div>
 </section>
 
@@ -553,22 +590,26 @@ async function mountPaymentElement(clientSecret) {
     if (elements) {
         elements.unmount(); // Clean up previous Elements if any
     }
-    elements = stripe.elements({ clientSecret });
+    elements = stripe.elements({
+        clientSecret
+    });
 
     //paymentElement = elements.create('payment');
     paymentElement = elements.create('payment', {
-        layout: { type: 'tabs' },
+        layout: {
+            type: 'tabs'
+        },
         fields: {
             billingDetails: {
                 address: {
-                    country: 'never'   // ✅ Hides country dropdown
+                    country: 'never' // ✅ Hides country dropdown
                 }
             }
         },
         defaultValues: {
             billingDetails: {
                 address: {
-                    country: 'AE'     // ✅ Force UAE (Dubai)
+                    country: 'AE' // ✅ Force UAE (Dubai)
                 }
             }
         }
@@ -588,14 +629,14 @@ $(document).ready(async function() {
     // Add New Address button click
     $('#addNewAddressBtn').on('click', function() {
         $('#addressFormWrapper').slideDown();
-        $('input[name="selected_address"]').prop('checked', false); 
+        $('input[name="selected_address"]').prop('checked', false);
     });
 
     // Hide form if existing address selected
     $('input[name="selected_address"]').on('change', function() {
         $('#addressFormWrapper').slideUp();
     });
-    
+
     $("#productInquiryForm").validate({
         rules: {
             name: {
@@ -656,10 +697,10 @@ $(document).ready(async function() {
         },
         errorElement: 'div',
         errorClass: 'invalid-feedback',
-        highlight: function (element) {
+        highlight: function(element) {
             $(element).addClass('is-invalid');
         },
-        unhighlight: function (element) {
+        unhighlight: function(element) {
             $(element).removeClass('is-invalid');
         }
     });
@@ -709,7 +750,7 @@ $(document).ready(async function() {
                 return;
             }
             addressId = data.address_id;
-        } else{
+        } else {
             addressId = selectedAddress;
         }
 
@@ -718,7 +759,10 @@ $(document).ready(async function() {
             return;
         }
         //const addressId = data.address_id;
-        const { error } = await stripe.confirmPayment({ elements,
+        const {
+            error
+        } = await stripe.confirmPayment({
+            elements,
             confirmParams: {
                 return_url: sitePath + '/payment/success?address_id=' + addressId,
                 payment_method_data: {

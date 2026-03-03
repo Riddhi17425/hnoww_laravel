@@ -322,6 +322,30 @@ $(document).ready(function () {
 
 // loader js start
 
+// const loader = document.getElementById("page-loader");
+// const path = document.querySelector(".loader-box path");
+
+// // Get real path length
+// const length = path.getTotalLength();
+
+// // Setup stroke animation
+// path.style.strokeDasharray = length;
+// path.style.strokeDashoffset = length;
+
+// // Draw animation (SLOW)
+// path.animate([{ strokeDashoffset: length }, { strokeDashoffset: 0 }], {
+//     duration: 3200,
+//     easing: "ease-in-out",
+//     fill: "forwards",
+// });
+
+// // Hide loader smoothly
+// window.addEventListener("load", () => {
+//     setTimeout(() => {
+//         loader.classList.add("hidden");
+//     }, 2000);
+// });
+
 const loader = document.getElementById("page-loader");
 const path = document.querySelector(".loader-box path");
 
@@ -334,16 +358,17 @@ path.style.strokeDashoffset = length;
 
 // Draw animation (SLOW)
 path.animate([{ strokeDashoffset: length }, { strokeDashoffset: 0 }], {
-    duration: 3200,
+    duration: 3000,
     easing: "ease-in-out",
     fill: "forwards",
 });
 
-// Hide loader smoothly
+// Hide loader smoothly after a maximum of 5 seconds
 window.addEventListener("load", () => {
+    // Change the timeout to 5000 milliseconds (5 seconds)
     setTimeout(() => {
         loader.classList.add("hidden");
-    }, 2000);
+    }, 2000); 
 });
 
 // loader js end

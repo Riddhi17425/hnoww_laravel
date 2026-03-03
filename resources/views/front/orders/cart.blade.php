@@ -48,7 +48,7 @@
                     <div class="col-lg-8">
                         @php $subTotal = 0; @endphp
                         <!-- Shopping Summery -->
-                        <div class="table-responsive" id="cart_item_list">
+                        <div class="table-responsive" id="cart_item_list" style="overflow-x: visible;">
                             @if(isset($cartData) && count($cartData) > 0 && is_countable($cartData) > 0)
                             <table class="table shopping-summery" id="cartTable" style="--bs-table-bg:--bs-table-bg;">
                                 <thead>
@@ -84,7 +84,7 @@
                                                         alt="{{ $cart->product->product_name ?? 'Product Image' }}"></a>
                                             </td>
                                             <td class="" data-title="Product Name">
-                                                <p class="product-name"><a href=""
+                                                <p class="product-name mb-0"><a href=""
                                                         target="_blank">{{ $cart->product->product_name ?? '' }}</a></p>
                                             </td>
                                             <td class="price" data-title="Price"> <span class="unit-price"
@@ -104,7 +104,7 @@
                                                 <!-- </div> -->
                                             </td>
                                             <td class="total-amount cart_single_price" data-title="Total"> <span
-                                                    class="d-lg-none">AED</span> <br /> <span class="row-total">
+                                                    class="d-block d-lg-none">AED</span> <span class="row-total">
                                                     {{ $cart->price ? ($cart->price * $cart->quantity) : '' }}</span>
                                             </td>
                                             <td>
