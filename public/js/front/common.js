@@ -140,10 +140,10 @@ $("#requestCorporateProposalForm").validate({
             noSpamEmail: true, 
             uniqueEmail: "corporate_proposal_requests" 
         },
-        'nature_of_requirement[]': { 
-            required: true,
-            minlength: 1
-        },
+        // 'nature_of_requirement[]': { 
+        //     required: true,
+        //     minlength: 1
+        // },
         quantity_range: { 
             required: true 
         },
@@ -184,10 +184,10 @@ $("#requestCorporateProposalForm").validate({
             number: "Phone number must contain only digits",
             validPhone: "Enter a valid phone number"
         },
-        'nature_of_requirement[]': {
-            required: "Please select at least one nature of requirement",
-            minlength: "Please select at least one nature of requirement"
-        },
+        // 'nature_of_requirement[]': {
+        //     required: "Please select at least one nature of requirement",
+        //     minlength: "Please select at least one nature of requirement"
+        // },
         quantity_range: {
             required: "Please select a quantity range"
         },
@@ -203,11 +203,11 @@ $("#requestCorporateProposalForm").validate({
     },
     errorElement: 'div',
     errorPlacement: function(error, element) {
-        if (element.attr('name') === 'nature_of_requirement[]') {
-            element.closest('.col-lg-4').append(error);
-        } else {
+        // if (element.attr('name') === 'nature_of_requirement[]') {
+        //     element.closest('.col-lg-4').append(error);
+        // } else {
             error.insertAfter(element);
-        }
+        // }
     },
     highlight: function(element) {
         $(element).addClass('is-invalid').removeClass('is-valid');

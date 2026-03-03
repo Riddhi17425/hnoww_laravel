@@ -12,7 +12,7 @@
 
 <section class="mt_60">
     <div class="container">
-        <p class="text-center sub_head_inter" style="color:#666666">Each HNOWW Edition is a chapter — shaped by
+        <p class="text-center sub_head_inter" style="color:#666666">Each HNOWW Edition is a chapter shaped by
             dialogue, discipline, and restraint. <br> They are created slowly, released briefly, and never repeated in
             the same form.</p>
         <p class="text-center sub_head_inter" style="color:#666666">This is not seasonal design. It is considered
@@ -59,7 +59,7 @@
                             space.</p>
 
                         <p class="sub_head_inter" style="color:unset;">Through restraint, weight, and placement, HNOWW
-                            objects move beyond the shelf — becoming structural elements within an environment.</p>
+                            objects move beyond the shelf becoming structural elements within an environment.</p>
                         <p class="magic_wrapper_h3 mt-4">Created in collaboration with Aara, this chapter examines how
                             florals respond when objects lead.
                         </p>
@@ -100,9 +100,9 @@
                     <hr>
                     <div class="archive_box_inner">
                         <h3 class="sub_head_inter">HNOWW × Aara</h3>
-                        <p class="mb-0">2025 — Spatial Composition</p>
+                        {{-- <p class="mb-0">2025 — Spatial Composition</p> --}}
                     </div>
-                    <p class="mb-0">A study of the table as structure. Objects arranged to shape space and movement.</p>
+                    <p class="mb-0">2025 Spatial Composition </br> A study of the table as structure. Objects arranged to shape space and movement.</p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -112,10 +112,10 @@
                     <hr>
 
                     <div class="archive_box_inner">
-                        <p class="mb-0">2024 — Light as Object</p>
+                        {{-- <p class="mb-0">2024 — Light as Object</p> --}}
                     </div>
 
-                    <p class="mb-0">A study of candle form and proportion. Developed in glass and metal with restrained
+                    <p class="mb-0">2024 Light as Object </br> A study of candle form and proportion. Developed in glass and metal with restrained
                         detailing.
                     </p>
                 </div>
@@ -128,10 +128,10 @@
 
                     <div class="archive_box_inner">
                         <h3 class="sub_head_inter">HNOWW * Shivaranjini</h3>
-                        <p class="mb-0">2024 — Devotional Forms </p>
+                        {{-- <p class="mb-0">2024 — Devotional Forms </p> --}}
                     </div>
 
-                    <p class="mb-0">A collaboration with an Indian artist. Traditional motifs presented in a
+                    <p class="mb-0">2024 Devotional Forms <br/> A collaboration with an Indian artist. Traditional motifs presented in a
                         contemporary way.</p>
                 </div>
             </div>

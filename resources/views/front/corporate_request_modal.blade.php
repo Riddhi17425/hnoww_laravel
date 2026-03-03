@@ -208,7 +208,7 @@
             </div>
         </div> -->
 
-        <div class="col-lg-12">
+        {{-- <div class="col-lg-12">
             <div class="ct_input">
                 <label class="sub_head">
                     Nature of Requirement <span class="text-danger">*</span>
@@ -251,7 +251,7 @@
 
             </div>
             <!-- <div id="w_looking_for_error"></div> -->
-        </div>
+        </div> --}}
 
 
         <!-- Budget -->

@@ -268,7 +268,7 @@
             </p>
             <h2 class="title_60 mb-4">Bespoke Rituals</h2>
             <p>Commission custom ceremonial objects, heirlooms, and sacred gifts.
-                Our atelier collaborates with <br> families, designers, and couples to create one-of-a-kind pieces
+                Our atelier collaborates with <br> families, designers, and couples to create one of a kind pieces
                 for</p>
 
             <!-- <div class="row align-items-center px-3 text-start">
@@ -391,7 +391,7 @@
                 </div>
             </div>
             <p class="text-center mb-0">We work with artisans whose hands understand the language of weight, stone, and
-                texture — bringing each
+                texture bringing each
                 object to life with purpose and care.</p>
         </div>
     </div>
