@@ -105,7 +105,9 @@
     text-edge: cap;
     font-size: 28px;
     font-weight: 500;
-    padding: 0 45px;
+    /* padding: 0 45px; */
+    width: 90px;
+    text-align: center;
 }
 
 .pro_details_info b {
