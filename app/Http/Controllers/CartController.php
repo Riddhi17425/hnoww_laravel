@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Product, Cart, Order, OrderProduct};
+use App\Models\{Product, Cart, Order, OrderProduct, UserAddress};
 use Illuminate\Support\Facades\Validator;
 use App\Services\PaymentService;
 use Stripe;
@@ -109,8 +109,9 @@ class CartController extends Controller
         $subTotal = $cartItems->sum(function ($item) {
             return $item->price * $item->quantity;
         });
+        $userAddresses = UserAddress::where('user_id', auth()->id())->where('is_confirm', 1)->get();
 
-        return view('front.orders.checkout', compact('cartItems', 'subTotal'));
+        return view('front.orders.checkout', compact('cartItems', 'subTotal', 'userAddresses'));
     }
 
     public function checkoutProcess(Request $request, PaymentService $paymentService){
@@ -132,15 +133,18 @@ class CartController extends Controller
 
     public function paymentSuccess(Request $request){
         \Log::info("PAYMENT RESPONSE - " . json_encode($request->all()));
+        $addressId = $request->address_id ?? null;
         if(isset($request['redirect_status']) && strtolower($request['redirect_status']) == 'succeeded'){
             $cartItems = Cart::where('user_id', auth()->id())->get();
             // Calculate subtotal
             $subTotal = $cartItems->sum(function($item) {
                 return $item->price * $item->quantity;
             });
+            $orderId = '';
             if(isset($cartItems) && is_countable($cartItems) && count($cartItems) > 0){
                 $order = new Order();
                 $order->user_id = auth()->id();
+                $order->order_address_id = $addressId;
                 $order->status = 'confirmed';
                 $order->subtotal = $subTotal;
                 $order->order_total = $subTotal;    
@@ -161,16 +165,55 @@ class CartController extends Controller
                     $orderProduct->save();
                     $cart->delete();
                 }  
+                $orderId = $order->id;
             }
 
+            $orderAddress = UserAddress::where(['user_id' => auth()->id(), 'is_confirm' => 0])->where('is_primary', '!=', 1)->delete();
+            $orderAddress = UserAddress::find($addressId);
+            if ($orderAddress) {
+                $orderAddress->is_confirm = 1;
+                $orderAddress->save();
+            }
             // SEND MAIL 
             // SEND WHATSAPP MESSSAGE
             
-            return redirect()->route('front.get.success', $order->id);
+            return redirect()->route('front.get.success', $orderId);
         }else{
-            return redirect()->route('front.get.failed', $order->id);
+            return redirect()->route('front.get.failed', $orderId);
             
         }
+    }
+
+    public function storeAddress(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|min:3',
+            'contact_no' => 'required',
+            'emirate' => 'required',
+            'address_line1' => 'required',
+            'address_line2' => 'required',
+            'landmark' => 'required',
+        ]);
+
+        if (auth()->check()) {
+            UserAddress::where('user_id', auth()->id())
+                ->update(['is_primary' => 0]);
+        }
+        $orderAddress = UserAddress::create([
+            'user_id' => auth()->id() ?? null,
+            'name' => $request->name,
+            'contact_no' => $request->contact_no,
+            'emirate' => $request->emirate,
+            'address_line1' => $request->address_line1,
+            'address_line2' => $request->address_line2,
+            'landmark' => $request->landmark,
+            'is_primary' => 1
+        ]);
+        
+        return response()->json([
+            'success' => true,
+            'address_id' => $orderAddress->id
+        ]);
     }
 
     public function getSuccess(Request $request, $orderid){

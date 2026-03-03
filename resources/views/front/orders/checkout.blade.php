@@ -257,41 +257,187 @@
         </div>
 
         @if($cartItems->count() > 0)
-        <div class="row">
+        <div class="row gx-lg-5">
             <!-- LEFT : Order Summary -->
             <div class="col-lg-8 col-12">
                 <div class="checkout-box">
-                    <div class="table-responsive">
-                        <table class="table checkout-table shopping-summery" style="--bs-table-bg:--bs-table-bg;">
-                        <thead>
-                            <tr class="main-hading">
-                                <th>Product</th>
-                                <th>Product Name</th>
-                                <th>Qty</th>
-                                <th>Price (In AED)</th>
-                                <th>Total (In AED)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($cartItems as $item)
-                            <tr class="checkout-table-row">
-                                <td><a href="{{ route('front.product.details', $item->product->product_url) }}"><img
-                                            class="img-fluid img_1"
-                                            src="{{ isset($item->product->list_page_img) ? asset('public/images/admin/product_list/'.$item->product->list_page_img) : '' }}"
-                                            height="120" width="150"
-                                            alt="{{ $item->product->product_name ?? 'Product Image' }}"></a></td>
-                                <td>{{ $item->product->product_name ?? 'Product' }}</td>
-                                <td>{{ $item->quantity }}</td>
-                                <td>{{ number_format($item->price, 2) }}</td>
-                                <td>{{ number_format($item->price * $item->quantity, 2) }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="checkout-box">
+                        <div class="ct_form">
+                            @if($userAddresses->count() > 0)
+                            <p class="sub_head mb-2">Choose an Existing Address OR Add a New Address</p>
+
+                                <div class="row g-3 address-selection mb-3">
+                                    @foreach($userAddresses as $address)
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <label class="address-card border p-3 rounded d-flex justify-content-between align-items-start h-100" style="cursor:pointer;">
+                                                
+                                                <div>
+                                                    <strong>{{ $address->name }}</strong><br>
+                                                    {{ $address->address_line1 }}, {{ $address->address_line2 }}<br>
+                                                    {{ $address->emirate }}<br>
+                                                    {{ $address->contact_no }}<br>
+                                                    @if($address->landmark) 
+                                                        Landmark: {{ $address->landmark }} 
+                                                    @endif
+                                                </div>
+
+                                                <input type="radio" name="selected_address" value="{{ $address->id }}">
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
+
+                            <!-- Add New Address Button -->
+                            <button type="button" id="addNewAddressBtn" class="com_btn mb-3">Add New Address</button>
+
+                            <!-- Address Form -->
+                            <form method="POST" id="productInquiryForm" action="{{ route('front.store.product.inquiry') }}">
+                                @csrf
+
+                                <div id="addressFormWrapper" style="display:none;">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="ct_input">
+                                                <label class="sub_head">Name <span class="text-danger">*</span></label>
+                                                <input type="text" name="name" placeholder="Enter Name" value="{{ old('name') }}" 
+                                                    oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();" 
+                                                    class="@error('name') is-invalid @enderror">
+                                                @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="ct_input">
+                                                <label class="sub_head">Contact Number <span class="text-danger">*</span></label>
+                                                <input type="text" name="contact_no" placeholder="Enter contact Number" value="{{ old('contact_no') }}" 
+                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);" 
+                                                    class="@error('contact_no') is-invalid @enderror">
+                                                @error('contact_no') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="ct_input">
+                                                <label class="sub_head">Emirate <span class="text-danger">*</span></label>
+                                                <input type="text" name="emirate" placeholder="Enter Emirate" value="{{ old('emirate') }}" 
+                                                    class="@error('emirate') is-invalid @enderror">
+                                                @error('emirate') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="ct_input">
+                                                <label class="sub_head">Address Line 1 <span class="text-danger">*</span></label>
+                                                <input type="text" name="address_line1" placeholder="Enter Address Line 1" class="fw-medium" value="">
+                                                @error('address_line1') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="ct_input">
+                                                <label class="sub_head">Address Line 2 <span class="text-danger">*</span></label>
+                                                <input type="text" name="address_line2" placeholder="Enter Address Line 2" class="fw-medium" value="">
+                                                @error('address_line2') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12">
+                                            <div class="ct_input">
+                                                <label class="sub_head">Landmark</label>
+                                                <textarea name="landmark" placeholder="Enter Landmark" rows="1" class="@error('landmark') is-invalid @enderror">{{ old('landmark') }}</textarea>
+                                                @error('landmark') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
-            </div>
+                {{-- <div class="checkout-box">
+                    <div class="ct_form">
 
+                        @if($userAddresses->count() > 0)
+                            <div class="ct_input mb-3">
+                                <label class="sub_head">Select Address</label>
+                                <select id="addressSelect" class="">
+                                    <option value="">-- Choose Existing Address --</option>
+                                    @foreach($userAddresses as $address)
+                                        <option value="{{ $address->id }}">
+                                            {{ $address->address_line1 }}, {{ $address->address_line2 }}, {{ $address->emirate }}
+                                        </option>
+                                    @endforeach
+                                    <option value="new">Add New Address</option>
+                                </select>
+                            </div>
+                        @endif
+
+                        <form method="POST" id="productInquiryForm" action="{{ route('front.store.product.inquiry') }}">
+                            @csrf
+
+                            <div id="addressFormWrapper" style="{{ $userAddresses->count() > 0 ? 'display:none;' : '' }}">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="ct_input">
+                                            <label class="sub_head">Name <span class="text-danger">*</span></label>
+                                            <input type="text" name="name" placeholder="Enter Name" value="{{ old('name') }}" 
+                                                oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();" 
+                                                class="@error('name') is-invalid @enderror">
+                                            @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="ct_input">
+                                            <label class="sub_head">Contact Number <span class="text-danger">*</span></label>
+                                            <input type="text" name="contact_no" placeholder="Enter contact Number" value="{{ old('contact_no') }}" 
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);" 
+                                                class="@error('contact_no') is-invalid @enderror">
+                                            @error('contact_no') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="ct_input">
+                                            <label class="sub_head">Emirate <span class="text-danger">*</span></label>
+                                            <input type="text" name="emirate" placeholder="Enter Emirate" value="{{ old('emirate') }}" 
+                                                class="@error('emirate') is-invalid @enderror">
+                                            @error('emirate') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="ct_input">
+                                            <label class="sub_head">Address Line 1 <span class="text-danger">*</span></label>
+                                            <input type="text" name="address_line1" placeholder="Enter Address Line 1" class="fw-medium" value="">
+                                            @error('address_line1') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="ct_input">
+                                            <label class="sub_head">Address Line 2 <span class="text-danger">*</span></label>
+                                            <input type="text" name="address_line2" placeholder="Enter Address Line 2" class="fw-medium" value="">
+                                            @error('address_line2') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="ct_input">
+                                            <label class="sub_head">Landmark</label>
+                                            <textarea name="landmark" placeholder="Enter Landmark" rows="1" class="@error('landmark') is-invalid @enderror">{{ old('landmark') }}</textarea>
+                                            @error('landmark') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div> --}}
+            </div>
             <!-- RIGHT : Price Summary + Payment -->
             <div class="col-lg-4 col-12">
                 <div class="checkout-box summary-wrapper">
@@ -351,12 +497,15 @@
                     </div>
 
                     <!-- Stripe Placeholder -->
-                    <form action="" method="POST">
-                        @csrf
+                    
                         <button type="button" id="payBtn" class="com_btn w-100 bg-transparent">
                             Pay Securely
                         </button>
-                    </form>
+
+                        {{-- <button type="submit" id="addressValidateBtn" class="com_btn w-100 bg-transparent">
+                            Pay Securely
+                        </button> --}}
+                
 
                     <!-- <a href="{{ route('front.home') }}" class="com_btn text-center mt-3 w-100">
                         Continue Shopping
@@ -429,6 +578,93 @@ async function mountPaymentElement(clientSecret) {
 }
 
 $(document).ready(async function() {
+    // Check on page load
+    if ($('input[name="selected_address"]').length === 0) {
+        // No existing addresses
+        $('#addressFormWrapper').show();
+        $('#addNewAddressBtn').hide();
+    }
+
+    // Add New Address button click
+    $('#addNewAddressBtn').on('click', function() {
+        $('#addressFormWrapper').slideDown();
+        $('input[name="selected_address"]').prop('checked', false); 
+    });
+
+    // Hide form if existing address selected
+    $('input[name="selected_address"]').on('change', function() {
+        $('#addressFormWrapper').slideUp();
+    });
+    
+    $("#productInquiryForm").validate({
+        rules: {
+            name: {
+                required: true,
+                minlength: 3
+            },
+            contact_no: {
+                required: true,
+                digits: true,
+                minlength: 7,
+                maxlength: 15
+            },
+            emirate: {
+                required: true,
+                minlength: 5,
+                maxlength: 20
+            },
+            address_line1: {
+                required: true,
+                minlength: 3
+            },
+            address_line2: {
+                required: true,
+                minlength: 3
+            },
+            landmark: {
+                required: false,
+                minlength: 5
+            }
+        },
+        messages: {
+            name: {
+                required: "Please enter your full name",
+                minlength: "Name must be at least 3 characters long"
+            },
+            contact_no: {
+                required: "Please enter your contact number",
+                digits: "Only numeric values are allowed",
+                minlength: "Contact number must be at least 7 digits",
+                maxlength: "Contact number cannot exceed 15 digits"
+            },
+            emirate: {
+                required: "Please select emirate",
+                minlength: "Emirate must be at least 5 characters",
+                maxlength: "Emirate cannot exceed 20 characters"
+            },
+            address_line1: {
+                required: "Please enter your address (Line 1)",
+                minlength: "Address Line 1 must be at least 3 characters"
+            },
+            address_line2: {
+                required: "Please enter your address (Line 2)",
+                minlength: "Address Line 2 must be at least 3 characters"
+            },
+            landmark: {
+                minlength: "Landmark must be at least 5 characters long"
+            }
+        },
+        errorElement: 'div',
+        errorClass: 'invalid-feedback',
+        highlight: function (element) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element) {
+            $(element).removeClass('is-invalid');
+        }
+    });
+
+    // $('#payBtn').hide();
     const amount = @json($subTotal);
     if (amount && amount > 0) {
         clientSecret = await createPaymentIntent(amount);
@@ -437,13 +673,54 @@ $(document).ready(async function() {
     }
 
     $('#payBtn').on('click', async function() {
+        // Validate form first
+        // if (!$("#productInquiryForm").valid()) {
+        //     return;
+        // }
+        const selectedAddress = $('input[name="selected_address"]:checked').val();
+        const isAddingNew = $('#addressFormWrapper').is(':visible');
+        var addressId;
+        if (!selectedAddress && !isAddingNew) {
+            //alert('Please select an existing address or add a new one.');
+            $('#error-message').text('Please select an existing address or add a new one.');
+            return;
+        }
+        if (isAddingNew) {
+            // Validate form using jQuery validate
+            if (!$('#productInquiryForm').valid()) {
+                return;
+            }
+        }
+
+        if (isAddingNew) {
+            let formData = $("#productInquiryForm").serialize();
+            // Save address first
+            let response = await fetch("{{ route('front.checkout.store.address') }}", {
+                method: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData
+            });
+            let data = await response.json();
+            if (!data.success) {
+                $('#error-message').text('Something went wrong while saving address.');
+                return;
+            }
+            addressId = data.address_id;
+        } else{
+            addressId = selectedAddress;
+        }
+
         if (!clientSecret) {
             $('#error-message').text('Please enter a valid amount first.');
             return;
         }
+        //const addressId = data.address_id;
         const { error } = await stripe.confirmPayment({ elements,
             confirmParams: {
-                return_url: sitePath + '/payment/success',
+                return_url: sitePath + '/payment/success?address_id=' + addressId,
                 payment_method_data: {
                     billing_details: {
                         address: {

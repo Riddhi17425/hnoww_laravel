@@ -118,12 +118,20 @@
                                         <div class="ct_input">
                                             <input type="text" id="phone" name="phone" value="{{ old('phone') }}"
                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
-                                                placeholder="Enter Phone Number">
+                                                placeholder="Enter Phone Number"><span class="text-danger">*</span>
                                             @error('phone')
                                                 <small class="text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="ct_input">
+                                            <label class="sub_head">Date of Birth <span class="text-danger">*</span></label>
+                                            <input type="date" name="dob" id="dob" value="{{ old('dob') }}">
+                                            @error('dob') <small class="text-danger">{{ $message }}</small> @enderror
+                                        </div>
+                                    </div> 
 
                                     <!-- Email -->
                                     <div class="col-lg-12">

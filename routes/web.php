@@ -101,6 +101,7 @@ Route::name('front.')->group(function () {
 		Route::post('/cart/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
 		
 		Route::get('/checkout', [CartController::class, 'getCheckout'])->name('checkout.view');
+		Route::post('/checkout/store-address', [CartController::class, 'storeAddress'])->name('checkout.store.address');
 		Route::post('/checkout/process', [CartController::class, 'checkoutProcess'])->name('checkout.process');
 		Route::get('/payment/success', [CartController::class, 'paymentSuccess'])->name('payment.success');
 		Route::get('/get/success/{orderid?}', [CartController::class, 'getSuccess'])->name('get.success');

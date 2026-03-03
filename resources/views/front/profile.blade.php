@@ -49,10 +49,14 @@
                                 <label for="email" class="sub_head">Email Address</label>
                                 <input type="email" name="email" id="email" readonly value="{{$user->email ?? ''}}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                             </div>
-                            {{-- <div class="ct_input">
+                            <div class="ct_input">
                                 <label for="phone" class="sub_head">Phone Number</label>
                                 <input type="tel" name="phone" id="phone" readonly value="{{$user->phone ?? ''}}" pattern="^\+?[1-9]\d{1,14}$" title="Please enter a valid phone number" required>
-                            </div> --}}
+                            </div>
+                            <div class="ct_input">
+                                <label for="dob" class="sub_head">Date of Birth</label>
+                                <input type="tel" name="dob" id="dob" readonly value="{{$user->dob ?? ''}}" pattern="^\+?[1-9]\d{1,14}$" title="Please enter a valid Date of Birth" required>
+                            </div>
                             <!--<div class="text-center">-->
                             <!--    <button class="com_btn bg-transparent" type="submit">Save</button>-->
                             <!--</div>-->

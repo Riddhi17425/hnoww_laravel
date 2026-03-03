@@ -25,6 +25,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'full_name'=>'string|required|min:2',
             'phone'=>'required|numeric|digits_between:8,15',
+            'dob' => 'nullable',
             'r_email'=>'string|required|unique:users,email',
             'r_password'=>'required|min:6|confirmed',
             //'address'=>'nullable|max:200',
@@ -39,6 +40,7 @@ class AuthController extends Controller
             'name'=>$data['full_name'],
             'email'=>$data['r_email'],
             'phone'=>$data['phone'],
+            'dob'=>$data['dob'],
             //'address'=>$data['address'],
             'password'=>Hash::make($data['r_password']),
             'status'=>'active'
@@ -180,10 +182,10 @@ class AuthController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // WhatsappInquiry::create([
-        //     'number'  => $request->number,
-        //     'message'  => $request->message,
-        // ]);
+        WhatsappInquiry::create([
+            'number'  => $request->number,
+            'message'  => $request->message,
+        ]);
     
         $timestamp = Carbon::now()->format('Y-m-d H:i:s');
         // Google Sheet expects:
