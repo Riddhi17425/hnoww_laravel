@@ -75,6 +75,45 @@
 
     </div>
 
+    {{-- Address Details --}}
+    <div class="row g-4 mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="fw-bold mb-3 text-danger">
+                        <i class="bi bi-geo-alt-fill"></i> Delivery Address
+                    </h6>
+
+                    @if($order->orderAddress)
+                        <p class="mb-1"><strong>Name:</strong> {{ $order->orderAddress->name }}</p>
+
+                        @if($order->orderAddress->contact_no)
+                            <p class="mb-1"><strong>Contact No:</strong> {{ $order->orderAddress->contact_no }}</p>
+                        @endif
+
+                        @if($order->orderAddress->emirate)
+                            <p class="mb-1"><strong>Emirate:</strong> {{ $order->orderAddress->emirate }}</p>
+                        @endif
+
+                        <p class="mb-1">
+                            <strong>Address:</strong>
+                            {{ $order->orderAddress->address_line1 }}
+                            @if($order->orderAddress->address_line2)
+                               {{','}}{{ $order->orderAddress->address_line2 }}<br>
+                            @endif
+                            @if($order->orderAddress->landmark)
+                                <strong>Landmark:</strong> {{ $order->orderAddress->landmark }}
+                            @endif
+                        </p>
+                    @else
+                        <p class="text-muted">No address found for this order.</p>
+                    @endif
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{-- Products --}}
     <div class="card border-0 shadow-sm">
         <div class="card-body">

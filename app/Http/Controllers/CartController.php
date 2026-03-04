@@ -232,7 +232,7 @@ class CartController extends Controller
     }
     public function orderDetail($orderId)
     {
-        $orderDetails = Order::where('id', $orderId)->with(['user', 'orderProducts'])->first();
+        $orderDetails = Order::where('id', $orderId)->with(['user', 'orderProducts', 'orderAddress'])->first();
         // Use dot notation to reach front/orders/order.php
         return view('front.orders.order_detail', compact('orderDetails'));
     }

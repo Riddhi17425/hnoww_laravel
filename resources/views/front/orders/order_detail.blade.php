@@ -95,6 +95,70 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="order_detail_wrapper order_detail_card mt-4">
+                        <div class="order_detail_head my-4">
+                            <h5 class="sub_head pb-2 text-center">
+                                <span>
+                                    <svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z" fill="#B58A46"/>
+                                    </svg>
+                                </span>
+                                <span>Delivery Address</span>
+                                <span>
+                                    <svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z" fill="#B58A46"/>
+                                    </svg>
+                                </span>
+                            </h5>
+
+                            @if($orderDetails->orderAddress)
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-10">
+                                        <div class="ordered_card">
+                                            
+                                            <p class="mb-2"><b>Name:</b> 
+                                                <span>{{ $orderDetails->orderAddress->name }}</span>
+                                            </p>
+
+                                            @if($orderDetails->orderAddress->contact_no)
+                                                <p class="mb-2"><b>Contact No:</b> 
+                                                    <span>{{ $orderDetails->orderAddress->contact_no }}</span>
+                                                </p>
+                                            @endif
+
+                                            @if($orderDetails->orderAddress->emirate)
+                                                <p class="mb-2"><b>Emirate:</b> 
+                                                    <span>{{ $orderDetails->orderAddress->emirate }}</span>
+                                                </p>
+                                            @endif
+
+                                            <p class="mb-2">
+                                                <b>Address:</b>
+                                                <span>
+                                                    {{ $orderDetails->orderAddress->address_line1 }}
+                                                    @if($orderDetails->orderAddress->address_line2)
+                                                        , {{ $orderDetails->orderAddress->address_line2 }}
+                                                    @endif
+                                                </span>
+                                            </p>
+
+                                            @if($orderDetails->orderAddress->landmark)
+                                                <p class="mb-0">
+                                                    <b>Landmark:</b> 
+                                                    <span>{{ $orderDetails->orderAddress->landmark }}</span>
+                                                </p>
+                                            @endif
+
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <p class="text-center text-muted">No address found for this order.</p>
+                            @endif
+                        </div>
+                    </div>
+
                     <div class="order_detail_wrapper order_detail_card">
                         <div class="order_detail_head my-4">
                             <h5 class="sub_head pb-2 text-center">
