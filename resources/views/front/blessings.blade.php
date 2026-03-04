@@ -415,7 +415,6 @@ $('#giftBlessingForm').validate({
             required: true,
             email: true,
             noSpamEmail: true,
-            uniqueEmail: "contact_inquiries"
         },
         from_phone: {
             required: true,
@@ -431,7 +430,6 @@ $('#giftBlessingForm').validate({
             required: true,
             email: true,
             noSpamEmail: true,
-            uniqueEmail: "contact_inquiries"
         },
         to_phone: {
             required: true,

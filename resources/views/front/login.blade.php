@@ -62,7 +62,6 @@ $( document ).ready(function() {
                 required: true,
                 email: true,
                 noSpamEmail: true,
-                uniqueEmail: "contact_inquiries"
             },
             password:{
                 required: true,
