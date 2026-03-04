@@ -286,32 +286,32 @@
 
         <div class="corporate_slider">
 
-            <div class="desire_box">
-                <img class=" img-fluid mb-2 mb-lg-4" src="{{asset('public/images/front/Bespoke-Rituals1.webp')}}" alt="images">
+            <div class="desire_box mx-2">
+                <img class="w-100 mb-2 mb-lg-4" src="{{asset('public/images/front/Bespoke-Rituals1.webp')}}" alt="images">
                 <h3 class="sub_head">Weddings & Pheras</h3>
             </div>
-            <div class="desire_box">
-                <img class=" img-fluid mb-2 mb-lg-4" src="{{asset('public/images/front/Bespoke-Rituals2.webp')}}" alt="images">
+            <div class="desire_box mx-2">
+                <img class="img-fluid mb-2 mb-lg-4" src="{{asset('public/images/front/Bespoke-Rituals2.webp')}}" alt="images">
                 <h3 class="sub_head">Milestone Celebrations</h3>
             </div>
-            <div class="desire_box">
-                <img class=" img-fluid mb-2 mb-lg-4" src="{{asset('public/images/front/Bespoke-Rituals3.webp')}}" alt="images">
+            <div class="desire_box mx-2">
+                <img class="img-fluid mb-2 mb-lg-4" src="{{asset('public/images/front/Bespoke-Rituals3.webp')}}" alt="images">
                 <h3 class="sub_head">New Homes</h3>
             </div>
-            <div class="desire_box">
-                <img class=" img-fluid mb-2 mb-lg-4" src="{{asset('public/images/front/Bespoke-Rituals4.webp')}}" alt="images">
+            <div class="desire_box mx-2">
+                <img class="img-fluid mb-2 mb-lg-4" src="{{asset('public/images/front/Bespoke-Rituals4.webp')}}" alt="images">
                 <h3 class="sub_head">Corporate Rituals</h3>
             </div>
 
             <!-- <div class="desire_box">
-                <img class=" img-fluid mb-2 mb-lg-4" src="{{asset('public/images/front/Bespoke-Rituals5.webp')}}" alt="images">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <h3 class="sub_head">Spiritual or Personal altars</h3>
+            <!--    <img class=" img-fluid mb-2 mb-lg-4" src="{{asset('public/images/front/Bespoke-Rituals5.webp')}}" alt="images">-->
+            <!--    <div class="d-flex justify-content-between align-items-center">-->
+            <!--        <div>-->
+            <!--            <h3 class="sub_head">Spiritual or Personal altars</h3>-->
 
-                    </div>
-                </div>
-            </div> -->
+            <!--        </div>-->
+            <!--    </div>-->
+            <!--</div> -->
 
         </div>
     </div>

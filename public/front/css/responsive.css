@@ -1890,4 +1890,10 @@
         .increment_decrement .span_value {
         width: 60px;
     }
+    
+    .wa-modal
+    {
+        right:-20px;
+    }
+    
 }
