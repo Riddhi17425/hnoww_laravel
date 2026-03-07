@@ -270,6 +270,10 @@ $(document).ready(function() {
                 validPhone: true,
                 //number:true,
             },
+            dob: {
+                required: true,
+                beforeToday: true
+            },
             address: {
                 minlength: 5,
                 maxlength: 500
@@ -289,6 +293,10 @@ $(document).ready(function() {
             },
             phone: {
                 required: "Please enter your Contact number"
+            },
+            dob: {
+                required: "Please enter your date of birth",
+                beforeToday: "DOB must be before today"
             },
             r_password: {
                 required: "Please enter your Password",

@@ -56,6 +56,8 @@ $(document).on('click', '.dec_btn', function () {
 $(document).on('click', '.add_to_cart_btn', function () {
     let productId = $(this).data('product-id');
     let qty = $(this).closest('.increment_decrement_area').find('.qty_input').val();
+
+    
     $.ajax({
         url: sitePath + '/cart/add',
         method: "POST",

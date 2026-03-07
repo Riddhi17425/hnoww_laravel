@@ -111,13 +111,12 @@
                     <input type="hidden" class="qty_input" id="product-qty" value="1">
                     <button class="inc_btn" data-call="detail" type="button">+</button>
                 </div>
-                @auth
-                    <a href="javascript:void(0)" class="com_btn add_to_cart_btn" data-product-id="{{ $product->id }}"> Add to Cart</a>
-                @else
+                {{-- @auth --}}
+                    <a href="javascript:void(0)" class="com_btn add_to_cart_btn" data-product-id="{{ $product->id }}" id="cartSubmitBtn"> Add to Cart</a>
+                {{-- @else
                     <a href="javascript:void(0)" class="com_btn" data-bs-toggle="modal" data-bs-target="#loginRequiredModal"> Add to Cart </a>
-                @endauth
+                @endauth --}}
             </div>
-
 
             @if(isset($product->large_description) && $product->large_description != '')
             <h4 class="sub_head mb-4">The Story</h4>

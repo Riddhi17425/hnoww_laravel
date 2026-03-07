@@ -137,7 +137,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <p class="m-3">Please login to continue and add items to your cart.</p>
+                <p class="m-3">Please login to continue and proceed to Checkout</p>
             </div>
             <div class="modal-footer justify-content-center">
                 <a href="{{ route('front.auth', 'login') }}" class="com_btn">

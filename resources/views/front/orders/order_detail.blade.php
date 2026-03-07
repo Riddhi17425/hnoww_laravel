@@ -41,6 +41,17 @@
         .sticky-header {
             /*background: #EDEAE4;*/
         }
+
+                .shopping-summery td
+        {
+           padding: 10px 0px;
+        }
+            .shopping-summery td:last-child {
+        top: 25px;
+}
+    .shopping-summery tr {
+        padding: 15px 15px 15px 15px;
+    }
     }
 </style>
 
