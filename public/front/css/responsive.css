@@ -1893,7 +1893,7 @@
     }
 
     .theme-white .sticky-header {
-        background: var(--secondary-color);
+        background: var(--secondary-color); 
         padding-bottom: 20px;
     }
 
