@@ -24,13 +24,8 @@ use App\Http\Middleware\RedirectIfNotAdmin;
 //FRONT ROUTE
 Route::name('front.')->group(function () {
     Route::get('/', [FrontController::class, 'index'])->name('home');
-    Route::get('stripe', [FrontController::class, 'getStripe']);
-    Route::post('stripe-post', [FrontController::class, 'stripePost'])->name('stripe.post');
-
-	Route::get('front/auth/{page?}', [AuthController::class, 'getAuth'])->name('auth'); // used for both login & registration
-    Route::post('front/register', [AuthController::class, 'submitRegister'])->name('register.post');
-	Route::get('front/login', [AuthController::class, 'getLogin'])->name('login'); //un-used
-    Route::post('front/login', [AuthController::class, 'submitLogin'])->name('login.post');
+    Route::get('stripe', [FrontController::class, 'getStripe']); // Temporary
+    Route::post('stripe-post', [FrontController::class, 'stripePost'])->name('stripe.post'); // Temporary
 
     Route::get('list/{category_slug}/{from?}', [FrontController::class, 'getList'])->name('list');
     Route::get('product-details/{product_slug}', [FrontController::class, 'getProductDetails'])->name('product.details');
@@ -69,7 +64,6 @@ Route::name('front.')->group(function () {
 	Route::post('/wedding-vault/verify-otp', [FrontController::class, 'verifyWeddingVaultOtp'])->name('wedding-vault.verify-otp');
     Route::get('/wedding-vault-inside', [FrontController::class, 'getWeddingVaultInside'])->name('wedding.vault.inside');
     
-
 	// NOT MADE DYNAMIC - START
 	Route::get('/rituals', [FrontController::class, 'getRituals'])->name('rituals'); 
 	Route::get('/bespoke-wedding-hampers', [FrontController::class, 'bespokeWeddingHampers'])->name('bespoke.wedding.hampers');
@@ -79,16 +73,26 @@ Route::name('front.')->group(function () {
 	Route::get('/architect-study', [FrontController::class, 'getArchitectStudy'])->name('architect-study'); 
 	Route::get('/about', [FrontController::class, 'getAbout'])->name('about'); 
 	Route::get('/editions', [FrontController::class, 'getEditions'])->name('editions'); 
-	Route::get('/thankyou', [FrontController::class, 'getThankYou'])->name('thankyou'); 
-	
-
 	// NOT MADE DYNAMIC - END
-	
+
+	Route::get('/thankyou', [FrontController::class, 'getThankYou'])->name('thankyou'); 
+
+	// LOGIN & REGISTER
+	Route::get('front/auth/{page?}', [AuthController::class, 'getAuth'])->name('auth'); // used for both login & registration
+    Route::post('front/register', [AuthController::class, 'submitRegister'])->name('register.post');
+	Route::get('front/login', [AuthController::class, 'getLogin'])->name('login'); //un-used
+    Route::post('front/login', [AuthController::class, 'submitLogin'])->name('login.post');
+
+	// FORGOT PASSWORD
 	Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('get.forgot.password');
 	Route::post('/post-forgot-password', [AuthController::class, 'sendResetLink'])->name('post.forgot.password');
-	
     Route::get('/reset-password/{token}', [AuthController::class, 'resetPassword'])->name('get.reset.password');
     Route::post('post-reset-password', [AuthController::class, 'postResetPassword'])->name('password.update');
+	
+	// MANAGE CART
+	Route::get('/cart', [CartController::class, 'getCart'])->name('cart.view');
+	Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add.ajax');
+	Route::post('/cart/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
     
 	Route::middleware(['auth'])->group(function () {
 	    Route::get('/profile', [FrontController::class, 'profile'])->name('profile'); 
@@ -96,9 +100,9 @@ Route::name('front.')->group(function () {
 		Route::get('/order', [CartController::class, 'order'])->name('order.view');
 		Route::get('/order-detail/{orderid}', [CartController::class, 'orderDetail'])->name('order_detail.view');
 		
-		Route::get('/cart', [CartController::class, 'getCart'])->name('cart.view');
-		Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add.ajax');
-		Route::post('/cart/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
+		// Route::get('/cart', [CartController::class, 'getCart'])->name('cart.view');
+		// Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add.ajax');
+		// Route::post('/cart/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
 		
 		Route::get('/checkout', [CartController::class, 'getCheckout'])->name('checkout.view');
 		Route::post('/checkout/store-address', [CartController::class, 'storeAddress'])->name('checkout.store.address');

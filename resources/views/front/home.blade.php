@@ -292,13 +292,13 @@
                     </svg>
                     <span>Enquire Now</span>
                     </a> --}}
-                    <a href="jsvascript:void(0);" class="desire_box_top_child_inner @auth add_to_cart_btn @endauth"
+                    {{-- <a href="jsvascript:void(0);" class="desire_box_top_child_inner @auth add_to_cart_btn @endauth"
                         @auth data-product-id="{{ $val->id }}" @else data-bs-toggle="modal"
-                        data-bs-target="#loginRequiredModal" @endauth>
+                        data-bs-target="#loginRequiredModal" @endauth> --}}
+                    <a href="jsvascript:void(0);" class="desire_box_top_child_inner add_to_cart_btn" data-product-id="{{ $val->id }}">
                         <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
                             <path
-                                d="M0.5 4.5H18.5M0.5 4.5V16.5C0.5 17.6046 1.39543 18.5 2.5 18.5H16.5C17.6046 18.5 18.5 17.6046 18.5 16.5V4.5M0.5 4.5L2.46327 1.00974C2.64039 0.69486 2.97357 0.5 3.33485 0.5H15.6652C16.0264 0.5 16.3596 0.69486 16.5367 1.00974L18.5 4.5M12.5 8.5C12.5 10.1569 11.1569 11.5 9.5 11.5C7.8431 11.5 6.5 10.1569 6.5 8.5"
-                                stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                                d="M0.5 4.5H18.5M0.5 4.5V16.5C0.5 17.6046 1.39543 18.5 2.5 18.5H16.5C17.6046 18.5 18.5 17.6046 18.5 16.5V4.5M0.5 4.5L2.46327 1.00974C2.64039 0.69486 2.97357 0.5 3.33485 0.5H15.6652C16.0264 0.5 16.3596 0.69486 16.5367 1.00974L18.5 4.5M12.5 8.5C12.5 10.1569 11.1569 11.5 9.5 11.5C7.8431 11.5 6.5 10.1569 6.5 8.5" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                         <span>Add to Cart</span>
                     </a>

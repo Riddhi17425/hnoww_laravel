@@ -7,6 +7,8 @@ use App\Models\{Product, Cart, Order, OrderProduct, UserAddress};
 use Illuminate\Support\Facades\Validator;
 use App\Services\PaymentService;
 use Stripe;
+use Session;
+use Auth;
 
 class CartController extends Controller
 {
@@ -17,7 +19,18 @@ class CartController extends Controller
     }
 
     public function getCart(Request $request){
-        $cartData = Cart::where('user_id', auth()->id())->get();
+        $cartData = Cart::query();
+        if(Auth::user()) 
+        { 
+            $cartData->where('user_id', Auth::user()->id);                       
+        }
+        else
+        {
+            $cartData->where('session_id', Session::getId());
+        }
+        $cartData = $cartData->get();   
+       // echo "<pre>"; print_r(Session::getId()); die;
+        
         return view('front.orders.cart', compact('cartData'));
     }
 
@@ -36,7 +49,24 @@ class CartController extends Controller
         }
 
         $product = Product::findOrFail($request->product_id);
-        $cart = Cart::where('user_id', auth()->id())->where('product_id', $product->id)->first();
+        $user_id = $session_id = '';
+        $cartCount = 0;
+        if (Auth::user()) {
+            $user_id = Auth::user()->id;
+            $session_id = '';
+        } else {
+            $user_id = '';
+            $session_id = Session::getId();
+        } 
+
+        $cart = Cart::where('product_id', $product->id);
+        if ($user_id != '') 
+        {
+            $cart = $cart->where('user_id', $user_id)->first();
+        }else{
+            $cart = $cart->where('session_id', $session_id)->first();
+        }
+
         $requestedQty = $request->quantity ?? 1;
         if(isset($request->cart_id) && $request->cart_id != ''){
             $totalQty = $requestedQty;   
@@ -73,7 +103,8 @@ class CartController extends Controller
             // Only create if quantity > 0
             if ($request->quantity > 0) {
                 Cart::create([
-                    'user_id'    => auth()->id(),
+                    'user_id'    => $user_id != '' ? $user_id : null,
+                    'session_id' => $session_id != '' ? $session_id : null,
                     'product_id' => $product->id,
                     'price'      => $product->product_price,
                     'quantity'   => $request->quantity,
@@ -81,16 +112,41 @@ class CartController extends Controller
             }
         }
 
+        if (Auth::user()) {
+            $cartCount = Cart::where('user_id', auth()->id())->sum('quantity');
+        }else{
+            $cartCount = Cart::where('session_id', $session_id)->sum('quantity');
+        }
+
         return response()->json([
             'status' => true,
             'message' => 'Product added to cart successfully!',
-            'cart_count' => Cart::where('user_id', auth()->id())->sum('quantity'),
+            'cart_count' => $cartCount,
         ]);
     }
 
     public function deleteCart(Request $request)
     {
-        $cart = Cart::where('id', $request->cart_id)->where('user_id', auth()->id())->first();
+        $user_id = $session_id = '';
+        if (Auth::user()) {
+            $user_id = Auth::user()->id;
+            $session_id = '';
+        } else {
+            $user_id = '';
+            $session_id = Session::getId();
+        }
+
+        $cart = Cart::where('id', $request->cart_id);
+        if ($user_id == '') {
+            if($session_id != ''){
+                $cart = $cart->where(['session_id' => $session_id])->first();
+            }
+        } else {
+            if($user_id != ''){
+                $cart = $cart->where(['user_id' => $user_id])->first();
+            }
+        }
+        
         if (!$cart) {
             return response()->json([
                 'status' => false,
@@ -232,7 +288,7 @@ class CartController extends Controller
     }
     public function orderDetail($orderId)
     {
-        $orderDetails = Order::where('id', $orderId)->with(['user', 'orderProducts'])->first();
+        $orderDetails = Order::where('id', $orderId)->with(['user', 'orderProducts', 'orderAddress'])->first();
         // Use dot notation to reach front/orders/order.php
         return view('front.orders.order_detail', compact('orderDetails'));
     }

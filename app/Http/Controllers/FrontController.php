@@ -237,6 +237,11 @@ class FrontController extends Controller
             'to_name' => 'required',
             'to_email' => 'required|email',
             'to_phone' => 'required',
+            'address_line1' => 'required',
+            'address_line2' => 'required',
+            'emirate' => 'required',
+            'landmark' => 'nullable',
+            'message_note' => 'nullable',
         ]);
         if ($validator->fails()) {
             return redirect()->back()
@@ -245,12 +250,17 @@ class FrontController extends Controller
         }
         $data = [
             'blessing_id' => $request->blessing_id,
-            'from_name'   => $request->from_name,
-            'from_email'  => $request->from_email,
-            'from_phone'  => $request->from_phone,
-            'to_name'     => $request->to_name,
-            'to_email'    => $request->to_email,
-            'to_phone'    => $request->to_phone,
+            'from_name'   => $request->from_name ?? null,
+            'from_email'  => $request->from_email ?? null,
+            'from_phone'  => $request->from_phone ?? null,
+            'to_name'     => $request->to_name ?? null,
+            'to_email'    => $request->to_email ?? null,
+            'to_phone'    => $request->to_phone ?? null,
+            'address_line1'    => $request->address_line1 ?? null,
+            'address_line2'    => $request->address_line2 ?? null,
+            'emirate'    => $request->emirate ?? null,
+            'landmark'    => $request->landmark ?? null,
+            'message_note'    => $request->message_note ?? null,
         ];
         $gift = GiftBlessing::create($data);
         $adminEmail = $this->adminEmail;
@@ -280,6 +290,11 @@ class FrontController extends Controller
             "Name: {$gift->to_name}\n" .
             "Email: {$gift->to_email}\n" .
             "Phone: {$gift->to_phone}\n\n" .
+            "Address Line 1: {$gift->address_line1}\n\n" .
+            "Address Line 2: {$gift->address_line2}\n\n" .
+            "Emirate: {$gift->emirate}\n\n" .
+            "Landmark: {$gift->landmark}\n\n" .
+            "Message Note: {$gift->message_note}\n\n" .
             "*Blessing:* " . ($gift->blessing->title ?? '-') . "\n\n" .
             "— HNoWW";
 
@@ -617,8 +632,8 @@ class FrontController extends Controller
             'role'                  => 'required|string|max:100',
             //'phone'                 => 'nullable|regex:/^[0-9\s\-\+\(\)]+$/|min:7|max:20',
             'email'                 => 'required|email|max:150',
-            'nature_of_requirement'   => 'required|array|min:1',
-            'nature_of_requirement.*' => 'string|max:150',
+            // 'nature_of_requirement'   => 'required|array|min:1',
+            // 'nature_of_requirement.*' => 'string|max:150',
             'quantity_range'        => 'required|string|max:50',
             'corporate_budget'      => 'required|string|max:100',
             'timeline'              => 'required|string|max:50',
@@ -638,9 +653,9 @@ class FrontController extends Controller
             // 'phone.max'                  => 'Phone Number is too long.',
             'email.required'             => 'Email Address is required.',
             'email.email'                => 'Email must be a valid email address.',
-            'nature_of_requirement.required'   => 'Please select at least one Nature of Requirement.',
-            'nature_of_requirement.array'      => 'Invalid Nature of Requirement selection.',
-            'nature_of_requirement.*.max'      => 'Each selected Nature of Requirement cannot exceed 150 characters.',
+            // 'nature_of_requirement.required'   => 'Please select at least one Nature of Requirement.',
+            // 'nature_of_requirement.array'      => 'Invalid Nature of Requirement selection.',
+            // 'nature_of_requirement.*.max'      => 'Each selected Nature of Requirement cannot exceed 150 characters.',
             'quantity_range.required'    => 'Please select a Quantity Range.',
             'quantity_range.max'         => 'Quantity Range cannot exceed 50 characters.',
             'corporate_budget.required' => 'Please select a Budget Comfort.',
@@ -677,18 +692,18 @@ class FrontController extends Controller
         //     $data['product_of_interest'] = null;
         // }
 
-        if ($request->has('nature_of_requirement')) {
-            $data['nature_of_requirement'] = json_encode($request->input('nature_of_requirement'));
-        } else {
-            $data['nature_of_requirement'] = null;
-        }
+        // if ($request->has('nature_of_requirement')) {
+        //     $data['nature_of_requirement'] = json_encode($request->input('nature_of_requirement'));
+        // } else {
+        //     $data['nature_of_requirement'] = null;
+        // }
 
         CorporateProposalRequest::create($data);
-        $commaSeparatedRequirements = '';
-        $requirements = $request->nature_of_requirement;
-        if (isset($requirements) && is_countable($requirements) && count($requirements) > 0) {
-            $commaSeparatedRequirements = implode(', ', $requirements);
-        }
+        // $commaSeparatedRequirements = '';
+        // $requirements = $request->nature_of_requirement;
+        // if (isset($requirements) && is_countable($requirements) && count($requirements) > 0) {
+        //     $commaSeparatedRequirements = implode(', ', $requirements);
+        // }
 
         // $commaSeparatedProducts = '';
         // $productIds = $request->product_of_interest;
@@ -721,7 +736,7 @@ class FrontController extends Controller
             'quantity_range'         => $qualityRange,
             'corporate_budget'       => $corporateBudget,
             'timeline'               => $timeline,
-            'nature_of_requirement'  => $commaSeparatedRequirements,
+            // 'nature_of_requirement'  => $commaSeparatedRequirements,
             'message_data'           => $request->message ?? null,
         ];
 
@@ -759,7 +774,7 @@ class FrontController extends Controller
                     "*Quantity Range:* {$qualityRange}\n" .
                     "*Budget Comfort:* {$corporateBudget}\n" .
                     "*Timeline:* {$timeline}\n" .
-                    "*Nature of Requirement:* " . ($commaSeparatedRequirements ?? 'N/A') . "\n" .
+                    // "*Nature of Requirement:* " . ($commaSeparatedRequirements ?? 'N/A') . "\n" .
                     "*Message:* " . ($request->message ?? 'N/A') . "\n\n" .
                     "— HNoWW";
 
@@ -939,12 +954,10 @@ class FrontController extends Controller
         // Validate the request
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
-            echo '<pre>'; print_r($validator->errors()); die;
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
         }
-       echo "<pre>"; print_r($request->all()); die;
         $data = [
             'full_name' => $request->k_full_name,
             'company_name' => $request->k_company_name,

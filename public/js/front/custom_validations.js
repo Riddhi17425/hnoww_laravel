@@ -89,3 +89,10 @@ $.validator.addMethod("minDate", function(value, element) {
     today.setHours(0,0,0,0); // remove time part
     return this.optional(element) || selectedDate > today;
 });
+
+$.validator.addMethod("beforeToday", function(value, element) {
+    if (!value) return true;
+    var today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+
+    return value < today;
+}, "Date of birth must be before today.");

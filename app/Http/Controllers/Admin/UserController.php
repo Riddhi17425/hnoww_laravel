@@ -70,7 +70,7 @@ class UserController extends Controller
     }
 
     public function viewOrderDetails(Request $request, $id){
-        $order = Order::where('id', $id)->with(['user', 'orderProducts'])->first();
+        $order = Order::where('id', $id)->with(['user', 'orderProducts', 'orderAddress'])->first();
         return view('admin.user.order_detail', compact('order'));
     }
 }

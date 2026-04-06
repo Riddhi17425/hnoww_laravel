@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{User, WhatsappInquiry};
+use App\Models\{User, WhatsappInquiry, Cart};
 use Auth;
 use Session;
 use Hash;
@@ -36,7 +36,7 @@ class AuthController extends Controller
                 ->withInput();
         }   
         $data=$request->all();
-        $check = User::create([
+        $user = User::create([
             'name'=>$data['full_name'],
             'email'=>$data['r_email'],
             'phone'=>$data['phone'],
@@ -47,7 +47,29 @@ class AuthController extends Controller
             ]);
 
         Session::put('user',$data['r_email']);
-        if($check){
+
+        if($user){
+            // $sessionId = Session::getId();  
+            // $cartData = Cart::where('session_id', '=', $sessionId)->get();         
+
+            // $oldSessionId = Session::getId();
+            // $cartData = Cart::where('session_id', $oldSessionId)->get(); 
+            // foreach($cartData as $value)
+            // {
+            //     $cart = Cart::where('id', $value->id)->first();
+            //     $checkCart = Cart::where('user_id', $user->id)->where('product_id', $cart->product_id)->first();
+            //     if (isset($checkCart) && ($checkCart->quantity + $cart->quantity) > $cart->product->product_stock) {
+            //         $checkCart->quantity = $checkCart->quantity + $cart->quantity;
+            //         $checkCart->save();
+            //         Cart::where('id', $value->id)->delete();
+            //     }
+            //     else{
+            //         $cart->session_id = null;
+            //         $cart->user_id = $user->id;
+            //         $cart->save();    
+            //     }
+            // }
+
             request()->session()->flash('success','Successfully registered');
             return redirect()->route('front.auth', 'login');
         }
@@ -71,9 +93,39 @@ class AuthController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         } 
+        // SAVE OLD SESSION ID BEFORE LOGIN
+        $oldSessionId = Session::getId();
         $data = $request->all();
         if(Auth::attempt(['email' => $data['email'], 'password' => $data['password']])){
             Session::put('user', $data['email']);
+
+            // $sessionId = Session::getId(); 
+            // $cartData = Cart::where('session_id', '=', $sessionId)->get(); 
+            $cartData = Cart::where('session_id', $oldSessionId)->get();           
+            foreach($cartData as $value)
+            {
+                $cart = Cart::where('id', $value->id)->first();
+                $checkCart = Cart::where('user_id', auth()->id())->where('product_id', $cart->product_id)->first();
+                if($checkCart)
+                {
+                    if (($checkCart->quantity + $cart->quantity) > $cart->product->product_stock) {
+                        $checkCart->quantity = $checkCart->quantity;
+                    }
+                    else{
+                        $checkCart->quantity = $checkCart->quantity + $cart->quantity;
+                    }
+                    $checkCart->save();
+                    Cart::where('id', $value->id)->delete();
+                }
+                else
+                {
+                    $cart->session_id = null;
+                    $cart->user_id = auth()->id();
+                    $cart->save();    
+                }
+                
+            }
+
             request()->session()->flash('success','Successfully login');
             return redirect()->route('front.home');
         }
@@ -172,7 +224,7 @@ class AuthController extends Controller
             'Lax'
         );
     }
-// Hello @~Sal Ma'am, We have done all changes as you mentioned except whatsapp message integration
+
     public function whatsaapInquiry(Request $request){
         $validator = Validator::make($request->all(), [
             'number' => 'required',
@@ -198,7 +250,7 @@ class AuthController extends Controller
     
         // Send to Google Sheets
         try {
-            Http::withHeaders(['Content-Type' => 'application/json'])
+            $response = Http::withHeaders(['Content-Type' => 'application/json'])
                 ->post('https://script.google.com/macros/s/AKfycbwC1jNkkBNUH9lJsOtG5gk5DZePCISChsgcTNzE-_v8e2FJdSjs_eI3JLmLB-ZZ5GCZ/exec', 
                     $sheetsData
                 );

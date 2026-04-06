@@ -208,12 +208,36 @@
                                     <input type="text" name="to_phone" placeholder="Enter Phone Number"
                                         oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);">
                                 </div>
+                            </div>
 
+                            <div class="col-md-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Receipients Address Line1</label>
+                                    <input type="text" name="address_line1" placeholder="Enter Address Line 1">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Receipients Address Line2</label>
+                                    <input type="text" name="address_line2" placeholder="Enter Address Line 2">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="ct_input">
+                                    <label class="sub_head">Receipients Emirate</label>
+                                    <input type="text" name="emirate" placeholder="Enter Emirate">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="ct_input">
+                                    <label class="sub_head">Receipients Landmark</label>
+                                    <input type="text" name="landmark" placeholder="Enter Landmark">
+                                </div>
                             </div>
 
                             <div class="col-md-12">
                                 <label class="sub_head">Message/Notes</label>
-                                <textarea name="w_message" placeholder="Notes" id="#" rows="1"
+                                <textarea name="message_note" placeholder="Notes" id="#" rows="1"
                                     aria-invalid="false"></textarea>
                             </div>
                         </div>
@@ -391,7 +415,6 @@ $('#giftBlessingForm').validate({
             required: true,
             email: true,
             noSpamEmail: true,
-            uniqueEmail: "contact_inquiries"
         },
         from_phone: {
             required: true,
@@ -407,11 +430,35 @@ $('#giftBlessingForm').validate({
             required: true,
             email: true,
             noSpamEmail: true,
-            uniqueEmail: "contact_inquiries"
         },
         to_phone: {
             required: true,
             validPhone: true
+        },
+        address_line1: {
+            required: true,
+            minlength: 3,
+            maxlength: 150
+        },
+        address_line2: {
+            required: true,
+            minlength: 3,
+            maxlength: 150
+        },
+        emirate: {
+            required: true,
+            minlength: 3,
+            maxlength: 50,
+            lettersonly: true
+        },
+        landmark: {
+            minlength: {
+                param: 3,
+                depends: function(element) {
+                    return $(element).val().length > 0;
+                }
+            },
+            maxlength: 150
         },
     },
     messages: {
@@ -442,6 +489,26 @@ $('#giftBlessingForm').validate({
         },
         to_phone: {
             required: "Please enter recipient's Contact number"
+        },
+        address_line1: {
+            required: "Please enter recipient's Address Line 1",
+            minlength: "Address Line 1 must be at least 3 characters",
+            maxlength: "Address Line 1 cannot exceed 150 characters"
+        },
+        address_line2: {
+            required: "Please enter recipient's Address Line 2",
+            minlength: "Address Line 2 must be at least 3 characters",
+            maxlength: "Address Line 2 cannot exceed 150 characters"
+        },
+        emirate: {
+            required: "Please enter recipient's Emirate",
+            minlength: "Emirate must be at least 3 characters",
+            maxlength: "Emirate cannot exceed 50 characters",
+            lettersonly: "Only letters and spaces are allowed"
+        },
+        landmark: {
+            minlength: "Landmark must be at least 3 characters",
+            maxlength: "Landmark cannot exceed 150 characters"
         },
     },
     submitHandler: function(form) {
