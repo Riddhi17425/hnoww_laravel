@@ -419,6 +419,16 @@
     {
         font-size:50px;
     }
+
+    .layout-wrapper-Socials .left-card:before {
+    width: 160px;
+    height: 170px;
+}
+
+.home_instagram
+{
+    width: 220px;
+}
 }
 
 /*=========================                  =========================
@@ -883,6 +893,11 @@
     .cor_kits_cont .sub_head {
         font-size: 20px;
         line-height: 28px;
+    }
+
+        .layout-wrapper-Socials .left-card:before {
+        width: 135px;
+        height: 140px;
     }
 }
 
@@ -1890,4 +1905,12 @@
         .increment_decrement .span_value {
         width: 60px;
     }
+
+    .layout-wrapper-Socials {
+    flex-direction: column;
+}
+
+.layout-wrapper-Socials .image-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
 }
