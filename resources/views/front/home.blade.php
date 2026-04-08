@@ -193,8 +193,8 @@
                 <h6 class="mt-3">LIMITED EDITION — 50</h6>
                 <p class="sub_head_inter">A sculptural object for the architect of industry. Minimal, grounded, and
                     rare.</p>
-                <a href="{{ route('front.product.details', 'product-details/the-wireless-courtyardd') }}" class="com_btn"> Explore The
-                    Architect’s Study </a>
+                <a href="{{ route('front.product.details', 'the-wireless-courtyard') }}" class="com_btn"> Explore The
+                    Architect's Study </a>
             </div>
         </div>
     </div>

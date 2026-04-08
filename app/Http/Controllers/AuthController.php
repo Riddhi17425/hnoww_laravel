@@ -267,8 +267,13 @@ class AuthController extends Controller
 
         // Redirect to WhatsApp
         $number = $request->number;
+        $adminNumber = config('global_values.admin_whatsapp_no'); // Fallback number
         $message = 'Inquiry from the website with Phone No. - '. $number.' and Message - '. $request->message;
-        $whatsappUrl = "https://api.whatsapp.com/send/?phone={$number}&text=" . urlencode($message);
+
+        $url = 'https://wa.me/' . $adminNumber . '?text=' . urlencode($message);
+        return back()->with('whatsapp_url', $url);
+
+        // $whatsappUrl = "https://api.whatsapp.com/send/?phone={$adminNumber}&text=" . urlencode($message);
    
         return redirect()->away($whatsappUrl);
     }

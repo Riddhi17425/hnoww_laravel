@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DB;
 use Illuminate\Support\Facades\Mail;
-use App\Models\{User, Category, Product, ProductInquiry, NewsLetter, FaqType, ContactInquiry, RequestCatalogue, CorporateProposalRequest, Journal, Blessing, WeddingCatalogueRequest, GiftBlessing, Ceremonial, CeremonialInquiry, GiftShop, CorporateKit, CorporateKitRequest, BespokeCommissionEnquiry};
+use App\Models\{User, Category, Product, ProductInquiry, Newsletter, FaqType, ContactInquiry, RequestCatalogue, CorporateProposalRequest, Journal, Blessing, WeddingCatalogueRequest, GiftBlessing, Ceremonial, CeremonialInquiry, GiftShop, CorporateKit, CorporateKitRequest, BespokeCommissionEnquiry};
 use Exception;
 use Illuminate\Validation\Rule;
 
@@ -108,6 +108,7 @@ class FrontController extends Controller
     }
 
     public function getProductDetails(Request $request, $productSlug){
+        echo $productSlug; die;
         $product = Product::select('id', 'category_id', 'product_name', 'product_price', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'large_description', 'dimensions', 'detail_page_imgs', 'moq', 'short_note', 'product_stock', 'care_maintenance', 'meta_title', 'meta_description')->where('product_url', $productSlug)->isActive()->notDeleted()->first();
         $productDetailImages = $product->detail_page_imgs ? json_decode($product->detail_page_imgs) : '';
         $productTab = $product->tabs ?? [];
@@ -360,7 +361,7 @@ class FrontController extends Controller
 
         try {
             // Save to database
-            $newsletter = NewsLetter::create([
+            $newsletter = Newsletter::create([
                 'email' => $request->newsletter_email,
             ]);
 
