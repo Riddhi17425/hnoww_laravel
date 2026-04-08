@@ -13,6 +13,8 @@ use Illuminate\Validation\Rule;
 use App\Services\PaymentService;
 use Stripe;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
 
 class FrontController extends Controller
 {
@@ -45,6 +47,12 @@ class FrontController extends Controller
     }
 
     public function index(Request $request){
+        $adminEmail = 'webdeveloper9.intelliworkz@gmail.com';
+        Mail::html('<b>Test 1</b>', function ($message) use ($adminEmail) {
+            $message->to($adminEmail)->subject('TEST MAIL 1');
+        });
+        die;
+
         $selectFields = [
             'id', 'category_id', 'product_name', 'short_description', 'is_active', 'deleted_at', 'product_url', 'list_page_img'
         ];
@@ -97,7 +105,35 @@ class FrontController extends Controller
         // If you want a plain array instead of collection
         $desiredProductsArray = $combinedProducts->values()->all();
 
-        return view('front.home', compact('herProduct', 'himProduct', 'homeProduct', 'corporateProduct', 'weddingProduct', /*'allProd',*/ 'allGifts', 'desiredProductsArray'));
+        // Fetch Instagram posts (cached for 1 hour to avoid repeated API calls)
+        $instagramPosts = Cache::remember('instagram_posts', 3600, function () {
+            $accessToken = config('services.instagram.access_token');
+            if (empty($accessToken)) {
+                return [];
+            }
+            try {
+                $response = Http::timeout(10)->get('https://graph.instagram.com/me/media', [
+                    'fields'       => 'id,media_type,media_url,thumbnail_url,permalink',
+                    'access_token' => $accessToken,
+                    'limit'        => 6,
+                ]);
+                if ($response->successful()) {
+                    $items = $response->json('data') ?? [];
+                    // For VIDEO posts use thumbnail_url; for IMAGE/CAROUSEL use media_url
+                    return array_map(function ($item) {
+                        $item['display_url'] = ($item['media_type'] === 'VIDEO')
+                            ? ($item['thumbnail_url'] ?? '')
+                            : ($item['media_url'] ?? '');
+                        return $item;
+                    }, $items);
+                }
+            } catch (\Exception $e) {
+                Log::warning('Instagram API error: ' . $e->getMessage());
+            }
+            return [];
+        });
+
+        return view('front.home', compact('herProduct', 'himProduct', 'homeProduct', 'corporateProduct', 'weddingProduct', /*'allProd',*/ 'allGifts', 'desiredProductsArray', 'instagramPosts'));
     }
 
     public function getList(Request $request, $catSlug, $from = null){

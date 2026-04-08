@@ -30,4 +30,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'instagram' => [
+        'access_token' => env('INSTAGRAM_ACCESS_TOKEN'),
+        'app_id'       => env('INSTAGRAM_APP_ID'),
+        'app_secret'   => env('INSTAGRAM_APP_SECRET'),
+    ],
+
 ];

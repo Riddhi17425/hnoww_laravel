@@ -9,12 +9,14 @@ use App\Services\PaymentService;
 use Stripe;
 use Session;
 use Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
     protected $paymentService;
     public function __construct(PaymentService $paymentService)
     {
+        $this->adminEmail = config('global_values.admin_email');
         $this->paymentService = $paymentService;
     }
 
@@ -230,7 +232,31 @@ class CartController extends Controller
                 $orderAddress->is_confirm = 1;
                 $orderAddress->save();
             }
-            // SEND MAIL 
+        
+            // SEND MAIL TO USER AND ADMIN
+            $adminEmail = $this->adminEmail;
+            $userDetails = auth()->user();
+            $userEmail = $userDetails->email;
+            $data = [
+                'name'        => $userDetails->name,
+                'order_id'  => $order->id ?? null,
+                'status'       => $order->status ?? null,
+                'order_total'  => $order->order_total ?? null,
+                'order_products' => $order->orderProducts ?? null,
+            ];
+
+            try {
+                Mail::send('email.admin.order_success', $data, function ($message) use ($adminEmail, $adminSubject) {
+                    $message->to($this->adminEmail)->subject($adminSubject);
+                });
+        
+                Mail::send('email.front.order_success', $data, function ($message) use ($userEmail) {
+                    $message->to($userEmail)->subject('Order Placed Successfully');
+                });
+            } catch (Exception $e) {
+                Log::error('Inquiry Mail sending failed: '.$e->getMessage());
+            }
+
             // SEND WHATSAPP MESSSAGE
             
             return redirect()->route('front.get.success', $orderId);

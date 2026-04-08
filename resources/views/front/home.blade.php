@@ -196,14 +196,7 @@
                 <h6 class="mt-3">LIMITED EDITION — 50</h6>
                 <p class="sub_head_inter">A sculptural object for the architect of industry. Minimal, grounded, and
                     rare.</p>
-<<<<<<< HEAD
-                <a href="{{ route('front.product.details', 'the-wireless-courtyard') }}" class="com_btn"> Explore The
-                    Architect's Study </a>
-=======
-                <a href="{{ route('front.product.details', 'product-details/the-wireless-courtyardd') }}"
-                    class="com_btn"> Explore The
-                    Architect’s Study </a>
->>>>>>> 5326a14aaf625a8d002df8921707519747892167
+                <a href="{{ route('front.product.details', 'the-wireless-courtyard') }}" class="com_btn"> Explore The Architect's Study </a>
             </div>
         </div>
     </div>
@@ -563,15 +556,34 @@ alt="images" loading="lazy">
                         Your Journey To A Confident Smile Starts Here!
                     </p>
                 </div>
-               <a href="#" class="com_btn mt-2">Follow us on Instagram</a>
+               <a href="https://www.instagram.com/h.noww" target="_blank" class="com_btn mt-2">Follow us on Instagram</a>
             </div>
             <div class="image-grid">
-                <img src="{{ asset('public/images/front/editions2.webp') }}" alt="Grid Image 1" class="grid-image">
+                {{-- <img src="{{ asset('public/images/front/editions2.webp') }}" alt="Grid Image 1" class="grid-image">
                 <img src="{{ asset('public/images/front/editions2.webp') }}" alt="Grid Image 2" class="grid-image">
                 <img src="{{ asset('public/images/front/editions2.webp') }}" alt="Grid Image 3" class="grid-image">
                 <img src="{{ asset('public/images/front/editions2.webp') }}" alt="Grid Image 4" class="grid-image">
                 <img src="{{ asset('public/images/front/editions2.webp') }}" alt="Grid Image 5" class="grid-image">
-                <img src="{{ asset('public/images/front/editions2.webp') }}" alt="Grid Image 6" class="grid-image">
+                <img src="{{ asset('public/images/front/editions2.webp') }}" alt="Grid Image 6" class="grid-image"> --}}
+                @if(!empty($instagramPosts))
+                    @foreach($instagramPosts as $post)
+                        @php
+                            $imgUrl = $post['display_url'] ?? '';
+                            $link   = $post['permalink'] ?? 'https://www.instagram.com/h.noww';
+                        @endphp
+                        @if(!empty($imgUrl))
+                        <a href="{{ $link }}" target="_blank" rel="noopener noreferrer">
+                            <img src="{{ $imgUrl }}" alt="Instagram Post" class="grid-image"
+                                 onerror="this.parentElement.style.display='none'">
+                        </a>
+                        @endif
+                    @endforeach
+                @else
+                    {{-- Fallback when no token / API unavailable --}}
+                    @for($i = 1; $i <= 6; $i++)
+                        <img src="{{ asset('public/images/front/editions2.webp') }}" alt="Grid Image {{ $i }}" class="grid-image">
+                    @endfor
+                @endif
             </div>
         </div>
     </div>
