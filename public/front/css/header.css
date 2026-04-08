@@ -233,6 +233,7 @@ header .navbar {
         opacity: 1;
         transform: translateY(0);
     }
+
     .has-dropdown:hover .dropdown-arrow {
         transform: rotate(180deg);
         color: var(--gold-color);

@@ -127,8 +127,9 @@
             <div class="col-md-4">
                 <div class="collection_box">
                     <div class="">
-                        <a href="{{ route('front.list', 'for-her') }}"><img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/images/front/collections1.webp') }}"
-                            alt="images" loading="lazy"></a>
+                        <a href="{{ route('front.list', 'for-her') }}"><img class="img-fluid mb-2 mb-md-4"
+                                src="{{ asset('public/images/front/collections1.webp') }}" alt="images"
+                                loading="lazy"></a>
                     </div>
                     <h3 class="sub_head">For Her {{-- — {{$herProduct[0]->product_name ?? ''}} --}}</h3>
                     <p>@if(isset($herProduct[0]->short_description)){!! $herProduct[0]->short_description !!}@endif</p>
@@ -138,8 +139,9 @@
             <div class="col-md-4">
                 <div class="collection_box">
                     <div class="">
-                        <a href="{{ route('front.list', 'for-him') }}"><img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/images/front/collections2.webp') }}"
-                            alt="images" loading="lazy"></a>
+                        <a href="{{ route('front.list', 'for-him') }}"><img class="img-fluid mb-2 mb-md-4"
+                                src="{{ asset('public/images/front/collections2.webp') }}" alt="images"
+                                loading="lazy"></a>
                     </div>
                     <h3 class="sub_head">For Him {{-- — {{$himProduct[0]->product_name ?? ''}} --}}</h3>
                     <p>@if(isset($himProduct[0]->short_description)){!! $himProduct[0]->short_description !!}@endif</p>
@@ -149,8 +151,9 @@
             <div class="col-md-4">
                 <div class="collection_box">
                     <div class="">
-                        <a href="{{ route('front.list', 'for-home') }}"><img class="img-fluid mb-2 mb-md-4" src="{{ asset('public/images/front/collections3.webp') }}"
-                            alt="images" loading="lazy"></a>
+                        <a href="{{ route('front.list', 'for-home') }}"><img class="img-fluid mb-2 mb-md-4"
+                                src="{{ asset('public/images/front/collections3.webp') }}" alt="images"
+                                loading="lazy"></a>
                     </div>
                     <h3 class="sub_head">For Home {{-- — {{$homeProduct[0]->product_name ?? ''}} --}}</h3>
                     <p>@if(isset($homeProduct[0]->short_description)){!! $homeProduct[0]->short_description !!}@endif
@@ -193,8 +196,14 @@
                 <h6 class="mt-3">LIMITED EDITION — 50</h6>
                 <p class="sub_head_inter">A sculptural object for the architect of industry. Minimal, grounded, and
                     rare.</p>
+<<<<<<< HEAD
                 <a href="{{ route('front.product.details', 'the-wireless-courtyard') }}" class="com_btn"> Explore The
                     Architect's Study </a>
+=======
+                <a href="{{ route('front.product.details', 'product-details/the-wireless-courtyardd') }}"
+                    class="com_btn"> Explore The
+                    Architect’s Study </a>
+>>>>>>> 5326a14aaf625a8d002df8921707519747892167
             </div>
         </div>
     </div>
@@ -490,8 +499,8 @@ alt="images" loading="lazy">
         <div class="row mobile_slider">
             <div class="col-md-4">
                 <div class="collection_box">
-                    <a href="{{ route('front.blessings.library') }}"><img class="img-fluid mb-4" src="{{ asset('public/images/front/editions1.webp') }}" alt="images"
-                        loading="lazy"></a>
+                    <a href="{{ route('front.blessings.library') }}"><img class="img-fluid mb-4"
+                            src="{{ asset('public/images/front/editions1.webp') }}" alt="images" loading="lazy"></a>
                     <h3 class="sub_head">The Blessing Library</h3>
                     <p style="height:40px;">Written blessings and words of intention for home, union, and self.</p>
                     <a href="{{ route('front.blessings.library') }}" class="com_btn">Explore </a>
@@ -499,8 +508,8 @@ alt="images" loading="lazy">
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
-                    <a href="{{ route('front.journal') }}"><img class="img-fluid mb-4" src="{{ asset('public/images/front/editions2.webp') }}" alt="images"
-                        loading="lazy"></a>
+                    <a href="{{ route('front.journal') }}"><img class="img-fluid mb-4"
+                            src="{{ asset('public/images/front/editions2.webp') }}" alt="images" loading="lazy"></a>
                     <h3 class="sub_head">The Journal</h3>
                     <p style="height:40px;">Reflections on design, ritual, and contemporary living.</p>
                     <a href="{{ route('front.journal') }}" class="com_btn">Explore</a>
@@ -508,8 +517,8 @@ alt="images" loading="lazy">
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
-                    <a href="{{ route('front.bespoke.commission') }}"><img class="img-fluid mb-4" src="{{ asset('public/images/front/editions3.webp') }}" alt="images"
-                        loading="lazy"></a>
+                    <a href="{{ route('front.bespoke.commission') }}"><img class="img-fluid mb-4"
+                            src="{{ asset('public/images/front/editions3.webp') }}" alt="images" loading="lazy"></a>
                     <h3 class="sub_head">Bespoke Commissions</h3>
                     <p style="height:40px;">Collaborative creations shaped around personal rituals and intent.</p>
                     <a href="{{ route('front.bespoke.commission') }}" class="com_btn">Explore</a>
@@ -518,6 +527,56 @@ alt="images" loading="lazy">
         </div>
     </div>
 </section>
+
+<!--The social  -->
+<section class="mt_120 mb_120">
+    <div class="container">
+        <div class="section_header">
+            <p class="sub_head mb-0">
+                <span>
+                    <svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z"
+                            fill="#B58A46" />
+                    </svg>
+                </span>
+                <span>the</span>
+                <span>
+                    <svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z"
+                            fill="#B58A46" />
+                    </svg>
+                </span>
+            </p>
+            <h2 class="title_60"> Socials </h2>
+        </div>
+        <div class="layout-wrapper-Socials">
+            <div class="left-card">
+                <img class="home_instagram" src="{{ asset('public/images/front/Instagram_logo_home.svg') }}" alt="images" class="mb-4" loading="lazy">
+              
+                <div>
+                    <h4 class="sub_head_inter my-4">Capture The Moments:<br>Insta-Smile Highlights</h4>
+                    <p>
+                        Explore The Charm Of Real Smiles, Transformations,<br>
+                        And The Joy Of Our Community.<br>
+                        Your Journey To A Confident Smile Starts Here!
+                    </p>
+                </div>
+               <a href="#" class="com_btn mt-2">Follow us on Instagram</a>
+            </div>
+            <div class="image-grid">
+                <img src="{{ asset('public/images/front/editions2.webp') }}" alt="Grid Image 1" class="grid-image">
+                <img src="{{ asset('public/images/front/editions2.webp') }}" alt="Grid Image 2" class="grid-image">
+                <img src="{{ asset('public/images/front/editions2.webp') }}" alt="Grid Image 3" class="grid-image">
+                <img src="{{ asset('public/images/front/editions2.webp') }}" alt="Grid Image 4" class="grid-image">
+                <img src="{{ asset('public/images/front/editions2.webp') }}" alt="Grid Image 5" class="grid-image">
+                <img src="{{ asset('public/images/front/editions2.webp') }}" alt="Grid Image 6" class="grid-image">
+            </div>
+        </div>
+    </div>
+</section>
+
 
 <div class="modal fade audio_modal" id="productInquiry" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="productInquiryLabel" aria-hidden="true">
