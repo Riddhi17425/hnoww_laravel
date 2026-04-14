@@ -1905,7 +1905,6 @@
         .increment_decrement .span_value {
         width: 60px;
     }
-<<<<<<< HEAD
 
     .layout-wrapper-Socials {
     flex-direction: column;
@@ -1914,12 +1913,10 @@
 .layout-wrapper-Socials .image-grid {
     grid-template-columns: repeat(2, 1fr);
 }
-=======
     
     .wa-modal
     {
         right:-20px;
     }
     
->>>>>>> d74246d7b89bd11832d1673e1486d859deaaed24
 }
