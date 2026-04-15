@@ -47,11 +47,11 @@ class FrontController extends Controller
     }
 
     public function index(Request $request){
-        $adminEmail = 'webdeveloper9.intelliworkz@gmail.com';
-        Mail::html('<b>Test 1</b>', function ($message) use ($adminEmail) {
-            $message->to($adminEmail)->subject('TEST MAIL 1');
-        });
-        die;
+        // $adminEmail = 'webdeveloper9.intelliworkz@gmail.com';
+        // Mail::html('<b>Test 1</b>', function ($message) use ($adminEmail) {
+        //     $message->to($adminEmail)->subject('TEST MAIL 1');
+        // });
+        // die;
 
         $selectFields = [
             'id', 'category_id', 'product_name', 'short_description', 'is_active', 'deleted_at', 'product_url', 'list_page_img'
@@ -144,7 +144,6 @@ class FrontController extends Controller
     }
 
     public function getProductDetails(Request $request, $productSlug){
-        echo $productSlug; die;
         $product = Product::select('id', 'category_id', 'product_name', 'product_price', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'large_description', 'dimensions', 'detail_page_imgs', 'moq', 'short_note', 'product_stock', 'care_maintenance', 'meta_title', 'meta_description')->where('product_url', $productSlug)->isActive()->notDeleted()->first();
         $productDetailImages = $product->detail_page_imgs ? json_decode($product->detail_page_imgs) : '';
         $productTab = $product->tabs ?? [];
