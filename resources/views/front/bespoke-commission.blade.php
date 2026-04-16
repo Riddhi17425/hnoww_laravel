@@ -15,7 +15,7 @@
     <div class="container">
         <div class="magic_wrapper">
             <h2 class="magic_head_phone">
-                Beauty is not decoration is personal.
+                Beauty is not decoration it is personal.
             </h2>
             <!-- 3️⃣ Left image (from left) -->
             <div class="text-end magic_wrapper_logo">
@@ -45,7 +45,7 @@
 
             <!-- 5️⃣ Last heading (from right) -->
             <h2 class="magic_head_2">
-                is personal.
+               It is personal.
             </h2>
         </div>
     </div>

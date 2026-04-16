@@ -16,7 +16,7 @@
         <p class="mb-0 d-md-none">Designed in Dubai. Made to endure.</p>
         <!--<h1 class="main_head">Where meaning takes shape.</h1>-->
         <h1 class="main_head">Where craft holds expressions </h1>
-        <p>Personalised gifts designed to turn the everyday into a feeling. Thoughtfully designed, customized gifts
+        <p>Personalised gifts designed to turn everyday into a feeling. Thoughtfully designed, customized gifts
             shaped by intention and form.</p>
         <!--<p>Objects crafted to turn the everyday into ceremony.</p>-->
         <a href="{{ route('front.atelier') }}" class="com_btn border-0 bg-white d-lg-none">Explore The Works</a>
