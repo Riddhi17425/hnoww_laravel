@@ -3,18 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use App\Models\{User, Category, Product, ProductInquiry, Newsletter, FaqType, ContactInquiry, RequestCatalogue, CorporateProposalRequest, Journal, Blessing, WeddingCatalogueRequest, GiftBlessing, Ceremonial, CeremonialInquiry, GiftShop, CorporateKit, CorporateKitRequest, BespokeCommissionEnquiry};
+use Illuminate\Support\Facades\Validator;
+use App\Models\{User, Category, Product, ProductInquiry, Newsletter, FaqType, ContactInquiry, RequestCatalogue, CorporateProposalRequest, Journal, Blessing, WeddingCatalogueRequest, GiftBlessing, SharedDetail, Ceremonial, CeremonialInquiry, GiftShop, CorporateKit, CorporateKitRequest, BespokeCommissionEnquiry};
 use Exception;
 use Illuminate\Validation\Rule;
 
+use App\Services\ElevenLabsTextToSpeechService;
 use App\Services\PaymentService;
 use Stripe;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Cache;
 
 class FrontController extends Controller
 {
@@ -27,6 +28,28 @@ class FrontController extends Controller
         $this->adminEmail = config('global_values.admin_email');
         $this->adminWhatsappNo = config('global_values.admin_whatsapp_no');
         $this->paymentService = $paymentService;
+    }
+
+    public function blessingAudio(Blessing $blessing, ElevenLabsTextToSpeechService $textToSpeechService)
+    {
+        try {
+            $audioPath = $textToSpeechService->getBlessingAudioPath($blessing);
+
+            if (!$audioPath || !file_exists($audioPath)) {
+                abort(404);
+            }
+
+            return response()->file($audioPath, [
+                'Content-Type' => 'audio/mpeg',
+                'Cache-Control' => 'public, max-age=86400',
+            ]);
+        } catch (Exception $e) {
+            Log::error('Blessing audio generation failed: ' . $e->getMessage(), [
+                'blessing_id' => $blessing->id,
+            ]);
+
+            abort(500, 'Unable to generate blessing audio');
+        }
     }
 
     public function getStripe(Request $request){
@@ -277,6 +300,8 @@ class FrontController extends Controller
             'address_line2' => 'required',
             'emirate' => 'required',
             'landmark' => 'nullable',
+            'add_flowers' => 'nullable|boolean',
+            'flower_budget_range' => 'nullable|required_if:add_flowers,1|string|in:150 to 250,250 to 500',
             'message_note' => 'nullable',
         ]);
         if ($validator->fails()) {
@@ -284,6 +309,7 @@ class FrontController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+        $addFlowers = $request->boolean('add_flowers');
         $data = [
             'blessing_id' => $request->blessing_id,
             'from_name'   => $request->from_name ?? null,
@@ -296,12 +322,15 @@ class FrontController extends Controller
             'address_line2'    => $request->address_line2 ?? null,
             'emirate'    => $request->emirate ?? null,
             'landmark'    => $request->landmark ?? null,
+            'add_flowers' => $addFlowers,
+            'flower_budget_range' => $addFlowers ? $request->flower_budget_range : null,
             'message_note'    => $request->message_note ?? null,
         ];
         $gift = GiftBlessing::create($data);
         $adminEmail = $this->adminEmail;
         $userEmail = $request->from_email;
         $data['blessing_title'] = optional($gift->blessing)->title;
+        $data['add_flowers_label'] = $addFlowers ? 'Yes' : 'No';
         // 📧 Send Mail
         try {
             Mail::send('email.admin.gift_blessing_request', $data, function ($message) use ($adminEmail) {
@@ -312,7 +341,7 @@ class FrontController extends Controller
                 $message->to($userEmail)->subject('Gift blessing request send Successfully');
             });
         } catch (Exception $e) {
-            \Log::error('Gift blessing sending failed: '.$e->getMessage());
+            Log::error('Gift blessing sending failed: '.$e->getMessage());
         }
 
         // WhatsApp
@@ -330,6 +359,8 @@ class FrontController extends Controller
             "Address Line 2: {$gift->address_line2}\n\n" .
             "Emirate: {$gift->emirate}\n\n" .
             "Landmark: {$gift->landmark}\n\n" .
+            "Add Flowers: " . ($gift->add_flowers ? 'Yes' : 'No') . "\n\n" .
+            "Flower Budget Range: " . ($gift->flower_budget_range ?? '-') . "\n\n" .
             "Message Note: {$gift->message_note}\n\n" .
             "*Blessing:* " . ($gift->blessing->title ?? '-') . "\n\n" .
             "— HNoWW";
@@ -348,6 +379,46 @@ class FrontController extends Controller
         // }
 
         return response()->json(['message' => 'Blessing gifted successfully']);
+    }
+
+    public function storeSharedDetail(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'blessing_id' => 'required|exists:blessings,id',
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|max:255',
+            'contact_no' => 'required|string|max:15',
+        ], [
+            'name.required' => 'Please enter your name',
+            'email.required' => 'Please enter your email',
+            'email.email' => 'Please enter a valid email address',
+            'contact_no.required' => 'Please enter your contact number',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $shareLink = route('front.blessings.detail', ['blessings_of' => $request->blessing_id]);
+
+        SharedDetail::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'contact_no' => $request->contact_no,
+            'share_link' => $shareLink,
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Share details saved successfully',
+            'share_link' => $shareLink,
+            'whatsapp_url' => 'https://wa.me/?text=' . urlencode($shareLink),
+            'email_url' => 'mailto:?subject=' . rawurlencode('Blessing share') . '&body=' . rawurlencode($shareLink),
+            'instagram_url' => 'https://www.instagram.com/',
+        ]);
     }
 
     public function checkEmailUnique(Request $request){
@@ -1170,7 +1241,7 @@ class FrontController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
             return redirect()->back()
-                ->withErrors($validator)
+                ->withErrors($validator) 
                 ->withInput();
         }
         $role = $request->w_role ? $weddingRole[$request->w_role] : '-';

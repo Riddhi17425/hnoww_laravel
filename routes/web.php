@@ -41,7 +41,9 @@ Route::name('front.')->group(function () {
 	Route::get('/journal', [FrontController::class, 'getJournal'])->name('journal');
 	Route::get('/blessings-library/{blessings_of?}', [FrontController::class, 'getBlessings'])->name('blessings.library');
 	Route::get('/blessings-detail/{blessings_of?}', [FrontController::class, 'blessingDetail'])->name('blessings.detail');
+	Route::get('/blessings-audio/{blessing}', [FrontController::class, 'blessingAudio'])->name('blessings.audio');
 	Route::post('/gift-blessing', [FrontController::class, 'storeGiftBlessing'])->name('store.gift.blessing');
+	Route::post('/shared-details', [FrontController::class, 'storeSharedDetail'])->name('store.shared.detail');
 
 	Route::get('/atelier', [FrontController::class, 'getAtelier'])->name('atelier');
 	Route::post('store-corporate-proposal-request', [FrontController::class, 'storeCorporateProposalRequest'])->name('store.corporate.proposal.request');
