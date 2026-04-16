@@ -416,38 +416,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-
-    function processText(node) {
+    function applyHnowwStyle(node) {
+        // Sirf text nodes ko check karein
         if (node.nodeType === 3) {
             let text = node.nodeValue;
-
+            
+            // "hnoww" ko detect karke <span class="hnoww-font"> me wrap karega
+            // 'gi' matlab Global (poore page par) aur Case-Insensitive (Chota-bada font dono)
             let updated = text.replace(/hnoww/gi, function (match) {
-
-                // word ko letters me tod do
-                let chars = match.split("");
-
-                // o ko span me wrap karo
-                let finalWord = chars.map(char => {
-                    if (char.toLowerCase() === "o") {
-                        return `<span class="border-o">${char}</span>`;
-                    }
-                    return char;
-                }).join("");
-
-                // full word wrapper
-                return `<span class="hnoww-font">${finalWord}</span>`;
+                return `<span class="hnoww-font">${match}</span>`;
             });
 
             if (updated !== text) {
-                let span = document.createElement("span");
-                span.innerHTML = updated;
-                node.replaceWith(span);
+                let tempSpan = document.createElement("span");
+                tempSpan.innerHTML = updated;
+                node.replaceWith(tempSpan);
             }
-
-        } else {
-            node.childNodes.forEach(processText);
+        } else if (node.nodeType === 1 && node.childNodes.length > 0) {
+            // Script aur Style tags ko ignore karein taaki code break na ho
+            if (node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
+                Array.from(node.childNodes).forEach(applyHnowwStyle);
+            }
         }
     }
 
-    processText(document.body);
+    applyHnowwStyle(document.body);
 });

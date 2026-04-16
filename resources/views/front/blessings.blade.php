@@ -2,76 +2,21 @@
 @php // print_r(request()->segment(2)); die;
 @endphp
 
+
 <style>
-.gift_flower_options {
-    display: none;
+.bles_modal_close {
+    top: 22px;
+    right: 22px;
 }
 
-.gift_flower_options.is-visible {
-    display: flex;
-    gap: 15px;
+@media (max-width: 767px) {
+    .bles_modal_close {
+        filter: invert(1);
+    }
 }
 
-/* OPTION CARD */
-.flower_option {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 18px;
-    border: 2px solid #ddd;
-    cursor: pointer;
-    transition: 0.3s;
-    font-weight: 500;
-}
-
-/* HIDE DEFAULT RADIO */
-.flower_option input {
-    display: none;
-}
-
-/* CUSTOM RADIO */
-.custom_radio {
-    width: 18px;
-    height: 18px;
-    border: 2px solid #999;
-    border-radius: 50%;
-    position: relative;
-}
-
-/* INNER DOT */
-.custom_radio::after {
-    content: "";
-    width: 10px;
-    height: 10px;
-    background: #8c8a72;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    transition: 0.2s;
-}
-
-/* TEXT */
-.option_text {
-    font-size: 14px;
-}
-
-/* ACTIVE STATE */
-.flower_option input:checked+.custom_radio {
-    border-color: #8c8a72;
-}
-
-.flower_option input:checked+.custom_radio::after {
-    transform: translate(-50%, -50%) scale(1);
-}
-
-
-/* HOVER EFFECT */
-.flower_option:hover {
-    border-color: #8c8a72;
-}
 </style>
+
 <section class="hero-section_inner">
     <img class="img-fluid" src="{{asset('public/images/front/blessing-library-banner.webp')}}" alt="him banner">
 
@@ -265,25 +210,25 @@
 
                             <div class="col-md-6">
                                 <div class="ct_input">
-                                    <label class="sub_head">Receipients Address Line1</label>
+                                    <label class="sub_head">Recipient's Address Line1</label>
                                     <input type="text" name="address_line1" placeholder="Enter Address Line 1">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="ct_input">
-                                    <label class="sub_head">Receipients Address Line2</label>
+                                    <label class="sub_head">Recipient's Address Line2</label>
                                     <input type="text" name="address_line2" placeholder="Enter Address Line 2">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="ct_input">
-                                    <label class="sub_head">Receipients Emirate</label>
+                                    <label class="sub_head">Recipient's Emirate</label>
                                     <input type="text" name="emirate" placeholder="Enter Emirate">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="ct_input">
-                                    <label class="sub_head">Receipients Landmark</label>
+                                    <label class="sub_head">Recipient's Landmark</label>
                                     <input type="text" name="landmark" placeholder="Enter Landmark">
                                 </div>
                             </div>
@@ -297,33 +242,34 @@
                             </div>
 
                             <div class="col-md-12">
-                               <div class="ct_input">
-                                 <div class=" remember-me mb-3">
-                                    <input type="checkbox" value="1" id="addFlowersCheckbox" name="add_flowers">
-                                    <label class="sub_head"> Would you like to add beautiful Flowers?</label>
+                                <div class="ct_input">
+                                    <div class=" remember-me mb-3">
+                                        <span><input type="checkbox" value="1" id="addFlowersCheckbox"
+                                                name="add_flowers"></span>
+                                        <label class="sub_head"> Would you like to add beautiful Flowers?</label>
+                                    </div>
+
+                                    <div id="giftFlowerOptions" class="gift_flower_options is-visible">
+
+                                        <label class="flower_option">
+                                            <input type="radio" name="flower_budget_range" value="150 to 250">
+                                            <span class="custom_radio"></span>
+                                            <span class="option_text">₹150 - ₹250</span>
+                                        </label>
+
+                                        <label class="flower_option">
+                                            <input type="radio" name="flower_budget_range" value="250 to 500">
+                                            <span class="custom_radio"></span>
+                                            <span class="option_text">₹250 - ₹500</span>
+                                        </label>
+
+                                    </div>
                                 </div>
-
-                                <div id="giftFlowerOptions" class="gift_flower_options is-visible">
-
-                                    <label class="flower_option">
-                                        <input type="radio" name="flower_budget_range" value="150 to 250">
-                                        <span class="custom_radio"></span>
-                                        <span class="option_text">₹150 - ₹250</span>
-                                    </label>
-
-                                    <label class="flower_option">
-                                        <input type="radio" name="flower_budget_range" value="250 to 500">
-                                        <span class="custom_radio"></span>
-                                        <span class="option_text">₹250 - ₹500</span>
-                                    </label>
-
-                                </div>
-                               </div>
 
                             </div>
                         </div>
 
-                        <div class="mt-3 d-flex justify-content-center gap-2">
+                        <div class=" d-flex justify-content-center gap-2">
                             <a class="com_btn" data-bs-toggle="modal" data-bs-target="#blessingPopup"
                                 style="cursor: pointer;"><span>
                                     <- </span> Back</a>
@@ -390,20 +336,126 @@
     <div class="modal-dialog modal-dialog-centered modal-md">
         <div class="modal-content">
             <div class="modal-body">
-                <div class="audio-card d-grid">
+                <div class="audio-card d-grid gap-0">
                     <div class="modal-header border-0 px-0 pt-0">
-                        <h5 class="title_40">Share Options</h5>
+                        <h5 class="title_40">Social Sharing Options</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
-                    <div class="share_option_buttons">
-                        <a href="javascript:void(0);" class="com_btn bg-transparent" id="shareWhatsappBtn">Share on
-                            WhatsApp</a>
-                        <a href="javascript:void(0);" class="com_btn bg-transparent" id="shareEmailBtn">Share on
-                            Email</a>
-                        <a href="javascript:void(0);" class="com_btn bg-transparent" id="shareInstagramBtn">Share on
-                            Instagram</a>
+                    <div>
+                        Awesome! Where would you like to share your poem?
                     </div>
+
+                    <div class="share-wrapper">
+                        <a href="javascript:void(0);" id="shareWhatsappBtn" class="share-box whatsapp"
+                            title="Share on WhatsApp">
+                            <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_146_89)">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M75 0C116.423 0 150 33.5771 150 75C150 116.423 116.423 150 75 150C33.5771 150 0 116.423 0 75C0 33.5771 33.5771 0 75 0Z"
+                                        fill="url(#paint0_linear_146_89)" />
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M75.0002 109.518C68.8918 109.518 62.8801 107.892 57.6213 104.818C56.7746 104.323 55.7551 104.191 54.8088 104.449L43.3742 107.587L47.3586 98.8125C47.9006 97.6201 47.76 96.2285 46.9953 95.165C42.7326 89.2617 40.4826 82.2861 40.4826 75C40.4826 55.9658 55.966 40.4824 75.0002 40.4824C94.0344 40.4824 109.518 55.9658 109.518 75C109.518 94.0342 94.0344 109.518 75.0002 109.518ZM75.0002 33.1758C51.9377 33.1758 33.1789 51.9375 33.1789 75C33.1789 83.1123 35.4787 90.9023 39.8586 97.6641L33.5041 111.659C32.9182 112.951 33.132 114.463 34.049 115.541C34.7551 116.364 35.7775 116.824 36.8293 116.824C39.1848 116.824 52.0314 112.787 55.301 111.888C61.3449 115.122 68.1213 116.824 75.0002 116.824C98.0598 116.824 116.824 98.0596 116.824 75C116.824 51.9375 98.0598 33.1787 75.0002 33.1758Z"
+                                        fill="white" />
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M84.9844 79.8895C83.4024 80.537 82.3916 83.0155 81.3662 84.2811C80.8389 84.9286 80.2119 85.0311 79.4033 84.7059C73.4619 82.3388 68.9063 78.372 65.6279 72.9052C65.0713 72.0585 65.1709 71.3876 65.8418 70.5995C66.832 69.4335 68.0772 68.1093 68.3438 66.536C68.9385 63.0614 64.3945 52.2772 58.3916 57.164C41.1211 71.2382 87.2022 108.565 95.5195 88.3768C97.8721 82.6522 87.6094 78.8143 84.9844 79.8895Z"
+                                        fill="white" />
+                                </g>
+                                <defs>
+                                    <linearGradient id="paint0_linear_146_89" x1="19.8721" y1="24.1465" x2="138.923"
+                                        y2="114.252" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#39AE41" />
+                                        <stop offset="1" stop-color="#80C269" />
+                                    </linearGradient>
+                                    <clipPath id="clip0_146_89">
+                                        <rect width="150" height="150" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            <span>WhatsApp</span>
+                        </a>
+
+                        <a href="javascript:void(0);" id="shareEmailBtn" class="share-box gmail" title="Share via Email">
+                            <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M75 2C115.317 2 148 34.6832 148 75C148 115.317 115.317 148 75 148C34.6832 148 2 115.317 2 75C2 34.6832 34.6832 2 75 2Z"
+                                    stroke="#8C8A72" stroke-width="4" />
+                                <g clip-path="url(#clip0_146_125)">
+                                    <path
+                                        d="M36.0352 108.984H50.3906V73.9701L29.8828 58.5227V102.805C29.8828 106.224 32.6411 108.984 36.0352 108.984Z"
+                                        fill="#4285F4" />
+                                    <path
+                                        d="M99.6094 108.984H113.965C117.369 108.984 120.117 106.214 120.117 102.805V58.5227L99.6094 73.9701"
+                                        fill="#34A853" />
+                                    <path
+                                        d="M99.6094 47.1946V73.9701L120.117 58.5227V50.284C120.117 42.6427 111.432 38.2865 105.352 42.8693"
+                                        fill="#FBBC04" />
+                                    <path d="M50.3906 73.9701V47.1946L75 65.7315L99.6094 47.1946V73.9701L75 92.5071"
+                                        fill="#EA4335" />
+                                    <path
+                                        d="M29.8828 50.284V58.5227L50.3906 73.9701V47.1946L44.6484 42.8693C38.5576 38.2865 29.8828 42.6427 29.8828 50.284Z"
+                                        fill="#C5221F" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_146_125">
+                                        <rect width="90.2344" height="67.9688" fill="white"
+                                            transform="translate(29.8828 41.0156)" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            <span>Email</span>
+                        </a>
+
+                        <a href="javascript:void(0);" id="shareInstagramBtn" class="share-box instagram"
+                            title="Share on Instagram">
+                            <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_146_96)">
+                                    <mask id="mask0_146_96" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0"
+                                        y="0" width="150" height="150">
+                                        <path
+                                            d="M75 150C116.421 150 150 116.421 150 75C150 33.5786 116.421 0 75 0C33.5786 0 0 33.5786 0 75C0 116.421 33.5786 150 75 150Z"
+                                            fill="white" />
+                                    </mask>
+                                    <g mask="url(#mask0_146_96)">
+                                        <path
+                                            d="M32.2266 303.516C121.218 303.516 193.359 231.374 193.359 142.383C193.359 53.3916 121.218 -18.75 32.2266 -18.75C-56.7646 -18.75 -128.906 53.3916 -128.906 142.383C-128.906 231.374 -56.7646 303.516 32.2266 303.516Z"
+                                            fill="url(#paint0_radial_146_96)" />
+                                    </g>
+                                    <path
+                                        d="M96.0938 59.7656C99.3298 59.7656 101.953 57.1423 101.953 53.9062C101.953 50.6702 99.3298 48.0469 96.0938 48.0469C92.8577 48.0469 90.2344 50.6702 90.2344 53.9062C90.2344 57.1423 92.8577 59.7656 96.0938 59.7656Z"
+                                        fill="white" />
+                                    <path
+                                        d="M75 56.25C71.2916 56.25 67.6665 57.3497 64.5831 59.4099C61.4996 61.4702 59.0964 64.3986 57.6773 67.8247C56.2581 71.2508 55.8868 75.0208 56.6103 78.6579C57.3338 82.2951 59.1195 85.636 61.7418 88.2582C64.364 90.8805 67.7049 92.6663 71.3421 93.3897C74.9792 94.1132 78.7492 93.7419 82.1753 92.3227C85.6014 90.9036 88.5298 88.5004 90.5901 85.4169C92.6503 82.3335 93.75 78.7084 93.75 75C93.75 70.0272 91.7746 65.2581 88.2583 61.7417C84.742 58.2254 79.9728 56.25 75 56.25ZM75 84.375C73.1458 84.375 71.3333 83.8252 69.7915 82.795C68.2498 81.7649 67.0482 80.3007 66.3386 78.5877C65.6291 76.8746 65.4434 74.9896 65.8051 73.171C66.1669 71.3525 67.0598 69.682 68.3709 68.3709C69.682 67.0598 71.3525 66.1669 73.171 65.8051C74.9896 65.4434 76.8746 65.6291 78.5877 66.3386C80.3007 67.0482 81.7649 68.2498 82.795 69.7915C83.8252 71.3332 84.375 73.1458 84.375 75C84.375 77.4864 83.3873 79.871 81.6291 81.6291C79.871 83.3873 77.4864 84.375 75 84.375Z"
+                                        fill="white" />
+                                    <path
+                                        d="M98.4375 37.5H51.5625C43.796 37.5 37.5 43.796 37.5 51.5625V98.4375C37.5 106.204 43.796 112.5 51.5625 112.5H98.4375C106.204 112.5 112.5 106.204 112.5 98.4375V51.5625C112.5 43.796 106.204 37.5 98.4375 37.5Z"
+                                        stroke="white" stroke-width="10.0495" stroke-miterlimit="10" />
+                                </g>
+                                <defs>
+                                    <radialGradient id="paint0_radial_146_96" cx="0" cy="0" r="1"
+                                        gradientUnits="userSpaceOnUse"
+                                        gradientTransform="translate(32.2266 142.383) scale(161.133)">
+                                        <stop stop-color="#FFD676" />
+                                        <stop offset="0.25" stop-color="#F2A454" />
+                                        <stop offset="0.38" stop-color="#F05C3C" />
+                                        <stop offset="0.7" stop-color="#C22F86" />
+                                        <stop offset="0.96" stop-color="#6666AD" />
+                                        <stop offset="0.99" stop-color="#5C6CB2" />
+                                    </radialGradient>
+                                    <clipPath id="clip0_146_96">
+                                        <rect width="150" height="150" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            <span>Instagram</span>
+                        </a>
+                    </div>
+
+                       <div class="text-center">
+                       <a class="com_btn" data-bs-toggle="modal" data-bs-target="#blessingPopup" style="cursor: pointer;"><span>
+                                    &lt;- </span> Back</a>
+                    </div>
+
                 </div>
             </div>
         </div>
