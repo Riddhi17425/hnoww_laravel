@@ -53,6 +53,16 @@
                 <td width="65%" style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">{{ $landmark ?? '' }}</td>
             </tr>
             <tr>
+                <td width="35%" style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #888888;">Would you like to add beutiful Flowers ?</td>
+                <td width="65%" style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">{{ $add_flowers_label ?? 'No' }}</td>
+            </tr>
+            @if(!empty($flower_budget_range))
+            <tr>
+                <td width="35%" style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #888888;">Flower Budget Range:</td>
+                <td width="65%" style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">{{ $flower_budget_range }}</td>
+            </tr>
+            @endif
+            <tr>
                 <td width="35%" style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #888888;">Message / Notes:</td>
                 <td width="65%" style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">{{ $message_note ?? '' }}</td>
             </tr>
