@@ -62,7 +62,7 @@
             @if(isset($catProducts) && is_countable($catProducts) && count($catProducts))
                 @foreach($catProducts as $key => $val)
                     <div class="him_prod">
-                        <div class="him_prod_top mb-2 mb-md-4">
+                        <div class="him_prod_top">
                             @php
                                 $imagePath = public_path('images/admin/product_list/' . $val->list_page_img);
                             @endphp
@@ -83,10 +83,10 @@
                 @endforeach
             @endif
             {{-- <div class="him_prod">
-                <div class="him_prod_top  mb-2 mb-md-4">
+                <div class="him_prod_top">
                     <img class="img-fluid img_1" src="{{ asset('public/images/front/desire2.webp')}}" alt="him_prod">
                 </div>
-              
+               
                     <div>
                         <h3 class="sub_head">The Oculus (Solo)</h3>
                         <p>A compact ritual centerpiece for intimate hosting.</p>
@@ -97,7 +97,7 @@
                 </div>
             </div>
             <div class="him_prod">
-                <div class="him_prod_top mb-2 mb-md-4">
+                <div class="him_prod_top">
                     <img class="img-fluid img_1" src="{{ asset('public/images/front/desire3.webp')}}" alt="him_prod">
                 </div>
                     <div>
@@ -110,7 +110,7 @@
                 </div>
             </div>
             <div class="him_prod">
-                <div class="him_prod_top mb-2 mb-md-4">
+                <div class="him_prod_top">
                     <img class="img-fluid img_1" src="{{ asset('public/images/front/desire4.webp')}}" alt="him_prod">
                 </div>
                     <div>
