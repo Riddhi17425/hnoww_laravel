@@ -605,8 +605,8 @@
     }
 
     .zoom-lens {
-        width: 100px;
-        height: 100px;
+        width: 150px;
+        height: 150px;
     }
 
     .increment_decrement .span_value {
@@ -713,12 +713,19 @@
     }
 
     .ceremonial_box .inquire_bespoke {
-        width: 150px;
-        height: 150px;
+        width: 125px;
+        height: 125px;
+    }
+
+    .ceremonial_box .inquire_link svg
+    {
+        width: 25px;
+        height: 25px;
+        margin-top: 5px;
     }
 
     .ceremonial_box .inquire_link {
-        font-size: 18px;
+        font-size: 12px;
     }
 
     .corporate_slider .slick-slide {
