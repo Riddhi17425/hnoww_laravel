@@ -235,6 +235,7 @@ class CartController extends Controller
         
             // SEND MAIL TO USER AND ADMIN
             $adminEmail = $this->adminEmail;
+            $adminSubject = 'New Order Placed - '.$order->order_number;
             $userDetails = auth()->user();
             $userEmail = $userDetails->email;
             $data = [
