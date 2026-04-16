@@ -222,7 +222,7 @@ $current_route ===
         <nav class="navbar navbar-expand-lg">
             <div class="navbar_left">
                 <a href="{{ route('front.home') }}"><img class="header_logo" src="{{ $is_green 
-                            ? asset('public/images/front/home_magic_left.svg') 
+                            ? asset('public/images/front/footer-logo.svg') 
                             : asset('public/images/front/header-logo.svg') }}" alt="Logo"></a>
             </div>
 
