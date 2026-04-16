@@ -109,7 +109,7 @@
         <div class="ft_bottom">
             <div class="ym_cpy">
                 All rights reserved. <a href="{{ route('front.home') }}">©HNOWW</a> <?php echo date("Y"); ?>. Designed
-                in Dubai.
+                in Dubai.  
             </div>
 
             <div class="ft_privacy">
