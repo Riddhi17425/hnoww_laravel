@@ -423,9 +423,9 @@ document.addEventListener("DOMContentLoaded", function () {
             
             // "hnoww" ko detect karke <span class="hnoww-font"> me wrap karega
             // 'gi' matlab Global (poore page par) aur Case-Insensitive (Chota-bada font dono)
-            let updated = text.replace(/hnoww/gi, function (match) {
-                return `<span class="hnoww-font">${match}</span>`;
-            });
+           let updated = text.replace(/hnoww/gi, function (match) {
+    return `<span class="hnoww-font">HN<span class="hnoww-o">O̱</span>WW</span>`;
+});
 
             if (updated !== text) {
                 let tempSpan = document.createElement("span");
