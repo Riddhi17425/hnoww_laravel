@@ -412,3 +412,42 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    function processText(node) {
+        if (node.nodeType === 3) {
+            let text = node.nodeValue;
+
+            let updated = text.replace(/hnoww/gi, function (match) {
+
+                // word ko letters me tod do
+                let chars = match.split("");
+
+                // o ko span me wrap karo
+                let finalWord = chars.map(char => {
+                    if (char.toLowerCase() === "o") {
+                        return `<span class="border-o">${char}</span>`;
+                    }
+                    return char;
+                }).join("");
+
+                // full word wrapper
+                return `<span class="hnoww-font">${finalWord}</span>`;
+            });
+
+            if (updated !== text) {
+                let span = document.createElement("span");
+                span.innerHTML = updated;
+                node.replaceWith(span);
+            }
+
+        } else {
+            node.childNodes.forEach(processText);
+        }
+    }
+
+    processText(document.body);
+});

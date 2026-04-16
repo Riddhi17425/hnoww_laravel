@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('emirate')->nullable();
             $table->string('address_line1')->nullable();
             $table->string('address_line2')->nullable();
-            $table->string('landmark')->nullable();
             $table->string('landmark', 500)->nullable();
             $table->string('message_note', 500)->nullable();
             $table->timestamps();

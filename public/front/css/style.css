@@ -493,3 +493,20 @@ a {
 .theme-green .has-dropdown .dropdown-menu::before {
     border-bottom: 8px solid #c0bdb8;
 }
+
+.border-o {
+  border-bottom: 2px solid red;
+}
+
+
+
+.hnoww-font {
+    font-family: var(--heading-font);
+}
+
+/* .border-o {
+    border-bottom: 2px solid red;
+    display: inline-block;
+    line-height: 1;
+    width: 10px;
+} */
