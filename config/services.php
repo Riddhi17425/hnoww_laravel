@@ -36,4 +36,16 @@ return [
         'app_secret'   => env('INSTAGRAM_APP_SECRET'),
     ],
 
+    'elevenlabs' => [
+        'api_key' => env('ELEVENLABS_API_KEY'),
+        'voice_id' => env('ELEVENLABS_VOICE_ID'),
+        'model_id' => env('ELEVENLABS_MODEL_ID', 'eleven_multilingual_v2'),
+        'base_url' => env('ELEVENLABS_BASE_URL', 'https://api.elevenlabs.io'),
+        'output_format' => env('ELEVENLABS_OUTPUT_FORMAT', 'mp3_44100_128'),
+        'stability' => env('ELEVENLABS_STABILITY'),
+        'similarity_boost' => env('ELEVENLABS_SIMILARITY_BOOST'),
+        'style' => env('ELEVENLABS_STYLE'),
+        'use_speaker_boost' => env('ELEVENLABS_USE_SPEAKER_BOOST'),
+    ],
+
 ];
