@@ -127,7 +127,7 @@
     }
 
     .main_head {
-        font-size: 56px;
+        font-size: 48px;
     }
 
     .mt_80 {
@@ -308,12 +308,12 @@
     }
 
     .ceremonial_box .inquire_bespoke {
-        width: 200px;
-        height: 200px;
+        width: 130px;
+        height: 130px;
     }
 
     .ceremonial_box .inquire_link {
-        font-size: 20px;
+        font-size: 14px;
     }
 
     .corporate_kit_content .corporate_kit_list {
@@ -369,8 +369,8 @@
     }
 
     .founder_main .founder_text_1 p {
-        font-size: 24px;
-        line-height: 28px;
+        font-size: 20px;
+        line-height: 24px;
     }
 
     .abiout_left {
@@ -429,6 +429,14 @@
 {
     width: 220px;
 }
+
+
+#reg_login .reg_login_child .user .formBx .ct_form input
+{
+    font-size: 18px;
+    line-height: 22px;
+}
+
 }
 
 /*=========================                  =========================
@@ -506,7 +514,7 @@
     }
 
     .main_head {
-        font-size: 48px;
+        font-size: 42px;
     }
 
     .gesture_box svg {
@@ -863,7 +871,7 @@
 
     #reg_login .reg_login_child .user .formBx .ct_form input {
         margin-top: 0px;
-        font-size: 16px;
+        font-size: 15px;
         line-height: 18px;
     }
 
@@ -977,7 +985,7 @@
     }
 
     .main_head {
-        font-size: 42px;
+        font-size: 36px;
     }
 
     .section_header {
@@ -1200,6 +1208,11 @@
     .cor_kits_cont .sub_head {
         font-size: 18px;
         line-height: 24px;
+    }
+
+        #reg_login .reg_login_child .user .formBx .ct_form input {
+        font-size: 14px;
+        line-height: 18px;
     }
 }
 

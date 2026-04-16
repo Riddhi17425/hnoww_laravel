@@ -15,8 +15,8 @@
     <div class="hero_content">
         <p class="mb-0 d-md-none">Designed in Dubai. Made to endure.</p>
         <!--<h1 class="main_head">Where meaning takes shape.</h1>-->
-        <h1 class="main_head">Where craft holds expressions </h1>
-        <p>Curated objects for the desk, the home & the relationships that matter.</p>
+        <h1 class="main_head">Where craft holds expressions HNOWW</h1>
+        <p>Curated objects for the desk, the home & the relationships that matter. HNOWW</p>
         <!--<p>Objects crafted to turn the everyday into ceremony.</p>-->
         <a href="{{ route('front.atelier') }}" class="com_btn border-0 bg-white d-lg-none">Explore The Works</a>
     </div>

@@ -207,7 +207,7 @@ $current_route ===
 <body class="<?= $is_green ? 'theme-green' : 'theme-white' ?>">
 
     <!-- Page Loader -->
-    <div id="page-loader" class="loader-overlay d-none">
+    <div id="page-loader" class="loader-overlay">
         <div class="loader-box">
             <svg width="100%" height="100%" viewBox="-3 -3 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
