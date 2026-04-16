@@ -3,43 +3,73 @@
 @endphp
 
 <style>
-.form-control:focus {
-    border-color: #8c8a72;
-    box-shadow: unset;
-}
-
-.bles_modal_close {
-    top: 22px;
-    right: 22px;
-}
-
-@media (max-width: 767px) {
-    .bles_modal_close {
-        filter: invert(1);
-    }
-}
-
 .gift_flower_options {
     display: none;
-    margin-top: 12px;
-    flex-direction: column;
-    gap: 10px;
 }
 
 .gift_flower_options.is-visible {
     display: flex;
+    gap: 15px;
 }
 
-.share_option_buttons {
+/* OPTION CARD */
+.flower_option {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    border: 2px solid #ddd;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 500;
 }
 
-@media (max-width: 767px) {
-    .gift_flower_options {
-        gap: 10px;
-    }
+/* HIDE DEFAULT RADIO */
+.flower_option input {
+    display: none;
+}
+
+/* CUSTOM RADIO */
+.custom_radio {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #999;
+    border-radius: 50%;
+    position: relative;
+}
+
+/* INNER DOT */
+.custom_radio::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: #8c8a72;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 0.2s;
+}
+
+/* TEXT */
+.option_text {
+    font-size: 14px;
+}
+
+/* ACTIVE STATE */
+.flower_option input:checked+.custom_radio {
+    border-color: #8c8a72;
+}
+
+.flower_option input:checked+.custom_radio::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+
+/* HOVER EFFECT */
+.flower_option:hover {
+    border-color: #8c8a72;
 }
 </style>
 <section class="hero-section_inner">
@@ -156,8 +186,8 @@
 
                         <a href="javascript:void(0);" class="com_btn" id="giftBtn">GIFT THIS BLESSING</a>
                         <div class="audio-links mt-4">
-                            <a href="javascript:void(0);" id="shareBlessingBtn">Share this <svg width="20" height="22" viewBox="0 0 20 22"
-                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <a href="javascript:void(0);" id="shareBlessingBtn">Share this <svg width="20" height="22"
+                                    viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M12.75 5.25L6.75 8.75M6.75 12.75L12.75 16.25M15.75 6.75C14.0931 6.75 12.75 5.40685 12.75 3.75C12.75 2.09315 14.0931 0.75 15.75 0.75C17.4069 0.75 18.75 2.09315 18.75 3.75C18.75 5.40685 17.4069 6.75 15.75 6.75ZM15.75 20.75C14.0931 20.75 12.75 19.4069 12.75 17.75C12.75 16.0931 14.0931 14.75 15.75 14.75C17.4069 14.75 18.75 16.0931 18.75 17.75C18.75 19.4069 17.4069 20.75 15.75 20.75ZM3.75 13.75C2.09315 13.75 0.75 12.4069 0.75 10.75C0.75 9.0931 2.09315 7.75 3.75 7.75C5.40685 7.75 6.75 9.0931 6.75 10.75C6.75 12.4069 5.40685 13.75 3.75 13.75Z"
                                         stroke="#c7b58c" stroke-width="1.5" stroke-linecap="round"
@@ -245,13 +275,13 @@
                                     <input type="text" name="address_line2" placeholder="Enter Address Line 2">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="ct_input">
                                     <label class="sub_head">Receipients Emirate</label>
                                     <input type="text" name="emirate" placeholder="Enter Emirate">
                                 </div>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <div class="ct_input">
                                     <label class="sub_head">Receipients Landmark</label>
                                     <input type="text" name="landmark" placeholder="Enter Landmark">
@@ -259,27 +289,37 @@
                             </div>
 
                             <div class="col-md-12">
-                                <label class="sub_head">Message/Notes</label>
-                                <textarea name="message_note" placeholder="Notes" id="#" rows="1"
-                                    aria-invalid="false"></textarea>
+                                <div class="ct_input">
+                                    <label class="sub_head">Message/Notes</label>
+                                    <textarea name="message_note" placeholder="Notes" id="#" rows="1"
+                                        aria-invalid="false"></textarea>
+                                </div>
                             </div>
 
-                            <div class="col-md-12 mt-3">
-                                <label style="gap:8px;cursor:pointer;">
+                            <div class="col-md-12">
+                               <div class="ct_input">
+                                 <div class=" remember-me mb-3">
                                     <input type="checkbox" value="1" id="addFlowersCheckbox" name="add_flowers">
-                                    <span class="sub_head" style="margin:0;">Would you like to add beautiful Flowers?</span>
-                                </label>
-
-                                <div id="giftFlowerOptions" class="gift_flower_options">
-                                    <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;">
-                                        <input type="radio" id="flower_budget_range_150_250" name="flower_budget_range" value="150 to 250">
-                                        <span>150 to 250</span>
-                                    </label>
-                                    <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;">
-                                        <input type="radio" id="flower_budget_range_250_500" name="flower_budget_range" value="250 to 500">
-                                        <span>250 to 500</span>
-                                    </label>
+                                    <label class="sub_head"> Would you like to add beautiful Flowers?</label>
                                 </div>
+
+                                <div id="giftFlowerOptions" class="gift_flower_options is-visible">
+
+                                    <label class="flower_option">
+                                        <input type="radio" name="flower_budget_range" value="150 to 250">
+                                        <span class="custom_radio"></span>
+                                        <span class="option_text">₹150 - ₹250</span>
+                                    </label>
+
+                                    <label class="flower_option">
+                                        <input type="radio" name="flower_budget_range" value="250 to 500">
+                                        <span class="custom_radio"></span>
+                                        <span class="option_text">₹250 - ₹500</span>
+                                    </label>
+
+                                </div>
+                               </div>
+
                             </div>
                         </div>
 
@@ -302,7 +342,8 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div class="audio-card d-grid">
-                    <form method="POST" id="shareDetailsForm" action="{{ route('front.store.shared.detail') }}" class="ct_form">
+                    <form method="POST" id="shareDetailsForm" action="{{ route('front.store.shared.detail') }}"
+                        class="ct_form">
                         @csrf
                         <div class="modal-header border-0 px-0 pt-0">
                             <h5 class="title_40">Share This Blessing</h5>
@@ -356,9 +397,12 @@
                     </div>
 
                     <div class="share_option_buttons">
-                        <a href="javascript:void(0);" class="com_btn bg-transparent" id="shareWhatsappBtn">Share on WhatsApp</a>
-                        <a href="javascript:void(0);" class="com_btn bg-transparent" id="shareEmailBtn">Share on Email</a>
-                        <a href="javascript:void(0);" class="com_btn bg-transparent" id="shareInstagramBtn">Share on Instagram</a>
+                        <a href="javascript:void(0);" class="com_btn bg-transparent" id="shareWhatsappBtn">Share on
+                            WhatsApp</a>
+                        <a href="javascript:void(0);" class="com_btn bg-transparent" id="shareEmailBtn">Share on
+                            Email</a>
+                        <a href="javascript:void(0);" class="com_btn bg-transparent" id="shareInstagramBtn">Share on
+                            Instagram</a>
                     </div>
                 </div>
             </div>
@@ -763,9 +807,13 @@ $('#shareDetailsForm').validate({
                 method: 'POST',
                 data: $(form).serialize(),
                 success: function(res) {
-                    activeShareLink = res.share_link || buildBlessingShareLink($('#shareBlessingId').val());
-                    activeWhatsappUrl = res.whatsapp_url || ('https://wa.me/?text=' + encodeURIComponent(activeShareLink));
-                    activeEmailUrl = res.email_url || ('mailto:?subject=' + encodeURIComponent('Blessing share') + '&body=' + encodeURIComponent(activeShareLink));
+                    activeShareLink = res.share_link || buildBlessingShareLink($(
+                        '#shareBlessingId').val());
+                    activeWhatsappUrl = res.whatsapp_url || ('https://wa.me/?text=' +
+                        encodeURIComponent(activeShareLink));
+                    activeEmailUrl = res.email_url || ('mailto:?subject=' + encodeURIComponent(
+                        'Blessing share') + '&body=' + encodeURIComponent(
+                        activeShareLink));
                     activeInstagramUrl = res.instagram_url || 'https://www.instagram.com/';
 
                     $('#shareDetailsModal').modal('hide');
