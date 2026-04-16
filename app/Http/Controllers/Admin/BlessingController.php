@@ -9,8 +9,6 @@ use DataTables;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
-
-use Illuminate\Support\Facades\Http;
 // use Illuminate\Support\Facades\Storage;
 
 class BlessingController extends Controller
@@ -158,42 +156,6 @@ class BlessingController extends Controller
             $blessing->image = $imageName;
         }
 
-        // OLD CODE
-        // if ($request->hasFile('audio_file')) {
-        //     $audio = $request->file('audio_file');
-        //     $audioName = $audio->getClientOriginalName();
-        //     $audio->move(public_path('images/admin/blessing/audios/'), $audioName);
-        //     $blessing->audio_file = $audioName;
-        // }
-
-        // NEW CODE (Converted Text to Audio file)
-        if(isset($content) && $content != null){
-            $folderPath = public_path('images/admin/blessing/audios/');
-            if (!file_exists($folderPath)) {
-                mkdir($folderPath, 0755, true);
-            }
-            // Split text into chunks (max 180 characters)
-            $chunks = str_split($content, 180);
-            $audioName = 'audio_'.$blessing->id.'_'.time().'.mp3';
-            $fullPath = $folderPath.$audioName;
-            $finalAudio = '';
-            foreach($chunks as $chunk){
-                $text = urlencode($chunk);
-                $url = "https://translate.googleapis.com/translate_tts?ie=UTF-8&q={$text}&tl=en-IN&client=gtx";
-                $response = Http::withHeaders([
-                    'User-Agent' => 'Mozilla/5.0'
-                ])->get($url);
-                if($response->successful()){
-                    $finalAudio .= $response->body();
-                }
-            }
-            if($finalAudio != ''){
-                file_put_contents($fullPath, $finalAudio);
-                $blessing->audio_file = $audioName;
-                $blessing->save();
-            }
-        }
-
         return redirect()->route('admin.blessings.index')->with('success', 'Blessing added successfully!');
     }
 
@@ -281,59 +243,6 @@ class BlessingController extends Controller
             $imageName = $image->getClientOriginalName();
             $image->move(public_path('images/admin/blessing/images/'), $imageName);
             $blessing->image = $imageName;
-        }
-
-        // OLD CODE
-        // if ($request->hasFile('audio_file')) {
-        //     // Remove old audio
-        //     // if($blessing->audio_file && file_exists(public_path('audio/blessings/'.$blessing->audio_file))){
-        //     //     unlink(public_path('audio/blessings/'.$blessing->audio_file));
-        //     // }
-        //     $audio = $request->file('audio_file');
-        //     $audioName = $audio->getClientOriginalName();
-        //     $audio->move(public_path('images/admin/blessing/audios/'), $audioName);
-        //     $blessing->audio_file = $audioName;
-        // }
-
-        // NEW CODE (Converted Text to Audio file)
-        if(isset($content) && $content != null){
-            $folderPath = public_path('images/admin/blessing/audios/');
-            // Create folder if it doesn't exist
-            if (!file_exists($folderPath)) {
-                mkdir($folderPath, 0755, true);
-            }
-            // Remove old audio file if exists
-            if($blessing->audio_file && file_exists($folderPath.$blessing->audio_file)){
-                unlink($folderPath.$blessing->audio_file);
-            }
-            // Split content into safe chunks (<200 characters per request)
-            $chunks = explode("\n", wordwrap($content, 180));
-            $audioName = 'audio_'.$blessing->id.'_'.time().'.mp3';
-            $fullPath = $folderPath.$audioName;
-            $finalAudio = '';
-            foreach($chunks as $chunk){
-                $text = urlencode($chunk);
-                // Use reliable Google API endpoint
-                $url = "https://translate.googleapis.com/translate_tts?ie=UTF-8&q={$text}&tl=en-IN&client=gtx";
-                $response = Http::withHeaders([
-                    'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-                ])->get($url);
-                if($response->successful()){
-                    $finalAudio .= $response->body();
-                } else {
-                    \Log::error('TTS request failed', [
-                        'status' => $response->status(),
-                        'text' => $chunk
-                    ]);
-                }
-            }
-            if($finalAudio != ''){
-                // Save new audio
-                file_put_contents($fullPath, $finalAudio);
-                // Update database
-                $blessing->audio_file = $audioName;
-                $blessing->save();
-            }   
         }
 
         return redirect()->route('admin.blessings.index')->with('success', 'Blessing updated successfully!');
