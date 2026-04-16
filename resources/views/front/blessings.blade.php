@@ -18,6 +18,29 @@
         filter: invert(1);
     }
 }
+
+.gift_flower_options {
+    display: none;
+    margin-top: 12px;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.gift_flower_options.is-visible {
+    display: flex;
+}
+
+.share_option_buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+@media (max-width: 767px) {
+    .gift_flower_options {
+        gap: 10px;
+    }
+}
 </style>
 <section class="hero-section_inner">
     <img class="img-fluid" src="{{asset('public/images/front/blessing-library-banner.webp')}}" alt="him banner">
@@ -55,7 +78,7 @@
                     data-id="{{ $val->id }}" data-title="{{ $val->title }}" data-subtitle="{{ $val->sub_title }}"
                     data-description="{{ strip_tags($val->description) }}"
                     data-image="{{ asset('public/images/admin/blessing/images/'.$val->image) }}"
-                    data-audio="{{ asset('public/images/admin/blessing/audios/'.$val->audio_file) }}">
+                    data-audio="{{ route('front.blessings.audio', $val->id) }}">
                     <img class="img-fluid mb-2 mb-md-4"
                         src="{{ asset('public/images/admin/blessing/images/'.$val->image) }}" alt="images">
                     <div class="d-flex justify-content-between align-items-center">
@@ -133,7 +156,7 @@
 
                         <a href="javascript:void(0);" class="com_btn" id="giftBtn">GIFT THIS BLESSING</a>
                         <div class="audio-links mt-4">
-                            <a href="#" onclick="openShare()">Share this <svg width="20" height="22" viewBox="0 0 20 22"
+                            <a href="javascript:void(0);" id="shareBlessingBtn">Share this <svg width="20" height="22" viewBox="0 0 20 22"
                                     fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M12.75 5.25L6.75 8.75M6.75 12.75L12.75 16.25M15.75 6.75C14.0931 6.75 12.75 5.40685 12.75 3.75C12.75 2.09315 14.0931 0.75 15.75 0.75C17.4069 0.75 18.75 2.09315 18.75 3.75C18.75 5.40685 17.4069 6.75 15.75 6.75ZM15.75 20.75C14.0931 20.75 12.75 19.4069 12.75 17.75C12.75 16.0931 14.0931 14.75 15.75 14.75C17.4069 14.75 18.75 16.0931 18.75 17.75C18.75 19.4069 17.4069 20.75 15.75 20.75ZM3.75 13.75C2.09315 13.75 0.75 12.4069 0.75 10.75C0.75 9.0931 2.09315 7.75 3.75 7.75C5.40685 7.75 6.75 9.0931 6.75 10.75C6.75 12.4069 5.40685 13.75 3.75 13.75Z"
@@ -240,6 +263,24 @@
                                 <textarea name="message_note" placeholder="Notes" id="#" rows="1"
                                     aria-invalid="false"></textarea>
                             </div>
+
+                            <div class="col-md-12 mt-3">
+                                <label style="gap:8px;cursor:pointer;">
+                                    <input type="checkbox" value="1" id="addFlowersCheckbox" name="add_flowers">
+                                    <span class="sub_head" style="margin:0;">Would you like to add beautiful Flowers?</span>
+                                </label>
+
+                                <div id="giftFlowerOptions" class="gift_flower_options">
+                                    <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;">
+                                        <input type="radio" id="flower_budget_range_150_250" name="flower_budget_range" value="150 to 250">
+                                        <span>150 to 250</span>
+                                    </label>
+                                    <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;">
+                                        <input type="radio" id="flower_budget_range_250_500" name="flower_budget_range" value="250 to 500">
+                                        <span>250 to 500</span>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="mt-3 d-flex justify-content-center gap-2">
@@ -255,9 +296,83 @@
     </div>
 </div>
 
+<!-- Share Details Modal -->
+<div class="modal fade audio_modal" id="shareDetailsModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="audio-card d-grid">
+                    <form method="POST" id="shareDetailsForm" action="{{ route('front.store.shared.detail') }}" class="ct_form">
+                        @csrf
+                        <div class="modal-header border-0 px-0 pt-0">
+                            <h5 class="title_40">Share This Blessing</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <input type="hidden" name="blessing_id" id="shareBlessingId">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="ct_input">
+                                    <label class="sub_head">Name</label>
+                                    <input type="text" name="name" placeholder="Enter your Name"
+                                        oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="ct_input">
+                                    <label class="sub_head">Email</label>
+                                    <input type="email" name="email" placeholder="Enter your Email">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="ct_input">
+                                    <label class="sub_head">Contact</label>
+                                    <input type="text" name="contact_no" placeholder="Enter your Contact Number"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 d-flex justify-content-center gap-2">
+                            <button type="submit" class="com_btn bg-transparent">Continue to Share</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Share Options Modal -->
+<div class="modal fade audio_modal" id="shareOptionsModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="audio-card d-grid">
+                    <div class="modal-header border-0 px-0 pt-0">
+                        <h5 class="title_40">Share Options</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="share_option_buttons">
+                        <a href="javascript:void(0);" class="com_btn bg-transparent" id="shareWhatsappBtn">Share on WhatsApp</a>
+                        <a href="javascript:void(0);" class="com_btn bg-transparent" id="shareEmailBtn">Share on Email</a>
+                        <a href="javascript:void(0);" class="com_btn bg-transparent" id="shareInstagramBtn">Share on Instagram</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @push('script')
 <script>
 let currentBlessingId = null;
+let activeShareLink = '';
+let activeWhatsappUrl = '';
+let activeEmailUrl = '';
+let activeInstagramUrl = 'https://www.instagram.com/';
 const modal = document.getElementById("blessingPopup");
 const audio = document.getElementById("audio");
 const playBtn = document.getElementById("playBtn");
@@ -283,19 +398,25 @@ playBtn.addEventListener("click", async () => {
     }
 });
 
-function openShare() {
-    const url = sitePath + '/blessings-detail/' + currentBlessingId;
+function buildBlessingShareLink(blessingId) {
+    return sitePath + '/blessings-detail/' + blessingId;
+}
 
-    if (navigator.share) {
-        navigator.share({
-            title: document.title,
-            url: url
-        });
-    } else {
-        navigator.clipboard.writeText(url).then(() => {
-            alert("Link copied to clipboard");
-        });
+function copyShareLink(callback) {
+    if (!activeShareLink) {
+        alert('Share link not available');
+        return;
     }
+
+    navigator.clipboard.writeText(activeShareLink).then(function() {
+        if (typeof callback === 'function') {
+            callback();
+        }
+    }).catch(function() {
+        if (typeof callback === 'function') {
+            callback();
+        }
+    });
 }
 
 // Update progress
@@ -402,7 +523,46 @@ $('#giftBtn').on('click', function() {
 });
 // ==============================================
 
+$('#shareBlessingBtn').on('click', function() {
+    if (!currentBlessingId) {
+        alert('Please select a blessing');
+        return;
+    }
+
+    $('#shareBlessingId').val(currentBlessingId);
+    $('#blessingPopup').modal('hide');
+
+    setTimeout(function() {
+        $('#shareDetailsModal').modal('show');
+    }, 350);
+});
+
 var formSubmitted = false;
+var shareFormSubmitted = false;
+const addFlowersCheckbox = document.getElementById('addFlowersCheckbox');
+const giftFlowerOptions = document.getElementById('giftFlowerOptions');
+
+function toggleGiftFlowerOptions() {
+    if (!addFlowersCheckbox || !giftFlowerOptions) {
+        return;
+    }
+
+    if (addFlowersCheckbox.checked) {
+        giftFlowerOptions.classList.add('is-visible');
+        return;
+    }
+
+    giftFlowerOptions.classList.remove('is-visible');
+    giftFlowerOptions.querySelectorAll('input[name="flower_budget_range"]').forEach(function(radio) {
+        radio.checked = false;
+    });
+}
+
+if (addFlowersCheckbox) {
+    addFlowersCheckbox.addEventListener('change', toggleGiftFlowerOptions);
+    toggleGiftFlowerOptions();
+}
+
 $('#giftBlessingForm').validate({
     rules: {
         from_name: {
@@ -460,6 +620,13 @@ $('#giftBlessingForm').validate({
             },
             maxlength: 150
         },
+        flower_budget_range: {
+            required: {
+                depends: function() {
+                    return $('#addFlowersCheckbox').is(':checked');
+                }
+            }
+        },
     },
     messages: {
         from_name: {
@@ -510,6 +677,9 @@ $('#giftBlessingForm').validate({
             minlength: "Landmark must be at least 3 characters",
             maxlength: "Landmark cannot exceed 150 characters"
         },
+        flower_budget_range: {
+            required: "Please select a flower budget range"
+        },
     },
     submitHandler: function(form) {
         if (!formSubmitted) {
@@ -526,6 +696,7 @@ $('#giftBlessingForm').validate({
                     alert(res.message);
                     $('#giftBlessingModal').modal('hide');
                     form.reset();
+                    toggleGiftFlowerOptions();
                     if (res.whatsapp_url) {
                         window.open(res.whatsapp_url, '_blank');
                     }
@@ -541,6 +712,129 @@ $('#giftBlessingForm').validate({
                 }
             });
         }
+    }
+});
+
+$('#shareDetailsForm').validate({
+    rules: {
+        name: {
+            required: true,
+            minlength: 2,
+            maxlength: 100,
+            lettersonly: true
+        },
+        email: {
+            required: true,
+            email: true,
+            noSpamEmail: true,
+        },
+        contact_no: {
+            required: true,
+            validPhone: true
+        }
+    },
+    messages: {
+        name: {
+            required: 'Please enter your name',
+            minlength: 'Name must be at least 2 characters',
+            maxlength: 'Name cannot be longer than 100 characters',
+            lettersonly: 'Only letters and spaces are allowed'
+        },
+        email: {
+            required: 'Please enter your email',
+            email: 'Please enter a valid email address',
+            noSpamEmail: 'This email address is not allowed',
+        },
+        contact_no: {
+            required: 'Please enter your contact number'
+        }
+    },
+    submitHandler: function(form) {
+        if (!shareFormSubmitted) {
+            shareFormSubmitted = true;
+            const btn = $(form).find('button[type="submit"]');
+
+            if (btn.length) {
+                btn.prop('disabled', true).text('Submitting...');
+            }
+
+            $.ajax({
+                url: "{{ route('front.store.shared.detail') }}",
+                method: 'POST',
+                data: $(form).serialize(),
+                success: function(res) {
+                    activeShareLink = res.share_link || buildBlessingShareLink($('#shareBlessingId').val());
+                    activeWhatsappUrl = res.whatsapp_url || ('https://wa.me/?text=' + encodeURIComponent(activeShareLink));
+                    activeEmailUrl = res.email_url || ('mailto:?subject=' + encodeURIComponent('Blessing share') + '&body=' + encodeURIComponent(activeShareLink));
+                    activeInstagramUrl = res.instagram_url || 'https://www.instagram.com/';
+
+                    $('#shareDetailsModal').modal('hide');
+                    form.reset();
+
+                    setTimeout(function() {
+                        $('#shareOptionsModal').modal('show');
+                    }, 350);
+                },
+                error: function(xhr) {
+                    let message = 'Something went wrong';
+
+                    if (xhr.responseJSON && xhr.responseJSON.errors) {
+                        const firstError = Object.values(xhr.responseJSON.errors)[0];
+                        if (firstError && firstError[0]) {
+                            message = firstError[0];
+                        }
+                    }
+
+                    alert(message);
+                },
+                complete: function() {
+                    shareFormSubmitted = false;
+                    if (btn.length) {
+                        btn.prop('disabled', false).text('Continue to Share');
+                    }
+                }
+            });
+        }
+    }
+});
+
+$('#shareWhatsappBtn').on('click', function() {
+    if (!activeWhatsappUrl) {
+        alert('Share link not available');
+        return;
+    }
+
+    window.open(activeWhatsappUrl, '_blank');
+});
+
+$('#shareEmailBtn').on('click', function() {
+    if (!activeEmailUrl) {
+        alert('Share link not available');
+        return;
+    }
+
+    window.location.href = activeEmailUrl;
+});
+
+$('#shareInstagramBtn').on('click', function() {
+    copyShareLink(function() {
+        alert('Share link copied. Paste it in Instagram.');
+        window.open(activeInstagramUrl, '_blank');
+    });
+});
+
+$('#giftBlessingModal').on('hidden.bs.modal', function() {
+    const form = document.getElementById('giftBlessingForm');
+    if (form) {
+        form.reset();
+    }
+    toggleGiftFlowerOptions();
+});
+
+$('#shareDetailsModal').on('hidden.bs.modal', function() {
+    const form = document.getElementById('shareDetailsForm');
+    if (form) {
+        form.reset();
     }
 });
 </script>
