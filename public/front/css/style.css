@@ -78,7 +78,7 @@ a {
 .main_head {
     color: var(--white-color);
     font-family: var(--heading-font);
-    font-size: 64px;
+    font-size: 58px;
     font-weight: 500;
 }
 
@@ -496,6 +496,13 @@ a {
 
 
 .hnoww-font {
-    font-family: var(--heading-font), serif; /* Logo style font */
+    font-family: var(--heading-font), serif;
     text-transform: uppercase !important;
+}
+
+.hnoww-o {
+    font-size: 0.9em;
+    position: relative;
+    top: -0.2em;
+    text-transform: lowercase;
 }
