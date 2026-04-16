@@ -118,10 +118,10 @@
                         <p class="sub_head_inter" style="color:unset;"> Inspired by the rituals of our culture hosting,
                             gifting, gathering, lighting a flame, offering sweets, preserving moments we reimagine these
                             gestures through culptural design.</p>
-                        <p class="sub_head_inter" style="color:unset;">Every curve, weight, and material is chosen with
+                        <p class="sub_head_inter" style="color:unset;">Every curve, weight and material is chosen with
                             purpose.</p>
                         <p class="sub_head_inter" style="color:unset;">Stone for grounding, silver for memory, malachite
-                            for depth, Brass for stillness. </p>
+                            for depth, brass for stillness. </p>
                         <p class="magic_wrapper_h3 mt-4">HNOWW is not an object brand. It is a movement back to meaning.
                         </p>
                     </div>
