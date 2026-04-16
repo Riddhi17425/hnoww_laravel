@@ -1,0 +1,33 @@
+.gift_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 120px;
+}
+
+.gift_box .gift_box_lt,
+.gift_box .gift_box_rt {
+    width: 50%;
+}
+
+.gift_box_rt .gift_head {
+    color: var(--dark-900);
+    font-family: var(--heading-font);
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 55px;
+}
+
+.gift_box_rt .sub_head_inter
+{
+    line-height: 38px;
+    color: var(--grey-666);
+    margin: 60px 0;
+    border-left: 1px solid #C2B48E;
+    padding: 19px 0 19px 30px;
+    margin-left: 60px;
+}
+
+.gift_box_rt .com_btn {
+    margin-left: 90px;
+}

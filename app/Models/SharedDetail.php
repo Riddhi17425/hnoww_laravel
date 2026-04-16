@@ -5,12 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class GiftBlessing extends Model
+class SharedDetail extends Model
 {
     use HasFactory;
-    protected $guarded = [];
 
-    protected $casts = [
-        'add_flowers' => 'boolean',
-    ];
+    protected $guarded = [];
 }

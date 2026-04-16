@@ -38,7 +38,7 @@
 
                 <!-- AUDIO -->
                 <audio id="audio">
-                    <source src="{{ asset('public/images/admin/blessing/audios/'.$blessing->audio_file) }}"
+                    <source src="{{ route('front.blessings.audio', $blessing->id) }}"
                             type="audio/mpeg">
                     Your browser does not support audio.
                 </audio>
@@ -80,7 +80,7 @@ const progress = document.getElementById("progress");
 const currentTimeEl = document.getElementById("currentTime");
 const remainingTimeEl = document.getElementById("remainingTime");
 
-let wasPlaying = false; // track state
+let wasPlaying = false;
 
 // Play / Pause
 // playBtn.addEventListener("click", () => {
@@ -127,31 +127,6 @@ progressBar.addEventListener("click", (e) => {
 audio.addEventListener("ended", () => {
     playBtn.textContent = "▶";
     progress.style.width = "0%";
-});
-
-// 👉 MODAL CLOSE → PAUSE AUDIO
-// modal.addEventListener("hidden.bs.modal", () => {
-//     wasPlaying = !audio.paused; // store state
-//     audio.pause();
-//     playBtn.textContent = "▶";
-// });
-modal.addEventListener("hidden.bs.modal", () => {
-    audio.pause();
-    audio.currentTime = 0;
-    playBtn.textContent = "▶";
-});
-
-
-// 👉 MODAL OPEN → RESUME IF IT WAS PLAYING
-// modal.addEventListener("shown.bs.modal", () => {
-//     if (wasPlaying) {
-//         audio.play();
-//         playBtn.textContent = "⏸";
-//     }
-//     wasPlaying = false; // reset state
-// });
-modal.addEventListener("shown.bs.modal", () => {
-    wasPlaying = false; // reset state
 });
 
 function formatTime(time) {
