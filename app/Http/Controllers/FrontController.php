@@ -33,11 +33,24 @@ class FrontController extends Controller
     public function blessingAudio(Blessing $blessing, ElevenLabsTextToSpeechService $textToSpeechService)
     {
         try {
+            Log::info('Blessing audio request received', [
+                'blessing_id' => $blessing->id,
+            ]);
+
             $audioPath = $textToSpeechService->getBlessingAudioPath($blessing);
 
             if (!$audioPath || !file_exists($audioPath)) {
+                Log::warning('Blessing audio file not found', [
+                    'blessing_id' => $blessing->id,
+                    'audio_path' => $audioPath,
+                ]);
                 abort(404);
             }
+
+            Log::info('Blessing audio file served', [
+                'blessing_id' => $blessing->id,
+                'audio_path' => $audioPath,
+            ]);
 
             return response()->file($audioPath, [
                 'Content-Type' => 'audio/mpeg',

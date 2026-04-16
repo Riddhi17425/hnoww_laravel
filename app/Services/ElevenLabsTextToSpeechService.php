@@ -16,7 +16,18 @@ class ElevenLabsTextToSpeechService
         $text = trim((string) ($blessing->audio_content ?: $blessing->description));
         $outputFormat = (string) config('services.elevenlabs.output_format', 'mp3_44100_128');
 
-        if ($text === '' || !$this->isConfigured()) {
+        if ($text === '') {
+            Log::warning('Blessing audio text is empty', [
+                'blessing_id' => $blessing->id,
+            ]);
+            return $fallbackPath;
+        }
+
+        if (!$this->isConfigured()) {
+            Log::warning('ElevenLabs is not configured, using fallback audio when available', [
+                'blessing_id' => $blessing->id,
+                'has_fallback' => (bool) $fallbackPath,
+            ]);
             return $fallbackPath;
         }
 
@@ -29,6 +40,10 @@ class ElevenLabsTextToSpeechService
         $targetPath = $targetDirectory . 'blessing_' . $blessing->id . '_' . $fileHash . '.mp3';
 
         if (file_exists($targetPath) && filesize($targetPath) > 0) {
+            Log::info('Serving cached ElevenLabs blessing audio', [
+                'blessing_id' => $blessing->id,
+                'audio_path' => $targetPath,
+            ]);
             return $targetPath;
         }
 
@@ -69,6 +84,11 @@ class ElevenLabsTextToSpeechService
         }
 
         file_put_contents($targetPath, $response->body());
+
+        Log::info('Generated ElevenLabs blessing audio', [
+            'blessing_id' => $blessing->id,
+            'audio_path' => $targetPath,
+        ]);
 
         return $targetPath;
     }
