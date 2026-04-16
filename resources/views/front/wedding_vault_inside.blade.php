@@ -281,7 +281,7 @@
                     data-bs-target="#requestWeddingCatalogue"> Book a Wedding Gifting Consultation</a>
             </div>
 
-            <p class="text-white mb-0"><i>HNoww Wedding Concierge — Ceremonial objects, sculptural heirlooms, and
+            <p class="text-white mb-0"><i>HNoww Wedding Concierge, Ceremonial objects, sculptural heirlooms, and
                     bespoke gifting for the modern union.</i></p>
         </div>
     </div>

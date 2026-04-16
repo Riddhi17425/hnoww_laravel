@@ -107,7 +107,7 @@
                     <div class="origin_left">
                         <img class="img-fluid" src="{{asset('public/images/front/weddings1.webp')}}" alt="images">
                         <div class="origin_left_content">
-                            <p class="title_40">HNOWW was born from a simple belief:</p>
+                            <p class="title_40">HNOWW was born from a simple belief</p>
                             <p class="sub_head">that life becomes richer when lived with intention.</p>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
                             gifting, gathering, lighting a flame, offering sweets, preserving moments we reimagine these
                             gestures through culptural design.</p>
                         <p class="sub_head_inter" style="color:unset;">Every curve, weight, and material is chosen with
-                            purpose:</p>
+                            purpose.</p>
                         <p class="sub_head_inter" style="color:unset;">Stone for grounding, silver for memory, malachite
                             for depth, Brass for stillness. </p>
                         <p class="magic_wrapper_h3 mt-4">HNOWW is not an object brand. It is a movement back to meaning.
@@ -269,7 +269,7 @@
             <h2 class="title_60 mb-4">Bespoke Rituals</h2>
             <p>Commission custom ceremonial objects, heirlooms, and sacred gifts.
                 Our atelier collaborates with <br> families, designers, and couples to create one of a kind pieces
-                for</p>
+                for...</p>
 
             <!-- <div class="row align-items-center px-3 text-start">
                 <div class="col-md-6 mb-3 mb-md-0">
@@ -304,7 +304,7 @@
             </div>
 
             <!-- <div class="desire_box">
-            <!--    <img class=" img-fluid mb-2 mb-lg-4" src="{{asset('public/images/front/Bespoke-Rituals5.webp')}}" alt="images">-->
+               <img class=" img-fluid mb-2 mb-lg-4" src="{{asset('public/images/front/Bespoke-Rituals5.webp')}}" alt="images">-->
             <!--    <div class="d-flex justify-content-between align-items-center">-->
             <!--        <div>-->
             <!--            <h3 class="sub_head">Spiritual or Personal altars</h3>-->
