@@ -7,6 +7,67 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
+## Getting Started in VS Code
+
+### Prerequisites
+
+- [PHP 8.1+](https://www.php.net/downloads)
+- [Composer](https://getcomposer.org/)
+- [Node.js & npm](https://nodejs.org/)
+- [MySQL](https://www.mysql.com/)
+- [VS Code](https://code.visualstudio.com/)
+
+### Setup
+
+1. **Clone and open the project in VS Code:**
+   ```bash
+   git clone https://github.com/Riddhi17425/hnoww_laravel.git
+   cd hnoww_laravel
+   code .
+   ```
+
+2. **Install recommended extensions:**
+   When you open the project, VS Code will prompt you to install the recommended extensions defined in `.vscode/extensions.json`. Click **Install All** to set up PHP IntelliSense, Blade syntax highlighting, Artisan support, and more.
+
+3. **Install PHP dependencies:**
+   ```bash
+   composer install
+   ```
+
+4. **Install JavaScript dependencies:**
+   ```bash
+   npm install
+   ```
+
+5. **Configure the environment:**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+   Then edit `.env` and set your database credentials (`DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`).
+
+6. **Run database migrations:**
+   ```bash
+   php artisan migrate
+   ```
+
+7. **Build front-end assets:**
+   ```bash
+   npm run dev
+   ```
+
+8. **Start the development server:**
+   ```bash
+   php artisan serve
+   ```
+   The application will be available at [http://localhost:8000](http://localhost:8000).
+
+### Debugging with Xdebug
+
+The `.vscode/launch.json` includes a **Listen for Xdebug** configuration. Install and enable [Xdebug](https://xdebug.org/) for PHP, then press **F5** in VS Code to start a debugging session.
+
+---
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:

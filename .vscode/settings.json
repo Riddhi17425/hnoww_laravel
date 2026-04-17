@@ -1,0 +1,38 @@
+{
+    "php.suggest.basic": false,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
+    "[php]": {
+        "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+    },
+    "[blade]": {
+        "editor.defaultFormatter": "shufo.vscode-blade-formatter"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "files.associations": {
+        "*.blade.php": "blade"
+    },
+    "emmet.includeLanguages": {
+        "blade": "html"
+    },
+    "intelephense.environment.phpVersion": "8.1.0",
+    "intelephense.files.exclude": [
+        "**/vendor/**",
+        "**/node_modules/**"
+    ],
+    "files.exclude": {
+        "**/node_modules": true,
+        "**/vendor": false
+    },
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/vendor": true,
+        "storage": true,
+        "bootstrap/cache": true
+    }
+}
