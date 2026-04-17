@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\{Product, Cart, Order, OrderProduct, UserAddress};
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use App\Services\PaymentService;
 use Stripe;
-use Session;
-use Auth;
+use Exception;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
+    protected $adminEmail;
     protected $paymentService;
     public function __construct(PaymentService $paymentService)
     {
@@ -190,80 +194,156 @@ class CartController extends Controller
     }
 
     public function paymentSuccess(Request $request){
-        \Log::info("PAYMENT RESPONSE - " . json_encode($request->all()));
+        Log::info("PAYMENT RESPONSE - " . json_encode($request->all()));
+
+        if (!auth()->check()) {
+            return redirect()->route('front.login');
+        }
+
         $addressId = $request->address_id ?? null;
-        if(isset($request['redirect_status']) && strtolower($request['redirect_status']) == 'succeeded'){
-            $cartItems = Cart::where('user_id', auth()->id())->get();
-            // Calculate subtotal
-            $subTotal = $cartItems->sum(function($item) {
-                return $item->price * $item->quantity;
-            });
-            $orderId = '';
-            if(isset($cartItems) && is_countable($cartItems) && count($cartItems) > 0){
-                $order = new Order();
-                $order->user_id = auth()->id();
-                $order->order_address_id = $addressId;
-                $order->status = 'confirmed';
-                $order->subtotal = $subTotal;
-                $order->order_total = $subTotal;    
-                $order->stripe_payment_intent = $request['payment_intent'] ?? null;
-                $order->stripe_payment_intent_client_secret = $request['payment_intent_client_secret'] ?? null;
-                $order->payment_status = 'paid';
-                $order->save();    
-                $randomNum = rand(1000, 9999);
-                $order->order_number = 'ORD-'.$order->id.'-'.auth()->id().'-'.$randomNum;
-                $order->save();
-                foreach($cartItems as $k => $cart){
-                    $orderProduct = new OrderProduct();
-                    $orderProduct->order_id = $order->id;
-                    $orderProduct->product_id = $cart->product_id;
-                    $orderProduct->price = $cart->price;
-                    $orderProduct->quantity = $cart->quantity;
-                    $orderProduct->subtotal = ($cart->price * $cart->quantity);
-                    $orderProduct->save();
-                    $cart->delete();
-                }  
-                $orderId = $order->id;
+        $paymentIntentId = $request->payment_intent ?? null;
+        $orderId = null;
+
+        if (!$paymentIntentId) {
+            Log::warning('Payment success callback missing payment_intent', [
+                'user_id' => auth()->id(),
+                'request' => $request->all(),
+            ]);
+
+            return redirect()->route('front.get.failed', ['orderid' => $orderId]);
+        }
+
+        try {
+            $paymentIntent = $this->paymentService->retrievePaymentIntent($paymentIntentId);
+        } catch (Exception $e) {
+            Log::error('Unable to retrieve Stripe payment intent: ' . $e->getMessage(), [
+                'user_id' => auth()->id(),
+                'payment_intent' => $paymentIntentId,
+            ]);
+
+            return redirect()->route('front.get.failed', ['orderid' => $orderId]);
+        }
+
+        if (($paymentIntent->status ?? null) !== 'succeeded') {
+            Log::warning('Stripe payment intent not succeeded', [
+                'user_id' => auth()->id(),
+                'payment_intent' => $paymentIntentId,
+                'status' => $paymentIntent->status ?? null,
+            ]);
+
+            return redirect()->route('front.get.failed', ['orderid' => $orderId]);
+        }
+
+        $existingOrder = Order::where('user_id', auth()->id())
+            ->where('stripe_payment_intent', $paymentIntentId)
+            ->first();
+
+        if ($existingOrder) {
+            return redirect()->route('front.get.success', ['orderid' => $existingOrder->id]);
+        }
+
+        $cartItems = Cart::where('user_id', auth()->id())->get();
+
+        if ($cartItems->isEmpty()) {
+            Log::warning('Payment succeeded but cart was empty', [
+                'user_id' => auth()->id(),
+                'payment_intent' => $paymentIntentId,
+            ]);
+
+            return redirect()->route('front.get.failed', ['orderid' => $orderId]);
+        }
+
+        $subTotal = $cartItems->sum(function($item) {
+            return $item->price * $item->quantity;
+        });
+
+        DB::beginTransaction();
+
+        try {
+            $order = new Order();
+            $order->user_id = auth()->id();
+            $order->order_address_id = $addressId;
+            $order->status = 'confirmed';
+            $order->subtotal = $subTotal;
+            $order->order_total = $subTotal;
+            $order->stripe_payment_intent = $paymentIntentId;
+            $order->stripe_payment_intent_client_secret = $request['payment_intent_client_secret'] ?? null;
+            $order->payment_status = 'paid';
+            $order->save();
+
+            $randomNum = rand(1000, 9999);
+            $order->order_number = 'ORD-' . $order->id . '-' . auth()->id() . '-' . $randomNum;
+            $order->save();
+
+            foreach($cartItems as $cart) {
+                $orderProduct = new OrderProduct();
+                $orderProduct->order_id = $order->id;
+                $orderProduct->product_id = $cart->product_id;
+                $orderProduct->price = $cart->price;
+                $orderProduct->quantity = $cart->quantity;
+                $orderProduct->subtotal = ($cart->price * $cart->quantity);
+                $orderProduct->save();
+                $cart->delete();
             }
 
-            $orderAddress = UserAddress::where(['user_id' => auth()->id(), 'is_confirm' => 0])->where('is_primary', '!=', 1)->delete();
-            $orderAddress = UserAddress::find($addressId);
+            UserAddress::where([
+                'user_id' => auth()->id(),
+                'is_confirm' => 0,
+            ])->where('is_primary', '!=', 1)->delete();
+
+            $orderAddress = UserAddress::where('user_id', auth()->id())
+                ->where('id', $addressId)
+                ->first();
+
             if ($orderAddress) {
                 $orderAddress->is_confirm = 1;
                 $orderAddress->save();
             }
-        
-            // SEND MAIL TO USER AND ADMIN
-            $adminEmail = $this->adminEmail;
-            $userDetails = auth()->user();
-            $userEmail = $userDetails->email;
-            $data = [
-                'name'        => $userDetails->name,
-                'order_id'  => $order->id ?? null,
-                'status'       => $order->status ?? null,
-                'order_total'  => $order->order_total ?? null,
-                'order_products' => $order->orderProducts ?? null,
-            ];
 
-            try {
-                Mail::send('email.admin.order_success', $data, function ($message) use ($adminEmail, $adminSubject) {
-                    $message->to($this->adminEmail)->subject($adminSubject);
-                });
-        
-                Mail::send('email.front.order_success', $data, function ($message) use ($userEmail) {
-                    $message->to($userEmail)->subject('Order Placed Successfully');
-                });
-            } catch (Exception $e) {
-                Log::error('Inquiry Mail sending failed: '.$e->getMessage());
-            }
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
 
-            // SEND WHATSAPP MESSSAGE
-            
-            return redirect()->route('front.get.success', $orderId);
-        }else{
-            return redirect()->route('front.get.failed', $orderId);
-            
+            Log::error('Order creation failed after successful payment: ' . $e->getMessage(), [
+                'user_id' => auth()->id(),
+                'payment_intent' => $paymentIntentId,
+            ]);
+
+            return redirect()->route('front.get.failed', ['orderid' => $orderId]);
         }
+
+        $orderId = $order->id;
+        $order->load('orderProducts.product');
+
+        $adminEmail = $this->adminEmail;
+        $adminSubject = 'New Order Placed - ' . ($order->order_number ?? ('Order #' . $order->id));
+        $userDetails = auth()->user();
+        $userEmail = $userDetails->email;
+        $data = [
+            'name' => $userDetails->name,
+            'email' => $userEmail,
+            'order_id' => $order->id,
+            'status' => $order->status,
+            'order_total' => $order->order_total,
+            'order_products' => $order->orderProducts,
+        ];
+
+        try {
+            Mail::send('email.admin.order_success', $data, function ($message) use ($adminEmail, $adminSubject) {
+                $message->to($adminEmail)->subject($adminSubject);
+            });
+
+            Mail::send('email.front.order_success', $data, function ($message) use ($userEmail) {
+                $message->to($userEmail)->subject('Order Placed Successfully');
+            });
+        } catch (Exception $e) {
+            Log::error('Order success mail sending failed: ' . $e->getMessage(), [
+                'order_id' => $order->id,
+                'user_id' => auth()->id(),
+            ]);
+        }
+
+        return redirect()->route('front.get.success', ['orderid' => $orderId]);
     }
 
     public function storeAddress(Request $request)

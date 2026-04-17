@@ -22,4 +22,9 @@ class PaymentService
             ],
         ]);
     }
+
+    public function retrievePaymentIntent(string $paymentIntentId)
+    {
+        return PaymentIntent::retrieve($paymentIntentId);
+    }
 }

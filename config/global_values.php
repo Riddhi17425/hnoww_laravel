@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'admin_email' => 'webdeveloper9.intelliworkz@gmail.com',
+    'admin_email' => 'webdeveloper12.intelliworkz@gmail.com',
     'admin_whatsapp_no' => '971502243720',
     'contact_enquiry_type' => ['bespoke_commission' => 'Bespoke Commissions', 'general_enquiery' => 'General Enquiry', 'support' => 'Support'],
     'request_catalogue_interest' => ['private_collection1' => 'Private Collection1', 'private_collection2' => 'Private Collection2'],
