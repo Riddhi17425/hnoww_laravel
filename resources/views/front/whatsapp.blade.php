@@ -180,7 +180,7 @@
           @csrf
             <div class="wa-body">
                 <input type="tel" name="phone" id="wa-phone" oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,15);" required>
-                <textarea id="wa-textarea" name="message" placeholder="How may we assist with your bespoke request?" required></textarea>
+                <textarea id="wa-textarea" name="message" placeholder="How may we assist with your bespoke request?"></textarea>
                 <!--Hidden fields -->
                 <input type="hidden" name="number" id="wa_full_phone">
                 <input type="hidden" name="country" id="wa_country_name">

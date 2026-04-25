@@ -1,10 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-// use App\Http\Controllers\RegistationController;
-// use App\Http\Controllers\superAdminController;
-
 use App\Http\Controllers\{FrontController, AuthController, CartController};
 
 use App\Http\Controllers\Admin\Auth\LoginController;
@@ -20,6 +16,21 @@ use App\Http\Middleware\RedirectIfNotAdmin;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/clear', function () {
+    Artisan::call('optimize:clear');
+    return 'Application cache cleared!';
+});
+
+Route::post('/newsletter-temp/store', [FrontController::class, 'storeNewsletterTempInquiry'])->name('newsletter.temp.store');
+Route::post('/check-email-unique', [FrontController::class, 'checkEmailUnique'])->name('front.check.email.unique');
+
+// Catch-all for frontend (coming soon)
+// Route::any('{any}', function () {
+//     return view('front.coming_soon');
+// })->where('any', '^(?!admin).*');
+
 
 //FRONT ROUTE
 Route::name('front.')->group(function () {
@@ -30,8 +41,8 @@ Route::name('front.')->group(function () {
     Route::get('list/{category_slug}/{from?}', [FrontController::class, 'getList'])->name('list');
     Route::get('product-details/{product_slug}', [FrontController::class, 'getProductDetails'])->name('product.details');
     Route::post('store-product-inquiry', [FrontController::class, 'storeProductInquiry'])->name('store.product.inquiry');
-    Route::post('/check-email-unique', [FrontController::class, 'checkEmailUnique'])
-     ->name('check.email.unique');
+    // Route::post('/check-email-unique', [FrontController::class, 'checkEmailUnique'])
+    //  ->name('check.email.unique');
     Route::post('/newsletter/store', [FrontController::class, 'storeNewsletterInquiry'])->name('newsletter.store');
     Route::get('/request-catalogue', [FrontController::class, 'getRequestCatalogue'])->name('request.catalogue');
     Route::post('store-request-catalogue', [FrontController::class, 'storeRequestCatalogue'])->name('store.request.catalogue');
