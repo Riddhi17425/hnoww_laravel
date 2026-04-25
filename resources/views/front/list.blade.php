@@ -73,7 +73,7 @@
                             @endif
                         </div>
                             <div>
-                                <h3 class="sub_head"><a href="{{ route('front.product.details', $val->product_url) }}">{{ $val->product_name ?? '' }}</a></h3>
+                                <h3 class="sub_head mt-2"><a href="{{ route('front.product.details', $val->product_url) }}">{{ $val->product_name ?? '' }}</a></h3>
                                 <p class>{!! $val->short_description ?? '' !!}</p>
                             </div>
                         <div>

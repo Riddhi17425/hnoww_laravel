@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use App\Models\{User, Category, Product, ProductInquiry, Newsletter, FaqType, ContactInquiry, RequestCatalogue, CorporateProposalRequest, Journal, Blessing, WeddingCatalogueRequest, GiftBlessing, SharedDetail, Ceremonial, CeremonialInquiry, GiftShop, CorporateKit, CorporateKitRequest, BespokeCommissionEnquiry};
+
 use Exception;
 use Illuminate\Validation\Rule;
 
@@ -70,12 +71,6 @@ class FrontController extends Controller
     }
 
     public function index(Request $request){
-        // $adminEmail = 'webdeveloper9.intelliworkz@gmail.com';
-        // Mail::html('<b>Test 1</b>', function ($message) use ($adminEmail) {
-        //     $message->to($adminEmail)->subject('TEST MAIL 1');
-        // });
-        // die;
-
         $selectFields = [
             'id', 'category_id', 'product_name', 'short_description', 'is_active', 'deleted_at', 'product_url', 'list_page_img'
         ];
@@ -448,6 +443,49 @@ class FrontController extends Controller
         return response()->json([
             'unique' => !$exists
         ]);
+    }
+
+    public function storeNewsletterTempInquiry(Request $request){
+         try {
+            // Save to database
+            $newsletter = Newsletter::create([
+                'email' => $request->newsletter_email,
+            ]);
+
+            // SEND MAIL TO USER AND ADMIN
+            $adminEmail = $this->adminEmail;
+            $adminWhatsappNo = config('global_values.admin_whatsapp_no'); // admin whatsapp number
+            $data = [
+                'email'       => $newsletter->email,
+            ];
+            try {
+                Mail::send('email.admin.newsletter_subscription', $data, function ($message) use ($adminEmail) {
+                    $message->to($adminEmail)->subject('New Newsletter subscription');
+                });
+                Mail::send('email.front.newsletter_subscription', $data, function ($message) use ($newsletter) {
+                    $message->to($newsletter->email)->subject('Thank you for subscribing to our newsletter!');
+                });
+            } catch (Exception $e) {
+                Log::error('Newsletter subscriptionl sending failed: '.$e->getMessage());
+            }
+            
+
+            // WhatsApp link (user must click to open)
+            $waUrl = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode('New Newsletter subscription with Email Id - ' . $newsletter->email);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Subscription successful!',
+                'whatsappUrl' => $waUrl,
+            ]);
+
+        } catch (\Exception $e) {
+            Log::error('Newsletter subscription failed: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong!'
+            ]);
+        }
     }
 
     public function storeNewsletterInquiry(Request $request){

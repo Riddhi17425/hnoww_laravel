@@ -545,21 +545,21 @@ $( document ).ready(function() {
         phone: { 
             required: true, 
         },
-        message: { 
-            required: true,
-            minlength: 2,
-            maxlength: 150
-        },
+        // message: { 
+        //     required: true,
+        //     minlength: 2,
+        //     maxlength: 150
+        // },
     },
     messages: {
         phone: {
             required: "Please enter Phone No.",
         },
-        message: {
-            required: "Please enter Message",
-            minlength: "Message must be at least 2 characters",
-            maxlength: "Message cannot exceed 150 characters"
-        },
+        // message: {
+        //     required: "Please enter Message",
+        //     minlength: "Message must be at least 2 characters",
+        //     maxlength: "Message cannot exceed 150 characters"
+        // },
     },
     errorElement: 'div',
     errorPlacement: function(error, element) {

@@ -108,8 +108,7 @@
         </div>
         <div class="ft_bottom">
             <div class="ym_cpy">
-                All rights reserved. <a href="{{ route('front.home') }}">©HNOWW</a> <?php echo date("Y"); ?>. Designed
-                in Dubai.  
+                All rights reserved. <a href="{{ route('front.home') }}">©HNOWW</a> <?php echo date("Y"); ?>. <span style="font-size: 11px;font-weight: 400;">Designed & Developed by <a href="https://www.intelliworkz.tech/" target="_blank"> Intelliworkz</a></span>
             </div>
 
             <div class="ft_privacy">
@@ -274,10 +273,22 @@ $(document).ready(function() {
     });
 });
 
+// @if(session('whatsapp_url'))
+// window.open("{{ session('whatsapp_url') }}", "_blank");
+// @endif
+</script>
+
+<script>
 @if(session('whatsapp_url'))
-window.open("{{ session('whatsapp_url') }}", "_blank");
+    window.location.href = "{{ session('whatsapp_url') }}";
 @endif
 </script>
+@if(session('whatsapp_url'))
+<noscript>
+    <a href="{{ session('whatsapp_url') }}">Click here if not redirected</a>
+</noscript>
+@endif
+
 @stack('script')
 
 
