@@ -71,10 +71,10 @@ class FrontController extends Controller
     }
 
     public function index(Request $request){
+
         $selectFields = [
             'id', 'category_id', 'product_name', 'short_description', 'is_active', 'deleted_at', 'product_url', 'list_page_img'
         ];
-
         $herProduct = Product::select($selectFields)->isActive()->notDeleted()
             ->whereHas('category', function($q){
                 $q->where('category_url', 'for-her')

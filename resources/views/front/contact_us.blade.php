@@ -40,7 +40,7 @@
                         <div>
                             <h3 class="sub_head">WhatsApp</h3>
                             <p class="mb-0">
-                                <a href="tel:+97150950927">+971 50 950 927</a> <br /> <span>(Immediate
+                                <a href="tel:+971502243720">+971 50 224 3720</a> <br /> <span>(Immediate
                                     assistance)</span>
                             </p>
                         </div>
