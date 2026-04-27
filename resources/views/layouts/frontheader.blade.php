@@ -256,7 +256,14 @@ $current_route ===
                 <a href="{{ route('front.cart.view') }}" class="cart_icon d-lg-none">
                     <img src="<?= $is_green ? asset('public/images/front/cart-icon-black.svg') : asset('public/images/front/cart-icon.svg') ?>"
                         alt="Cart">
-                    <span id="cart-count" class="cart-total cart_badge">{{ \App\Models\Cart::where('user_id', auth()->id())->sum('quantity') ?? 0 }}</span>
+                    @php
+                        if (Auth::check()) {
+                            $cartCount = \App\Models\Cart::where('user_id', Auth::id())->sum('quantity');
+                        } else {
+                            $cartCount = \App\Models\Cart::where('session_id', session()->getId())->sum('quantity');
+                        }
+                    @endphp
+                    <span id="cart-count" class="cart-total cart_badge">{{ $cartCount ?? 0 }} </span>
                 </a>
 
                 <span class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
@@ -409,7 +416,15 @@ $current_route ===
                     <!-- Cart with Badge -->
                     <a href="{{ route('front.cart.view') }}" class="cart_icon d-none d-lg-block">
                         <img src="<?= $is_green ? asset('public/images/front/cart-icon-black.svg') : asset('public/images/front/cart-icon.svg') ?>" alt="Cart">
-                        <span id="cart-count" class="cart-total cart_badge">{{ \App\Models\Cart::where('user_id', auth()->id())->sum('quantity') ?? 0 }}</span>
+                        @php
+                            if (Auth::check()) {
+                                $cartCount = \App\Models\Cart::where('user_id', Auth::id())->sum('quantity');
+                            } else {
+                                $cartCount = \App\Models\Cart::where('session_id', session()->getId())->sum('quantity');
+                            }
+                        @endphp
+                        <span id="cart-count" class="cart-total cart_badge">{{ $cartCount ?? 0 }} </span>
+                        <!--<span id="cart-count" class="cart-total cart_badge">{{ \App\Models\Cart::where('user_id', auth()->id())->sum('quantity') ?? 0 }}</span>-->
                     </a>
 
                     <div class="language-select ms-lg-3">
