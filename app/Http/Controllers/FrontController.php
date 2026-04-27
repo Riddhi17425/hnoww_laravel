@@ -139,7 +139,8 @@ class FrontController extends Controller
                     $items = $response->json('data') ?? [];
                     // For VIDEO posts use thumbnail_url; for IMAGE/CAROUSEL use media_url
                     return array_map(function ($item) {
-                        $item['display_url'] = ($item['media_type'] === 'VIDEO')
+                        \Log::info("INSTA DETAILS - " . json_encode($item));
+                        $item['display_url'] = (strtoupper($item['media_type']) === 'VIDEO')
                             ? ($item['thumbnail_url'] ?? '')
                             : ($item['media_url'] ?? '');
                         return $item;
