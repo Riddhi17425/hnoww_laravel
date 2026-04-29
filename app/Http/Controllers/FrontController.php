@@ -361,7 +361,7 @@ class FrontController extends Controller
             "*Blessing:* " . ($gift->blessing->title ?? '-') . "\n\n" .
             "— HNoWW";
 
-        //try {
+        try {
             $url = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode($message);
             //return back()->with('whatsapp_url', $url);
             return response()->json([
@@ -370,9 +370,9 @@ class FrontController extends Controller
                 'whatsapp_url' => $url
             ]);
 
-        // } catch (Exception $e) {
-        //     \Log::error('Gift Blessing Whatsapp message sending failed: '.$e->getMessage());
-        // }
+        } catch (Exception $e) {
+            \Log::error('Gift Blessing Whatsapp message sending failed: '.$e->getMessage());
+        }
 
         return response()->json(['message' => 'Blessing gifted successfully']);
     }
@@ -886,7 +886,7 @@ class FrontController extends Controller
             'message_data'           => $request->message ?? null,
         ];
 
-        //try {
+        try {
             Mail::send('email.admin.corporate_proposal_request', $data, function ($message) use ($adminEmail) {
                 $message->to($this->adminEmail)->subject('New Corporate Proposal Request Received');
             });
@@ -894,9 +894,9 @@ class FrontController extends Controller
             Mail::send('email.front.corporate_proposal_request', $data, function ($message) use ($userEmail) {
                 $message->to($userEmail)->subject('Corporate Proposal Request send Successfully');
             });
-        // } catch (Exception $e) {
-        //     Log::error('Inquiry Mail sending failed: '.$e->getMessage());
-        // }
+        } catch (Exception $e) {
+            Log::error('Inquiry Mail sending failed: '.$e->getMessage());
+        }
 
         // SEND WHATSAPP MESSAGE TO ADMIN
         //$message = 'New Corporate Proposal Request is placed using email - '.$request->email;
@@ -1024,7 +1024,7 @@ class FrontController extends Controller
             'message_data'     => $request->cp_message ?? NULL,
         ];
  
-        //try {
+        try {
             Mail::send('email.admin.corporate_product_request', $data, function ($message) use ($adminEmail) {
                 $message->to($this->adminEmail)->subject('New Corporate Product Request Received');
             });
@@ -1032,9 +1032,9 @@ class FrontController extends Controller
             Mail::send('email.front.corporate_product_request', $data, function ($message) use ($userEmail) {
                 $message->to($userEmail)->subject('Corporate Product Request send Successfully');
             });
-        // } catch (Exception $e) {
-        //     Log::error('Inquiry Mail sending failed: '.$e->getMessage());
-        // }
+        } catch (Exception $e) {
+            Log::error('Inquiry Mail sending failed: '.$e->getMessage());
+        }
  
         // SEND WHATSAPP MESSAGE TO ADMIN
         $message = 'New Corporate Product Request is placed using email - '.$request->cp_email;
@@ -1051,13 +1051,13 @@ class FrontController extends Controller
                 "*Message:* " . ($request->cp_message ?? 'N/A') . "\n\n" .
                 "— HNoWW";
  
-        //try {
+        try {
             $url = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode($message);
             //return redirect()->away($url);
             return back()->with('whatsapp_url', $url);
-        // } catch (Exception $e) {
-        //     Log::error('Inquiry Whatsapp message sending failed: '.$e->getMessage());
-        // }
+        } catch (Exception $e) {
+            Log::error('Inquiry Whatsapp message sending failed: '.$e->getMessage());
+        }
  
         return redirect()->back()->with('success', 'Corporate product request submitted successfully.');
     }
