@@ -15,8 +15,8 @@
     <div class="hero_content">
         <p class="mb-0 d-md-none">Designed in Dubai. Made to endure.</p>
         <!--<h1 class="main_head">Where meaning takes shape.</h1>-->
-        <h1 class="main_head">Where craft holds expressions</h1>
-        <p>Curated objects for the desk, the home & the relationships that matter.</p>
+        <h1 class="main_head">Where craft holds expressions HNOWW</h1>
+        <p>Curated objects for the desk, the home & the relationships that matter. HNOWW</p>
         <!--<p>Objects crafted to turn the everyday into ceremony.</p>-->
         <a href="{{ route('front.atelier') }}" class="com_btn border-0 bg-white d-lg-none">Explore The Works</a>
     </div>
@@ -569,18 +569,11 @@ alt="images" loading="lazy">
                         @php
                             $imgUrl = $post['display_url'] ?? '';
                             $link   = $post['permalink'] ?? 'https://www.instagram.com/h.noww';
-                            $mediaType = $post['media_type'] ?? '';
                         @endphp
                         @if(!empty($imgUrl))
                         <a href="{{ $link }}" target="_blank" rel="noopener noreferrer">
-                            @if($post['media_type'] === 'VIDEO')
-                                <video muted loop playsinline autoplay class="grid-image"> 
-                                    <source src="{{ $post['media_url'] }}" type="video/mp4">
-                                </video>
-                            @else
                             <img src="{{ $imgUrl }}" alt="Instagram Post" class="grid-image"
                                  onerror="this.parentElement.style.display='none'">
-                            @endif
                         </a>
                         @endif
                     @endforeach
