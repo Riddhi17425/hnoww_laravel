@@ -112,7 +112,12 @@
                     <button class="inc_btn" data-call="detail" type="button">+</button>
                 </div>
                 {{-- @auth --}}
+                @if($product->product_url == 'the-sovereign-weight' || $product->product_url == 'the-wireless-courtyard')
+                    <a href="#" class="com_btn" data-bs-toggle="modal" data-bs-target="#productInquiry">Reserved for June Delivery </a>
+                @else
                     <a href="javascript:void(0)" class="com_btn add_to_cart_btn" data-product-id="{{ $product->id }}" id="cartSubmitBtn"> Add to Cart</a>
+                @endif
+                
                 {{-- @else
                     <a href="javascript:void(0)" class="com_btn" data-bs-toggle="modal" data-bs-target="#loginRequiredModal"> Add to Cart </a>
                 @endauth --}}

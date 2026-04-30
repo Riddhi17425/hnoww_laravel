@@ -102,7 +102,7 @@
                         <h3 class="sub_head_inter">HNOWW × Aara</h3>
                         {{-- <p class="mb-0">2025 — Spatial Composition</p> --}}
                     </div>
-                    <p class="mb-0">2025 Spatial Composition </br> A study of the table as structure. Objects arranged to shape space and movement.</p>
+                    <p class="mb-0">2026 Spatial Composition </br> A study of the table as structure. Objects arranged to shape space and movement.</p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -115,7 +115,7 @@
                         {{-- <p class="mb-0">2024 — Light as Object</p> --}}
                     </div>
 
-                    <p class="mb-0">2024 Light as Object </br> A study of candle form and proportion. Developed in glass and metal with restrained
+                    <p class="mb-0">2025 Light as Object </br> A study of candle form and proportion. Developed in glass and metal with restrained
                         detailing.
                     </p>
                 </div>
@@ -131,7 +131,7 @@
                         {{-- <p class="mb-0">2024 — Devotional Forms </p> --}}
                     </div>
 
-                    <p class="mb-0">2024 Devotional Forms <br/> A collaboration with an Indian artist. Traditional motifs presented in a
+                    <p class="mb-0">2025 Devotional Forms <br/> A collaboration with an Indian artist. Traditional motifs presented in a
                         contemporary way.</p>
                 </div>
             </div>

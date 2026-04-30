@@ -150,6 +150,15 @@
     color: var(--white-color);
     font-size: 24px;
 }
+
+@media (max-width: 768px)
+{
+    .wa-modal {
+   
+    width: 320px;
+    }
+}
+
 </style>
 
 <div class="wa-container">
