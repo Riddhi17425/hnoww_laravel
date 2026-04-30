@@ -91,6 +91,10 @@
                             <p class="mb-1"><strong>Contact No:</strong> {{ $order->orderAddress->contact_no }}</p>
                         @endif
 
+                        @if($order->orderAddress->whatsapp_no)
+                            <p class="mb-1"><strong>WhatsApp No:</strong> {{ $order->orderAddress->whatsapp_no }}</p>
+                        @endif
+
                         @if($order->orderAddress->emirate)
                             <p class="mb-1"><strong>Emirate:</strong> {{ $order->orderAddress->emirate }}</p>
                         @endif

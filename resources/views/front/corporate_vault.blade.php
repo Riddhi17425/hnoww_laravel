@@ -203,7 +203,7 @@
                 </span>
             </p>
             <h2 class="title_60">Corporate Kits</h2>
-            <p>Pre-designed ensembles for specific corporate milestones. Ships in one master "Vault" box.</p>
+            <p>Pre-designed ensembles for specific corporate milestones.</p>
         </div>
 
         <div class="cor_kits_slider">

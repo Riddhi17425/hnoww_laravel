@@ -17,6 +17,8 @@ use Illuminate\Validation\Rule;
 use App\Services\ElevenLabsTextToSpeechService;
 use App\Services\PaymentService;
 use Stripe;
+use App\Services\YetiWhatsappMesasgeService;
+// use App\Models\Order;
 
 class FrontController extends Controller
 {
@@ -24,13 +26,16 @@ class FrontController extends Controller
     protected $adminWhatsappNo;
     protected $paymentService;
 
-    public function __construct(PaymentService $paymentService)
+    protected $yetiWhatsappMesasgeService;
+
+    public function __construct(PaymentService $paymentService, YetiWhatsappMesasgeService $yetiWhatsappMesasgeService)
     {
         $this->adminEmail = config('global_values.admin_email');
         $this->adminWhatsappNo = config('global_values.admin_whatsapp_no');
         $this->paymentService = $paymentService;
+        $this->yetiWhatsappMesasgeService = $yetiWhatsappMesasgeService;
     }
-
+ 
     public function blessingAudio(Blessing $blessing, ElevenLabsTextToSpeechService $textToSpeechService)
     {
         try {
@@ -75,6 +80,14 @@ class FrontController extends Controller
         // Mail::html('<b>Test 1</b>', function ($message) use ($adminEmail) {
         //     $message->to($adminEmail)->subject('TEST MAIL 1');
         // });
+        // die;
+        // $order = Order::where('id', 1)->with('user')->first();
+        // $order->whatsapp_no = '916354910945';
+        // $messageResponse = $this->yetiWhatsappMesasgeService->sendWhatsappNotification($order);
+        // if($messageResponse){
+        //     // Handle successful message sending
+        //     \Log::info('WhatsApp message sent successfully: '. json_encode($messageResponse));
+        // }
         // die;
 
         $selectFields = [

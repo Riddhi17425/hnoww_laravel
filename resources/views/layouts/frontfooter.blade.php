@@ -27,7 +27,7 @@
                             <div class="ft_input">
                                 <input class="w-100" type="email" name="newsletter_email" id="newsletter_email"
                                     placeholder="Enter your email address">
-                                <button type="submit" id="newsletterSubmitBtn">
+                                <button type="submit" class="bg-white" id="newsletterSubmitBtn">
                                     <span class="btn-text">Join the list</span>
                                     <span class="btn-loader" style="display:none;">Submitting...</span>
                                 </button>
