@@ -275,7 +275,7 @@
                             @if($userAddresses->count() > 0)
                             <h3 class="sub_head mb-3">Choose an Existing Address OR Add a New Address</h3>
 
-                            <div class="row address-selection mb-3 gy-4 gy-lg-0" style="--bs-gutter-x: 20px;">
+                            <div class="row address-selection mb-3 gy-4" style="--bs-gutter-x: 20px;">
                                 @foreach($userAddresses as $address)
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <label
@@ -293,7 +293,7 @@
                                             @endif
                                         </div>
 
-                                        <input class="check_box_new" type="checkbox" name="selected_address" value="{{ $address->id }}">
+                                        <input class="check_box_new" type="radio" name="selected_address" value="{{ $address->id }}">
                                     </label>
                                 </div>
                                 @endforeach
@@ -697,6 +697,12 @@ $(document).ready(async function() {
                 digits: "Only numeric values are allowed",
                 minlength: "Contact number must be at least 7 digits",
                 maxlength: "Contact number cannot exceed 15 digits"
+            },
+            whatsapp_no: {
+                required: "Please enter your Whatsapp number",
+                digits: "Only numeric values are allowed",
+                minlength: "Whatsapp number must be at least 7 digits",
+                maxlength: "Whatsapp number cannot exceed 15 digits"
             },
             emirate: {
                 required: "Please select emirate",

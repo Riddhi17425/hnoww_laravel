@@ -243,7 +243,7 @@ class CartController extends Controller
             $data = [
                 'name'        => $userDetails->name ?? null,
                 'email'        => $userDetails->email ?? null,
-                'order_id'  => $order->id ?? null,
+                'order_id'  => $order->order_number ?? null,
                 'status'       => $order->status ?? null,
                 'order_total'  => $order->order_total ?? null,
                 'order_products' => $order->orderProducts ?? null,
@@ -263,10 +263,15 @@ class CartController extends Controller
 
             // SEND WHATSAPP MESSSAGE
             try {
-                // $messageResponse = $this->yetiWhatsappMesasgeService->sendWhatsappNotification($order);
-                // if($messageResponse){
-                //     // Handle successful message sending
-                // }
+                $whatsappNumber = $orderAddress->whatsapp_no ?? '';
+                if($whatsappNumber != ''){
+                    $order->whatsapp_no = $whatsappNumber;
+                    $messageResponse = $this->yetiWhatsappMesasgeService->sendWhatsappNotification($order);
+                    if($messageResponse){
+                        // Handle successful message sending
+                        \Log::info('WhatsApp message sent successfully: '. json_encode($messageResponse));
+                    }
+                }
             } catch (Exception $e) {
                 \Log::error('WhatsApp message sending failed: '.$e->getMessage());
             }
