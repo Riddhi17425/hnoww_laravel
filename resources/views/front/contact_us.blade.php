@@ -82,8 +82,7 @@
                     <div>
                         <div class="mb-4">
                             <h3 class="sub_head">Location</h3>
-                            <p class="mb-0"><a href="https://maps.app.goo.gl/GcNVEWJPTW3xotjN6">Dubai Design District,
-                                    Building 7.</a></p>
+                            <p class="mb-0"><a href="https://maps.app.goo.gl/GcNVEWJPTW3xotjN6">Act tower 2, Burj area, Downtown Dubai, UAE</a></p>
                         </div>
                         <div>
                             <h3 class="sub_head">By Appointment Only</h3>
