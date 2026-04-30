@@ -7,10 +7,10 @@
 
 .hero-section {
     position: relative;
-    /* height: 100vh; */
+     height: 100vh; 
 }
 
-.hero-section .com_btn {
+.hero-section .home_btn {
     position: absolute;
     bottom: 4em;
     left: 50%;

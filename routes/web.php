@@ -101,6 +101,10 @@ Route::name('front.')->group(function () {
 
 	Route::get('/thankyou', [FrontController::class, 'getThankYou'])->name('thankyou'); 
 
+	Route::get('/articles', [FrontController::class, 'getArticles'])->name('articles'); 
+	Route::get('/articlesdetails', [FrontController::class, 'getArticlesDetails'])->name('articlesdetails'); 
+
+
 	// LOGIN & REGISTER
 	Route::get('front/auth/{page?}', [AuthController::class, 'getAuth'])->name('auth'); // used for both login & registration
     Route::post('front/register', [AuthController::class, 'submitRegister'])->name('register.post');

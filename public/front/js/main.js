@@ -373,26 +373,7 @@ window.addEventListener("load", () => {
 
 // loader js end
 
-document.querySelectorAll(".read-more-btn").forEach((btn) => {
-    btn.addEventListener("click", function () {
-        const wrapper = this.previousElementSibling;
 
-        if (!wrapper.classList.contains("expanded")) {
-            // OPEN
-            wrapper.style.maxHeight = wrapper.scrollHeight + "px";
-            wrapper.classList.add("expanded");
-            this.textContent = "Read Less";
-        } else {
-            // CLOSE
-            wrapper.style.maxHeight = wrapper.scrollHeight + "px"; 
-            requestAnimationFrame(() => {
-                wrapper.style.maxHeight = "90px";
-            });
-            wrapper.classList.remove("expanded");
-            this.textContent = "Read More";
-        }
-    });
-});
 
 
 // ---------------------------- user drop down ------------------------
@@ -411,34 +392,4 @@ document.addEventListener("DOMContentLoaded", function () {
             userMenu.classList.remove("open");
         }
     });
-});
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    function applyHnowwStyle(node) {
-        // Sirf text nodes ko check karein
-        if (node.nodeType === 3) {
-            let text = node.nodeValue;
-            
-            // "hnoww" ko detect karke <span class="hnoww-font"> me wrap karega
-            // 'gi' matlab Global (poore page par) aur Case-Insensitive (Chota-bada font dono)
-           let updated = text.replace(/hnoww/gi, function (match) {
-    return `<span class="hnoww-font">HN<span class="hnoww-o">O̱</span>WW</span>`;
-});
-
-            if (updated !== text) {
-                let tempSpan = document.createElement("span");
-                tempSpan.innerHTML = updated;
-                node.replaceWith(tempSpan);
-            }
-        } else if (node.nodeType === 1 && node.childNodes.length > 0) {
-            // Script aur Style tags ko ignore karein taaki code break na ho
-            if (node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
-                Array.from(node.childNodes).forEach(applyHnowwStyle);
-            }
-        }
-    }
-
-    applyHnowwStyle(document.body);
 });

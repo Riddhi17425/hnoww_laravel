@@ -7,7 +7,7 @@
                         <img src="{{ asset('public/images/front/footer-logo.svg') }}" alt="hnow"
                             class="img-fluid footer_logo">
                     </a>
-                    <p class="mt-3">Architectural Objects & Luxury Gifting Studio Dubai.</p>
+                    <p class="mt-3 mb-0">Architectural Objects & Luxury Gifting Studio Dubai.</p>
                 </div>
                 <div>
                     <div class="ft_top_right">
@@ -33,9 +33,8 @@
                                 </button>
                             </div>
                             <div id="newsletter_error"></div>
+                             <div id="newsletterMessage" class="auto-hide" style="color: green; margin-top: 7px;"></div>
                         </form>
-                        <div id="newsletterMessage" class="auto-hide" style="color: green; margin-top: 7px;"></div>
-
                     </div>
                 </div>
             </div>
