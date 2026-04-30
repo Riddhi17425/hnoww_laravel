@@ -265,7 +265,7 @@ class CartController extends Controller
             try {
                 $whatsappNumber = $orderAddress->whatsapp_no ?? '';
                 if($whatsappNumber != ''){
-                    $order->whatsapp_no = $whatsappNumber;
+                    $order->whatsapp_no = '971'.$whatsappNumber;
                     $messageResponse = $this->yetiWhatsappMesasgeService->sendWhatsappNotification($order);
                     if($messageResponse){
                         // Handle successful message sending
