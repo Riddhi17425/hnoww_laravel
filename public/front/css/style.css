@@ -494,7 +494,6 @@ a {
     border-bottom: 8px solid #c0bdb8;
 }
 
-
 .hnoww-font {
     font-family: var(--heading-font), serif;
     text-transform: uppercase !important;
@@ -503,6 +502,65 @@ a {
 .hnoww-o {
     font-size: 0.9em;
     position: relative;
-    top: -0.2em;
+    top: -0.24em;
     text-transform: lowercase;
 }
+
+.line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.articles_box {
+    padding: 24px;
+    position: relative;
+    background: url("../../images/front/ct_noise_bg.webp") repeat;
+    line-height: normal;
+    font-family: var(--heading-font);
+    z-index: 1;
+    height: 100%;
+}
+
+.articles_box:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: url("../../images/front/ct_design.svg");
+    background-repeat: no-repeat;
+    background-size: contain; 
+    width: 90px;
+    height: 96px;
+    z-index: -1;
+}
+
+.articles_box .title_40 {
+    margin: 18px 0;
+}
+
+.articles_details ul
+{
+    padding-left: 1rem;
+}
+
+.articles_details ul li
+{
+    margin-bottom: 6px;
+}
+
+.articles_cta
+{
+  position: relative;
+}
+
+.articles_cta_content
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+

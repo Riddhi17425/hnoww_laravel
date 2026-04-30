@@ -1760,6 +1760,15 @@ class FrontController extends Controller
         return view('front.about');
     }
 
+     public function getArticles(){
+        return view('front.articles');
+    }
+
+      public function getArticlesDetails(){
+        return view('front.articlesdetails');
+    }
+
+
     public function bespokeWeddingHampers(){
         return view('front.bespoke-wedding-hampers');
     }
