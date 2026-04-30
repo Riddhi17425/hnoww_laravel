@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\{Product, Cart, Order, OrderProduct, UserAddress};
 use Illuminate\Support\Facades\Validator;
-use App\Services\PaymentService;
+use App\Services\{PaymentService, YetiWhatsappMesasgeService};
 use Stripe;
 use Session;
 use Auth;
@@ -14,10 +14,12 @@ use Illuminate\Support\Facades\Mail;
 class CartController extends Controller
 {
     protected $paymentService;
-    public function __construct(PaymentService $paymentService)
+    protected $yetiWhatsappMesasgeService;
+    public function __construct(PaymentService $paymentService, YetiWhatsappMesasgeService $yetiWhatsappMesasgeService)
     {
         $this->adminEmail = config('global_values.admin_email');
         $this->paymentService = $paymentService;
+        $this->yetiWhatsappMesasgeService = $yetiWhatsappMesasgeService;
     }
 
     public function getCart(Request $request){
@@ -31,7 +33,6 @@ class CartController extends Controller
             $cartData->where('session_id', Session::getId());
         }
         $cartData = $cartData->get();   
-       // echo "<pre>"; print_r(Session::getId()); die;
         
         return view('front.orders.cart', compact('cartData'));
     }
@@ -199,6 +200,7 @@ class CartController extends Controller
                 return $item->price * $item->quantity;
             });
             $orderId = '';
+            $order = null;
             if(isset($cartItems) && is_countable($cartItems) && count($cartItems) > 0){
                 $order = new Order();
                 $order->user_id = auth()->id();
@@ -239,7 +241,8 @@ class CartController extends Controller
             $userDetails = auth()->user();
             $userEmail = $userDetails->email;
             $data = [
-                'name'        => $userDetails->name,
+                'name'        => $userDetails->name ?? null,
+                'email'        => $userDetails->email ?? null,
                 'order_id'  => $order->id ?? null,
                 'status'       => $order->status ?? null,
                 'order_total'  => $order->order_total ?? null,
@@ -259,7 +262,15 @@ class CartController extends Controller
             }
 
             // SEND WHATSAPP MESSSAGE
-            
+            try {
+                // $messageResponse = $this->yetiWhatsappMesasgeService->sendWhatsappNotification($order);
+                // if($messageResponse){
+                //     // Handle successful message sending
+                // }
+            } catch (Exception $e) {
+                \Log::error('WhatsApp message sending failed: '.$e->getMessage());
+            }
+
             return redirect()->route('front.get.success', $orderId);
         }else{
             return redirect()->route('front.get.failed', $orderId);
@@ -272,6 +283,7 @@ class CartController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|min:3',
             'contact_no' => 'required',
+            'whatsapp_no' => 'required',
             'emirate' => 'required',
             'address_line1' => 'required',
             'address_line2' => 'required',
@@ -286,6 +298,7 @@ class CartController extends Controller
             'user_id' => auth()->id() ?? null,
             'name' => $request->name,
             'contact_no' => $request->contact_no,
+            'whatsapp_no' => $request->whatsapp_no,
             'emirate' => $request->emirate,
             'address_line1' => $request->address_line1,
             'address_line2' => $request->address_line2,
