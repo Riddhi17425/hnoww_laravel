@@ -14,7 +14,7 @@ $current_route ===
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('public/images/front/favicon.png') }}">
-    <title>{{ $meta_title ?? 'HNOWW' }}</title>
+    <title>{{ $meta_title ?? 'Architectural Objects & Home Accents | HNoww Dubai' }}</title>
     <meta name="description"
         content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}">
     <!-- google fonts -->
@@ -202,7 +202,7 @@ $current_route ===
     </script>
     @endif
 
-</head>
+</head>   
 
 <body class="<?= $is_green ? 'theme-green' : 'theme-white' ?>">
 

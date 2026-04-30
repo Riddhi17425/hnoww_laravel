@@ -17,6 +17,17 @@ use App\Http\Middleware\RedirectIfNotAdmin;
 |
 */
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Mail;
+
+Route::get('/send', function () {
+    Mail::raw('This is a test email sent from Laravel.', function ($message) {
+        $message->to('webdeveloper9.intelliworkz@gmail.com')
+                ->subject('Test Mail from Laravel');
+    });
+
+    return 'Mail sent!';
+});
+
 
 Route::get('/clear', function () {
     Artisan::call('optimize:clear');
