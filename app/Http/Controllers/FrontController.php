@@ -71,10 +71,16 @@ class FrontController extends Controller
     }
 
     public function index(Request $request){
+        // $adminEmail = 'webdeveloper9.intelliworkz@gmail.com';
+        // Mail::html('<b>Test 1</b>', function ($message) use ($adminEmail) {
+        //     $message->to($adminEmail)->subject('TEST MAIL 1');
+        // });
+        // die;
 
         $selectFields = [
             'id', 'category_id', 'product_name', 'short_description', 'is_active', 'deleted_at', 'product_url', 'list_page_img'
         ];
+
         $herProduct = Product::select($selectFields)->isActive()->notDeleted()
             ->whereHas('category', function($q){
                 $q->where('category_url', 'for-her')
@@ -139,7 +145,6 @@ class FrontController extends Controller
                     $items = $response->json('data') ?? [];
                     // For VIDEO posts use thumbnail_url; for IMAGE/CAROUSEL use media_url
                     return array_map(function ($item) {
-                        \Log::info("INSTA DETAILS - " . json_encode($item));
                         $item['display_url'] = (strtoupper($item['media_type']) === 'VIDEO')
                             ? ($item['thumbnail_url'] ?? '')
                             : ($item['media_url'] ?? '');
@@ -163,7 +168,7 @@ class FrontController extends Controller
     }
 
     public function getProductDetails(Request $request, $productSlug){
-        $product = Product::select('id', 'category_id', 'product_name', 'product_price', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'large_description', 'dimensions', 'detail_page_imgs', 'moq', 'short_note', 'product_stock', 'care_maintenance', 'meta_title', 'meta_description')->where('product_url', $productSlug)->isActive()->notDeleted()->first();
+        $product = Product::select('id', 'category_id', 'product_name', 'product_url', 'product_price', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'large_description', 'dimensions', 'detail_page_imgs', 'moq', 'short_note', 'product_stock', 'care_maintenance', 'meta_title', 'meta_description')->where('product_url', $productSlug)->isActive()->notDeleted()->first();
         $productDetailImages = $product->detail_page_imgs ? json_decode($product->detail_page_imgs) : '';
         $productTab = $product->tabs ?? [];
         if(!isset($product) && $product == ''){
@@ -361,7 +366,7 @@ class FrontController extends Controller
             "*Blessing:* " . ($gift->blessing->title ?? '-') . "\n\n" .
             "— HNoWW";
 
-        try {
+        //try {
             $url = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode($message);
             //return back()->with('whatsapp_url', $url);
             return response()->json([
@@ -370,9 +375,9 @@ class FrontController extends Controller
                 'whatsapp_url' => $url
             ]);
 
-        } catch (Exception $e) {
-            \Log::error('Gift Blessing Whatsapp message sending failed: '.$e->getMessage());
-        }
+        // } catch (Exception $e) {
+        //     \Log::error('Gift Blessing Whatsapp message sending failed: '.$e->getMessage());
+        // }
 
         return response()->json(['message' => 'Blessing gifted successfully']);
     }
@@ -1051,13 +1056,13 @@ class FrontController extends Controller
                 "*Message:* " . ($request->cp_message ?? 'N/A') . "\n\n" .
                 "— HNoWW";
  
-        try {
+        //try {
             $url = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode($message);
             //return redirect()->away($url);
             return back()->with('whatsapp_url', $url);
-        } catch (Exception $e) {
-            Log::error('Inquiry Whatsapp message sending failed: '.$e->getMessage());
-        }
+        // } catch (Exception $e) {
+        //     Log::error('Inquiry Whatsapp message sending failed: '.$e->getMessage());
+        // }
  
         return redirect()->back()->with('success', 'Corporate product request submitted successfully.');
     }

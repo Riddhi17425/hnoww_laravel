@@ -125,7 +125,8 @@ class CategoryController extends Controller
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:255',
             'banner_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'button_text' => 'required_if:category_type,2|string|max:255',
+            // 'button_text' => 'required_if:category_type,2|string|max:255',
+            'button_text' => 'nullable|string|max:255',
         ], [
             'category_name.required' => 'Category name is required.',
             'category_name.string' => 'Category name must be a valid string.',
@@ -215,7 +216,8 @@ class CategoryController extends Controller
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:255',
             'banner_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'button_text' => 'required_if:category_type,2|string|max:255',
+            // 'button_text' => 'required_if:category_type,2|string|max:255',
+            'button_text' => 'nullable|string|max:255',
         ], [
             'category_name.required' => 'Category name is required.',
             'category_name.string' => 'Category name must be a valid string.',

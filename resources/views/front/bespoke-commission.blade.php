@@ -214,7 +214,7 @@ alt="{{ $val->product_name ?? 'Product Image' }}">
                 </p>
             </div>
             <div>
-                <p class="cta_ft_center">Commission slots for Q1 2026 are <br /> currently open.</p>
+                <p class="cta_ft_center">Commission slots for 2026 are <br /> currently open.</p>
             </div>
             <div>
                 <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#bespokeCommission"
