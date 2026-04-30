@@ -287,6 +287,7 @@
                                             {{ $address->address_line1 }}, {{ $address->address_line2 }}<br>
                                             {{ $address->emirate }}<br>
                                             {{ $address->contact_no }}<br>
+                                            @if(isset($address->whatsapp_no)){{ $address->whatsapp_no }}<br>@endif
                                             @if($address->landmark)
                                             Landmark: {{ $address->landmark }}
                                             @endif
@@ -304,7 +305,7 @@
 
                             <!-- Address Form -->
                             <form method="POST" id="productInquiryForm"
-                                action="{{ route('front.store.product.inquiry') }}">
+                                action="">
                                 @csrf
 
                                 <div id="addressFormWrapper" style="display:none;">
@@ -347,6 +348,19 @@
                                         </div>
 
                                         <div class="col-lg-6">
+                                            <div class="ct_input">
+                                                <label class="sub_head">Whatsapp Number <span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" name="whatsapp_no" placeholder="Enter Whatsapp Number"
+                                                    value="{{ old('whatsapp_no') }}"
+                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
+                                                    class="@error('whatsapp_no') is-invalid @enderror">
+                                                @error('whatsapp_no') <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12">
                                             <div class="ct_input">
                                                 <label class="sub_head">Landmark</label>
                                                 <textarea name="landmark" placeholder="Enter Landmark" rows="1"
@@ -644,6 +658,12 @@ $(document).ready(async function() {
                 minlength: 3
             },
             contact_no: {
+                required: true,
+                digits: true,
+                minlength: 7,
+                maxlength: 15
+            },
+            whatsapp_no: {
                 required: true,
                 digits: true,
                 minlength: 7,
