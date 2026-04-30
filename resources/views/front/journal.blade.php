@@ -151,7 +151,7 @@ $monthMap = [
                     <img class="img-fluid"
                         src="{{ asset('public/images/admin/journal/detail_images/'.$val->detail_img) }}">
 
-                    <a class="com_btn">
+                    <a class="com_btn"> 
                         <span class="ms-2">{{ $val->month_name }}</span>
                     </a>
                 </div>
