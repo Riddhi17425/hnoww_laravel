@@ -138,53 +138,43 @@
             </div>
 
             <div class="mb_35">
-
-                <h3 class="title_40 mb-3">Top Industries Using Corporate Gifts</h3>
+                <h3 class="title_40 mb-3">Top Industries Using Corporate Gifts
+                </h3>
                 <p>Corporate gifting is widely adopted across Dubai’s major industries, each applying it differently
-                    based on customer expectations and relationship dynamics.</p>
-                <div class="row g-4">
-                    <div class="col-lg-6">
-                        <div class="articles_box">
-                            <b class="title_60" style="color:var(--secondary-color)">01</b>
-                            <h3 class="title_40">Real Estate Industry</h3>
-                            <p>Corporate gifts for real estate clients are shared during a handover. Developers use
-                                architectural objects and curated home articles to change ownership into a celebrated
-                                milestone, keeping both brand prestige and emotional value.</p>
-                        </div>
-                    </div>
+                    based on customer expectations and relationship dynamics.
 
-                    <div class="col-lg-6">
-                        <div class="articles_box">
-                            <b class="title_60" style="color:var(--secondary-color)">02</b>
-                            <h3 class="title_40">Hospitality Sector</h3>
-                            <p>Luxury hotels depend on Hotel corporate giveaways for better guest experiences.
-                                Thoughtfully created welcome or farewell gifts create memories and strengthen brand
-                                recognition in a competitive environment.</p>
-                        </div>
-                    </div>
+                </p>
+                <ul style="list-style: auto;">
+                    <li> <b>Real Estate Industry</b> Corporate gifts for real estate clients are shared during a
+                        handover. Developers use architectural objects and curated home articles to change ownership
+                        into a celebrated milestone, keeping both brand prestige and emotional value.
 
-                    <div class="col-lg-6">
-                        <div class="articles_box">
-                            <b class="title_60" style="color:var(--secondary-color)">03</b>
-                            <h3 class="title_40">Financial & Consulting Firms</h3>
-                            <p>In trust-driven sectors, gifting is simple yet meaningful. Executive gifting builds
-                                professionalism and strengthens long-term relationships through refined, minimal
-                                objects.</p>
-                        </div>
-                    </div>
+                    </li>
+                    <li>
+                        <b>Hospitality Sector
+                        </b>Luxury hotels depend on Hotel corporate giveaways for better guest experiences. Thoughtfully
+                        created welcome or farewell gifts create memories and strengthen brand recognition in a
+                        competitive environment.
 
-                    <div class="col-lg-6">
-                        <div class="articles_box">
-                            <b class="title_60" style="color:var(--secondary-color)">04</b>
-                            <h3 class="title_40">Luxury Retail Brands</h3>
-                            <p>Retail brands come up with Unique Corporate Gift Ideas to nurture VIP customers. Gifting
-                                is often tied to milestone purchases or private launches, maintaining exclusivity and
-                                emotional loyalty.</p>
-                        </div>
-                    </div>
-                </div>
-                <p class="text-center mt-2">Across sectors, gifting is no longer just an exchange. It is a relationship
-                    strategy.</p>
+
+                    </li>
+                   
+                    <li> <b>Financial & Consulting Firms
+                    </b>In trust-driven sectors, gifting is simple yet meaningful. Executive gifting builds
+                    professionalism and strengthens long-term relationships through refined, minimal objects.</li>
+
+                    <li>
+                        <b>Luxury Retail Brands
+                        </b>
+                        Retail brands come up with Unique Corporate Gift Ideas to nurture VIP customers. Gifting is
+                        often tied to milestone purchases or private launches, maintaining exclusivity and emotional
+                        loyalty.
+
+                    </li>
+                </ul>
+                <p>Across sectors, gifting is no longer just an exchange. It is a relationship strategy.
+
+                </p>
             </div>
 
             <div class="mb_35">
@@ -204,58 +194,46 @@
             </div>
 
             <div class="mb_35">
+                <h3 class="title_40 mb-3">Where to Buy Corporate Gifts in Dubai
 
-                <h3 class="title_40 mb-3">Where to Buy Corporate Gifts in Dubai</h3>
+                </h3>
                 <p>Dubai offers a broad network of corporate gift suppliers in Dubai, ranging from promotional vendors
-                    to boutique luxury gifting studios. Choosing the right partner directly influences brand image.</p>
-                <div class="row g-4">
-                    <div class="col-lg-4">
-                        <div class="articles_box">
-                            <b class="title_60" style="color:var(--secondary-color)">01</b>
-                            <h3 class="title_40">Supplier Reputation</h3>
-                            <p>Trusted vendors with a strong track record often deliver more consistent results.</p>
-                        </div>
-                    </div>
+                    to boutique luxury gifting studios. Choosing the right partner directly influences brand image.
+                </p>
+                <ul style="list-style: auto;">
+                    <li> <b>Supplier Reputation
+                        </b> Trusted vendors with a strong track record often deliver more consistent results.
+                    </li>
+                    <li>
+                        <b>Delivery Reliability
 
-                    <div class="col-lg-4">
-                        <div class="articles_box">
-                            <b class="title_60" style="color:var(--secondary-color)">02</b>
-                            <h3 class="title_40">Delivery Reliability</h3>
-                            <p>Timely execution is necessary, particularly for seasonal campaigns and corporate
-                                achievements.</p>
-                        </div>
-                    </div>
+                        </b>Timely execution is necessary, particularly for seasonal campaigns and corporate
+                        achievements.
+                    </li>
+                    
+                    <li><b>Packaging Standards
 
-                    <div class="col-lg-4">
-                        <div class="articles_box">
-                            <b class="title_60" style="color:var(--secondary-color)">03</b>
-                            <h3 class="title_40">Packaging Standards</h3>
-                            <p>Elegant packaging increases value and improves the unboxing experience.</p>
-                        </div>
-                    </div>
+                    </b>Elegant packaging increases value and improves the unboxing experience.</li>
 
-                    <div class="col-lg-6">
-                        <div class="articles_box">
-                            <b class="title_60" style="color:var(--secondary-color)">04</b>
-                            <h3 class="title_40">Customization Capabilities</h3>
-                            <p>In trust-driven sectors, gifting is simple yet meaningful. Executive gifting builds
-                                professionalism and strengthens long-term relationships through refined, minimal
-                                objects.</p>
-                        </div>
-                    </div>
+                    <li>
+                        <b>Customization Capabilities
+                        </b>
+                        In trust-driven sectors, gifting is simple yet meaningful. Executive gifting builds
+                        professionalism and strengthens long-term relationships through refined, minimal objects.
 
-                    <div class="col-lg-6">
-                        <div class="articles_box">
-                            <b class="title_60" style="color:var(--secondary-color)">05</b>
-                            <h3 class="title_40">Product Quality</h3>
-                            <p>Premium gifting begins with craftsmanship. Durable materials and refined finishes ensure
-                                the gift aligns with Dubai’s luxury expectations.</p>
-                        </div>
-                    </div>
-                </div>
-                <p class="text-center mt-2">Brands like HNoww are growing as a preferred Corporate gifts company in
-                    Dubai, businesses depend on for design-led gifting and End-to-End Gifting Solutions built by
-                    craftsmanship and intentionality.</p>
+                    </li>
+                    <li>
+                        <b>Product Quality
+
+                        </b>
+                        Premium gifting begins with craftsmanship. Durable materials and refined finishes ensure the
+                        gift aligns with Dubai’s luxury expectations.
+
+                    </li>
+                </ul>
+                <p>Brands like HNO̱WW are growing as a preferred Corporate gifts company in Dubai, businesses depend on
+                    for design-led gifting and End-to-End Gifting Solutions built by craftsmanship and intentionality.
+                </p>
             </div>
 
             <div class="mb_35">
@@ -383,7 +361,7 @@
             </div>
 
             <div>
-                    <h2 class="title_60 mb-4">FAQs</h2>
+                <h2 class="title_60 mb-4">FAQs</h2>
                 <div class="faq_cont">
                     <div class="accordion" id="staticFaqAccordion">
 
