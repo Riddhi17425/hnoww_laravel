@@ -192,3 +192,29 @@ function validateAndPreviewCTAImage() {
     reader.readAsDataURL(file);
     return true;
 }
+
+function updateStatus(status, blogId){
+    $.ajax({
+        url:  window.APP_URLS.updateStatus,
+        type: "POST",
+        headers: {
+            'X-CSRF-TOKEN': window.APP_URLS.csrfToken
+        },
+        data: {
+            id: blogId,
+            status: status
+        },
+        success: function (response) {
+            console.log(response);
+            if (response.success) {
+                alert(response.message);
+            } else {
+                alert(response.message);
+            }
+            $('#blogs_table').DataTable().ajax.reload(null, false);
+        },
+        error: function () {
+            alert('Server error');
+        }
+    });
+}

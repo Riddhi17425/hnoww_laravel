@@ -101,8 +101,8 @@ Route::name('front.')->group(function () {
 
 	Route::get('/thankyou', [FrontController::class, 'getThankYou'])->name('thankyou'); 
 
-	Route::get('/articles', [FrontController::class, 'getArticles'])->name('articles'); 
-	Route::get('/articlesdetails', [FrontController::class, 'getArticlesDetails'])->name('articlesdetails'); 
+	Route::get('/blogs', [FrontController::class, 'getBlogs'])->name('blogs'); 
+	Route::get('/blog/{url}', [FrontController::class, 'getBlogDetails'])->name('blog.detail'); 
 
 
 	// LOGIN & REGISTER
