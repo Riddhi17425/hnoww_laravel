@@ -187,6 +187,10 @@
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <!-- Sweetalert popup -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js">
+</script>
+
 <script>
 AOS.init();
 </script>
@@ -448,6 +452,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 </script>
+
+
 @endif
 
 </body>

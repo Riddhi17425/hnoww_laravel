@@ -148,6 +148,23 @@
     }
 
 }
+
+/* Keep intl-tel-input aligned with checkout fields */
+#addressFormWrapper .ct_input .iti {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+#addressFormWrapper .ct_input .iti__selected-flag {
+    height: 4em;
+    background-color: transparent !important;
+}
+
+#checkout-whatsapp-no.checkout-whatsapp-country-select {
+    margin-top: 1.19em !important;
+}
+
+
 </style>
 
 <!-- old code  -->
@@ -346,19 +363,21 @@
                                                 @enderror
                                             </div>
                                         </div>
-
                                         <div class="col-lg-6">
                                             <div class="ct_input">
                                                 <label class="sub_head">Whatsapp Number <span
                                                         class="text-danger">*</span></label>
-                                                <input type="text" name="whatsapp_no" placeholder="Enter Whatsapp Number"
+                                                <input type="tel" id="checkout-whatsapp-no" name="whatsapp_no"
                                                     value="{{ old('whatsapp_no') }}"
                                                     oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
-                                                    class="@error('whatsapp_no') is-invalid @enderror">
+                                                    class="checkout-whatsapp-country-select @error('whatsapp_no') is-invalid @enderror">
+                                                <input type="hidden" name="whatsapp_country" id="checkout-whatsapp-country" value="">
                                                 @error('whatsapp_no') <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                         </div>
+
+                                       
 
                                         <div class="col-lg-12">
                                             <div class="ct_input">
@@ -633,6 +652,28 @@ async function mountPaymentElement(clientSecret) {
 }
 
 $(document).ready(async function() {
+    const checkoutWhatsappInput = document.querySelector("#checkout-whatsapp-no");
+    const checkoutWhatsappCountry = document.querySelector("#checkout-whatsapp-country");
+    let checkoutWhatsappIti = null;
+
+    if (checkoutWhatsappInput && window.intlTelInput) {
+        checkoutWhatsappIti = window.intlTelInput(checkoutWhatsappInput, {
+            initialCountry: "ae",
+            separateDialCode: true,
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        });
+    }
+
+    function setCheckoutWhatsappValue() {
+        if (!checkoutWhatsappInput || !checkoutWhatsappIti) {
+            return;
+        }
+        const countryData = checkoutWhatsappIti.getSelectedCountryData();
+        const rawNumber = checkoutWhatsappInput.value.replace(/\D/g, "");
+        checkoutWhatsappCountry.value = countryData.name || "";
+        checkoutWhatsappInput.value = rawNumber ? `${countryData.dialCode}${rawNumber}` : "";
+    }
+
     // Check on page load
     if ($('input[name="selected_address"]').length === 0) {
         // No existing addresses
@@ -760,6 +801,7 @@ $(document).ready(async function() {
         }
 
         if (isAddingNew) {
+            setCheckoutWhatsappValue();
             let formData = $("#productInquiryForm").serialize();
             // Save address first
             let response = await fetch("{{ route('front.checkout.store.address') }}", {
