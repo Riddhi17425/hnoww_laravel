@@ -83,8 +83,8 @@
                            <div class="col-md-6 mb-3">
                               <label class="form-label">Status <span class="text-danger">*</span></label>
                               <select name="status" class="form-control @error('status') is-invalid @enderror">
-                              <option value="Active" {{ old('status') == 'Active' ? 'selected' : '' }}>Active</option>
-                              <option value="In-Active" {{ old('status') == 'In-Active' ? 'selected' : '' }}>Inactive</option>
+                                 <option value="Active" {{ old('status') == 0 ? 'selected' : '' }}>Active</option>
+                                 <option value="In-Active" {{ old('status') == 1 ? 'selected' : '' }}>Inactive</option>
                               </select>
                               @error('status')
                               <div class="invalid-feedback">{{ $message }}</div>

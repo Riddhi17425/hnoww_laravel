@@ -4,10 +4,6 @@
         <div class="body d-flex py-lg-3 py-md-2">
             <div class="container-xxl">
                 <div class="row align-items-center">
-                    <div id="message-pop-up" class="alert  alert-dismissible fade show"  role="alert" style="display: none">
-                        <span id="success-message"></span>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
                     <div class="border-0 mb-4">
                         <div class="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                             <h3 class="fw-bold mb-0">Blogs</h3>
@@ -18,18 +14,6 @@
                             </div>
                         </div>
                     </div>
-                    <div id="message-pop-up" class="alert  alert-dismissible fade show"  role="alert" style="display: none">
-                        <span id="success-message"></span>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    {{-- Success Message --}}
-                    @if(session('success'))
-                        <div class="alert alert-success alert-dismissible fade show" id="success-message" role="alert">
-                            {{ session('success') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-
                 </div> <!-- Row end  -->
                 <div class="row clearfix g-3">
                     <div class="col-sm-12">
@@ -57,11 +41,12 @@
     window.APP_URLS = {
         getBlogsData: "{{ route('admin.blogs.fetch') }}",
         deleteblogs:"{{ route('admin.blogs.delete' , [':id']) }}",
+        updateStatus:"{{ route('admin.blogs.update.status') }}",
         csrfToken: "{{ csrf_token() }}",
         image_path: "{{ asset('/') }}"
     };
 </script>
-<script src="{{ asset('public/admin/js/blogs.js') }}" defer></script>
+<script src="{{ asset('public/js/admin/blog.js') }}" defer></script>
 @endsection
         
 

@@ -530,7 +530,7 @@ a {
     right: 0;
     background: url("../../images/front/ct_design.svg");
     background-repeat: no-repeat;
-    background-size: contain; 
+    background-size: contain;
     width: 90px;
     height: 96px;
     z-index: -1;
@@ -540,33 +540,27 @@ a {
     margin: 18px 0;
 }
 
-.articles_details ul
-{
+.articles_details ul {
     padding-left: 1rem;
 }
 
-.articles_details ul li
-{
+.articles_details ul li {
     margin-bottom: 14px;
 }
 
-.articles_details ul li::marker
-{
+.articles_details ul li::marker {
     color: var(--gold-color);
     font-weight: bold;
 }
 
-.articles_cta
-{
-  position: relative;
+.articles_cta {
+    position: relative;
 }
 
-.articles_cta_content
-{
+.articles_cta_content {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
 }
-
