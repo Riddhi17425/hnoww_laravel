@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use App\Models\{User, Category, Product, ProductInquiry, Newsletter, FaqType, ContactInquiry, RequestCatalogue, CorporateProposalRequest, Journal, Blessing, WeddingCatalogueRequest, GiftBlessing, SharedDetail, Ceremonial, CeremonialInquiry, GiftShop, CorporateKit, CorporateKitRequest, BespokeCommissionEnquiry};
-
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Validation\Rule;
 
@@ -465,7 +465,7 @@ class FrontController extends Controller
     }
 
     public function storeNewsletterTempInquiry(Request $request){
-         try {
+        //  try {
             // Save to database
             $newsletter = Newsletter::create([
                 'email' => $request->newsletter_email,
@@ -486,8 +486,29 @@ class FrontController extends Controller
                 });
             } catch (Exception $e) {
                 Log::error('Newsletter subscriptionl sending failed: '.$e->getMessage());
+            }   
+
+            // STORE IN SHEET
+            try {
+                $timestamp = Carbon::now()->format('Y-m-d H:i:s');
+                $sheetsData = [
+                    'email'  => $request->newsletter_email,
+                    'date'      => $timestamp,
+                ];
+                $response = Http::withHeaders(['Content-Type' => 'application/json'])
+                    ->post('https://script.google.com/macros/s/AKfycbxH4I7n_9ZOkgc0eK1N4XC4Pbx5Bc0aC_8k0Cd3jqL5RVBtnnhjoLhWDMJxmRwpwEGy/exec', 
+                        $sheetsData
+                    );
+                if ($response->failed()) {
+                    \Log::error('Google Sheet request failed: '.$response->body());
+                }
+            } catch (\Exception $e) {
+                \Log::error('Google Sheets Exception (WhatsApp Inquiry):', [
+                    'message'   => $e->getMessage(),
+                    'trace'     => $e->getTraceAsString(),
+                    'data_sent' => $sheetsData
+                ]);
             }
-            
 
             // WhatsApp link (user must click to open)
             $waUrl = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode('New Newsletter subscription with Email Id - ' . $newsletter->email);
@@ -498,13 +519,13 @@ class FrontController extends Controller
                 'whatsappUrl' => $waUrl,
             ]);
 
-        } catch (\Exception $e) {
-            Log::error('Newsletter subscription failed: ' . $e->getMessage());
-            return response()->json([
-                'success' => false,
-                'message' => 'Something went wrong!'
-            ]);
-        }
+        // } catch (\Exception $e) {
+        //     Log::error('Newsletter subscription failed: ' . $e->getMessage());
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => 'Something went wrong!'
+        //     ]);
+        // }
     }
 
     public function storeNewsletterInquiry(Request $request){
@@ -545,6 +566,27 @@ class FrontController extends Controller
                 Log::error('Newsletter subscriptionl sending failed: '.$e->getMessage());
             }
             
+            // STORE IN SHEET
+            try {
+                $timestamp = Carbon::now()->format('Y-m-d H:i:s');
+                $sheetsData = [
+                    'email'  => $request->newsletter_email,
+                    'date'      => $timestamp,
+                ];
+                $response = Http::withHeaders(['Content-Type' => 'application/json'])
+                    ->post('https://script.google.com/macros/s/AKfycbxH4I7n_9ZOkgc0eK1N4XC4Pbx5Bc0aC_8k0Cd3jqL5RVBtnnhjoLhWDMJxmRwpwEGy/exec', 
+                        $sheetsData
+                    );
+                if ($response->failed()) {
+                    \Log::error('Google Sheet request failed: '.$response->body());
+                }
+            } catch (\Exception $e) {
+                \Log::error('Google Sheets Exception (WhatsApp Inquiry):', [
+                    'message'   => $e->getMessage(),
+                    'trace'     => $e->getTraceAsString(),
+                    'data_sent' => $sheetsData
+                ]);
+            }
 
             // WhatsApp link (user must click to open)
             $waUrl = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode('New Newsletter subscription with Email Id - ' . $newsletter->email);
