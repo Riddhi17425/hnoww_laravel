@@ -1311,18 +1311,18 @@
     }
 
     .magic_wrapper {
-        gap: 20px;
-        grid-template-columns: repeat(1, 1fr);
-        padding: 0;
+        /* gap: 20px;
+        grid-template-columns: repeat(1, 1fr);*/
+        padding: 0; 
     }
 
     .magic_wrapper {
         text-align: center;
     }
 
-    .magic_wrapper img {
-        width: 70%;
-    }
+    /* .magic_wrapper img {
+        width: 30%;
+    } */
 
     .magic_wrapper_center .magic_wrapper_p {
         font-size: 16px;
@@ -1431,12 +1431,12 @@
         width: 100%;
     }
 
-    .cta_ftwrapper {
+    /* .cta_ftwrapper {
         flex-direction: column;
         gap: 18px;
         padding: 25px 0;
         text-align: center;
-    }
+    } */
 
     .cta_ftwrapper .sub_head span svg {
         display: none;
@@ -1871,7 +1871,8 @@
     }
 
     .material_flex {
-        display: block;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
     }
 
     .home_gift_box .gift_box_rt {
@@ -1884,6 +1885,11 @@
         background-size: cover;
         background-repeat: no-repeat;
         height: 600px;
+        background-position-y: 70%;
+    }
+
+    .row {
+      --bs-gutter-x: 0.5rem;
     }
 
     .hero-section .com_btn {
@@ -1949,9 +1955,9 @@
         padding: 8px;
     }
 
-    .hero-section {
+    /* .hero-section {
         height: 75vh;
-    }
+    } */
 
     .ft_middle {
         margin-top: 25px;
@@ -1964,5 +1970,40 @@
 
     .articles_cta_content {
         width: 90%;
+    }
+}
+
+
+
+
+/*=========================                  =========================
+===========================                  =========================
+===========================       480px      ===========================
+===========================                  ===========================*/
+
+@media (max-width: 480px) {
+       .hero-section {
+        height: 75vh;
+    }
+
+        .magic_wrapper img {
+        width: 70%;
+    }
+
+     .magic_wrapper {
+        gap: 20px;
+        grid-template-columns: repeat(1, 1fr);
+        padding: 0; 
+    }
+
+    .cta_ftwrapper {
+        flex-direction: column;
+        gap: 18px;
+        padding: 25px 0;
+        text-align: center;
+    }
+
+    .material_flex {
+      display:  block ;
     }
 }

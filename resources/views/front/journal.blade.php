@@ -145,8 +145,8 @@ $monthMap = [
     @endphp
 
     @if($journalMonthNumber <= $currentMonthNumber) <div class="col-md-6" id="month-{{ $journalMonthNumber }}">
-        <div class="row gy-3 gy-md-0">
-            <div class="col-md-6">
+        <div class="row gy-3 gy-lg-0">
+            <div class="col-lg-6">
                 <div class="montheditions_lt">
                     <img class="img-fluid"
                         src="{{ asset('public/images/admin/journal/detail_images/'.$val->detail_img) }}">
@@ -157,7 +157,7 @@ $monthMap = [
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <div class="montheditions_rt">
                     <h3 class="sub_head mb-md-3">{{ $val->title }}</h3>
                     @if(isset($val->feature_title))<p class="montheditions_para">Feature: {{$val->feature_title}}</p>
