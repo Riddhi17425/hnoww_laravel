@@ -2,12 +2,12 @@
 <!-- hero section -->
 <section class="hero-section">
     <!-- <img class="img-fluid" src="{{ asset('public/images/front/hero-banner.webp') }}" alt="images" loading="lazy"> -->
-    <video autoplay muted loop class="hero_video d-none d-lg-block">
+    <video autoplay muted loop class="hero_video d-none d-md-block">
         <source src="{{ asset('public/images/front/hero-video.webm') }}" type="video/webm">
         Your browser does not support the video tag.
     </video>
 
-    <video autoplay muted loop class="hero_video d-lg-none">
+    <video autoplay muted loop class="hero_video d-md-none">
         <source src="{{ asset('public/images/front/hero-video-mobaile.mp4') }}" type="video/mp4">
         Your browser does not support the video tag.
     </video>

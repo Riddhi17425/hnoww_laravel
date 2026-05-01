@@ -12,7 +12,7 @@
 <section class="mt_60">
     <div class="container">
         <div class="row gy-4 gy-md-0">
-            <div class="col-lg-6">
+            <div class="col-md-6">
                 <div class="contact_box">
 
                     <div class="section_header">
@@ -57,7 +57,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-6">
+            <div class="col-md-6">
                 <div class="contact_box">
                     <div class="section_header">
                         <p class="sub_head mb-0">

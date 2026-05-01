@@ -83,7 +83,16 @@ $(document).ready(function () {
             slidesToShow: 3,
             responsive: [
                 {
-                    breakpoint: 768,
+                    breakpoint: 769,
+                    settings: {
+                        slidesToShow: 2,
+                        centerPadding: "40px",
+                        // centerMode: false
+                    },
+                },
+
+                {
+                    breakpoint: 576,
                     settings: {
                         slidesToShow: 1,
                         centerPadding: "40px",
@@ -103,13 +112,13 @@ if ($(".corporate_slider").length) {
     autoplaySpeed: 2500,
     responsive: [
         {
-            breakpoint: 992,
+            breakpoint: 769,
             settings: {
-                slidesToShow: 1
+                slidesToShow: 2
             }
         },
         {
-            breakpoint: 768,
+            breakpoint: 576,
             settings: {
                 slidesToShow: 1
             }
@@ -298,7 +307,7 @@ document.querySelectorAll(".ceremonial_box").forEach((box) => {
 // ============= mobile slider add
 
 function mobileOnlySlider() {
-    if (window.innerWidth < 768) {
+    if (window.innerWidth < 576) {
         if (!$(".mobile_slider").hasClass("slick-initialized")) {
             $(".mobile_slider").slick({
                 slidesToShow: 1,
@@ -308,7 +317,21 @@ function mobileOnlySlider() {
                 centerPadding: "0px",
             });
         }
-    } else {
+    }
+
+    // else if (window.innerWidth < 576) {
+    //      if (!$(".mobile_slider").hasClass("slick-initialized")) {
+    //         $(".mobile_slider").slick({
+    //             slidesToShow: 1,
+    //             arrows: false,
+    //             dots: true,
+    //             centerMode: true,
+    //             centerPadding: "0px",
+    //         });
+    //     }
+    // }
+
+     else {
         if ($(".mobile_slider").hasClass("slick-initialized")) {
             $(".mobile_slider").slick("unslick");
         }
