@@ -564,8 +564,9 @@
             </div>
 
              <button type="button" id="payBtn" class="com_btn w-100 bg-transparent">
-            Pay Securely
-        </button>
+                <span class="btn-text">Pay Securely</span>
+                <span class="btn-loader" style="display:none;">Processing...</span>
+            </button>
 
         {{-- <button type="submit" id="addressValidateBtn" class="com_btn w-100 bg-transparent">
                             Pay Securely
@@ -599,6 +600,19 @@
 
 @push('script')
 <script>
+function setPayLoading(state) {
+    if (state) {
+        $('#payBtn').prop('disabled', true);
+        $('.btn-text').hide();
+        $('.btn-loader').show();
+    } else {
+        $('#payBtn').prop('disabled', false);
+        $('.btn-text').show();
+        $('.btn-loader').hide();
+    }
+}
+
+
 const stripe = Stripe("{{ env('STRIPE_KEY') }}"); // <--- You MUST do this once upfront
 let elements;
 let paymentElement;
@@ -665,13 +679,21 @@ $(document).ready(async function() {
     }
 
     function setCheckoutWhatsappValue() {
-        if (!checkoutWhatsappInput || !checkoutWhatsappIti) {
-            return;
-        }
+        // if (!checkoutWhatsappInput || !checkoutWhatsappIti) {
+        //     return;
+        // }
         const countryData = checkoutWhatsappIti.getSelectedCountryData();
         const rawNumber = checkoutWhatsappInput.value.replace(/\D/g, "");
+        // checkoutWhatsappCountry.value = countryData.name || "";
+        // checkoutWhatsappInput.value = rawNumber ? `${countryData.dialCode}${rawNumber}` : "";
+        //Remove already-added dial code (prevents duplication like 919191...)
+        const dialCode = countryData.dialCode;
+        if (rawNumber.startsWith(dialCode)) {
+            rawNumber = rawNumber.slice(dialCode.length);
+        }
         checkoutWhatsappCountry.value = countryData.name || "";
-        checkoutWhatsappInput.value = rawNumber ? `${countryData.dialCode}${rawNumber}` : "";
+        //Ensure we only prepend dial code once
+        checkoutWhatsappInput.value = rawNumber ? `${dialCode}${rawNumber}` : "";
     }
 
     // Check on page load
@@ -785,17 +807,21 @@ $(document).ready(async function() {
         // if (!$("#productInquiryForm").valid()) {
         //     return;
         // }
+        setPayLoading(true); // ✅ START LOADING
+
         const selectedAddress = $('input[name="selected_address"]:checked').val();
         const isAddingNew = $('#addressFormWrapper').is(':visible');
         var addressId;
         if (!selectedAddress && !isAddingNew) {
             //alert('Please select an existing address or add a new one.');
             $('#error-message').text('Please select an existing address or add a new one.');
+            setPayLoading(false);
             return;
         }
         if (isAddingNew) {
             // Validate form using jQuery validate
             if (!$('#productInquiryForm').valid()) {
+                setPayLoading(false);
                 return;
             }
         }
@@ -815,6 +841,7 @@ $(document).ready(async function() {
             let data = await response.json();
             if (!data.success) {
                 $('#error-message').text('Something went wrong while saving address.');
+                setPayLoading(false);
                 return;
             }
             addressId = data.address_id;
@@ -824,12 +851,11 @@ $(document).ready(async function() {
 
         if (!clientSecret) {
             $('#error-message').text('Please enter a valid amount first.');
+            setPayLoading(false);
             return;
         }
         //const addressId = data.address_id;
-        const {
-            error
-        } = await stripe.confirmPayment({
+        const { error } = await stripe.confirmPayment({
             elements,
             confirmParams: {
                 return_url: sitePath + '/payment/success?address_id=' + addressId,
@@ -844,6 +870,7 @@ $(document).ready(async function() {
         });
         if (error) {
             $('#error-message').text(error.message);
+            setPayLoading(false);
         }
     });
 

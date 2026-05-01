@@ -36,19 +36,19 @@ class YetiWhatsappMesasgeService
                         'parameters' => [
                             [
                                 'type' => 'text',
-                                'text' => $order->user->name ?? 'Customer',
+                                'text' => $order->user->name ?? '',
                             ],
                             [
                                 'type' => 'text',
-                                'text' => $order->user->email ?? 'customer@yopmail.com',
+                                'text' => $order->user->email ?? '',
                             ],
                             [
                                 'type' => 'text',
-                                'text' => $order->order_number ?? 'Ord-1-1-1234',
+                                'text' => $order->order_number ?? '',
                             ],
                             [
                                 'type' => 'text',
-                                'text' => $order->status ?? 'Confirmed',
+                                'text' => $order->status ? ucfirst($order->status) : '',
                             ],
                             [
                                 'type' => 'text',
