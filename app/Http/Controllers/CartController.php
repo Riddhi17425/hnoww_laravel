@@ -262,19 +262,19 @@ class CartController extends Controller
             }
 
             // SEND WHATSAPP MESSSAGE
-            try {
-                $whatsappNumber = $orderAddress->whatsapp_no ?? '';
-                if($whatsappNumber != ''){
-                    $order->whatsapp_no = '971'.$whatsappNumber;
-                    $messageResponse = $this->yetiWhatsappMesasgeService->sendWhatsappNotification($order);
-                    if($messageResponse){
-                        // Handle successful message sending
-                        \Log::info('WhatsApp message sent successfully: '. json_encode($messageResponse));
-                    }
-                }
-            } catch (Exception $e) {
-                \Log::error('WhatsApp message sending failed: '.$e->getMessage());
-            }
+            // try {
+            //     $whatsappNumber = $orderAddress->whatsapp_no ?? '';
+            //     if($whatsappNumber != ''){
+            //         $order->whatsapp_no = '971'.$whatsappNumber;
+            //         $messageResponse = $this->yetiWhatsappMesasgeService->sendWhatsappNotification($order);
+            //         if($messageResponse){
+            //             // Handle successful message sending
+            //             \Log::info('WhatsApp message sent successfully: '. json_encode($messageResponse));
+            //         }
+            //     }
+            // } catch (Exception $e) {
+            //     \Log::error('WhatsApp message sending failed: '.$e->getMessage());
+            // }
 
             return redirect()->route('front.get.success', $orderId);
         }else{
