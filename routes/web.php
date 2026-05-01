@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{FrontController, AuthController, CartController};
 
 use App\Http\Controllers\Admin\Auth\LoginController;
-use App\Http\Controllers\Admin\{AdminController, CategoryController, ProductController, ProductTabController, ProductImageController, FaqController, JournalController, BlessingController, CeremonialController, GiftShopController, CorporateKitController, UserController};
+use App\Http\Controllers\Admin\{AdminController, CategoryController, ProductController, ProductTabController, ProductImageController, FaqController, JournalController, BlessingController, CeremonialController, GiftShopController, CorporateKitController, UserController, BlogController};
 use App\Http\Middleware\RedirectIfNotAdmin;
 /*
 |--------------------------------------------------------------------------
@@ -229,7 +229,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
             route::get('/fetch-orders' , [UserController::class , 'fetchOrders'])->name('orders.fetch');
             route::get('/view-order-details/{orderid}' , [UserController::class , 'viewOrderDetails'])->name('orders.details');
         });
-		
+
+		Route::prefix('blogs')->name('blogs.')->group(function () {
+			Route::get('/', [BlogController::class, 'index'])->name('index');
+			Route::get('/fetch', [BlogController::class, 'fetchBlogs'])->name('fetch');
+			Route::get('/create', [BlogController::class, 'create'])->name('create');
+			Route::post('/store', [BlogController::class, 'store'])->name('store');
+			Route::get('/edit/{blog_id}', [BlogController::class, 'edit'])->name('edit');
+			Route::put('/update/{blog_id}', [BlogController::class, 'update'])->name('update');
+			Route::delete('/delete/{blog_id}', [BlogController::class, 'delete'])->name('delete');
+			Route::post('/update-status', [BlogController::class, 'updateStatus'])->name('update.status');
+		});
+
 		Route::resource('journals', JournalController::class);
 		route::get('journal/fetch' , [JournalController::class , 'getJournals'])->name('journal.fetch');
 		route::post('journal/update/status' , [JournalController::class , 'updateStatus'])->name('journal.update.status');
