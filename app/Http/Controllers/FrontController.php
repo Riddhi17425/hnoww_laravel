@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use App\Models\{User, Category, Product, ProductInquiry, Newsletter, FaqType, ContactInquiry, RequestCatalogue, CorporateProposalRequest, Journal, Blessing, WeddingCatalogueRequest, GiftBlessing, SharedDetail, Ceremonial, CeremonialInquiry, GiftShop, CorporateKit, CorporateKitRequest, BespokeCommissionEnquiry};
+use App\Models\{User, Category, Product, ProductInquiry, Newsletter, FaqType, ContactInquiry, RequestCatalogue, CorporateProposalRequest, Journal, Blessing, WeddingCatalogueRequest, GiftBlessing, SharedDetail, Ceremonial, CeremonialInquiry, GiftShop, CorporateKit, CorporateKitRequest, BespokeCommissionEnquiry, Blog};
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Validation\Rule;
@@ -1802,12 +1802,20 @@ class FrontController extends Controller
         return view('front.about');
     }
 
-     public function getArticles(){
-        return view('front.articles');
+    public function getBlogs(){
+        $metatitle="Our Blogs & Insights | Armstrong";
+        $metadescription="Explore our latest blogs & articles about the woven sack, FIBC industrial machines, HDPE/PP, jumbo bag-making machines, and many more.";
+        $blogs = Blogs::orderBy('id','desc')->whereNull('deleted_at')->where('status', 0)->get();
+        return view('front.blogs',compact('metatitle','metadescription','blogs'));
     }
 
-      public function getArticlesDetails(){
-        return view('front.articlesdetails');
+    public function getBlogDetails($url){
+        $blog = Blogs::where('url', $url)->firstOrFail();
+        $metatitle = $blog->meta_title;
+        $metadescription = $blog->meta_description;
+        $blogs = Blogs::where('status', 0)->where('id', '!=', $blog->id)->get();
+        
+        return view('front.blog-detail', compact('blog','blogs','metatitle','metadescription'));
     }
 
 
