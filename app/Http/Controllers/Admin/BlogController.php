@@ -16,14 +16,29 @@ class BlogController extends Controller
         return view('admin.blog.index');
     }
 
-    public function getBlogs()
+    public function fetchBlogs(Request $request)
     {
         $blogs = Blog::whereNull('deleted_at')->get();
          
         return DataTables::of($blogs)
             ->addIndexColumn()
+            ->addColumn('status', function ($result) {  
+                if ($result->status == 0) {
+                    return '<div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" checked onclick="updateStatus(1,' . $result->id . ');">
+                                <label class="form-check-label">Active</label>
+                            </div>';
+                    }
+                    else
+                    {
+                        return '<div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" onclick="updateStatus(0,' . $result->id . ');">
+                                <label class="form-check-label">In-Active</label>
+                            </div>';;
+                    }              
+            })
             ->addColumn('action', function ($row) {
-                $editUrl = route('blogs.edit', $row->id);
+                $editUrl = route('admin.blogs.edit', $row->id);
                 return '
                     <a href="' . $editUrl . '" class="btn btn-outline-primary btn-sm">
                         <i class="icofont-edit"></i>
@@ -33,7 +48,7 @@ class BlogController extends Controller
                     </button>
                 ';
             })
-            ->rawColumns(['action'])
+            ->rawColumns(['action', 'status'])
             ->make(true);
     }
 
@@ -116,19 +131,36 @@ class BlogController extends Controller
                 'detail_description' => $request->detail_description,
                 'date'               => date('Y-m-d', strtotime($request->input('date'))),
                 'url'                => $request->url,
-                'status'             => $request->status ?? 'Active',
+                'status'             => $request->status ?? null,
                 'front_image'        => $frontImagePath,
                 'detail_image'       => $detailImagePath,
                 'cta_image'          => $ctaImagePath,
                 'meta_title'         => $request->get('meta_title'),
                 'meta_description'         => $request->get('meta_description'),
-                'blog_faq'         => $title_description,
+                'blog_faq'         => json_encode($title_description),
             ]); 
-            return redirect()->route('blogs')->with('success', 'Blogs created successfully!');
+            return redirect()->route('admin.blogs.index')->with('success', 'Blogs created successfully!');
         } catch (\Exception $e) {
             \Log::error('BlogsStore error: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Failed to create blogs: ' . $e->getMessage());
         }
+    }
+
+    public function updateStatus(Request $request){
+        $blog = Blog::find($request->id);
+        if (!$blog) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Blog not found'
+            ]);
+        }
+        $blog->status = $request->status;
+        $blog->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Status updated successfully'
+        ]);
     }
 
     public function edit($id){
@@ -145,7 +177,7 @@ class BlogController extends Controller
             'front_image'         => 'nullable|file|mimes:jpg,jpeg,png,webp|max:2048',
             'detail_image'        => 'nullable|file|mimes:jpg,jpeg,png,webp|max:2048',
             'cta_image'           => 'nullable|file|mimes:jpg,jpeg,png,webp|max:2048',
-            'status'              => 'required|in:Active,In-Active',
+            'status'              => 'required|in:0,1',
             'short_description'       => [
                 'required',
                 'string',
@@ -180,12 +212,10 @@ class BlogController extends Controller
                 },
             ],
         ]);
-
         if ($validator->fails()) {
             return redirect()->back()
                 ->withErrors($validator)
-                ->withInput()
-                ->with('error', 'Please fix the validation errors.');
+                ->withInput();
         }
 
         try {
@@ -260,7 +290,7 @@ class BlogController extends Controller
                 'conclusion'         => $request->conclusion,
                 'date'               => $request->date, // simplified
                 'url'                => $request->url,
-                'status'             => $request->status ?? 'Active',
+                'status'             => $request->status ?? null,
                 'front_image'        => $frontImagePath,
                 'detail_image'       => $detailImagePath,
                 'cta_image'          => $ctaImagePath,
