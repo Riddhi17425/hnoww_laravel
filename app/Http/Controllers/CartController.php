@@ -263,9 +263,10 @@ class CartController extends Controller
 
             // SEND WHATSAPP MESSSAGE
             try {
-                $whatsappNumber = $orderAddress->whatsapp_no ?? '';
+                $whatsappNumber = preg_replace('/\D+/', '', $orderAddress->whatsapp_no ?? '');
                 if($whatsappNumber != ''){
-                    $order->whatsapp_no = '971'.$whatsappNumber;
+                    // Keep legacy local UAE numbers working, but avoid double prefix
+                    $order->whatsapp_no = strlen($whatsappNumber) <= 10 ? '971'.$whatsappNumber : $whatsappNumber;
                     $messageResponse = $this->yetiWhatsappMesasgeService->sendWhatsappNotification($order);
                     if($messageResponse){
                         // Handle successful message sending
