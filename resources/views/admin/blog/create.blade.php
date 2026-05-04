@@ -69,18 +69,14 @@
                               @enderror
                               <img id="preview_cta_image" src="#" alt="Preview" class="mt-2" style="max-width: 100px; height: 100px; display: none;" />
                            </div>
-                           <div class="col-md-6 mb-3">
+                           <div class="col-md-3 mb-3">
                               <label for="date" class="form-label">Date <span class="text-danger">*</span></label>
                               <input type="date" id="date" name="date"class="form-control @error('date') is-invalid @enderror" value="{{ old('date') }}">
                               @error('date')
                               <div class="invalid-feedback">{{ $message }}</div>
                               @enderror
                            </div>
-                           <div class="col-md-6 mb-3">
-                              <label class="form-label">Meta Title</label>
-                              <input type="text" id="meta_title" name="meta_title" class="form-control">
-                           </div>
-                           <div class="col-md-6 mb-3">
+                           <div class="col-md-3 mb-3">
                               <label class="form-label">Status <span class="text-danger">*</span></label>
                               <select name="status" class="form-control @error('status') is-invalid @enderror">
                                  <option value="Active" {{ old('status') == 0 ? 'selected' : '' }}>Active</option>
@@ -90,6 +86,7 @@
                               <div class="invalid-feedback">{{ $message }}</div>
                               @enderror
                            </div>
+                           
                            {{-- Short Description --}}
                            <div class="col-md-12 mb-3">
                               <label class="form-label">Short Description <span class="text-danger">*</span></label>
@@ -117,6 +114,10 @@
                               @error('conclusion')
                               <div class="invalid-feedback">{{ $message }}</div>
                               @enderror
+                           </div>
+                           <div class="col-md-6 mb-3">
+                              <label class="form-label">Meta Title</label>
+                              <input type="text" id="meta_title" name="meta_title" class="form-control">
                            </div>
                            <div class="col-md-12">
                               <label for="meta_description" class="form-label">Meta Description</label>

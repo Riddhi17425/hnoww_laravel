@@ -540,6 +540,11 @@ a {
     margin: 18px 0;
 }
 
+.articles_details div
+{
+    margin-bottom: 35px;
+}
+
 .articles_details ul {
     padding-left: 1rem;
 }
