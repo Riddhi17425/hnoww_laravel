@@ -13,13 +13,15 @@
                     <div class="ft_top_right">
                         <div>
                             @if(request()->routeIs('front.editions'))
-                                <h2>Be notified when the next Edition opens.</h2>
+                            <h2>Be notified when the next Edition opens.</h2>
                             @else
-                                <h2>Join the Circle.</h2>
+                            <h2>Join the Circle.</h2>
                             @endif
-                            
+
                             <!--<h4> A monthly reflection on design, ritual, and slow living</h4>-->
-                            <h4 class="mb-0"><b>Objects. Occasions. Intention.</b></h4><p class="mb-0">A quiet note, sent occasionally. On what we're making, what we're thinking, and what's worth giving.</p>
+                            <h4 class="mb-0"><b>Objects. Occasions. Intention.</b></h4>
+                            <p class="mb-0">A quiet note, sent occasionally. On what we're making, what we're thinking,
+                                and what's worth giving.</p>
                         </div>
                         <form id="newsletterForm" class="ft_newsletter" action="{{ route('front.newsletter.store') }}"
                             method="POST">
@@ -33,7 +35,7 @@
                                 </button>
                             </div>
                             <div id="newsletter_error"></div>
-                             <div id="newsletterMessage" class="auto-hide" style="color: green; margin-top: 7px;"></div>
+                            <div id="newsletterMessage" class="auto-hide" style="color: green; margin-top: 7px;"></div>
                         </form>
                     </div>
                 </div>
@@ -114,7 +116,9 @@
         </div>
         <div class="ft_bottom">
             <div class="ym_cpy">
-                All rights reserved. <a href="{{ route('front.home') }}">©HNOWW</a> <?php echo date("Y"); ?>. <span style="font-size: 11px;font-weight: 400;">Designed & Developed by <a href="https://www.intelliworkz.tech/" target="_blank"> Intelliworkz</a></span>
+                All rights reserved. <a href="{{ route('front.home') }}">©HNOWW</a> <?php echo date("Y"); ?>. <span
+                    style="font-size: 11px;font-weight: 400;">Designed & Developed by <a
+                        href="https://www.intelliworkz.tech/" target="_blank"> Intelliworkz</a></span>
             </div>
 
             <div class="ft_privacy">
@@ -290,7 +294,7 @@ $(document).ready(function() {
 
 <script>
 @if(session('whatsapp_url'))
-    window.location.href = "{{ session('whatsapp_url') }}";
+window.location.href = "{{ session('whatsapp_url') }}";
 @endif
 </script>
 @if(session('whatsapp_url'))
@@ -422,35 +426,41 @@ function setConsent(value) {
         });
 }
 
-
 document.addEventListener("DOMContentLoaded", function () {
-    function applyHnowwStyle(node) {
-        // Sirf text nodes ko check karein
-        if (node.nodeType === 3) {
-            let text = node.nodeValue;
-            
-            // "hnoww" ko detect karke <span class="hnoww-font"> me wrap karega
-            // 'gi' matlab Global (poore page par) aur Case-Insensitive (Chota-bada font dono)
-           let updated = text.replace(/hnoww/gi, function (match) {
-    return `<span class="hnoww-font">HN<span class="hnoww-o">O\u0331</span>WW</span>`;
-});
+    const emailRegex = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i;
 
-            if (updated !== text) {
-                let tempSpan = document.createElement("span");
-                tempSpan.innerHTML = updated;
-                node.replaceWith(tempSpan);
-            }
-        } else if (node.nodeType === 1 && node.childNodes.length > 0) {
-            // Script aur Style tags ko ignore karein taaki code break na ho
-            if (node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
-                Array.from(node.childNodes).forEach(applyHnowwStyle);
+    function processTextNode(node) {
+        if (emailRegex.test(node.nodeValue)) return;
+
+        const regex = /hnoww/gi;
+        let match;
+
+        while ((match = regex.exec(node.nodeValue)) !== null) {
+            const range = document.createRange();
+            range.setStart(node, match.index);
+            range.setEnd(node, match.index + match[0].length);
+
+            const span = document.createElement("span");
+            span.className = "hnoww-font";
+            span.innerHTML = `HN<span class="hnoww-o">O̱</span>WW`;
+
+            range.deleteContents();
+            range.insertNode(span);
+        }
+    }
+
+    function walk(node) {
+        if (node.nodeType === 3) {
+            processTextNode(node);
+        } else if (node.nodeType === 1) {
+            if (node.tagName !== "SCRIPT" && node.tagName !== "STYLE") {
+                Array.from(node.childNodes).forEach(walk);
             }
         }
     }
 
-    applyHnowwStyle(document.body);
+    walk(document.body);
 });
-
 </script>
 
 

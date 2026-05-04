@@ -497,14 +497,17 @@ a {
 .hnoww-font {
     font-family: var(--heading-font), serif;
     text-transform: uppercase !important;
+    display: inline;
+    white-space: nowrap;
 }
 
 .hnoww-o {
     font-size: 0.9em;
     position: relative;
-    top: -0.24em;
+       top: -0.24em;
     text-transform: lowercase;
 }
+
 
 .line-clamp {
     display: -webkit-box;
