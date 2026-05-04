@@ -82,16 +82,12 @@
                               @enderror
                               <div class="preview_cta_image-zone mt-2 d-flex flex-wrap gap-2 position-relative"></div>
                            </div>
-                           <div class="col-md-6 mb-3">
+                           <div class="col-md-3 mb-3">
                               <label for="date" class="form-label">Date<span class="required-star">*</span></label>
                               <input type="date" id="date" value="{{$blog->date}}" name="date" class="form-control">
                            </div>
-                           <div class="col-md-6 mb-3">
-                              <label for="meta_title" class="form-label">Meta Title</label>
-                              <input type="text" id="meta_title" name="meta_title" value="{{ $blog->meta_title }}"  class="form-control">
-                           </div>
                            {{-- Status --}}
-                           <div class="col-md-12 mb-3">
+                           <div class="col-md-3 mb-3">
                               <label class="form-label">Status<span class="required-star">*</span></label>
                               <select name="status" class="form-control @error('status') is-invalid @enderror">
                               <option value="0" {{ old('status', $blog->status) == 0 ? 'selected' : '' }}>Active</option>
@@ -128,6 +124,10 @@
                               @error('conclusion')
                               <div class="invalid-feedback">{{ $message }}</div>
                               @enderror
+                           </div>
+                           <div class="col-md-6 mb-3">
+                              <label for="meta_title" class="form-label">Meta Title</label>
+                              <input type="text" id="meta_title" name="meta_title" value="{{ $blog->meta_title }}"  class="form-control">
                            </div>
                            <div class="col-md-12">
                               <label for="meta_description" class="form-label">Meta Description</label>

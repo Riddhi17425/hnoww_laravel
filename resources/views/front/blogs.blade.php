@@ -31,19 +31,20 @@
             <h2 class="title_60">House Journal</h2>
         </div>
         <div class="row gy-4 gy-lg-5">
-
-            <div class="col-md-4">
-                <div class="collection_box">
-                    <a href="{{ route('front.blessings.library') }}"><img class="img-fluid mb-2 mb-md-4"
-                            src="{{ asset('public/images/front/articles1.webp') }}" alt="images" loading="lazy"></a>
-                    <h3 class="sub_head">Corporate Gifts in Dubai: A Complete Guide for Businesses</h3>
-                    <p class="line-clamp">A complete guide to building long-term brand trust through thoughtful,
-                        architectural gifting in a competitive marketplace.</p>
-                    <a href="{{ route('front.blessings.library') }}" class="com_btn">Explore</a>
-                </div>
-            </div>
-
-            <div class="col-md-4">
+            @if(isset($blogs) && is_countable($blogs) && count($blogs) > 0)
+                @foreach($blogs as $blog)
+                    <div class="col-md-4">
+                        <div class="collection_box">
+                            <a href="{{ route('front.blog.detail', ['url' => $blog->url]) }}"><img class="img-fluid mb-2 mb-md-4"
+                                    src="{{ asset('/' . $blog->front_image) }}" alt="images" loading="lazy"></a>
+                            <h3 class="sub_head">{{ $blog->title ?? '' }}</h3>
+                            <p class="line-clamp">{{ $blog->short_description ?? '' }}</p>
+                            <a href="{{ route('front.blog.detail', ['url' => $blog->url]) }}" class="com_btn">Explore</a>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+            {{-- <div class="col-md-4">
                 <div class="collection_box">
                     <a href="{{ route('front.blessings.library') }}"><img class="img-fluid mb-2 mb-md-4"
                             src="{{ asset('public/images/front/articles2.webp') }}" alt="images" loading="lazy"></a>
@@ -53,7 +54,6 @@
                     <a href="{{ route('front.blessings.library') }}" class="com_btn">Explore</a>
                 </div>
             </div>
-
             <div class="col-md-4">
                 <div class="collection_box">
                     <a href="{{ route('front.blessings.library') }}"><img class="img-fluid mb-2 mb-md-4"
@@ -64,7 +64,6 @@
                     <a href="{{ route('front.blessings.library') }}" class="com_btn">Explore</a>
                 </div>
             </div>
-
             <div class="col-md-4">
                 <div class="collection_box">
                     <a href="{{ route('front.blessings.library') }}"><img class="img-fluid mb-2 mb-md-4"
@@ -75,7 +74,6 @@
                     <a href="{{ route('front.blessings.library') }}" class="com_btn">Explore</a>
                 </div>
             </div>
-
             <div class="col-md-4">
                 <div class="collection_box">
                     <a href="{{ route('front.blessings.library') }}"><img class="img-fluid mb-2 mb-md-4"
@@ -86,7 +84,6 @@
                     <a href="{{ route('front.blessings.library') }}" class="com_btn">Explore</a>
                 </div>
             </div>
-
             <div class="col-md-4">
                 <div class="collection_box">
                     <a href="{{ route('front.blessings.library') }}"><img class="img-fluid mb-2 mb-md-4"
@@ -96,7 +93,7 @@
                         silver are shaped to endure generations.</p>
                     <a href="{{ route('front.blessings.library') }}" class="com_btn">Explore</a>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>
