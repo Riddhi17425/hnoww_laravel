@@ -140,12 +140,12 @@
 
 <section class="about">
     <div class="container">
-        <div class="magic_wrapper pt-0 pb-lg-4">
+        <div class="magic_wrapper pt-0 pb-lg-4" style="">
             <!--<h2 class="magic_head_phone">-->
             <!--    Containment & Presentation-->
             <!--</h2>-->
             <!-- 3️⃣ Left image (from left) -->
-            <div class="text-end magic_wrapper_logo">
+            <div class="text-lg-end ">
                 <img src="{{ asset('public/images/front/home_magic_left.svg') }}" loading="lazy" alt=""
                     class="img-fluid">
             </div>
