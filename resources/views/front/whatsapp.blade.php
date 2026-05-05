@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
 
 <style>
 /* Global Container */
@@ -150,6 +149,15 @@
     color: var(--white-color);
     font-size: 24px;
 }
+
+@media (max-width: 768px)
+{
+    .wa-modal {
+   
+    width: 320px;
+    }
+}
+
 </style>
 
 <div class="wa-container">
@@ -180,7 +188,7 @@
           @csrf
             <div class="wa-body">
                 <input type="tel" name="phone" id="wa-phone" oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,15);" required>
-                <textarea id="wa-textarea" name="message" placeholder="How may we assist with your bespoke request?" required></textarea>
+                <textarea id="wa-textarea" name="message" placeholder="How may we assist with your bespoke request?"></textarea>
                 <!--Hidden fields -->
                 <input type="hidden" name="number" id="wa_full_phone">
                 <input type="hidden" name="country" id="wa_country_name">

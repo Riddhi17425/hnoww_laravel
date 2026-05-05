@@ -148,6 +148,23 @@
     }
 
 }
+
+/* Keep intl-tel-input aligned with checkout fields */
+#addressFormWrapper .ct_input .iti {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+#addressFormWrapper .ct_input .iti__selected-flag {
+    height: 4em;
+    background-color: transparent !important;
+}
+
+#checkout-whatsapp-no.checkout-whatsapp-country-select {
+    margin-top: 1.19em !important;
+}
+
+
 </style>
 
 <!-- old code  -->
@@ -275,7 +292,7 @@
                             @if($userAddresses->count() > 0)
                             <h3 class="sub_head mb-3">Choose an Existing Address OR Add a New Address</h3>
 
-                            <div class="row address-selection mb-3 gy-4 gy-lg-0" style="--bs-gutter-x: 20px;">
+                            <div class="row address-selection mb-3 gy-4" style="--bs-gutter-x: 20px;">
                                 @foreach($userAddresses as $address)
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <label
@@ -287,12 +304,13 @@
                                             {{ $address->address_line1 }}, {{ $address->address_line2 }}<br>
                                             {{ $address->emirate }}<br>
                                             {{ $address->contact_no }}<br>
+                                            @if(isset($address->whatsapp_no)){{ $address->whatsapp_no }}<br>@endif
                                             @if($address->landmark)
                                             Landmark: {{ $address->landmark }}
                                             @endif
                                         </div>
 
-                                        <input class="check_box_new" type="checkbox" name="selected_address" value="{{ $address->id }}">
+                                        <input class="check_box_new" type="radio" name="selected_address" value="{{ $address->id }}">
                                     </label>
                                 </div>
                                 @endforeach
@@ -304,7 +322,7 @@
 
                             <!-- Address Form -->
                             <form method="POST" id="productInquiryForm"
-                                action="{{ route('front.store.product.inquiry') }}">
+                                action="">
                                 @csrf
 
                                 <div id="addressFormWrapper" style="display:none;">
@@ -345,8 +363,23 @@
                                                 @enderror
                                             </div>
                                         </div>
-
                                         <div class="col-lg-6">
+                                            <div class="ct_input">
+                                                <label class="sub_head">Whatsapp Number <span
+                                                        class="text-danger">*</span></label>
+                                                <input type="tel" id="checkout-whatsapp-no" name="whatsapp_no"
+                                                    value="{{ old('whatsapp_no') }}"
+                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
+                                                    class="checkout-whatsapp-country-select @error('whatsapp_no') is-invalid @enderror">
+                                                <input type="hidden" name="whatsapp_country" id="checkout-whatsapp-country" value="">
+                                                @error('whatsapp_no') <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                       
+
+                                        <div class="col-lg-12">
                                             <div class="ct_input">
                                                 <label class="sub_head">Landmark</label>
                                                 <textarea name="landmark" placeholder="Enter Landmark" rows="1"
@@ -531,8 +564,9 @@
             </div>
 
              <button type="button" id="payBtn" class="com_btn w-100 bg-transparent">
-            Pay Securely
-        </button>
+                <span class="btn-text">Pay Securely</span>
+                <span class="btn-loader" style="display:none;">Processing...</span>
+            </button>
 
         {{-- <button type="submit" id="addressValidateBtn" class="com_btn w-100 bg-transparent">
                             Pay Securely
@@ -566,6 +600,19 @@
 
 @push('script')
 <script>
+function setPayLoading(state) {
+    if (state) {
+        $('#payBtn').prop('disabled', true);
+        $('.btn-text').hide();
+        $('.btn-loader').show();
+    } else {
+        $('#payBtn').prop('disabled', false);
+        $('.btn-text').show();
+        $('.btn-loader').hide();
+    }
+}
+
+
 const stripe = Stripe("{{ env('STRIPE_KEY') }}"); // <--- You MUST do this once upfront
 let elements;
 let paymentElement;
@@ -619,6 +666,36 @@ async function mountPaymentElement(clientSecret) {
 }
 
 $(document).ready(async function() {
+    const checkoutWhatsappInput = document.querySelector("#checkout-whatsapp-no");
+    const checkoutWhatsappCountry = document.querySelector("#checkout-whatsapp-country");
+    let checkoutWhatsappIti = null;
+
+    if (checkoutWhatsappInput && window.intlTelInput) {
+        checkoutWhatsappIti = window.intlTelInput(checkoutWhatsappInput, {
+            initialCountry: "ae",
+            separateDialCode: true,
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        });
+    }
+
+    function setCheckoutWhatsappValue() {
+        // if (!checkoutWhatsappInput || !checkoutWhatsappIti) {
+        //     return;
+        // }
+        const countryData = checkoutWhatsappIti.getSelectedCountryData();
+        const rawNumber = checkoutWhatsappInput.value.replace(/\D/g, "");
+        // checkoutWhatsappCountry.value = countryData.name || "";
+        // checkoutWhatsappInput.value = rawNumber ? `${countryData.dialCode}${rawNumber}` : "";
+        //Remove already-added dial code (prevents duplication like 919191...)
+        const dialCode = countryData.dialCode;
+        if (rawNumber.startsWith(dialCode)) {
+            rawNumber = rawNumber.slice(dialCode.length);
+        }
+        checkoutWhatsappCountry.value = countryData.name || "";
+        //Ensure we only prepend dial code once
+        checkoutWhatsappInput.value = rawNumber ? `${dialCode}${rawNumber}` : "";
+    }
+
     // Check on page load
     if ($('input[name="selected_address"]').length === 0) {
         // No existing addresses
@@ -644,6 +721,12 @@ $(document).ready(async function() {
                 minlength: 3
             },
             contact_no: {
+                required: true,
+                digits: true,
+                minlength: 7,
+                maxlength: 15
+            },
+            whatsapp_no: {
                 required: true,
                 digits: true,
                 minlength: 7,
@@ -677,6 +760,12 @@ $(document).ready(async function() {
                 digits: "Only numeric values are allowed",
                 minlength: "Contact number must be at least 7 digits",
                 maxlength: "Contact number cannot exceed 15 digits"
+            },
+            whatsapp_no: {
+                required: "Please enter your Whatsapp number",
+                digits: "Only numeric values are allowed",
+                minlength: "Whatsapp number must be at least 7 digits",
+                maxlength: "Whatsapp number cannot exceed 15 digits"
             },
             emirate: {
                 required: "Please select emirate",
@@ -718,22 +807,27 @@ $(document).ready(async function() {
         // if (!$("#productInquiryForm").valid()) {
         //     return;
         // }
+        setPayLoading(true); // ✅ START LOADING
+
         const selectedAddress = $('input[name="selected_address"]:checked').val();
         const isAddingNew = $('#addressFormWrapper').is(':visible');
         var addressId;
         if (!selectedAddress && !isAddingNew) {
             //alert('Please select an existing address or add a new one.');
             $('#error-message').text('Please select an existing address or add a new one.');
+            setPayLoading(false);
             return;
         }
         if (isAddingNew) {
             // Validate form using jQuery validate
             if (!$('#productInquiryForm').valid()) {
+                setPayLoading(false);
                 return;
             }
         }
 
         if (isAddingNew) {
+            setCheckoutWhatsappValue();
             let formData = $("#productInquiryForm").serialize();
             // Save address first
             let response = await fetch("{{ route('front.checkout.store.address') }}", {
@@ -747,6 +841,7 @@ $(document).ready(async function() {
             let data = await response.json();
             if (!data.success) {
                 $('#error-message').text('Something went wrong while saving address.');
+                setPayLoading(false);
                 return;
             }
             addressId = data.address_id;
@@ -756,12 +851,11 @@ $(document).ready(async function() {
 
         if (!clientSecret) {
             $('#error-message').text('Please enter a valid amount first.');
+            setPayLoading(false);
             return;
         }
         //const addressId = data.address_id;
-        const {
-            error
-        } = await stripe.confirmPayment({
+        const { error } = await stripe.confirmPayment({
             elements,
             confirmParams: {
                 return_url: sitePath + '/payment/success?address_id=' + addressId,
@@ -776,6 +870,7 @@ $(document).ready(async function() {
         });
         if (error) {
             $('#error-message').text(error.message);
+            setPayLoading(false);
         }
     });
 

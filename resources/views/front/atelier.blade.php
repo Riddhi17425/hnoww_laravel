@@ -117,11 +117,11 @@
                     <div class="atelier_origin_content">
                         <p class="sub_head_inter" style="color:unset;"> Inspired by the rituals of our culture hosting,
                             gifting, gathering, lighting a flame, offering sweets, preserving moments we reimagine these
-                            gestures through culptural design.</p>
-                        <p class="sub_head_inter" style="color:unset;">Every curve, weight, and material is chosen with
+                            gestures through cultural designs.</p>
+                        <p class="sub_head_inter" style="color:unset;">Every curve, weight and material is chosen with
                             purpose.</p>
                         <p class="sub_head_inter" style="color:unset;">Stone for grounding, silver for memory, malachite
-                            for depth, Brass for stillness. </p>
+                            for depth, brass for stillness. </p>
                         <p class="magic_wrapper_h3 mt-4">HNOWW is not an object brand. It is a movement back to meaning.
                         </p>
                     </div>
@@ -328,7 +328,7 @@
                                 fill="#B58A46" />
                         </svg>
                     </span>
-                    <span>Crafted</span>
+                    <span>Materials</span>
                     <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z"
@@ -336,7 +336,7 @@
                         </svg>
                     </span>
                 </p>
-                <h2 class="title_60">With Intention</h2>
+                <h2 class="title_60">We work with</h2>
                 <p>Our objects are made in small batches using natural materials:</p>
             </div>
             <div class="material_flex mobile_slider">
@@ -408,7 +408,7 @@
                             fill="#B58A46" />
                     </svg>
                 </span>
-                <span>the</span>
+                <span>Crafted</span>
                 <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z"
@@ -416,7 +416,7 @@
                     </svg>
                 </span>
             </p>
-            <h2 class="title_60">Crafted With Intention</h2>
+            <h2 class="title_60">With Intention</h2>
         </div>
         <div class="row gy-4 gy-md-0">
             <div class="col-md-4">

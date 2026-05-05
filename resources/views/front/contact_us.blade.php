@@ -12,7 +12,7 @@
 <section class="mt_60">
     <div class="container">
         <div class="row gy-4 gy-md-0">
-            <div class="col-lg-6">
+            <div class="col-md-6">
                 <div class="contact_box">
 
                     <div class="section_header">
@@ -40,7 +40,7 @@
                         <div>
                             <h3 class="sub_head">WhatsApp</h3>
                             <p class="mb-0">
-                                <a href="tel:+97150950927">+971 50 950 927</a> <br /> <span>(Immediate
+                                <a href="tel:+971502243720">+971 50 224 3720</a> <br /> <span>(Immediate
                                     assistance)</span>
                             </p>
                         </div>
@@ -57,7 +57,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-6">
+            <div class="col-md-6">
                 <div class="contact_box">
                     <div class="section_header">
                         <p class="sub_head mb-0">
@@ -82,8 +82,7 @@
                     <div>
                         <div class="mb-4">
                             <h3 class="sub_head">Location</h3>
-                            <p class="mb-0"><a href="https://maps.app.goo.gl/GcNVEWJPTW3xotjN6">Dubai Design District,
-                                    Building 7.</a></p>
+                            <p class="mb-0"><a href="https://maps.app.goo.gl/GcNVEWJPTW3xotjN6">Act tower 2, Burj area, Downtown Dubai, UAE</a></p>
                         </div>
                         <div>
                             <h3 class="sub_head">By Appointment Only</h3>

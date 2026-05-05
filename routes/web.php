@@ -1,14 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-// use App\Http\Controllers\RegistationController;
-// use App\Http\Controllers\superAdminController;
-
 use App\Http\Controllers\{FrontController, AuthController, CartController};
 
 use App\Http\Controllers\Admin\Auth\LoginController;
-use App\Http\Controllers\Admin\{AdminController, CategoryController, ProductController, ProductTabController, ProductImageController, FaqController, JournalController, BlessingController, CeremonialController, GiftShopController, CorporateKitController, UserController};
+use App\Http\Controllers\Admin\{AdminController, CategoryController, ProductController, ProductTabController, ProductImageController, FaqController, JournalController, BlessingController, CeremonialController, GiftShopController, CorporateKitController, UserController, BlogController};
 use App\Http\Middleware\RedirectIfNotAdmin;
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +16,32 @@ use App\Http\Middleware\RedirectIfNotAdmin;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Mail;
+
+Route::get('/send', function () {
+    Mail::raw('This is a test email sent from Laravel.', function ($message) {
+        $message->to('webdeveloper9.intelliworkz@gmail.com')
+                ->subject('Test Mail from Laravel');
+    });
+
+    return 'Mail sent!';
+});
+
+
+Route::get('/clear', function () {
+    Artisan::call('optimize:clear');
+    return 'Application cache cleared!';
+});
+
+Route::post('/newsletter-temp/store', [FrontController::class, 'storeNewsletterTempInquiry'])->name('newsletter.temp.store');
+Route::post('/check-email-unique', [FrontController::class, 'checkEmailUnique'])->name('front.check.email.unique');
+
+// Catch-all for frontend (coming soon)
+// Route::any('{any}', function () {
+//     return view('front.coming_soon');
+// })->where('any', '^(?!admin).*');
+
 
 //FRONT ROUTE
 Route::name('front.')->group(function () {
@@ -30,8 +52,8 @@ Route::name('front.')->group(function () {
     Route::get('list/{category_slug}/{from?}', [FrontController::class, 'getList'])->name('list');
     Route::get('product-details/{product_slug}', [FrontController::class, 'getProductDetails'])->name('product.details');
     Route::post('store-product-inquiry', [FrontController::class, 'storeProductInquiry'])->name('store.product.inquiry');
-    Route::post('/check-email-unique', [FrontController::class, 'checkEmailUnique'])
-     ->name('check.email.unique');
+    // Route::post('/check-email-unique', [FrontController::class, 'checkEmailUnique'])
+    //  ->name('check.email.unique');
     Route::post('/newsletter/store', [FrontController::class, 'storeNewsletterInquiry'])->name('newsletter.store');
     Route::get('/request-catalogue', [FrontController::class, 'getRequestCatalogue'])->name('request.catalogue');
     Route::post('store-request-catalogue', [FrontController::class, 'storeRequestCatalogue'])->name('store.request.catalogue');
@@ -78,6 +100,10 @@ Route::name('front.')->group(function () {
 	// NOT MADE DYNAMIC - END
 
 	Route::get('/thankyou', [FrontController::class, 'getThankYou'])->name('thankyou'); 
+
+	Route::get('/blogs', [FrontController::class, 'getBlogs'])->name('blogs'); 
+	Route::get('/blog/{url}', [FrontController::class, 'getBlogDetails'])->name('blog.detail'); 
+
 
 	// LOGIN & REGISTER
 	Route::get('front/auth/{page?}', [AuthController::class, 'getAuth'])->name('auth'); // used for both login & registration
@@ -203,7 +229,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
             route::get('/fetch-orders' , [UserController::class , 'fetchOrders'])->name('orders.fetch');
             route::get('/view-order-details/{orderid}' , [UserController::class , 'viewOrderDetails'])->name('orders.details');
         });
-		
+
+		Route::prefix('blogs')->name('blogs.')->group(function () {
+			Route::get('/', [BlogController::class, 'index'])->name('index');
+			Route::get('/fetch', [BlogController::class, 'fetchBlogs'])->name('fetch');
+			Route::get('/create', [BlogController::class, 'create'])->name('create');
+			Route::post('/store', [BlogController::class, 'store'])->name('store');
+			Route::get('/edit/{blog_id}', [BlogController::class, 'edit'])->name('edit');
+			Route::put('/update/{blog_id}', [BlogController::class, 'update'])->name('update');
+			Route::delete('/delete/{blog_id}', [BlogController::class, 'delete'])->name('delete');
+			Route::post('/update-status', [BlogController::class, 'updateStatus'])->name('update.status');
+		});
+
 		Route::resource('journals', JournalController::class);
 		route::get('journal/fetch' , [JournalController::class , 'getJournals'])->name('journal.fetch');
 		route::post('journal/update/status' , [JournalController::class , 'updateStatus'])->name('journal.update.status');

@@ -451,10 +451,10 @@
                         </a>
                     </div>
 
-                       <div class="text-center">
+                       <!-- <div class="text-center">
                        <a class="com_btn" data-bs-toggle="modal" data-bs-target="#blessingPopup" style="cursor: pointer;"><span>
                                     &lt;- </span> Back</a>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
