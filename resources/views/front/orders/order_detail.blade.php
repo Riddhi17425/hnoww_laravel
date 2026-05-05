@@ -137,6 +137,11 @@
                                                     <span>{{ $orderDetails->orderAddress->contact_no }}</span>
                                                 </p>
                                             @endif
+                                            @if($orderDetails->orderAddress->whatsapp_no)
+                                                <p class="mb-2"><b>WhatsApp No:</b> 
+                                                    <span>{{ $orderDetails->orderAddress->whatsapp_no }}</span>
+                                                </p>
+                                            @endif
 
                                             @if($orderDetails->orderAddress->emirate)
                                                 <p class="mb-2"><b>Emirate:</b> 

@@ -83,7 +83,16 @@ $(document).ready(function () {
             slidesToShow: 3,
             responsive: [
                 {
-                    breakpoint: 768,
+                    breakpoint: 769,
+                    settings: {
+                        slidesToShow: 2,
+                        centerPadding: "40px",
+                        // centerMode: false
+                    },
+                },
+
+                {
+                    breakpoint: 576,
                     settings: {
                         slidesToShow: 1,
                         centerPadding: "40px",
@@ -103,13 +112,13 @@ if ($(".corporate_slider").length) {
     autoplaySpeed: 2500,
     responsive: [
         {
-            breakpoint: 992,
+            breakpoint: 769,
             settings: {
-                slidesToShow: 1
+                slidesToShow: 2
             }
         },
         {
-            breakpoint: 768,
+            breakpoint: 576,
             settings: {
                 slidesToShow: 1
             }
@@ -298,7 +307,7 @@ document.querySelectorAll(".ceremonial_box").forEach((box) => {
 // ============= mobile slider add
 
 function mobileOnlySlider() {
-    if (window.innerWidth < 768) {
+    if (window.innerWidth < 576) {
         if (!$(".mobile_slider").hasClass("slick-initialized")) {
             $(".mobile_slider").slick({
                 slidesToShow: 1,
@@ -308,7 +317,21 @@ function mobileOnlySlider() {
                 centerPadding: "0px",
             });
         }
-    } else {
+    }
+
+    // else if (window.innerWidth < 576) {
+    //      if (!$(".mobile_slider").hasClass("slick-initialized")) {
+    //         $(".mobile_slider").slick({
+    //             slidesToShow: 1,
+    //             arrows: false,
+    //             dots: true,
+    //             centerMode: true,
+    //             centerPadding: "0px",
+    //         });
+    //     }
+    // }
+
+     else {
         if ($(".mobile_slider").hasClass("slick-initialized")) {
             $(".mobile_slider").slick("unslick");
         }
@@ -373,26 +396,7 @@ window.addEventListener("load", () => {
 
 // loader js end
 
-document.querySelectorAll(".read-more-btn").forEach((btn) => {
-    btn.addEventListener("click", function () {
-        const wrapper = this.previousElementSibling;
 
-        if (!wrapper.classList.contains("expanded")) {
-            // OPEN
-            wrapper.style.maxHeight = wrapper.scrollHeight + "px";
-            wrapper.classList.add("expanded");
-            this.textContent = "Read Less";
-        } else {
-            // CLOSE
-            wrapper.style.maxHeight = wrapper.scrollHeight + "px"; 
-            requestAnimationFrame(() => {
-                wrapper.style.maxHeight = "90px";
-            });
-            wrapper.classList.remove("expanded");
-            this.textContent = "Read More";
-        }
-    });
-});
 
 
 // ---------------------------- user drop down ------------------------
@@ -411,34 +415,4 @@ document.addEventListener("DOMContentLoaded", function () {
             userMenu.classList.remove("open");
         }
     });
-});
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    function applyHnowwStyle(node) {
-        // Sirf text nodes ko check karein
-        if (node.nodeType === 3) {
-            let text = node.nodeValue;
-            
-            // "hnoww" ko detect karke <span class="hnoww-font"> me wrap karega
-            // 'gi' matlab Global (poore page par) aur Case-Insensitive (Chota-bada font dono)
-            let updated = text.replace(/hnoww/gi, function (match) {
-                return `<span class="hnoww-font">${match}</span>`;
-            });
-
-            if (updated !== text) {
-                let tempSpan = document.createElement("span");
-                tempSpan.innerHTML = updated;
-                node.replaceWith(tempSpan);
-            }
-        } else if (node.nodeType === 1 && node.childNodes.length > 0) {
-            // Script aur Style tags ko ignore karein taaki code break na ho
-            if (node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
-                Array.from(node.childNodes).forEach(applyHnowwStyle);
-            }
-        }
-    }
-
-    applyHnowwStyle(document.body);
 });
