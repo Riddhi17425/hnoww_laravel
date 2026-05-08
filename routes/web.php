@@ -74,7 +74,7 @@ Route::name('front.')->group(function () {
     Route::post('store-wedding-catelogue-request', [FrontController::class, 'storeWeddingCatalogueRequest'])->name('store.wedding.catelogue.request');
 	Route::post('store-bespoke-commission-request', [FrontController::class, 'storeBespokeCommissionRequest'])->name('store.bespoke.commission.request');
 
-	Route::get('/ceremonials/{category_id?}', [FrontController::class, 'getCeremonials'])->name('ceremonials');
+	Route::get('/wedding-products/{category_id?}', [FrontController::class, 'getCeremonials'])->name('ceremonials');
 	Route::post('store-ceremonial-inquiry', [FrontController::class, 'storeCeremonialInquiry'])->name('store.ceremonial.inquiry');
 	Route::get('/gift-shop', [FrontController::class, 'getGiftShop'])->name('giftshop');
     Route::get('gift-details/{product_slug}', [FrontController::class, 'getGiftDetails'])->name('gift.details');
