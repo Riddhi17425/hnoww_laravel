@@ -59,7 +59,7 @@
                     <img src="{{ asset('/' . $blog->cta_image) }}" alt="cat image"
                         class="img-fluid">
                     <div class="articles_cta_content">
-                        <h3 class="title_40 text-white">Lorem ipsum dolor sit amet consectetur. A fames.</h3>
+                        <h3 class="title_40 text-white">{{ $blog->cta_content ?? '' }}</h3>
                         <a href="{{ route('front.contactus') }}" class="btn_2 mt_35">Get In Touch</a>
                     </div>
                 </div>
