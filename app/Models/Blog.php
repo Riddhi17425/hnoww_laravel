@@ -10,5 +10,7 @@ class Blog extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [];
-    
+    protected $casts = [
+        'blog_faq' => 'array',
+    ];
 }
