@@ -209,7 +209,7 @@
         <div class="cor_kits_slider">
             @foreach($corporateKits as $key => $val)
             <div class="cor_kts">
-                        <img  class="img-fluid d-none d-lg-block" src="{{ asset('public/images/admin/corporatekit/'.$val->image) }}" alt="">
+                        <img  class="img-fluid d-none d-lg-block cor_kits_slider_img" src="{{ asset('public/images/admin/corporatekit/'.$val->image) }}" alt="">
                         <img  class="img-fluid d-lg-none" src="{{ asset('public/images/admin/corporatekit/mobile_image/'.$val->mobile_image) }}" alt="">
 
                 <div class="cor_kits_cont">
