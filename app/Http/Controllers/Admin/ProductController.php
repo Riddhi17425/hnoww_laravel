@@ -178,7 +178,7 @@ class ProductController extends Controller
 
         $data = $request->only([
             'category_id', 'product_name', 'product_price', 'short_description', 'large_description',
-            'meta_title', 'meta_description', 'product_url', 'dimensions', 'moq', 'short_note', 'product_stock', 'care_maintenance'
+            'meta_title', 'meta_description', 'product_url', 'dimensions', 'materials', 'moq', 'short_note', 'product_stock', 'weight', 'care_maintenance'
         ]);
 
         // STORE LIST PAGE IMAGE (SINGLE)
