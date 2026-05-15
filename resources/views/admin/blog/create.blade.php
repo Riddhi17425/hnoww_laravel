@@ -62,7 +62,7 @@
                            </div>
                            {{-- Cta Image --}}
                            <div class="col-md-6 mb-3">
-                              <label class="form-label">Cta Image <span class="text-danger">*</span></label>
+                              <label class="form-label">Cta Image </label>
                               <input type="file" name="cta_image" id="cta_image" class="form-control @error('cta_image') is-invalid @enderror" onchange="validateAndPreviewCTAImage()">
                               @error('cta_image')
                               <div class="invalid-feedback">{{ $message }}</div>
@@ -86,7 +86,15 @@
                               <div class="invalid-feedback">{{ $message }}</div>
                               @enderror
                            </div>
-                           
+                           <div class="col-md-12 mb-3">
+                              <label class="form-label">CTA Content </label>
+                              <textarea name="cta_content" id="cta_content"
+                                 class="form-control @error('cta_content') is-invalid @enderror"
+                                 value="{{ old('cta_content') }}" placeholder="Enter CTA content">{{ old('cta_content') }}</textarea>
+                              @error('cta_content')
+                              <div class="invalid-feedback">{{ $message }}</div>
+                              @enderror
+                           </div>
                            {{-- Short Description --}}
                            <div class="col-md-12 mb-3">
                               <label class="form-label">Short Description <span class="text-danger">*</span></label>

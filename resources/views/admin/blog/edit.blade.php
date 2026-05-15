@@ -72,7 +72,7 @@
                            </div>
                            {{-- Cta Image --}}
                            <div class="col-md-6 mb-3">
-                              <label class="form-label">Cta Image<span class="required-star">*</span></label>
+                              <label class="form-label">Cta Image</label>
                               <input type="file" name="cta_image" id="cta_image" class="form-control @error('cta_image') is-invalid @enderror" onchange="validateAndPreviewCTAImage()">
                               @if($blog->cta_image)
                               <img id="preview_cta_image" src="{{ asset('/' . $blog->cta_image) }}" class="mt-2" style="max-width: 100px;">
@@ -94,6 +94,15 @@
                               <option value="1" {{ old('status', $blog->status) == 1 ? 'selected' : '' }}>Inactive</option>
                               </select>
                               @error('status')
+                              <div class="invalid-feedback">{{ $message }}</div>
+                              @enderror
+                           </div>
+                           <div class="col-md-12 mb-3">
+                              <label class="form-label">CTA Content </label>
+                              <textarea name="cta_content" id="cta_content"
+                                 class="form-control @error('cta_content') is-invalid @enderror"
+                                 placeholder="Enter CTA content">{{ old('cta_content', $blog->cta_content) }}</textarea>
+                              @error('cta_content')
                               <div class="invalid-feedback">{{ $message }}</div>
                               @enderror
                            </div>

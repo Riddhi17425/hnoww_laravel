@@ -1219,7 +1219,18 @@
 ===========================      768px       ===========================
 ===========================                  ===========================*/
 
-@media (max-width: 800px) {
+@media (max-width: 830px) {
+    
+        .hospitality_img_overlay .title_36 {
+        font-size: 18px;
+    }
+    
+    .cor_kits_slider_img
+    {
+        height:400px;
+        object-fit: cover;
+    }
+    
     header {
         padding: 10px 10px;
     }
@@ -1654,9 +1665,7 @@
         font-size: 16px;
     }
 
-    .him_wrapper {
-        grid-template-columns: 1fr;
-    }
+   
     .hero-section_inner img {
         height: 400px;
         object-fit: cover;
@@ -1912,12 +1921,9 @@
     }
 
     .cor_kits_cont {
-        position: absolute;
-        top: 0;
-        left: 0;
-        transform: translate(0, 0);
-        width: 100%;
-        padding: 25px;
+      
+        width: 40%;
+        /*padding: 25px;*/
     }
 
     .theme-white .sticky-header {
@@ -1939,7 +1945,7 @@
     }
 
     .layout-wrapper-Socials .image-grid {
-        grid-template-columns: repeat(2, 1fr);
+        /*grid-template-columns: repeat(2, 1fr);*/
     }
 
     .wa-modal {
@@ -1982,6 +1988,20 @@
 ===========================                  ===========================*/
 
 @media (max-width: 480px) {
+    
+    
+        .cor_kits_cont {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(0, 0);
+        width: 100%;
+        padding: 25px;
+    }
+    
+     .him_wrapper {
+        grid-template-columns: 1fr;
+    }
        .hero-section {
         height: 75vh;
     }
