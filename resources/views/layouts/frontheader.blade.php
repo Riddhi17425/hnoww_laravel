@@ -11,11 +11,16 @@ $current_route ===
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('public/images/front/favicon.png') }}">
     <title>{{ $meta_title ?? 'Architectural Objects & Home Accents | HNoww Dubai' }}</title>
     <meta name="description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}">
+    <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
+    <link rel="canonical" href="{{ url()->current() }}" />
+    <!--OG Tags-->
+    <meta property="og:title" content="{{ $meta_title ?? 'Architectural Objects & Home Accents | HNoww Dubai' }}" />
+    <meta property="og:description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}" />
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

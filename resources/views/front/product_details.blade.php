@@ -33,9 +33,9 @@
                                 $imagePath = public_path('images/admin/product_detail/' . $val);
                             @endphp
                             @if(isset($val) && $val != '' && file_exists($imagePath))
-                                <img src="{{ asset('public/images/admin/product_detail/'.$val)}}" alt="Sample Product">
+                                <img src="{{ asset('public/images/admin/product_detail/'.$val)}}" alt="{{ $val }}">
                             @else
-                                <img class="img-fluid" src="{{asset('public/noimg.jpg')}}" alt="no image found">
+                                <img class="img-fluid" src="{{asset('public/noimg.jpg')}}" alt="{{ $val }}">
                             @endif
                         </button>
                         @endforeach
@@ -52,10 +52,10 @@
                                 @endphp
                                 @if(isset($val) && $val != '' && file_exists($imagePath))
                                     <img class="zoom-image img-fluid" src="{{ asset('public/images/admin/product_detail/'.$val)}}"
-                                    alt="Product Detail Image">
+                                    alt="{{ $val }}">
                                     <div class="zoom-lens"></div>
                                 @else
-                                    <img class="img-fluid" src="{{asset('public/noimg.jpg')}}" alt="no image found">
+                                    <img class="img-fluid" src="{{asset('public/noimg.jpg')}}" alt="{{ $val }}">
                                     <div class="zoom-lens"></div>
                                 @endif
                                 {{-- <div class="zoom-lens"></div> --}}
@@ -136,16 +136,28 @@
                         gift, but a complete sensory ceremony designed to spark joy.</p> --}}
             </div>
             @endif
-            @if(isset($product->large_description) && $product->large_description != '')
+            @if(isset($product->materials) && $product->materials != '')
             <h4 class="sub_head mb-4">Material</h4>
             <div class="pro_details_info_list">
-                {!! $product->dimensions ?? '' !!}
+                {!! $product->materials ?? '' !!}
                 {{-- <h4 class="sub_head mb-4">Dimensions</h4>
                     <ul>
                         <li><b>Bowl Diameter:</b> 20–22 cm (Approx.)</li>
                         <li><b>Box Dimensions:</b> 30 cm x 25 cm x 10 cm</li>
                         <li><b>Weight:</b> ~1.8 kg (Full Set)</li>
                     </ul> --}}
+            </div>
+            @endif
+            @if(isset($product->weight) && $product->weight != '')
+            <h4 class="sub_head mb-4">Weight</h4>
+            <div class="pro_details_info_list">
+                {{$product->weight ?? '' }}
+            </div>
+            @endif
+            @if(isset($product->dimensions) && $product->dimensions != '')
+            <h4 class="sub_head mb-4 mt-3">Dimensions</h4>
+            <div class="pro_details_info_list">
+                {!! $product->dimensions ?? '' !!}
             </div>
             @endif
 
