@@ -128,8 +128,8 @@
             </div>
             <div class="col-md-3">
                 <label class="form-label">Product Weight</label>
-                <input type="number" name="product_weight" id="product_weight" class="form-control" value="{{ old('product_weight', $product->product_weight) }}">
-                @error('product_weight') <span class="text-danger">{{ $message }}</span> @enderror
+                <input type="text" name="weight" id="weight" class="form-control" value="{{ old('weight', $product->weight) }}">
+                @error('weight') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
             <div class="col-md-12">
