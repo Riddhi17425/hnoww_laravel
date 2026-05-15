@@ -59,17 +59,23 @@
             </div>
 
             {{-- Product Name --}}
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <label class="form-label">Product Name</label><span class="text-danger">*</span>
                 <input type="text" name="product_name" id="product_name" class="form-control" value="{{ old('product_name', $product->product_name) }}">
                 @error('product_name') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
             {{-- Product URL --}}
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <label class="form-label">Product URL</label><span class="text-danger">*</span>
                 <input type="text" name="product_url" id="product_url" class="form-control" value="{{ old('product_url', $product->product_url) }}">
                 @error('product_url') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="col-md-2">
+                <label class="form-label">Product Stock</label><span class="text-danger">*</span>
+                <input type="number" name="product_stock" id="product_stock" class="form-control" value="{{ old('product_stock', $product->product_stock) }}">
+                @error('product_stock') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
             <div class="col-md-8">
@@ -121,16 +127,6 @@
                 <input type="text" name="short_note" id="short_note" class="form-control" value="{{ old('short_note', $product->short_note) }}">
                 @error('short_note') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
-            <div class="col-md-3">
-                <label class="form-label">Product Stock (In Quantity)</label><span class="text-danger">*</span>
-                <input type="number" name="product_stock" id="product_stock" class="form-control" value="{{ old('product_stock', $product->product_stock) }}">
-                @error('product_stock') <span class="text-danger">{{ $message }}</span> @enderror
-            </div>
-            <div class="col-md-3">
-                <label class="form-label">Product Weight</label>
-                <input type="text" name="weight" id="weight" class="form-control" value="{{ old('weight', $product->weight) }}">
-                @error('weight') <span class="text-danger">{{ $message }}</span> @enderror
-            </div>
 
             <div class="col-md-12">
                 <label class="form-label">Product Short Description</label>
@@ -145,13 +141,7 @@
             </div>
 
             <div class="col-md-12">
-                <label class="form-label">Product Materials</label>
-                <textarea name="materials" id="materials" class="form-control" rows="4">{{ old('materials', $product->materials) }}</textarea>
-                @error('materials') <span class="text-danger">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="col-md-12">
-                <label class="form-label">Product Dimensions</label>
+                <label class="form-label">Product dimensions</label>
                 <textarea name="dimensions" id="dimensions" class="form-control" rows="4">{{ old('dimensions', $product->dimensions) }}</textarea>
                 @error('dimensions') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
@@ -220,7 +210,7 @@ $(document).ready(function() {
         $('#short_description').val($('#short_description').summernote('code'));
     });
     
-    $('#short_description,#large_description,#dimensions,#care_maintenance, #materials').summernote({
+    $('#short_description').summernote({
         placeholder: 'Enter Product Description here...',
         height: 300,
         toolbar: [
@@ -236,6 +226,52 @@ $(document).ready(function() {
         ]
     });
 
+    $('#large_description').summernote({
+        placeholder: 'Enter Product Description here...',
+        height: 300,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['insert', ['link', 'picture', 'hr']],
+            ['view', ['fullscreen', 'codeview']],
+            ['help', ['help']]
+        ]
+    });
+
+    $('#dimensions').summernote({
+        placeholder: 'Enter Product Description here...',
+        height: 300,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['insert', ['link', 'picture', 'hr']],
+            ['view', ['fullscreen', 'codeview']],
+            ['help', ['help']]
+        ]
+    });
+    $('#care_maintenance').summernote({
+        placeholder: 'Enter Care & Description here...',
+        height: 300,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['insert', ['link', 'picture', 'hr']],
+            ['view', ['fullscreen', 'codeview']],
+            ['help', ['help']]
+        ]
+    });
 });
 </script>
 @endpush

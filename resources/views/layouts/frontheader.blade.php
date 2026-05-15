@@ -11,16 +11,12 @@ $current_route ===
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('public/images/front/favicon.png') }}">
-    <title>{{ $meta_title ?? 'Architectural Objects & Home Accents | HNoww Dubai' }}</title>
-    <meta name="description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}">
-    <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
-    <link rel="canonical" href="{{ url()->current() }}" />
-    <!--OG Tags-->
-    <meta property="og:title" content="{{ $meta_title ?? 'Architectural Objects & Home Accents | HNoww Dubai' }}" />
-    <meta property="og:description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}" />
+    <title>{{ $meta_title ?? 'HNOWW' }}</title>
+    <meta name="description"
+        content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}">
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,7 +39,6 @@ $current_route ===
 
     <!--country-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
-
 
     <!-- style css start -->
     <link rel="stylesheet" href="{{ asset('public/front/css/style.css')}}">
@@ -207,12 +202,12 @@ $current_route ===
     </script>
     @endif
 
-</head>   
+</head>
 
 <body class="<?= $is_green ? 'theme-green' : 'theme-white' ?>">
 
     <!-- Page Loader -->
-    <!-- <div id="page-loader" class="loader-overlay">
+    <div id="page-loader" class="loader-overlay">
         <div class="loader-box">
             <svg width="100%" height="100%" viewBox="-3 -3 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -220,14 +215,14 @@ $current_route ===
                     fill="#D0C2AA" />
             </svg>
         </div>
-    </div>  -->
+    </div> 
 
     <header class="sticky-header <?= $is_green ? 'theme-green' : 'theme-white' ?>">
 
         <nav class="navbar navbar-expand-lg">
             <div class="navbar_left">
                 <a href="{{ route('front.home') }}"><img class="header_logo" src="{{ $is_green 
-                            ? asset('public/images/front/footer-logo.svg') 
+                            ? asset('public/images/front/home_magic_left.svg') 
                             : asset('public/images/front/header-logo.svg') }}" alt="Logo"></a>
             </div>
 
@@ -261,14 +256,7 @@ $current_route ===
                 <a href="{{ route('front.cart.view') }}" class="cart_icon d-lg-none">
                     <img src="<?= $is_green ? asset('public/images/front/cart-icon-black.svg') : asset('public/images/front/cart-icon.svg') ?>"
                         alt="Cart">
-                    @php
-                        if (Auth::check()) {
-                            $cartCount = \App\Models\Cart::where('user_id', Auth::id())->sum('quantity');
-                        } else {
-                            $cartCount = \App\Models\Cart::where('session_id', session()->getId())->sum('quantity');
-                        }
-                    @endphp
-                    <span id="cart-count" class="cart-total cart_badge">{{ $cartCount ?? 0 }} </span>
+                    <span id="cart-count" class="cart-total cart_badge">{{ \App\Models\Cart::where('user_id', auth()->id())->sum('quantity') ?? 0 }}</span>
                 </a>
 
                 <span class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
@@ -421,15 +409,7 @@ $current_route ===
                     <!-- Cart with Badge -->
                     <a href="{{ route('front.cart.view') }}" class="cart_icon d-none d-lg-block">
                         <img src="<?= $is_green ? asset('public/images/front/cart-icon-black.svg') : asset('public/images/front/cart-icon.svg') ?>" alt="Cart">
-                        @php
-                            if (Auth::check()) {
-                                $cartCount = \App\Models\Cart::where('user_id', Auth::id())->sum('quantity');
-                            } else {
-                                $cartCount = \App\Models\Cart::where('session_id', session()->getId())->sum('quantity');
-                            }
-                        @endphp
-                        <span id="cart-count" class="cart-total cart_badge">{{ $cartCount ?? 0 }} </span>
-                        <!--<span id="cart-count" class="cart-total cart_badge">{{ \App\Models\Cart::where('user_id', auth()->id())->sum('quantity') ?? 0 }}</span>-->
+                        <span id="cart-count" class="cart-total cart_badge">{{ \App\Models\Cart::where('user_id', auth()->id())->sum('quantity') ?? 0 }}</span>
                     </a>
 
                     <div class="language-select ms-lg-3">

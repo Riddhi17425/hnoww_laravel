@@ -1,0 +1,40 @@
+.faq_cont .according_head {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding-right: 30px;
+}
+
+.faq_cont .tab-content {
+    padding: 0px;
+    margin-top: 60px;
+}
+
+
+.faq_cont .faq_cont_acco {
+    border-bottom: 1px solid #BBBBBB;
+    padding-bottom: 24px;
+    margin-bottom: 30px;
+}
+
+.faq_cont .according_head[aria-expanded="true"] {
+    /* background: red; */
+    /* color: white; */
+}
+
+.faq_cont .according_head::after {
+    content: "+";
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    font-weight: bold;
+    font-size: 24px;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+}
+
+.faq_cont .according_head[aria-expanded="true"]::after {
+    transform: translateY(-50%) rotate(4455deg);
+}

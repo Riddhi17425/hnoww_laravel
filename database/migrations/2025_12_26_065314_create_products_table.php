@@ -21,8 +21,6 @@ return new class extends Migration
             $table->unsignedInteger('product_stock')->default(0);
             $table->text('large_description')->nullable();
             $table->string('dimensions', 5000)->nullable();
-            $table->string('weight', 2000)->nullable();
-            $table->string('materials', 2000)->nullable();
             $table->string('meta_title')->nullable();
             $table->string('meta_description', 1000)->nullable();
             $table->string('product_url')->nullable();

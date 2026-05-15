@@ -16,7 +16,6 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('contact_no')->nullable();  
-            $table->string('whatsapp_no')->nullable();  
             $table->string('emirate')->nullable();
             $table->string('address_line1', 500)->nullable(); 
             $table->string('address_line2', 500)->nullable(); 
