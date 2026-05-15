@@ -1,5 +1,5 @@
 @include('layouts.frontheader', [
-    'og_image' => asset($blog->detail_image)
+    'og_image' => asset($blog->og_image)
 ])
  @if (isset($blog->blog_faq) && is_countable($blog->blog_faq) && count($blog->blog_faq) > 0)
     @php
@@ -47,8 +47,8 @@
         </div>
 
         <div class="mb_35">
-            <img class="img-fluid" src="{{ asset('/' . $blog->detail_image) }}"
-                alt="images">
+            <img class="img-fluid dasddsd" src="{{ asset('/' . $blog->detail_image) }}"
+                alt="{{ $blog->detail_image_alt ?? '' }}">
         </div>
 
         <div class="articles_details">
@@ -56,10 +56,10 @@
 
             <div class="mb_35">
                 <div class="articles_cta">
-                    <img src="{{ asset('/' . $blog->cta_image) }}" alt="cat image"
+                    <img src="{{ asset('/' . $blog->cta_image) }}" alt="{{ $blog->cta_image_alt ?? '' }} "
                         class="img-fluid">
                     <div class="articles_cta_content">
-                        <h3 class="title_40 text-white">{{ $blog->cta_content ?? '' }}</h3>
+                        <h3 class="title_40 text-white">{!! $blog->cta_content ?? '' !!}</h3>
                         <a href="{{ route('front.contactus') }}" class="btn_2 mt_35">Get In Touch</a>
                     </div>
                 </div>
