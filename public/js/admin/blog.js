@@ -193,6 +193,38 @@ function validateAndPreviewCTAImage() {
     return true;
 }
 
+function validateAndPreviewOGImage() {
+    const input = document.getElementById("og_image");
+    const file = input.files[0];
+    const previewImg = document.getElementById("preview_og_image");
+    const bannerId = document.getElementById("span_blogs_image_id")?.value;
+    // Check if file selected
+    if (bannerId && !file) {
+        return true; // allow update without new image
+    }
+    if (!file) {
+        previewImg.style.display = "none";
+        return false;
+    }
+
+    if (!file.type.startsWith("image/")) {
+        input.value = ""; // reset input
+        previewImg.style.display = "none";
+        return false;
+    }
+
+    // Show image preview
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        previewImg.src = e.target.result;
+        previewImg.style.display = "block";
+        
+    }
+    reader.readAsDataURL(file);
+    return true;
+}
+
+
 function updateStatus(status, blogId){
     $.ajax({
         url:  window.APP_URLS.updateStatus,
