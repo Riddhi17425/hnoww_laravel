@@ -9,13 +9,16 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use App\Models\{User, Category, Product, ProductInquiry, Newsletter, FaqType, ContactInquiry, RequestCatalogue, CorporateProposalRequest, Journal, Blessing, WeddingCatalogueRequest, GiftBlessing, SharedDetail, Ceremonial, CeremonialInquiry, GiftShop, CorporateKit, CorporateKitRequest, BespokeCommissionEnquiry};
+use App\Models\{User, Category, Product, ProductInquiry, Newsletter, FaqType, ContactInquiry, RequestCatalogue, CorporateProposalRequest, Journal, Blessing, WeddingCatalogueRequest, GiftBlessing, SharedDetail, Ceremonial, CeremonialInquiry, GiftShop, CorporateKit, CorporateKitRequest, BespokeCommissionEnquiry, Blog};
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Validation\Rule;
 
 use App\Services\ElevenLabsTextToSpeechService;
 use App\Services\PaymentService;
 use Stripe;
+use App\Services\YetiWhatsappMesasgeService;
+// use App\Models\Order;
 
 class FrontController extends Controller
 {
@@ -23,13 +26,16 @@ class FrontController extends Controller
     protected $adminWhatsappNo;
     protected $paymentService;
 
-    public function __construct(PaymentService $paymentService)
+    protected $yetiWhatsappMesasgeService;
+
+    public function __construct(PaymentService $paymentService, YetiWhatsappMesasgeService $yetiWhatsappMesasgeService)
     {
         $this->adminEmail = config('global_values.admin_email');
         $this->adminWhatsappNo = config('global_values.admin_whatsapp_no');
         $this->paymentService = $paymentService;
+        $this->yetiWhatsappMesasgeService = $yetiWhatsappMesasgeService;
     }
-
+ 
     public function blessingAudio(Blessing $blessing, ElevenLabsTextToSpeechService $textToSpeechService)
     {
         try {
@@ -74,6 +80,14 @@ class FrontController extends Controller
         // Mail::html('<b>Test 1</b>', function ($message) use ($adminEmail) {
         //     $message->to($adminEmail)->subject('TEST MAIL 1');
         // });
+        // die;
+        // $order = Order::where('id', 1)->with('user')->first();
+        // $order->whatsapp_no = '916354910945';
+        // $messageResponse = $this->yetiWhatsappMesasgeService->sendWhatsappNotification($order);
+        // if($messageResponse){
+        //     // Handle successful message sending
+        //     \Log::info('WhatsApp message sent successfully: '. json_encode($messageResponse));
+        // }
         // die;
 
         $selectFields = [
@@ -144,7 +158,7 @@ class FrontController extends Controller
                     $items = $response->json('data') ?? [];
                     // For VIDEO posts use thumbnail_url; for IMAGE/CAROUSEL use media_url
                     return array_map(function ($item) {
-                        $item['display_url'] = ($item['media_type'] === 'VIDEO')
+                        $item['display_url'] = (strtoupper($item['media_type']) === 'VIDEO')
                             ? ($item['thumbnail_url'] ?? '')
                             : ($item['media_url'] ?? '');
                         return $item;
@@ -167,7 +181,7 @@ class FrontController extends Controller
     }
 
     public function getProductDetails(Request $request, $productSlug){
-        $product = Product::select('id', 'category_id', 'product_name', 'product_price', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'large_description', 'dimensions', 'detail_page_imgs', 'moq', 'short_note', 'product_stock', 'care_maintenance', 'meta_title', 'meta_description')->where('product_url', $productSlug)->isActive()->notDeleted()->first();
+        $product = Product::select('id', 'category_id', 'product_name', 'product_url', 'product_price', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'large_description', 'dimensions', 'detail_page_imgs', 'moq', 'short_note', 'product_stock', 'care_maintenance', 'meta_title', 'meta_description', 'materials', 'weight')->where('product_url', $productSlug)->isActive()->notDeleted()->first();
         $productDetailImages = $product->detail_page_imgs ? json_decode($product->detail_page_imgs) : '';
         $productTab = $product->tabs ?? [];
         if(!isset($product) && $product == ''){
@@ -450,6 +464,70 @@ class FrontController extends Controller
         ]);
     }
 
+    public function storeNewsletterTempInquiry(Request $request){
+        //  try {
+            // Save to database
+            $newsletter = Newsletter::create([
+                'email' => $request->newsletter_email,
+            ]);
+
+            // SEND MAIL TO USER AND ADMIN
+            $adminEmail = $this->adminEmail;
+            $adminWhatsappNo = config('global_values.admin_whatsapp_no'); // admin whatsapp number
+            $data = [
+                'email'       => $newsletter->email,
+            ];
+            try {
+                Mail::send('email.admin.newsletter_subscription', $data, function ($message) use ($adminEmail) {
+                    $message->to($adminEmail)->subject('New Newsletter subscription');
+                });
+                Mail::send('email.front.newsletter_subscription', $data, function ($message) use ($newsletter) {
+                    $message->to($newsletter->email)->subject('Thank you for subscribing to our newsletter!');
+                });
+            } catch (Exception $e) {
+                Log::error('Newsletter subscriptionl sending failed: '.$e->getMessage());
+            }   
+
+            // STORE IN SHEET
+            try {
+                $timestamp = Carbon::now()->format('Y-m-d H:i:s');
+                $sheetsData = [
+                    'email'  => $request->newsletter_email,
+                    'date'      => $timestamp,
+                ];
+                $response = Http::withHeaders(['Content-Type' => 'application/json'])
+                    ->post('https://script.google.com/macros/s/AKfycbxH4I7n_9ZOkgc0eK1N4XC4Pbx5Bc0aC_8k0Cd3jqL5RVBtnnhjoLhWDMJxmRwpwEGy/exec', 
+                        $sheetsData
+                    );
+                if ($response->failed()) {
+                    \Log::error('Google Sheet request failed: '.$response->body());
+                }
+            } catch (\Exception $e) {
+                \Log::error('Google Sheets Exception (WhatsApp Inquiry):', [
+                    'message'   => $e->getMessage(),
+                    'trace'     => $e->getTraceAsString(),
+                    'data_sent' => $sheetsData
+                ]);
+            }
+
+            // WhatsApp link (user must click to open)
+            $waUrl = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode('New Newsletter subscription with Email Id - ' . $newsletter->email);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Subscription successful!',
+                'whatsappUrl' => $waUrl,
+            ]);
+
+        // } catch (\Exception $e) {
+        //     Log::error('Newsletter subscription failed: ' . $e->getMessage());
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => 'Something went wrong!'
+        //     ]);
+        // }
+    }
+
     public function storeNewsletterInquiry(Request $request){
         $validator = Validator::make($request->all(), [
             'newsletter_email' => 'required|email|unique:newsletters,email',
@@ -488,6 +566,27 @@ class FrontController extends Controller
                 Log::error('Newsletter subscriptionl sending failed: '.$e->getMessage());
             }
             
+            // STORE IN SHEET
+            try {
+                $timestamp = Carbon::now()->format('Y-m-d H:i:s');
+                $sheetsData = [
+                    'email'  => $request->newsletter_email,
+                    'date'      => $timestamp,
+                ];
+                $response = Http::withHeaders(['Content-Type' => 'application/json'])
+                    ->post('https://script.google.com/macros/s/AKfycbxH4I7n_9ZOkgc0eK1N4XC4Pbx5Bc0aC_8k0Cd3jqL5RVBtnnhjoLhWDMJxmRwpwEGy/exec', 
+                        $sheetsData
+                    );
+                if ($response->failed()) {
+                    \Log::error('Google Sheet request failed: '.$response->body());
+                }
+            } catch (\Exception $e) {
+                \Log::error('Google Sheets Exception (WhatsApp Inquiry):', [
+                    'message'   => $e->getMessage(),
+                    'trace'     => $e->getTraceAsString(),
+                    'data_sent' => $sheetsData
+                ]);
+            }
 
             // WhatsApp link (user must click to open)
             $waUrl = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode('New Newsletter subscription with Email Id - ' . $newsletter->email);
@@ -847,7 +946,7 @@ class FrontController extends Controller
             'message_data'           => $request->message ?? null,
         ];
 
-        //try {
+        try {
             Mail::send('email.admin.corporate_proposal_request', $data, function ($message) use ($adminEmail) {
                 $message->to($this->adminEmail)->subject('New Corporate Proposal Request Received');
             });
@@ -855,9 +954,9 @@ class FrontController extends Controller
             Mail::send('email.front.corporate_proposal_request', $data, function ($message) use ($userEmail) {
                 $message->to($userEmail)->subject('Corporate Proposal Request send Successfully');
             });
-        // } catch (Exception $e) {
-        //     Log::error('Inquiry Mail sending failed: '.$e->getMessage());
-        // }
+        } catch (Exception $e) {
+            Log::error('Inquiry Mail sending failed: '.$e->getMessage());
+        }
 
         // SEND WHATSAPP MESSAGE TO ADMIN
         //$message = 'New Corporate Proposal Request is placed using email - '.$request->email;
@@ -985,7 +1084,7 @@ class FrontController extends Controller
             'message_data'     => $request->cp_message ?? NULL,
         ];
  
-        //try {
+        try {
             Mail::send('email.admin.corporate_product_request', $data, function ($message) use ($adminEmail) {
                 $message->to($this->adminEmail)->subject('New Corporate Product Request Received');
             });
@@ -993,9 +1092,9 @@ class FrontController extends Controller
             Mail::send('email.front.corporate_product_request', $data, function ($message) use ($userEmail) {
                 $message->to($userEmail)->subject('Corporate Product Request send Successfully');
             });
-        // } catch (Exception $e) {
-        //     Log::error('Inquiry Mail sending failed: '.$e->getMessage());
-        // }
+        } catch (Exception $e) {
+            Log::error('Inquiry Mail sending failed: '.$e->getMessage());
+        }
  
         // SEND WHATSAPP MESSAGE TO ADMIN
         $message = 'New Corporate Product Request is placed using email - '.$request->cp_email;
@@ -1702,6 +1801,23 @@ class FrontController extends Controller
      public function getAbout(){
         return view('front.about');
     }
+
+    public function getBlogs(){
+        // $metaTitle="Our Blogs & Insights | Hnoww";
+        // $metaDescription="Explore our latest blogs & articles about the woven sack, FIBC industrial machines, HDPE/PP, jumbo bag-making machines, and many more.";
+        $blogs = Blog::orderBy('id','desc')->whereNull('deleted_at')->where('status', 0)->get();
+        return view('front.blogs',compact(/*'metaTitle','metaDescription',*/'blogs'));
+    }
+
+    public function getBlogDetails($url){
+        $blog = Blog::where('url', $url)->firstOrFail();
+        $meta_title = $blog->meta_title;
+        $meta_description = $blog->meta_description;
+        $blogs = Blog::where('status', 0)->where('id', '!=', $blog->id)->get();
+
+        return view('front.blog_details', compact('blog','blogs','meta_title','meta_description', 'blogs'));
+    }
+
 
     public function bespokeWeddingHampers(){
         return view('front.bespoke-wedding-hampers');

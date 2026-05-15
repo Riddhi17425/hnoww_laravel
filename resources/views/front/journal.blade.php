@@ -145,19 +145,19 @@ $monthMap = [
     @endphp
 
     @if($journalMonthNumber <= $currentMonthNumber) <div class="col-md-6" id="month-{{ $journalMonthNumber }}">
-        <div class="row gy-3 gy-md-0">
-            <div class="col-md-6">
+        <div class="row gy-3 gy-lg-0">
+            <div class="col-lg-6">
                 <div class="montheditions_lt">
                     <img class="img-fluid"
                         src="{{ asset('public/images/admin/journal/detail_images/'.$val->detail_img) }}">
 
-                    <a class="com_btn">
+                    <a class="com_btn"> 
                         <span class="ms-2">{{ $val->month_name }}</span>
                     </a>
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-lg-6">
                 <div class="montheditions_rt">
                     <h3 class="sub_head mb-md-3">{{ $val->title }}</h3>
                     @if(isset($val->feature_title))<p class="montheditions_para">Feature: {{$val->feature_title}}</p>
@@ -186,5 +186,29 @@ $monthMap = [
         </div>
         </div>
 </section>
+
+
+<script>
+    document.querySelectorAll(".read-more-btn").forEach((btn) => {
+    btn.addEventListener("click", function () {
+        const wrapper = this.previousElementSibling;
+
+        if (!wrapper.classList.contains("expanded")) {
+            // OPEN
+            wrapper.style.maxHeight = wrapper.scrollHeight + "px";
+            wrapper.classList.add("expanded");
+            this.textContent = "Read Less";
+        } else {
+            // CLOSE
+            wrapper.style.maxHeight = wrapper.scrollHeight + "px"; 
+            requestAnimationFrame(() => {
+                wrapper.style.maxHeight = "90px";
+            });
+            wrapper.classList.remove("expanded");
+            this.textContent = "Read More";
+        }
+    });
+});
+</script>
 
 @include('layouts.frontfooter')

@@ -10,25 +10,28 @@
         <p style="margin: 0 0 40px 0; font-family: Arial, sans-serif; font-size: 16px; color: #777777;">New order has been placed. The details are provided below:</p>
 
         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 40px;">
+            @if(isset($order_products) && is_countable($order_products) && count($order_products) > 0)
+            @foreach($order_products as $product)
             <tr>
                 <td width="120" valign="top">
-                    <img src="{{ asset('public/images/front/emails-card.png') }}" alt="The Gathering"
-                        width="120" style="display: block; max-width: 120px; border: 1px solid #eeeeee;">
+                    {{-- <img src="{{ asset('public/images/front/emails-card.png') }}" alt="The Gathering" width="120" style="display: block; max-width: 1200px; border: 1px solid #eeeeee;"> --}}
+                    <img src="{{ isset($product->product->list_page_img) ? asset('public/images/admin/product_list/'. rawurlencode($product->product->list_page_img)) : asset('public/images/no_image.png') }}" alt="{{ $product->prodcuct->product_name ?? ''}}" width="110" style="display: block; max-width: 110px; border: 1px solid #eeeeee;margin:3px">
                 </td>
                 <td valign="top" style="padding-left: 20px;">
                     <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                         <tr>
                             <td align="left"
-                                style="font-family: 'Times New Roman', Times, serif; font-size: 24px; color: #222222; font-weight: bold;">
-                                The Gathering</td>
+                                style="font-family: 'Times New Roman', Times, serif; font-size: 20px; color: #222222; font-weight: bold;">
+                                {{ $product->product->product_name ?? ''}}</td>
                             <td align="right"
                                 style="font-family: Arial, sans-serif; font-size: 18px; color: #a58855; font-weight: bold;">
-                                AED 750</td>
+                                AED {{ $product->price ?? ''}}</td>
                         </tr>
                     </table>
-                    <p style="margin: 10px 0 0 0; font-family: Arial, sans-serif; font-size: 15px; color: #777777;">A sculptural vessel for shared presence.</p>
                 </td>
             </tr>
+            @endforeach
+            @endif
         </table>
 
         <h2 style="margin: 0 0 20px 0; font-family: 'Times New Roman', Times, serif; font-size: 24px; color: #222222; font-weight: bold;">
@@ -67,7 +70,8 @@
                     Status</td>
                 <td
                     style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">
-                    {{ $status ?? '' }}</td>
+                    {{ $status ? ucfirst($status) : '' }}
+                </td>
             </tr>
             <tr>
                 <td

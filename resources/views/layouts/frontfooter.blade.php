@@ -7,12 +7,21 @@
                         <img src="{{ asset('public/images/front/footer-logo.svg') }}" alt="hnow"
                             class="img-fluid footer_logo">
                     </a>
+                    <p class="mt-3 mb-0">Architectural Objects & Luxury Gifting Studio Dubai.</p>
                 </div>
                 <div>
                     <div class="ft_top_right">
                         <div>
+                            @if(request()->routeIs('front.editions'))
+                            <h2>Be notified when the next Edition opens.</h2>
+                            @else
                             <h2>Join the Circle.</h2>
-                            <h4> A monthly reflection on design, ritual, and slow living</h4>
+                            @endif
+
+                            <!--<h4> A monthly reflection on design, ritual, and slow living</h4>-->
+                            <h4 class="mb-0"><b>Objects. Occasions. Intention.</b></h4>
+                            <p class="mb-0">A quiet note, sent occasionally. On what we're making, what we're thinking,
+                                and what's worth giving.</p>
                         </div>
                         <form id="newsletterForm" class="ft_newsletter" action="{{ route('front.newsletter.store') }}"
                             method="POST">
@@ -20,15 +29,14 @@
                             <div class="ft_input">
                                 <input class="w-100" type="email" name="newsletter_email" id="newsletter_email"
                                     placeholder="Enter your email address">
-                                <button type="submit" id="newsletterSubmitBtn">
-                                    <span class="btn-text">Submit</span>
+                                <button type="submit" class="bg-white text-nowrap" id="newsletterSubmitBtn">
+                                    <span class="btn-text">Join the list</span>
                                     <span class="btn-loader" style="display:none;">Submitting...</span>
                                 </button>
                             </div>
                             <div id="newsletter_error"></div>
+                            <div id="newsletterMessage" class="auto-hide" style="color: green; margin-top: 7px;"></div>
                         </form>
-                        <div id="newsletterMessage" class="auto-hide" style="color: green; margin-top: 7px;"></div>
-
                     </div>
                 </div>
             </div>
@@ -108,8 +116,9 @@
         </div>
         <div class="ft_bottom">
             <div class="ym_cpy">
-                All rights reserved. <a href="{{ route('front.home') }}">©HNOWW</a> <?php echo date("Y"); ?>. Designed
-                in Dubai.
+                All rights reserved. <a href="{{ route('front.home') }}">©HNOWW</a> <?php echo date("Y"); ?>. <span
+                    style="font-size: 11px;font-weight: 400;">Designed & Developed by <a
+                        href="https://www.intelliworkz.tech/" target="_blank"> Intelliworkz</a></span>
             </div>
 
             <div class="ft_privacy">
@@ -182,6 +191,10 @@
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <!-- Sweetalert popup -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js">
+</script>
+
 <script>
 AOS.init();
 </script>
@@ -274,10 +287,22 @@ $(document).ready(function() {
     });
 });
 
+// @if(session('whatsapp_url'))
+// window.open("{{ session('whatsapp_url') }}", "_blank");
+// @endif
+</script>
+
+<script>
 @if(session('whatsapp_url'))
-window.open("{{ session('whatsapp_url') }}", "_blank");
+window.location.href = "{{ session('whatsapp_url') }}";
 @endif
 </script>
+@if(session('whatsapp_url'))
+<noscript>
+    <a href="{{ session('whatsapp_url') }}">Click here if not redirected</a>
+</noscript>
+@endif
+
 @stack('script')
 
 
@@ -400,7 +425,45 @@ function setConsent(value) {
             location.reload();
         });
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const emailRegex = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i;
+
+    function processTextNode(node) {
+        if (emailRegex.test(node.nodeValue)) return;
+
+        const regex = /hnoww/gi;
+        let match;
+
+        while ((match = regex.exec(node.nodeValue)) !== null) {
+            const range = document.createRange();
+            range.setStart(node, match.index);
+            range.setEnd(node, match.index + match[0].length);
+
+            const span = document.createElement("span");
+            span.className = "hnoww-font";
+            span.innerHTML = `HN<span class="hnoww-o">O̱</span>WW`;
+
+            range.deleteContents();
+            range.insertNode(span);
+        }
+    }
+
+    function walk(node) {
+        if (node.nodeType === 3) {
+            processTextNode(node);
+        } else if (node.nodeType === 1) {
+            if (node.tagName !== "SCRIPT" && node.tagName !== "STYLE") {
+                Array.from(node.childNodes).forEach(walk);
+            }
+        }
+    }
+
+    walk(document.body);
+});
 </script>
+
+
 @endif
 
 </body>

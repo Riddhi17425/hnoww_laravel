@@ -119,6 +119,16 @@
                     </ul>
             </li>
 
+            <li class="{{ request()->routeIs('admin.blogs*') ? '' : 'collapsed' }}">
+                <a class="m-link {{ request()->routeIs('admin.blogs*') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#blogs" href="#">
+                    <i class="icofont-listing-box fs-5"></i> <span>Blogs</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
+                <!-- Menu: Sub menu ul -->
+                <ul class="sub-menu collapse {{ request()->routeIs('admin.blogs*') ? 'show' : '' }}" id="blogs">
+                    <li><a class="ms-link {{ request()->routeIs('admin.blogs.index') ? 'active' : '' }}" href="{{ route('admin.blogs.index') }}">Blog List</a></li>
+                    <li><a class="ms-link {{ request()->routeIs('admin.blogs.create') ? 'active' : '' }}" href="{{ route('admin.blogs.create') }}">Blog Add</a></li>
+                </ul>
+            </li>
+
         </ul>
 
         <!-- Menu: menu collepce btn -->

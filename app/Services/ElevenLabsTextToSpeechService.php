@@ -14,6 +14,7 @@ class ElevenLabsTextToSpeechService
     {
         $fallbackPath = $this->getFallbackAudioPath($blessing);
         $text = trim((string) ($blessing->audio_content ?: $blessing->description));
+        $outputFormat = (string) config('services.elevenlabs.output_format', 'mp3_44100_128');
 
         if ($text === '' || !$this->isConfigured()) {
             return $fallbackPath;
@@ -24,16 +25,16 @@ class ElevenLabsTextToSpeechService
             mkdir($targetDirectory, 0755, true);
         }
 
-        $fileHash = md5($blessing->id . '|' . $text . '|' . $this->voiceId() . '|' . $this->modelId());
+        $fileHash = md5($blessing->id . '|' . $text . '|' . $this->voiceId() . '|' . $this->modelId() . '|' . $outputFormat . '|' . json_encode($this->voiceSettings()));
         $targetPath = $targetDirectory . 'blessing_' . $blessing->id . '_' . $fileHash . '.mp3';
 
         if (file_exists($targetPath) && filesize($targetPath) > 0) {
             return $targetPath;
         }
 
-        $endpoint = rtrim((string) config('services.elevenlabs.base_url'), '/')
+        $endpoint = rtrim((string) config('services.elevenlabs.base_url', 'https://api.elevenlabs.io'), '/')
             . '/v1/text-to-speech/' . $this->voiceId()
-            . '?output_format=' . urlencode((string) config('services.elevenlabs.output_format', 'mp3_44100_128'));
+            . '?output_format=' . urlencode($outputFormat);
 
         $response = Http::timeout(60)
             ->withHeaders([
