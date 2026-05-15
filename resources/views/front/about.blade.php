@@ -222,7 +222,7 @@
                 <img src="{{ asset('public/images/front/hnoww-women.webp') }}" alt="" class="img-fluid">
             </div>
 
-            <div class="founder_text_2 d-none d-lg-block">
+            <div class="founder_text_2 d-none d-lg-flex">
                 <h2>
                     HNOWW
                 </h2>

@@ -198,7 +198,7 @@
 
         <div class="wedding_box_main">
             <div class="row">
-                <div class="col-md-3 mb-4">
+                <div class="col-md-6 col-lg-3 mb-4">
                     <div class="wedding_box">
                         <h3 class="wedding_box_head">01</h3>
                         <h5 class="sub_head mb-3">Discovery Call</h5>
@@ -209,7 +209,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-3 mb-4">
+                <div class="col-md-6 col-lg-3 mb-4">
                     <div class="wedding_box">
                         <h3 class="wedding_box_head">02</h3>
                         <h5 class="sub_head mb-3">Curated Proposal</h5>
@@ -221,7 +221,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-3 mb-4">
+                <div class="col-md-6 col-lg-3 mb-4">
                     <div class="wedding_box">
                         <h3 class="wedding_box_head">03</h3>
                         <h5 class="sub_head mb-3">Final Selection & Customization</h5>
@@ -232,7 +232,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-3 mb-4">
+                <div class="col-md-6 col-lg-3 mb-4">
                     <div class="wedding_box">
                         <h3 class="wedding_box_head">04</h3>
                         <h5 class="sub_head mb-3">Production & Delivery</h5>
@@ -281,7 +281,7 @@
                     data-bs-target="#requestWeddingCatalogue"> Book a Wedding Gifting Consultation</a>
             </div>
 
-            <p class="text-white mb-0"><i>HNoww Wedding Concierge — Ceremonial objects, sculptural heirlooms, and
+            <p class="text-white mb-0"><i>HNoww Wedding Concierge, Ceremonial objects, sculptural heirlooms, and
                     bespoke gifting for the modern union.</i></p>
         </div>
     </div>

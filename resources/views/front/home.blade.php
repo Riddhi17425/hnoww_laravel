@@ -2,12 +2,12 @@
 <!-- hero section -->
 <section class="hero-section">
     <!-- <img class="img-fluid" src="{{ asset('public/images/front/hero-banner.webp') }}" alt="images" loading="lazy"> -->
-    <video autoplay muted loop class="hero_video d-none d-lg-block">
+    <video autoplay muted loop class="hero_video d-none d-md-block">
         <source src="{{ asset('public/images/front/hero-video.webm') }}" type="video/webm">
         Your browser does not support the video tag.
     </video>
 
-    <video autoplay muted loop class="hero_video d-lg-none">
+    <video autoplay muted loop class="hero_video d-md-none">
         <source src="{{ asset('public/images/front/hero-video-mobaile.mp4') }}" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -15,11 +15,13 @@
     <div class="hero_content">
         <p class="mb-0 d-md-none">Designed in Dubai. Made to endure.</p>
         <!--<h1 class="main_head">Where meaning takes shape.</h1>-->
-        <h1 class="main_head">Where craft holds expressions </h1>
-        <p>Personalised gifts designed to turn the everyday into a feeling. Thoughtfully designed, customized gifts
-            shaped by intention and form.</p>
+        <h1 class="main_head">Objects Designed To Stay</h1>
+        <p>Curated objects for the desk, the home & the relationships that matter.</p>
         <!--<p>Objects crafted to turn the everyday into ceremony.</p>-->
-        <a href="{{ route('front.atelier') }}" class="com_btn border-0 bg-white d-lg-none">Explore The Works</a>
+        <div>
+             <a href="{{ route('front.atelier') }}" class="com_btn border-0 bg-white d-lg-none">Explore The Works</a>
+         <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white d-lg-none">Corporate Enquiries</a>
+        </div>
     </div>
 
     <div class="hero_left_right">
@@ -36,7 +38,10 @@
             </svg></span>
     </div>
 
-    <a href="{{ route('front.atelier') }}" class="com_btn border-0 bg-white d-none d-lg-block">Explore The Works</a>
+        <div class="d-none d-lg-block home_btn ">
+            <a href="{{ route('front.atelier') }}" class="com_btn border-0 bg-white ">Explore The Works</a>
+            <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white ms-3">Corporate Enquiries</a>
+       </div>
 
 
 </section>
@@ -549,14 +554,12 @@ alt="images" loading="lazy">
                 <img class="home_instagram" src="{{ asset('public/images/front/Instagram_logo_home.svg') }}" alt="images" class="mb-4" loading="lazy">
               
                 <div>
-                    <h4 class="sub_head_inter my-4">Capture The Moments:<br>Insta-Smile Highlights</h4>
+                    <h4 class="sub_head_inter my-4">The Collection, In Motion.</h4>
                     <p>
-                        Explore The Charm Of Real Smiles, Transformations,<br>
-                        And The Joy Of Our Community.<br>
-                        Your Journey To A Confident Smile Starts Here!
+                        Architectural Objects in context. <br/> Follow the work at @h.noww
                     </p>
                 </div>
-               <a href="https://www.instagram.com/h.noww" target="_blank" class="com_btn mt-2">Follow us on Instagram</a>
+               <a href="https://www.instagram.com/h.noww" target="_blank" class="com_btn mt-2">Follow on Instagram</a>
             </div>
             <div class="image-grid">
                 {{-- <img src="{{ asset('public/images/front/editions2.webp') }}" alt="Grid Image 1" class="grid-image">

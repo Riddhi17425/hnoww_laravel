@@ -199,7 +199,7 @@
                             <div class="form_check_item">
                                 <input type="checkbox" id="check_unsure" name="w_looking_for[]"
                                     value="Unsure — need guidance" class="custom_check_input">
-                                <label class="custom_check_label" for="check_unsure"> Unsure — need guidance</label>
+                                <label class="custom_check_label" for="check_unsure"> Unsure - need guidance</label>
                             </div>
                         </div>
 
