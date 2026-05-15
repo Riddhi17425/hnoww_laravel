@@ -10,7 +10,7 @@
         <h2 class="main_head">The Corporate Vault</h2>
         <p class="para my-3">Objects designed to remain.</p>
         <a href="#" class="com_btn bg-white border-0" data-bs-toggle="modal"
-            data-bs-target="#requestCorporateProposal">Request CORPORATE CATALOGUE</a>
+            data-bs-target="#requestCorporateProposal">Request for CORPORATE CATALOGUE</a>
     </div>
 </section>
 
@@ -140,12 +140,12 @@
 
 <section class="about">
     <div class="container">
-        <div class="magic_wrapper pt-0 pb-lg-4" style="">
-            <!--<h2 class="magic_head_phone">-->
-            <!--    Containment & Presentation-->
-            <!--</h2>-->
+        <div class="magic_wrapper">
+            <h2 class="magic_head_phone">
+                Containment & Presentation
+            </h2>
             <!-- 3️⃣ Left image (from left) -->
-            <div class="text-lg-end ">
+            <div class="text-end magic_wrapper_logo">
                 <img src="{{ asset('public/images/front/home_magic_left.svg') }}" loading="lazy" alt=""
                     class="img-fluid">
             </div>
@@ -158,9 +158,6 @@
 
             <!-- 4️⃣ Text block (from right) -->
             <div>
-                 <h2 class="magic_head_1 position-static d-block">
-                Containment
-            </h2>
                 <p>
                     Every piece in the Corporate Vault is presented in <b>signature velvet boxes,</b> designed for
                     permanence , not transit.
@@ -170,14 +167,14 @@
             </div>
 
             <!-- 1️⃣ First heading (from right) -->
-            <!--<h2 class="magic_head_1">-->
-            <!--    Containment &-->
-            <!--</h2>-->
+            <h2 class="magic_head_1">
+                Containment &
+            </h2>
 
             <!-- 5️⃣ Last heading (from right) -->
-            <!--<h2 class="magic_head_2">-->
-            <!--    Presentation-->
-            <!--</h2>-->
+            <h2 class="magic_head_2">
+                Presentation
+            </h2>
 
         </div>
     </div>
@@ -203,13 +200,13 @@
                 </span>
             </p>
             <h2 class="title_60">Corporate Kits</h2>
-            <p>Pre-designed ensembles for specific corporate milestones.</p>
+            <p>Pre-designed ensembles for specific corporate milestones. Ships in one master "Vault" box.</p>
         </div>
 
         <div class="cor_kits_slider">
             @foreach($corporateKits as $key => $val)
             <div class="cor_kts">
-                        <img  class="img-fluid d-none d-lg-block cor_kits_slider_img" src="{{ asset('public/images/admin/corporatekit/'.$val->image) }}" alt="">
+                        <img  class="img-fluid d-none d-lg-block" src="{{ asset('public/images/admin/corporatekit/'.$val->image) }}" alt="">
                         <img  class="img-fluid d-lg-none" src="{{ asset('public/images/admin/corporatekit/mobile_image/'.$val->mobile_image) }}" alt="">
 
                 <div class="cor_kits_cont">
@@ -226,9 +223,9 @@
                     </div>
 
                     {{-- <a href="#" class="com_btn border-white" data-bs-toggle="modal"
-                            data-bs-target="#requestCorporateProposal">Request CORPORATE CATALOGUE</a> --}}
+                            data-bs-target="#requestCorporateProposal">Request for CORPORATE CATALOGUE</a> --}}
                     <a href="#" class="com_btn border-white" data-bs-toggle="modal"
-                        data-bs-target="#requestCorporateKitProposal">Request CORPORATE CATALOGUE</a>
+                        data-bs-target="#requestCorporateKitProposal">Request for CORPORATE CATALOGUE</a>
                 </div>
             </div>
             @endforeach
