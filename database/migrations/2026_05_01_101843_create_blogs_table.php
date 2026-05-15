@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('front_image')->nullable();
             $table->string('detail_image')->nullable();
             $table->string('cta_image')->nullable();
+            $table->string('cta_content', 150)->nullable();
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
             $table->enum('status', ['Active', 'In-Active'])->default('Active');
