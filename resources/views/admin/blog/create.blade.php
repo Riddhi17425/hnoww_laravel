@@ -51,6 +51,15 @@
                               @enderror
                               <img id="preview_front_image" src="#" alt="Preview" class="mt-2" style="max-width: 100px; height: 100px; display: none;" />
                            </div>
+
+                           <div class="col-md-6">
+                              <label class="form-label">Front Image Alt Text <span class="text-danger">*</span></label>
+                              <input type="text" name="front_image_alt" class="form-control @error('front_image_alt') is-invalid @enderror" value="{{ old('front_image_alt') }}" placeholder="Enter Front Image Alt Text">
+                              @error('front_image_alt')
+                              <div class="invalid-feedback">{{ $message }}</div>
+                              @enderror
+                           </div>
+
                            {{-- Detail Image --}}
                            <div class="col-md-6 mb-3">
                               <label class="form-label">Banner Image <span class="text-danger">*</span></label>
@@ -59,6 +68,14 @@
                               <div class="invalid-feedback">{{ $message }}</div>
                               @enderror
                               <img id="preview_blogs_image" src="#" alt="Preview" class="mt-2" style="max-width: 100px; height: 100px; display: none;" />
+                           </div>
+
+                           <div class="col-md-6">
+                              <label class="form-label">Banner Image Alt Text <span class="text-danger">*</span></label>
+                              <input type="text" name="banner_image_alt" class="form-control @error('banner_image_alt') is-invalid @enderror" value="{{ old('banner_image_alt') }}" placeholder="Enter Banner Image Alt Text">
+                              @error('banner_image_alt')
+                              <div class="invalid-feedback">{{ $message }}</div>
+                              @enderror
                            </div>
                            {{-- Cta Image --}}
                            <div class="col-md-6 mb-3">
@@ -69,14 +86,42 @@
                               @enderror
                               <img id="preview_cta_image" src="#" alt="Preview" class="mt-2" style="max-width: 100px; height: 100px; display: none;" />
                            </div>
-                           <div class="col-md-3 mb-3">
+
+                           <div class="col-md-6">
+                              <label class="form-label">Cta Image Alt Text <span class="text-danger">*</span></label>
+                              <input type="text" name="cta_image_alt" class="form-control @error('cta_image_alt') is-invalid @enderror" value="{{ old('cta_image_alt') }}" placeholder="Enter Cta Image Alt Text">
+                              @error('cta_image_alt')
+                              <div class="invalid-feedback">{{ $message }}</div>
+                              @enderror
+                           </div>
+
+                           
+
+                           <div class="col-md-6 mb-3">
+                              <label class="form-label">OG Image </label>
+                              <input type="file" name="og_image" id="og_image" class="form-control @error('og_image') is-invalid @enderror" onchange="validateAndPreviewOGImage()">
+                              @error('og_image')
+                              <div class="invalid-feedback">{{ $message }}</div>
+                              @enderror
+                              <img id="preview_og_image" src="#" alt="Preview" class="mt-2" style="max-width: 100px; height: 100px; display: none;" />
+                           </div>
+
+                           <div class="col-md-6">
+                              <label class="form-label">OG Image Alt Text <span class="text-danger">*</span></label>
+                              <input type="text" name="og_image_alt" class="form-control @error('og_image_alt') is-invalid @enderror" value="{{ old('og_image_alt') }}" placeholder="Enter OG Image Alt Text">
+                              @error('og_image_alt')
+                              <div class="invalid-feedback">{{ $message }}</div>
+                              @enderror
+                           </div>
+                           
+                           <div class="col-md-6 mb-3">
                               <label for="date" class="form-label">Date <span class="text-danger">*</span></label>
                               <input type="date" id="date" name="date"class="form-control @error('date') is-invalid @enderror" value="{{ old('date') }}">
                               @error('date')
                               <div class="invalid-feedback">{{ $message }}</div>
                               @enderror
                            </div>
-                           <div class="col-md-3 mb-3">
+                           <div class="col-md-6 mb-3">
                               <label class="form-label">Status <span class="text-danger">*</span></label>
                               <select name="status" class="form-control @error('status') is-invalid @enderror">
                                  <option value="Active" {{ old('status') == 0 ? 'selected' : '' }}>Active</option>
@@ -86,6 +131,7 @@
                               <div class="invalid-feedback">{{ $message }}</div>
                               @enderror
                            </div>
+
                            <div class="col-md-12 mb-3">
                               <label class="form-label">CTA Content </label>
                               <textarea name="cta_content" id="cta_content"
@@ -131,6 +177,12 @@
                               <label for="meta_description" class="form-label">Meta Description</label>
                               <textarea id="meta_description" name="meta_description" class="form-control"></textarea>
                            </div>
+
+                           <div class="col-md-12 mt-3">
+                              <label for="blogs_schema" class="form-label">Blogs Schema</label>
+                              <textarea id="blogs_schema" name="blogs_schema" class="form-control"></textarea>
+                           </div>
+
                            <div class="card mb-4 border">
                               <div class="card-header bg-light d-flex justify-content-between align-items-center">
                                  <strong>FAQ Title & Description</strong>
@@ -220,6 +272,37 @@
        });
        $('#meta_description').summernote({
            placeholder: 'Enter Meta Description here...',
+           height: 300,
+           toolbar: [
+               ['style', ['style']],
+               ['font', ['bold', 'italic', 'underline', 'clear']],
+               ['fontname', ['fontname']],
+               ['color', ['color']],
+               ['para', ['ul', 'ol', 'paragraph']],
+               ['height', ['height']],
+               ['insert', ['link', 'picture', 'hr']],
+               ['view', ['fullscreen', 'codeview']],
+               ['help', ['help']]
+           ]
+       });
+       $('#cta_content').summernote({
+           placeholder: 'Enter CTA Content here...',
+           height: 300,
+           toolbar: [
+               ['style', ['style']],
+               ['font', ['bold', 'italic', 'underline', 'clear']],
+               ['fontname', ['fontname']],
+               ['color', ['color']],
+               ['para', ['ul', 'ol', 'paragraph']],
+               ['height', ['height']],
+               ['insert', ['link', 'picture', 'hr']],
+               ['view', ['fullscreen', 'codeview']],
+               ['help', ['help']]
+           ]
+       });
+
+       $('#blogs_schema').summernote({
+           placeholder: 'Enter Blogs Schema here...',
            height: 300,
            toolbar: [
                ['style', ['style']],
