@@ -95,7 +95,13 @@
                               @enderror
                            </div>
 
-                           
+                           <div class="col-md-12 mb-3">
+                              <label class="form-label">CTA Link URL </label>
+                              <input type="text" id="cta_link" name="cta_link" class="form-control" value="{{ old('cta_link') }}"  placeholder="Enter CTA Link URL">
+                              @error('cta_link')
+                              <div class="invalid-feedback">{{ $message }}</div>
+                              @enderror
+                           </div>
 
                            <div class="col-md-6 mb-3">
                               <label class="form-label">OG Image </label>
@@ -128,16 +134,6 @@
                                  <option value="In-Active" {{ old('status') == 1 ? 'selected' : '' }}>Inactive</option>
                               </select>
                               @error('status')
-                              <div class="invalid-feedback">{{ $message }}</div>
-                              @enderror
-                           </div>
-
-                           <div class="col-md-12 mb-3">
-                              <label class="form-label">CTA Content </label>
-                              <textarea name="cta_content" id="cta_content"
-                                 class="form-control @error('cta_content') is-invalid @enderror"
-                                 value="{{ old('cta_content') }}" placeholder="Enter CTA content">{{ old('cta_content') }}</textarea>
-                              @error('cta_content')
                               <div class="invalid-feedback">{{ $message }}</div>
                               @enderror
                            </div>
@@ -225,68 +221,8 @@
 <script src="{{ asset('public/js/admin/blog.js') }}" defer></script>
 <script>
    $(document).ready(function () {
-       $('#detail_description').summernote({
+       $('#detail_description,#short_description,#conclusion,#meta_description,#blogs_schema').summernote({
            placeholder: 'Enter Description here...',
-           height: 300,
-           toolbar: [
-               ['style', ['style']],
-               ['font', ['bold', 'italic', 'underline', 'clear']],
-               ['fontname', ['fontname']],
-               ['color', ['color']],
-               ['para', ['ul', 'ol', 'paragraph']],
-               ['height', ['height']],
-               ['insert', ['link', 'picture', 'hr']],
-               ['view', ['fullscreen', 'codeview']],
-               ['help', ['help']]
-           ]
-       });
-       $('#short_description').summernote({
-           placeholder: 'Enter Description here...',
-           height: 300,
-           toolbar: [
-               ['style', ['style']],
-               ['font', ['bold', 'italic', 'underline', 'clear']],
-               ['fontname', ['fontname']],
-               ['color', ['color']],
-               ['para', ['ul', 'ol', 'paragraph']],
-               ['height', ['height']],
-               ['insert', ['link', 'picture', 'hr']],
-               ['view', ['fullscreen', 'codeview']],
-               ['help', ['help']]
-           ]
-       });
-       $('#conclusion').summernote({
-           placeholder: 'Enter Conclusion here...',
-           height: 300,
-           toolbar: [
-               ['style', ['style']],
-               ['font', ['bold', 'italic', 'underline', 'clear']],
-               ['fontname', ['fontname']],
-               ['color', ['color']],
-               ['para', ['ul', 'ol', 'paragraph']],
-               ['height', ['height']],
-               ['insert', ['link', 'picture', 'hr']],
-               ['view', ['fullscreen', 'codeview']],
-               ['help', ['help']]
-           ]
-       });
-       $('#meta_description').summernote({
-           placeholder: 'Enter Meta Description here...',
-           height: 300,
-           toolbar: [
-               ['style', ['style']],
-               ['font', ['bold', 'italic', 'underline', 'clear']],
-               ['fontname', ['fontname']],
-               ['color', ['color']],
-               ['para', ['ul', 'ol', 'paragraph']],
-               ['height', ['height']],
-               ['insert', ['link', 'picture', 'hr']],
-               ['view', ['fullscreen', 'codeview']],
-               ['help', ['help']]
-           ]
-       });
-       $('#cta_content').summernote({
-           placeholder: 'Enter CTA Content here...',
            height: 300,
            toolbar: [
                ['style', ['style']],
@@ -301,21 +237,6 @@
            ]
        });
 
-       $('#blogs_schema').summernote({
-           placeholder: 'Enter Blogs Schema here...',
-           height: 300,
-           toolbar: [
-               ['style', ['style']],
-               ['font', ['bold', 'italic', 'underline', 'clear']],
-               ['fontname', ['fontname']],
-               ['color', ['color']],
-               ['para', ['ul', 'ol', 'paragraph']],
-               ['height', ['height']],
-               ['insert', ['link', 'picture', 'hr']],
-               ['view', ['fullscreen', 'codeview']],
-               ['help', ['help']]
-           ]
-       });
    });
 </script>
 <script>

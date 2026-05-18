@@ -202,6 +202,14 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
+                                    {{-- CTA Link URL --}}
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-label">CTA Link URL</label>
+                                        <input type="text" id="cta_link" name="cta_link" class="form-control" value="{{ old('cta_link', $blog->cta_link) }}"  placeholder="Enter CTA Link URL">
+                                        @error('cta_link')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
 
                                     {{-- OG Image --}}
                                     <div class="col-md-6 mb-3">
@@ -277,19 +285,6 @@
                                         </select>
 
                                         @error('status')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    {{-- CTA Content --}}
-                                    <div class="col-md-12 mb-3">
-                                        <label class="form-label">CTA Content</label>
-
-                                        <textarea name="cta_content"
-                                            id="cta_content"
-                                            class="form-control">{{ old('cta_content', $blog->cta_content) }}</textarea>
-
-                                        @error('cta_content')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -505,11 +500,6 @@
 
         $('#meta_description').summernote({
             placeholder: 'Enter Meta Description here...',
-            height: 300,
-        });
-
-        $('#cta_content').summernote({
-            placeholder: 'Enter CTA Content here...',
             height: 300,
         });
 
