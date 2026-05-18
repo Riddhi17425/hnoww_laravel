@@ -44,6 +44,7 @@
     <div class="container">
         <div class="section_header">
             <h2 class="title_60">{{$blog->title ?? ''}}</h2>
+            <p>Published May 07, 2026</p>
         </div>
 
         <div class="mb_35">
