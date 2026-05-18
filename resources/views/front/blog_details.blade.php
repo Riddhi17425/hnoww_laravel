@@ -43,12 +43,12 @@
 <section class="mt_120 mb_120">
     <div class="container">
         <div class="section_header">
-            <h2 class="title_60">{{$blog->title ?? ''}}</h2>
-            <p>Published May 07, 2026</p>
+            <h1 class="title_60">{{$blog->title ?? ''}}</h1>
+            <p>Published {{ $blog->date ? \Carbon\Carbon::parse($blog->date)->format('F d, Y') : '' }}</p>
         </div>
 
         <div class="mb_35">
-            <img class="img-fluid dasddsd" src="{{ asset('/' . $blog->detail_image) }}"
+            <img class="img-fluid" src="{{ asset('/' . $blog->detail_image) }}"
                 alt="{{ $blog->detail_image_alt ?? '' }}">
         </div>
 
@@ -57,17 +57,16 @@
 
             <div class="mb_35">
                 <div class="articles_cta">
-                    <img src="{{ asset('/' . $blog->cta_image) }}" alt="{{ $blog->cta_image_alt ?? '' }} "
-                        class="img-fluid">
+                    <a href="{{$blog->cta_link ?? '#'}}" target="_blank"><img src="{{ asset('/' . $blog->cta_image) }}" alt="{{$blog->cta_image_alt ?? ''}}"
+                        class="img-fluid" alt="{{ $blog->cta_image_alt ?? '' }} "></a>
                     <div class="articles_cta_content">
-                        <h3 class="title_40 text-white">{!! $blog->cta_content ?? '' !!}</h3>
-                        <a href="{{ route('front.contactus') }}" class="btn_2 mt_35">Get In Touch</a>
+                        {{--<h3 class="text-white">{!! $blog->cta_content ?? '' !!}</h3>
+                         <a href="{{ route('front.contactus') }}" class="btn_2 mt_35">Get In Touch</a> --}}
                     </div>
                 </div>
             </div>
 
             <div class="mb_35">
-                <h3 class="title_40 mb-3">Conclusion</h3>
                 {!! $blog->conclusion !!}
             </div>
 
@@ -160,21 +159,38 @@
 
             @if (isset($blog->blog_faq) && is_countable($blog->blog_faq) && count($blog->blog_faq) > 0)
             <div>
-                <h2 class="title_60 mb-4" style="color: #c7b58c;">FAQs</h2>
+                <h2 class="title_60 mb-4 text-center"  style="color: #c7b58c;">FAQs</h2>
+            
                 <div class="faq_cont">
                     <div class="accordion" id="staticFaqAccordion">
+            
                         @foreach ($blog->blog_faq as $index => $faq)
+            
                             <div class="faq_cont_acco border-bottom">
-                                <h3 class="according_head sub_head" data-bs-toggle="collapse" data-bs-target="#faq-1" aria-expanded="true">
-                                    {{ $faq['faq_title'] }}
+            
+                                <h3
+                                    class="according_head sub_head"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#faq-{{ $index }}"
+                                    aria-expanded="{{ $index === 0 ? 'true' : 'false' }}"
+                                >
+                                    {{ $faq['faq_title'] ?? '' }}
                                 </h3>
-                                <div id="faq-{{ $index }}" class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}" data-bs-parent="#staticFaqAccordion">
+            
+                                <div
+                                    id="faq-{{ $index }}"
+                                    class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}"
+                                    data-bs-parent="#staticFaqAccordion"
+                                >
                                     <div class="accordion-body">
-                                        {!! $faq['faq_description'] !!}
+                                        {!! $faq['faq_description'] ?? '' !!}
                                     </div>
                                 </div>
+            
                             </div>
-                        @endforeach  
+            
+                        @endforeach
+            
                     </div>
                 </div>
             </div>
