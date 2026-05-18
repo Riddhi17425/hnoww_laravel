@@ -633,15 +633,49 @@ async function createPaymentIntent(amount) {
     return data.client_secret;
 }
 
+// riddhi code comment 
+// async function mountPaymentElement(clientSecret) {
+//     if (elements) {
+//         elements.unmount(); // Clean up previous Elements if any
+//     }
+//     elements = stripe.elements({
+//         clientSecret
+//     });
+
+//     //paymentElement = elements.create('payment');
+//     paymentElement = elements.create('payment', {
+//         layout: {
+//             type: 'tabs'
+//         },
+//         fields: {
+//             billingDetails: {
+//                 address: {
+//                     country: 'never' // ✅ Hides country dropdown
+//                 }
+//             }
+//         },
+//         defaultValues: {
+//             billingDetails: {
+//                 address: {
+//                     country: 'AE' // ✅ Force UAE (Dubai)
+//                 }
+//             }
+//         }
+//     });
+
+//     paymentElement.mount('#card-element');
+// }
+
 async function mountPaymentElement(clientSecret) {
+
     if (elements) {
-        elements.unmount(); // Clean up previous Elements if any
+        $('#card-element').html('');
     }
+
     elements = stripe.elements({
         clientSecret
     });
 
-    //paymentElement = elements.create('payment');
     paymentElement = elements.create('payment', {
         layout: {
             type: 'tabs'
@@ -649,20 +683,49 @@ async function mountPaymentElement(clientSecret) {
         fields: {
             billingDetails: {
                 address: {
-                    country: 'never' // ✅ Hides country dropdown
+                    country: 'never'
                 }
             }
         },
         defaultValues: {
             billingDetails: {
                 address: {
-                    country: 'AE' // ✅ Force UAE (Dubai)
+                    country: 'AE'
                 }
             }
         }
     });
 
     paymentElement.mount('#card-element');
+
+    // DISABLE INITIALLY
+    $('#payBtn').prop('disabled', true);
+
+    // STRIPE VALIDATION
+    paymentElement.on('change', function(event) {
+
+        // CLEAR ERROR
+        $('#error-message').text('');
+
+        // IF ERROR
+        if (event.error) {
+
+            $('#error-message').text(event.error.message);
+
+            // KEEP DISABLED
+            $('#payBtn').prop('disabled', true);
+
+            return;
+        }
+
+        // ENABLE ONLY WHEN COMPLETE
+        if (event.complete) {
+            $('#payBtn').prop('disabled', false);
+        } else {
+            $('#payBtn').prop('disabled', true);
+        }
+
+    });
 }
 
 $(document).ready(async function() {
@@ -678,22 +741,44 @@ $(document).ready(async function() {
         });
     }
 
+    // RIDDHI CODE 
+    // function setCheckoutWhatsappValue() {
+    //     // if (!checkoutWhatsappInput || !checkoutWhatsappIti) {
+    //     //     return;
+    //     // }
+    //     const countryData = checkoutWhatsappIti.getSelectedCountryData();
+    //     const rawNumber = checkoutWhatsappInput.value.replace(/\D/g, "");
+    //     // checkoutWhatsappCountry.value = countryData.name || "";
+    //     // checkoutWhatsappInput.value = rawNumber ? `${countryData.dialCode}${rawNumber}` : "";
+    //     //Remove already-added dial code (prevents duplication like 919191...)
+    //     const dialCode = countryData.dialCode;
+    //     if (rawNumber.startsWith(dialCode)) {
+    //         rawNumber = rawNumber.slice(dialCode.length);
+    //     }
+    //     checkoutWhatsappCountry.value = countryData.name || "";
+    //     //Ensure we only prepend dial code once
+    //     checkoutWhatsappInput.value = rawNumber ? `${dialCode}${rawNumber}` : "";
+    // }
+
     function setCheckoutWhatsappValue() {
-        // if (!checkoutWhatsappInput || !checkoutWhatsappIti) {
-        //     return;
-        // }
+
         const countryData = checkoutWhatsappIti.getSelectedCountryData();
-        const rawNumber = checkoutWhatsappInput.value.replace(/\D/g, "");
-        // checkoutWhatsappCountry.value = countryData.name || "";
-        // checkoutWhatsappInput.value = rawNumber ? `${countryData.dialCode}${rawNumber}` : "";
-        //Remove already-added dial code (prevents duplication like 919191...)
+
+        let rawNumber = checkoutWhatsappInput.value.replace(/\D/g, "");
+
         const dialCode = countryData.dialCode;
+
+        // Remove duplicate dial code
         if (rawNumber.startsWith(dialCode)) {
             rawNumber = rawNumber.slice(dialCode.length);
         }
+
         checkoutWhatsappCountry.value = countryData.name || "";
-        //Ensure we only prepend dial code once
-        checkoutWhatsappInput.value = rawNumber ? `${dialCode}${rawNumber}` : "";
+
+        // Add dial code once only
+        checkoutWhatsappInput.value = rawNumber
+            ? `${dialCode}${rawNumber}`
+            : "";
     }
 
     // Check on page load
@@ -807,6 +892,11 @@ $(document).ready(async function() {
         // if (!$("#productInquiryForm").valid()) {
         //     return;
         // }
+        var cardErrors = document.querySelector('#error-message');
+        if (cardErrors && cardErrors.textContent.trim() !== '') {
+            setPayLoading(false);
+            return;
+        }
         setPayLoading(true); // ✅ START LOADING
 
         const selectedAddress = $('input[name="selected_address"]:checked').val();
@@ -869,7 +959,7 @@ $(document).ready(async function() {
             },
         });
         if (error) {
-            $('#error-message').text(error.message);
+            $('#error-message').text(error.message + ' Please try again.');
             setPayLoading(false);
         }
     });
