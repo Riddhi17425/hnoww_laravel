@@ -1,5 +1,6 @@
 @include('layouts.frontheader', [
-    'og_image' => asset($blog->og_image)
+    'og_image' => asset($blog->og_image),
+    'blog_schema' => $blog->blog_schema ?? ''
 ])
  @if (isset($blog->blog_faq) && is_countable($blog->blog_faq) && count($blog->blog_faq) > 0)
     @php

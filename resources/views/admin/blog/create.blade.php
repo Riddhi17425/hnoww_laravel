@@ -174,9 +174,9 @@
                               <textarea id="meta_description" name="meta_description" class="form-control"></textarea>
                            </div>
 
-                           <div class="col-md-12 mt-3">
+                           <div class="col-md-12 mt-3 mb-3">
                               <label for="blogs_schema" class="form-label">Blogs Schema</label>
-                              <textarea id="blogs_schema" name="blogs_schema" class="form-control"></textarea>
+                              <textarea id="blogs_schema" rows="5" name="blogs_schema" class="form-control"></textarea>
                            </div>
 
                            <div class="card mb-4 border">
@@ -221,7 +221,7 @@
 <script src="{{ asset('public/js/admin/blog.js') }}" defer></script>
 <script>
    $(document).ready(function () {
-       $('#detail_description,#short_description,#conclusion,#meta_description,#blogs_schema').summernote({
+       $('#detail_description,#short_description,#conclusion,#meta_description').summernote({
            placeholder: 'Enter Description here...',
            height: 300,
            toolbar: [
