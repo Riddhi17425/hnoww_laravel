@@ -325,6 +325,12 @@ $current_route ===
                     </a>
                 </li>
 
+                <li>
+                    <a href="{{ route('front.blogs') }}" data-text="Blogs">
+                        <span>Blogs</span>
+                    </a>
+                </li>
+
                 <!-- @auth
                     <li class="has-dropdown">
                         <a href="#" data-text="My Account">

@@ -36,8 +36,10 @@
                     <div class="col-md-4">
                         <div class="collection_box">
                             <a href="{{ route('front.blog.detail', ['url' => $blog->url]) }}"><img class="img-fluid mb-2 mb-md-4"
-                                    src="{{ asset('/' . $blog->front_image) }}" alt="{{ $blog->front_image_alt ?? '' }}" loading="lazy"></a>
-                            <h3 class="sub_head">{{ $blog->title ?? '' }}</h3>
+                                    src="{{ asset('/' . $blog->front_image) }}" alt="{{ $blog->front_image_alt ?? '' }}" loading="lazy">
+                            
+                                    <h3 class="sub_head">{{ $blog->title ?? '' }}</h3>
+                            </a>
                             <p class="line-clamp">{!! $blog->short_description ?? '' !!}</p>
                             <a href="{{ route('front.blog.detail', ['url' => $blog->url]) }}" class="com_btn">Explore</a>
                         </div>
