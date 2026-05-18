@@ -18,9 +18,23 @@ $current_route ===
     <meta name="description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}">
     <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
     <link rel="canonical" href="{{ url()->current() }}" />
+    
     <!--OG Tags-->
+    @php
+        $ogType = request()->is('blog/*') || request()->is('blogs') ? 'article' : 'website';
+    @endphp
+    <meta property="og:site_name" content="Hnoww">
+    <meta property="og:locale" content="en_AE">
     <meta property="og:title" content="{{ $meta_title ?? 'Architectural Objects & Home Accents | HNoww Dubai' }}" />
     <meta property="og:description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}" />
+    <meta property="og:image" content="{{$og_image ?? ''}}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="{{$ogType}}">
+    
+    <script type="application/ld+json">
+        {!! $blog_schema !!}
+    </script>
+
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -324,7 +338,7 @@ $current_route ===
                         <span>the atelier</span>
                     </a>
                 </li>
-
+                
                 <li>
                     <a href="{{ route('front.blogs') }}" data-text="Blogs">
                         <span>Blogs</span>

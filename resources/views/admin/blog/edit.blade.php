@@ -363,7 +363,7 @@
                                     <div class="col-md-12 mt-3">
                                         <label class="form-label">Blogs Schema</label>
 
-                                        <textarea id="blogs_schema"
+                                        <textarea id="blogs_schema" rows="5"
                                             name="blogs_schema"
                                             class="form-control">{{ old('blogs_schema', $blog->blog_schema) }}</textarea>
                                     </div>
@@ -500,11 +500,6 @@
 
         $('#meta_description').summernote({
             placeholder: 'Enter Meta Description here...',
-            height: 300,
-        });
-
-        $('#blogs_schema').summernote({
-            placeholder: 'Enter Blogs Schema here...',
             height: 300,
         });
 
