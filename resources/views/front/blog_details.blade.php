@@ -159,14 +159,14 @@
 
             @if (isset($blog->blog_faq) && is_countable($blog->blog_faq) && count($blog->blog_faq) > 0)
             <div>
-                <h2 class="title_60 mb-4">FAQs</h2>
+                <h2 class="title_60 mb-4" style="color: #c7b58c;">FAQs</h2>
                 <div class="faq_cont">
                     <div class="accordion" id="staticFaqAccordion">
                         @foreach ($blog->blog_faq as $index => $faq)
                             <div class="faq_cont_acco border-bottom">
-                                <h2 class="according_head sub_head" data-bs-toggle="collapse" data-bs-target="#faq-1" aria-expanded="true">
+                                <h3 class="according_head sub_head" data-bs-toggle="collapse" data-bs-target="#faq-1" aria-expanded="true">
                                     {{ $faq['faq_title'] }}
-                                </h2>
+                                </h3>
                                 <div id="faq-{{ $index }}" class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}" data-bs-parent="#staticFaqAccordion">
                                     <div class="accordion-body">
                                         {!! $faq['faq_description'] !!}
