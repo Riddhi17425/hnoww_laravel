@@ -18,24 +18,23 @@ $current_route ===
     <meta name="description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}">
     <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
     <link rel="canonical" href="{{ url()->current() }}" />
-    
-    <!--Twitter X Card Tags-->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ $meta_title ?? 'Architectural Objects & Home Accents | HNoww Dubai' }}">
-    <meta name="twitter:description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}">
-    <meta name="twitter:image" content="{{$og_image ?? ''}}">
 
     <!--OG Tags-->
     @php
         $ogType = request()->is('blog/*') || request()->is('blogs') ? 'article' : 'website';
     @endphp
     <meta property="og:site_name" content="Hnoww">
-    <meta property="og:locale" content="en_AE">
     <meta property="og:title" content="{{ $meta_title ?? 'Architectural Objects & Home Accents | HNoww Dubai' }}" />
     <meta property="og:description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}" />
     <meta property="og:image" content="{{$og_image ?? ''}}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="{{$ogType}}">
+    
+    <!--Twitter X Card Tags-->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $meta_title ?? 'Architectural Objects & Home Accents | HNoww Dubai' }}">
+    <meta name="twitter:description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}">
+    <meta name="twitter:image" content="{{$og_image ?? ''}}">
     
     @if(isset($blog_schema) && $blog_schema != '')
     <script type="application/ld+json">
