@@ -19,6 +19,12 @@ $current_route ===
     <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
     <link rel="canonical" href="{{ url()->current() }}" />
     
+    <!--Twitter X Card Tags-->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $meta_title ?? 'Architectural Objects & Home Accents | HNoww Dubai' }}">
+    <meta name="twitter:description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}">
+    <meta name="twitter:image" content="{{$og_image ?? ''}}">
+
     <!--OG Tags-->
     @php
         $ogType = request()->is('blog/*') || request()->is('blogs') ? 'article' : 'website';
@@ -31,10 +37,12 @@ $current_route ===
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="{{$ogType}}">
     
+    @if(isset($blog_schema) && $blog_schema != '')
     <script type="application/ld+json">
         {!! $blog_schema !!}
     </script>
-
+    @endif
+    
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
