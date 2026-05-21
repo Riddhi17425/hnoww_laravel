@@ -41,7 +41,7 @@
                                     <h3 class="sub_head">{{ $blog->title ?? '' }}</h3>
                             </a>
                             <p class="line-clamp">{!! $blog->short_description ?? '' !!}</p>
-                            <a href="{{ route('front.blog.detail', ['url' => $blog->url]) }}" class="com_btn">Explore</a>
+                            <a href="{{ route('front.blog.detail', ['url' => $blog->url]) }}" class="com_btn">Read More</a>
                         </div>
                     </div>
                 @endforeach
