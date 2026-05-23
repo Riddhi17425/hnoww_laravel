@@ -262,6 +262,9 @@
 
 
 <section class="mt_60 mb_120">
+    @php 
+        $discountPercent = config('global_values.discount_percent', 0);
+    @endphp
     <div class="container">
         <div class="section_header">
             <p class="sub_head mb-0">
@@ -356,7 +359,7 @@
                                             <div class="ct_input">
                                                 <label class="sub_head">Emirate <span
                                                         class="text-danger">*</span></label>
-                                                <input type="text" name="emirate" placeholder="Enter Emirate"
+                                                <input type="text" name="emirate" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s{2,}/g, ' ').trimStart();" placeholder="Enter Emirate"
                                                     value="{{ old('emirate') }}"
                                                     class="@error('emirate') is-invalid @enderror">
                                                 @error('emirate') <div class="invalid-feedback">{{ $message }}</div>
@@ -517,6 +520,10 @@
                         AED</span>
                 </div>
             </div>
+            <div class="summary-row">
+                <span class="label">Discount (FLAT 15% OFF)</span>
+                <span class="value text-muted" id="discounted-values"></span>
+            </div>
 
             <hr class="summary-divider">
 
@@ -600,6 +607,19 @@
 
 @push('script')
 <script>
+var $discountedTotal = parseFloat(@json($subTotal));
+
+$(document).ready(function () {
+   var subTotal = parseFloat(@json($subTotal));
+   var discountPercent = parseFloat(@json($discountPercent));
+   // $cartSubTotal = parseFloat($('#cart-subtotal-value').val());
+   $cartSubTotal =  $subTotal; // Assuming this value is set from the server-side
+   $discount = ($cartSubTotal * discountPercent) / 100; // Calculate discount based on global value
+   $discountedTotal = $cartSubTotal - $discount; // Calculate total after discount      
+    $('#discounted-values').text(`- AED ${$discount.toFixed(2)}`); // Display discount  
+    $('#you-pay').text(`AED ${$discountedTotal.toFixed(2)}`); // Display total after discount
+}); 
+
 function setPayLoading(state) {
     if (state) {
         $('#payBtn').prop('disabled', true);
@@ -880,8 +900,10 @@ $(document).ready(async function() {
     });
 
     // $('#payBtn').hide();
-    const amount = @json($subTotal);
+    const amount = $discountedTotal;
+        console.log('Discounted amount:', $discountedTotal);
     if (amount && amount > 0) {
+        console.log('Amount:', amount);
         clientSecret = await createPaymentIntent(amount);
         await mountPaymentElement(clientSecret);
         $('#error-message').text(''); // Clear errors
