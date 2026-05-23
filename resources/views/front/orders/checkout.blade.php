@@ -633,7 +633,7 @@ async function createPaymentIntent(amount) {
     return data.client_secret;
 }
 
-// riddhi code comment 
+// riddhi codes comment as per sir 
 // async function mountPaymentElement(clientSecret) {
 //     if (elements) {
 //         elements.unmount(); // Clean up previous Elements if any
@@ -741,7 +741,7 @@ $(document).ready(async function() {
         });
     }
 
-    // RIDDHI CODE 
+    // RIDDHI CODE
     // function setCheckoutWhatsappValue() {
     //     // if (!checkoutWhatsappInput || !checkoutWhatsappIti) {
     //     //     return;
@@ -759,22 +759,22 @@ $(document).ready(async function() {
     //     //Ensure we only prepend dial code once
     //     checkoutWhatsappInput.value = rawNumber ? `${dialCode}${rawNumber}` : "";
     // }
-
+    
     function setCheckoutWhatsappValue() {
 
         const countryData = checkoutWhatsappIti.getSelectedCountryData();
-
+    
         let rawNumber = checkoutWhatsappInput.value.replace(/\D/g, "");
-
+    
         const dialCode = countryData.dialCode;
-
+    
         // Remove duplicate dial code
         if (rawNumber.startsWith(dialCode)) {
             rawNumber = rawNumber.slice(dialCode.length);
         }
-
+    
         checkoutWhatsappCountry.value = countryData.name || "";
-
+    
         // Add dial code once only
         checkoutWhatsappInput.value = rawNumber
             ? `${dialCode}${rawNumber}`
@@ -892,11 +892,6 @@ $(document).ready(async function() {
         // if (!$("#productInquiryForm").valid()) {
         //     return;
         // }
-        var cardErrors = document.querySelector('#error-message');
-        if (cardErrors && cardErrors.textContent.trim() !== '') {
-            setPayLoading(false);
-            return;
-        }
         setPayLoading(true); // ✅ START LOADING
 
         const selectedAddress = $('input[name="selected_address"]:checked').val();
@@ -959,7 +954,7 @@ $(document).ready(async function() {
             },
         });
         if (error) {
-            $('#error-message').text(error.message + ' Please try again.');
+            $('#error-message').text(error.message);
             setPayLoading(false);
         }
     });

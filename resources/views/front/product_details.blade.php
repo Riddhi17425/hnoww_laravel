@@ -33,9 +33,9 @@
                                 $imagePath = public_path('images/admin/product_detail/' . $val);
                             @endphp
                             @if(isset($val) && $val != '' && file_exists($imagePath))
-                                <img src="{{ asset('public/images/admin/product_detail/'.$val)}}" alt="{{ $val }}">
+                                <img src="{{ asset('public/images/admin/product_detail/'.$val)}}" alt="Sample Product">
                             @else
-                                <img class="img-fluid" src="{{asset('public/noimg.jpg')}}" alt="{{ $val }}">
+                                <img class="img-fluid" src="{{asset('public/noimg.jpg')}}" alt="no image found">
                             @endif
                         </button>
                         @endforeach
@@ -52,10 +52,10 @@
                                 @endphp
                                 @if(isset($val) && $val != '' && file_exists($imagePath))
                                     <img class="zoom-image img-fluid" src="{{ asset('public/images/admin/product_detail/'.$val)}}"
-                                    alt="{{ $val }}">
+                                    alt="Product Detail Image">
                                     <div class="zoom-lens"></div>
                                 @else
-                                    <img class="img-fluid" src="{{asset('public/noimg.jpg')}}" alt="{{ $val }}">
+                                    <img class="img-fluid" src="{{asset('public/noimg.jpg')}}" alt="no image found">
                                     <div class="zoom-lens"></div>
                                 @endif
                                 {{-- <div class="zoom-lens"></div> --}}
