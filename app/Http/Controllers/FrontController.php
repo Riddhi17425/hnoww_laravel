@@ -169,7 +169,6 @@ class FrontController extends Controller
             }
             return [];
         });
-
         return view('front.home', compact('herProduct', 'himProduct', 'homeProduct', 'corporateProduct', 'weddingProduct', /*'allProd',*/ 'allGifts', 'desiredProductsArray', 'instagramPosts'));
     }
 

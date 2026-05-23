@@ -20,6 +20,9 @@
 }
 </style>
 <section class="mt_60 mb_120">
+    @php 
+        $discountPercent = config('global_values.discount_percent', 0);
+    @endphp
     <div class="container">
         <div class="section_header">
             <p class="sub_head mb-0">
@@ -160,12 +163,12 @@
                                     <span class="value" id="cart-subtotal">AED
                                         {{ number_format($subTotal ?? 0, 2) }}</span>
                                 </div>
-                                {{-- 
-                        <div class="summary-row">
-                           <span class="label">Shipping</span>
-                           <span class="value text-muted">Calculated at checkout</span>
-                        </div>
-                        --}}
+                                 
+                                <div class="summary-row">
+                                    <span class="label">Discount (FLAT 15% OFF)</span>
+                                    <span class="value text-muted" id="discounted-values"></span>
+                                </div>
+                       
                             </div>
                             <hr class="summary-divider">
                             <div class="summary-row total-row">
@@ -195,7 +198,19 @@
 </section>
 @push('script')
 <script src="{{ asset('public/js/front/cart.js') }} "></script>
+
 <script>
+$(document).ready(function () {
+    var subTotal = parseFloat(@json($subTotal));
+    var discountPercent = parseFloat(@json($discountPercent));
+   // $cartSubTotal = parseFloat($('#cart-subtotal-value').val());
+   $cartSubTotal =  $subTotal; // Assuming this value is set from the server-side
+   $discount = ($cartSubTotal * $discountPercent) / 100; // Calculate discount based on global value
+   $discountedTotal = $cartSubTotal - $discount; // Calculate total after discount      
+    $('#discounted-values').text(`- AED ${$discount.toFixed(2)}`); // Display discount  
+    $('#you-pay').text(`AED ${$discountedTotal.toFixed(2)}`); // Display total after discount
+}); 
+
 $(document).on('change', '.input-number', function() {
     clearTimeout(window.cartTimer);
     window.cartTimer = setTimeout(function() {
