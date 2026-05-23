@@ -1,0 +1,30 @@
+[13-May-2026 04:40:38 America/New_York] PHP Warning:  require_once(/home/hnowwcom/public_html/app/public/index.php): Failed to open stream: No such file or directory in /home/hnowwcom/public_html/app/index.php on line 21
+[13-May-2026 04:40:38 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/hnowwcom/public_html/app/public/index.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/hnowwcom/public_html/app/index.php:21
+Stack trace:
+#0 {main}
+  thrown in /home/hnowwcom/public_html/app/index.php on line 21
+[13-May-2026 04:41:00 America/New_York] PHP Warning:  require_once(/home/hnowwcom/public_html/app/public/index.php): Failed to open stream: No such file or directory in /home/hnowwcom/public_html/app/index.php on line 21
+[13-May-2026 04:41:00 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/hnowwcom/public_html/app/public/index.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/hnowwcom/public_html/app/index.php:21
+Stack trace:
+#0 {main}
+  thrown in /home/hnowwcom/public_html/app/index.php on line 21
+[21-May-2026 01:28:38 America/New_York] PHP Warning:  require_once(/home/hnowwcom/public_html/app/public/index.php): Failed to open stream: No such file or directory in /home/hnowwcom/public_html/app/index.php on line 21
+[21-May-2026 01:28:38 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/hnowwcom/public_html/app/public/index.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/hnowwcom/public_html/app/index.php:21
+Stack trace:
+#0 {main}
+  thrown in /home/hnowwcom/public_html/app/index.php on line 21
+[21-May-2026 19:21:36 America/New_York] PHP Warning:  require_once(/home/hnowwcom/public_html/app/public/index.php): Failed to open stream: No such file or directory in /home/hnowwcom/public_html/app/index.php on line 21
+[21-May-2026 19:21:36 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/hnowwcom/public_html/app/public/index.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/hnowwcom/public_html/app/index.php:21
+Stack trace:
+#0 {main}
+  thrown in /home/hnowwcom/public_html/app/index.php on line 21
+[21-May-2026 20:58:20 America/New_York] PHP Warning:  require_once(/home/hnowwcom/public_html/app/public/index.php): Failed to open stream: No such file or directory in /home/hnowwcom/public_html/app/index.php on line 21
+[21-May-2026 20:58:20 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/hnowwcom/public_html/app/public/index.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/hnowwcom/public_html/app/index.php:21
+Stack trace:
+#0 {main}
+  thrown in /home/hnowwcom/public_html/app/index.php on line 21
+[21-May-2026 20:59:46 America/New_York] PHP Warning:  require_once(/home/hnowwcom/public_html/app/public/index.php): Failed to open stream: No such file or directory in /home/hnowwcom/public_html/app/index.php on line 21
+[21-May-2026 20:59:46 America/New_York] PHP Fatal error:  Uncaught Error: Failed opening required '/home/hnowwcom/public_html/app/public/index.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/hnowwcom/public_html/app/index.php:21
+Stack trace:
+#0 {main}
+  thrown in /home/hnowwcom/public_html/app/index.php on line 21

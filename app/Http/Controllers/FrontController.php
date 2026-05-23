@@ -1814,7 +1814,6 @@ class FrontController extends Controller
         $meta_title = $blog->meta_title;
         $meta_description = $blog->meta_description;
         $blogs = Blog::where('status', 'Active')->where('id', '!=', $blog->id)->get();
-
         return view('front.blog_details', compact('blog','blogs','meta_title','meta_description', 'blogs'));
     }
 
