@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('order_number')->nullable();
             $table->string('status')->default('pending')->comment('pending', 'confirmed', 'canceled');
             $table->decimal('subtotal', 10, 2);   
+            $table->decimal('discount_percent', 10, 2);   
+            $table->decimal('discount', 10, 2);   
             $table->decimal('order_total', 10, 2);   
             $table->string('stripe_payment_intent')->nullable();   
             $table->string('stripe_payment_intent_client_secret')->nullable();    

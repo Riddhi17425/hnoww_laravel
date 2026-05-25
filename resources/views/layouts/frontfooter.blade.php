@@ -29,7 +29,7 @@
                             <div class="ft_input">
                                 <input class="w-100" type="email" name="newsletter_email" id="newsletter_email"
                                     placeholder="Enter your email address">
-                                <button type="submit" class="bg-white text-nowrap" id="newsletterSubmitBtn">
+                                <button type="submit" class="bg-white  text-nowrap" id="newsletterSubmitBtn">
                                     <span class="btn-text">Join the list</span>
                                     <span class="btn-loader" style="display:none;">Submitting...</span>
                                 </button>
@@ -108,6 +108,7 @@
                             {{-- <li><a href="#">Shipping & Returns</a></li>
                              <li><a href="#">Your Wishlist</a></li> --}}
                             <li><a href="{{ route('front.faqs') }}">FAQ's</a></li>
+                            <li><a href="{{ route('front.blogs') }}">Blogs</a></li>
                         </ul>
                     </div>
                 </div>

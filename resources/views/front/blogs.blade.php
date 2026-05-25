@@ -11,7 +11,7 @@
 </section>
 
 <section class="mt_120 mb_120">
-    <div class="container">
+    <div class="container"> 
         <div class="section_header">
             <p class="sub_head mb-0">
                 <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -36,10 +36,11 @@
                     <div class="col-md-4">
                         <div class="collection_box">
                             <a href="{{ route('front.blog.detail', ['url' => $blog->url]) }}"><img class="img-fluid mb-2 mb-md-4"
-                                    src="{{ asset('/' . $blog->front_image) }}" alt="images" loading="lazy"></a>
+                                    src="{{ asset('/' . $blog->front_image) }}" alt="{{ $blog->front_image_alt ?? '' }}" loading="lazy">
                             <h3 class="sub_head">{{ $blog->title ?? '' }}</h3>
-                            <p class="line-clamp">{{ $blog->short_description ?? '' }}</p>
-                            <a href="{{ route('front.blog.detail', ['url' => $blog->url]) }}" class="com_btn">Explore</a>
+                            </a>
+                            <p class="line-clamp">{!! $blog->short_description ?? '' !!}</p>
+                            <a href="{{ route('front.blog.detail', ['url' => $blog->url]) }}" class="com_btn">Read More</a>
                         </div>
                     </div>
                 @endforeach
