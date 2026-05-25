@@ -2026,4 +2026,13 @@
     .material_flex {
       display:  block ;
     }
+
+    .articles_details h2 {
+    font-size: 22px;
+    line-height: normal;
+    }
+    
+        .articles_details h3 {
+        font-size: 18px;
+    }
 }

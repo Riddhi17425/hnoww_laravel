@@ -1,8 +1,10 @@
 @include('layouts.frontheader')
 <!-- hero section -->
 <section class="hero-section">
-    <!-- <img class="img-fluid" src="{{ asset('public/images/front/hero-banner.webp') }}" alt="images" loading="lazy"> -->
-    <video autoplay muted loop class="hero_video d-none d-md-block">
+    <img class="img-fluid d-none d-md-block" src="{{ asset('public/images/front/banner_1.webp') }}" alt="images" loading="lazy">
+    <img class="img-fluid d-md-none" src="{{ asset('public/images/front/banner_1_mobile.webp') }}" alt="images" loading="lazy">
+    <!--<section class="hero-section">
+     <video autoplay muted loop class="hero_video d-none d-md-block">
         <source src="{{ asset('public/images/front/hero-video.webm') }}" type="video/webm">
         Your browser does not support the video tag.
     </video>
@@ -10,19 +12,17 @@
     <video autoplay muted loop class="hero_video d-md-none">
         <source src="{{ asset('public/images/front/hero-video-mobaile.mp4') }}" type="video/mp4">
         Your browser does not support the video tag.
-    </video>
+    </video> -->
 
-    <div class="hero_content">
+    <!-- <div class="hero_content">
         <p class="mb-0 d-md-none">Designed in Dubai. Made to endure.</p>
-        <!--<h1 class="main_head">Where meaning takes shape.</h1>-->
         <h1 class="main_head">Objects Designed To Stay</h1>
         <p>Curated objects for the desk, the home & the relationships that matter.</p>
-        <!--<p>Objects crafted to turn the everyday into ceremony.</p>-->
         <div>
              <a href="{{ route('front.atelier') }}" class="com_btn border-0 bg-white d-lg-none">Explore The Works</a>
          <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white d-lg-none">Corporate Enquiries</a>
         </div>
-    </div>
+    </div> -->
 
     <div class="hero_left_right">
         <span><svg xmlns="http://www.w3.org/2000/svg" width="63" height="6" viewBox="0 0 63 6" fill="none">
@@ -133,7 +133,7 @@
                 <div class="collection_box">
                     <div class="">
                         <a href="{{ route('front.list', 'for-her') }}"><img class="img-fluid mb-2 mb-md-4"
-                                src="{{ asset('public/images/front/collections1.webp') }}" alt="images"
+                                src="{{ asset('public/images/front/collections1.webp') }}" alt="collections1"
                                 loading="lazy"></a>
                     </div>
                     <h3 class="sub_head">For Her {{-- — {{$herProduct[0]->product_name ?? ''}} --}}</h3>
@@ -145,7 +145,7 @@
                 <div class="collection_box">
                     <div class="">
                         <a href="{{ route('front.list', 'for-him') }}"><img class="img-fluid mb-2 mb-md-4"
-                                src="{{ asset('public/images/front/collections2.webp') }}" alt="images"
+                                src="{{ asset('public/images/front/collections2.webp') }}" alt="collections2"
                                 loading="lazy"></a>
                     </div>
                     <h3 class="sub_head">For Him {{-- — {{$himProduct[0]->product_name ?? ''}} --}}</h3>
@@ -157,7 +157,7 @@
                 <div class="collection_box">
                     <div class="">
                         <a href="{{ route('front.list', 'for-home') }}"><img class="img-fluid mb-2 mb-md-4"
-                                src="{{ asset('public/images/front/collections3.webp') }}" alt="images"
+                                src="{{ asset('public/images/front/collections3.webp') }}" alt="collections3"
                                 loading="lazy"></a>
                     </div>
                     <h3 class="sub_head">For Home {{-- — {{$homeProduct[0]->product_name ?? ''}} --}}</h3>
@@ -171,41 +171,41 @@
     </div>
 </section>
 
-<section class="mt_80 home_gift_box">
-    <div class="container">
-        <div class="section_header">
-            <p class="sub_head mb-0">
-                <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z"
-                            fill="#fff" />
-                    </svg>
-                </span>
-                <span>The</span>
-                <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z"
-                            fill="#fff" />
-                    </svg>
-                </span>
-            </p>
-            <h2 class="title_60">Valet Tray</h2>
-        </div>
-        <div class="gift_box">
-            <!-- <div class="gift_box_lt">
-                <img class="img-fluid" src="{{asset('public/images/front/valet_tray_home.webp')}}" alt="images">
-            </div> -->
+<!--<section class="mt_80 home_gift_box">-->
+<!--    <div class="container">-->
+<!--        <div class="section_header">-->
+<!--            <p class="sub_head mb-0">-->
+<!--                <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--                        <path-->
+<!--                            d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z"-->
+<!--                            fill="#fff" />-->
+<!--                    </svg>-->
+<!--                </span>-->
+<!--                <span>The</span>-->
+<!--                <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--                        <path-->
+<!--                            d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z"-->
+<!--                            fill="#fff" />-->
+<!--                    </svg>-->
+<!--                </span>-->
+<!--            </p>-->
+<!--            <h2 class="title_60">Valet Tray</h2>-->
+<!--        </div>-->
+<!--        <div class="gift_box">-->
+<!--             <div class="gift_box_lt">-->
+<!--                <img class="img-fluid" src="{{asset('public/images/front/valet_tray_home.webp')}}" alt="images">-->
+<!--            </div> -->-->
 
-            <div class="gift_box_rt">
-                <h3 class="gift_head">Carved in natural marble for <br /> leadership desks</h3>
-                <h6 class="mt-3">LIMITED EDITION — 50</h6>
-                <p class="sub_head_inter">A sculptural object for the architect of industry. Minimal, grounded, and
-                    rare.</p>
-                <a href="{{ route('front.product.details', 'the-wireless-courtyard') }}" class="com_btn"> Explore The Architect's Study </a>
-            </div>
-        </div>
-    </div>
-</section>
+<!--            <div class="gift_box_rt">-->
+<!--                <h3 class="gift_head">Carved in natural marble for <br /> leadership desks</h3>-->
+<!--                <h6 class="mt-3">LIMITED EDITION — 50</h6>-->
+<!--                <p class="sub_head_inter">A sculptural object for the architect of industry. Minimal, grounded, and-->
+<!--                    rare.</p>-->
+<!--                <a href="{{ route('front.product.details', 'the-wireless-courtyard') }}" class="com_btn"> Explore The Architect's Study </a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
 
 <!-- about -->
 <section class="about mt_120">
@@ -216,13 +216,13 @@
             </h2>
             <!-- 3️⃣ Left image (from left) -->
             <div class="text-end magic_wrapper_logo">
-                <img src="{{ asset('public/images/front/home_magic_left.svg') }}" loading="lazy" alt=""
+                <img src="{{ asset('public/images/front/home_magic_left.svg') }}" loading="lazy" alt="Home Magic Left Image"
                     class="img-fluid">
             </div>
 
             <!-- 2️⃣ Center image (scale 0 → 1) -->
             <div class="magic_wrapper_center">
-                <img src="{{ asset('public/images/front/home_magic.webp') }}" loading="lazy" alt="" class="img-fluid">
+                <img src="{{ asset('public/images/front/home_magic.webp') }}" loading="lazy" alt="Home Magic Center Image" class="img-fluid">
                 <p class="magic_wrapper_p"> Ritual is the first luxury.</p>
             </div>
 
@@ -354,7 +354,7 @@
                 <div class="curated_rituals_box">
                     <div>
                         <img class="w-100 mb-4" src="{{ asset('public/images/front/rurated-rituals1.webp') }}"
-alt="images" loading="lazy">
+alt="Curated Rituals 1" loading="lazy">
 </div>
 <div class="box_bot">
     <div>
@@ -368,7 +368,7 @@ alt="images" loading="lazy">
 
 <div class="col-md-6">
     <div class="curated_rituals_box">
-        <img class="w-100 mb-4" src="{{ asset('public/images/front/rurated-rituals2.webp') }}" alt="images"
+        <img class="w-100 mb-4" src="{{ asset('public/images/front/rurated-rituals2.webp') }}" alt="Curated Rituals 2"
             loading="lazy">
         <div class="box_bot">
             <div>
@@ -382,7 +382,7 @@ alt="images" loading="lazy">
 
 <div class="col-md-6">
     <div class="curated_rituals_box">
-        <img class="w-100 mb-4" src="{{ asset('public/images/front/rurated-rituals3.webp') }}" alt="images"
+        <img class="w-100 mb-4" src="{{ asset('public/images/front/rurated-rituals3.webp') }}" alt="Curated Rituals 3"
             loading="lazy">
         <div class="box_bot">
             <div>
@@ -396,7 +396,7 @@ alt="images" loading="lazy">
 
 <div class="col-md-6">
     <div class="curated_rituals_box">
-        <img class="w-100 mb-4" src="{{ asset('public/images/front/rurated-rituals4.webp') }}" alt="images"
+        <img class="w-100 mb-4" src="{{ asset('public/images/front/rurated-rituals4.webp') }}" alt="Curated Rituals 4"
             loading="lazy">
         <div class="box_bot">
             <div>
@@ -437,7 +437,7 @@ alt="images" loading="lazy">
             <div class="col-md-6">
                 <div class="bespoke_box">
                     <div class="bespoke_box_top">
-                        <img class="img-fluid" src="{{ asset('public/images/front/bespoke1.webp') }}" alt="images"
+                        <img class="img-fluid" src="{{ asset('public/images/front/bespoke1.webp') }}" alt="Bespoke Service 1"
                             loading="lazy">
                         <p class="title_40">Weddings & Celebrations</p>
                     </div>
@@ -454,7 +454,7 @@ alt="images" loading="lazy">
                 <div class="bespoke_box">
 
                     <div class="bespoke_box_top_2">
-                        <img class="img-fluid" src="{{ asset('public/images/front/bespoke2.webp') }}" alt="images"
+                        <img class="img-fluid" src="{{ asset('public/images/front/bespoke2.webp') }}" alt="Bespoke Service 2"
                             loading="lazy">
                         <p class="title_40">Corporate Rituals</p>
                     </div>
@@ -498,7 +498,7 @@ alt="images" loading="lazy">
             <div class="col-md-4">
                 <div class="collection_box">
                     <a href="{{ route('front.blessings.library') }}"><img class="img-fluid mb-4"
-                            src="{{ asset('public/images/front/editions1.webp') }}" alt="images" loading="lazy"></a>
+                            src="{{ asset('public/images/front/editions1.webp') }}" alt="House Journal 1" loading="lazy"></a>
                     <h3 class="sub_head">The Blessing Library</h3>
                     <p style="height:40px;">Written blessings and words of intention for home, union, and self.</p>
                     <a href="{{ route('front.blessings.library') }}" class="com_btn">Explore </a>
@@ -507,7 +507,7 @@ alt="images" loading="lazy">
             <div class="col-md-4">
                 <div class="collection_box">
                     <a href="{{ route('front.journal') }}"><img class="img-fluid mb-4"
-                            src="{{ asset('public/images/front/editions2.webp') }}" alt="images" loading="lazy"></a>
+                            src="{{ asset('public/images/front/editions2.webp') }}" alt="House Journal 2" loading="lazy"></a>
                     <h3 class="sub_head">The Journal</h3>
                     <p style="height:40px;">Reflections on design, ritual, and contemporary living.</p>
                     <a href="{{ route('front.journal') }}" class="com_btn">Explore</a>
@@ -516,7 +516,7 @@ alt="images" loading="lazy">
             <div class="col-md-4">
                 <div class="collection_box">
                     <a href="{{ route('front.bespoke.commission') }}"><img class="img-fluid mb-4"
-                            src="{{ asset('public/images/front/editions3.webp') }}" alt="images" loading="lazy"></a>
+                            src="{{ asset('public/images/front/editions3.webp') }}" alt="House Journal 3" loading="lazy"></a>
                     <h3 class="sub_head">Bespoke Commissions</h3>
                     <p style="height:40px;">Collaborative creations shaped around personal rituals and intent.</p>
                     <a href="{{ route('front.bespoke.commission') }}" class="com_btn">Explore</a>
@@ -551,7 +551,7 @@ alt="images" loading="lazy">
         </div>
         <div class="layout-wrapper-Socials">
             <div class="left-card">
-                <img class="home_instagram" src="{{ asset('public/images/front/Instagram_logo_home.svg') }}" alt="images" class="mb-4" loading="lazy">
+                <img class="home_instagram" src="{{ asset('public/images/front/Instagram_logo_home.svg') }}" alt="Instagram Logo" class="mb-4" loading="lazy">
               
                 <div>
                     <h4 class="sub_head_inter my-4">The Collection, In Motion.</h4>

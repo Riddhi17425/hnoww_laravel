@@ -169,7 +169,6 @@ class FrontController extends Controller
             }
             return [];
         });
-
         return view('front.home', compact('herProduct', 'himProduct', 'homeProduct', 'corporateProduct', 'weddingProduct', /*'allProd',*/ 'allGifts', 'desiredProductsArray', 'instagramPosts'));
     }
 
@@ -1805,7 +1804,7 @@ class FrontController extends Controller
     public function getBlogs(){
         // $metaTitle="Our Blogs & Insights | Hnoww";
         // $metaDescription="Explore our latest blogs & articles about the woven sack, FIBC industrial machines, HDPE/PP, jumbo bag-making machines, and many more.";
-        $blogs = Blog::orderBy('id','desc')->whereNull('deleted_at')->where('status', 0)->get();
+        $blogs = Blog::orderBy('id','desc')->whereNull('deleted_at')->where('status', 'Active')->get();
         return view('front.blogs',compact(/*'metaTitle','metaDescription',*/'blogs'));
     }
 
@@ -1813,8 +1812,7 @@ class FrontController extends Controller
         $blog = Blog::where('url', $url)->firstOrFail();
         $meta_title = $blog->meta_title;
         $meta_description = $blog->meta_description;
-        $blogs = Blog::where('status', 0)->where('id', '!=', $blog->id)->get();
-
+        $blogs = Blog::where('status', 'Active')->where('id', '!=', $blog->id)->get();
         return view('front.blog_details', compact('blog','blogs','meta_title','meta_description', 'blogs'));
     }
 

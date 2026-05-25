@@ -15,12 +15,38 @@ $current_route ===
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('public/images/front/favicon.png') }}">
     <title>{{ $meta_title ?? 'Architectural Objects & Home Accents | HNoww Dubai' }}</title>
-    <meta name="description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}">
-    <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
+    <meta name="description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}"> 
+    @if(request()->is('gift-blessing') || request()->is('gift-shop') || request()->is('gift-details/*') || request()->is('front/auth/*') || request()->is('cart') || request()->is('forgot-password') || request()->is('privacy'))
+        <meta name="robots" content="nofollow, noindex"/>
+    @else
+        <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
+    @endif
+    
     <link rel="canonical" href="{{ url()->current() }}" />
+
     <!--OG Tags-->
+    @php
+        $ogType = request()->is('blog/*') || request()->is('blogs') ? 'article' : 'website';
+    @endphp
+    <meta property="og:site_name" content="Hnoww">
     <meta property="og:title" content="{{ $meta_title ?? 'Architectural Objects & Home Accents | HNoww Dubai' }}" />
     <meta property="og:description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}" />
+    <meta property="og:image" content="{{$og_image ?? ''}}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="{{$ogType}}">
+    
+    <!--Twitter X Card Tags-->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $meta_title ?? 'Architectural Objects & Home Accents | HNoww Dubai' }}">
+    <meta name="twitter:description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}">
+    <meta name="twitter:image" content="{{$og_image ?? ''}}">
+    
+    @if(isset($blog_schema) && $blog_schema != '')
+    <script type="application/ld+json">
+        {!! $blog_schema !!}
+    </script>
+    @endif
+    
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -322,6 +348,12 @@ $current_route ===
                 <li>
                     <a href="{{ route('front.atelier') }}" data-text="the atelier">
                         <span>the atelier</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="{{ route('front.blogs') }}" data-text="Blogs">
+                        <span>Blogs</span>
                     </a>
                 </li>
 
