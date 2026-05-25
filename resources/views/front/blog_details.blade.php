@@ -3,12 +3,8 @@
 @endphp
 
 @include('layouts.frontheader', [
-<<<<<<< HEAD
-    'og_image' => asset($blog->og_image)
-=======
     'og_image' => asset($blog->og_image),
     'blog_schema' => $blog->blog_schema ?? ''
->>>>>>> 280e8f3de3a650a0239293749ec08f0ad33449ba
 ])
 
 @if (isset($blog->blog_faq) && is_countable($blog->blog_faq) && count($blog->blog_faq) > 0)
@@ -55,10 +51,7 @@
     <div class="container">
         <div class="section_header">
             <h1 class="title_60">{{$blog->title ?? ''}}</h1>
-<<<<<<< HEAD
-=======
             <p>Published {{ $blog->date ? \Carbon\Carbon::parse($blog->date)->format('F d, Y') : '' }}</p>
->>>>>>> 280e8f3de3a650a0239293749ec08f0ad33449ba
         </div>
 
         <div class="mb_35">
@@ -71,28 +64,16 @@
 
             <div class="mb_35">
                 <div class="articles_cta">
-<<<<<<< HEAD
-                    <a href="{{ route('front.list', 'for-home') }}" target="_blank"><img src="{{ asset('/' . $blog->cta_image) }}" alt="cat image"
-                        class="img-fluid" alt="{{ $blog->cta_image_alt ?? '' }} "></a>
-                    <div class="articles_cta_content">
-                        <h3 class="title_40 text-white">{!! $blog->cta_content ?? '' !!}</h3>
-                        {{-- <a href="{{ route('front.contactus') }}" class="btn_2 mt_35">Get In Touch</a> --}}
-=======
                     <a href="{{$blog->cta_link ?? '#'}}" target="_blank"><img src="{{ asset('/' . $blog->cta_image) }}" alt="{{$blog->cta_image_alt ?? ''}}"
                         class="img-fluid" alt="{{ $blog->cta_image_alt ?? '' }} "></a>
                     <div class="articles_cta_content">
                         {{--<h3 class="text-white">{!! $blog->cta_content ?? '' !!}</h3>
                          <a href="{{ route('front.contactus') }}" class="btn_2 mt_35">Get In Touch</a> --}}
->>>>>>> 280e8f3de3a650a0239293749ec08f0ad33449ba
                     </div>
                 </div>
             </div>
 
             <div class="mb_35">
-<<<<<<< HEAD
-                {{-- <h3 class="title_40 mb-3">Conclusion</h3> --}}
-=======
->>>>>>> 280e8f3de3a650a0239293749ec08f0ad33449ba
                 {!! $blog->conclusion !!}
             </div>
 
@@ -184,35 +165,6 @@
             </div> --}}
 
             @if (isset($blog->blog_faq) && is_countable($blog->blog_faq) && count($blog->blog_faq) > 0)
-<<<<<<< HEAD
-<div>
-    <h2 class="title_60 mb-4">FAQs</h2>
-
-    <div class="faq_cont">
-        <div class="accordion" id="staticFaqAccordion">
-
-            @foreach ($blog->blog_faq as $index => $faq)
-
-                <div class="faq_cont_acco border-bottom">
-
-                    <h2
-                        class="according_head sub_head"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#faq-{{ $index }}"
-                        aria-expanded="{{ $index === 0 ? 'true' : 'false' }}"
-                    >
-                        {{ $faq['faq_title'] ?? '' }}
-                    </h2>
-
-                    <div
-                        id="faq-{{ $index }}"
-                        class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}"
-                        data-bs-parent="#staticFaqAccordion"
-                    >
-                        <div class="accordion-body">
-                            {!! $faq['faq_description'] ?? '' !!}
-                        </div>
-=======
             <div>
                 <h2 class="title_60 mb-4 text-center"  style="color: #c7b58c;">FAQs</h2>
             
@@ -246,7 +198,6 @@
             
                         @endforeach
             
->>>>>>> 280e8f3de3a650a0239293749ec08f0ad33449ba
                     </div>
 
                 </div>
