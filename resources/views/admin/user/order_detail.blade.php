@@ -132,7 +132,10 @@
                             <th>Product</th>
                             <th class="text-center">Price</th>
                             <th class="text-center">Qty</th>
-                            <th class="text-end">Subtotal</th>
+                            @if(isset($item->discount) && $item->discount != null)
+                            <th class="text-center">Discount</th>
+                            @endif
+                            <th class="text-end">Total</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -160,9 +163,21 @@
                                     {{ $item->quantity }}
                                 </span>
                             </td>
-                            <td class="text-end fw-bold">
-                                ₹{{ number_format($item->subtotal, 2) }}
+                            @if(isset($item->discount) && $item->discount != null)
+                            <td class="text-center">
+                                <span class="badge bg-light text-dark px-3">
+                                    {{ $item->discount }}
+                                </span>
                             </td>
+                            @endif
+                            <td class="text-center">
+                                <span class="badge bg-light text-dark px-3">
+                                    ₹{{ number_format($item->order_total, 2) }}
+                                </span>
+                            </td>
+                            {{-- <td class="text-end fw-bold">
+                                ₹{{ number_format($item->subtotal, 2) }}
+                            </td> --}}
                         </tr>
                         @endforeach
                     </tbody>
