@@ -17,9 +17,9 @@
     transform: translateX(-50%);
 }
 
-.hero-section img {
+/* .hero-section img {
     filter: brightness(0.7);
-}
+} */
 
 .hero_content {
     position: absolute;
