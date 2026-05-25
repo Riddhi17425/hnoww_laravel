@@ -613,7 +613,7 @@ $(document).ready(function () {
    var subTotal = parseFloat(@json($subTotal));
    var discountPercent = parseFloat(@json($discountPercent));
    // $cartSubTotal = parseFloat($('#cart-subtotal-value').val());
-   $cartSubTotal =  $subTotal; // Assuming this value is set from the server-side
+   $cartSubTotal =  subTotal; // Assuming this value is set from the server-side
    $discount = ($cartSubTotal * discountPercent) / 100; // Calculate discount based on global value
    $discountedTotal = $cartSubTotal - $discount; // Calculate total after discount      
     $('#discounted-values').text(`- AED ${$discount.toFixed(2)}`); // Display discount  

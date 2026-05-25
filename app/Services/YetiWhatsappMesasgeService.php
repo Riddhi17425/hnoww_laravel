@@ -58,7 +58,7 @@ class YetiWhatsappMesasgeService
                     ],
                 ],
             ],
-        ];
+        ]; 
         \Log::info('Sending WhatsApp message with payload: '. json_encode($requestBody));
         $response = $client->post(config('global_values.whatsapp_message_api_url'), [
             'headers' => [
