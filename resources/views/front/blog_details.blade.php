@@ -201,13 +201,8 @@
                     </div>
 
                 </div>
-
-            @endforeach
-
-        </div>
-    </div>
-</div>
-@endif
+            </div>
+        @endif
 
         </div>
     </div>

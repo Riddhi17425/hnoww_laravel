@@ -31,7 +31,6 @@ $(document).on('click', '.inc_btn', function () {
             confirmButtonColor: '#B58A46',
         });
     }
-    
 });
 
 $(document).on('click', '.dec_btn', function () {
@@ -182,8 +181,16 @@ function recalculateCartTotals() {
         subtotal += rowTotal;
     });
 
+
+    $discount = (subtotal * discountPercent) / 100; // Calculate discount based on global value
+    $discountedTotal = subtotal - $discount; // Calculate total after discount    
+    $('#discounted-values').text(`- AED ${$discount.toFixed(2)}`); // Display discount  
+    
+
+
     $('#cart-subtotal').text(subtotal.toFixed(2) + ' AED');
-    $('#you-pay').text(subtotal.toFixed(2) + ' AED');
+    // $('#you-pay').text(subtotal.toFixed(2) + ' AED');
+    $('#you-pay').text(`AED ${$discountedTotal.toFixed(2)}`); // Display total after discount
 }
 
 // Update cart total for Header cart Icon
