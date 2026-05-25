@@ -2,7 +2,7 @@
 
 return [
     'admin_email' => 'webdeveloper12.intelliworkz@gmail.com',
-    'admin_whatsapp_no' => '8238270948',
+    'admin_whatsapp_no' => '971502243720',
     'discount_percent' => 15, // Set the discount percentage here 
     'whatsapp_message_api_url' => 'https://crm.intelliworkz.tech/api/meta/v19.0/1070176459515925/messages',
     'contact_enquiry_type' => ['bespoke_commission' => 'Bespoke Commissions', 'general_enquiery' => 'General Enquiry', 'support' => 'Support'],
