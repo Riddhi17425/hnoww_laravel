@@ -200,13 +200,14 @@
 <script src="{{ asset('public/js/front/cart.js') }} "></script>
 
 <script>
+var discountPercent = parseFloat(@json($discountPercent));
+
 $(document).ready(function () {
     var subTotal = parseFloat(@json($subTotal));
-    var discountPercent = parseFloat(@json($discountPercent));
-   // $cartSubTotal = parseFloat($('#cart-subtotal-value').val());
-   $cartSubTotal =  subTotal; // Assuming this value is set from the server-side
-   $discount = ($cartSubTotal * discountPercent) / 100; // Calculate discount based on global value
-   $discountedTotal = $cartSubTotal - $discount; // Calculate total after discount    
+    // $cartSubTotal = parseFloat($('#cart-subtotal-value').val());
+    $cartSubTotal =  subTotal; // Assuming this value is set from the server-side
+    $discount = ($cartSubTotal * discountPercent) / 100; // Calculate discount based on global value
+    $discountedTotal = $cartSubTotal - $discount; // Calculate total after discount    
 
     $('#discounted-values').text(`- AED ${$discount.toFixed(2)}`); // Display discount  
     $('#you-pay').text(`AED ${$discountedTotal.toFixed(2)}`); // Display total after discount
