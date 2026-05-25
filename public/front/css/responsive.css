@@ -1260,7 +1260,7 @@
     }
 
     .hero-section img {
-        height: 80vh;
+        /* height: 80vh; */
         object-fit: cover;
     }
 

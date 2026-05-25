@@ -1,8 +1,8 @@
 @include('layouts.frontheader')
 <!-- hero section -->
-<section class="hero-section">
-    <img class="img-fluid d-none d-md-block" src="{{ asset('public/images/front/banner_1.webp') }}" alt="images" loading="lazy">
-    <img class="img-fluid d-md-none" src="{{ asset('public/images/front/banner_1_mobile.webp') }}" alt="images" loading="lazy">
+<section class="hero-section" style="height: 100%;">
+    <img class="img-fluid d-none d-lg-block" src="{{ asset('public/images/front/banner_1.webp') }}" alt="images" loading="lazy">
+    <img class="img-fluid d-lg-none" src="{{ asset('public/images/front/banner_1_mobile.webp') }}" alt="images" loading="lazy">
     <!--<section class="hero-section">
      <video autoplay muted loop class="hero_video d-none d-md-block">
         <source src="{{ asset('public/images/front/hero-video.webm') }}" type="video/webm">
@@ -23,6 +23,13 @@
          <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white d-lg-none">Corporate Enquiries</a>
         </div>
     </div> -->
+
+     <div class="hero_content" style="top: 90%; left: 50%; transform: translateX(-50%); padding: 0 0;">
+        <div>
+             <a href="{{ route('front.atelier') }}" class="com_btn border-0 bg-white d-lg-none">Explore The Works</a>
+         <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white d-lg-none">Corporate Enquiries</a>
+        </div>
+    </div>
 
     <div class="hero_left_right">
         <span><svg xmlns="http://www.w3.org/2000/svg" width="63" height="6" viewBox="0 0 63 6" fill="none">
@@ -194,7 +201,7 @@
 <!--        <div class="gift_box">-->
 <!--             <div class="gift_box_lt">-->
 <!--                <img class="img-fluid" src="{{asset('public/images/front/valet_tray_home.webp')}}" alt="images">-->
-<!--            </div> -->-->
+<!--            </div> -->
 
 <!--            <div class="gift_box_rt">-->
 <!--                <h3 class="gift_head">Carved in natural marble for <br /> leadership desks</h3>-->
