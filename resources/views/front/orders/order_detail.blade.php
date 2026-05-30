@@ -91,9 +91,9 @@
                                             <th scope="col" class="text-nowrap">Order Status</th>
                                             <th scope="col" class="text-nowrap">Payment Status</th>
                                             <th scope="col" class="text-nowrap">Sub Total</th>
-                                            @if(isset($orderDetails->discount) && $orderDetails->discount != null)
+                                            {{-- @if(isset($orderDetails->discount) && $orderDetails->discount != null)
                                                 <th scope="col" class="text-nowrap">Discount</th>
-                                            @endif
+                                            @endif --}}
                                             <th scope="col" class="text-nowrap">Total Amount</th>
                                         </tr>
                                     </thead>
@@ -104,9 +104,9 @@
                                             <td><span class="status_pill @if(strtolower($orderDetails->status) == 'confirmed') 'status_red' @else 'status_green' @endif">{{strtoupper($orderDetails->status) ?? '-'}}</span></td>
                                             <td><span class="status_pill @if(strtolower($orderDetails->payment_status) == 'paid') 'status_red' @else 'status_green' @endif">{{strtoupper($orderDetails->payment_status) ?? '-'}}</span></td>
                                             <td>{{number_format($orderDetails->subtotal, 2) ?? '-'}}</td>
-                                            @if(isset($orderDetails->discount) && $orderDetails->discount != null)
+                                            {{-- @if(isset($orderDetails->discount) && $orderDetails->discount != null)
                                                 <td>{{number_format($orderDetails->discount, 2) ?? '-'}}</td>
-                                            @endif
+                                            @endif --}}
                                             <td>{{number_format($orderDetails->order_total, 2) ?? '-'}}</td>
                                         </tr>
                                     </tbody>

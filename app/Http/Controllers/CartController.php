@@ -198,9 +198,12 @@ class CartController extends Controller
             $subTotal = $cartItems->sum(function($item) {
                 return $item->price * $item->quantity;
             });
-            //ADD FLAT !5% DISCOUNT
-            $discount = ($subTotal * config('global_values.discount_percent')) / 100; // Calculate discount based on global value
-            $OrderTotal = $subTotal - $discount; // Calculate total after discount    
+
+            //ADD FLAT 15% DISCOUNT 
+            // $discount = ($subTotal * config('global_values.discount_percent')) / 100; // Calculate discount based on global value
+            // $OrderTotal = $subTotal - $discount; // Calculate total after discount    
+
+            $OrderTotal = $subTotal; // WITHOUT DISCOUNT CALCULATION
 
             $orderId = '';
             $order = null;
@@ -210,8 +213,10 @@ class CartController extends Controller
                 $order->order_address_id = $addressId;
                 $order->status = 'confirmed';
                 $order->subtotal = $subTotal;
-                $order->discount_percent = config('global_values.discount_percent');
-                $order->discount = $discount;
+                // $order->discount_percent = config('global_values.discount_percent');
+                // $order->discount = $discount;
+                $order->discount_percent = 0;
+                $order->discount = 0;
                 $order->order_total = $OrderTotal;    
                 $order->stripe_payment_intent = $request['payment_intent'] ?? null;
                 $order->stripe_payment_intent_client_secret = $request['payment_intent_client_secret'] ?? null;

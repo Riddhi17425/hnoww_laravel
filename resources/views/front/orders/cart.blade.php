@@ -20,9 +20,9 @@
 }
 </style>
 <section class="mt_60 mb_120">
-    @php 
-        $discountPercent = config('global_values.discount_percent', 0);
-    @endphp
+    {{-- @php 
+         $discountPercent = config('global_values.discount_percent', 0);
+    @endphp --}}
     <div class="container">
         <div class="section_header">
             <p class="sub_head mb-0">
@@ -164,10 +164,10 @@
                                         {{ number_format($subTotal ?? 0, 2) }}</span>
                                 </div>
                                  
-                                <div class="summary-row">
+                                {{-- <div class="summary-row">
                                     <span class="label">Discount (FLAT 15% OFF)</span>
                                     <span class="value text-muted" id="discounted-values"></span>
-                                </div>
+                                </div> --}}
                        
                             </div>
                             <hr class="summary-divider">
@@ -200,18 +200,16 @@
 <script src="{{ asset('public/js/front/cart.js') }} "></script>
 
 <script>
-var discountPercent = parseFloat(@json($discountPercent));
-
+{{-- var discountPercent = parseFloat(@json($discountPercent));
 $(document).ready(function () {
-    var subTotal = parseFloat(@json($subTotal));
-    // $cartSubTotal = parseFloat($('#cart-subtotal-value').val());
+    // FOR DISCOUNT CALCULATION
+    var subTotal = parseFloat(@json($subTotal)); 
     $cartSubTotal =  subTotal; // Assuming this value is set from the server-side
     $discount = ($cartSubTotal * discountPercent) / 100; // Calculate discount based on global value
     $discountedTotal = $cartSubTotal - $discount; // Calculate total after discount    
-
     $('#discounted-values').text(`- AED ${$discount.toFixed(2)}`); // Display discount  
     $('#you-pay').text(`AED ${$discountedTotal.toFixed(2)}`); // Display total after discount
-}); 
+}); --}}
 
 $(document).on('change', '.input-number', function() {
     clearTimeout(window.cartTimer);
