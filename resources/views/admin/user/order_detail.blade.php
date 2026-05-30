@@ -132,9 +132,9 @@
                             <th>Product</th>
                             <th class="text-center">Price</th>
                             <th class="text-center">Qty</th>
-                            @if(isset($item->discount) && $item->discount != null)
+                            {{-- @if(isset($item->discount) && $item->discount != null)
                             <th class="text-center">Discount</th>
-                            @endif
+                            @endif --}}
                             <th class="text-end">Total</th>
                         </tr>
                     </thead>
@@ -163,13 +163,13 @@
                                     {{ $item->quantity }}
                                 </span>
                             </td>
-                            @if(isset($item->discount) && $item->discount != null)
+                            {{-- @if(isset($item->discount) && $item->discount != null)
                             <td class="text-center">
                                 <span class="badge bg-light text-dark px-3">
                                     {{ $item->discount }}
                                 </span>
                             </td>
-                            @endif
+                            @endif --}}
                             <td class="text-center">
                                 <span class="badge bg-light text-dark px-3">
                                     ₹{{ number_format($item->order_total, 2) }}
