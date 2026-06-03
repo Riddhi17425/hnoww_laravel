@@ -46,7 +46,7 @@
                         </div>
                         <div>
                             <h3 class="sub_head">Email</h3>
-                            <p class="mb-0"><a href="mailto:studio@hnoww.com">studio@hnoww.com</a></p>
+                            <p class="mb-0"><a href="mailto:connect@hnoww.com ">connect@hnoww.com </a></p>
                         </div>
                         <div>
                             <h3 class="sub_head">Hours</h3>
