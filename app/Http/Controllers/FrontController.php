@@ -720,6 +720,7 @@ class FrontController extends Controller
             'message'     => $request->message ?? NULL,
         ]);
 
+        $timestamp = Carbon::now()->format('Y-m-d H:i:s');
         // SEND MAIL TO USER AND ADMIN
         $adminEmail = $this->adminEmail;
         $userEmail = $request->email;
@@ -729,6 +730,7 @@ class FrontController extends Controller
             'contact_no'  => $request->phone,
             'inquiry_type' => $enquiryType[$request->enquiry_type],
             'message_data'     => $request->message ?? NULL,
+            'date'      =>  $timestamp,
         ];
 
         try {
@@ -743,6 +745,23 @@ class FrontController extends Controller
             Log::error('Inquiry Mail sending failed: '.$e->getMessage());
         }
 
+        // STORE IN SHEET
+        try {
+            $response = Http::withHeaders(['Content-Type' => 'application/json'])
+                ->post('https://script.google.com/macros/s/AKfycbx67EVt27zgYnp-ULaFlBKnrUwd6mo0vxSYgp0Y88CFv5VVyzFn8-wVwzC8pvCdQYZyEQ/exec', 
+                    $data
+                );
+            if ($response->failed()) {
+                \Log::error('Google Sheet request failed: '.$response->body());
+            }
+        } catch (\Exception $e) {
+            \Log::error('Google Sheets Exception (WhatsApp Inquiry):', [
+                'message'   => $e->getMessage(),
+                'trace'     => $e->getTraceAsString(),
+                'data_sent' => $sheetsData
+            ]);
+        }
+
         // SEND WHATSAPP MESSAGE TO ADMIN
         //$message = 'New Contact inquiry is placed using email - '.$request->email;
         $message = "📩 *New Contact Inquiry*\n\n" .
@@ -752,6 +771,8 @@ class FrontController extends Controller
             "*Enquiry Type:* {$enquiryType[$request->enquiry_type]}\n" .
             "*Message:* " . ($request->message ?? 'N/A') . "\n\n" .
             "— HNoWW";
+
+        
 
         try {
             $url = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode($message);
