@@ -321,7 +321,7 @@
                                         </div>
 
                                         <div>
-                                            <input class="check_box_new" type="radio" name="selected_address" value="{{ $address->id }}">
+                                            <input class="check_box_new mt-0" type="radio" name="selected_address" value="{{ $address->id }}">
                                         </div>
                                     </label>
                                 </div>
