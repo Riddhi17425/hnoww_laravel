@@ -107,6 +107,15 @@ return [
         "AED 25,000-50,000" => "AED 25,000-50,000",
         "AED 50,000+" => "AED 50,000+"
     ],
+    'emirates' => [
+        "Abu Dhabi",
+        "Dubai",
+        "Sharjah",
+        "Ajman",
+        "Umm Al Quwain",
+        "Ras Al Khaimah",
+        "Fujairah"
+    ],
 
     
 ];
