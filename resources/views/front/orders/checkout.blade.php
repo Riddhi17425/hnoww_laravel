@@ -355,10 +355,11 @@
                                             <div class="ct_input">
                                                 <label class="sub_head">Contact Number <span
                                                         class="text-danger">*</span></label>
-                                                <input type="text" name="contact_no" placeholder="Enter contact Number"
+                                                <input type="tel" id="checkout-contact-no" name="contact_no" placeholder="Enter contact Number"
                                                     value="{{ old('contact_no') }}"
                                                     oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
-                                                    class="@error('contact_no') is-invalid @enderror">
+                                                    class="checkout-contact-country-select @error('contact_no') is-invalid @enderror">
+                                                <input type="hidden" name="contact_country" id="checkout-contact-country" value="">
                                                 @error('contact_no') <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
@@ -369,7 +370,7 @@
                                                 <label class="sub_head">Emirate <span
                                                         class="text-danger">*</span></label>
                                                 @php $emirates = config('global_values.emirates'); @endphp
-                                                <select name="emirate" class="form-control">
+                                                <select name="emirate">
                                                     <option value="">Select Emirate</option>
                                                     @foreach($emirates as $emirate)
                                                         <option value="{{ $emirate }}"
@@ -474,10 +475,11 @@
                         <div class="col-lg-4">
                             <div class="ct_input">
                                 <label class="sub_head">Contact Number <span class="text-danger">*</span></label>
-                                <input type="text" name="contact_no" placeholder="Enter contact Number"
+                                <input type="tel" id="checkout-contact-no-old" name="contact_no" placeholder="Enter contact Number"
                                     value="{{ old('contact_no') }}"
                                     oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
-                                    class="@error('contact_no') is-invalid @enderror">
+                                    class="checkout-contact-country-select @error('contact_no') is-invalid @enderror">
+                                <input type="hidden" name="contact_country" id="checkout-contact-country-old" value="">
                                 @error('contact_no') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
                         </div>
@@ -765,6 +767,18 @@ async function mountPaymentElement(clientSecret) {
 }
 
 $(document).ready(async function() {
+    const checkoutContactInput = document.querySelector("#checkout-contact-no");
+    const checkoutContactCountry = document.querySelector("#checkout-contact-country");
+    let checkoutContactIti = null;
+
+    if (checkoutContactInput && window.intlTelInput) {
+        checkoutContactIti = window.intlTelInput(checkoutContactInput, {
+            initialCountry: "ae",
+            separateDialCode: true,
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        });
+    }
+
     const checkoutWhatsappInput = document.querySelector("#checkout-whatsapp-no");
     const checkoutWhatsappCountry = document.querySelector("#checkout-whatsapp-country");
     let checkoutWhatsappIti = null;
@@ -796,6 +810,18 @@ $(document).ready(async function() {
     //     checkoutWhatsappInput.value = rawNumber ? `${dialCode}${rawNumber}` : "";
     // }
     
+    function setCheckoutContactValue() {
+        if (!checkoutContactIti) return;
+        const countryData = checkoutContactIti.getSelectedCountryData();
+        let rawNumber = checkoutContactInput.value.replace(/\D/g, "");
+        const dialCode = countryData.dialCode;
+        if (rawNumber.startsWith(dialCode)) {
+            rawNumber = rawNumber.slice(dialCode.length);
+        }
+        checkoutContactCountry.value = countryData.name || "";
+        checkoutContactInput.value = rawNumber ? `${dialCode}${rawNumber}` : "";
+    }
+
     function setCheckoutWhatsappValue() {
 
         const countryData = checkoutWhatsappIti.getSelectedCountryData();
@@ -855,8 +881,6 @@ $(document).ready(async function() {
             },
             emirate: {
                 required: true,
-                minlength: 5,
-                maxlength: 20
             },
             address_line1: {
                 required: true,
@@ -890,8 +914,6 @@ $(document).ready(async function() {
             },
             emirate: {
                 required: "Please select emirate",
-                minlength: "Emirate must be at least 5 characters",
-                maxlength: "Emirate cannot exceed 20 characters"
             },
             address_line1: {
                 required: "Please enter your Details",
@@ -950,6 +972,7 @@ $(document).ready(async function() {
         }
 
         if (isAddingNew) {
+            setCheckoutContactValue();
             setCheckoutWhatsappValue();
             let formData = $("#productInquiryForm").serialize();
             // Save address first
