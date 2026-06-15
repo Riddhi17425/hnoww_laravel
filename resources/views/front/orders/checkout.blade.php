@@ -368,10 +368,21 @@
                                             <div class="ct_input">
                                                 <label class="sub_head">Emirate <span
                                                         class="text-danger">*</span></label>
-                                                <input type="text" name="emirate" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s{2,}/g, ' ').trimStart();" placeholder="Enter Emirate"
+                                                @php $emirates = config('global_values.emirates'); @endphp
+                                                <select name="emirate" class="form-control">
+                                                    <option value="">Select Emirate</option>
+                                                    @foreach($emirates as $emirate)
+                                                        <option value="{{ $emirate }}"
+                                                            {{ old('emirate') == $emirate ? 'selected' : '' }}>
+                                                            {{ $emirate }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                {{-- <input type="text" name="emirate" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s{2,}/g, ' ').trimStart();" placeholder="Enter Emirate"
                                                     value="{{ old('emirate') }}"
-                                                    class="@error('emirate') is-invalid @enderror">
-                                                @error('emirate') <div class="invalid-feedback">{{ $message }}</div>
+                                                    class="@error('emirate') is-invalid @enderror"> --}}
+                                                @error('emirate') 
+                                                    <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                         </div>
