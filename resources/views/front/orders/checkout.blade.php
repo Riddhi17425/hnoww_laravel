@@ -380,8 +380,27 @@
                                             </div>
                                         </div>
 
-                                       
+                                        <div class="col-lg-6">
+                                            <div class="ct_input">
+                                                <label class="sub_head">Flat No./House No., Building/Apartment <span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" name="address_line1"
+                                                    placeholder="Enter Details" class="fw-medium" value="">
+                                                @error('address_line1') <div class="invalid-feedback">{{ $message }}
+                                                </div> @enderror
+                                            </div>
+                                        </div>
 
+                                        <div class="col-lg-6">
+                                            <div class="ct_input">
+                                                <label class="sub_head">Area, Street, Sector, Town <span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" name="address_line2"
+                                                    placeholder="Enter Details" class="fw-medium" value="">
+                                                @error('address_line2') <div class="invalid-feedback">{{ $message }}
+                                                </div> @enderror
+                                            </div>
+                                        </div>
                                         <div class="col-lg-12">
                                             <div class="ct_input">
                                                 <label class="sub_head">Landmark</label>
@@ -391,29 +410,6 @@
                                                 @enderror
                                             </div>
                                         </div>
-
-                                        <div class="col-lg-6">
-                                            <div class="ct_input">
-                                                <label class="sub_head">Address Line 1 <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="text" name="address_line1"
-                                                    placeholder="Enter Address Line 1" class="fw-medium" value="">
-                                                @error('address_line1') <div class="invalid-feedback">{{ $message }}
-                                                </div> @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <div class="ct_input">
-                                                <label class="sub_head">Address Line 2 <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="text" name="address_line2"
-                                                    placeholder="Enter Address Line 2" class="fw-medium" value="">
-                                                @error('address_line2') <div class="invalid-feedback">{{ $message }}
-                                                </div> @enderror
-                                            </div>
-                                        </div>
-
 
                                     </div>
                                 </div>
@@ -878,12 +874,12 @@ $(document).ready(async function() {
                 maxlength: "Emirate cannot exceed 20 characters"
             },
             address_line1: {
-                required: "Please enter your address (Line 1)",
-                minlength: "Address Line 1 must be at least 3 characters"
+                required: "Please enter your Details",
+                minlength: "Details must be at least 3 characters"
             },
             address_line2: {
-                required: "Please enter your address (Line 2)",
-                minlength: "Address Line 2 must be at least 3 characters"
+                required: "Please enter your Details",
+                minlength: "Details must be at least 3 characters"
             },
             landmark: {
                 minlength: "Landmark must be at least 5 characters long"
