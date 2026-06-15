@@ -176,7 +176,7 @@
                                 <span class="sub_head" id="you-pay">AED {{ number_format($subTotal ?? 0, 2) }}</span>
                             </div>
                             <div class="summary-actions">
-                                <a class="com_btn w-100 text-center" @auth href="{{ route('front.checkout.view') }}" @else data-bs-toggle="modal" data-bs-target="#loginRequiredModal" href="javascript:void(0);" @endauth>
+                                <a class="com_btn w-100 text-center @auth @else user_icon @endauth" @auth href="{{ route('front.checkout.view') }}" @else data-bs-toggle="modal" data-bs-target="#loginRequiredModal" @endauth>
                                     PROCEED TO CHECKOUT
                                 </a>
                                 <a href="{{ route('front.home') }}" class="btn-continue">
