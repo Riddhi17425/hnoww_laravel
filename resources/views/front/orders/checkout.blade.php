@@ -153,15 +153,22 @@
 #addressFormWrapper .ct_input .iti {
     width: 100%;
     margin-bottom: 0;
+    /* margin-top: 24px; */
 }
+
+#addressFormWrapper .ct_input .iti input {
+    margin-top: 24px !important;
+}
+
+#addressFormWrapper .ct_input .iti__flag-container {
+    top: 24px;
+    padding-bottom: 16px;
+}
+
 
 #addressFormWrapper .ct_input .iti__selected-flag {
-    height: 4em;
     background-color: transparent !important;
-}
-
-#checkout-whatsapp-no.checkout-whatsapp-country-select {
-    margin-top: 1.19em !important;
+    height: auto !important;
 }
 
 
@@ -299,7 +306,7 @@
                                 @foreach($userAddresses as $address)
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <label
-                                        class="address-card border p-3 rounded d-flex justify-content-between align-items-start h-100"
+                                        class="address-card border p-3 rounded d-flex gap-3 justify-content-between align-items-start h-100"
                                         style="cursor:pointer;">
 
                                         <div>
@@ -313,7 +320,9 @@
                                             @endif
                                         </div>
 
-                                        <input class="check_box_new" type="radio" name="selected_address" value="{{ $address->id }}">
+                                        <div>
+                                            <input class="check_box_new" type="radio" name="selected_address" value="{{ $address->id }}">
+                                        </div>
                                     </label>
                                 </div>
                                 @endforeach

@@ -681,6 +681,13 @@
         margin-top: 18px;
     }
 
+    #addressFormWrapper .ct_input .iti input {
+        margin-top: 18px !important;
+    }
+    #addressFormWrapper .ct_input .iti__flag-container {
+        top: 18px;
+    }
+
     .faq_cont .tab-content {
         padding: 0px;
     }
@@ -871,6 +878,13 @@
         margin-top: 0px;
         font-size: 15px;
         line-height: 18px;
+    }
+
+    #addressFormWrapper .ct_input .iti input {
+        margin-top: 0px !important;
+    }
+    #addressFormWrapper .ct_input .iti__flag-container {
+        top: 0px;
     }
 
     #reg_login .reg_login_child .user .formBx {

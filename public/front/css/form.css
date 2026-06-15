@@ -32,7 +32,7 @@
     row-gap: 24px;
 }
 
-.ct_grid > div:first-child {
+.ct_grid>div:first-child {
     border-right: 1px solid var(--gold-color);
 }
 
