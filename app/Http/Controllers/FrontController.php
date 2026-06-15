@@ -169,6 +169,30 @@ class FrontController extends Controller
             }
             return [];
         });
+        // WITHOUT CACHE
+        // $accessToken = config('services.instagram.access_token');
+        // $instagramPosts = [];
+        // if (!empty($accessToken)) {
+        //     $response = Http::timeout(10)->get('https://graph.instagram.com/me/media', [
+        //         'fields'       => 'id,media_type,media_url,thumbnail_url,permalink',
+        //         'access_token' => $accessToken,
+        //         'limit'        => 6,
+        //     ]);
+        //     \Log::info('INSTA POST 1 - ' . json_encode($response->json()));
+        
+        //     if ($response->successful()) {
+        //         $items = $response->json('data') ?? [];
+        
+        //         $instagramPosts = array_map(function ($item) {
+        //             $item['display_url'] = (strtoupper($item['media_type']) === 'VIDEO')
+        //                 ? ($item['thumbnail_url'] ?? '')
+        //                 : ($item['media_url'] ?? '');
+        
+        //             return $item;
+        //         }, $items);
+        //     }
+        // }
+
         return view('front.home', compact('herProduct', 'himProduct', 'homeProduct', 'corporateProduct', 'weddingProduct', /*'allProd',*/ 'allGifts', 'desiredProductsArray', 'instagramPosts'));
     }
 
@@ -719,7 +743,7 @@ class FrontController extends Controller
             'inquiry_type' => $request->enquiry_type,
             'message'     => $request->message ?? NULL,
         ]);
-
+        
         $timestamp = Carbon::now()->format('Y-m-d H:i:s');
         // SEND MAIL TO USER AND ADMIN
         $adminEmail = $this->adminEmail;
@@ -744,7 +768,7 @@ class FrontController extends Controller
         } catch (Exception $e) {
             Log::error('Inquiry Mail sending failed: '.$e->getMessage());
         }
-
+        
         // STORE IN SHEET
         try {
             $response = Http::withHeaders(['Content-Type' => 'application/json'])
@@ -771,8 +795,6 @@ class FrontController extends Controller
             "*Enquiry Type:* {$enquiryType[$request->enquiry_type]}\n" .
             "*Message:* " . ($request->message ?? 'N/A') . "\n\n" .
             "— HNoWW";
-
-        
 
         try {
             $url = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode($message);

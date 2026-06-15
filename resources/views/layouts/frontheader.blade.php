@@ -260,10 +260,10 @@ $current_route ===
             <div class="d-flex gap-3 align-items-center">
                 <!-- User Dropdown -->
                 <div class="user_dropdown d-lg-none">
-                    <a href="javascript:void(0)" class="user_icon">
+                    <span class="user_icon">
                         <img src="<?= $is_green ? asset('public/images/front/user-icon-black.svg') : asset('public/images/front/user-icon.svg') ?>"
-                            alt="User">
-                    </a>
+                            >
+                    </span>
 
                     @auth
                     <div class="user_menu">
@@ -428,10 +428,10 @@ $current_route ===
 
                     <!-- User Dropdown -->
                     <div class="user_dropdown d-none d-lg-block">
-                        <a href="javascript:void(0)" class="user_icon">
+                        <span class="user_icon">
                             <img src="<?= $is_green ? asset('public/images/front/user-icon-black.svg') : asset('public/images/front/user-icon.svg') ?>"
-                                alt="User">
-                        </a>
+                                >
+                        </span>
 
                         @auth
                         <div class="user_menu">

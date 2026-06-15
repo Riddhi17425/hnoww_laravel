@@ -15,6 +15,10 @@ header .navbar {
     width: 140px;
 }
 
+.user_icon{
+ cursor:pointer;
+}
+
 .navbar_left {
     display: flex;
     align-items: center;
