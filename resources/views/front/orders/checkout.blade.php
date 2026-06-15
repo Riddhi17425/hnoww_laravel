@@ -391,7 +391,7 @@
 
                                         <div class="col-lg-6">
                                             <div class="ct_input">
-                                                <label class="sub_head" style="wrap-text:nowrap;">Flat/House No., Building/Apartment <span
+                                                <label class="sub_head text-nowrap">Flat/House No., Building/Apartment <span
                                                         class="text-danger">*</span></label>
                                                 <input type="text" name="address_line1"
                                                     placeholder="Enter Details" class="fw-medium" value="">
