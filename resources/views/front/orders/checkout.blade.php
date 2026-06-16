@@ -770,11 +770,20 @@ $(document).ready(async function() {
     const checkoutContactInput = document.querySelector("#checkout-contact-no");
     const checkoutContactCountry = document.querySelector("#checkout-contact-country");
     let checkoutContactIti = null;
-
     if (checkoutContactInput && window.intlTelInput) {
         checkoutContactIti = window.intlTelInput(checkoutContactInput, {
-            initialCountry: "ae",
+            initialCountry: "auto",
             separateDialCode: true,
+            geoIpLookup: function(callback) {
+                fetch("https://ipapi.co/json")
+                    .then(res => res.json())
+                    .then(data => {
+                        callback(data.country_code.toLowerCase());
+                    })
+                    .catch(() => {
+                        callback("ae"); // fallback country
+                    });
+            },
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
         });
     }
@@ -785,8 +794,18 @@ $(document).ready(async function() {
 
     if (checkoutWhatsappInput && window.intlTelInput) {
         checkoutWhatsappIti = window.intlTelInput(checkoutWhatsappInput, {
-            initialCountry: "ae",
+            initialCountry: "auto",
             separateDialCode: true,
+            geoIpLookup: function(callback) {
+                fetch("https://ipapi.co/json")
+                    .then(res => res.json())
+                    .then(data => {
+                        callback(data.country_code.toLowerCase());
+                    })
+                    .catch(() => {
+                        callback("ae"); // fallback country
+                    });
+            },
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
         });
     }
