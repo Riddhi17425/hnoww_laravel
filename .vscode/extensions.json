@@ -1,0 +1,16 @@
+{
+    "recommendations": [
+        "bmewburn.vscode-intelephense-client",
+        "shufo.vscode-blade-formatter",
+        "onecentlin.laravel-blade",
+        "amiralizadeh9480.laravel-extra-intellisense",
+        "ryannaddy.laravel-artisan",
+        "mikestead.dotenv",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "eamodio.gitlens",
+        "xdebug.php-debug",
+        "formulahendry.auto-close-tag",
+        "formulahendry.auto-rename-tag"
+    ]
+}
