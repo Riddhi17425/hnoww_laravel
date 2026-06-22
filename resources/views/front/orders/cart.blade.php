@@ -176,7 +176,7 @@
                                 <span class="sub_head" id="you-pay">AED {{ number_format($subTotal ?? 0, 2) }}</span>
                             </div>
                             <div class="summary-actions">
-                                <a class="com_btn w-100 text-center @auth @else user_icon @endauth" @auth href="{{ route('front.checkout.view') }}" @else data-bs-toggle="modal" data-bs-target="#loginRequiredModal" @endauth>
+                                <a class="com_btn w-100 text-center @auth @else user_icon @endauth" @auth href="{{ route('front.checkout.view') }}" @else data-bs-toggle="modal" data-bs-target="#checkoutAuthModal" @endauth>
                                     PROCEED TO CHECKOUT
                                 </a>
                                 <a href="{{ route('front.home') }}" class="btn-continue">
@@ -196,6 +196,68 @@
         <!--/ End Shopping Cart -->
     </div>
 </section>
+
+<!-- Checkout Authentication Modal -->
+<div class="modal fade audio_modal" id="checkoutAuthModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="checkoutAuthTitle">Login to Checkout</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" id="closeCheckoutAuthModalBtn"></button>
+            </div>
+            <div class="modal-body text-start">
+                <div class="ct_form">
+                    <form id="checkout-auth-form">
+                        @csrf
+
+                        <div id="checkout-auth-alert" class="alert alert-danger d-none py-2 px-3 mb-3" style="font-size: 14px;"></div>
+
+                        <div id="step-email" class="auth-step">
+                            <p class="m-3 text-center">Please enter your email address to continue.</p>
+                            <div class="ct_input mb-4">
+                                <input type="email" name="email" id="checkout_email" class="form-control" placeholder="Enter email address" style="margin-top: 10px;" required>
+                            </div>
+                            <div class="modal-footer justify-content-center border-0 p-0">
+                                <button type="button" class="com_btn bg-transparent" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" id="btn-email-next" class="com_btn">Next</button>
+                            </div>
+                        </div>
+
+                        <div id="step-login" class="auth-step d-none">
+                            <p class="m-3 text-center">This email is already registered. Please enter your password to continue.</p>
+                            <div class="ct_input mb-4">
+                                <input type="password" name="password" id="checkout_password" class="form-control" placeholder="Enter your password" style="margin-top: 10px;">
+                            </div>
+                            <div class="modal-footer justify-content-center border-0 p-0">
+                                <button type="button" id="btn-login-back" class="com_btn bg-transparent">Back</button>
+                                <button type="submit" id="btn-login-submit" class="com_btn">Login & Checkout</button>
+                            </div>
+                        </div>
+
+                        <div id="step-register" class="auth-step d-none">
+                            <p class="m-3 text-center">It looks like you are new to HNOWW. Create an account to complete your checkout.</p>
+                            <div class="ct_input mb-3">
+                                <input type="text" name="name" id="checkout_name" class="form-control" placeholder="Enter Full name" style="margin-top: 10px;">
+                            </div>
+                            <div class="ct_input mb-3">
+                                <input type="password" name="reg_password" id="checkout_reg_password" class="form-control" placeholder="Set password (min 6 characters)" style="margin-top: 10px;">
+                            </div>
+                            <div class="ct_input mb-4">
+                                <input type="password" name="reg_password_confirmation" id="checkout_reg_password_confirmation" class="form-control" placeholder="Confirm password" style="margin-top: 10px;">
+                            </div>
+                            <div class="modal-footer justify-content-center border-0 p-0">
+                                <button type="button" id="btn-register-back" class="com_btn bg-transparent">Back</button>
+                                <button type="submit" id="btn-register-submit" class="com_btn">Register & Checkout</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @push('script')
 <script src="{{ asset('public/js/front/cart.js') }} "></script>
 
@@ -221,6 +283,199 @@ window.appData = {
     emptyCartImage: "{{ asset('public/images/front/emty_cart.webp') }}",
     homeUrl: "{{ route('front.home') }}"
 };
+
+$(document).ready(function() {
+    var isRegistered = false;
+    var userEmail = '';
+    var checkoutAuthValidator = $('#checkout-auth-form').validate({
+        ignore: ':hidden',
+        errorElement: 'div',
+        errorClass: 'text-danger mt-1',
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true,
+                minlength: 6
+            },
+            name: {
+                required: true,
+                minlength: 2
+            },
+            reg_password: {
+                required: true,
+                minlength: 6
+            },
+            reg_password_confirmation: {
+                required: true,
+                equalTo: '#checkout_reg_password'
+            }
+        },
+        messages: {
+            email: {
+                required: 'Please enter your email address.',
+                email: 'Please enter a valid email address.'
+            },
+            password: {
+                required: 'Please enter your password.',
+                minlength: 'Password must be at least 6 characters.'
+            },
+            name: {
+                required: 'Please enter your name.',
+                minlength: 'Name must be at least 2 characters.'
+            },
+            reg_password: {
+                required: 'Please enter a password.',
+                minlength: 'Password must be at least 6 characters.'
+            },
+            reg_password_confirmation: {
+                required: 'Please confirm your password.',
+                equalTo: 'Password and confirm password must match.'
+            }
+        }
+    });
+
+    $('#btn-email-next').click(function() {
+        var emailInput = $('#checkout_email');
+        var email = emailInput.val().trim();
+
+        emailInput.val(email);
+        if (!emailInput.valid()) {
+            return;
+        }
+
+        hideError();
+        $('#btn-email-next').prop('disabled', true).text('Checking...');
+
+        $.ajax({
+            url: "{{ route('front.checkout.check-email') }}",
+            type: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                email: email
+            },
+            success: function(response) {
+                $('#btn-email-next').prop('disabled', false).text('Next');
+                if (response.success) {
+                    userEmail = email;
+                    if (response.registered) {
+                        isRegistered = true;
+                        $('#checkoutAuthTitle').text('Welcome Back');
+                        $('#step-email').addClass('d-none');
+                        $('#step-login').removeClass('d-none');
+                        $('#checkout_password').attr('required', true);
+                    } else {
+                        isRegistered = false;
+                        $('#checkoutAuthTitle').text('Create Account');
+                        $('#step-email').addClass('d-none');
+                        $('#step-register').removeClass('d-none');
+                        $('#checkout_name').attr('required', true);
+                        $('#checkout_reg_password').attr('required', true);
+                        $('#checkout_reg_password_confirmation').attr('required', true);
+                    }
+                } else {
+                    showError(response.message);
+                }
+            },
+            error: function(xhr) {
+                $('#btn-email-next').prop('disabled', false).text('Next');
+                showError(getAjaxErrorMessage(xhr));
+            }
+        });
+    });
+
+    $('#btn-login-back, #btn-register-back').click(function() {
+        hideError();
+        $('#checkoutAuthTitle').text('Continue to Checkout');
+        $('.auth-step').addClass('d-none');
+        $('#step-email').removeClass('d-none');
+
+        $('#checkout_password').removeAttr('required').val('');
+        $('#checkout_name').removeAttr('required').val('');
+        $('#checkout_reg_password').removeAttr('required').val('');
+        $('#checkout_reg_password_confirmation').removeAttr('required').val('');
+        checkoutAuthValidator.resetForm();
+    });
+
+    $('#checkout-auth-form').submit(function(e) {
+        e.preventDefault();
+        hideError();
+
+        if (!$(this).valid()) {
+            return;
+        }
+
+        var submitBtn = isRegistered ? $('#btn-login-submit') : $('#btn-register-submit');
+        var originalBtnText = submitBtn.text();
+        submitBtn.prop('disabled', true).text('Processing...');
+
+        var url = isRegistered ? "{{ route('front.checkout.login') }}" : "{{ route('front.checkout.register') }}";
+
+        var formData = {
+            _token: "{{ csrf_token() }}",
+            email: userEmail
+        };
+
+        if (isRegistered) {
+            formData.password = $('#checkout_password').val();
+        } else {
+            formData.name = $('#checkout_name').val().trim();
+            formData.reg_password = $('#checkout_reg_password').val();
+            formData.reg_password_confirmation = $('#checkout_reg_password_confirmation').val();
+        }
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: formData,
+            success: function(response) {
+                if (response.success) {
+                    window.location.href = response.redirect_url;
+                } else {
+                    submitBtn.prop('disabled', false).text(originalBtnText);
+                    showError(response.message);
+                }
+            },
+            error: function(xhr) {
+                submitBtn.prop('disabled', false).text(originalBtnText);
+                showError(getAjaxErrorMessage(xhr));
+            }
+        });
+    });
+
+    $('#checkoutAuthModal').on('hidden.bs.modal', function () {
+        hideError();
+        $('#checkoutAuthTitle').text('Continue to Checkout');
+        $('.auth-step').addClass('d-none');
+        $('#step-email').removeClass('d-none');
+        $('#checkout_email').val('');
+        $('#checkout_password').removeAttr('required').val('');
+        $('#checkout_name').removeAttr('required').val('');
+        $('#checkout_reg_password').removeAttr('required').val('');
+        $('#checkout_reg_password_confirmation').removeAttr('required').val('');
+        checkoutAuthValidator.resetForm();
+        isRegistered = false;
+        userEmail = '';
+    });
+
+    function showError(msg) {
+        $('#checkout-auth-alert').text(msg).removeClass('d-none');
+    }
+
+    function hideError() {
+        $('#checkout-auth-alert').addClass('d-none').text('');
+    }
+
+    function getAjaxErrorMessage(xhr) {
+        if (xhr.responseJSON && xhr.responseJSON.message) {
+            return xhr.responseJSON.message;
+        }
+
+        return 'Something went wrong. Please try again.';
+    }
+});
 </script>
 @endpush
 @include('layouts.frontfooter')

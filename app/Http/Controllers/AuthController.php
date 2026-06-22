@@ -34,7 +34,7 @@ class AuthController extends Controller
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
-        }   
+        }
         $data=$request->all();
         $user = User::create([
             'name'=>$data['full_name'],
@@ -49,11 +49,11 @@ class AuthController extends Controller
         Session::put('user',$data['r_email']);
 
         if($user){
-            // $sessionId = Session::getId();  
-            // $cartData = Cart::where('session_id', '=', $sessionId)->get();         
+            // $sessionId = Session::getId();
+            // $cartData = Cart::where('session_id', '=', $sessionId)->get();
 
             // $oldSessionId = Session::getId();
-            // $cartData = Cart::where('session_id', $oldSessionId)->get(); 
+            // $cartData = Cart::where('session_id', $oldSessionId)->get();
             // foreach($cartData as $value)
             // {
             //     $cart = Cart::where('id', $value->id)->first();
@@ -66,7 +66,7 @@ class AuthController extends Controller
             //     else{
             //         $cart->session_id = null;
             //         $cart->user_id = $user->id;
-            //         $cart->save();    
+            //         $cart->save();
             //     }
             // }
 
@@ -92,16 +92,16 @@ class AuthController extends Controller
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
-        } 
+        }
         // SAVE OLD SESSION ID BEFORE LOGIN
         $oldSessionId = Session::getId();
         $data = $request->all();
         if(Auth::attempt(['email' => $data['email'], 'password' => $data['password']])){
             Session::put('user', $data['email']);
 
-            // $sessionId = Session::getId(); 
-            // $cartData = Cart::where('session_id', '=', $sessionId)->get(); 
-            $cartData = Cart::where('session_id', $oldSessionId)->get();           
+            // $sessionId = Session::getId();
+            // $cartData = Cart::where('session_id', '=', $sessionId)->get();
+            $cartData = Cart::where('session_id', $oldSessionId)->get();
             foreach($cartData as $value)
             {
                 $cart = Cart::where('id', $value->id)->first();
@@ -121,24 +121,24 @@ class AuthController extends Controller
                 {
                     $cart->session_id = null;
                     $cart->user_id = auth()->id();
-                    $cart->save();    
+                    $cart->save();
                 }
-                
+
             }
 
             request()->session()->flash('success','Successfully login');
             return redirect()->route('front.home');
         }
-        else{ 
+        else{
             request()->session()->flash('error','Invalid email and password please try again!');
             return redirect()->route('front.auth', 'login');
         }
     }
-    
+
     public function forgotPassword(Request $request){
         return view('front.forgot_password');
     }
-    
+
     public function sendResetLink(Request $request){
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|exists:users,email',
@@ -147,7 +147,7 @@ class AuthController extends Controller
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
-        } 
+        }
 
         $token = Str::random(64);
         DB::table('password_resets')->updateOrInsert(
@@ -167,7 +167,7 @@ class AuthController extends Controller
 
         return back()->with('success', 'Password reset link sent to your email.');
     }
-    
+
     public function resetPassword(Request $request, $token){
         return view('front.reset_password', [
             'token' => $token,
@@ -202,7 +202,7 @@ class AuthController extends Controller
         Session::forget('user');
         Auth::logout();
         request()->session()->flash('success','Logout successfully');
-        
+
         return back();
     }
 
@@ -238,7 +238,7 @@ class AuthController extends Controller
             'number'  => $request->number,
             'message'  => $request->message,
         ]);
-    
+
         $timestamp = Carbon::now()->format('Y-m-d H:i:s');
         // Google Sheet expects:
         $sheetsData = [
@@ -247,11 +247,11 @@ class AuthController extends Controller
             'message'  => $request->message,
             'date'      => $timestamp,
         ];
-    
+
         // Send to Google Sheets
         try {
             $response = Http::withHeaders(['Content-Type' => 'application/json'])
-                ->post('https://script.google.com/macros/s/AKfycbwC1jNkkBNUH9lJsOtG5gk5DZePCISChsgcTNzE-_v8e2FJdSjs_eI3JLmLB-ZZ5GCZ/exec', 
+                ->post('https://script.google.com/macros/s/AKfycbwC1jNkkBNUH9lJsOtG5gk5DZePCISChsgcTNzE-_v8e2FJdSjs_eI3JLmLB-ZZ5GCZ/exec',
                     $sheetsData
                 );
             if ($response->failed()) {
@@ -274,8 +274,140 @@ class AuthController extends Controller
         return back()->with('whatsapp_url', $url);
 
         // $whatsappUrl = "https://api.whatsapp.com/send/?phone={$adminNumber}&text=" . urlencode($message);
-   
+
         return redirect()->away($whatsappUrl);
+    }
+
+    public function checkoutCheckEmail(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()->first(),
+            ]);
+        }
+
+        $userExists = User::where('email', $request->email)->exists();
+
+        return response()->json([
+            'success' => true,
+            'registered' => $userExists,
+        ]);
+    }
+
+    public function checkoutLogin(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:255|exists:users,email',
+            'password' => 'required|min:6',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()->first(),
+            ]);
+        }
+
+        $oldSessionId = Session::getId();
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            Session::put('user', $request->email);
+
+            // Merge cart logic
+            $cartData = Cart::where('session_id', $oldSessionId)->get();
+            foreach ($cartData as $value) {
+                $cart = Cart::where('id', $value->id)->first();
+                $checkCart = Cart::where('user_id', auth()->id())->where('product_id', $cart->product_id)->first();
+                if ($checkCart) {
+                    if (($checkCart->quantity + $cart->quantity) > $cart->product->product_stock) {
+                        $checkCart->quantity = $checkCart->quantity;
+                    } else {
+                        $checkCart->quantity = $checkCart->quantity + $cart->quantity;
+                    }
+                    $checkCart->save();
+                    Cart::where('id', $value->id)->delete();
+                } else {
+                    $cart->session_id = null;
+                    $cart->user_id = auth()->id();
+                    $cart->save();
+                }
+            }
+
+            return response()->json([
+                'success' => true,
+                'redirect_url' => route('front.checkout.view'),
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Invalid email or password.',
+        ]);
+    }
+
+    public function checkoutRegister(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:255|unique:users,email',
+            'name' => 'required|string|min:2|max:255',
+            'reg_password' => 'required|min:6|confirmed',
+        ], [
+            'reg_password.confirmed' => 'Password and confirm password must match.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()->first(),
+            ]);
+        }
+
+        $oldSessionId = Session::getId();
+        $user = User::create([
+            'name' => trim($request->name),
+            'email' => $request->email,
+            'password' => Hash::make($request->reg_password),
+            'status' => 'active'
+        ]);
+
+        if ($user) {
+            Auth::login($user);
+            Session::put('user', $request->email);
+
+            // Merge cart logic
+            $cartData = Cart::where('session_id', $oldSessionId)->get();
+            foreach ($cartData as $value) {
+                $cart = Cart::where('id', $value->id)->first();
+                $checkCart = Cart::where('user_id', auth()->id())->where('product_id', $cart->product_id)->first();
+                if ($checkCart) {
+                    if (($checkCart->quantity + $cart->quantity) > $cart->product->product_stock) {
+                        $checkCart->quantity = $checkCart->quantity;
+                    } else {
+                        $checkCart->quantity = $checkCart->quantity + $cart->quantity;
+                    }
+                    $checkCart->save();
+                    Cart::where('id', $value->id)->delete();
+                } else {
+                    $cart->session_id = null;
+                    $cart->user_id = auth()->id();
+                    $cart->save();
+                }
+            }
+
+            return response()->json([
+                'success' => true,
+                'redirect_url' => route('front.checkout.view'),
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Registration failed, please try again.',
+        ]);
     }
 
 }
