@@ -18,6 +18,159 @@
         transform-origin: left;
     }
 }
+
+/* Checkout Authentication Modal Styling */
+#checkoutAuthModal .modal-content {
+    background-color: #faf9f6; /* Soft warm luxury background */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E"); /* Subtle noise texture */
+    border: 1px solid var(--gold-color);
+    border-radius: 0px; /* Sharp, modern, architectural look */
+    box-shadow: 0 20px 50px rgba(14, 34, 51, 0.15) !important;
+    padding: 20px;
+}
+
+#checkoutAuthModal .modal-header {
+    border-bottom: none;
+    padding-bottom: 0;
+    position: relative;
+}
+
+#checkoutAuthModal .modal-title {
+    /* font-family: var(--heading-font);
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--dark-900);
+    letter-spacing: 0.5px;
+    text-transform: uppercase; */
+}
+
+#checkoutAuthModal .btn-close {
+    background-color: transparent;
+    border: 1px solid rgba(199, 181, 140, 0.3);
+    border-radius: 50%;
+    padding: 0.5rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    background-size: 10px;
+}
+
+#checkoutAuthModal .btn-close:hover {
+    opacity: 1;
+    border-color: var(--gold-color);
+    background-color: rgba(199, 181, 140, 0.1);
+}
+
+#checkoutAuthModal .modal-body {
+    padding-top: 15px;
+}
+
+/* #checkoutAuthModal .auth-step p {
+    font-family: var(--body-font);
+    font-size: 14.5px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 25px;
+} */
+
+/* Floating labels custom style for luxury look */
+#checkoutAuthModal .form-floating {
+    margin-bottom: 20px;
+}
+
+#checkoutAuthModal .form-floating .form-control {
+    background-color: transparent !important;
+    border: none;
+    border-bottom: 1px solid rgba(14, 34, 51, 0.2);
+    border-radius: 0;
+    padding: 10px 0;
+    height: 50px;
+    font-size: 16px;
+    color: var(--dark-900);
+    box-shadow: none !important;
+    transition: border-color 0.3s ease;
+}
+
+#checkoutAuthModal .form-floating .form-control:focus {
+    border-bottom-color: var(--gold-color);
+}
+
+#checkoutAuthModal .form-floating label {
+    padding: 10px 0;
+    color: var(--dark-900);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+#checkoutAuthModal .form-floating .form-control:focus ~ label,
+#checkoutAuthModal .form-floating .form-control:not(:placeholder-shown) ~ label {
+    color: var(--gold-color);
+    transform: scale(0.85) translateY(-1rem);
+}
+
+/* Submit and Action Buttons */
+#checkoutAuthModal .btn-auth-primary {
+    width: 100%;
+    background-color: var(--dark-900);
+    color: var(--white-color);
+    border: 1px solid var(--dark-900);
+     border-color: var(--dark-900);
+    /* padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+    border-radius: 0; */
+}
+/* 
+#checkoutAuthModal .btn-auth-primary:hover {
+    background-color: var(--gold-color);
+    border-color: var(--gold-color);
+    color: var(--white-color);
+} */
+
+#checkoutAuthModal .btn-auth-secondary {
+    display: inline-block;
+    background: transparent;
+    border: none;
+    color: var(--secondary-color);
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 8px 16px;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#checkoutAuthModal .btn-auth-secondary:hover {
+    color: var(--dark-900);
+    text-decoration: underline;
+}
+
+/* Alert Styling */
+#checkoutAuthModal .alert-danger {
+    border-radius: 0;
+    border: 1px solid #d32f2f;
+    background-color: #fff5f5;
+    color: #d32f2f;
+    font-size: 13.5px;
+    padding: 12px 16px;
+}
+
+/* JQuery Validation Error */
+#checkoutAuthModal .text-danger.mt-1 {
+    font-size: 12.5px;
+    color: #d32f2f !important;
+    text-align: left;
+    margin-top: 4px !important;
+}
 </style>
 <section class="mt_60 mb_120">
     {{-- @php 
@@ -198,56 +351,131 @@
 </section>
 
 <!-- Checkout Authentication Modal -->
-<div class="modal fade audio_modal" id="checkoutAuthModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+<div class="modal fade auth_modal" id="checkoutAuthModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="checkoutAuthTitle">Login to Checkout</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" id="closeCheckoutAuthModalBtn"></button>
+                <p class="modal-title w-100 text-center title_40" id="checkoutAuthTitle">Login to Checkout</p>
+                <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" id="closeCheckoutAuthModalBtn"></button>
             </div>
-            <div class="modal-body text-start">
+            <div class="modal-body text-center">
                 <div class="ct_form">
                     <form id="checkout-auth-form">
                         @csrf
 
-                        <div id="checkout-auth-alert" class="alert alert-danger d-none py-2 px-3 mb-3" style="font-size: 14px;"></div>
+                        <div id="checkout-auth-alert" class="alert alert-danger d-none py-2 px-3 mb-3 text-start"></div>
 
                         <div id="step-email" class="auth-step">
-                            <p class="m-3 text-center">Please enter your email address to continue.</p>
-                            <div class="ct_input mb-4">
-                                <input type="email" name="email" id="checkout_email" class="form-control" placeholder="Enter email address" style="margin-top: 10px;" required>
+                            <p>Please enter your email address to continue.</p>
+                            <div class="form-floating">
+                                <input type="email" name="email" id="checkout_email" class="form-control shadow-none" placeholder=" " required>
+                                <label for="checkout_email">Email address</label>
                             </div>
-                            <div class="modal-footer justify-content-center border-0 p-0">
-                                <button type="button" class="com_btn bg-transparent" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" id="btn-email-next" class="com_btn">Next</button>
+                            <div class="d-flex flex-column align-items-center gap-2 mt-4">
+                                <button type="button" id="btn-email-next" class="btn-auth-primary com_btn">Continue</button>
+                                <button type="button" class="btn-auth-secondary" data-bs-dismiss="modal">Cancel</button>
                             </div>
                         </div>
 
                         <div id="step-login" class="auth-step d-none">
-                            <p class="m-3 text-center">This email is already registered. Please enter your password to continue.</p>
-                            <div class="ct_input mb-4">
-                                <input type="password" name="password" id="checkout_password" class="form-control" placeholder="Enter your password" style="margin-top: 10px;">
+                            <p>This email is already registered. Please enter your password to continue.</p>
+                            <div class="form-floating password_wrap">
+                                <input type="password" name="password" id="checkout_password" class="form-control shadow-none" placeholder=" ">
+                                <label for="checkout_password">Password</label>
+                                <span class="toggle_password" onclick="togglePasswordSvg('checkout_password', this)">
+                                    <!-- 👁 Eye (show) -->
+                                    <svg class="eye-open" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12" stroke="#000" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M1 12C1 12 5 20 12 20C19 20 23 12 23 12" stroke="#000"
+                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path
+                                            d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
+                                            stroke="#000" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+
+                                    <!-- 🙈 Eye Off (hide) -->
+                                    <svg class="eye-close" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M2 2L22 22M6.71277 6.7226C3.66479 8.79527 2 12 2 12C2 12 5.63636 19 12 19C14.0503 19 15.8174 18.2734 17.2711 17.2884M11 5.05822C11.3254 5.02013 11.6588 5 12 5C18.3636 5 22 12 22 12C22 12 21.3082 13.3317 20 14.8335M14 14.2361C13.4692 14.7111 12.7684 15 12 15C10.3431 15 9 13.6569 9 12C9 11.1763 9.33193 10.4302 9.86932 9.88808"
+                                            stroke="#000" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </span>
                             </div>
-                            <div class="modal-footer justify-content-center border-0 p-0">
-                                <button type="button" id="btn-login-back" class="com_btn bg-transparent">Back</button>
-                                <button type="submit" id="btn-login-submit" class="com_btn">Login & Checkout</button>
+                            <div class="d-flex flex-column align-items-center gap-2 mt-4">
+                                <button type="submit" id="btn-login-submit" class="btn-auth-primary com_btn">Login & Checkout</button>
+                                <button type="button" id="btn-login-back" class="btn-auth-secondary"><- Back</button>
                             </div>
                         </div>
 
                         <div id="step-register" class="auth-step d-none">
-                            <p class="m-3 text-center">It looks like you are new to HNOWW. Create an account to complete your checkout.</p>
-                            <div class="ct_input mb-3">
-                                <input type="text" name="name" id="checkout_name" class="form-control" placeholder="Enter Full name" style="margin-top: 10px;">
+                            <p>It looks like you are new to HNOWW. Create an account to complete your checkout.</p>
+                            <div class="form-floating">
+                                <input type="text" name="name" id="checkout_name" class="form-control shadow-none" placeholder=" ">
+                                <label for="checkout_name">Full Name</label>
                             </div>
-                            <div class="ct_input mb-3">
-                                <input type="password" name="reg_password" id="checkout_reg_password" class="form-control" placeholder="Set password (min 6 characters)" style="margin-top: 10px;">
+                            <div class="form-floating password_wrap">
+                                <input type="password" name="reg_password" id="checkout_reg_password" class="form-control shadow-none" placeholder=" ">
+                                <label for="checkout_reg_password">Password (min 6 characters)</label>
+                                <span class="toggle_password" onclick="togglePasswordSvg('checkout_reg_password', this)">
+                                    <!-- 👁 Eye (show) -->
+                                    <svg class="eye-open" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12" stroke="#000" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M1 12C1 12 5 20 12 20C19 20 23 12 23 12" stroke="#000"
+                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path
+                                            d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
+                                            stroke="#000" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+
+                                    <!-- 🙈 Eye Off (hide) -->
+                                    <svg class="eye-close" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M2 2L22 22M6.71277 6.7226C3.66479 8.79527 2 12 2 12C2 12 5.63636 19 12 19C14.0503 19 15.8174 18.2734 17.2711 17.2884M11 5.05822C11.3254 5.02013 11.6588 5 12 5C18.3636 5 22 12 22 12C22 12 21.3082 13.3317 20 14.8335M14 14.2361C13.4692 14.7111 12.7684 15 12 15C10.3431 15 9 13.6569 9 12C9 11.1763 9.33193 10.4302 9.86932 9.88808"
+                                            stroke="#000" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </span>
                             </div>
-                            <div class="ct_input mb-4">
-                                <input type="password" name="reg_password_confirmation" id="checkout_reg_password_confirmation" class="form-control" placeholder="Confirm password" style="margin-top: 10px;">
+                            <div class="form-floating password_wrap">
+                                <input type="password" name="reg_password_confirmation" id="checkout_reg_password_confirmation" class="form-control shadow-none" placeholder=" ">
+                                <label for="checkout_reg_password_confirmation">Confirm Password</label>
+                                <span class="toggle_password" onclick="togglePasswordSvg('checkout_reg_password_confirmation', this)">
+                                    <!-- 👁 Eye (show) -->
+                                    <svg class="eye-open" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12" stroke="#000" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M1 12C1 12 5 20 12 20C19 20 23 12 23 12" stroke="#000"
+                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path
+                                            d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
+                                            stroke="#000" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+
+                                    <!-- 🙈 Eye Off (hide) -->
+                                    <svg class="eye-close" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M2 2L22 22M6.71277 6.7226C3.66479 8.79527 2 12 2 12C2 12 5.63636 19 12 19C14.0503 19 15.8174 18.2734 17.2711 17.2884M11 5.05822C11.3254 5.02013 11.6588 5 12 5C18.3636 5 22 12 22 12C22 12 21.3082 13.3317 20 14.8335M14 14.2361C13.4692 14.7111 12.7684 15 12 15C10.3431 15 9 13.6569 9 12C9 11.1763 9.33193 10.4302 9.86932 9.88808"
+                                            stroke="#000" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </span>
                             </div>
-                            <div class="modal-footer justify-content-center border-0 p-0">
-                                <button type="button" id="btn-register-back" class="com_btn bg-transparent">Back</button>
-                                <button type="submit" id="btn-register-submit" class="com_btn">Register & Checkout</button>
+                            <div class="d-flex flex-column align-items-center gap-2 mt-4">
+                                <button type="submit" id="btn-register-submit" class="btn-auth-primary com_btn">Register & Checkout</button>
+                                <button type="button" id="btn-register-back" class="btn-auth-secondary"><span>
+                                    <- </span> Back</button>
                             </div>
                         </div>
 
@@ -476,6 +704,18 @@ $(document).ready(function() {
         return 'Something went wrong. Please try again.';
     }
 });
+
+function togglePasswordSvg(inputId, el) {
+    const input = document.getElementById(inputId);
+
+    if (input.type === "password") {
+        input.type = "text";
+        el.classList.add("active");
+    } else {
+        input.type = "password";
+        el.classList.remove("active");
+    }
+}
 </script>
 @endpush
 @include('layouts.frontfooter')
