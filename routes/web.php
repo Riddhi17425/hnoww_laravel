@@ -111,6 +111,11 @@ Route::name('front.')->group(function () {
 	Route::get('front/login', [AuthController::class, 'getLogin'])->name('login'); //un-used
     Route::post('front/login', [AuthController::class, 'submitLogin'])->name('login.post');
 
+	// CHECKOUT AUTHENTICATION FLOW
+	Route::post('/checkout/check-email', [AuthController::class, 'checkoutCheckEmail'])->name('checkout.check-email');
+	Route::post('/checkout/login', [AuthController::class, 'checkoutLogin'])->name('checkout.login');
+	Route::post('/checkout/register', [AuthController::class, 'checkoutRegister'])->name('checkout.register');
+
 	// FORGOT PASSWORD
 	Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('get.forgot.password');
 	Route::post('/post-forgot-password', [AuthController::class, 'sendResetLink'])->name('post.forgot.password');
