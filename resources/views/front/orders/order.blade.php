@@ -68,6 +68,7 @@
                                 <th>TOTAL AMOUNT</th>
                                 <th>ORDER STATUS</th>
                                 <th>PAYMENT STATUS</th>
+                                <th>ORDER DATE</th>
                                 <th>ORDER VIEW</th>
                             </tr>
                         </thead>
@@ -79,6 +80,7 @@
                                 <td>{{$val->order_total ?? '-'}}</td>
                                 <td><span class="status_pill status_green">{{strtoupper($val->status) ?? '-'}}</span></td>
                                 <td><span class="status_pill status_red">{{strtoupper($val->payment_status) ?? '-'}}</span></td>
+                                <td><span class="">{{strtoupper($val->created_at) ? date('d-m-Y', strtotime($val->created_at)) : '-'}}</span></td>
                                 <td>
                                     <a class="view_btn" href="{{route('front.order_detail.view', $val->id)}}"> 
                                         <svg class="eye-open" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
