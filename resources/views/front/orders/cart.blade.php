@@ -85,7 +85,7 @@
     border: none;
     border-bottom: 1px solid rgba(14, 34, 51, 0.2);
     border-radius: 0;
-    padding: 10px 0;
+    padding: 20px 0 0 0;
     height: 50px;
     font-size: 16px;
     color: var(--dark-900);
@@ -98,16 +98,17 @@
 }
 
 #checkoutAuthModal .form-floating label {
-    padding: 10px 0;
+    padding: 12px 0;
     color: var(--dark-900);
     transition: all 0.3s ease;
     pointer-events: none;
+    transform-origin: 0 0;
 }
 
 #checkoutAuthModal .form-floating .form-control:focus ~ label,
 #checkoutAuthModal .form-floating .form-control:not(:placeholder-shown) ~ label {
     color: var(--gold-color);
-    transform: scale(0.85) translateY(-1rem);
+    transform: scale(0.85) translateY(-12px);
 }
 
 /* Submit and Action Buttons */
@@ -141,7 +142,7 @@
     font-size: 13px;
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    /* letter-spacing: 1px; */
     padding: 8px 16px;
     margin-top: 10px;
     transition: all 0.3s ease;
