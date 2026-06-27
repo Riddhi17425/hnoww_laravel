@@ -203,14 +203,27 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 <script>
 // Initialize the professional country picker
-const phoneInput = document.querySelector("#wa-phone");
-const countryNameField = document.querySelector("#wa_country_name");
-const fullPhoneField = document.querySelector("#wa_full_phone");
 
-const iti = window.intlTelInput(phoneInput, {
-    initialCountry: "ae", // Default to India
-    separateDialCode: true,
-    utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+document.addEventListener("DOMContentLoaded", function () {
+    const phoneInput = document.querySelector("#wa-phone");
+    const countryNameField = document.querySelector("#wa_country_name");
+    const fullPhoneField = document.querySelector("#wa_full_phone");
+    let iti = null;
+    iti = window.intlTelInput(phoneInput, {
+        initialCountry: "auto", // Default to India
+        separateDialCode: true,
+        geoIpLookup: function(callback) {
+            fetch("https://ipapi.co/json")
+                .then(res => res.json())
+                .then(data => {
+                    callback(data.country_code.toLowerCase());
+                })
+                .catch(() => {
+                    callback("ae"); // fallback country
+                });
+        },
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
 });
 
 const form = document.getElementById("whatsapForm");

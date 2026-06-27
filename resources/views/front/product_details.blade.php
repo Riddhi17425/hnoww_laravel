@@ -104,25 +104,23 @@
                 </div>
             </div> --}}
 
-            <div class="increment_decrement_area">
+            {{-- <div class="increment_decrement_area">
                 <div class="increment_decrement" data-product-id="{{ $product->id }}" data-stock="{{ $product->product_stock }}">
                     <button class="dec_btn" data-call="detail" type="button">−</button>
                     <span class="span_value">1</span>
                     <input type="hidden" class="qty_input" id="product-qty" value="1">
                     <button class="inc_btn" data-call="detail" type="button">+</button>
                 </div>
-                {{-- @auth --}}
                 @if($product->product_url == 'the-sovereign-weight' || $product->product_url == 'the-wireless-courtyard')
                     <button type="button" class="com_btn" data-bs-toggle="modal" data-bs-target="#productInquiry">Reserved for June Delivery </button>
                 @else
                     <button type="button" class="com_btn add_to_cart_btn" data-product-id="{{ $product->id }}" id="cartSubmitBtn"> Add to Cart</button>
                 @endif
-                
-                {{-- @else
-                    <a href="javascript:void(0)" class="com_btn" data-bs-toggle="modal" data-bs-target="#loginRequiredModal"> Add to Cart </a>
-                @endauth --}}
+            </div> --}}
+            <div class="increment_decrement_area">
+                <a href="#" class="com_btn" data-bs-toggle="modal" data-bs-target="#productInquiry">Enquire Now </a>
             </div>
-
+            
             @if(isset($product->large_description) && $product->large_description != '')
             <h4 class="sub_head mb-4">The Story</h4>
             <div class="mb-4">

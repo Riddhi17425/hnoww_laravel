@@ -958,9 +958,7 @@ $(document).ready(async function() {
 
     // $('#payBtn').hide();
     const amount = $discountedTotal;
-        console.log('Discounted amount:', $discountedTotal);
     if (amount && amount > 0) {
-        console.log('Amount:', amount);
         clientSecret = await createPaymentIntent(amount);
         await mountPaymentElement(clientSecret);
         $('#error-message').text(''); // Clear errors
