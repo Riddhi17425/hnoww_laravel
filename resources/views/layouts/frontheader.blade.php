@@ -269,7 +269,7 @@ $current_route ===
                     <div class="user_menu">
 
                         <a href="{{route('front.profile')}}">My Profile</a>
-                        <a href="{{ route('front.order.view') }}">My Orders</a>
+                        {{-- <a href="{{ route('front.order.view') }}">My Orders</a> --}}
                         <!-- <a href="#">My Wishlist</a> -->
                         <a href="{{ route('front.logout') }}">Logout</a>
                     </div>
@@ -284,7 +284,7 @@ $current_route ===
                 </div>
 
                 <!-- Cart with Badge -->
-                <a href="{{ route('front.cart.view') }}" class="cart_icon d-lg-none">
+                {{--<a href="{{ route('front.cart.view') }}" class="cart_icon d-lg-none">
                     <img src="<?= $is_green ? asset('public/images/front/cart-icon-black.svg') : asset('public/images/front/cart-icon.svg') ?>"
                         alt="Cart">
                     @php
@@ -295,7 +295,7 @@ $current_route ===
                         }
                     @endphp
                     <span id="cart-count" class="cart-total cart_badge">{{ $cartCount ?? 0 }} </span>
-                </a>
+                </a> --}}
 
                 <span class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
                     aria-label="Toggle navigation">
@@ -437,7 +437,7 @@ $current_route ===
                         <div class="user_menu">
 
                             <a href="{{route('front.profile')}}">My Profile</a>
-                            <a href="{{ route('front.order.view') }}">My Orders</a>
+                            {{-- <a href="{{ route('front.order.view') }}">My Orders</a> --}}
                             <!-- <a href="#">My Wishlist</a> -->
                             <a href="{{ route('front.logout') }}">Logout</a>
                         </div>
@@ -451,7 +451,7 @@ $current_route ===
 
                     </div>
                     <!-- Cart with Badge -->
-                    <a href="{{ route('front.cart.view') }}" class="cart_icon d-none d-lg-block">
+                    {{--<a href="{{ route('front.cart.view') }}" class="cart_icon d-none d-lg-block">
                         <img src="<?= $is_green ? asset('public/images/front/cart-icon-black.svg') : asset('public/images/front/cart-icon.svg') ?>" alt="Cart">
                         @php
                             if (Auth::check()) {
@@ -462,7 +462,7 @@ $current_route ===
                         @endphp
                         <span id="cart-count" class="cart-total cart_badge">{{ $cartCount ?? 0 }} </span>
                         <!--<span id="cart-count" class="cart-total cart_badge">{{ \App\Models\Cart::where('user_id', auth()->id())->sum('quantity') ?? 0 }}</span>-->
-                    </a>
+                    </a> --}}
 
                     <div class="language-select ms-lg-3">
                         <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
