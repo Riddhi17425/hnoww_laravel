@@ -203,12 +203,24 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 <script>
 // Initialize the professional country picker
-
+// OLD CODE
+// const phoneInput = document.querySelector("#wa-phone");
+// const countryNameField = document.querySelector("#wa_country_name");
+// const fullPhoneField = document.querySelector("#wa_full_phone");
+// const iti = window.intlTelInput(phoneInput, {
+//     initialCountry: "ae", // Default to India
+//     separateDialCode: true,
+//     utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+// });
+// NEW CODE
+var phoneInput = null;
+var countryNameField = null;
+var fullPhoneField = null;
+var iti = null;
 document.addEventListener("DOMContentLoaded", function () {
-    const phoneInput = document.querySelector("#wa-phone");
-    const countryNameField = document.querySelector("#wa_country_name");
-    const fullPhoneField = document.querySelector("#wa_full_phone");
-    let iti = null;
+    phoneInput = document.querySelector("#wa-phone");
+    countryNameField = document.querySelector("#wa_country_name");
+    fullPhoneField = document.querySelector("#wa_full_phone");
     iti = window.intlTelInput(phoneInput, {
         initialCountry: "auto", // Default to India
         separateDialCode: true,
@@ -224,17 +236,18 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
     });
+
+    const form = document.getElementById("whatsapForm");
+    form.addEventListener("submit", function (e) {
+        const countryData = iti.getSelectedCountryData();
+        const dialCode = countryData.dialCode;
+        const countryName = countryData.name;
+        const phoneNumber = phoneInput.value.replace(/\s+/g, "");
+        fullPhoneField.value = `+${dialCode}${phoneNumber}`;
+        countryNameField.value = countryName;
+    });
 });
 
-const form = document.getElementById("whatsapForm");
-form.addEventListener("submit", function (e) {
-    const countryData = iti.getSelectedCountryData();
-    const dialCode = countryData.dialCode;
-    const countryName = countryData.name;
-    const phoneNumber = phoneInput.value.replace(/\s+/g, "");
-    fullPhoneField.value = `+${dialCode}${phoneNumber}`;
-    countryNameField.value = countryName;
-});
 
 function toggleWAModal() {
     const modal = document.getElementById('hnoww-wa-modal');
