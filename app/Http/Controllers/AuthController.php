@@ -226,19 +226,20 @@ class AuthController extends Controller
     }
 
     public function whatsaapInquiry(Request $request){
+        \Log::info("1");
         $validator = Validator::make($request->all(), [
             'number' => 'required',
-            'message' => 'required',
+            'message' => 'nullable',
         ]);
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
+        \Log::info("2");
         WhatsappInquiry::create([
             'number'  => $request->number,
             'message'  => $request->message,
         ]);
-
+        \Log::info("3");
         $timestamp = Carbon::now()->format('Y-m-d H:i:s');
         // Google Sheet expects:
         $sheetsData = [
@@ -248,8 +249,9 @@ class AuthController extends Controller
             'date'      => $timestamp,
         ];
 
+        \Log::info("4");
         // Send to Google Sheets
-        try {
+        // try {
             $response = Http::withHeaders(['Content-Type' => 'application/json'])
                 ->post('https://script.google.com/macros/s/AKfycbwC1jNkkBNUH9lJsOtG5gk5DZePCISChsgcTNzE-_v8e2FJdSjs_eI3JLmLB-ZZ5GCZ/exec',
                     $sheetsData
@@ -257,19 +259,19 @@ class AuthController extends Controller
             if ($response->failed()) {
                 \Log::error('Google Sheet request failed: '.$response->body());
             }
-        } catch (\Exception $e) {
-            \Log::error('Google Sheets Exception (WhatsApp Inquiry):', [
-                'message'   => $e->getMessage(),
-                'trace'     => $e->getTraceAsString(),
-                'data_sent' => $sheetsData
-            ]);
-        }
-
+        // } catch (\Exception $e) {
+        //     \Log::error('Google Sheets Exception (WhatsApp Inquiry):', [
+        //         'message'   => $e->getMessage(),
+        //         'trace'     => $e->getTraceAsString(),
+        //         'data_sent' => $sheetsData
+        //     ]);
+        // }
+\Log::info("5");
         // Redirect to WhatsApp
         $number = $request->number;
         $adminNumber = config('global_values.admin_whatsapp_no'); // Fallback number
         $message = 'Inquiry from the website with Phone No. - '. $number.' and Message - '. $request->message;
-
+\Log::info("6");
         $url = 'https://wa.me/' . $adminNumber . '?text=' . urlencode($message);
         return back()->with('whatsapp_url', $url);
 
