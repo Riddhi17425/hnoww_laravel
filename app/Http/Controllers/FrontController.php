@@ -234,15 +234,16 @@ class FrontController extends Controller
         $validator = Validator::make($request->all(), [
             'name'        => 'required|string|max:255',
             'product_id' => $isGift ? 'required|exists:gift_shops,id' : 'required|exists:products,id',
-            'email'      => ['required', 'email', 'max:255',
-                $isGift
-                    ? Rule::unique('product_inquiries')->where(function ($query) {
-                        $query->where('is_gift_inquiry', 1);
-                    })
-                    : Rule::unique('product_inquiries')->where(function ($query) {
-                        $query->where('is_gift_inquiry', 0);
-                    })
-            ],
+            'email'      => ['required', 'email', 'max:255'],
+            // 'email'      => ['required', 'email', 'max:255',
+            //     $isGift
+            //         ? Rule::unique('product_inquiries')->where(function ($query) {
+            //             $query->where('is_gift_inquiry', 1);
+            //         })
+            //         : Rule::unique('product_inquiries')->where(function ($query) {
+            //             $query->where('is_gift_inquiry', 0);
+            //         })
+            // ],
             'contact_no'  => 'nullable|string|max:15|min:8',
             'message'     => 'nullable|string',
         ], [
@@ -252,7 +253,7 @@ class FrontController extends Controller
             'product_id.required' => 'Product information is required.',
             'email.required'      => 'Please enter your email address.',
             'email.email'         => 'Please enter a valid email address.',
-            'email.unique'        => 'This email has already been used for an inquiry.',
+            //'email.unique'        => 'This email has already been used for an inquiry.',
             'contact_no.max'      => 'Contact number may not exceed 15 digits.',
             'message.string'      => 'Message must be valid text.',
         ]);
@@ -553,11 +554,12 @@ class FrontController extends Controller
 
     public function storeNewsletterInquiry(Request $request){
         $validator = Validator::make($request->all(), [
-            'newsletter_email' => 'required|email|unique:newsletters,email',
+            // 'newsletter_email' => 'required|email|unique:newsletters,email',
+            'newsletter_email' => 'required|email',
         ], [
             'newsletter_email.required'      => 'Please enter your email address.',
             'newsletter_email.email'         => 'Please enter a valid email address.',
-            'newsletter_email.unique'        => 'This email has already been used for an inquiry.',
+            // 'newsletter_email.unique'        => 'This email has already been used for an inquiry.',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -637,7 +639,8 @@ class FrontController extends Controller
         $interest = config('global_values.request_catalogue_interest');
         $validator = Validator::make($request->all(), [
             'full_name'      => 'required|string|min:2|max:100',
-            'email'         => 'required|email|unique:request_catalogues,email',
+            // 'email'         => 'required|email|unique:request_catalogues,email',
+            'email'         => 'required|email',
             'phone'         => 'required|min:7|max:15',
             'interest'  => 'required|string',
         ], [
@@ -646,7 +649,7 @@ class FrontController extends Controller
             'full_name.max'            => 'Full Name may not be greater than 100 characters.',
             'email.required'      => 'Please enter your email address.',
             'email.email'         => 'Please enter a valid email address.',
-            'email.unique'        => 'This email has already been used for an inquiry.',
+            // 'email.unique'        => 'This email has already been used for an inquiry.',
             'phone.max'      => 'Phone number may not exceed 15 digits.',
             'interest.required' => 'Please select Interest',
         ]);
@@ -713,7 +716,8 @@ class FrontController extends Controller
         $enquiryType = config('global_values.contact_enquiry_type');
         $validator = Validator::make($request->all(), [
             'full_name'      => 'required|string|min:2|max:100',
-            'email'         => 'required|email|unique:contact_inquiries,email',
+            // 'email'         => 'required|email|unique:contact_inquiries,email',
+            'email'         => 'required|email',
             'phone'         => 'required|min:7|max:15',
             'enquiry_type'  => 'required|string',
             'message'       => 'required|string|min:5|max:255',
@@ -724,7 +728,7 @@ class FrontController extends Controller
             'full_name.max'            => 'Full Name may not be greater than 100 characters.',
             'email.required'      => 'Please enter your email address.',
             'email.email'         => 'Please enter a valid email address.',
-            'email.unique'        => 'This email has already been used for an inquiry.',
+            // 'email.unique'        => 'This email has already been used for an inquiry.',
             'phone.max'      => 'Phone number may not exceed 15 digits.',
             'enquiry_type.required' => 'Please select Enquiry Type',
             'message.string'      => 'Message must be valid text.',
@@ -1711,7 +1715,8 @@ class FrontController extends Controller
         $validator = Validator::make($request->all(), [
             'name'        => 'required|string|max:255',
             'ceremonial_id'  => 'required|exists:products,id',
-            'email'       => 'required|email|max:255|unique:ceremonial_inquiries,email',
+            // 'email'       => 'required|email|max:255|unique:ceremonial_inquiries,email',
+            'email'       => 'required|email|max:255',
             'contact_no'  => 'nullable|string|max:15',
             'message'     => 'nullable|string',
         ], [
@@ -1720,7 +1725,7 @@ class FrontController extends Controller
             'name.max'            => 'Name may not be greater than 255 characters.',
             'email.required'      => 'Please enter your email address.',
             'email.email'         => 'Please enter a valid email address.',
-            'email.unique'        => 'This email has already been used for an inquiry.',
+            // 'email.unique'        => 'This email has already been used for an inquiry.',
             'contact_no.max'      => 'Contact number may not exceed 15 digits.',
             'message.string'      => 'Message must be valid text.',
         ]);

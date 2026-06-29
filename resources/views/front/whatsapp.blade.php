@@ -225,14 +225,10 @@ document.addEventListener("DOMContentLoaded", function () {
         initialCountry: "auto", // Default to India
         separateDialCode: true,
         geoIpLookup: function(callback) {
-            fetch("https://ipapi.co/json")
+            fetch("https://ipwho.is/")
                 .then(res => res.json())
-                .then(data => {
-                    callback(data.country_code.toLowerCase());
-                })
-                .catch(() => {
-                    callback("ae"); // fallback country
-                });
+                .then(data => callback(data.country_code.toLowerCase()))
+                .catch(() => callback("ae"));
         },
         utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
     });

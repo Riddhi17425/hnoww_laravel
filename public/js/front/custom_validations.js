@@ -59,22 +59,26 @@ $.validator.addMethod("noSpamEmail", function (value, element) {
 // }, "This email is already registered");
 
 // tableName is a string identifying which table to check
-$.validator.addMethod("uniqueEmail", function(value, element, tableName) {
-    let isValid = false;
+// $.validator.addMethod("uniqueEmail", function(value, element, tableName) {
+//     let isValid = false;
 
-    $.ajax({
-        url: sitePath + "/check-email-unique",
-        type: "POST",
-        data: { 
-            email: value,
-            table: tableName // send table name to backend
-        },
-        async: false,
-        success: function(response) {
-            isValid = response.unique === true;
-        }
-    });
-    return isValid;
+//     $.ajax({
+//         url: sitePath + "/check-email-unique",
+//         type: "POST",
+//         data: { 
+//             email: value,
+//             table: tableName // send table name to backend
+//         },
+//         async: false,
+//         success: function(response) {
+//             isValid = response.unique === true;
+//         }
+//     });
+//     return isValid;
+// }, "This email is already registered");
+
+$.validator.addMethod("uniqueEmail", function(value, element, tableName) {
+    return true;
 }, "This email is already registered");
 
 $.validator.addMethod('filesize5', function (value, element, param) {
