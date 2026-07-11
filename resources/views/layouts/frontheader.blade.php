@@ -23,13 +23,13 @@ $current_route ===
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('public/images/front/favicon.png') }}">
     <title>{{ $meta_title ?? 'Architectural Objects & Home Accents | HNoww Dubai' }}</title>
-    <meta name="description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}"> 
+    <meta name="description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}">
     @if(request()->is('gift-blessing') || request()->is('gift-shop') || request()->is('gift-details/*') || request()->is('front/auth/*') || request()->is('cart') || request()->is('forgot-password') || request()->is('privacy'))
         <meta name="robots" content="nofollow, noindex"/>
     @else
         <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
     @endif
-    
+
     <link rel="canonical" href="{{ url()->current() }}" />
 
     <!--OG Tags-->
@@ -42,19 +42,19 @@ $current_route ===
     <meta property="og:image" content="{{$og_image ?? ''}}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="{{$ogType}}">
-    
+
     <!--Twitter X Card Tags-->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $meta_title ?? 'Architectural Objects & Home Accents | HNoww Dubai' }}">
     <meta name="twitter:description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}">
     <meta name="twitter:image" content="{{$og_image ?? ''}}">
-    
+
     @if(isset($blog_schema) && $blog_schema != '')
     <script type="application/ld+json">
         {!! $blog_schema !!}
     </script>
     @endif
-    
+
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -241,9 +241,9 @@ $current_route ===
     </script>
     @endif
 
-</head>   
+</head>
 
-<body class="<?= $is_green ? 'theme-green' : 'theme-white' ?>">
+<body class="<?php echo $is_green ? 'theme-green' : 'theme-white' ?>">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TC64GGWX"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -260,12 +260,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
     </div>  -->
 
-    <header class="sticky-header <?= $is_green ? 'theme-green' : 'theme-white' ?>">
+    <header class="sticky-header <?php echo $is_green ? 'theme-green' : 'theme-white' ?>">
 
         <nav class="navbar navbar-expand-lg">
             <div class="navbar_left">
-                <a href="{{ route('front.home') }}"><img class="header_logo" src="{{ $is_green 
-                            ? asset('public/images/front/footer-logo.svg') 
+                <a href="{{ route('front.home') }}"><img class="header_logo" src="{{ $is_green
+                            ? asset('public/images/front/footer-logo.svg')
                             : asset('public/images/front/header-logo.svg') }}" alt="Logo"></a>
             </div>
 
@@ -273,7 +273,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <!-- User Dropdown -->
                 <div class="user_dropdown d-lg-none">
                     <span class="user_icon">
-                        <img src="<?= $is_green ? asset('public/images/front/user-icon-black.svg') : asset('public/images/front/user-icon.svg') ?>"
+                        <img src="<?php echo $is_green ? asset('public/images/front/user-icon-black.svg') : asset('public/images/front/user-icon.svg') ?>"
                             >
                     </span>
 
@@ -297,7 +297,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                 <!-- Cart with Badge -->
                 {{--<a href="{{ route('front.cart.view') }}" class="cart_icon d-lg-none">
-                    <img src="<?= $is_green ? asset('public/images/front/cart-icon-black.svg') : asset('public/images/front/cart-icon.svg') ?>"
+                    <img src="<?php echo $is_green ? asset('public/images/front/cart-icon-black.svg') : asset('public/images/front/cart-icon.svg') ?>"
                         alt="Cart">
                     @php
                         if (Auth::check()) {
@@ -362,7 +362,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <span>the atelier</span>
                     </a>
                 </li>
-                
+
                 <li>
                     <a href="{{ route('front.blogs') }}" data-text="Blogs">
                         <span>Blogs</span>
@@ -413,13 +413,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </ul>
                 <!-- <div class="navbar_right">
                     <a href=""><img
-                            src=" <?= $is_green ? asset('public/images/front/serach-icon-black.svg') : asset('public/images/front/search-icon.svg') ?>"
+                            src=" <?php echo $is_green ? asset('public/images/front/serach-icon-black.svg') : asset('public/images/front/search-icon.svg') ?>"
                         alt="Search"></a>
                     <a href=""><img
-                            src="<?= $is_green ? asset('public/images/front/user-icon-black.svg') : asset('public/images/front/user-icon.svg') ?>"
+                            src="<?php echo $is_green ? asset('public/images/front/user-icon-black.svg') : asset('public/images/front/user-icon.svg') ?>"
                             alt="User"></a>
                     <a href=""><img
-                            src="<?= $is_green ? asset('public/images/front/cart-icon-black.svg') : asset('public/images/front/cart-icon.svg') ?>"
+                            src="<?php echo $is_green ? asset('public/images/front/cart-icon-black.svg') : asset('public/images/front/cart-icon.svg') ?>"
                             alt="Cart"></a>
                 </div> -->
 
@@ -428,7 +428,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <!-- Search Dropdown -->
                     <!-- <div class="search_dropdown">
                     <a href="javascript:void(0)" class="search_icon">
-                        <img src=" <?= $is_green ? asset('public/images/front/serach-icon-black.svg') : asset('public/images/front/search-icon.svg') ?>"
+                        <img src=" <?php echo $is_green ? asset('public/images/front/serach-icon-black.svg') : asset('public/images/front/search-icon.svg') ?>"
                             alt="Search">
                     </a>
 
@@ -441,7 +441,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <!-- User Dropdown -->
                     <div class="user_dropdown d-none d-lg-block">
                         <span class="user_icon">
-                            <img src="<?= $is_green ? asset('public/images/front/user-icon-black.svg') : asset('public/images/front/user-icon.svg') ?>"
+                            <img src="<?php echo $is_green ? asset('public/images/front/user-icon-black.svg') : asset('public/images/front/user-icon.svg') ?>"
                                 >
                         </span>
 
@@ -464,7 +464,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </div>
                     <!-- Cart with Badge -->
                     {{--<a href="{{ route('front.cart.view') }}" class="cart_icon d-none d-lg-block">
-                        <img src="<?= $is_green ? asset('public/images/front/cart-icon-black.svg') : asset('public/images/front/cart-icon.svg') ?>" alt="Cart">
+                        <img src="<?php echo $is_green ? asset('public/images/front/cart-icon-black.svg') : asset('public/images/front/cart-icon.svg') ?>" alt="Cart">
                         @php
                             if (Auth::check()) {
                                 $cartCount = \App\Models\Cart::where('user_id', Auth::id())->sum('quantity');
@@ -503,30 +503,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         </nav>
     </header>
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div>
-                Some text as placeholder. In real life you can have the elements you have chosen. Like, text,
-                images,
-                lists, etc.
-            </div>
-            <div class="dropdown mt-3">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                    Dropdown button
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
 
     <div class="header_login_mess">
         @include('admin.includes.messages')
