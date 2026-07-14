@@ -202,7 +202,10 @@ class FrontController extends Controller
         //     }
         // }
 
-        return view('front.home', compact('herProduct', 'himProduct', 'homeProduct', 'corporateProduct', 'weddingProduct', /*'allProd',*/'allGifts', 'desiredProductsArray', 'instagramPosts'));
+        $meta_title       = 'Luxury Home Decor & Desk Accessories Dubai | HNOWW';
+        $meta_description = 'Sculptural objects for the desk, home, and gifting. Discover brass decor, executive desk accessories, and modern interiors in Dubai.';
+
+        return view('front.home', compact('herProduct', 'himProduct', 'homeProduct', 'corporateProduct', 'weddingProduct', /*'allProd',*/'allGifts', 'desiredProductsArray', 'instagramPosts', 'meta_title', 'meta_description'));
     }
 
     public function getList(Request $request, $catSlug, $from = null)
