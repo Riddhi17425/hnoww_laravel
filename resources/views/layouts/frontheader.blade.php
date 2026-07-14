@@ -22,8 +22,8 @@ $current_route ===
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('public/images/front/favicon.png') }}">
-    <title>{{ $meta_title ?? 'Architectural Objects & Home Accents | HNoww Dubai' }}</title>
-    <meta name="description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}">
+    <title>{{ $meta_title ?? 'Luxury Home Decor & Desk Accessories Dubai | HNOWW' }}</title>
+    <meta name="description" content="{{ $meta_description ?? 'Sculptural objects for the desk, home, and gifting. Discover brass decor, executive desk accessories, and modern interiors in Dubai.' }}">
     @if(request()->is('gift-blessing') || request()->is('gift-shop') || request()->is('gift-details/*') || request()->is('front/auth/*') || request()->is('cart') || request()->is('forgot-password') || request()->is('privacy'))
         <meta name="robots" content="nofollow, noindex"/>
     @else
@@ -37,19 +37,17 @@ $current_route ===
         $ogType = request()->is('blog/*') || request()->is('blogs') ? 'article' : 'website';
     @endphp
     <meta property="og:site_name" content="Hnoww">
-    <meta property="og:title" content="{{ $meta_title ?? 'Architectural Objects & Home Accents | HNoww Dubai' }}" />
-    <meta property="og:description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}" />
-    <meta property="og:image" content="{{ $og_image ?? asset('public/images/front/default-og-image.jpg') }}">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:title" content="{{ $meta_title ?? 'Luxury Home Decor & Desk Accessories Dubai | HNOWW' }}" />
+    <meta property="og:description" content="{{ $meta_description ?? 'Sculptural objects for the desk, home, and gifting. Discover brass decor, executive desk accessories, and modern interiors in Dubai.' }}" />
+    <meta property="og:image" content="{{$og_image ?? ''}}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="{{$ogType}}">
 
     <!--Twitter X Card Tags-->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ $meta_title ?? 'Architectural Objects & Home Accents | HNoww Dubai' }}">
-    <meta name="twitter:description" content="{{ $meta_description ?? 'Luxury gifting where design, ritual, and story take shape.' }}">
-    <meta name="twitter:image" content="{{ $og_image ?? asset('public/images/front/default-og-image.jpg') }}">
+    <meta name="twitter:title" content="{{ $meta_title ?? 'Luxury Home Decor & Desk Accessories Dubai | HNOWW' }}">
+    <meta name="twitter:description" content="{{ $meta_description ?? 'Sculptural objects for the desk, home, and gifting. Discover brass decor, executive desk accessories, and modern interiors in Dubai.' }}">
+    <meta name="twitter:image" content="{{$og_image ?? ''}}">
 
     @if(isset($blog_schema) && $blog_schema != '')
     <script type="application/ld+json">
@@ -355,8 +353,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     </li>
                     <li><a href="{{ route('front.list', ['for-her', 'worlds']) }}">The The Desert Rose</a></li>
                     <li><a href="{{ route('front.list', ['for-home', 'worlds']) }}">The Modern Majlis</a></li> --}}
-                  <li><a href="{{ route('front.rituals') }}">The Ritual Table</a></li>
-                  <li><a href="{{ route('front.architect-study') }}">The Table As Landscape</a></li>
+                    <li><a href="#">The Ritual Table</a></li>
+                    <li><a href="#">The Table As Landscape</a></li>
                 </ul>
                 </li>
                 <li>
