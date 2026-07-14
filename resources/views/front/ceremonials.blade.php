@@ -50,7 +50,7 @@
                     <p class="my-3">
                     {!! $val->short_description ?? '' !!}
                     </p>
-                    <a href="javascript:void(0);" class="com_btn" data-bs-toggle="modal" data-bs-target="#ceremonialInquiry" data-ceremonial-name="{{ $val->product_name }}" data-ceremonial-id="{{ $val->id }}">Available through the H Noww Wedding Concierge.</a>
+                    <button class="com_btn" data-bs-toggle="modal" data-bs-target="#ceremonialInquiry" data-ceremonial-name="{{ $val->product_name }}" data-ceremonial-id="{{ $val->id }}">Available through the H Noww Wedding Concierge.</button>
                 </div>
             @endforeach
             @endif
