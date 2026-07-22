@@ -21,7 +21,7 @@
 <section class="section-mt mt_80 mb_80">
     <div class="container">
         <div class="author-banner">
-            <div class="row align-items-center h-100 author-content-row justify-content-center p-lg-3">
+            <div class="row align-items-center h-100 author-content-row justify-content-center p-lg-3 pb-lg-0">
                 <div class="col-md-4 mb-0 text-center align-self-end  order-2 order-md-1">
                     <img src="{{ asset('public/images/front/auth-img.webp') }}" alt="Salomi Kotecha" class="img-fluid author-banner-img">
                 </div>
