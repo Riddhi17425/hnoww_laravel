@@ -1950,4 +1950,9 @@ class FrontController extends Controller
         return view('front.orders.thankyou');
     }
 
+    public function getAuthor()
+    {
+        return view('front.author');
+    }
+
 }

@@ -1991,6 +1991,10 @@
     .articles_cta_content {
         width: 90%;
     }
+
+    .author-banner-subtitle {
+    gap: 8px;
+}
 }
 
 
