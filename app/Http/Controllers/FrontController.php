@@ -1927,7 +1927,12 @@ class FrontController extends Controller
         $meta_description = $blog->meta_description;
         $og_image         = $blog->og_image ? asset($blog->og_image) : (asset($blog->front_image ?? ''));
         $blogs            = Blog::where('status', 'Active')->where('id', '!=', $blog->id)->get();
-        return view('front.blog_details', compact('blog', 'blogs', 'meta_title', 'meta_description', 'og_image'));
+        $blessings        = Blessing::where('is_active', 0)
+            ->whereNull('deleted_at')
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        return view('front.blog_details', compact('blog', 'blogs', 'meta_title', 'meta_description', 'og_image', 'blessings'));
     }
 
     public function bespokeWeddingHampers()
@@ -1952,7 +1957,7 @@ class FrontController extends Controller
 
     public function getAuthor()
     {
-        return view('front.author');
+        $blogs = Blog::orderBy('id', 'desc')->whereNull('deleted_at')->where('status', 'Active')->get();
+        return view('front.author', compact('blogs'));
     }
-
 }
