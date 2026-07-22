@@ -177,37 +177,41 @@
                 </div>
             </div> --}}
 
-                <!-- Author Section (Blitz Style) -->
-                <div class="author-section mb-5 mt-5">
-                    <div class="row align-items-center">
-                        <div class="col-md-3 mb-md-0 mb-3 text-center">
+           <!-- Author Section (Blitz Style) -->
+            <div class="author-section mb-5 mt-5">
+                <div class="row align-items-center">
+                    <div class="col-md-3 mb-md-0 mb-3 text-center">
+                        <a href="{{ route('front.author') }}">
                             <img src="{{ asset('public/images/front/hnoww-women.webp') }}" alt="Salomi Kotecha"
                                 class="img-fluid rounded-circle author-img">
-                        </div>
-                        <div class="col-md-9">
-                            <div class="d-flex align-items-center mb-2">
-                                <h4 class="author-name mb-0">Salomi Kotecha</h4>
-                                <a href="#" class="text-decoration-none ms-3" title="LinkedIn">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#0077b5">
-                                        <path
-                                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                                    </svg>
-                                </a>
-                            </div>
-                            <p class="author-subtitle mb-3">
-                                Founder, HNOWW <span class="text-muted mx-2">|</span>Objects, Rituals and the Art of
-                                Giving
-                            </p>
-                        </div>
+                        </a>
                     </div>
-                    <p class="author-desc mb-0">
-                        Salomi Kotecha is the founder of HNOWW, a Dubai-based design house creating objects designed to
-                        stay. After more than a decade working across fashion, design and material culture, she founded
-                        HNOWW to explore how objects shape the way we give, gather and remember. She writes about
-                        considered gifting, modern rituals, craftsmanship, hospitality and the stories that give objects
-                        permanence.
-                    </p>
+                    <div class="col-md-9">
+                        <div class="d-flex align-items-center mb-2">
+                            <a href="{{ route('front.author') }}" class="text-decoration-none">
+                                <h4 class="author-name mb-0">Salomi Kotecha</h4>
+                            </a>
+                            <a href="https://www.linkedin.com/in/salomi-kotecha-93b9a6131/" class="text-decoration-none ms-3" title="LinkedIn" target="_blank">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="#0077b5">
+                                    <path
+                                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                </svg>
+                            </a>
+                        </div>
+                        <p class="author-subtitle mb-3">
+                            Founder, HNOWW <span class="text-muted mx-2">|</span>Objects, Rituals and the Art of
+                            Giving
+                        </p>
+                    </div>
                 </div>
+                <p class="author-desc mb-0">
+                    Salomi Kotecha is the founder of HNOWW, a Dubai-based design house creating objects designed to
+                    stay. After more than a decade working across fashion, design and material culture, she founded
+                    HNOWW to explore how objects shape the way we give, gather and remember. She writes about
+                    considered gifting, modern rituals, craftsmanship, hospitality and the stories that give objects
+                    permanence.
+                </p>
+            </div>
 
                 @if (isset($blog->blog_faq) && is_countable($blog->blog_faq) && count($blog->blog_faq) > 0)
                     <div>
