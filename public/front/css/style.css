@@ -615,6 +615,8 @@ object-position:center center;
     overflow-y: auto;
     background-color: #EDEAE4;
     padding: 16px;
+    padding-top: 0;
+
 }
 
 .sidebar-container::-webkit-scrollbar {
@@ -631,6 +633,16 @@ object-position:center center;
     font-family: var(--heading-font);
     font-size: 20px;
     text-transform: uppercase;
+}
+
+/* Make only the left 'CONTENTS' menu title sticky */
+.sidebar-container > p.sidebar-title {
+    position: sticky;
+    top: 0;
+    background-color: #EDEAE4;
+    z-index: 10;
+    padding: 16px 0 10px 0;
+    margin-top: 0;
 }
 
 .sidebar-container ul li {

@@ -191,12 +191,12 @@
                             </a>
                         </div>
                         <p class="mb-3 author-subtitle">
-                            Founder of HNoww <span class="mx-2 text-muted">|</span> Crafting Meaningful Stories Through Objects
+                            Founder, HNOWW <span class="mx-2 text-muted">|</span>Objects, Rituals and the Art of Giving
                         </p>
                     </div>
                 </div>
                 <p class="mb-0 author-desc">
-                    Salomi Kotecha is the founder of HNOWW, a Dubai-based design house creating objects designed to stay. After more than a decade in fashion and design, she founded HNOWW to explore how craftsmanship, material and meaningful design shape the way we gift, gather and remember. She writes about design, gifting, hosting and the stories behind objects that become part of everyday life.
+                   Salomi Kotecha is the founder of HNOWW, a Dubai-based design house creating objects designed to stay. After more than a decade working across fashion, design and material culture, she founded HNOWW to explore how objects shape the way we give, gather and remember. She writes about considered gifting, modern rituals, craftsmanship, hospitality and the stories that give objects permanence.
                 </p>
             </div>
 
@@ -247,7 +247,7 @@
                     <!-- Blessings Library Promotional Section -->
                     <div class="blessings-promo">
                         <!-- Auto-sliding Content Carousel -->
-                        <div id="blessingsPromoCarousel" class="carousel slide carousel-fade pb-4" data-bs-ride="carousel" data-bs-interval="5000">
+                        <div id="blessingsPromoCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
                             <div class="carousel-inner">
                                 <!-- Slide 1 -->
                                 <div class="carousel-item active">
@@ -279,10 +279,7 @@
                                         </span>
                                     </div>
 
-                                    <a href="{{ route('front.blessings.library') }}" class="com_btn w-100 text-center mb-3" >GIFT THIS BLESSING</a>
-                                    <div class="text-center">
-                                        <a href="#" style="font-size: 14px; color: #c7b58c; text-decoration: none;">Share this <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ms-1"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg></a>
-                                    </div>
+                                    <a href="{{ route('front.blessings.library') }}" class="com_btn w-100 text-center" >GIFT THIS BLESSING <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ms-1"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg></a>
                                 </div>
 
                                 <!-- Slide 2 -->
@@ -315,10 +312,8 @@
                                         </span>
                                     </div>
 
-                                    <a href="{{ route('front.blessings.library') }}" class="com_btn w-100 text-center mb-3" style="background: transparent; color: #666; border: 1px solid #ccc;">GIFT THIS BLESSING</a>
-                                    <div class="text-center">
-                                        <a href="#" style="font-size: 14px; color: #c7b58c; text-decoration: none;">Share this <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ms-1"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg></a>
-                                    </div>
+                                    <a href="{{ route('front.blessings.library') }}" class="com_btn w-100 text-center" >GIFT THIS BLESSING <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ms-1"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg></a>
+
                                 </div>
                             </div>
                         </div>
