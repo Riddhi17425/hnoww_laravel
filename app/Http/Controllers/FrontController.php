@@ -486,7 +486,7 @@ class FrontController extends Controller
             'message'       => 'Share details saved successfully',
             'share_link'    => $shareLink,
             'whatsapp_url'  => 'https://wa.me/?text=' . urlencode($shareLink),
-            'email_url'     => 'mailto:?subject=' . rawurlencode('Blessing share') . '&body=' . rawurlencode($shareLink),
+            'email_url'     => 'https://mail.google.com/mail/?view=cm&fs=1&su=' . rawurlencode('Blessing share') . '&body=' . rawurlencode($shareLink),
             'instagram_url' => 'https://www.instagram.com/',
         ]);
     }

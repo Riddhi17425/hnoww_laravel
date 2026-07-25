@@ -863,7 +863,7 @@ $('#shareDetailsForm').validate({
                         '#shareBlessingId').val());
                     activeWhatsappUrl = res.whatsapp_url || ('https://wa.me/?text=' +
                         encodeURIComponent(activeShareLink));
-                    activeEmailUrl = res.email_url || ('mailto:?subject=' + encodeURIComponent(
+                    activeEmailUrl = res.email_url || ('https://mail.google.com/mail/?view=cm&fs=1&su=' + encodeURIComponent(
                         'Blessing share') + '&body=' + encodeURIComponent(
                         activeShareLink));
                     activeInstagramUrl = res.instagram_url || 'https://www.instagram.com/';
@@ -913,7 +913,7 @@ $('#shareEmailBtn').on('click', function() {
         return;
     }
 
-    window.location.href = activeEmailUrl;
+    window.open(activeEmailUrl, '_blank');
 });
 
 $('#shareInstagramBtn').on('click', function() {

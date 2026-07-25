@@ -973,7 +973,7 @@
                             blogActiveWhatsappUrl = res.whatsapp_url || (
                                 'https://wa.me/?text=' + encodeURIComponent(
                                     blogActiveShareLink));
-                            blogActiveEmailUrl = res.email_url || ('mailto:?subject=' +
+                            blogActiveEmailUrl = res.email_url || ('https://mail.google.com/mail/?view=cm&fs=1&su=' +
                                 encodeURIComponent('Blessing share') + '&body=' +
                                 encodeURIComponent(blogActiveShareLink));
                             blogActiveInstagramUrl = res.instagram_url ||
@@ -1015,7 +1015,7 @@
                     alert('Share link not available');
                     return;
                 }
-                window.location.href = blogActiveEmailUrl;
+                window.open(blogActiveEmailUrl, '_blank');
             });
 
             $('#blogShareInstagramBtn').on('click', function() {
