@@ -177,7 +177,7 @@
                 </div>
             </div> --}}
 
-           <!-- Author Section (Blitz Style) -->
+           <!-- Author Section -->
             <div class="author-section mb-5 mt-5">
                 <div class="row align-items-center">
                     <div class="col-md-3 mb-md-0 mb-3 text-center">
