@@ -33,7 +33,7 @@
 
                 <!-- DESCRIPTION -->
                 <p>
-                    {!! nl2br(e($blessing->description)) !!}
+                    {!! ($blessing->description ?? '') !!}
                 </p>
 
                 <!-- AUDIO -->

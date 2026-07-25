@@ -367,8 +367,11 @@ class FrontController extends Controller
         $gift = GiftBlessing::create($data);
         $adminEmail = $this->adminEmail;
         $userEmail = $request->from_email;
+        $toEmail = $request->to_email;
         $data['blessing_title'] = optional($gift->blessing)->title;
         $data['add_flowers_label'] = $addFlowers ? 'Yes' : 'No';
+        $data['shareLink'] = route('front.blessings.detail', ['blessings_of' => $request->blessing_id]);
+        
         // 📧 Send Mail
         try {
             Mail::send('email.admin.gift_blessing_request', $data, function ($message) use ($adminEmail) {
@@ -377,6 +380,10 @@ class FrontController extends Controller
        
             Mail::send('email.front.gift_blessing_request', $data, function ($message) use ($userEmail) {
                 $message->to($userEmail)->subject('Gift blessing request send Successfully');
+            });
+
+            Mail::send('email.front.gift_blessing_receive_request', $data, function ($message) use ($toEmail) {
+                $message->to($toEmail)->subject('Gift blessing receive Successfully');
             });
         } catch (Exception $e) {
             Log::error('Gift blessing sending failed: '.$e->getMessage());
@@ -403,7 +410,7 @@ class FrontController extends Controller
             "*Blessing:* " . ($gift->blessing->title ?? '-') . "\n\n" .
             "— HNoWW";
 
-        //try {
+        try {
             $url = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode($message);
             //return back()->with('whatsapp_url', $url);
             return response()->json([
@@ -412,9 +419,9 @@ class FrontController extends Controller
                 'whatsapp_url' => $url
             ]);
 
-        // } catch (Exception $e) {
-        //     \Log::error('Gift Blessing Whatsapp message sending failed: '.$e->getMessage());
-        // }
+        } catch (Exception $e) {
+            \Log::error('Gift Blessing Whatsapp message sending failed: '.$e->getMessage());
+        }
 
         return response()->json(['message' => 'Blessing gifted successfully']);
     }

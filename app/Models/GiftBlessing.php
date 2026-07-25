@@ -13,4 +13,10 @@ class GiftBlessing extends Model
     protected $casts = [
         'add_flowers' => 'boolean',
     ];
+
+    public function blessing()
+    {
+        return $this->belongsTo(Blessing::class, 'blessing_id', 'id')->withTrashed();
+    }
+    
 }
