@@ -9,16 +9,16 @@
          <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white d-lg-none">Corporate Enquiries</a>
         </div>
     </div> --}}
-    
+
     <section class="hero-section">
      <video autoplay muted loop class="hero_video d-none d-md-block">
         <source src="{{ asset('public/images/front/hero-video.webm') }}" type="video/webm">
         Your browser does not support the video tag.
     </video>
     <video autoplay muted loop class="hero_video d-md-none">
-        <source src="{{ asset('public/images/front/hero-video-mobaile.mp4') }}" type="video/mp4">
+        <source src="{{ asset('public/images/front/hero-video-mobile.mp4') }}" type="video/mp4">
         Your browser does not support the video tag.
-    </video> 
+    </video>
     <div class="hero_content">
         <p class="mb-0 d-md-none">Designed in Dubai. Made to endure.</p>
         <h1 class="main_head">Objects Designed To Stay</h1>
@@ -27,7 +27,7 @@
              <a href="{{ route('front.atelier') }}" class="com_btn border-0 bg-white d-lg-none">Explore The Works</a>
          <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white d-lg-none">Corporate Enquiries</a>
         </div>
-    </div> 
+    </div>
 
     <div class="hero_left_right">
         <span><svg xmlns="http://www.w3.org/2000/svg" width="63" height="6" viewBox="0 0 63 6" fill="none">
@@ -290,8 +290,8 @@
                     </svg>
                 </span>
                 <div class="desire_box_top_child">
-                    <a href="jsvascript:void(0);" class="desire_box_top_child_inner" data-bs-toggle="modal"
-                        data-bs-target="#productInquiry" data-product-name="{{ $val->product_name }}"
+                  <a href="javascript:void(0);" class="desire_box_top_child_inner" data-bs-toggle="modal"
+                    data-bs-target="#productInquiry" data-product-name="{{ $val->product_name }}"
                     data-product-id="{{ $val->id }}">
                     <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
                         <path
@@ -450,9 +450,7 @@ alt="Curated Rituals 1" loading="lazy">
                     </div>
                     <div class="bespoke_box_bot">
                         <p class="para">Ceremonial designs crafted to mark modern unions.</p>
-                        <span><a href="javascript:void(0);" data-bs-toggle="modal"
-                                data-bs-target="#requestWeddingCatalogue" class="com_btn">Request Wedding
-                                Catalogue</a></span>
+                       <span><a href="{{ route('front.wedding.vault') }}" data-bs-toggle="modal" data-bs-target="#requestWeddingCatalogue" class="com_btn">Request Wedding Catalogue</a></span>
                     </div>
                 </div>
             </div>
@@ -468,9 +466,7 @@ alt="Curated Rituals 1" loading="lazy">
                     <div class="bespoke_box_bot">
 
                         <p class="para">Articles designed to mark intentional partnerships.</p>
-                        <span><a href="javascript:void(0);" data-bs-toggle="modal"
-                                data-bs-target="#requestCorporateProposal" class="com_btn"> The Corporate
-                                Edit</a></span>
+                        <span><a href="{{ route('front.corporate.vault') }}" data-bs-toggle="modal" data-bs-target="#requestCorporateProposal" class="com_btn">The Corporate Edit</a></span>
                     </div>
                 </div>
             </div>
@@ -559,7 +555,7 @@ alt="Curated Rituals 1" loading="lazy">
         <div class="layout-wrapper-Socials">
             <div class="left-card">
                 <img class="home_instagram" src="{{ asset('public/images/front/Instagram_logo_home.svg') }}" alt="Instagram Logo" class="mb-4" loading="lazy">
-              
+
                 <div>
                     <h4 class="sub_head_inter my-4">The Collection, In Motion.</h4>
                     <p>

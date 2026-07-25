@@ -63,8 +63,8 @@
                             {{-- <li><a href="{{ route('front.list', ['for-him', 'worlds']) }}">The Architect’s Study</a></li>
                             <li><a href="{{ route('front.list', ['for-her', 'worlds']) }}">The The Desert Rose</a></li>
                             <li><a href="{{ route('front.list', ['for-home', 'worlds']) }}">The Modern Majlis</a></li> --}}
-                            <li><a href="#">The Ritual Table</a></li>
-                            <li><a href="#">The Table As Landscape</a></li>
+                           <li><a href="{{ route('front.rituals') }}">The Ritual Table</a></li>
+                            <li><a href="{{ route('front.architect-study') }}">The Table As Landscape</a></li>
                         </ul>
                     </div>
                 </div> -->
