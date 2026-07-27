@@ -1,11 +1,24 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{FrontController, AuthController, CartController};
-
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Auth\LoginController;
-use App\Http\Controllers\Admin\{AdminController, CategoryController, ProductController, ProductTabController, ProductImageController, FaqController, JournalController, BlessingController, CeremonialController, GiftShopController, CorporateKitController, UserController, BlogController};
+use App\Http\Controllers\Admin\BlessingController;
+use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CeremonialController;
+use App\Http\Controllers\Admin\CorporateKitController;
+use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\GiftShopController;
+use App\Http\Controllers\Admin\JournalController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductImageController;
+use App\Http\Controllers\Admin\ProductTabController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\FrontController;use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\RedirectIfNotAdmin;
+use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,18 +29,17 @@ use App\Http\Middleware\RedirectIfNotAdmin;
 | contains the "web" middleware group. Now create something great!
 |
 */
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/send', function () {
     Mail::raw('This is a test email sent from Laravel.', function ($message) {
         $message->to('webdeveloper9.intelliworkz@gmail.com')
-                ->subject('Test Mail from Laravel');
+            ->subject('Test Mail from Laravel');
     });
 
     return 'Mail sent!';
 });
-
 
 Route::get('/clear', function () {
     Artisan::call('optimize:clear');
@@ -37,16 +49,23 @@ Route::get('/clear', function () {
 Route::post('/newsletter-temp/store', [FrontController::class, 'storeNewsletterTempInquiry'])->name('newsletter.temp.store');
 Route::post('/check-email-unique', [FrontController::class, 'checkEmailUnique'])->name('front.check.email.unique');
 
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap.index');
+Route::get('/post-sitemap.xml', [SitemapController::class, 'posts'])->name('sitemap.posts');
+Route::get('/page-sitemap.xml', [SitemapController::class, 'pages'])->name('sitemap.pages');
+Route::get('/product-sitemap.xml', [SitemapController::class, 'products'])->name('sitemap.products');
+Route::get('/category-sitemap.xml', [SitemapController::class, 'categories'])->name('sitemap.categories');
+Route::get('/gift-sitemap.xml', [SitemapController::class, 'gifts'])->name('sitemap.gifts');
+Route::get('/blessing-sitemap.xml', [SitemapController::class, 'blessings'])->name('sitemap.blessings');
+
 // Catch-all for frontend (coming soon)
 // Route::any('{any}', function () {
 //     return view('front.coming_soon');
 // })->where('any', '^(?!admin).*');
 
-
 //FRONT ROUTE
 Route::name('front.')->group(function () {
     Route::get('/', [FrontController::class, 'index'])->name('home');
-    Route::get('stripe', [FrontController::class, 'getStripe']); // Temporary
+    Route::get('stripe', [FrontController::class, 'getStripe']);                             // Temporary
     Route::post('stripe-post', [FrontController::class, 'stripePost'])->name('stripe.post'); // Temporary
 
     Route::get('list/{category_slug}/{from?}', [FrontController::class, 'getList'])->name('list');
@@ -60,99 +79,98 @@ Route::name('front.')->group(function () {
     Route::get('/contact-us', [FrontController::class, 'getContactUs'])->name('contactus');
     Route::post('store-contact-inquiry', [FrontController::class, 'storeContactInquiry'])->name('store.contact.inquiry');
     Route::get('/faqs', [FrontController::class, 'getFaqs'])->name('faqs');
-	Route::get('/journal', [FrontController::class, 'getJournal'])->name('journal');
-	Route::get('/blessings-library/{blessings_of?}', [FrontController::class, 'getBlessings'])->name('blessings.library');
-	Route::get('/blessings-detail/{blessings_of?}', [FrontController::class, 'blessingDetail'])->name('blessings.detail');
-	Route::get('/blessings-audio/{blessing}', [FrontController::class, 'blessingAudio'])->name('blessings.audio');
-	Route::post('/gift-blessing', [FrontController::class, 'storeGiftBlessing'])->name('store.gift.blessing');
-	Route::post('/shared-details', [FrontController::class, 'storeSharedDetail'])->name('store.shared.detail');
+    Route::get('/journal', [FrontController::class, 'getJournal'])->name('journal');
+    Route::get('/blessings-library/{blessings_of?}', [FrontController::class, 'getBlessings'])->name('blessings.library');
+    Route::get('/blessings-detail/{blessings_of?}', [FrontController::class, 'blessingDetail'])->name('blessings.detail');
+    Route::get('/blessings-audio/{blessing}', [FrontController::class, 'blessingAudio'])->name('blessings.audio');
+    Route::post('/gift-blessing', [FrontController::class, 'storeGiftBlessing'])->name('store.gift.blessing');
+    Route::post('/shared-details', [FrontController::class, 'storeSharedDetail'])->name('store.shared.detail');
 
-	Route::get('/atelier', [FrontController::class, 'getAtelier'])->name('atelier');
-	Route::post('store-corporate-proposal-request', [FrontController::class, 'storeCorporateProposalRequest'])->name('store.corporate.proposal.request');
-	Route::post('store-corporate-product-request', [FrontController::class, 'storeCorporateProductRequest'])->name('store.corporate.product.request');
-	Route::post('store-corporate-kit-request', [FrontController::class, 'storeCorporateKitRequest'])->name('store.corporate.kit.request');
+    Route::get('/atelier', [FrontController::class, 'getAtelier'])->name('atelier');
+    Route::post('store-corporate-proposal-request', [FrontController::class, 'storeCorporateProposalRequest'])->name('store.corporate.proposal.request');
+    Route::post('store-corporate-product-request', [FrontController::class, 'storeCorporateProductRequest'])->name('store.corporate.product.request');
+    Route::post('store-corporate-kit-request', [FrontController::class, 'storeCorporateKitRequest'])->name('store.corporate.kit.request');
     Route::post('store-wedding-catelogue-request', [FrontController::class, 'storeWeddingCatalogueRequest'])->name('store.wedding.catelogue.request');
-	Route::post('store-bespoke-commission-request', [FrontController::class, 'storeBespokeCommissionRequest'])->name('store.bespoke.commission.request');
+    Route::post('store-bespoke-commission-request', [FrontController::class, 'storeBespokeCommissionRequest'])->name('store.bespoke.commission.request');
 
-	Route::get('/wedding-products/{category_id?}', [FrontController::class, 'getCeremonials'])->name('ceremonials');
-	Route::post('store-ceremonial-inquiry', [FrontController::class, 'storeCeremonialInquiry'])->name('store.ceremonial.inquiry');
-	Route::get('/gift-shop', [FrontController::class, 'getGiftShop'])->name('giftshop');
+    Route::get('/wedding-products/{category_id?}', [FrontController::class, 'getCeremonials'])->name('ceremonials');
+    Route::post('store-ceremonial-inquiry', [FrontController::class, 'storeCeremonialInquiry'])->name('store.ceremonial.inquiry');
+    Route::get('/gift-shop', [FrontController::class, 'getGiftShop'])->name('giftshop');
     Route::get('gift-details/{product_slug}', [FrontController::class, 'getGiftDetails'])->name('gift.details');
-	Route::get('/bespoke-commission', [FrontController::class, 'getBespokeCommission'])->name('bespoke.commission');
-	Route::get('/privacy', [FrontController::class, 'getprivacy'])->name('privacy');
+    Route::get('/bespoke-commission', [FrontController::class, 'getBespokeCommission'])->name('bespoke.commission');
+    Route::get('/privacy', [FrontController::class, 'getprivacy'])->name('privacy');
 
     Route::get('/corporate-vault/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
-	Route::get('/get-products-by-category/{category_id}', [FrontController::class, 'getProductsByCategory'])->name('get.products.by.category');
+    Route::get('/get-products-by-category/{category_id}', [FrontController::class, 'getProductsByCategory'])->name('get.products.by.category');
     Route::get('/wedding-vault', [FrontController::class, 'getWeddingVault'])->name('wedding.vault');
-	Route::post('/wedding-vault/send-email', [FrontController::class, 'sendUnlockWeddingEmail'])->name('wedding-vault.send-email');
-	Route::post('/wedding-vault/verify-otp', [FrontController::class, 'verifyWeddingVaultOtp'])->name('wedding-vault.verify-otp');
+    Route::post('/wedding-vault/send-email', [FrontController::class, 'sendUnlockWeddingEmail'])->name('wedding-vault.send-email');
+    Route::post('/wedding-vault/verify-otp', [FrontController::class, 'verifyWeddingVaultOtp'])->name('wedding-vault.verify-otp');
     Route::get('/wedding-vault-inside', [FrontController::class, 'getWeddingVaultInside'])->name('wedding.vault.inside');
-    
-	// NOT MADE DYNAMIC - START
-	Route::get('/rituals', [FrontController::class, 'getRituals'])->name('rituals'); 
-	Route::get('/bespoke-wedding-hampers', [FrontController::class, 'bespokeWeddingHampers'])->name('bespoke.wedding.hampers');
-	Route::get('/everyday-sacred', [FrontController::class, 'getEverydaySacred'])->name('everyday-sacred'); 
-	Route::get('/memory-shelf', [FrontController::class, 'getMemoryShelf'])->name('memory-shelf'); 
-	Route::get('/modern-majilis', [FrontController::class, 'getModernMajilis'])->name('modern-majilis'); 
-	Route::get('/architect-study', [FrontController::class, 'getArchitectStudy'])->name('architect-study'); 
-	Route::get('/author', [FrontController::class, 'getAuthor'])->name('author'); 
-	Route::get('/about', [FrontController::class, 'getAbout'])->name('about'); 
-	Route::get('/editions', [FrontController::class, 'getEditions'])->name('editions'); 
-	// NOT MADE DYNAMIC - END
 
-	Route::get('/thankyou', [FrontController::class, 'getThankYou'])->name('thankyou'); 
+    // NOT MADE DYNAMIC - START
+    Route::get('/rituals', [FrontController::class, 'getRituals'])->name('rituals');
+    Route::get('/bespoke-wedding-hampers', [FrontController::class, 'bespokeWeddingHampers'])->name('bespoke.wedding.hampers');
+    Route::get('/everyday-sacred', [FrontController::class, 'getEverydaySacred'])->name('everyday-sacred');
+    Route::get('/memory-shelf', [FrontController::class, 'getMemoryShelf'])->name('memory-shelf');
+    Route::get('/modern-majilis', [FrontController::class, 'getModernMajilis'])->name('modern-majilis');
+    Route::get('/architect-study', [FrontController::class, 'getArchitectStudy'])->name('architect-study');
+    Route::get('/author', [FrontController::class, 'getAuthor'])->name('author');
+    Route::get('/about', [FrontController::class, 'getAbout'])->name('about');
+    Route::get('/editions', [FrontController::class, 'getEditions'])->name('editions');
+    // NOT MADE DYNAMIC - END
 
-	Route::get('/blogs', [FrontController::class, 'getBlogs'])->name('blogs'); 
-	Route::get('/blog/{url}', [FrontController::class, 'getBlogDetails'])->name('blog.detail'); 
+    Route::get('/thankyou', [FrontController::class, 'getThankYou'])->name('thankyou');
 
+    Route::get('/blogs', [FrontController::class, 'getBlogs'])->name('blogs');
+    Route::get('/blog/{url}', [FrontController::class, 'getBlogDetails'])->name('blog.detail');
 
-	// LOGIN & REGISTER
-	Route::get('front/auth/{page?}', [AuthController::class, 'getAuth'])->name('auth'); // used for both login & registration
+                                                                                        // LOGIN & REGISTER
+    Route::get('front/auth/{page?}', [AuthController::class, 'getAuth'])->name('auth'); // used for both login & registration
     Route::post('front/register', [AuthController::class, 'submitRegister'])->name('register.post');
-	Route::get('front/login', [AuthController::class, 'getLogin'])->name('login'); //un-used
+    Route::get('front/login', [AuthController::class, 'getLogin'])->name('login'); //un-used
     Route::post('front/login', [AuthController::class, 'submitLogin'])->name('login.post');
 
-	// CHECKOUT AUTHENTICATION FLOW
-	Route::post('/checkout/check-email', [AuthController::class, 'checkoutCheckEmail'])->name('checkout.check-email');
-	Route::post('/checkout/login', [AuthController::class, 'checkoutLogin'])->name('checkout.login');
-	Route::post('/checkout/register', [AuthController::class, 'checkoutRegister'])->name('checkout.register');
+    // CHECKOUT AUTHENTICATION FLOW
+    Route::post('/checkout/check-email', [AuthController::class, 'checkoutCheckEmail'])->name('checkout.check-email');
+    Route::post('/checkout/login', [AuthController::class, 'checkoutLogin'])->name('checkout.login');
+    Route::post('/checkout/register', [AuthController::class, 'checkoutRegister'])->name('checkout.register');
 
-	// FORGOT PASSWORD
-	Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('get.forgot.password');
-	Route::post('/post-forgot-password', [AuthController::class, 'sendResetLink'])->name('post.forgot.password');
+    // FORGOT PASSWORD
+    Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('get.forgot.password');
+    Route::post('/post-forgot-password', [AuthController::class, 'sendResetLink'])->name('post.forgot.password');
     Route::get('/reset-password/{token}', [AuthController::class, 'resetPassword'])->name('get.reset.password');
     Route::post('post-reset-password', [AuthController::class, 'postResetPassword'])->name('password.update');
-	
-	// MANAGE CART
-	Route::get('/cart', [CartController::class, 'getCart'])->name('cart.view');
-	Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add.ajax');
-	Route::post('/cart/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
-    
-	Route::middleware(['auth'])->group(function () {
-	    Route::get('/profile', [FrontController::class, 'profile'])->name('profile'); 
-	    
-		Route::get('/order', [CartController::class, 'order'])->name('order.view');
-		Route::get('/order-detail/{orderid}', [CartController::class, 'orderDetail'])->name('order_detail.view');
-		
-		// Route::get('/cart', [CartController::class, 'getCart'])->name('cart.view');
-		// Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add.ajax');
-		// Route::post('/cart/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
-		
-		Route::get('/checkout', [CartController::class, 'getCheckout'])->name('checkout.view');
-		Route::post('/checkout/store-address', [CartController::class, 'storeAddress'])->name('checkout.store.address');
-		Route::post('/checkout/process', [CartController::class, 'checkoutProcess'])->name('checkout.process');
-		Route::get('/payment/success', [CartController::class, 'paymentSuccess'])->name('payment.success');
-		Route::get('/get/success/{orderid?}', [CartController::class, 'getSuccess'])->name('get.success');
-		Route::get('/get/failed/{orderid}', [CartController::class, 'getFailed'])->name('get.failed');
 
-		Route::get('front/logout', [AuthController::class, 'logout'])->name('logout');
-	});
+    // MANAGE CART
+    Route::get('/cart', [CartController::class, 'getCart'])->name('cart.view');
+    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add.ajax');
+    Route::post('/cart/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
 
-	Route::post('/cookie-consent', [AuthController::class, 'cookieConsent']);
-	Route::post('/whatsaap-inquiry', [AuthController::class, 'whatsaapInquiry'])->name('whatsaap.inquiry');
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/profile', [FrontController::class, 'profile'])->name('profile');
+
+        Route::get('/order', [CartController::class, 'order'])->name('order.view');
+        Route::get('/order-detail/{orderid}', [CartController::class, 'orderDetail'])->name('order_detail.view');
+
+        // Route::get('/cart', [CartController::class, 'getCart'])->name('cart.view');
+        // Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add.ajax');
+        // Route::post('/cart/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
+
+        Route::get('/checkout', [CartController::class, 'getCheckout'])->name('checkout.view');
+        Route::post('/checkout/store-address', [CartController::class, 'storeAddress'])->name('checkout.store.address');
+        Route::post('/checkout/process', [CartController::class, 'checkoutProcess'])->name('checkout.process');
+        Route::get('/payment/success', [CartController::class, 'paymentSuccess'])->name('payment.success');
+        Route::get('/get/success/{orderid?}', [CartController::class, 'getSuccess'])->name('get.success');
+        Route::get('/get/failed/{orderid}', [CartController::class, 'getFailed'])->name('get.failed');
+
+        Route::get('front/logout', [AuthController::class, 'logout'])->name('logout');
+    });
+
+    Route::post('/cookie-consent', [AuthController::class, 'cookieConsent']);
+    Route::post('/whatsaap-inquiry', [AuthController::class, 'whatsaapInquiry'])->name('whatsaap.inquiry');
 
 });
-  
+
 // -----------------------------------------------------------------------------------------------------------------
 //ADMIN ROUTES
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -161,116 +179,114 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-   Route::middleware([RedirectIfNotAdmin::class])->group(function () {
+    Route::middleware([RedirectIfNotAdmin::class])->group(function () {
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
         Route::get('profile', [AdminController::class, 'adminProfile'])->name('profile');
-		Route::post('profile/update', [AdminController::class, 'profileUpdate'])->name('profile.update');
+        Route::post('profile/update', [AdminController::class, 'profileUpdate'])->name('profile.update');
 
         // PRODUCT CATEGORY
-		Route::prefix('categories')->name('categories.')->group(function () {
-			Route::get('/', [CategoryController::class, 'index'])->name('index');
-			Route::get('/fetch', [CategoryController::class, 'getCategories'])->name('fetch');
-			Route::get('/create', [CategoryController::class, 'create'])->name('create');
-			Route::post('/store', [CategoryController::class, 'store'])->name('store');
-			Route::get('/edit/{cat_id}', [CategoryController::class, 'edit'])->name('edit');
-			Route::put('/update/{cat_id}', [CategoryController::class, 'update'])->name('update');
-			Route::delete('/delete/{cat_id}', [CategoryController::class, 'delete'])->name('delete');
-			Route::post('/update-status', [CategoryController::class, 'updateStatus'])->name('update.status');
-		});
+        Route::prefix('categories')->name('categories.')->group(function () {
+            Route::get('/', [CategoryController::class, 'index'])->name('index');
+            Route::get('/fetch', [CategoryController::class, 'getCategories'])->name('fetch');
+            Route::get('/create', [CategoryController::class, 'create'])->name('create');
+            Route::post('/store', [CategoryController::class, 'store'])->name('store');
+            Route::get('/edit/{cat_id}', [CategoryController::class, 'edit'])->name('edit');
+            Route::put('/update/{cat_id}', [CategoryController::class, 'update'])->name('update');
+            Route::delete('/delete/{cat_id}', [CategoryController::class, 'delete'])->name('delete');
+            Route::post('/update-status', [CategoryController::class, 'updateStatus'])->name('update.status');
+        });
 
         //PRODUCT
         Route::prefix('products')->name('products.')->group(function () {
-			Route::get('/', [ProductController::class, 'index'])->name('index');
-			Route::get('/fetch', [ProductController::class, 'getProducts'])->name('fetch');
-			Route::get('/create', [ProductController::class, 'create'])->name('create');
-			Route::post('/store', [ProductController::class, 'store'])->name('store');
-			Route::get('/edit/{product_id}', [ProductController::class, 'edit'])->name('edit');
-			Route::put('/update/{product_id}', [ProductController::class, 'update'])->name('update');
-			Route::delete('/delete/{product_id}', [ProductController::class, 'delete'])->name('delete');
-			Route::post('/update-status', [ProductController::class, 'updateStatus'])->name('update.status');
+            Route::get('/', [ProductController::class, 'index'])->name('index');
+            Route::get('/fetch', [ProductController::class, 'getProducts'])->name('fetch');
+            Route::get('/create', [ProductController::class, 'create'])->name('create');
+            Route::post('/store', [ProductController::class, 'store'])->name('store');
+            Route::get('/edit/{product_id}', [ProductController::class, 'edit'])->name('edit');
+            Route::put('/update/{product_id}', [ProductController::class, 'update'])->name('update');
+            Route::delete('/delete/{product_id}', [ProductController::class, 'delete'])->name('delete');
+            Route::post('/update-status', [ProductController::class, 'updateStatus'])->name('update.status');
 
-			Route::post('delete-detail-image', [ProductController::class, 'deleteDetailImage'])->name('delete.detail.image');
-			Route::post('delete-all-detail-images', [ProductController::class, 'deleteAllDetailImages'])->name('delete.alldetail.images');
-		});
+            Route::post('delete-detail-image', [ProductController::class, 'deleteDetailImage'])->name('delete.detail.image');
+            Route::post('delete-all-detail-images', [ProductController::class, 'deleteAllDetailImages'])->name('delete.alldetail.images');
+        });
 
         //PRODCUCT TABS
         Route::prefix('product-tabs')->name('product-tabs.')->group(function () {
-			Route::get('/', [ProductTabController::class, 'index'])->name('index');
-			Route::get('/fetch', [ProductTabController::class, 'getProductTabs'])->name('fetch');
-			Route::get('/create', [ProductTabController::class, 'create'])->name('create');
-			Route::post('/store', [ProductTabController::class, 'store'])->name('store');
-			Route::get('/edit/{product_id}', [ProductTabController::class, 'edit'])->name('edit');
-			Route::post('/update/{product_id}', [ProductTabController::class, 'update'])->name('update');
-			Route::delete('/delete/{product_id}', [ProductTabController::class, 'destroyByProduct'])->name('delete');
-			Route::post('/update-status', [ProductTabController::class, 'updateStatus'])->name('update.status');
-		});
+            Route::get('/', [ProductTabController::class, 'index'])->name('index');
+            Route::get('/fetch', [ProductTabController::class, 'getProductTabs'])->name('fetch');
+            Route::get('/create', [ProductTabController::class, 'create'])->name('create');
+            Route::post('/store', [ProductTabController::class, 'store'])->name('store');
+            Route::get('/edit/{product_id}', [ProductTabController::class, 'edit'])->name('edit');
+            Route::post('/update/{product_id}', [ProductTabController::class, 'update'])->name('update');
+            Route::delete('/delete/{product_id}', [ProductTabController::class, 'destroyByProduct'])->name('delete');
+            Route::post('/update-status', [ProductTabController::class, 'updateStatus'])->name('update.status');
+        });
 
         //PRODCUCT TABS
         Route::prefix('product-images')->name('product-images.')->group(function () {
-			Route::get('/', [ProductImageController::class, 'index'])->name('index');
-			Route::get('/fetch', [ProductImageController::class, 'getProductImages'])->name('fetch');
-			Route::get('/create', [ProductImageController::class, 'create'])->name('create');
-			Route::post('/store', [ProductImageController::class, 'store'])->name('store');
-			Route::get('/edit/{product_id}', [ProductImageController::class, 'edit'])->name('edit');
-			Route::put('/update/{product_id}', [ProductImageController::class, 'update'])->name('update');
-			Route::delete('/delete/{product_id}', [ProductImageController::class, 'destroyByProduct'])->name('delete');
-			Route::post('/update-status', [ProductImageController::class, 'updateStatus'])->name('update.status');
-		});
+            Route::get('/', [ProductImageController::class, 'index'])->name('index');
+            Route::get('/fetch', [ProductImageController::class, 'getProductImages'])->name('fetch');
+            Route::get('/create', [ProductImageController::class, 'create'])->name('create');
+            Route::post('/store', [ProductImageController::class, 'store'])->name('store');
+            Route::get('/edit/{product_id}', [ProductImageController::class, 'edit'])->name('edit');
+            Route::put('/update/{product_id}', [ProductImageController::class, 'update'])->name('update');
+            Route::delete('/delete/{product_id}', [ProductImageController::class, 'destroyByProduct'])->name('delete');
+            Route::post('/update-status', [ProductImageController::class, 'updateStatus'])->name('update.status');
+        });
 
-		//FAQs
+        //FAQs
         Route::prefix('faqs')->name('faqs.')->group(function () {
-            route::get('/' , [FaqController::class , 'index'])->name('index');
-            route::get('/create' , [FaqController::class , 'create'])->name('create');
-            route::post('/store' , [FaqController::class , 'store'])->name('store');
-            route::get('/fetch' , [FaqController::class , 'getFaqs'])->name('fetch');
-            route::get('/edit/{type_id}' , [FaqController::class , 'editFaqs'])->name('edit');
-            route::post('/update/{type_id}' , [FaqController::class , 'updateFaqs'])->name('update');
+            route::get('/', [FaqController::class, 'index'])->name('index');
+            route::get('/create', [FaqController::class, 'create'])->name('create');
+            route::post('/store', [FaqController::class, 'store'])->name('store');
+            route::get('/fetch', [FaqController::class, 'getFaqs'])->name('fetch');
+            route::get('/edit/{type_id}', [FaqController::class, 'editFaqs'])->name('edit');
+            route::post('/update/{type_id}', [FaqController::class, 'updateFaqs'])->name('update');
             Route::delete('/delete/{type_id}', [FaqController::class, 'destroyByType'])->name('delete');
         });
 
-		Route::prefix('users')->name('users.')->group(function () {
-            route::get('/get-users' , [UserController::class , 'getUsers'])->name('get');
-            route::get('/fetch-users' , [UserController::class , 'fetchUsers'])->name('fetch');
-            route::get('/get-orders' , [UserController::class , 'getOrders'])->name('orders');
-            route::get('/fetch-orders' , [UserController::class , 'fetchOrders'])->name('orders.fetch');
-            route::get('/view-order-details/{orderid}' , [UserController::class , 'viewOrderDetails'])->name('orders.details');
+        Route::prefix('users')->name('users.')->group(function () {
+            route::get('/get-users', [UserController::class, 'getUsers'])->name('get');
+            route::get('/fetch-users', [UserController::class, 'fetchUsers'])->name('fetch');
+            route::get('/get-orders', [UserController::class, 'getOrders'])->name('orders');
+            route::get('/fetch-orders', [UserController::class, 'fetchOrders'])->name('orders.fetch');
+            route::get('/view-order-details/{orderid}', [UserController::class, 'viewOrderDetails'])->name('orders.details');
         });
 
-		Route::prefix('blogs')->name('blogs.')->group(function () {
-			Route::get('/index', [BlogController::class, 'index'])->name('index');
-			Route::get('/fetch', [BlogController::class, 'fetchBlogs'])->name('fetch');
-			Route::get('/create', [BlogController::class, 'create'])->name('create');
-			Route::post('/store', [BlogController::class, 'store'])->name('store');
-			Route::get('/edit/{blog_id}', [BlogController::class, 'edit'])->name('edit');
-			Route::put('/update/{blog_id}', [BlogController::class, 'update'])->name('update');
-			Route::delete('/delete/{blog_id}', [BlogController::class, 'delete'])->name('delete');
-			Route::post('/update-status', [BlogController::class, 'updateStatus'])->name('update.status');
-		});
+        Route::prefix('blogs')->name('blogs.')->group(function () {
+            Route::get('/index', [BlogController::class, 'index'])->name('index');
+            Route::get('/fetch', [BlogController::class, 'fetchBlogs'])->name('fetch');
+            Route::get('/create', [BlogController::class, 'create'])->name('create');
+            Route::post('/store', [BlogController::class, 'store'])->name('store');
+            Route::get('/edit/{blog_id}', [BlogController::class, 'edit'])->name('edit');
+            Route::put('/update/{blog_id}', [BlogController::class, 'update'])->name('update');
+            Route::delete('/delete/{blog_id}', [BlogController::class, 'delete'])->name('delete');
+            Route::post('/update-status', [BlogController::class, 'updateStatus'])->name('update.status');
+        });
 
-		Route::resource('journals', JournalController::class);
-		route::get('journal/fetch' , [JournalController::class , 'getJournals'])->name('journal.fetch');
-		route::post('journal/update/status' , [JournalController::class , 'updateStatus'])->name('journal.update.status');
+        Route::resource('journals', JournalController::class);
+        route::get('journal/fetch', [JournalController::class, 'getJournals'])->name('journal.fetch');
+        route::post('journal/update/status', [JournalController::class, 'updateStatus'])->name('journal.update.status');
 
-		Route::resource('blessings', BlessingController::class);
-		route::get('blessing/fetch' , [BlessingController::class , 'getBlessings'])->name('blessing.fetch');
-		route::post('blessing/update/status' , [BlessingController::class , 'updateStatus'])->name('blessing.update.status');
+        Route::resource('blessings', BlessingController::class);
+        route::get('blessing/fetch', [BlessingController::class, 'getBlessings'])->name('blessing.fetch');
+        route::post('blessing/update/status', [BlessingController::class, 'updateStatus'])->name('blessing.update.status');
 
-		Route::resource('ceremonials', CeremonialController::class);
-		route::get('ceremonial/fetch' , [CeremonialController::class , 'getCeremonials'])->name('ceremonial.fetch');
-		route::post('ceremonial/update/status' , [CeremonialController::class , 'updateStatus'])->name('ceremonial.update.status');
+        Route::resource('ceremonials', CeremonialController::class);
+        route::get('ceremonial/fetch', [CeremonialController::class, 'getCeremonials'])->name('ceremonial.fetch');
+        route::post('ceremonial/update/status', [CeremonialController::class, 'updateStatus'])->name('ceremonial.update.status');
 
-		Route::resource('giftshops', GiftShopController::class);
-		route::get('giftshop/fetch' , [GiftShopController::class , 'getGifts'])->name('giftshop.fetch');
-		route::post('giftshop/update/status' , [GiftShopController::class , 'updateStatus'])->name('giftshop.update.status');
-		Route::post('gift/delete-detail-image', [GiftShopController::class, 'deleteGiftDetailImage'])->name('gift.delete.detail.image');
-		Route::post('gift/delete-all-detail-images', [GiftShopController::class, 'deleteAllGiftDetailImages'])->name('gift.delete.alldetail.images');
+        Route::resource('giftshops', GiftShopController::class);
+        route::get('giftshop/fetch', [GiftShopController::class, 'getGifts'])->name('giftshop.fetch');
+        route::post('giftshop/update/status', [GiftShopController::class, 'updateStatus'])->name('giftshop.update.status');
+        Route::post('gift/delete-detail-image', [GiftShopController::class, 'deleteGiftDetailImage'])->name('gift.delete.detail.image');
+        Route::post('gift/delete-all-detail-images', [GiftShopController::class, 'deleteAllGiftDetailImages'])->name('gift.delete.alldetail.images');
 
-		Route::resource('corporate-kits', CorporateKitController::class);
-		route::get('corporate-kit/fetch' , [CorporateKitController::class , 'getCorporateKits'])->name('corporate-kit.fetch');
-		route::post('corporate-kit/update/status' , [CorporateKitController::class , 'updateStatus'])->name('corporate-kit.update.status');
-
+        Route::resource('corporate-kits', CorporateKitController::class);
+        route::get('corporate-kit/fetch', [CorporateKitController::class, 'getCorporateKits'])->name('corporate-kit.fetch');
+        route::post('corporate-kit/update/status', [CorporateKitController::class, 'updateStatus'])->name('corporate-kit.update.status');
 
     });
 
 });
-
