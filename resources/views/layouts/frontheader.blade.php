@@ -31,7 +31,7 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
     <meta property="og:site_name" content="Hnoww">
     <meta property="og:title" content="{{ $meta_title ?? 'Luxury Home Decor & Desk Accessories Dubai | HNOWW' }}" />
     <meta property="og:description" content="{{ $meta_description ?? 'Sculptural objects for the desk, home, and gifting. Discover brass decor, executive desk accessories, and modern interiors in Dubai.' }}" />
-    <meta property="og:image" content="{{$og_image ?? ''}}">
+    <meta property="og:image" content="{{$og_image ?? asset('public/images/front/hnoww-luxury-gifts-dubai-og-image.jpg')}}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="{{$ogType}}">
 
@@ -39,7 +39,7 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $meta_title ?? 'Luxury Home Decor & Desk Accessories Dubai | HNOWW' }}">
     <meta name="twitter:description" content="{{ $meta_description ?? 'Sculptural objects for the desk, home, and gifting. Discover brass decor, executive desk accessories, and modern interiors in Dubai.' }}">
-    <meta name="twitter:image" content="{{$og_image ?? ''}}">
+    <meta name="twitter:image" content="{{$og_image ?? asset('public/images/front/hnoww-luxury-gifts-dubai-og-image.jpg')}}">
 
     @if(isset($blog_schema) && $blog_schema != '')
     <script type="application/ld+json">

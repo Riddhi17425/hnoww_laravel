@@ -215,7 +215,7 @@
                 <h2>
                     Founder
                 </h2>
-                <p class="mb-0">Viral Kotecha</p>
+                <p class="mb-0">Salomi Kotecha</p>
             </div>
 
             <div>
@@ -231,5 +231,76 @@
     </div>
 </section>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AboutPage",
+      "@id": "https://hnoww.com/about#webpage",
+      "url": "https://hnoww.com/about",
+      "name": "About HNOWW | Architectural Gifting Studio Dubai",
+      "description": "Learn about HNOWW, an architectural gifting studio in Dubai creating luxury objects, home accessories, and meaningful gifts inspired by architecture, craftsmanship, and timeless design.",
+      "isPartOf": {
+        "@id": "https://hnoww.com/#website"
+      },
+      "about": {
+        "@id": "https://hnoww.com/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://hnoww.com/public/images/front/footer-logo.svg"
+      },
+      "inLanguage": "en-AE"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://hnoww.com/#organization",
+      "name": "HNOWW",
+      "url": "https://hnoww.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://hnoww.com/public/images/front/footer-logo.svg"
+      },
+      "description": "HNOWW is an architectural gifting studio in Dubai crafting luxury objects, home accessories, and meaningful gifts for homes, offices, and special occasions.",
+      "email": "connect@hnoww.com",
+      "telephone": "+971502243720",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Act Tower 2, Burj Area",
+        "addressLocality": "Downtown Dubai",
+        "addressRegion": "Dubai",
+        "addressCountry": "AE"
+      },
+      "founder": {
+        "@id": "https://hnoww.com/#founder"
+      },
+      "knowsAbout": [
+        "Luxury Gifts",
+        "Architectural Objects",
+        "Luxury Home Accessories",
+        "Corporate Gifts",
+        "Wedding Gifts",
+        "Personalised Gifts",
+        "Collectible Design",
+        "Home Decor"
+      ],
+      "sameAs": [
+        "https://www.instagram.com/h.noww",
+        "https://www.facebook.com/people/H-Noww/61579793212952/"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://hnoww.com/#founder",
+      "name": "Salomi Kotecha",
+      "jobTitle": "Founder",
+      "worksFor": {
+        "@id": "https://hnoww.com/#organization"
+      }
+    }
+  ]
+}
+</script>
 
 @include('layouts.frontfooter')

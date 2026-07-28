@@ -1,4 +1,5 @@
 @include('layouts.frontheader', [
+    'og_image' => $og_image ? asset($og_image) : asset('public/images/front/hnoww-luxury-gifts-dubai-og-image.jpg'),
     'meta_title' => $product->meta_title ?? $product->name,
     'meta_description' => $product->meta_description ?? \Illuminate\Support\Str::limit(strip_tags($product->description), 160)
 ])

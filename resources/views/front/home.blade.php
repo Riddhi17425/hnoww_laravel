@@ -690,6 +690,116 @@ alt="Curated Rituals 1" loading="lazy">
 </div>
 
 @push('script')
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://hnoww.com/#organization",
+      "name": "HNOWW",
+      "url": "https://hnoww.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://hnoww.com/public/images/front/footer-logo.svg"
+      },
+      "description": "HNOWW is an architectural gifting studio in Dubai crafting luxury objects, home accessories, and meaningful gifts for homes, offices, and special occasions.",
+      "email": "connect@hnoww.com",
+      "telephone": "+971502243720",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Act Tower 2, Burj Area",
+        "addressLocality": "Downtown Dubai",
+        "addressRegion": "Dubai",
+        "addressCountry": "AE"
+      },
+      "sameAs": [
+        "https://www.instagram.com/h.noww",
+        "https://www.facebook.com/people/H-Noww/61579793212952/"
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://hnoww.com/#localbusiness",
+      "name": "HNOWW",
+      "url": "https://hnoww.com/",
+      "image": "https://hnoww.com/public/images/front/footer-logo.svg",
+      "email": "connect@hnoww.com",
+      "telephone": "+971502243720",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Act Tower 2, Burj Area",
+        "addressLocality": "Downtown Dubai",
+        "addressRegion": "Dubai",
+        "addressCountry": "AE"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "parentOrganization": {
+        "@id": "https://hnoww.com/#organization"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://hnoww.com/#website",
+      "url": "https://hnoww.com/",
+      "name": "HNOWW",
+      "publisher": {
+        "@id": "https://hnoww.com/#organization"
+      },
+      "inLanguage": "en-AE"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://hnoww.com/#webpage",
+      "url": "https://hnoww.com/",
+      "name": "Luxury Gifts Dubai | Architectural Objects & Home Accessories | HNOWW",
+      "description": "Discover luxury gifts, architectural objects, and premium home accessories in Dubai. HNOWW creates meaningful gifts and collectible designs for modern living.",
+      "isPartOf": {
+        "@id": "https://hnoww.com/#website"
+      },
+      "about": {
+        "@id": "https://hnoww.com/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://hnoww.com/public/images/front/footer-logo.svg"
+      },
+      "inLanguage": "en-AE"
+    },
+    {
+      "@type": "Service",
+      "@id": "https://hnoww.com/#service",
+      "name": "Luxury Gifting & Architectural Objects",
+      "provider": {
+        "@id": "https://hnoww.com/#organization"
+      },
+      "serviceType": "Luxury Gifting Studio",
+      "description": "HNOWW designs architectural objects, luxury gifts, premium home accessories, personalized wedding gifts, corporate gifts, and collectible decor pieces in Dubai.",
+      "areaServed": {
+        "@type": "Country",
+        "name": "United Arab Emirates"
+      },
+      "url": "https://hnoww.com/"
+    }
+  ]
+}
+</script>
+
+
 <script>
 $(document).ready(function() {
     $('#productInquiry').on('show.bs.modal', function(event) {
