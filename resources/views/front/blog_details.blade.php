@@ -1,7 +1,3 @@
-@php
-    //echo "<pre>"; print_r($blog->blog_faq); die;
-@endphp
-
 @include('layouts.frontheader', [
     'og_image' => asset($blog->og_image),
     'blog_schema' => $blog->blog_schema ?? '',

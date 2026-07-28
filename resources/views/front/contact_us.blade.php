@@ -292,5 +292,89 @@ $(document).ready(function() {
     });
 });
 </script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ContactPage",
+      "@id": "https://hnoww.com/contact-us#webpage",
+      "url": "https://hnoww.com/contact-us",
+      "name": "Contact HNOWW | Luxury Gifting Studio Dubai",
+      "description": "Contact HNOWW for luxury gifts, architectural objects, home accessories, corporate gifting, wedding gifts, and personalized gifting solutions in Dubai.",
+      "isPartOf": {
+        "@id": "https://hnoww.com/#website"
+      },
+      "about": {
+        "@id": "https://hnoww.com/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://hnoww.com/public/images/front/footer-logo.svg"
+      },
+      "inLanguage": "en-AE"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://hnoww.com/#organization",
+      "name": "HNOWW",
+      "url": "https://hnoww.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://hnoww.com/public/images/front/footer-logo.svg"
+      },
+      "description": "HNOWW is an architectural gifting studio in Dubai crafting luxury objects, home accessories, and meaningful gifts.",
+      "email": "connect@hnoww.com",
+      "telephone": "+971502243720",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Act Tower 2, Burj Area",
+        "addressLocality": "Downtown Dubai",
+        "addressRegion": "Dubai",
+        "addressCountry": "AE"
+      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "Customer Support",
+          "telephone": "+971502243720",
+          "email": "connect@hnoww.com",
+          "areaServed": "AE",
+          "availableLanguage": [
+            "English"
+          ],
+          "hoursAvailable": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "09:00",
+            "closes": "18:00"
+          }
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "WhatsApp Support",
+          "telephone": "+971502243720",
+          "areaServed": "AE",
+          "availableLanguage": [
+            "English"
+          ]
+        }
+      ],
+      "sameAs": [
+        "https://www.instagram.com/h.noww",
+        "https://www.facebook.com/people/H-Noww/61579793212952/"
+      ]
+    }
+  ]
+}
+</script>
+
 @endpush
 @include('layouts.frontfooter')
