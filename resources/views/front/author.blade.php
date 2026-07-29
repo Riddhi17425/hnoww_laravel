@@ -11,46 +11,41 @@
 
     @media (max-width:767px) {
         .sticky-header {
-            /*background: #EDEAE4;*/
+           
         }
     }
 </style>
 
-<section class="section-mt mt_80 mb_80">
+<section class="author-dark-section">
     <div class="container">
-        <div class="author-banner">
-            <div class="row align-items-center h-100 author-content-row justify-content-center p-lg-3 pb-lg-0">
-                <div class="col-md-4 align-self-end order-md-1 order-2 mb-0 text-center">
-                    <img src="{{ asset('public/images/front/auth-img.webp') }}" alt="Salomi Kotecha"
-                        class="img-fluid author-banner-img">
+        <div class="row align-items-center mt-5 pt-5">
+            <div class="col-lg-7 col-md-12 author-text-col">
+                <h2 class="author-name">Salomi Kotecha</h2>
+                <div class="author-subtitle">
+                    <span>Founder of HNOWW</span>
+                    <span class="divider">|</span>
+                    <span>Objects, Rituals and the Art of Giving</span>
+                    <span class="divider">|</span>
+                    <a href="https://www.linkedin.com/in/salomi-kotecha-93b9a6131/" target="_blank" class="linkedin-link">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        </svg>
+                        LinkedIn
+                    </a>
                 </div>
-                <div class="col-md-7 ps-md-5 order-md-2 text-md-start order-1 py-5 text-center">
-                    <h2 class="title_60">Salomi Kotecha</h2>
-                    <div class="author-banner-subtitle justify-content-center justify-content-md-start">
-                        <span>Founder, HNOWW</span>
-                        <span class="text-muted d-none d-lg-inline">|</span>
-                        <span>Objects, Rituals and the Art of Giving</span>
-                        <span class="text-muted d-none d-lg-inline">|</span>
-                        <a href="https://www.linkedin.com/in/salomi-kotecha-93b9a6131/" target="_blank" class="mt-md-0 mt-2">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="#0077b5">
-                                <path
-                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                            </svg>
-                            LinkedIn
-                        </a>
-                    </div>
-                    <p class="author-banner-desc pe-md-4 mb-0">
-                        Salomi Kotecha is the founder of HNOWW, a Dubai-based design house creating objects designed to
-                        stay. After more than a decade working across fashion, design and material culture, she founded
-                        HNOWW to explore how objects shape the way we give, gather and remember. She writes about
-                        considered gifting, modern rituals, craftsmanship, hospitality and the stories that give objects
-                        permanence.
-                    </p>
+                <p class="author-desc-text">
+                    Salomi Kotecha is the founder of HNOWW, a Dubai-based design house creating objects designed to stay. After more than a decade working across fashion, design and material culture, she founded HNOWW to explore how objects shape the way we give, gather and remember. She writes about considered gifting, modern rituals, craftsmanship, hospitality and the stories that give objects permanence.
+                </p>
+            </div>
+            <div class="col-lg-5 col-md-12 author-img-col">
+                <div class="author-img-wrapper">
+                    <img src="{{ asset('public/images/front/Authorimage.webp') }}" class="img-fluid w-100" alt="Salomi Kotecha">
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 
 <section class="mt_80">
     <div class="container">
