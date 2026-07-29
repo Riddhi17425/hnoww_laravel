@@ -33,6 +33,58 @@
     @endif
 @endif
 
+<style>
+.iti__selected-flag{
+    padding-bottom:12px;
+}
+.receiver-label{
+    padding-bottom:12px;
+}
+
+.iti__flag-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    padding: 1px;
+}
+
+.iti.has-error .iti__flag-container {
+    bottom: 20px;
+}
+
+.gift-success-dialog {
+    max-width: 460px;
+    margin: 80px auto 0 auto;
+}
+
+.gift-success-content {
+    background-color: #faf9f6;
+    border: 1px solid var(--gold-color);
+    border-radius: 0px;
+    box-shadow: 0 20px 50px rgba(14, 34, 51, 0.15) !important;
+}
+
+.gift-success-icon {
+    color: var(--gold-color);
+    display: flex;
+    justify-content: center;
+}
+
+#blogGiftSuccessMessage {
+    color: #666;
+    font-size: 15.5px;
+    line-height: 1.6;
+}
+
+@media (max-width: 767px) {
+    .gift-success-dialog {
+        margin-top: 60px;
+        max-width: calc(100% - 32px);
+    }
+}
+
+</style>
+
 <!-- hero section -->
 <section class="hero-section_inner">
     <img class="img-fluid" src="{{ asset('public/images/front/articles-banner.webp') }}" alt="about us banner">
@@ -634,55 +686,6 @@
     });
 </script>
 
-<!-- Gift Blessing popup for blog sidebar (reuses the 3-field share form) -->
-<div class="modal fade audio_modal" id="blogGiftModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="audio-card d-grid">
-                    <form method="POST" id="blogGiftForm" action="{{ route('front.store.shared.detail') }}"
-                        class="ct_form">
-                        @csrf
-                        <div class="modal-header border-0 px-0 pt-0">
-                            <h5 class="title_40">Gift This Blessing</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-
-                        <input type="hidden" name="blessing_id" id="blogGiftBlessingId">
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="ct_input">
-                                    <label class="sub_head">Name</label>
-                                    <input type="text" name="name" placeholder="Enter your Name"
-                                        oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="ct_input">
-                                    <label class="sub_head">Email</label>
-                                    <input type="email" name="email" placeholder="Enter your Email">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="ct_input">
-                                    <label class="sub_head">Contact</label>
-                                    <input type="text" name="contact_no" placeholder="Enter your Contact Number"
-                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="d-flex justify-content-center mt-3 gap-2">
-                            <button type="submit" class="com_btn bg-transparent">Continue</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Share Options Modal (blog sidebar) -->
 <div class="modal fade audio_modal" id="blogShareOptionsModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-md">
@@ -810,6 +813,195 @@
     </div>
 </div>
 
+<!-- Full Gift Blessing Form Modal (blog sidebar) -->
+<div class="modal fade audio_modal" id="blogGiftBlessingModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="audio-card d-grid">
+                    <form method="POST" id="blogGiftBlessingForm" action="{{ route('front.store.gift.blessing') }}"
+                        class="ct_form">
+                        @csrf
+                        <div class="modal-header border-0 px-0 pt-0">
+                            <h5 class="title_40">Gift This Blessing</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <input type="hidden" name="blessing_id" id="blogGiftBlessingFormId">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="ct_input">
+                                    <h6 class="sub_head">Your Details</h6>
+                                </div>
+                                <div class="ct_input">
+                                    <label class="sub_head">Name<span class="text-danger">*</span></label>
+                                    <input type="text" name="from_name" placeholder="Enter your Name"
+                                        oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();">
+                                </div>
+                                <div class="ct_input">
+                                    <label class="sub_head">Email<span class="text-danger">*</span></label>
+                                    <input type="email" name="from_email" placeholder="Enter your Email">
+                                </div>
+                                <div class="ct_input">
+                                    <label class="sub_head">Phone<span class="text-danger">*</span></label>
+                                    <input type="text" name="from_phone" placeholder="Enter your Phone Number"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="ct_input">
+                                    <h6 class="sub_head">Recipient's Details</h6>
+                                </div>
+
+                                <div class="ct_input">
+                                    <label class="sub_head">Name<span class="text-danger">*</span></label>
+                                    <input type="text" name="to_name" placeholder="Enter the Name"
+                                        oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();">
+                                </div>
+                                <div class="ct_input">
+                                    <label class="sub_head">Email<span class="text-danger">*</span></label>
+                                    <input type="email" name="to_email" placeholder="Email">
+                                </div>
+                                <div class="ct_input">
+                                    <label class="sub_head">Phone<span class="text-danger">*</span></label>
+                                    <input type="text" name="to_phone" placeholder="Enter Phone Number"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Recipient's Address Line1<span class="text-danger">*</span></label>
+                                    <input type="text" name="address_line1" placeholder="Enter Address Line 1">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Recipient's Address Line2<span class="text-danger">*</span></label>
+                                    <input type="text" name="address_line2" placeholder="Enter Address Line 2">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Recipient's Emirate<span class="text-danger">*</span></label>
+                                    <input type="text" name="emirate" placeholder="Enter Emirate">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Recipient's Landmark</label>
+                                    <input type="text" name="landmark" placeholder="Enter Landmark">
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="ct_input">
+                                    <label class="sub_head">Message/Notes</label>
+                                    <textarea name="message_note" placeholder="Notes" id="#" rows="1"
+                                        aria-invalid="false"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="ct_input">
+                                    <div class="remember-me mb-3">
+                                        <span><input type="checkbox" value="1" id="blogAddFlowersCheckbox" name="add_flowers"></span>
+                                        <label class="sub_head"> Would you like to add beautiful Flowers?</label>
+                                    </div>
+
+                                    <div id="blogGiftFlowerOptions" class="gift_flower_options">
+                                        <label class="flower_option">
+                                            <input type="radio" name="flower_budget_range" value="199" checked>
+                                            <span class="custom_radio"></span>
+                                            <span class="option_text">₹199</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center gap-2">
+                            <a class="com_btn" data-bs-toggle="modal" data-bs-target="#blogShareOptionsModal"
+                                style="cursor: pointer;"><span><- </span> Back</a>
+                            <button type="submit" class="com_btn bg-transparent">Send Gift</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- WhatsApp Gift Mini-Form Modal (blog sidebar) -->
+<div class="modal fade audio_modal" id="blogWhatsappGiftModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="audio-card d-grid">
+                    <form method="POST" id="blogWhatsappGiftForm" action="{{ route('front.store.whatsapp.gift.blessing') }}" class="ct_form">
+                        @csrf
+                        <div class="modal-header border-0 px-0 pt-0">
+                            <h5 class="title_40">Send via WhatsApp</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <input type="hidden" name="blessing_id" id="blogWhatsappGiftBlessingId">
+
+                        <div class="col-md-12">
+                            <div class="ct_input">
+                                <label class="sub_head">Your Name<span class="text-danger">*</span></label>
+                                <input type="text" name="sender_name" placeholder="Enter your Name"
+                                    oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="ct_input">
+                               <label class="sub_head">Receiver's Name<span class="text-danger">*</span></label>
+                                <input type="text" name="receiver_name" placeholder="Enter Receiver's Name"
+                                    oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="ct_input">
+                               <label class="sub_head receiver-label">Receiver's WhatsApp Number<span class="text-danger">*</span></label>
+                                <input type="tel" id="blog-whatsapp-receiver-phone-display" placeholder="98765 43210">
+                                <input type="hidden" name="receiver_phone" id="blog_whatsapp_receiver_phone">
+                            </div>
+                        </div>
+
+                        <div class="mt-3 d-flex justify-content-center gap-2">
+                            <a class="com_btn" data-bs-toggle="modal" data-bs-target="#blogShareOptionsModal" style="cursor: pointer;"><span><- </span> Back</a>
+                            <button type="submit" class="com_btn bg-transparent">Open WhatsApp</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Gift Success Modal (blog sidebar) -->
+<div class="modal fade" id="blogGiftSuccessModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog gift-success-dialog">
+        <div class="modal-content gift-success-content text-center">
+            <div class="modal-body px-4 py-5">
+                <div class="gift-success-icon mb-3">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M8 12.5l2.5 2.5L16 9"></path>
+                    </svg>
+                </div>
+                <h5 class="title_40 mb-2">Blessing Gifted</h5>
+                <p id="blogGiftSuccessMessage" class="mb-4"></p>
+                <button type="button" class="com_btn" data-bs-dismiss="modal">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @push('script')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -903,131 +1095,324 @@
                 if (slide) resetSlideUI(slide);
             });
 
-            // GIFT THIS BLESSING -> open the 3-field popup
-            carouselEl.addEventListener('click', function(e) {
-                const giftBtn = e.target.closest('.promo-gift-btn');
-                if (!giftBtn) return;
-                document.getElementById('blogGiftBlessingId').value = giftBtn.dataset.id;
-                $('#blogGiftModal').modal('show');
-            });
+           let currentBlogBlessingId = null;
 
-            // Submit handler for the popup (mirrors shareDetailsForm on the blessings page)
-            let blogActiveShareLink = '';
-            let blogActiveWhatsappUrl = '';
-            let blogActiveEmailUrl = '';
-            let blogActiveInstagramUrl = 'https://www.instagram.com/';
+            // GIFT THIS BLESSING -> open share options directly
+            carouselEl.addEventListener('click', function(e) {
+            const giftBtn = e.target.closest('.promo-gift-btn');
+            if (!giftBtn) return;
+            currentBlogBlessingId = giftBtn.dataset.id;
+            document.getElementById('blogGiftBlessingFormId').value = currentBlogBlessingId;
+            document.getElementById('blogWhatsappGiftBlessingId').value = currentBlogBlessingId;
+            $('#blogShareOptionsModal').modal('show');
+        });
 
             function buildBlogShareLink(blessingId) {
                 return sitePath + '/blessings-detail/' + blessingId;
             }
 
-            $('#blogGiftForm').validate({
+            let blogWhatsappItiInstance = null;
+            let blogWhatsappGiftFormSubmitted = false;
+
+           $('#blogWhatsappGiftModal').on('shown.bs.modal', function() {
+                const phoneInput = document.querySelector('#blog-whatsapp-receiver-phone-display');
+                if (phoneInput && !blogWhatsappItiInstance) {
+                    blogWhatsappItiInstance = window.intlTelInput(phoneInput, {
+                        initialCountry: 'in',
+                        preferredCountries: ['ae', 'in'],
+                        separateDialCode: true,
+                        utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js'
+                    });
+
+                    phoneInput.addEventListener('input', function() {
+                        $('#blog_whatsapp_receiver_phone-error').hide();
+                        $(phoneInput).closest('.iti').removeClass('has-error');
+                    });
+                }
+            });
+
+           $.validator.addMethod('validBlogWhatsappPhone', function(value, element) {
+                return blogWhatsappItiInstance && blogWhatsappItiInstance.isValidNumber();
+            }, "Please enter a valid receiver's WhatsApp number.");
+
+            $('#blogWhatsappGiftForm').validate({
+                ignore: [],
                 rules: {
-                    name: {
+                    sender_name: {
                         required: true,
                         minlength: 2,
                         maxlength: 100,
                         lettersonly: true
                     },
-                    email: {
+                    receiver_name: {
                         required: true,
-                        email: true,
-                        noSpamEmail: true
+                        minlength: 2,
+                        maxlength: 100,
+                        lettersonly: true
                     },
-                    contact_no: {
-                        required: true,
-                        validPhone: true
+                    receiver_phone: {
+                        validBlogWhatsappPhone: true
                     }
                 },
                 messages: {
-                    name: {
+                    sender_name: {
                         required: 'Please enter your name',
                         minlength: 'Name must be at least 2 characters',
                         maxlength: 'Name cannot be longer than 100 characters',
                         lettersonly: 'Only letters and spaces are allowed'
                     },
-                    email: {
-                        required: 'Please enter your email',
-                        email: 'Please enter a valid email address',
-                        noSpamEmail: 'This email address is not allowed'
+                    receiver_name: {
+                        required: "Please enter the receiver's name",
+                        minlength: 'Name must be at least 2 characters',
+                        maxlength: 'Name cannot be longer than 100 characters',
+                        lettersonly: 'Only letters and spaces are allowed'
                     },
-                    contact_no: {
-                        required: 'Please enter your contact number'
+                    receiver_phone: {
+                        validBlogWhatsappPhone: "Please enter a valid receiver's WhatsApp number."
+                    }
+                },
+                errorPlacement: function(error, element) {
+                    if (element.attr('name') === 'receiver_phone') {
+                        error.attr('id', 'blog_whatsapp_receiver_phone-error');
+                        error.insertAfter('#blog-whatsapp-receiver-phone-display');
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                highlight: function(element) {
+                    if ($(element).attr('name') === 'receiver_phone') {
+                        $('#blog-whatsapp-receiver-phone-display').addClass('error-border');
+                        $('#blog-whatsapp-receiver-phone-display').closest('.iti').addClass('has-error');
+                    } else {
+                        $(element).addClass('error');
+                    }
+                },
+                unhighlight: function(element) {
+                    if ($(element).attr('name') === 'receiver_phone') {
+                        $('#blog-whatsapp-receiver-phone-display').removeClass('error-border');
+                        $('#blog-whatsapp-receiver-phone-display').closest('.iti').removeClass('has-error');
+                    } else {
+                        $(element).removeClass('error');
                     }
                 },
                 submitHandler: function(form) {
-                    const btn = $(form).find('button[type="submit"]');
-                    btn.prop('disabled', true).text('Submitting...');
+                    $('#blog_whatsapp_receiver_phone').val(blogWhatsappItiInstance.getNumber());
 
-                    $.ajax({
-                        url: "{{ route('front.store.shared.detail') }}",
-                        method: 'POST',
-                        data: $(form).serialize(),
-                        success: function(res) {
-                            blogActiveShareLink = res.share_link || buildBlogShareLink($(
-                                '#blogGiftBlessingId').val());
-                            blogActiveWhatsappUrl = res.whatsapp_url || (
-                                'https://wa.me/?text=' + encodeURIComponent(
-                                    blogActiveShareLink));
-                            blogActiveEmailUrl = res.email_url || ('https://mail.google.com/mail/?view=cm&fs=1&su=' +
-                                encodeURIComponent('Blessing share') + '&body=' +
-                                encodeURIComponent(blogActiveShareLink));
-                            blogActiveInstagramUrl = res.instagram_url ||
-                                'https://www.instagram.com/';
+                    if (!blogWhatsappGiftFormSubmitted) {
+                        blogWhatsappGiftFormSubmitted = true;
+                        const btn = $(form).find('button[type="submit"]');
+                        btn.prop('disabled', true).text('Submitting...');
 
-                            $('#blogGiftModal').modal('hide');
-                            form.reset();
-
-                            setTimeout(function() {
-                                $('#blogShareOptionsModal').modal('show');
-                            }, 350);
-                        },
-                        error: function(xhr) {
-                            let message = 'Something went wrong';
-                            if (xhr.responseJSON && xhr.responseJSON.errors) {
-                                const firstError = Object.values(xhr.responseJSON.errors)[
-                                0];
-                                if (firstError && firstError[0]) message = firstError[0];
+                        $.ajax({
+                            url: "{{ route('front.store.whatsapp.gift.blessing') }}",
+                            method: 'POST',
+                            data: $(form).serialize(),
+                            success: function(res) {
+                                if (res.whatsapp_url) {
+                                    window.open(res.whatsapp_url, '_blank');
+                                }
+                                $('#blogWhatsappGiftModal').modal('hide');
+                                form.reset();
+                                if (blogWhatsappItiInstance) {
+                                    blogWhatsappItiInstance.setNumber('');
+                                }
+                            },
+                            error: function(xhr) {
+                                let message = 'Something went wrong';
+                                if (xhr.responseJSON && xhr.responseJSON.errors) {
+                                    const firstError = Object.values(xhr.responseJSON.errors)[0];
+                                    if (firstError && firstError[0]) message = firstError[0];
+                                }
+                                alert(message);
+                            },
+                            complete: function() {
+                                blogWhatsappGiftFormSubmitted = false;
+                                btn.prop('disabled', false).text('Open WhatsApp');
                             }
-                            alert(message);
+                        });
+                    }
+                }
+            });
+
+           $('#blogWhatsappGiftModal').on('hidden.bs.modal', function() {
+                const form = document.getElementById('blogWhatsappGiftForm');
+                if (form) form.reset();
+                $('#blog_whatsapp_receiver_phone-error').hide();
+                $('#blog-whatsapp-receiver-phone-display').closest('.iti').removeClass('has-error');
+            });
+
+            const blogAddFlowersCheckbox = document.getElementById('blogAddFlowersCheckbox');
+            const blogGiftFlowerOptions = document.getElementById('blogGiftFlowerOptions');
+
+            function toggleBlogGiftFlowerOptions() {
+                if (!blogAddFlowersCheckbox || !blogGiftFlowerOptions) return;
+
+                if (blogAddFlowersCheckbox.checked) {
+                    blogGiftFlowerOptions.classList.add('is-visible');
+                    return;
+                }
+                blogGiftFlowerOptions.classList.remove('is-visible');
+            }
+
+            if (blogAddFlowersCheckbox) {
+                blogAddFlowersCheckbox.addEventListener('change', toggleBlogGiftFlowerOptions);
+                toggleBlogGiftFlowerOptions();
+            }
+
+            var blogGiftBlessingFormSubmitted = false;
+
+            $('#blogGiftBlessingForm').validate({
+                rules: {
+                    from_name: { required: true, minlength: 2, maxlength: 50, lettersonly: true },
+                    from_email: { required: true, email: true, noSpamEmail: true },
+                    from_phone: { required: true, validPhone: true },
+                    to_name: { required: true, minlength: 2, maxlength: 50, lettersonly: true },
+                    to_email: { required: true, email: true, noSpamEmail: true },
+                    to_phone: { required: true, validPhone: true },
+                    address_line1: { required: true, minlength: 3, maxlength: 150 },
+                    address_line2: { required: true, minlength: 3, maxlength: 150 },
+                    emirate: { required: true, minlength: 3, maxlength: 50, lettersonly: true },
+                    landmark: {
+                        minlength: {
+                            param: 3,
+                            depends: function(element) { return $(element).val().length > 0; }
                         },
-                        complete: function() {
-                            btn.prop('disabled', false).text('Continue');
+                        maxlength: 150
+                    },
+                    flower_budget_range: {
+                        required: {
+                            depends: function() { return $('#blogAddFlowersCheckbox').is(':checked'); }
                         }
-                    });
-                }
-            });
+                    }
+                },
+                messages: {
+                    from_name: {
+                        required: "Please enter your Full name",
+                        minlength: "Name must be at least 2 characters",
+                        maxlength: "Name cannot be longer than 50 characters",
+                        lettersonly: "Only letters and spaces are allowed"
+                    },
+                    from_email: {
+                        required: "Please enter your email",
+                        email: "Please enter a valid email address",
+                        noSpamEmail: "This email address is not allowed"
+                    },
+                    from_phone: { required: "Please enter your Contact number" },
+                    to_name: {
+                        required: "Please enter recipient's Full name",
+                        minlength: "Name must be at least 2 characters",
+                        maxlength: "Name cannot be longer than 50 characters",
+                        lettersonly: "Only letters and spaces are allowed"
+                    },
+                    to_email: {
+                        required: "Please enter recipient's email",
+                        email: "Please enter a valid email address",
+                        noSpamEmail: "This email address is not allowed"
+                    },
+                    to_phone: { required: "Please enter recipient's Contact number" },
+                    address_line1: {
+                        required: "Please enter recipient's Address Line 1",
+                        minlength: "Address Line 1 must be at least 3 characters",
+                        maxlength: "Address Line 1 cannot exceed 150 characters"
+                    },
+                    address_line2: {
+                        required: "Please enter recipient's Address Line 2",
+                        minlength: "Address Line 2 must be at least 3 characters",
+                        maxlength: "Address Line 2 cannot exceed 150 characters"
+                    },
+                    emirate: {
+                        required: "Please enter recipient's Emirate",
+                        minlength: "Emirate must be at least 3 characters",
+                        maxlength: "Emirate cannot exceed 50 characters",
+                        lettersonly: "Only letters and spaces are allowed"
+                    },
+                    landmark: {
+                        minlength: "Landmark must be at least 3 characters",
+                        maxlength: "Landmark cannot exceed 150 characters"
+                    },
+                    flower_budget_range: { required: "Please select a flower budget range" }
+                },
+                submitHandler: function(form) {
+                    if (!blogGiftBlessingFormSubmitted) {
+                        blogGiftBlessingFormSubmitted = true;
+                        const btn = $(form).find('button[type="submit"]');
+                        btn.prop('disabled', true).text('Submitting...');
 
-            $('#blogShareWhatsappBtn').on('click', function() {
-                if (!blogActiveWhatsappUrl) {
-                    alert('Share link not available');
-                    return;
-                }
-                window.open(blogActiveWhatsappUrl, '_blank');
-            });
+                        $.ajax({
+                            url: "{{ route('front.store.gift.blessing') }}",
+                            method: 'POST',
+                            data: $(form).serialize(),
+                            // NEW
+                            success: function(res) {
+                                $('#blogGiftBlessingModal').modal('hide');
+                                form.reset();
+                                toggleBlogGiftFlowerOptions();
 
-            $('#blogShareEmailBtn').on('click', function() {
-                if (!blogActiveEmailUrl) {
-                    alert('Share link not available');
-                    return;
-                }
-                window.open(blogActiveEmailUrl, '_blank');
-            });
-
-            $('#blogShareInstagramBtn').on('click', function() {
-                if (!blogActiveShareLink) {
-                    alert('Share link not available');
-                    return;
-                }
-                navigator.clipboard.writeText(blogActiveShareLink).then(function() {
-                    alert('Share link copied. Paste it in Instagram.');
-                    window.open(blogActiveInstagramUrl, '_blank');
-                }).catch(function() {
-                    alert('Share link copied. Paste it in Instagram.');
-                    window.open(blogActiveInstagramUrl, '_blank');
+                                setTimeout(function() {
+                                    $('#blogGiftSuccessMessage').text(res.message || 'Your blessing gift has been sent successfully.');
+                                    $('#blogGiftSuccessModal').modal('show');
+                                    if (res.whatsapp_url) {
+                                        window.open(res.whatsapp_url, '_blank');
+                                    }
+                                }, 350);
+                            },
+                            error: function() {
+                                alert('Something went wrong');
+                            },
+                            complete: function() {
+                                blogGiftBlessingFormSubmitted = false;
+                                btn.prop('disabled', false).text('Send Gift');
+                            }
+                        });
+                        }
+                    }
                 });
+
+            $('#blogGiftBlessingModal').on('hidden.bs.modal', function() {
+                const form = document.getElementById('blogGiftBlessingForm');
+                if (form) form.reset();
+                toggleBlogGiftFlowerOptions();
+            });
+
+          $('#blogShareWhatsappBtn').on('click', function() {
+            if (!currentBlogBlessingId) {
+                alert('Please select a blessing');
+                return;
+            }
+            document.getElementById('blogWhatsappGiftBlessingId').value = currentBlogBlessingId;
+            $('#blogShareOptionsModal').modal('hide');
+            setTimeout(function() {
+                $('#blogWhatsappGiftModal').modal('show');
+            }, 350);
+        });
+
+        $('#blogShareEmailBtn').on('click', function() {
+            if (!currentBlogBlessingId) {
+                alert('Please select a blessing');
+                return;
+            }
+            document.getElementById('blogGiftBlessingFormId').value = currentBlogBlessingId;
+            $('#blogShareOptionsModal').modal('hide');
+            setTimeout(function() {
+                $('#blogGiftBlessingModal').modal('show');
+            }, 350);
+        });
+
+           $('#blogShareInstagramBtn').on('click', function() {
+            if (!currentBlogBlessingId) {
+                alert('Please select a blessing');
+                return;
+            }
+            const shareLink = buildBlogShareLink(currentBlogBlessingId);
+            navigator.clipboard.writeText(shareLink).then(function() {
+                alert('Share link copied. Paste it in Instagram.');
+                window.open('https://www.instagram.com/', '_blank');
+            }).catch(function() {
+                alert('Share link copied. Paste it in Instagram.');
+                window.open('https://www.instagram.com/', '_blank');
             });
         });
+    });
     </script>
 @endpush
 

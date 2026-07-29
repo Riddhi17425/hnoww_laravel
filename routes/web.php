@@ -85,6 +85,7 @@ Route::name('front.')->group(function () {
     Route::get('/blessings-audio/{blessing}', [FrontController::class, 'blessingAudio'])->name('blessings.audio');
     Route::post('/gift-blessing', [FrontController::class, 'storeGiftBlessing'])->name('store.gift.blessing');
     Route::post('/shared-details', [FrontController::class, 'storeSharedDetail'])->name('store.shared.detail');
+    Route::post('/whatsapp-gift-blessing', [FrontController::class, 'storeWhatsappGiftBlessing'])->name('store.whatsapp.gift.blessing');
 
     Route::get('/atelier', [FrontController::class, 'getAtelier'])->name('atelier');
     Route::post('store-corporate-proposal-request', [FrontController::class, 'storeCorporateProposalRequest'])->name('store.corporate.proposal.request');

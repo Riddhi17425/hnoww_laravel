@@ -1,121 +1,120 @@
 <?php
 
 return [
-    'admin_email' => 'webdeveloper9.intelliworkz@gmail.com',
-    'admin_whatsapp_no' => '971502243720',
-    // 'discount_percent' => 15, // Set the discount percentage here 
-    'whatsapp_message_api_url' => 'https://crm.intelliworkz.tech/api/meta/v19.0/1070176459515925/messages',
-    'contact_enquiry_type' => ['bespoke_commission' => 'Bespoke Commissions', 'general_enquiery' => 'General Enquiry', 'support' => 'Support'],
+    'admin_email'                => 'ahemadraza887@gmail.com',
+    'admin_whatsapp_no'          => '971502243720',
+    // 'discount_percent' => 15, // Set the discount percentage here
+    'whatsapp_message_api_url'   => 'https://crm.intelliworkz.tech/api/meta/v19.0/1070176459515925/messages',
+    'contact_enquiry_type'       => ['bespoke_commission' => 'Bespoke Commissions', 'general_enquiery' => 'General Enquiry', 'support' => 'Support'],
     'request_catalogue_interest' => ['private_collection1' => 'Private Collection1', 'private_collection2' => 'Private Collection2'],
-    'quality_range' => [
+    'quality_range'              => [
         'under_20' => 'Under 20',
         '20_50'    => '20-50',
         '50_100'   => '50-100',
         '100_plus' => '100+',
     ],
-    'corporate_budget' => [
+    'corporate_budget'           => [
         'to_be_discussed' => 'To be discussed',
-        'under_300'     => 'Under AED 300',
-        '300_750'     => 'AED 300-750',
-        '750_1500'     => 'AED 750-1500',
-        '1500_plus'      => 'AED 1500+',
+        'under_300'       => 'Under AED 300',
+        '300_750'         => 'AED 300-750',
+        '750_1500'        => 'AED 750-1500',
+        '1500_plus'       => 'AED 1500+',
     ],
-    'corporate_timeline' => [
+    'corporate_timeline'         => [
         'flexible'   => 'Flexible',
         '2_4_weeks'  => '2-4 weeks',
         '1_3_months' => '1-3 months',
     ],
-    'months' => ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November','December'],
-    
+    'months'                     => ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+
     // 'blessing_of' => ['love' => 'Love', 'strength' => 'Strength', 'renewal' => 'Renewal', 'devotion' => 'Devotion'],
-    'blessing_of' => [
-        'stillness' => 'Stillness',
-        'return' => 'Return',
-        'clarity' => 'Clarity',
-        'presence' => 'Presence',
-        'ease' => 'Ease',
-        'courage' => 'Courage',
-        'grounding' => 'Grounding',
-        'gratitude' => 'Gratitude',
-        'connection' => 'Connection',
-        'celebration' => 'Celebration',
-        'personal_ritual' => 'A Personal Ritual',
-        'birthday' => 'A Birthday',
-        'wedding' => 'A Wedding',
-        'new_home' => 'A New Home',
-        'new_role_promotion' => 'A New Role / Promotion',
-        'friendship' => 'Friendship',
+    'blessing_of'                => [
+        'stillness'              => 'Stillness',
+        'return'                 => 'Return',
+        'clarity'                => 'Clarity',
+        'presence'               => 'Presence',
+        'ease'                   => 'Ease',
+        'courage'                => 'Courage',
+        'grounding'              => 'Grounding',
+        'gratitude'              => 'Gratitude',
+        'connection'             => 'Connection',
+        'celebration'            => 'Celebration',
+        'personal_ritual'        => 'A Personal Ritual',
+        'birthday'               => 'A Birthday',
+        'wedding'                => 'A Wedding',
+        'new_home'               => 'A New Home',
+        'new_role_promotion'     => 'A New Role / Promotion',
+        'friendship'             => 'Friendship',
         'festive_sacred_moments' => 'Festive & Sacred Moments',
         'togetherness_gathering' => 'Togetherness / Gathering',
     ],
-    'category_type' => [1 => 'Basic', 2 => 'Corporate', 3 => 'Wedding'],
+    'category_type'              => [1 => 'Basic', 2 => 'Corporate', 3 => 'Wedding'],
     // 'gift_for' => ['partner' => 'A Partner', 'family_member' => 'A Family Member', 'host' => 'A Host', 'client' => 'A client', 'team_member' => 'A Team Member', 'my_self' => 'Myself'],
-    'gift_for' => [
+    'gift_for'                   => [
         'family_member' => 'A Family Member',
-        'friend' => 'A Friend',
-        'partner' => 'A Partner',
-        'colleague' => 'A Colleague',
-        'my_self' => 'Myself',
+        'friend'        => 'A Friend',
+        'partner'       => 'A Partner',
+        'colleague'     => 'A Colleague',
+        'my_self'       => 'Myself',
     ],
     // 'to_celebrate' => ['birthday' => 'A Birthday', 'wedding' => 'A Wedding', 'new_home' => 'A New Home', 'celebration' => 'A Celebration', 'thank_you' => 'A Thank You', 'ritual_moment' => 'A Ritual Moment'],
-    'to_celebrate' => [
-        'new_home' => 'A New Home',
-        'birthday' => 'A Birthday',
-        'wedding' => 'A Wedding',
-        'promotion_new_role' => 'A Promotion / New Role',
+    'to_celebrate'               => [
+        'new_home'               => 'A New Home',
+        'birthday'               => 'A Birthday',
+        'wedding'                => 'A Wedding',
+        'promotion_new_role'     => 'A Promotion / New Role',
         'festive_sacred_moments' => 'Festive & Sacred Moments',
-        'personal_milestone' => 'A Personal Milestone',
-        'just_because' => 'Just Because',
+        'personal_milestone'     => 'A Personal Milestone',
+        'just_because'           => 'Just Because',
     ],
 
-    'gift_price_range' => ['0-500' => 'Under AED 500', '501-1000' => '501-1000', '1001-1500' => '1000-1500', '1501-2000' => '1501-2000', '2000-0' => 'Above AED 2000'],
-    'commission_type' => [
-        'personal' => 'Personal / Heirloom',
-        'wedding' => 'Wedding-related',
+    'gift_price_range'           => ['0-500' => 'Under AED 500', '501-1000' => '501-1000', '1001-1500' => '1000-1500', '1501-2000' => '1501-2000', '2000-0' => 'Above AED 2000'],
+    'commission_type'            => [
+        'personal'  => 'Personal / Heirloom',
+        'wedding'   => 'Wedding-related',
         'corporate' => 'Corporate / Institutiona',
-        'other' => 'Other (please specify)',
+        'other'     => 'Other (please specify)',
     ],
-    'timeline' => [
-        'flexible' => 'Flexible',
+    'timeline'                   => [
+        'flexible'      => 'Flexible',
         'within3months' => 'Within 3 months',
-        '3-6_months' => '3-6 months',
-        '6+months' => '6+ months',
+        '3-6_months'    => '3-6 months',
+        '6+months'      => '6+ months',
     ],
-    'budget_range' => [
+    'budget_range'               => [
         'to_be_discussed' => 'To be discussed',
-        'under5000' => 'Under AED 5,000',
-        'aed_5000_10000' => 'AED 5,000-10,000',
+        'under5000'       => 'Under AED 5,000',
+        'aed_5000_10000'  => 'AED 5,000-10,000',
         'aed_10000_25000' => 'AED 10,000-25,000',
     ],
-    'wedding_role' => [
-        'bride' => 'Bride',
-        'groom' => 'Groom',
-        'family_member' => 'Family Member',
+    'wedding_role'               => [
+        'bride'           => 'Bride',
+        'groom'           => 'Groom',
+        'family_member'   => 'Family Member',
         'wedding_planner' => 'Wedding Planner',
-        'other' => 'Other',
+        'other'           => 'Other',
     ],
-    'wedding_guest_count' => [
+    'wedding_guest_count'        => [
         "Under 50" => "Under 50",
-        "50-150" => "50-150",
-        "150-300" => "150-300",
-        "300+" => "300+"
+        "50-150"   => "50-150",
+        "150-300"  => "150-300",
+        "300+"     => "300+",
     ],
-    'wedding_budget' => [
-        "To be discussed" => "To be discussed",
-        "Under AED 10,000" => "Under AED 10,000",
+    'wedding_budget'             => [
+        "To be discussed"   => "To be discussed",
+        "Under AED 10,000"  => "Under AED 10,000",
         "AED 10,000-25,000" => "AED 10,000-25,000",
         "AED 25,000-50,000" => "AED 25,000-50,000",
-        "AED 50,000+" => "AED 50,000+"
+        "AED 50,000+"       => "AED 50,000+",
     ],
-    'emirates' => [
+    'emirates'                   => [
         "Abu Dhabi",
         "Dubai",
         "Sharjah",
         "Ajman",
         "Umm Al Quwain",
         "Ras Al Khaimah",
-        "Fujairah"
+        "Fujairah",
     ],
 
-    
 ];

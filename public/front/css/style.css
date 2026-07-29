@@ -504,10 +504,9 @@ a {
 .hnoww-o {
     font-size: 0.9em;
     position: relative;
-       top: -0.24em;
+    top: -0.24em;
     text-transform: lowercase;
 }
-
 
 .line-clamp {
     display: -webkit-box;
@@ -573,38 +572,37 @@ a {
     text-align: center;
 }
 
-
 /*blog css*/
-.articles_details a{
-    color:#c7b58c;
-    text-decoration:underline;
+.articles_details a {
+    color: #c7b58c;
+    text-decoration: underline;
 }
 
-.articles_details h2{
-    font-size:30px;
+.articles_details h2 {
+    font-size: 30px;
     color: var(--dark-900);
     font-family: var(--heading-font);
-    margin-top:20px;
+    margin-top: 20px;
 }
 
-.articles_details h3{
-    font-size:22px;
+.articles_details h3 {
+    font-size: 22px;
     color: var(--dark-900);
     font-family: var(--heading-font);
-    margin-top:30px;
+    margin-top: 30px;
 }
 
-.articles_details h4{
-    font-size:18px;
+.articles_details h4 {
+    font-size: 18px;
     color: var(--dark-900);
     font-family: var(--heading-font);
 }
 
-.product-blog-img{
-width:100%;
-height:650px;
-object-fit:cover;
-object-position:center center;
+.product-blog-img {
+    width: 100%;
+    height: 650px;
+    object-fit: cover;
+    object-position: center center;
 }
 
 /* Sidebar Styles for Blog Details */
@@ -613,10 +611,9 @@ object-position:center center;
     top: 120px;
     max-height: calc(100vh - 140px);
     overflow-y: auto;
-    background-color: #EDEAE4;
+    background-color: #edeae4;
     padding: 16px;
     padding-top: 0;
-
 }
 
 .sidebar-container::-webkit-scrollbar {
@@ -639,7 +636,7 @@ object-position:center center;
 .sidebar-container > p.sidebar-title {
     position: sticky;
     top: 0;
-    background-color: #EDEAE4;
+    background-color: #edeae4;
     z-index: 10;
     padding: 16px 0 10px 0;
     margin-top: 0;
@@ -705,14 +702,14 @@ object-position:center center;
     /* border-radius: 8px; */
     padding: 24px;
     background-color: #edeae4;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
 }
 .author-img {
     width: 150px;
     height: 150px;
     object-fit: cover;
     border: 2px solid #f8f8f8;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 .author-name {
     color: var(--dark-900);
@@ -725,8 +722,6 @@ object-position:center center;
     margin-top: 20px;
 }
 
-
-
 /* --------------- */
 .author-banner {
     background: url(../../images/front/ct_noise_bg.webp);
@@ -736,27 +731,26 @@ object-position:center center;
 }
 /* Subtle pattern overlay if needed */
 .author-banner::before {
-    content: '';
+    content: "";
     position: absolute;
     top: -8px;
     left: -8px;
     width: 100px;
     height: 100px;
-    background-image: url('../../images/front/ct_design.svg');
+    background-image: url("../../images/front/ct_design.svg");
     background-repeat: no-repeat;
     background-size: contain;
     z-index: 0;
     transform: rotate(-180deg);
-
 }
 .author-banner::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -8px;
     right: -8px;
     width: 100px;
     height: 100px;
-    background-image: url('../../images/front/ct_design.svg');
+    background-image: url("../../images/front/ct_design.svg");
     background-repeat: no-repeat;
     background-size: contain;
     z-index: 0;
@@ -766,7 +760,6 @@ object-position:center center;
     position: relative;
     z-index: 1;
 }
-
 
 .author-banner-subtitle {
     margin-bottom: var(--mb);
