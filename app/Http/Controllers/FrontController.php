@@ -20,7 +20,15 @@ use App\Models\ProductInquiry;
 use App\Models\RequestCatalogue;
 use App\Models\SharedDetail;
 use App\Models\User;
-use App\Models\WeddingCatalogueRequest;use App\Services\ElevenLabsTextToSpeechService;use App\Services\PaymentService;use App\Services\YetiWhatsappMesasgeService;use Exception;use Illuminate\Http\Request;use Illuminate\Support\Facades\Cache;use Illuminate\Support\Facades\DB;
+use App\Models\WeddingCatalogueRequest;
+use App\Models\WhatsappGiftBlessing;
+use App\Services\ElevenLabsTextToSpeechService;
+use App\Services\PaymentService;
+use App\Services\YetiWhatsappMesasgeService;
+use Carbon\Carbon;
+use Exception;
+use Illuminate\Http\Request;use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -364,7 +372,7 @@ class FrontController extends Controller
             'emirate'             => 'required',
             'landmark'            => 'nullable',
             'add_flowers'         => 'nullable|boolean',
-            'flower_budget_range' => 'nullable|required_if:add_flowers,1|string|in:150 to 250,250 to 500',
+            'flower_budget_range' => 'nullable|required_if:add_flowers,1|in:199',
             'message_note'        => 'nullable',
         ]);
         if ($validator->fails()) {
@@ -386,32 +394,40 @@ class FrontController extends Controller
             'emirate'             => $request->emirate ?? null,
             'landmark'            => $request->landmark ?? null,
             'add_flowers'         => $addFlowers,
-            'flower_budget_range' => $addFlowers ? $request->flower_budget_range : null,
+            'flower_budget_range' => $addFlowers ? 199 : null,
             'message_note'        => $request->message_note ?? null,
         ];
-        $gift = GiftBlessing::create($data);
-        $adminEmail = $this->adminEmail;
-        $userEmail = $request->from_email;
-        $toEmail = $request->to_email;
-        $data['blessing_title'] = optional($gift->blessing)->title;
+        $gift                      = GiftBlessing::create($data);
+        $adminEmail                = $this->adminEmail;
+        $userEmail                 = $request->from_email;
+        $toEmail                   = $request->to_email;
+        $data['blessing_title']    = optional($gift->blessing)->title;
         $data['add_flowers_label'] = $addFlowers ? 'Yes' : 'No';
-        $data['shareLink'] = route('front.blessings.detail', ['blessings_of' => $request->blessing_id]);
-        
+        $data['shareLink']         = route('front.blessings.detail', ['blessings_of' => $request->blessing_id]);
+
         // 📧 Send Mail
         try {
             Mail::send('email.admin.gift_blessing_request', $data, function ($message) use ($adminEmail) {
                 $message->to($adminEmail)->subject('New Blessing gifting Request');
             });
+        } catch (Exception $e) {
+            Log::error('Gift blessing admin mail failed: ' . $e->getMessage());
+        }
 
+        try {
             Mail::send('email.front.gift_blessing_request', $data, function ($message) use ($userEmail) {
                 $message->to($userEmail)->subject('Gift blessing request send Successfully');
             });
+        } catch (Exception $e) {
+            Log::error('Gift blessing sender mail failed: ' . $e->getMessage());
+        }
 
+        try {
             Mail::send('email.front.gift_blessing_receive_request', $data, function ($message) use ($toEmail) {
                 $message->to($toEmail)->subject('Gift blessing receive Successfully');
             });
         } catch (Exception $e) {
-            Log::error('Gift blessing sending failed: ' . $e->getMessage());
+            Log::error('Gift blessing receiver mail failed: ' . $e->getMessage());
         }
 
         // WhatsApp
@@ -439,13 +455,13 @@ class FrontController extends Controller
             $url = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode($message);
             //return back()->with('whatsapp_url', $url);
             return response()->json([
-                'status' => true,
-                'message' => 'Gift blessing sent successfully',
-                'whatsapp_url' => $url
+                'status'       => true,
+                'message'      => 'Gift blessing sent successfully',
+                'whatsapp_url' => $url,
             ]);
 
         } catch (Exception $e) {
-            \Log::error('Gift Blessing Whatsapp message sending failed: '.$e->getMessage());
+            \Log::error('Gift Blessing Whatsapp message sending failed: ' . $e->getMessage());
         }
 
         return response()->json(['message' => 'Blessing gifted successfully']);
@@ -488,6 +504,50 @@ class FrontController extends Controller
             'whatsapp_url'  => 'https://wa.me/?text=' . urlencode($shareLink),
             'email_url'     => 'https://mail.google.com/mail/?view=cm&fs=1&su=' . rawurlencode('Blessing share') . '&body=' . rawurlencode($shareLink),
             'instagram_url' => 'https://www.instagram.com/',
+        ]);
+    }
+
+    public function storeWhatsappGiftBlessing(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'blessing_id'    => 'required|exists:blessings,id',
+            'sender_name'    => 'required|string|max:100',
+            'receiver_name'  => 'required|string|max:100',
+            'receiver_phone' => 'required|string|max:15',
+        ], [
+            'blessing_id.required'    => 'Blessing information is missing.',
+            'blessing_id.exists'      => 'This blessing could not be found.',
+            'sender_name.required'    => 'Please enter your name.',
+            'receiver_name.required'  => 'Please enter the receiver\'s name.',
+            'receiver_phone.required' => 'Please enter the receiver\'s WhatsApp number.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        WhatsappGiftBlessing::create([
+            'blessing_id'    => $request->blessing_id,
+            'sender_name'    => $request->sender_name,
+            'receiver_name'  => $request->receiver_name,
+            'receiver_phone' => $request->receiver_phone,
+        ]);
+
+        $shareLink = route('front.blessings.detail', ['blessings_of' => $request->blessing_id]);
+
+        $message = "Hi, {$request->receiver_name}\n" .
+            "You've received a blessing 🙏\n" .
+            "{$shareLink}";
+
+        $whatsappUrl = 'https://wa.me/' . preg_replace('/[^0-9]/', '', $request->receiver_phone) . '?text=' . urlencode($message);
+
+        return response()->json([
+            'status'       => true,
+            'message'      => 'Blessing link ready to send',
+            'whatsapp_url' => $whatsappUrl,
         ]);
     }
 

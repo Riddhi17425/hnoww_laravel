@@ -2,23 +2,66 @@
 @php // print_r(request()->segment(2)); die;
 @endphp
 
-
 <style>
-.bles_modal_close {
-    top: 22px;
-    right: 22px;
-}
-
-@media (max-width: 767px) {
     .bles_modal_close {
-        filter: invert(1);
+        top: 22px;
+        right: 22px;
     }
+
+    .iti__selected-flag {
+        padding-bottom: 12px;
+    }
+
+    .receiver-label {
+        padding-bottom: 12px;
+    }
+
+    .iti__flag-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    padding: 1px;
 }
 
+.iti.has-error .iti__flag-container {
+    bottom: 20px;
+}
+
+    .gift-success-dialog {
+        max-width: 460px;
+        margin: 80px auto 0 auto;
+        /* pushes it near the top instead of vertical-center */
+    }
+
+    .gift-success-content {
+        background-color: #faf9f6;
+        border: 1px solid var(--gold-color);
+        border-radius: 0px;
+        box-shadow: 0 20px 50px rgba(14, 34, 51, 0.15) !important;
+    }
+
+    .gift-success-icon {
+        color: var(--gold-color);
+        display: flex;
+        justify-content: center;
+    }
+
+    #giftSuccessMessage {
+        color: #666;
+        font-size: 15.5px;
+        line-height: 1.6;
+    }
+
+    @media (max-width: 767px) {
+        .gift-success-dialog {
+            margin-top: 60px;
+            max-width: calc(100% - 32px);
+        }
+    }
 </style>
 
 <section class="hero-section_inner">
-    <img class="img-fluid" src="{{asset('public/images/front/blessing-library-banner.webp')}}" alt="him banner">
+    <img class="img-fluid" src="{{ asset('public/images/front/blessing-library-banner.webp') }}" alt="him banner">
 
     <div class="hero_content_inner">
         <h2 class="main_head mb-3">The Blessing Library</h2>
@@ -35,10 +78,10 @@
                     <h3 class="gesture_title">SEEKING A BLESSING OF</h3>
                     <select class="dropdown" id="blessing_of">
                         <option value="">All</option>
-                        @foreach(config('global_values.blessing_of') as $key => $label)
-                        <option value="{{ $key }}" {{ request()->segment(2) == $key ? 'selected' : '' }}>
-                            {{ $label }}
-                        </option>
+                        @foreach (config('global_values.blessing_of') as $key => $label)
+                            <option value="{{ $key }}" {{ request()->segment(2) == $key ? 'selected' : '' }}>
+                                {{ $label }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -46,34 +89,34 @@
         </div>
 
         <div class="row">
-            @if(isset($blessings) && is_countable($blessings) && count($blessings) > 0)
-            @foreach($blessings as $key => $val)
-            <div class="col-md-4 mb-4">
-                <div class="gesture_box open-blessing" data-bs-toggle="modal" data-bs-target="#blessingPopup"
-                    data-id="{{ $val->id }}" data-title="{{ $val->title }}" data-subtitle="{{ $val->sub_title }}"
-                    data-description="{{ strip_tags($val->description) }}"
-                    data-image="{{ asset('public/images/admin/blessing/images/'.$val->image) }}"
-                    data-audio="{{ route('front.blessings.audio', $val->id) }}">
-                    <img class="img-fluid mb-2 mb-md-4"
-                        src="{{ asset('public/images/admin/blessing/images/'.$val->image) }}" alt="images">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h3 class="sub_head">{{ $val->title ?? '' }}</h3>
-                            <p class="mb-0">{{ $val->sub_title ?? '' }}</p>
-                        </div>
-                        <div>
-                            <img style="cursor: pointer;" src="{{asset('public/images/front/volume.svg')}}" alt=""
-                                width="33" height="30">
+            @if (isset($blessings) && is_countable($blessings) && count($blessings) > 0)
+                @foreach ($blessings as $key => $val)
+                    <div class="col-md-4 mb-4">
+                        <div class="gesture_box open-blessing" data-bs-toggle="modal" data-bs-target="#blessingPopup"
+                            data-id="{{ $val->id }}" data-title="{{ $val->title }}"
+                            data-subtitle="{{ $val->sub_title }}" data-description="{{ strip_tags($val->description) }}"
+                            data-image="{{ asset('public/images/admin/blessing/images/' . $val->image) }}"
+                            data-audio="{{ route('front.blessings.audio', $val->id) }}">
+                            <img class="img-fluid mb-md-4 mb-2"
+                                src="{{ asset('public/images/admin/blessing/images/' . $val->image) }}" alt="images">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="sub_head">{{ $val->title ?? '' }}</h3>
+                                    <p class="mb-0">{{ $val->sub_title ?? '' }}</p>
+                                </div>
+                                <div>
+                                    <img style="cursor: pointer;" src="{{ asset('public/images/front/volume.svg') }}"
+                                        alt="" width="33" height="30">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            @endforeach
+                @endforeach
             @else
-            <div class="text-center">
-                <img class="mb-2 mb-md-4" height="250px" width="250px"
-                    src="{{asset('public/images/product-not-found.webp')}}" alt="images">
-            </div>
+                <div class="text-center">
+                    <img class="mb-md-4 mb-2" height="250px" width="250px"
+                        src="{{ asset('public/images/product-not-found.webp') }}" alt="images">
+                </div>
             @endif
         </div>
     </div>
@@ -98,7 +141,7 @@
                                 <h6 id="modalSubTitle" class="song_phrase"></h6>
                             </div>
                             <div>
-                                <img src="{{asset('public/images/front/volume.svg')}}" alt="volume" width="33"
+                                <img src="{{ asset('public/images/front/volume.svg') }}" alt="volume" width="33"
                                     height="30">
                             </div>
                         </div>
@@ -129,21 +172,22 @@
                             <button class="icon">⏭</button>
                         </div>
 
-                        <a href="javascript:void(0);" class="com_btn" id="giftBtn">GIFT THIS BLESSING</a>
-                        <div class="audio-links mt-4">
-                            <a href="javascript:void(0);" id="shareBlessingBtn">Share this <svg width="20" height="22"
-                                    viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M12.75 5.25L6.75 8.75M6.75 12.75L12.75 16.25M15.75 6.75C14.0931 6.75 12.75 5.40685 12.75 3.75C12.75 2.09315 14.0931 0.75 15.75 0.75C17.4069 0.75 18.75 2.09315 18.75 3.75C18.75 5.40685 17.4069 6.75 15.75 6.75ZM15.75 20.75C14.0931 20.75 12.75 19.4069 12.75 17.75C12.75 16.0931 14.0931 14.75 15.75 14.75C17.4069 14.75 18.75 16.0931 18.75 17.75C18.75 19.4069 17.4069 20.75 15.75 20.75ZM3.75 13.75C2.09315 13.75 0.75 12.4069 0.75 10.75C0.75 9.0931 2.09315 7.75 3.75 7.75C5.40685 7.75 6.75 9.0931 6.75 10.75C6.75 12.4069 5.40685 13.75 3.75 13.75Z"
-                                        stroke="#c7b58c" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                            </a>
-                        </div>
+                        <!-- NEW -->
+                        <a href="javascript:void(0);" class="com_btn promo-gift-btn text-center" id="giftBtn">
+                            GIFT THIS BLESSING
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ms-1">
+                                <circle cx="18" cy="5" r="3"></circle>
+                                <circle cx="6" cy="12" r="3"></circle>
+                                <circle cx="18" cy="19" r="3"></circle>
+                                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                            </svg>
+                        </a>
                     </div>
 
-                    <button type="button" class="btn-close position-absolute bles_modal_close " data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close position-absolute bles_modal_close"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
             </div>
         </div>
@@ -172,16 +216,16 @@
                                     <h6 class="sub_head">Your Details</h6>
                                 </div>
                                 <div class="ct_input">
-                                    <label class="sub_head">Name</label>
+                                    <label class="sub_head">Name<span class="text-danger">*</span></label>
                                     <input type="text" name="from_name" placeholder="Enter your Name"
                                         oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();">
                                 </div>
                                 <div class="ct_input">
-                                    <label class="sub_head">Email</label>
+                                    <label class="sub_head">Email<span class="text-danger">*</span></label>
                                     <input type="email" name="from_email" placeholder="Enter your Email">
                                 </div>
                                 <div class="ct_input">
-                                    <label class="sub_head">Phone</label>
+                                    <label class="sub_head">Phone<span class="text-danger">*</span></label>
                                     <input type="text" name="from_phone" placeholder="Enter your Phone Number"
                                         oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);">
                                 </div>
@@ -193,16 +237,16 @@
                                 </div>
 
                                 <div class="ct_input">
-                                    <label class="sub_head">Name</label>
+                                    <label class="sub_head">Name<span class="text-danger">*</span></label>
                                     <input type="text" name="to_name" placeholder="Enter the Name"
                                         oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();">
                                 </div>
                                 <div class="ct_input">
-                                    <label class="sub_head">Email</label>
+                                    <label class="sub_head">Email<span class="text-danger">*</span></label>
                                     <input type="email" name="to_email" placeholder="Email">
                                 </div>
                                 <div class="ct_input">
-                                    <label class="sub_head">Phone</label>
+                                    <label class="sub_head">Phone<span class="text-danger">*</span></label>
                                     <input type="text" name="to_phone" placeholder="Enter Phone Number"
                                         oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);">
                                 </div>
@@ -210,19 +254,22 @@
 
                             <div class="col-md-6">
                                 <div class="ct_input">
-                                    <label class="sub_head">Recipient's Address Line1</label>
+                                    <label class="sub_head">Recipient's Address Line1<span
+                                            class="text-danger">*</span></label>
                                     <input type="text" name="address_line1" placeholder="Enter Address Line 1">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="ct_input">
-                                    <label class="sub_head">Recipient's Address Line2</label>
+                                    <label class="sub_head">Recipient's Address Line2<span
+                                            class="text-danger">*</span></label>
                                     <input type="text" name="address_line2" placeholder="Enter Address Line 2">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="ct_input">
-                                    <label class="sub_head">Recipient's Emirate</label>
+                                    <label class="sub_head">Recipient's Emirate<span
+                                            class="text-danger">*</span></label>
                                     <input type="text" name="emirate" placeholder="Enter Emirate">
                                 </div>
                             </div>
@@ -236,93 +283,33 @@
                             <div class="col-md-12">
                                 <div class="ct_input">
                                     <label class="sub_head">Message/Notes</label>
-                                    <textarea name="message_note" placeholder="Notes" id="#" rows="1"
-                                        aria-invalid="false"></textarea>
+                                    <textarea name="message_note" placeholder="Notes" id="#" rows="1" aria-invalid="false"></textarea>
                                 </div>
                             </div>
-
                             <div class="col-md-12">
                                 <div class="ct_input">
-                                    <div class=" remember-me mb-3">
+                                    <div class="remember-me mb-3">
                                         <span><input type="checkbox" value="1" id="addFlowersCheckbox"
                                                 name="add_flowers"></span>
                                         <label class="sub_head"> Would you like to add beautiful Flowers?</label>
                                     </div>
 
-                                    <div id="giftFlowerOptions" class="gift_flower_options is-visible">
-
+                                    <div id="giftFlowerOptions" class="gift_flower_options">
                                         <label class="flower_option">
-                                            <input type="radio" name="flower_budget_range" value="150 to 250">
+                                            <input type="radio" name="flower_budget_range" value="199" checked>
                                             <span class="custom_radio"></span>
-                                            <span class="option_text">₹150 - ₹250</span>
+                                            <span class="option_text">₹199</span>
                                         </label>
-
-                                        <label class="flower_option">
-                                            <input type="radio" name="flower_budget_range" value="250 to 500">
-                                            <span class="custom_radio"></span>
-                                            <span class="option_text">₹250 - ₹500</span>
-                                        </label>
-
                                     </div>
                                 </div>
-
                             </div>
                         </div>
 
-                        <div class=" d-flex justify-content-center gap-2">
+                        <div class="d-flex justify-content-center gap-2">
                             <a class="com_btn" data-bs-toggle="modal" data-bs-target="#blessingPopup"
                                 style="cursor: pointer;"><span>
                                     <- </span> Back</a>
                             <button type="submit" class="com_btn bg-transparent">Send Gift</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Share Details Modal -->
-<div class="modal fade audio_modal" id="shareDetailsModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="audio-card d-grid">
-                    <form method="POST" id="shareDetailsForm" action="{{ route('front.store.shared.detail') }}"
-                        class="ct_form">
-                        @csrf
-                        <div class="modal-header border-0 px-0 pt-0">
-                            <h5 class="title_40">Share This Blessing</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-
-                        <input type="hidden" name="blessing_id" id="shareBlessingId">
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="ct_input">
-                                    <label class="sub_head">Name</label>
-                                    <input type="text" name="name" placeholder="Enter your Name"
-                                        oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="ct_input">
-                                    <label class="sub_head">Email</label>
-                                    <input type="email" name="email" placeholder="Enter your Email">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="ct_input">
-                                    <label class="sub_head">Contact</label>
-                                    <input type="text" name="contact_no" placeholder="Enter your Contact Number"
-                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-3 d-flex justify-content-center gap-2">
-                            <button type="submit" class="com_btn bg-transparent">Continue to Share</button>
                         </div>
                     </form>
                 </div>
@@ -362,8 +349,8 @@
                                         fill="white" />
                                 </g>
                                 <defs>
-                                    <linearGradient id="paint0_linear_146_89" x1="19.8721" y1="24.1465" x2="138.923"
-                                        y2="114.252" gradientUnits="userSpaceOnUse">
+                                    <linearGradient id="paint0_linear_146_89" x1="19.8721" y1="24.1465"
+                                        x2="138.923" y2="114.252" gradientUnits="userSpaceOnUse">
                                         <stop stop-color="#39AE41" />
                                         <stop offset="1" stop-color="#80C269" />
                                     </linearGradient>
@@ -375,7 +362,8 @@
                             <span>WhatsApp</span>
                         </a>
 
-                        <a href="javascript:void(0);" id="shareEmailBtn" class="share-box gmail" title="Share via Email">
+                        <a href="javascript:void(0);" id="shareEmailBtn" class="share-box gmail"
+                            title="Share via Email">
                             <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M75 2C115.317 2 148 34.6832 148 75C148 115.317 115.317 148 75 148C34.6832 148 2 115.317 2 75C2 34.6832 34.6832 2 75 2Z"
@@ -410,8 +398,8 @@
                             title="Share on Instagram">
                             <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_146_96)">
-                                    <mask id="mask0_146_96" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0"
-                                        y="0" width="150" height="150">
+                                    <mask id="mask0_146_96" style="mask-type:luminance" maskUnits="userSpaceOnUse"
+                                        x="0" y="0" width="150" height="150">
                                         <path
                                             d="M75 150C116.421 150 150 116.421 150 75C150 33.5786 116.421 0 75 0C33.5786 0 0 33.5786 0 75C0 116.421 33.5786 150 75 150Z"
                                             fill="white" />
@@ -451,7 +439,7 @@
                         </a>
                     </div>
 
-                       <!-- <div class="text-center">
+                    <!-- <div class="text-center">
                        <a class="com_btn" data-bs-toggle="modal" data-bs-target="#blessingPopup" style="cursor: pointer;"><span>
                                     &lt;- </span> Back</a>
                     </div> -->
@@ -462,482 +450,590 @@
     </div>
 </div>
 
+<!-- WhatsApp Gift Mini-Form Modal -->
+<div class="modal fade audio_modal" id="whatsappGiftModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="audio-card d-grid">
+                    <form method="POST" id="whatsappGiftForm"
+                        action="{{ route('front.store.whatsapp.gift.blessing') }}" class="ct_form">
+                        @csrf
+                        <div class="modal-header border-0 px-0 pt-0">
+                            <h5 class="title_40">Send via WhatsApp</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <input type="hidden" name="blessing_id" id="whatsappGiftBlessingId">
+
+                        <div class="col-md-12">
+                            <div class="ct_input">
+                                <label class="sub_head">Your Name <span class="text-danger">*</span></label>
+                                <input type="text" name="sender_name" placeholder="Enter your Name"
+                                    oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="ct_input">
+                                <label class="sub_head">Receiver's Name <span class="text-danger">*</span></label>
+                                <input type="text" name="receiver_name" placeholder="Enter Receiver's Name"
+                                    oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="ct_input">
+                                <label class="sub_head receiver-label">Receiver's WhatsApp Number <span
+                                        class="text-danger">*</span></label>
+                                <input type="tel" id="whatsapp-receiver-phone-display" placeholder="98765 43210">
+                                <input type="hidden" name="receiver_phone" id="whatsapp_receiver_phone">
+
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-3 gap-2">
+                            <a class="com_btn" data-bs-toggle="modal" data-bs-target="#shareOptionsModal"
+                                style="cursor: pointer;"><span><- </span> Back</a>
+                            <button type="submit" class="com_btn bg-transparent">Open WhatsApp</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Gift Success Modal -->
+<div class="modal fade" id="giftSuccessModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog gift-success-dialog">
+        <div class="modal-content gift-success-content text-center">
+            <div class="modal-body px-4 py-5">
+                <div class="gift-success-icon mb-3">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M8 12.5l2.5 2.5L16 9"></path>
+                    </svg>
+                </div>
+                <h5 class="title_40 mb-2">Blessing Gifted</h5>
+                <p id="giftSuccessMessage" class="mb-4"></p>
+                <button type="button" class="com_btn" data-bs-dismiss="modal">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @push('script')
-<script>
-let currentBlessingId = null;
-let activeShareLink = '';
-let activeWhatsappUrl = '';
-let activeEmailUrl = '';
-let activeInstagramUrl = 'https://www.instagram.com/';
-const modal = document.getElementById("blessingPopup");
-const audio = document.getElementById("audio");
-const playBtn = document.getElementById("playBtn");
-const progressBar = document.getElementById("progressBar");
-const progress = document.getElementById("progress");
-const currentTimeEl = document.getElementById("currentTime");
-const remainingTimeEl = document.getElementById("remainingTime");
+    <script>
+        let currentBlessingId = null;
+        let activeShareLink = '';
+        let activeEmailUrl = '';
+        let activeInstagramUrl = 'https://www.instagram.com/';
+        const modal = document.getElementById("blessingPopup");
+        const audio = document.getElementById("audio");
+        const playBtn = document.getElementById("playBtn");
+        const progressBar = document.getElementById("progressBar");
+        const progress = document.getElementById("progress");
+        const currentTimeEl = document.getElementById("currentTime");
+        const remainingTimeEl = document.getElementById("remainingTime");
 
-let wasPlaying = false;
+        let wasPlaying = false;
 
-// Play / Pause
-playBtn.addEventListener("click", async () => {
-    try {
-        if (audio.paused) {
-            await audio.play();
-            playBtn.textContent = "⏸";
-        } else {
-            audio.pause();
-            playBtn.textContent = "▶";
-        }
-    } catch (err) {
-        console.warn("Audio play interrupted:", err);
-    }
-});
-
-function buildBlessingShareLink(blessingId) {
-    return sitePath + '/blessings-detail/' + blessingId;
-}
-
-function copyShareLink(callback) {
-    if (!activeShareLink) {
-        alert('Share link not available');
-        return;
-    }
-
-    navigator.clipboard.writeText(activeShareLink).then(function() {
-        if (typeof callback === 'function') {
-            callback();
-        }
-    }).catch(function() {
-        if (typeof callback === 'function') {
-            callback();
-        }
-    });
-}
-
-// Update progress
-audio.addEventListener("timeupdate", () => {
-    const percent = (audio.currentTime / audio.duration) * 100;
-    progress.style.width = percent + "%";
-
-    currentTimeEl.textContent = formatTime(audio.currentTime);
-    remainingTimeEl.textContent = "-" + formatTime(audio.duration - audio.currentTime);
-});
-
-// Seek
-progressBar.addEventListener("click", (e) => {
-    const width = progressBar.clientWidth;
-    const clickX = e.offsetX;
-    audio.currentTime = (clickX / width) * audio.duration;
-});
-
-// On audio end
-audio.addEventListener("ended", () => {
-    playBtn.textContent = "▶";
-    progress.style.width = "0%";
-});
-
-// Modal close → pause & reset audio
-modal.addEventListener("hidden.bs.modal", () => {
-    audio.pause();
-    audio.currentTime = 0;
-    playBtn.textContent = "▶";
-    wasPlaying = false;
-});
-
-modal.addEventListener("shown.bs.modal", () => {
-    wasPlaying = false;
-});
-
-function formatTime(time) {
-    if (isNaN(time)) return "0:00";
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60).toString().padStart(2, "0");
-    return `${minutes}:${seconds}`;
-}
-
-// Open blessing modal & load data
-document.addEventListener('click', function(e) {
-    const card = e.target.closest('.open-blessing');
-    if (!card) return;
-
-    const blessingId = card.dataset.id;
-    const title = card.dataset.title;
-    const subtitle = card.dataset.subtitle;
-    const description = card.dataset.description;
-    const image = card.dataset.image;
-    const audioSrc = card.dataset.audio;
-
-    currentBlessingId = blessingId;
-
-    document.getElementById('modalTitle').textContent = title;
-    document.getElementById('modalSubTitle').textContent = subtitle;
-    document.getElementById('modalDescription').textContent = description;
-    document.getElementById('modalImage').src = image;
-
-    const audioEl = document.getElementById('audio');
-    const audioSource = document.getElementById('audioSource');
-
-    audioEl.pause();
-    audioEl.currentTime = 0;
-    audioSource.src = audioSrc;
-    audioEl.load();
-
-    document.getElementById('playBtn').textContent = '▶';
-});
-
-// Filter dropdown change
-$(document).ready(function() {
-    $('#blessing_of').on('change', function() {
-        var slug = $(this).val();
-        if (slug) {
-            window.location.href = "{{ route('front.blessings.library', ':slug') }}".replace(':slug',
-                slug);
-        } else {
-            window.location.href = "{{ route('front.blessings.library') }}";
-        }
-    });
-});
-
-// ========== UPDATED GIFT BUTTON LOGIC ==========
-$('#giftBtn').on('click', function() {
-    if (!currentBlessingId) {
-        alert('Please select a blessing');
-        return;
-    }
-
-    // Set the blessing ID in gift form
-    $('#giftBlessingId').val(currentBlessingId);
-
-    // Close the first modal (blessing detail)
-    $('#blessingPopup').modal('hide');
-
-    // Open the gift modal after the first one has fully hidden (with small delay for smooth transition)
-    setTimeout(function() {
-        $('#giftBlessingModal').modal('show');
-    }, 350);
-});
-// ==============================================
-
-$('#shareBlessingBtn').on('click', function() {
-    if (!currentBlessingId) {
-        alert('Please select a blessing');
-        return;
-    }
-
-    $('#shareBlessingId').val(currentBlessingId);
-    $('#blessingPopup').modal('hide');
-
-    setTimeout(function() {
-        $('#shareDetailsModal').modal('show');
-    }, 350);
-});
-
-var formSubmitted = false;
-var shareFormSubmitted = false;
-const addFlowersCheckbox = document.getElementById('addFlowersCheckbox');
-const giftFlowerOptions = document.getElementById('giftFlowerOptions');
-
-function toggleGiftFlowerOptions() {
-    if (!addFlowersCheckbox || !giftFlowerOptions) {
-        return;
-    }
-
-    if (addFlowersCheckbox.checked) {
-        giftFlowerOptions.classList.add('is-visible');
-        return;
-    }
-
-    giftFlowerOptions.classList.remove('is-visible');
-    giftFlowerOptions.querySelectorAll('input[name="flower_budget_range"]').forEach(function(radio) {
-        radio.checked = false;
-    });
-}
-
-if (addFlowersCheckbox) {
-    addFlowersCheckbox.addEventListener('change', toggleGiftFlowerOptions);
-    toggleGiftFlowerOptions();
-}
-
-$('#giftBlessingForm').validate({
-    rules: {
-        from_name: {
-            required: true,
-            minlength: 2,
-            maxlength: 50,
-            lettersonly: true
-        },
-        from_email: {
-            required: true,
-            email: true,
-            noSpamEmail: true,
-        },
-        from_phone: {
-            required: true,
-            validPhone: true
-        },
-        to_name: {
-            required: true,
-            minlength: 2,
-            maxlength: 50,
-            lettersonly: true
-        },
-        to_email: {
-            required: true,
-            email: true,
-            noSpamEmail: true,
-        },
-        to_phone: {
-            required: true,
-            validPhone: true
-        },
-        address_line1: {
-            required: true,
-            minlength: 3,
-            maxlength: 150
-        },
-        address_line2: {
-            required: true,
-            minlength: 3,
-            maxlength: 150
-        },
-        emirate: {
-            required: true,
-            minlength: 3,
-            maxlength: 50,
-            lettersonly: true
-        },
-        landmark: {
-            minlength: {
-                param: 3,
-                depends: function(element) {
-                    return $(element).val().length > 0;
+        // Play / Pause
+        playBtn.addEventListener("click", async () => {
+            try {
+                if (audio.paused) {
+                    await audio.play();
+                    playBtn.textContent = "⏸";
+                } else {
+                    audio.pause();
+                    playBtn.textContent = "▶";
                 }
-            },
-            maxlength: 150
-        },
-        flower_budget_range: {
-            required: {
-                depends: function() {
-                    return $('#addFlowersCheckbox').is(':checked');
+            } catch (err) {
+                console.warn("Audio play interrupted:", err);
+            }
+        });
+
+        function buildBlessingShareLink(blessingId) {
+            return sitePath + '/blessings-detail/' + blessingId;
+        }
+
+        function copyShareLink(callback) {
+            if (!activeShareLink) {
+                alert('Share link not available');
+                return;
+            }
+
+            navigator.clipboard.writeText(activeShareLink).then(function() {
+                if (typeof callback === 'function') {
+                    callback();
                 }
-            }
-        },
-    },
-    messages: {
-        from_name: {
-            required: "Please enter your Full name",
-            minlength: "Name must be at least 2 characters",
-            maxlength: "Name cannot be longer than 50 characters",
-            lettersonly: "Only letters and spaces are allowed"
-        },
-        from_email: {
-            required: "Please enter your email",
-            email: "Please enter a valid email address",
-            noSpamEmail: "This email address is not allowed",
-        },
-        from_phone: {
-            required: "Please enter your Contact number"
-        },
-        to_name: {
-            required: "Please enter recipient's Full name",
-            minlength: "Name must be at least 2 characters",
-            maxlength: "Name cannot be longer than 50 characters",
-            lettersonly: "Only letters and spaces are allowed"
-        },
-        to_email: {
-            required: "Please enter recipient's email",
-            email: "Please enter a valid email address",
-            noSpamEmail: "This email address is not allowed",
-        },
-        to_phone: {
-            required: "Please enter recipient's Contact number"
-        },
-        address_line1: {
-            required: "Please enter recipient's Address Line 1",
-            minlength: "Address Line 1 must be at least 3 characters",
-            maxlength: "Address Line 1 cannot exceed 150 characters"
-        },
-        address_line2: {
-            required: "Please enter recipient's Address Line 2",
-            minlength: "Address Line 2 must be at least 3 characters",
-            maxlength: "Address Line 2 cannot exceed 150 characters"
-        },
-        emirate: {
-            required: "Please enter recipient's Emirate",
-            minlength: "Emirate must be at least 3 characters",
-            maxlength: "Emirate cannot exceed 50 characters",
-            lettersonly: "Only letters and spaces are allowed"
-        },
-        landmark: {
-            minlength: "Landmark must be at least 3 characters",
-            maxlength: "Landmark cannot exceed 150 characters"
-        },
-        flower_budget_range: {
-            required: "Please select a flower budget range"
-        },
-    },
-    submitHandler: function(form) {
-        if (!formSubmitted) {
-            formSubmitted = true;
-            const btn = $(form).find('button[type="submit"]');
-            if (btn.length) {
-                btn.prop('disabled', true).text('Submitting...');
-            }
-            $.ajax({
-                url: "{{ route('front.store.gift.blessing') }}",
-                method: "POST",
-                data: $(form).serialize(),
-                success: function(res) {
-                    alert(res.message);
-                    $('#giftBlessingModal').modal('hide');
-                    form.reset();
-                    toggleGiftFlowerOptions();
-                    if (res.whatsapp_url) {
-                        window.open(res.whatsapp_url, '_blank');
-                    }
-                },
-                error: function() {
-                    alert('Something went wrong');
-                    formSubmitted = false;
-                    btn.prop('disabled', false).text('Send Gift');
-                },
-                complete: function() {
-                    formSubmitted = false;
-                    btn.prop('disabled', false).text('Send Gift');
+            }).catch(function() {
+                if (typeof callback === 'function') {
+                    callback();
                 }
             });
         }
-    }
-});
 
-$('#shareDetailsForm').validate({
-    rules: {
-        name: {
-            required: true,
-            minlength: 2,
-            maxlength: 100,
-            lettersonly: true
-        },
-        email: {
-            required: true,
-            email: true,
-            noSpamEmail: true,
-        },
-        contact_no: {
-            required: true,
-            validPhone: true
-        }
-    },
-    messages: {
-        name: {
-            required: 'Please enter your name',
-            minlength: 'Name must be at least 2 characters',
-            maxlength: 'Name cannot be longer than 100 characters',
-            lettersonly: 'Only letters and spaces are allowed'
-        },
-        email: {
-            required: 'Please enter your email',
-            email: 'Please enter a valid email address',
-            noSpamEmail: 'This email address is not allowed',
-        },
-        contact_no: {
-            required: 'Please enter your contact number'
-        }
-    },
-    submitHandler: function(form) {
-        if (!shareFormSubmitted) {
-            shareFormSubmitted = true;
-            const btn = $(form).find('button[type="submit"]');
+        // Update progress
+        audio.addEventListener("timeupdate", () => {
+            const percent = (audio.currentTime / audio.duration) * 100;
+            progress.style.width = percent + "%";
 
-            if (btn.length) {
-                btn.prop('disabled', true).text('Submitting...');
+            currentTimeEl.textContent = formatTime(audio.currentTime);
+            remainingTimeEl.textContent = "-" + formatTime(audio.duration - audio.currentTime);
+        });
+
+        // Seek
+        progressBar.addEventListener("click", (e) => {
+            const width = progressBar.clientWidth;
+            const clickX = e.offsetX;
+            audio.currentTime = (clickX / width) * audio.duration;
+        });
+
+        // On audio end
+        audio.addEventListener("ended", () => {
+            playBtn.textContent = "▶";
+            progress.style.width = "0%";
+        });
+
+        // Modal close → pause & reset audio
+        modal.addEventListener("hidden.bs.modal", () => {
+            audio.pause();
+            audio.currentTime = 0;
+            playBtn.textContent = "▶";
+            wasPlaying = false;
+        });
+
+        modal.addEventListener("shown.bs.modal", () => {
+            wasPlaying = false;
+        });
+
+        function formatTime(time) {
+            if (isNaN(time)) return "0:00";
+            const minutes = Math.floor(time / 60);
+            const seconds = Math.floor(time % 60).toString().padStart(2, "0");
+            return `${minutes}:${seconds}`;
+        }
+
+        // Open blessing modal & load data
+        document.addEventListener('click', function(e) {
+            const card = e.target.closest('.open-blessing');
+            if (!card) return;
+
+            const blessingId = card.dataset.id;
+            const title = card.dataset.title;
+            const subtitle = card.dataset.subtitle;
+            const description = card.dataset.description;
+            const image = card.dataset.image;
+            const audioSrc = card.dataset.audio;
+
+            currentBlessingId = blessingId;
+
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalSubTitle').textContent = subtitle;
+            document.getElementById('modalDescription').textContent = description;
+            document.getElementById('modalImage').src = image;
+
+            const audioEl = document.getElementById('audio');
+            const audioSource = document.getElementById('audioSource');
+
+            audioEl.pause();
+            audioEl.currentTime = 0;
+            audioSource.src = audioSrc;
+            audioEl.load();
+
+            document.getElementById('playBtn').textContent = '▶';
+        });
+
+        // Filter dropdown change
+        $(document).ready(function() {
+            $('#blessing_of').on('change', function() {
+                var slug = $(this).val();
+                if (slug) {
+                    window.location.href = "{{ route('front.blessings.library', ':slug') }}".replace(
+                        ':slug',
+                        slug);
+                } else {
+                    window.location.href = "{{ route('front.blessings.library') }}";
+                }
+            });
+        });
+
+        // ========== UPDATED GIFT BUTTON LOGIC ==========
+        $('#giftBtn').on('click', function() {
+            if (!currentBlessingId) {
+                alert('Please select a blessing');
+                return;
             }
 
-            $.ajax({
-                url: "{{ route('front.store.shared.detail') }}",
-                method: 'POST',
-                data: $(form).serialize(),
-                success: function(res) {
-                    activeShareLink = res.share_link || buildBlessingShareLink($(
-                        '#shareBlessingId').val());
-                    activeWhatsappUrl = res.whatsapp_url || ('https://wa.me/?text=' +
-                        encodeURIComponent(activeShareLink));
-                    activeEmailUrl = res.email_url || ('https://mail.google.com/mail/?view=cm&fs=1&su=' + encodeURIComponent(
-                        'Blessing share') + '&body=' + encodeURIComponent(
-                        activeShareLink));
-                    activeInstagramUrl = res.instagram_url || 'https://www.instagram.com/';
+            // Build link + share urls directly — no separate "share details" step anymore
+            activeShareLink = buildBlessingShareLink(currentBlessingId);
+            activeEmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&su=' +
+                encodeURIComponent('Blessing share') + '&body=' + encodeURIComponent(activeShareLink);
+            activeInstagramUrl = 'https://www.instagram.com/';
 
-                    $('#shareDetailsModal').modal('hide');
-                    form.reset();
+            $('#giftBlessingId').val(currentBlessingId); // keep in sync for the Email option below
 
-                    setTimeout(function() {
-                        $('#shareOptionsModal').modal('show');
-                    }, 350);
+            $('#blessingPopup').modal('hide');
+            setTimeout(function() {
+                $('#shareOptionsModal').modal('show');
+            }, 350);
+        });
+
+        var formSubmitted = false;
+        const addFlowersCheckbox = document.getElementById('addFlowersCheckbox');
+        const giftFlowerOptions = document.getElementById('giftFlowerOptions');
+
+        function toggleGiftFlowerOptions() {
+            if (!addFlowersCheckbox || !giftFlowerOptions) return;
+
+            if (addFlowersCheckbox.checked) {
+                giftFlowerOptions.classList.add('is-visible');
+                return;
+            }
+
+            giftFlowerOptions.classList.remove('is-visible');
+        }
+
+        if (addFlowersCheckbox) {
+            addFlowersCheckbox.addEventListener('change', toggleGiftFlowerOptions);
+            toggleGiftFlowerOptions();
+        }
+
+        $('#giftBlessingForm').validate({
+            rules: {
+                from_name: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 50,
+                    lettersonly: true
                 },
-                error: function(xhr) {
-                    let message = 'Something went wrong';
-
-                    if (xhr.responseJSON && xhr.responseJSON.errors) {
-                        const firstError = Object.values(xhr.responseJSON.errors)[0];
-                        if (firstError && firstError[0]) {
-                            message = firstError[0];
+                from_email: {
+                    required: true,
+                    email: true,
+                    noSpamEmail: true,
+                },
+                from_phone: {
+                    required: true,
+                    validPhone: true
+                },
+                to_name: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 50,
+                    lettersonly: true
+                },
+                to_email: {
+                    required: true,
+                    email: true,
+                    noSpamEmail: true,
+                },
+                to_phone: {
+                    required: true,
+                    validPhone: true
+                },
+                address_line1: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 150
+                },
+                address_line2: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 150
+                },
+                emirate: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 50,
+                    lettersonly: true
+                },
+                landmark: {
+                    minlength: {
+                        param: 3,
+                        depends: function(element) {
+                            return $(element).val().length > 0;
+                        }
+                    },
+                    maxlength: 150
+                },
+                flower_budget_range: {
+                    required: {
+                        depends: function() {
+                            return $('#addFlowersCheckbox').is(':checked');
                         }
                     }
-
-                    alert(message);
                 },
-                complete: function() {
-                    shareFormSubmitted = false;
+            },
+            messages: {
+                from_name: {
+                    required: "Please enter your Full name",
+                    minlength: "Name must be at least 2 characters",
+                    maxlength: "Name cannot be longer than 50 characters",
+                    lettersonly: "Only letters and spaces are allowed"
+                },
+                from_email: {
+                    required: "Please enter your email",
+                    email: "Please enter a valid email address",
+                    noSpamEmail: "This email address is not allowed",
+                },
+                from_phone: {
+                    required: "Please enter your Contact number"
+                },
+                to_name: {
+                    required: "Please enter recipient's Full name",
+                    minlength: "Name must be at least 2 characters",
+                    maxlength: "Name cannot be longer than 50 characters",
+                    lettersonly: "Only letters and spaces are allowed"
+                },
+                to_email: {
+                    required: "Please enter recipient's email",
+                    email: "Please enter a valid email address",
+                    noSpamEmail: "This email address is not allowed",
+                },
+                to_phone: {
+                    required: "Please enter recipient's Contact number"
+                },
+                address_line1: {
+                    required: "Please enter recipient's Address Line 1",
+                    minlength: "Address Line 1 must be at least 3 characters",
+                    maxlength: "Address Line 1 cannot exceed 150 characters"
+                },
+                address_line2: {
+                    required: "Please enter recipient's Address Line 2",
+                    minlength: "Address Line 2 must be at least 3 characters",
+                    maxlength: "Address Line 2 cannot exceed 150 characters"
+                },
+                emirate: {
+                    required: "Please enter recipient's Emirate",
+                    minlength: "Emirate must be at least 3 characters",
+                    maxlength: "Emirate cannot exceed 50 characters",
+                    lettersonly: "Only letters and spaces are allowed"
+                },
+                landmark: {
+                    minlength: "Landmark must be at least 3 characters",
+                    maxlength: "Landmark cannot exceed 150 characters"
+                },
+                flower_budget_range: {
+                    required: "Please select a flower budget range"
+                },
+            },
+            submitHandler: function(form) {
+                if (!formSubmitted) {
+                    formSubmitted = true;
+                    const btn = $(form).find('button[type="submit"]');
                     if (btn.length) {
-                        btn.prop('disabled', false).text('Continue to Share');
+                        btn.prop('disabled', true).text('Submitting...');
                     }
+                    $.ajax({
+                        url: "{{ route('front.store.gift.blessing') }}",
+                        method: "POST",
+                        data: $(form).serialize(),
+                        // NEW
+                        success: function(res) {
+                            $('#giftBlessingModal').modal('hide');
+                            form.reset();
+                            toggleGiftFlowerOptions();
+
+                            setTimeout(function() {
+                                $('#giftSuccessMessage').text(res.message ||
+                                    'Your blessing gift has been sent successfully.');
+                                $('#giftSuccessModal').modal('show');
+                                if (res.whatsapp_url) {
+                                    window.open(res.whatsapp_url, '_blank');
+                                }
+                            }, 350);
+                        },
+                        error: function() {
+                            alert('Something went wrong');
+                            formSubmitted = false;
+                            btn.prop('disabled', false).text('Send Gift');
+                        },
+                        complete: function() {
+                            formSubmitted = false;
+                            btn.prop('disabled', false).text('Send Gift');
+                        }
+                    });
                 }
+            }
+        });
+
+        var whatsappGiftFormSubmitted = false;
+        let whatsappItiInstance = null;
+
+        $.validator.addMethod('validWhatsappPhone', function(value, element) {
+            return whatsappItiInstance && whatsappItiInstance.isValidNumber();
+        }, "Please enter a valid receiver's WhatsApp number.");
+
+        $('#whatsappGiftForm').validate({
+            ignore: [],
+            rules: {
+                sender_name: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 100,
+                    lettersonly: true
+                },
+                receiver_name: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 100,
+                    lettersonly: true
+                },
+                receiver_phone: {
+                    validWhatsappPhone: true
+                }
+            },
+            messages: {
+                sender_name: {
+                    required: 'Please enter your name',
+                    minlength: 'Name must be at least 2 characters',
+                    maxlength: 'Name cannot be longer than 100 characters',
+                    lettersonly: 'Only letters and spaces are allowed'
+                },
+                receiver_name: {
+                    required: "Please enter the receiver's name",
+                    minlength: 'Name must be at least 2 characters',
+                    maxlength: 'Name cannot be longer than 100 characters',
+                    lettersonly: 'Only letters and spaces are allowed'
+                },
+                receiver_phone: {
+                    validWhatsappPhone: "Please enter a valid receiver's WhatsApp number."
+                }
+            },
+            errorPlacement: function(error, element) {
+                if (element.attr('name') === 'receiver_phone') {
+                    error.attr('id', 'whatsapp_receiver_phone-error');
+                    error.insertAfter('#whatsapp-receiver-phone-display');
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+           highlight: function(element) {
+            if ($(element).attr('name') === 'receiver_phone') {
+                $('#whatsapp-receiver-phone-display').addClass('error-border');
+                $('#whatsapp-receiver-phone-display').closest('.iti').addClass('has-error'); // NEW
+            } else {
+                $(element).addClass('error');
+            }
+        },
+        unhighlight: function(element) {
+            if ($(element).attr('name') === 'receiver_phone') {
+                $('#whatsapp-receiver-phone-display').removeClass('error-border');
+                $('#whatsapp-receiver-phone-display').closest('.iti').removeClass('has-error'); // NEW
+            } else {
+                $(element).removeClass('error');
+            }
+        },
+            submitHandler: function(form) {
+                $('#whatsapp_receiver_phone').val(whatsappItiInstance.getNumber());
+
+                if (!whatsappGiftFormSubmitted) {
+                    whatsappGiftFormSubmitted = true;
+                    const btn = $(form).find('button[type="submit"]');
+                    if (btn.length) {
+                        btn.prop('disabled', true).text('Submitting...');
+                    }
+                    $.ajax({
+                        url: "{{ route('front.store.whatsapp.gift.blessing') }}",
+                        method: 'POST',
+                        data: $(form).serialize(),
+                        success: function(res) {
+                            if (res.whatsapp_url) {
+                                window.open(res.whatsapp_url, '_blank');
+                            }
+                            $('#whatsappGiftModal').modal('hide');
+                            form.reset();
+                            if (whatsappItiInstance) {
+                                whatsappItiInstance.setNumber('');
+                            }
+                        },
+                        error: function(xhr) {
+                            let message = 'Something went wrong';
+                            if (xhr.responseJSON && xhr.responseJSON.errors) {
+                                const firstError = Object.values(xhr.responseJSON.errors)[0];
+                                if (firstError && firstError[0]) {
+                                    message = firstError[0];
+                                }
+                            }
+                            alert(message);
+                        },
+                        complete: function() {
+                            whatsappGiftFormSubmitted = false;
+                            if (btn.length) {
+                                btn.prop('disabled', false).text('Open WhatsApp');
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        $('#whatsappGiftModal').on('hidden.bs.modal', function() {
+            const form = document.getElementById('whatsappGiftForm');
+            if (form) {
+                form.reset();
+            }
+            $('#whatsapp_receiver_phone-error').hide();
+        });
+
+        $('#shareWhatsappBtn').on('click', function() {
+            if (!currentBlessingId) {
+                alert('Please select a blessing');
+                return;
+            }
+            $('#whatsappGiftBlessingId').val(currentBlessingId);
+            $('#shareOptionsModal').modal('hide');
+            setTimeout(function() {
+                $('#whatsappGiftModal').modal('show');
+            }, 350);
+        });
+
+        // NEW
+        $('#shareEmailBtn').on('click', function() {
+            if (!currentBlessingId) {
+                alert('Please select a blessing');
+                return;
+            }
+            $('#giftBlessingId').val(currentBlessingId);
+            $('#shareOptionsModal').modal('hide');
+            setTimeout(function() {
+                $('#giftBlessingModal').modal('show');
+            }, 350);
+        });
+
+        $('#shareInstagramBtn').on('click', function() {
+            copyShareLink(function() {
+                alert('Share link copied. Paste it in Instagram.');
+                window.open(activeInstagramUrl, '_blank');
             });
-        }
-    }
-});
+        });
 
-$('#shareWhatsappBtn').on('click', function() {
-    if (!activeWhatsappUrl) {
-        alert('Share link not available');
-        return;
-    }
+        $('#giftBlessingModal').on('hidden.bs.modal', function() {
+            const form = document.getElementById('giftBlessingForm');
+            if (form) {
+                form.reset();
+            }
+            toggleGiftFlowerOptions();
+        });
 
-    window.open(activeWhatsappUrl, '_blank');
-});
+        $('#whatsappGiftModal').on('shown.bs.modal', function() {
+            const phoneInput = document.querySelector('#whatsapp-receiver-phone-display');
+            if (phoneInput && !whatsappItiInstance) {
+                whatsappItiInstance = window.intlTelInput(phoneInput, {
+                    initialCountry: 'in',
+                    preferredCountries: ['ae', 'in'],
+                    separateDialCode: true,
+                    utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js'
+                });
 
-$('#shareEmailBtn').on('click', function() {
-    if (!activeEmailUrl) {
-        alert('Share link not available');
-        return;
-    }
-
-    window.open(activeEmailUrl, '_blank');
-});
-
-$('#shareInstagramBtn').on('click', function() {
-    copyShareLink(function() {
-        alert('Share link copied. Paste it in Instagram.');
-        window.open(activeInstagramUrl, '_blank');
-    });
-});
-
-$('#giftBlessingModal').on('hidden.bs.modal', function() {
-    const form = document.getElementById('giftBlessingForm');
-    if (form) {
-        form.reset();
-    }
-    toggleGiftFlowerOptions();
-});
-
-$('#shareDetailsModal').on('hidden.bs.modal', function() {
-    const form = document.getElementById('shareDetailsForm');
-    if (form) {
-        form.reset();
-    }
-});
-</script>
+               phoneInput.addEventListener('input', function() {
+                $('#whatsapp_receiver_phone-error').hide();
+                $(phoneInput).closest('.iti').removeClass('has-error'); // NEW
+            });
+            }
+        });
+    </script>
 @endpush
 
 @include('layouts.frontfooter')

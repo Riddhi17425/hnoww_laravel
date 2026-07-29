@@ -66,6 +66,18 @@
                 @error('audio_content') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
+            <div class="col-md-6">
+                <label class="form-label">Meta Title</label>
+                <input type="text" name="meta_title" class="form-control" value="{{ old('meta_title') }}">
+                @error('meta_title') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Meta Description</label>
+                <textarea name="meta_description" class="form-control" rows="1">{{ old('meta_description') }}</textarea>
+                @error('meta_description') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
             <div class="col-md-12">
                 <button type="submit" class="btn btn-primary">Save Blessing</button>
             </div>
@@ -76,7 +88,7 @@
 
 @push('custom_scripts')
 <script src="{{ asset('public/js/admin/blessing.js') }} " defer></script>
-<script> 
+<script>
 
 $(document).ready(function() {
     $('#description').summernote({
