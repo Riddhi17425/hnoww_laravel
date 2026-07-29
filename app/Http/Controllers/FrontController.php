@@ -1715,15 +1715,22 @@ class FrontController extends Controller
 
     public function blessingDetail(Request $request, $blessingsOf = null)
     {
-        $blessing = Blessing::where('is_active', 0)->whereNull('deleted_at');
-        if (isset($blessingsOf) && $blessingsOf != null) {
-            $blessing = $blessing->where('id', $blessingsOf);
+        if (! $blessingsOf) {
+            return redirect()->route('front.blessings.library');
         }
-        $blessing = $blessing->first();
+
+        $blessing = Blessing::where('is_active', 0)
+            ->whereNull('deleted_at')
+            ->where('id', $blessingsOf)
+            ->first();
+
+        if (! $blessing) {
+            abort(404);
+        }
 
         $meta_title       = $blessing->title ?? null;
         $meta_description = $blessing->sub_title ?? null;
-        $og_image         = ($blessing && $blessing->image) ? asset('public/images/admin/blessing/images/' . $blessing->image) : null;
+        $og_image         = $blessing->image ? asset('public/images/admin/blessing/images/' . $blessing->image) : null;
 
         return view('front.blessing_detail', compact('blessing', 'meta_title', 'meta_description', 'og_image'));
     }

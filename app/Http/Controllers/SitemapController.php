@@ -21,7 +21,6 @@ class SitemapController extends Controller
             route('sitemap.pages'),
             route('sitemap.products'),
             route('sitemap.categories'),
-            route('sitemap.gifts'),
             route('sitemap.blessings'),
         ];
 
@@ -69,7 +68,9 @@ class SitemapController extends Controller
 
     public function categories()
     {
-        $categories = Category::where('is_active', 0)->get();
+        $categories = Category::where('is_active', 0)
+            ->whereIn('category_url', ['for-her', 'for-him', 'for-home'])
+            ->get();
 
         $xml  = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
         $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
@@ -105,6 +106,10 @@ class SitemapController extends Controller
 
         $xml  = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
         $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+
+        // Static library page first
+        $xml .= "<url><loc>" . route('front.blessings.library') . "</loc></url>\n";
+
         foreach ($blessings as $blessing) {
             $loc      = route('front.blessings.detail', $blessing->blessing_of);
             $lastmod  = optional($blessing->updated_at)->toAtomString();
@@ -119,7 +124,7 @@ class SitemapController extends Controller
     {
         $staticRoutes = [
             'front.home', 'front.about', 'front.faqs', 'front.journal',
-            'front.atelier', 'front.giftshop', 'front.bespoke.commission',
+            'front.atelier', 'front.bespoke.commission',
             'front.privacy', 'front.rituals', 'front.bespoke.wedding.hampers',
             'front.everyday-sacred', 'front.memory-shelf', 'front.modern-majilis',
             'front.architect-study', 'front.author', 'front.editions',
