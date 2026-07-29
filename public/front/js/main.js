@@ -26,8 +26,10 @@ if (header) {
             header.classList.add("header-hidden");
             header.classList.remove("header-visible");
         } else {
-            header.classList.remove("header-hidden");
-            header.classList.add("header-visible");
+            if (!window.disableStickyOnScrollUp) {
+                header.classList.remove("header-hidden");
+                header.classList.add("header-visible");
+            }
         }
 
         lastScroll = currentScroll;
