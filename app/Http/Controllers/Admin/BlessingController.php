@@ -6,6 +6,8 @@ use App\Models\Blessing;
 use DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 // use Illuminate\Support\Facades\Storage;
 
@@ -24,13 +26,6 @@ class BlessingController extends Controller
             $query = $query->where('is_active', (int) $request->status);
         }
         return Datatables::of($query)
-        // ->editColumn('blessing_of', function ($result) use($blessingOf) {
-        //     if(isset($result->blessing_of)){
-        //         return $blessingOf[$result->blessing_of];
-        //     }else{
-        //        return '-';
-        //     }
-        // })
             ->editColumn('blessing_of', function ($result) use ($blessingOf) {
                 if (! empty($result->blessing_of)) {
                     $values    = explode(',', $result->blessing_of);
@@ -42,6 +37,9 @@ class BlessingController extends Controller
                     return $formatted;
                 }
                 return '-';
+            })
+            ->editColumn('slug', function ($result) {
+                return $result->slug ?? '-';
             })
             ->editColumn('description', function ($result) {
                 if (isset($result->description)) {
@@ -60,32 +58,30 @@ class BlessingController extends Controller
             ->addColumn('status', function ($result) {
                 if ($result->is_active == 0) {
                     return '<div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" checked onclick="updateStatus(1,' . $result->id . ');">
-                                <label class="form-check-label">Active</label>
-                            </div>';
+                            <input class="form-check-input" type="checkbox" role="switch" checked onclick="updateStatus(1,' . $result->id . ');">
+                            <label class="form-check-label">Active</label>
+                        </div>';
                 } else {
                     return '<div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" onclick="updateStatus(0,' . $result->id . ');">
-                                <label class="form-check-label">In-Active</label>
-                            </div>';;
+                            <input class="form-check-input" type="checkbox" role="switch" onclick="updateStatus(0,' . $result->id . ');">
+                            <label class="form-check-label">In-Active</label>
+                        </div>';
                 }
             })
             ->addColumn('action', function ($row) {
                 $editUrl = route('admin.blessings.edit', $row->id);
                 return '
-                    <a href="' . $editUrl . '" class="btn btn-outline-primary btn-sm">
-                        <i class="icofont-edit"></i>
-                    </a>
-                    <button type="button" class="btn btn-outline-danger btn-sm delete-blessing" data-id="' . $row->id . '">
-                        <i class="icofont-ui-delete"></i>
-                    </button>
-                ';
+                <a href="' . $editUrl . '" class="btn btn-outline-primary btn-sm">
+                    <i class="icofont-edit"></i>
+                </a>
+                <button type="button" class="btn btn-outline-danger btn-sm delete-blessing" data-id="' . $row->id . '">
+                    <i class="icofont-ui-delete"></i>
+                </button>
+            ';
             })
-        //->escapeColumns([])
             ->rawColumns(['status', 'action', 'image', 'description'])
             ->make(true);
     }
-
     public function create()
     {
         return view('admin.blessing.create');
@@ -94,14 +90,13 @@ class BlessingController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            // 'blessing_of' => 'required|in:'.implode(',', array_keys(config('global_values.blessing_of'))),
             'blessing_of'      => 'required|array',
             'blessing_of.*'    => 'in:' . implode(',', array_keys(config('global_values.blessing_of'))),
             'title'            => 'required|string|max:255',
+            'slug'             => 'nullable|string|max:255|alpha_dash|unique:blessings,slug',
             'sub_title'        => 'required|string|max:255',
             'description'      => 'required|string',
             'image'            => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            // 'audio_file'  => 'required|mimes:mp3,wav|max:10240', // max 10MB
             'audio_content'    => 'required|max:700',
             'meta_title'       => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
@@ -133,16 +128,31 @@ class BlessingController extends Controller
             // 'audio_file.max'       => 'The audio file size may not be greater than 10MB.',
             'audio_content.required' => 'The Audio Content is required.',
             'audio_content.max'      => 'The Audio content may not be greater than 700 characters.',
+
+            'slug.alpha_dash'        => 'Slug may only contain letters, numbers, dashes, and underscores.',
+            'slug.unique'            => 'This slug is already taken. Please choose another.',
+
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $content                    = $request->audio_content ?? null;
+        $content = $request->audio_content ?? null;
+
+        // Generate unique slug from title
+        $baseSlug = $request->slug ? Str::slug($request->slug) : Str::slug($request->title);
+        $slug     = $baseSlug;
+        $counter  = 1;
+        while (Blessing::where('slug', $slug)->exists()) {
+            $slug = $baseSlug . '-' . $counter;
+            $counter++;
+        }
+
         $blessing                   = new Blessing();
         $blessing->blessing_of      = $request->blessing_of ? implode(',', $request->blessing_of) : null;
         $blessing->title            = $request->title;
+        $blessing->slug             = $slug;
         $blessing->sub_title        = $request->sub_title;
         $blessing->description      = $request->description;
         $blessing->is_active        = 0;
@@ -150,6 +160,7 @@ class BlessingController extends Controller
         $blessing->meta_title       = $request->meta_title;
         $blessing->meta_description = $request->meta_description;
         $blessing->save();
+
         if ($request->hasFile('image')) {
             $image     = $request->file('image');
             $imageName = $image->getClientOriginalName();
@@ -224,14 +235,16 @@ class BlessingController extends Controller
     {
         $blessing  = Blessing::findOrFail($id);
         $validator = Validator::make($request->all(), [
-            //'blessing_of' => 'required|in:'.implode(',', array_keys(config('global_values.blessing_of'))),
             'blessing_of'      => 'required|array',
             'blessing_of.*'    => 'in:' . implode(',', array_keys(config('global_values.blessing_of'))),
             'title'            => 'required|string|max:255',
+            'slug'             => [
+                'nullable', 'string', 'max:255', 'alpha_dash',
+                Rule::unique('blessings', 'slug')->ignore($blessing->id),
+            ],
             'sub_title'        => 'required|string|max:255',
             'description'      => 'required|string',
             'image'            => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            //'audio_file'  => 'nullable|mimes:mp3,wav|max:10240',
             'audio_content'    => 'required|max:700',
             'meta_title'       => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
@@ -261,10 +274,26 @@ class BlessingController extends Controller
             // 'audio_file.max'       => 'The audio file size may not be greater than 10MB.',
             'audio_content.required' => 'The Audio Content is required.',
             'audio_content.max'      => 'The Audio content may not be greater than 700 characters.',
+
+            'slug.alpha_dash'        => 'Slug may only contain letters, numbers, dashes, and underscores.',
+            'slug.unique'            => 'This slug is already taken. Please choose another.',
+
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Only regenerate slug if title changed
+        if ($blessing->title !== $request->title || empty($blessing->slug)) {
+            $baseSlug = Str::slug($request->title);
+            $slug     = $baseSlug;
+            $counter  = 1;
+            while (Blessing::where('slug', $slug)->where('id', '!=', $blessing->id)->exists()) {
+                $slug = $baseSlug . '-' . $counter;
+                $counter++;
+            }
+            $blessing->slug = $slug;
         }
 
         $content                    = $request->audio_content ?? null;
@@ -276,17 +305,15 @@ class BlessingController extends Controller
         $blessing->meta_title       = $request->meta_title;
         $blessing->meta_description = $request->meta_description;
         $blessing->save();
+
         if ($request->hasFile('image')) {
-            // Remove old image
-            // if($blessing->image && file_exists(public_path('images/admin/blessing/images/'.$blessing->image))){
-            //     unlink(public_path('images/admin/blessing/images/'.$blessing->image));
-            // }
             $image     = $request->file('image');
             $imageName = $image->getClientOriginalName();
             $image->move(public_path('images/admin/blessing/images/'), $imageName);
             $blessing->image = $imageName;
             $blessing->save();
         }
+
         // OLD CODE
         // if ($request->hasFile('audio_file')) {
         //     // Remove old audio
