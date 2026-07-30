@@ -36,6 +36,12 @@
                 @error('title') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
+            <div class="col-md-4">
+                <label class="form-label">Slug</label>
+               <input type="text" name="slug" class="form-control" value="{{ old('slug') }}" placeholder="Auto-generated if left blank">
+                @error('slug') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
             <div class="col-md-6">
                 <label class="form-label">Sub Title</label><span class="text-danger">*</span>
                 <input type="text" name="sub_title" class="form-control" value="{{ old('sub_title') }}">
