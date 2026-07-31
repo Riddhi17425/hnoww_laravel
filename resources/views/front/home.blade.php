@@ -137,38 +137,38 @@
             <div class="col-md-4">
                 <div class="collection_box">
                     <div class="">
-                        <a href="{{ route('front.list', 'for-her') }}"><img class="img-fluid mb-2 mb-md-4"
+                        <a href="{{ route('front.list', 'luxury-gifts-for-her') }}"><img class="img-fluid mb-2 mb-md-4"
                                 src="{{ asset('public/images/front/collections1.webp') }}" alt="collections1"
                                 loading="lazy"></a>
                     </div>
                     <h3 class="sub_head">For Her {{-- — {{$herProduct[0]->product_name ?? ''}} --}}</h3>
                     <p>@if(isset($herProduct[0]->short_description)){!! $herProduct[0]->short_description !!}@endif</p>
-                    <a href="{{ route('front.list', 'for-her') }}" class="com_btn">Explore Her World</a>
+                    <a href="{{ route('front.list', 'luxury-gifts-for-her') }}" class="com_btn">Explore Her World</a>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
                     <div class="">
-                        <a href="{{ route('front.list', 'for-him') }}"><img class="img-fluid mb-2 mb-md-4"
+                        <a href="{{ route('front.list', 'luxury-gifts-for-him') }}"><img class="img-fluid mb-2 mb-md-4"
                                 src="{{ asset('public/images/front/collections2.webp') }}" alt="collections2"
                                 loading="lazy"></a>
                     </div>
                     <h3 class="sub_head">For Him {{-- — {{$himProduct[0]->product_name ?? ''}} --}}</h3>
                     <p>@if(isset($himProduct[0]->short_description)){!! $himProduct[0]->short_description !!}@endif</p>
-                    <a href="{{ route('front.list', 'for-him') }}" class="com_btn">Explore Him World</a>
+                    <a href="{{ route('front.list', 'luxury-gifts-for-him') }}" class="com_btn">Explore Him World</a>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="collection_box">
                     <div class="">
-                        <a href="{{ route('front.list', 'for-home') }}"><img class="img-fluid mb-2 mb-md-4"
+                        <a href="{{ route('front.list', 'luxury-home-decor') }}"><img class="img-fluid mb-2 mb-md-4"
                                 src="{{ asset('public/images/front/collections3.webp') }}" alt="collections3"
                                 loading="lazy"></a>
                     </div>
                     <h3 class="sub_head">For Home {{-- — {{$homeProduct[0]->product_name ?? ''}} --}}</h3>
                     <p>@if(isset($homeProduct[0]->short_description)){!! $homeProduct[0]->short_description !!}@endif
                     </p>
-                    <a href="{{ route('front.list', 'for-home') }}" class="com_btn">Explore Home
+                    <a href="{{ route('front.list', 'luxury-home-decor') }}" class="com_btn">Explore Home
                         World</a>
                 </div>
             </div>

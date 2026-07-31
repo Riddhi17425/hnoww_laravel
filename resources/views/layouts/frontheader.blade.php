@@ -307,17 +307,17 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
             <div class="collapse navbar-collapse justify-content-between" id="mainNavbar">
                 <ul class="mx-auto nav_links">
                     <li>
-                        <a href="{{ route('front.list', 'for-her') }}" data-text="for her">
+                        <a href="{{ route('front.list', 'luxury-gifts-for-her') }}" data-text="for her">
                             <span>for her</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('front.list', 'for-him') }}" data-text="for him">
+                        <a href="{{ route('front.list', 'luxury-gifts-for-him') }}" data-text="for him">
                             <span>for him</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('front.list', 'for-home') }}" data-text="for home">
+                        <a href="{{ route('front.list', 'luxury-home-decor') }}" data-text="for home">
                             <span>for home</span>
                         </a>
                     </li>

@@ -47,9 +47,9 @@
                     <div>
                         <h4 class="ft_head">Collections</h4>
                         <ul class="ft_menu">
-                            <li><a href="{{ route('front.list', 'for-her') }}">For Her</a></li>
-                            <li><a href="{{ route('front.list', 'for-him') }}">For Him</a></li>
-                            <li><a href="{{ route('front.list', 'for-home') }}">For Home</a></li>
+                            <li><a href="{{ route('front.list', 'luxury-gifts-for-her') }}">For Her</a></li>
+                            <li><a href="{{ route('front.list', 'luxury-gifts-for-him') }}">For Him</a></li>
+                            <li><a href="{{ route('front.list', 'luxury-home-decor') }}">For Home</a></li>
                             {{-- <li><a href="{{ route('front.giftshop') }}">The Gift Shop</a></li> --}}
                             <!--<li><a href="javascript:void(0)">Festive Collections</a></li>-->
                         </ul>
