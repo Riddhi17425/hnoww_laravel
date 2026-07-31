@@ -41,6 +41,10 @@ Route::get('/send', function () {
     return 'Mail sent!';
 });
 
+Route::get('/check-mail', function () {
+    return view('email.front.blessing_mail');
+});
+
 Route::get('/clear', function () {
     Artisan::call('optimize:clear');
     return 'Application cache cleared!';
