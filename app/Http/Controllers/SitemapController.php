@@ -69,7 +69,7 @@ class SitemapController extends Controller
     public function categories()
     {
         $categories = Category::where('is_active', 0)
-            ->whereIn('category_url', ['for-her', 'for-him', 'for-home'])
+            ->whereIn('category_url', ['luxury-gifts-for-her', 'luxury-gifts-for-him', 'luxury-home-decor'])
             ->get();
 
         $xml  = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
@@ -102,16 +102,18 @@ class SitemapController extends Controller
 
     public function blessings()
     {
-        $blessings = Blessing::where('is_active', 0)->get();
+        $blessings = Blessing::where('is_active', 0)->whereNull('deleted_at')->get();
 
         $xml  = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
         $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 
-        // Static library page first
         $xml .= "<url><loc>" . route('front.blessings.library') . "</loc></url>\n";
 
         foreach ($blessings as $blessing) {
-            $loc      = route('front.blessings.detail', $blessing->blessing_of);
+            if (empty($blessing->slug)) {
+                continue; // skip any legacy rows without a slug
+            }
+            $loc      = route('front.blessings.library', ['slug' => $blessing->slug]);
             $lastmod  = optional($blessing->updated_at)->toAtomString();
             $xml     .= "<url><loc>{$loc}</loc><lastmod>{$lastmod}</lastmod></url>\n";
         }

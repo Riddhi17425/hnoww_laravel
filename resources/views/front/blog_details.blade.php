@@ -310,7 +310,7 @@
                                 <div class="carousel-inner">
                                     @foreach ($blessings as $index => $blessing)
                                         <div class="carousel-item {{ $index === 0 ? 'active' : '' }}"
-                                            data-id="{{ $blessing->id }}"
+                                            data-id="{{ $blessing->id }}" data-slug="{{ $blessing->slug }}"
                                             data-audio="{{ route('front.blessings.audio', $blessing->id) }}">
 
                                             <img src="{{ asset('public/images/admin/blessing/images/' . $blessing->image) }}"
@@ -919,7 +919,7 @@
                                         <label class="flower_option">
                                             <input type="radio" name="flower_budget_range" value="199" checked>
                                             <span class="custom_radio"></span>
-                                            <span class="option_text">₹199</span>
+                                            <span class="option_text">AED 199</span>
                                         </label>
                                     </div>
                                 </div>
@@ -1100,19 +1100,22 @@
             });
 
            let currentBlogBlessingId = null;
+           let currentBlogBlessingSlug = null;
 
             // GIFT THIS BLESSING -> open share options directly
             carouselEl.addEventListener('click', function(e) {
             const giftBtn = e.target.closest('.promo-gift-btn');
             if (!giftBtn) return;
             currentBlogBlessingId = giftBtn.dataset.id;
+            const slide = giftBtn.closest('.carousel-item');
+            currentBlogBlessingSlug = slide ? slide.dataset.slug : null;
             document.getElementById('blogGiftBlessingFormId').value = currentBlogBlessingId;
             document.getElementById('blogWhatsappGiftBlessingId').value = currentBlogBlessingId;
             $('#blogShareOptionsModal').modal('show');
         });
 
-            function buildBlogShareLink(blessingId) {
-                return sitePath + '/blessings-detail/' + blessingId;
+            function buildBlogShareLink(slug) {
+                return sitePath + '/blessings-library/' + slug;
             }
 
             let blogWhatsappItiInstance = null;
@@ -1407,7 +1410,7 @@
                 alert('Please select a blessing');
                 return;
             }
-            const shareLink = buildBlogShareLink(currentBlogBlessingId);
+            const shareLink = buildBlogShareLink(currentBlogBlessingSlug);
             navigator.clipboard.writeText(shareLink).then(function() {
                 alert('Share link copied. Paste it in Instagram.');
                 window.open('https://www.instagram.com/', '_blank');

@@ -53,7 +53,7 @@ Route::get('/clear', function () {
 Route::post('/newsletter-temp/store', [FrontController::class, 'storeNewsletterTempInquiry'])->name('newsletter.temp.store');
 Route::post('/check-email-unique', [FrontController::class, 'checkEmailUnique'])->name('front.check.email.unique');
 
-Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap.index');
+Route::get('/sitemap-index.xml', [SitemapController::class, 'index'])->name('sitemap.index');
 Route::get('/post-sitemap.xml', [SitemapController::class, 'posts'])->name('sitemap.posts');
 Route::get('/page-sitemap.xml', [SitemapController::class, 'pages'])->name('sitemap.pages');
 Route::get('/product-sitemap.xml', [SitemapController::class, 'products'])->name('sitemap.products');
@@ -72,7 +72,8 @@ Route::name('front.')->group(function () {
     Route::get('stripe', [FrontController::class, 'getStripe']);                             // Temporary
     Route::post('stripe-post', [FrontController::class, 'stripePost'])->name('stripe.post'); // Temporary
 
-    Route::get('list/{category_slug}/{from?}', [FrontController::class, 'getList'])->name('list');
+    Route::get('collections/{category_slug}/{from?}', [FrontController::class, 'getList'])->name('list');
+    Route::get('/list/{category_slug}/{from?}', [FrontController::class, 'listLegacyRedirect'])->name('list.legacy');
     Route::get('product-details/{product_slug}', [FrontController::class, 'getProductDetails'])->name('product.details');
     Route::post('store-product-inquiry', [FrontController::class, 'storeProductInquiry'])->name('store.product.inquiry');
     // Route::post('/check-email-unique', [FrontController::class, 'checkEmailUnique'])
@@ -84,8 +85,9 @@ Route::name('front.')->group(function () {
     Route::post('store-contact-inquiry', [FrontController::class, 'storeContactInquiry'])->name('store.contact.inquiry');
     Route::get('/faqs', [FrontController::class, 'getFaqs'])->name('faqs');
     Route::get('/journal', [FrontController::class, 'getJournal'])->name('journal');
-    Route::get('/blessings-library/{blessings_of?}', [FrontController::class, 'getBlessings'])->name('blessings.library');
-    Route::get('/blessings-detail/{blessings_of?}', [FrontController::class, 'blessingDetail'])->name('blessings.detail');
+    Route::get('/blessings-library/{slug?}', [FrontController::class, 'getBlessings'])->name('blessings.library');
+    Route::get('/blessings-detail/{id?}', [FrontController::class, 'blessingDetailLegacyRedirect'])
+        ->name('blessings.detail.legacy');
     Route::get('/blessings-audio/{blessing}', [FrontController::class, 'blessingAudio'])->name('blessings.audio');
     Route::post('/gift-blessing', [FrontController::class, 'storeGiftBlessing'])->name('store.gift.blessing');
     Route::post('/shared-details', [FrontController::class, 'storeSharedDetail'])->name('store.shared.detail');
@@ -102,15 +104,19 @@ Route::name('front.')->group(function () {
     Route::post('store-ceremonial-inquiry', [FrontController::class, 'storeCeremonialInquiry'])->name('store.ceremonial.inquiry');
     Route::get('/gift-shop', [FrontController::class, 'getGiftShop'])->name('giftshop');
     Route::get('gift-details/{product_slug}', [FrontController::class, 'getGiftDetails'])->name('gift.details');
-    Route::get('/bespoke-commission', [FrontController::class, 'getBespokeCommission'])->name('bespoke.commission');
+    Route::get('/bespoke-luxury-gifts', [FrontController::class, 'getBespokeCommission'])->name('bespoke.commission');
     Route::get('/privacy', [FrontController::class, 'getprivacy'])->name('privacy');
 
-    Route::get('/corporate-vault/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
+    Route::get('/luxury-corporate-gifts/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
     Route::get('/get-products-by-category/{category_id}', [FrontController::class, 'getProductsByCategory'])->name('get.products.by.category');
     Route::get('/wedding-vault', [FrontController::class, 'getWeddingVault'])->name('wedding.vault');
     Route::post('/wedding-vault/send-email', [FrontController::class, 'sendUnlockWeddingEmail'])->name('wedding-vault.send-email');
     Route::post('/wedding-vault/verify-otp', [FrontController::class, 'verifyWeddingVaultOtp'])->name('wedding-vault.verify-otp');
-    Route::get('/wedding-vault-inside', [FrontController::class, 'getWeddingVaultInside'])->name('wedding.vault.inside');
+    Route::get('/luxury-wedding-gifts', [FrontController::class, 'getWeddingVaultInside'])->name('wedding.vault.inside');
+
+    Route::get('/bespoke-commission', [FrontController::class, 'bespokeCommissionLegacyRedirect'])->name('bespoke.commission.legacy');
+    Route::get('/corporate-vault/{cat_slug?}', [FrontController::class, 'corporateVaultLegacyRedirect'])->name('corporate.vault.legacy');
+    Route::get('/wedding-vault-inside', [FrontController::class, 'weddingVaultInsideLegacyRedirect'])->name('wedding.vault.inside.legacy');
 
     // NOT MADE DYNAMIC - START
     Route::get('/rituals', [FrontController::class, 'getRituals'])->name('rituals');

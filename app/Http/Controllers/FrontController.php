@@ -114,21 +114,21 @@ class FrontController extends Controller
 
         $herProduct = Product::select($selectFields)->isActive()->notDeleted()
             ->whereHas('category', function ($q) {
-                $q->where('category_url', 'for-her')
+                $q->where('category_url', 'luxury-gifts-for-her')
                     ->where('is_active', 0)
                     ->whereNull('deleted_at');
             })->with('category')->orderBy('id', 'DESC')->get();
 
         $himProduct = Product::select($selectFields)->isActive()->notDeleted()
             ->whereHas('category', function ($q) {
-                $q->where('category_url', 'for-him')
+                $q->where('category_url', 'luxury-gifts-for-him')
                     ->where('is_active', 0)
                     ->whereNull('deleted_at');
             })->with('category')->orderBy('id', 'DESC')->get();
 
         $homeProduct = Product::select($selectFields)->isActive()->notDeleted()
             ->whereHas('category', function ($q) {
-                $q->where('category_url', 'for-home')
+                $q->where('category_url', 'luxury-home-decor')
                     ->where('is_active', 0)
                     ->whereNull('deleted_at');
             })->with('category')->orderBy('id', 'DESC')->get();
@@ -403,7 +403,7 @@ class FrontController extends Controller
         $toEmail                   = $request->to_email;
         $data['blessing_title']    = optional($gift->blessing)->title;
         $data['add_flowers_label'] = $addFlowers ? 'Yes' : 'No';
-        $data['shareLink']         = route('front.blessings.detail', ['blessings_of' => $request->blessing_id]);
+        $data['shareLink']         = route('front.blessings.library', ['slug' => optional($gift->blessing)->slug]);
 
         // 📧 Send Mail
         try {
@@ -488,7 +488,8 @@ class FrontController extends Controller
             ], 422);
         }
 
-        $shareLink = route('front.blessings.detail', ['blessings_of' => $request->blessing_id]);
+        $blessing  = \App\Models\Blessing::find($request->blessing_id);
+        $shareLink = route('front.blessings.library', ['slug' => $blessing->slug ?? '']);
 
         SharedDetail::create([
             'name'       => $request->name,
@@ -536,7 +537,8 @@ class FrontController extends Controller
             'receiver_phone' => $request->receiver_phone,
         ]);
 
-        $shareLink = route('front.blessings.detail', ['blessings_of' => $request->blessing_id]);
+        $blessing  = \App\Models\Blessing::find($request->blessing_id);
+        $shareLink = route('front.blessings.library', ['slug' => $blessing->slug ?? '']);
 
         $message = "Hi, {$request->receiver_name}\n" .
             "You've received a blessing 🙏\n" .
@@ -1702,15 +1704,95 @@ class FrontController extends Controller
         return view('front.journal', compact('journal'));
     }
 
-    public function getBlessings(Request $request, $blessingsOf = null)
+    public function getBlessings(Request $request, $slug = null)
     {
-        $blessings = Blessing::where('is_active', 0)->whereNull('deleted_at');
-        if (isset($blessingsOf) && $blessingsOf != null) {
-            $blessings = $blessings->whereRaw("FIND_IN_SET(?, blessing_of)", [$blessingsOf]);
+        $blessingOfKeys = array_keys(config('global_values.blessing_of'));
+
+        // Case 1: segment matches a category key -> filtered library listing
+        if ($slug !== null && in_array($slug, $blessingOfKeys)) {
+            $blessings = Blessing::where('is_active', 0)
+                ->whereNull('deleted_at')
+                ->whereRaw("FIND_IN_SET(?, blessing_of)", [$slug])
+                ->orderBy('id', 'DESC')
+                ->get();
+
+            return view('front.blessings', compact('blessings'));
         }
-        $blessings = $blessings->orderBy('id', 'DESC')->get();
+
+        // Case 2: segment matches an actual blessing slug -> detail page
+        if ($slug !== null) {
+            $blessing = Blessing::where('is_active', 0)
+                ->whereNull('deleted_at')
+                ->where('slug', $slug)
+                ->first();
+
+            if (! $blessing) {
+                abort(404);
+            }
+
+            $meta_title       = $blessing->title ?? null;
+            $meta_description = $blessing->sub_title ?? null;
+            $og_image         = $blessing->image ? asset('public/images/admin/blessing/images/' . $blessing->image) : null;
+
+            return view('front.blessing_detail', compact('blessing', 'meta_title', 'meta_description', 'og_image'));
+        }
+
+        // Case 3: no segment -> full library
+        $blessings = Blessing::where('is_active', 0)
+            ->whereNull('deleted_at')
+            ->orderBy('id', 'DESC')
+            ->get();
 
         return view('front.blessings', compact('blessings'));
+    }
+
+    public function blessingDetailLegacyRedirect(Request $request, $id = null)
+    {
+        if (! $id) {
+            return redirect()->route('front.blessings.library', [], 301);
+        }
+
+        $blessing = Blessing::where('is_active', 0)
+            ->whereNull('deleted_at')
+            ->where('id', $id)
+            ->first();
+
+        if (! $blessing || ! $blessing->slug) {
+            return redirect()->route('front.blessings.library', [], 301);
+        }
+
+        return redirect()->route('front.blessings.library', $blessing->slug, 301);
+    }
+
+    public function listLegacyRedirect(Request $request, $categorySlug, $from = null)
+    {
+        $slugMap = [
+            'for-home' => 'luxury-home-decor',
+            'for-him'  => 'luxury-gifts-for-him',
+            'for-her'  => 'luxury-gifts-for-her',
+        ];
+
+        $newSlug = $slugMap[$categorySlug] ?? $categorySlug;
+
+        return redirect()->route('front.list', array_filter([
+            'category_slug' => $newSlug,
+            'from'          => $from,
+        ]), 301);
+    }
+
+    public function bespokeCommissionLegacyRedirect(Request $request)
+    {
+        return redirect()->route('front.bespoke.commission', [], 301);
+    }
+
+    public function corporateVaultLegacyRedirect(Request $request, $catSlug = null)
+    {
+        return redirect()->route('front.corporate.vault', array_filter(['cat_slug' => $catSlug]), 301);
+    }
+
+    public function weddingVaultInsideLegacyRedirect(Request $request)
+    {
+        return redirect()->route('front.wedding.vault.inside', [], 301);
     }
 
     public function blessingDetail(Request $request, $blessingsOf = null)

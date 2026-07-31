@@ -12,7 +12,7 @@
             <a href="{{ route('admin.blessings.create') }}" class="btn btn-primary">Add Blessing</a>
         </div>
     </div>
-    <div class="col-md-2 mb-3">                      
+    <div class="col-md-2 mb-3">
         <select id="status" class="form-control input-default">
             <option value=""> -- Select Status -- </option>
             <option value="0">Active</option>
@@ -25,6 +25,7 @@
                 <th>ID</th>
                 <th>Blessing Of</th>
                 <th>Title</th>
+                 <th>Slug</th>
                 <th>Sub Title</th>
                 <th>Description</th>
                 <th>Image</th>
@@ -33,7 +34,7 @@
             </tr>
         </thead>
         <tbody>
-            
+
         </tbody>
     </table>
 </div>

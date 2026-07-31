@@ -93,7 +93,7 @@
                 @foreach ($blessings as $key => $val)
                     <div class="col-md-4 mb-4">
                         <div class="gesture_box open-blessing" data-bs-toggle="modal" data-bs-target="#blessingPopup"
-                            data-id="{{ $val->id }}" data-title="{{ $val->title }}"
+                            data-id="{{ $val->id }}" data-slug="{{ $val->slug }}" data-title="{{ $val->title }}"
                             data-subtitle="{{ $val->sub_title }}" data-description="{{ strip_tags($val->description) }}"
                             data-image="{{ asset('public/images/admin/blessing/images/' . $val->image) }}"
                             data-audio="{{ route('front.blessings.audio', $val->id) }}">
@@ -298,7 +298,7 @@
                                         <label class="flower_option">
                                             <input type="radio" name="flower_budget_range" value="199" checked>
                                             <span class="custom_radio"></span>
-                                            <span class="option_text">₹199</span>
+                                           <span class="option_text">AED 199</span>
                                         </label>
                                     </div>
                                 </div>
@@ -525,6 +525,7 @@
 @push('script')
     <script>
         let currentBlessingId = null;
+        let currentBlessingSlug = null;
         let activeShareLink = '';
         let activeEmailUrl = '';
         let activeInstagramUrl = 'https://www.instagram.com/';
@@ -553,9 +554,9 @@
             }
         });
 
-        function buildBlessingShareLink(blessingId) {
-            return sitePath + '/blessings-detail/' + blessingId;
-        }
+        function buildBlessingShareLink(slug) {
+                return sitePath + '/blessings-library/' + slug;
+            }
 
         function copyShareLink(callback) {
             if (!activeShareLink) {
@@ -621,6 +622,7 @@
             if (!card) return;
 
             const blessingId = card.dataset.id;
+            const blessingSlug = card.dataset.slug;
             const title = card.dataset.title;
             const subtitle = card.dataset.subtitle;
             const description = card.dataset.description;
@@ -628,6 +630,7 @@
             const audioSrc = card.dataset.audio;
 
             currentBlessingId = blessingId;
+             currentBlessingSlug = blessingSlug;
 
             document.getElementById('modalTitle').textContent = title;
             document.getElementById('modalSubTitle').textContent = subtitle;
@@ -667,7 +670,7 @@
             }
 
             // Build link + share urls directly — no separate "share details" step anymore
-            activeShareLink = buildBlessingShareLink(currentBlessingId);
+            activeShareLink = buildBlessingShareLink(currentBlessingSlug);
             activeEmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&su=' +
                 encodeURIComponent('Blessing share') + '&body=' + encodeURIComponent(activeShareLink);
             activeInstagramUrl = 'https://www.instagram.com/';

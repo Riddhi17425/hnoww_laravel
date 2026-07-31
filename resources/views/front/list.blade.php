@@ -86,12 +86,12 @@
                 <div class="him_prod_top">
                     <img class="img-fluid img_1" src="{{ asset('public/images/front/desire2.webp')}}" alt="him_prod">
                 </div>
-               
+
                     <div>
                         <h3 class="sub_head">The Oculus (Solo)</h3>
                         <p>A compact ritual centerpiece for intimate hosting.</p>
                     </div>
-               
+
                 <div>
                     <a href="product-details.php" class="com_btn">VIEW OBJECT </a>
                 </div>
@@ -104,7 +104,7 @@
                         <h3 class="sub_head">The Hybrid Totem</h3>
                         <p> A travertine + brass totem for sound and stillness.</p>
                     </div>
-              
+
                 <div>
                     <a href="product-details.php" class="com_btn">VIEW OBJECT </a>
                 </div>
@@ -117,7 +117,7 @@
                         <h3 class="sub_head">The Wireless Courtyard</h3>
                         <p>A travertine charging stone — technology, grounded.</p>
                     </div>
-               
+
                 <div>
                     <a href="product-details.php" class="com_btn">VIEW OBJECT </a>
                 </div>
@@ -149,13 +149,13 @@
                     </span>
                     <span>
                         @if(isset($catSlug) && $catSlug != null)
-                            @if(strtolower($catSlug) == 'for-home')
+                            @if(strtolower($catSlug) == 'luxury-home-decor')
                             Craft Your Majlis.
                             @endif
-                            @if(strtolower($catSlug) == 'for-her')
+                            @if(strtolower($catSlug) == 'luxury-gifts-for-her')
                             Objects chosen with care, designed to be lived with.
                             @endif
-                            @if(strtolower($catSlug) == 'for-him')
+                            @if(strtolower($catSlug) == 'luxury-gifts-for-him')
                             Build His Ritual.
                             @endif
                         @endif
