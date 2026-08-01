@@ -14,8 +14,8 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/x-icon" href="{{ asset('public/images/front/favicon.png') }}">
-    <title>{{ $meta_title ?? 'Luxury Home Decor & Desk Accessories Dubai | HNOWW' }}</title>
-    <meta name="description" content="{{ $meta_description ?? 'Sculptural objects for the desk, home, and gifting. Discover brass decor, executive desk accessories, and modern interiors in Dubai.' }}">
+    <title>{{ $meta_title ?? 'Luxury Gifts Online | Unique Gift Items Dubai | HNOWW' }}</title>
+    <meta name="description" content="{{ $meta_description ?? 'Shop luxury gifts online in Dubai at HNOWW. Discover unique gift items, bespoke collections, home decor, corporate gifts, and elegant presents for every occasion' }}"> 
     @if(request()->is('gift-blessing') || request()->is('gift-shop') || request()->is('gift-details/*') || request()->is('front/auth/*') || request()->is('cart') || request()->is('forgot-password') || request()->is('privacy'))
         <meta name="robots" content="nofollow, noindex"/>
     @else
@@ -29,16 +29,16 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
         $ogType = request()->is('blog/*') || request()->is('blogs') ? 'article' : 'website';
     @endphp
     <meta property="og:site_name" content="Hnoww">
-    <meta property="og:title" content="{{ $meta_title ?? 'Luxury Home Decor & Desk Accessories Dubai | HNOWW' }}" />
-    <meta property="og:description" content="{{ $meta_description ?? 'Sculptural objects for the desk, home, and gifting. Discover brass decor, executive desk accessories, and modern interiors in Dubai.' }}" />
+    <meta property="og:title" content="{{ $meta_title ?? 'Luxury Gifts Online | Unique Gift Items Dubai | HNOWW' }}" />
+    <meta property="og:description" content="{{ $meta_description ?? 'Shop luxury gifts online in Dubai at HNOWW. Discover unique gift items, bespoke collections, home decor, corporate gifts, and elegant presents for every occasion' }}" />
     <meta property="og:image" content="{{$og_image ?? asset('public/images/front/hnoww-luxury-gifts-dubai-og-image.jpg')}}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="{{$ogType}}">
-
+    
     <!--Twitter X Card Tags-->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ $meta_title ?? 'Luxury Home Decor & Desk Accessories Dubai | HNOWW' }}">
-    <meta name="twitter:description" content="{{ $meta_description ?? 'Sculptural objects for the desk, home, and gifting. Discover brass decor, executive desk accessories, and modern interiors in Dubai.' }}">
+    <meta name="twitter:title" content="{{ $meta_title ?? 'Luxury Gifts Online | Unique Gift Items Dubai | HNOWW' }}">
+    <meta name="twitter:description" content="{{ $meta_description ?? 'Shop luxury gifts online in Dubai at HNOWW. Discover unique gift items, bespoke collections, home decor, corporate gifts, and elegant presents for every occasion' }}">
     <meta name="twitter:image" content="{{$og_image ?? asset('public/images/front/hnoww-luxury-gifts-dubai-og-image.jpg')}}">
 
     @if(isset($blog_schema) && $blog_schema != '')
