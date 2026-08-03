@@ -397,13 +397,30 @@ class FrontController extends Controller
             'flower_budget_range' => $addFlowers ? 199 : null,
             'message_note'        => $request->message_note ?? null,
         ];
-        $gift                      = GiftBlessing::create($data);
-        $adminEmail                = $this->adminEmail;
-        $userEmail                 = $request->from_email;
-        $toEmail                   = $request->to_email;
-        $data['blessing_title']    = optional($gift->blessing)->title;
+
+        $gift       = GiftBlessing::create($data);
+        $adminEmail = $this->adminEmail;
+        $userEmail  = $request->from_email;
+        $toEmail    = $request->to_email;
+
+        $blessing = $gift->blessing;
+
+        $data['blessing_title']       = optional($blessing)->title;
+        $data['blessing_subtitle']    = optional($blessing)->sub_title;
+        $data['blessing_description'] = $blessing && $blessing->description
+            ? strip_tags($blessing->description)
+            : null;
+        $data['blessing_image'] = $blessing && $blessing->image
+            ? asset('public/images/admin/blessing/images/' . $blessing->image)
+            : null;
+        $data['blessing_audio'] = $blessing
+            ? route('front.blessings.audio', $blessing->id)
+            : null;
         $data['add_flowers_label'] = $addFlowers ? 'Yes' : 'No';
-        $data['shareLink']         = route('front.blessings.library', ['slug' => optional($gift->blessing)->slug]);
+        $data['shareLink']         = route('front.blessings.library', ['slug' => optional($blessing)->slug]);
+        $data['order_date']        = $gift->created_at
+            ? $gift->created_at->format('d M Y')
+            : now()->format('d M Y');
 
         // 📧 Send Mail
         try {
@@ -540,8 +557,8 @@ class FrontController extends Controller
         $blessing  = \App\Models\Blessing::find($request->blessing_id);
         $shareLink = route('front.blessings.library', ['slug' => $blessing->slug ?? '']);
 
-        $message = "Hi, {$request->receiver_name}\n" .
-            "You've received a blessing 🙏\n" .
+        $message = "Hello, {$request->receiver_name}\n" .
+            "{$request->sender_name} has shared a blessing with you, {$blessing->title}, an audio-poetic blessing by HNOWW. 🙏\n" .
             "{$shareLink}";
 
         $whatsappUrl = 'https://wa.me/' . preg_replace('/[^0-9]/', '', $request->receiver_phone) . '?text=' . urlencode($message);
