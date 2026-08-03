@@ -325,12 +325,12 @@
             <div class="modal-body">
                 <div class="audio-card d-grid gap-0">
                     <div class="modal-header border-0 px-0 pt-0">
-                        <h5 class="title_40">Social Sharing Options</h5>
+                        <h5 class="title_40">Blessing Sharing Options</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
                     <div>
-                        Awesome! Where would you like to share your poem?
+                        Where would you like to share this audio poetic blessing?
                     </div>
 
                     <div class="share-wrapper">
@@ -493,7 +493,7 @@
                         <div class="d-flex justify-content-center mt-3 gap-2">
                             <a class="com_btn" data-bs-toggle="modal" data-bs-target="#shareOptionsModal"
                                 style="cursor: pointer;"><span><- </span> Back</a>
-                            <button type="submit" class="com_btn bg-transparent">Open WhatsApp</button>
+                            <button type="submit" class="com_btn bg-transparent">Send Blessing</button>
                         </div>
                     </form>
                 </div>
@@ -964,7 +964,7 @@
                         complete: function() {
                             whatsappGiftFormSubmitted = false;
                             if (btn.length) {
-                                btn.prop('disabled', false).text('Open WhatsApp');
+                                btn.prop('disabled', false).text('Send Blessing');
                             }
                         }
                     });
