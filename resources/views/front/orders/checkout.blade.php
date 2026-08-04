@@ -810,7 +810,6 @@ $(document).ready(async function() {
         });
     }
 
-    // RIDDHI CODE
     // function setCheckoutWhatsappValue() {
     //     // if (!checkoutWhatsappInput || !checkoutWhatsappIti) {
     //     //     return;
