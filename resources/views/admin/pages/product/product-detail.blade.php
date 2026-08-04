@@ -158,9 +158,7 @@
                                                         </div>
                                                         <button class="btn btn-primary mx-1 mt-2  mt-sm-0"><i
                                                                 class="fa fa-heart me-1"></i> Addto Wishlist</button>
-                                                        <button class="btn btn-primary mx-1 mt-2 mt-sm-0 w-sm-100"><i
-                                                                class="fa fa-shopping-cart me-1"></i> Add to
-                                                            Cart</button>
+                                                        <button class="btn btn-primary mx-1 mt-2 mt-sm-0 w-sm-100"><i class="fa fa-shopping-cart me-1"></i> Add to Cart</button>
                                                     </div>
                                                 </div>
                                             </div>

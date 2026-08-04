@@ -116,6 +116,7 @@
                     <button type="button" class="com_btn" data-bs-toggle="modal" data-bs-target="#productInquiry">Reserved for June Delivery </button>
                 @else --}}
                     <button type="button" class="com_btn add_to_cart_btn" data-product-id="{{ $product->id }}" id="cartSubmitBtn"> Add to Cart</button>
+                    {{-- <button type="button" class="com_btn buy_now_btn" data-product-id="{{ $product->id }}" id="buyNowBtn"> Buy Now</button> --}}
                 {{-- @endif --}}
             </div>
             {{-- <div class="increment_decrement_area">
@@ -383,6 +384,52 @@
 
 <script>
 var formSubmitted = false;
+// $(document).on('click', '.buy_now_btn', function() {
+//     let productId = $(this).data('product-id');
+//     let qty = $('#product-qty').val() || 1;
+
+//     $.ajax({
+//         url: sitePath + '/cart/add',
+//         method: 'POST',
+//         data: {
+//             product_id: productId,
+//             quantity: qty
+//         },
+//         success: function(response) {
+//             if (response.status) {
+//                 let newCount = response.cart_count || 0;
+//                 $('.cart-total').text(newCount).show();
+//                 $('#cart-count').show();
+//                 window.location.href = sitePath + '/checkout';
+//             } else {
+//                 var message = response.message;
+//                 var availableQty = response.data && response.data.available_stock;
+//                 var alreadyAddedQty = response.data && response.data.already_in_cart;
+//                 if (availableQty > 0) {
+//                     message += ' Total Stock Quantity is ' + availableQty;
+//                 }
+//                 if (alreadyAddedQty > 0) {
+//                     message += ' Your cart has already ' + alreadyAddedQty + ' QTY added';
+//                 }
+//                 Swal.fire({
+//                     icon: 'warning',
+//                     title: 'Warning',
+//                     text: message,
+//                     showConfirmButton: true,
+//                     confirmButtonColor: '#B58A46',
+//                 });
+//             }
+//         },
+//         error: function() {
+//             Swal.fire({
+//                 icon: 'error',
+//                 title: 'Error',
+//                 text: 'Something went wrong!',
+//             });
+//         }
+//     });
+// });
+
 $(document).ready(function() {
     $("#productInquiryForm").validate({
         rules: {
