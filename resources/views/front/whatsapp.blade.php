@@ -1,4 +1,3 @@
-
 <style>
 /* Global Container */
 .wa-container {
@@ -158,6 +157,27 @@
     }
 }
 
+/* ===== NAYA CODE: sirf country search box ki styling ===== */
+.wa-country-search {
+    display: block;
+    width: calc(100% - 20px);
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 10px 12px;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 2;
+}
+
+.wa-country-search:focus {
+    border-color: var(--gold-color);
+}
+
 </style>
 
 <div class="wa-container">
@@ -241,6 +261,58 @@ document.addEventListener("DOMContentLoaded", function () {
         const phoneNumber = phoneInput.value.replace(/\s+/g, "");
         fullPhoneField.value = `+${dialCode}${phoneNumber}`;
         countryNameField.value = countryName;
+    });
+
+    /* ===== NAYA CODE: sirf country list ke upar ek search box add karna ===== */
+    phoneInput.addEventListener("open:countrydropdown", function () {
+        // v17.0.8 me dropdown list ki asli class "iti__country-list" hai (sirf "country-list" nahi)
+        var dropdownList = document.querySelector(".iti__country-list");
+        if (!dropdownList) return;
+
+        // Dropdown ki width hamesha input jitni fixed rahe (px me), chahe kitni bhi
+        // countries filter ho jaayein -- warna list/search box chhota dikhne lagta hai
+        var wrapper = phoneInput.closest(".iti") || phoneInput.parentElement;
+        var fixedWidth = wrapper.getBoundingClientRect().width;
+        dropdownList.style.width = fixedWidth + "px";
+        dropdownList.style.minWidth = fixedWidth + "px";
+        dropdownList.style.maxWidth = fixedWidth + "px";
+        dropdownList.style.boxSizing = "border-box";
+
+        var allItems = dropdownList.querySelectorAll("li.iti__country");
+
+        var existingSearch = dropdownList.querySelector(".wa-country-search");
+        if (existingSearch) {
+            // dropdown dubara khula to purani search value reset kar do
+            existingSearch.value = "";
+            allItems.forEach(function (li) { li.style.display = ""; });
+            setTimeout(function () { existingSearch.focus(); }, 0);
+            return;
+        }
+
+        var searchBox = document.createElement("input");
+        searchBox.type = "text";
+        searchBox.placeholder = "Search";
+        searchBox.className = "wa-country-search";
+        dropdownList.insertBefore(searchBox, dropdownList.firstChild);
+
+        // search box ke andar click/keypress se dropdown band na ho aur
+        // library ka "type to jump to country" feature interfere na kare
+        searchBox.addEventListener("click", function (e) { e.stopPropagation(); });
+        searchBox.addEventListener("keydown", function (e) { e.stopPropagation(); });
+
+        searchBox.addEventListener("input", function () {
+            var val = this.value.trim().toLowerCase();
+            var items = dropdownList.querySelectorAll("li.iti__country");
+            items.forEach(function (li) {
+                var nameEl = li.querySelector(".iti__country-name");
+                var name = nameEl ? nameEl.textContent.toLowerCase() : "";
+                var dialCode = (li.getAttribute("data-dial-code") || "").toLowerCase();
+                var matches = name.indexOf(val) !== -1 || dialCode.indexOf(val) !== -1;
+                li.style.display = matches ? "" : "none";
+            });
+        });
+
+        setTimeout(function () { searchBox.focus(); }, 0);
     });
 });
 
