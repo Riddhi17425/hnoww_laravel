@@ -16,7 +16,8 @@ use App\Http\Controllers\Admin\ProductTabController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\FrontController;use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\FrontController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\RedirectIfNotAdmin;
 use Illuminate\Support\Facades\Artisan;
 /*
@@ -53,6 +54,14 @@ Route::get('/clear', function () {
 Route::post('/newsletter-temp/store', [FrontController::class, 'storeNewsletterTempInquiry'])->name('newsletter.temp.store');
 Route::post('/check-email-unique', [FrontController::class, 'checkEmailUnique'])->name('front.check.email.unique');
 
+//========================Start Sitemap Routes========================
+
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+
+//========================End Sitemap Routes========================
+
+
+/*
 Route::get('/sitemap-index.xml', [SitemapController::class, 'index'])->name('sitemap.index');
 Route::get('/post-sitemap.xml', [SitemapController::class, 'posts'])->name('sitemap.posts');
 Route::get('/page-sitemap.xml', [SitemapController::class, 'pages'])->name('sitemap.pages');
@@ -60,6 +69,8 @@ Route::get('/product-sitemap.xml', [SitemapController::class, 'products'])->name
 Route::get('/category-sitemap.xml', [SitemapController::class, 'categories'])->name('sitemap.categories');
 Route::get('/gift-sitemap.xml', [SitemapController::class, 'gifts'])->name('sitemap.gifts');
 Route::get('/blessing-sitemap.xml', [SitemapController::class, 'blessings'])->name('sitemap.blessings');
+*/
+
 
 // Catch-all for frontend (coming soon)
 // Route::any('{any}', function () {
