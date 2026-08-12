@@ -71,7 +71,7 @@ Route::name('front.')->group(function () {
     Route::get('/', [FrontController::class, 'index'])->name('home');
     Route::get('stripe', [FrontController::class, 'getStripe']);                             // Temporary
     Route::post('stripe-post', [FrontController::class, 'stripePost'])->name('stripe.post'); // Temporary
-
+    Route::get('collections', [FrontController::class, 'collections'])->name('collections');
     Route::get('collections/{category_slug}/{from?}', [FrontController::class, 'getList'])->name('list');
     Route::get('/list/{category_slug}/{from?}', [FrontController::class, 'listLegacyRedirect'])->name('list.legacy');
     Route::get('product-details/{product_slug}', [FrontController::class, 'getProductDetails'])->name('product.details');
@@ -104,15 +104,15 @@ Route::name('front.')->group(function () {
     Route::post('store-ceremonial-inquiry', [FrontController::class, 'storeCeremonialInquiry'])->name('store.ceremonial.inquiry');
     Route::get('/gift-shop', [FrontController::class, 'getGiftShop'])->name('giftshop');
     Route::get('gift-details/{product_slug}', [FrontController::class, 'getGiftDetails'])->name('gift.details');
-    Route::get('/bespoke-luxury-gifts', [FrontController::class, 'getBespokeCommission'])->name('bespoke.commission');
+    Route::get('/bespoke-gifts-dubai', [FrontController::class, 'getBespokeCommission'])->name('bespoke.commission');
     Route::get('/privacy', [FrontController::class, 'getprivacy'])->name('privacy');
 
-    Route::get('/luxury-corporate-gifts/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
+    Route::get('/corporate-gifts-dubai/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
     Route::get('/get-products-by-category/{category_id}', [FrontController::class, 'getProductsByCategory'])->name('get.products.by.category');
     Route::get('/wedding-vault', [FrontController::class, 'getWeddingVault'])->name('wedding.vault');
     Route::post('/wedding-vault/send-email', [FrontController::class, 'sendUnlockWeddingEmail'])->name('wedding-vault.send-email');
     Route::post('/wedding-vault/verify-otp', [FrontController::class, 'verifyWeddingVaultOtp'])->name('wedding-vault.verify-otp');
-    Route::get('/luxury-wedding-gifts', [FrontController::class, 'getWeddingVaultInside'])->name('wedding.vault.inside');
+    Route::get('/wedding-gifts-dubai', [FrontController::class, 'getWeddingVaultInside'])->name('wedding.vault.inside');
 
     Route::get('/bespoke-commission', [FrontController::class, 'bespokeCommissionLegacyRedirect'])->name('bespoke.commission.legacy');
     Route::get('/corporate-vault/{cat_slug?}', [FrontController::class, 'corporateVaultLegacyRedirect'])->name('corporate.vault.legacy');
@@ -125,7 +125,7 @@ Route::name('front.')->group(function () {
     Route::get('/memory-shelf', [FrontController::class, 'getMemoryShelf'])->name('memory-shelf');
     Route::get('/modern-majilis', [FrontController::class, 'getModernMajilis'])->name('modern-majilis');
     Route::get('/architect-study', [FrontController::class, 'getArchitectStudy'])->name('architect-study');
-    Route::get('/author', [FrontController::class, 'getAuthor'])->name('author');
+    Route::get('/author/salomi-kotecha', [FrontController::class, 'getAuthor'])->name('author');
     Route::get('/about', [FrontController::class, 'getAbout'])->name('about');
     Route::get('/editions', [FrontController::class, 'getEditions'])->name('editions');
     // NOT MADE DYNAMIC - END
