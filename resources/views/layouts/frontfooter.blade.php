@@ -4,7 +4,7 @@
             <div class="ft_head_wrapper">
                 <div>
                     <a href="{{ route('front.home') }}">
-                        <img src="{{ asset('public/images/front/footer-logo.svg') }}" alt="hnow"
+                        <img src="{{ asset('public/images/front/footer-logo.svg') }}" alt="hnoww"
                             class="img-fluid footer_logo">
                     </a>
                     <p class="mt-3 mb-0">Architectural Objects & Luxury Gifting Studio Dubai.</p>
@@ -356,15 +356,15 @@ window.location.href = "{{ session('whatsapp_url') }}";
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="ct_form" id="cookie-policy-modal" class="cookie-policy-modal">
-                        <h5>Introduction</h5>
+                        <span>Introduction</span>
                         <p>This Cookie Policy explains how we use cookies and similar technologies on our website. By
                             using our website, you consent to the use of cookies as described in this policy, unless you
                             have disabled them through your browser settings or our cookie consent tool.</p>
-                        <h5>What Are Cookies?</h5>
+                        <span>What Are Cookies?</span>
                         <p>Cookies are small text files placed on your device when you visit a website. They help
                             improve your browsing experience by enabling the website to remember your actions and
                             preferences, analyze site performance, and deliver personalized content.</p>
-                        <h5>Types of Cookies We Use</h5>
+                        <span>Types of Cookies We Use</span>
                         <ul>
                             <li><strong>Functional Cookies</strong>: Essential for website functionality, enabling
                                 features like navigation and saving preferences (e.g., language or cookie consent).
@@ -376,10 +376,10 @@ window.location.href = "{{ session('whatsapp_url') }}";
                             <li><strong>Advertisement Cookies</strong>: Deliver personalized ads and measure campaign
                                 effectiveness. Duration: Up to 1 year.</li>
                         </ul>
-                        <h5>How We Use Cookies</h5>
+                        <span>How We Use Cookies</span>
                         <p>We use cookies to enhance your browsing experience, analyze website traffic, deliver relevant
                             content, and ensure site security and functionality.</p>
-                        <h5>Managing Your Cookie Preferences</h5>
+                        <span>Managing Your Cookie Preferences</span>
                         <p>You can control cookies through:</p>
                         <ul>
                             <li><strong>Cookie Consent Tool</strong>: Accept all, reject non-essential, or customize
@@ -390,13 +390,13 @@ window.location.href = "{{ session('whatsapp_url') }}";
                                 though this may affect site functionality. Check your browser's help section for
                                 instructions.</li>
                         </ul>
-                        <h5>Third-Party Cookies</h5>
+                        <span>Third-Party Cookies</span>
                         <p>Some cookies are set by third-party services (e.g., analytics or advertising providers).
                             These parties process data according to their own policies.</p>
-                        <h5>Data Privacy</h5>
+                        <span>Data Privacy</span>
                         <p>Cookies may collect data like IP addresses or browsing behavior. We handle this data
                             responsibly to protect your privacy.</p>
-                        <h5>Changes to This Policy</h5>
+                        <span>Changes to This Policy</span>
                         <p>We may update this policy to reflect changes in practices or legal requirements. Check the
                             “Last updated” date for revisions.</p>
                     </div>
