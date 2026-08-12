@@ -28,8 +28,11 @@
                                 @csrf
                                 <input type="hidden" name="token" value="{{ $token }}">
                                 <input type="hidden" name="email" value="{{ $email }}">
+                                 <div class="ct_input password_wrap">
+                                    <input type="text" value="{{$email}}" readonly placeholder="Enter Email">
+                                </div>
+
                                 <div class="ct_input password_wrap">
-                                    <input type="text" value="{{$email}}" readonly>
                                     <input type="password" id="new_password" name="new_password" placeholder="Enter New Password" required>
                                     <span class="toggle_password" onclick="togglePasswordSvg('new_password', this)">
                                         <svg class="eye-open" width="24" height="24" viewBox="0 0 24 24" fill="none"
