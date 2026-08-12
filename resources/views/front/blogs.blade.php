@@ -28,7 +28,7 @@
                     </svg>
                 </span>
             </p>
-            <h2 class="title_60">House Journal</h2>
+            <h2 class="title_60">HNOWW Blogs</h2>
         </div>
         <div class="row gy-4 gy-lg-5">
             @if(isset($blogs) && is_countable($blogs) && count($blogs) > 0)
