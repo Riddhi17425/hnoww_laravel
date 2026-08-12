@@ -162,7 +162,7 @@
     display: block;
     width: calc(100% - 20px);
     box-sizing: border-box;
-    margin: 10px;
+    margin: px;
     padding: 10px 12px;
     border: 1px solid #dcdcdc;
     border-radius: 4px;
