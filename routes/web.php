@@ -55,22 +55,8 @@ Route::post('/newsletter-temp/store', [FrontController::class, 'storeNewsletterT
 Route::post('/check-email-unique', [FrontController::class, 'checkEmailUnique'])->name('front.check.email.unique');
 
 //========================Start Sitemap Routes========================
-
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
-
 //========================End Sitemap Routes========================
-
-
-/*
-Route::get('/sitemap-index.xml', [SitemapController::class, 'index'])->name('sitemap.index');
-Route::get('/post-sitemap.xml', [SitemapController::class, 'posts'])->name('sitemap.posts');
-Route::get('/page-sitemap.xml', [SitemapController::class, 'pages'])->name('sitemap.pages');
-Route::get('/product-sitemap.xml', [SitemapController::class, 'products'])->name('sitemap.products');
-Route::get('/category-sitemap.xml', [SitemapController::class, 'categories'])->name('sitemap.categories');
-Route::get('/gift-sitemap.xml', [SitemapController::class, 'gifts'])->name('sitemap.gifts');
-Route::get('/blessing-sitemap.xml', [SitemapController::class, 'blessings'])->name('sitemap.blessings');
-*/
-
 
 // Catch-all for frontend (coming soon)
 // Route::any('{any}', function () {
@@ -310,5 +296,4 @@ Route::prefix('admin')->name('admin.')->group(function () {
         route::post('corporate-kit/update/status', [CorporateKitController::class, 'updateStatus'])->name('corporate-kit.update.status');
 
     });
-
 });

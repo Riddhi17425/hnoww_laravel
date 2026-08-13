@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Blessing;
 use App\Models\Blog;
 use App\Models\Category;
-use App\Models\GiftShop;
 use App\Models\Product;
 
 class SitemapController extends Controller
@@ -31,7 +30,8 @@ class SitemapController extends Controller
 
 
         // ============================================================
-        // START - HOMEPAGE
+        // 1. HOMEPAGE
+        // PRIORITY: 1.00
         // ============================================================
 
         $xml .= '<url>';
@@ -52,33 +52,81 @@ class SitemapController extends Controller
 
         $xml .= '</url>' . "\n";
 
-        // ============================================================
-        // END - HOMEPAGE
-        // ============================================================
-
 
         // ============================================================
-        // START - CATEGORIES
+        // 2. ALL CATEGORIES + SUB-CATEGORIES
+        // PRIORITY: 0.80
+        //
+        // category_type:
+        // 1 = Base Categories
+        // 2 = Corporate Categories
+        // 3 = Wedding Categories
         // ============================================================
 
         $categories = Category::where('is_active', 0)
-            ->whereIn('category_url', [
-                'luxury-gifts-for-her',
-                'luxury-gifts-for-him',
-                'luxury-home-decor'
-            ])
+            ->whereNull('deleted_at')
+            ->whereIn('category_type', [1, 2, 3])
             ->get();
 
         foreach ($categories as $category)
         {
-            if (empty($category->category_url))
+            if (empty($category->id))
             {
                 continue;
             }
 
-            $loc = route('front.list', [
-                'category_slug' => $category->category_url
-            ]);
+            /*
+             * BASE CATEGORY
+             *
+             * /collections/luxury-gifts-for-her
+             * /collections/luxury-gifts-for-him
+             * /collections/luxury-home-decor
+             */
+            if ($category->category_type == 1)
+            {
+                if (empty($category->category_url))
+                {
+                    continue;
+                }
+
+                $loc = route('front.list', [
+                    'category_slug' => $category->category_url
+                ]);
+            }
+
+            /*
+             * CORPORATE CATEGORY
+             *
+             * /corporate-gifts-dubai/{cat_slug}
+             */
+            elseif ($category->category_type == 2)
+            {
+                if (empty($category->category_url))
+                {
+                    continue;
+                }
+
+                $loc = route('front.corporate.vault', [
+                    'cat_slug' => $category->category_url
+                ]);
+            }
+
+            /*
+             * WEDDING CATEGORY
+             *
+             * /wedding-products/{category_id}
+             */
+            elseif ($category->category_type == 3)
+            {
+                $loc = route('front.ceremonials', [
+                    'category_id' => $category->id
+                ]);
+            }
+
+            else
+            {
+                continue;
+            }
 
             $lastmod = optional($category->updated_at)->toAtomString();
 
@@ -100,16 +148,44 @@ class SitemapController extends Controller
             $xml .= '</url>' . "\n";
         }
 
-        // ============================================================
-        // END - CATEGORIES
-        // ============================================================
-
 
         // ============================================================
-        // START - PRODUCTS
+        // 3. ALL PRODUCTS
+        // PRIORITY: 0.80
+        //
+        // Includes:
+        // - Normal Products
+        // - Gift Shop Products
         // ============================================================
+
+        // ------------------------------------------------------------
+        // NORMAL PRODUCTS
+        // ------------------------------------------------------------
+
+        // Product URLs that should NOT appear in sitemap
+        $excludedProductUrls = [
+            'the-fluted-pedestal',
+            'pedestal-platters',
+            'elephant-pedestal-cake-stand',
+            'malachite-monolith-frame',
+            'keepsake-boxes',
+            'card-holders',
+            'pen-holders-organisers',
+            'paperweights',
+            'silver-grid-frames',
+            'malachite-stone-frames',
+            'malachite-stem-sculpture',
+            'silver-leaf-bowl',
+            'lotus-bowl',
+            'the-offering-stand',
+            'the-peacock-vessel',
+            'the-malachite-offering-platter',
+            'kamadhenu-ceremonial-idol',
+        ];
 
         $products = Product::where('is_active', 0)
+            ->whereNull('deleted_at')
+            ->whereNotIn('product_url', $excludedProductUrls)
             ->get();
 
         foreach ($products as $product)
@@ -138,35 +214,104 @@ class SitemapController extends Controller
                     . '</lastmod>';
             }
 
-            $xml .= '<priority>0.60</priority>';
+            $xml .= '<priority>0.80</priority>';
 
             $xml .= '</url>' . "\n";
         }
 
         // ============================================================
-        // END - PRODUCTS
+        // 4. ALL PAGES
+        // PRIORITY: 0.60
+        //
+        // Includes:
+        // - Corporate main page
+        // - Bespoke main page
+        // - Wedding main page
+        // - Normal static pages
+        // - Blessings library
+        // - Individual blessings
         // ============================================================
 
+        $staticRoutes = [
+            // Main / landing pages
+            'front.corporate.vault',
+            'front.bespoke.commission',
+            'front.wedding.vault.inside',
 
-        // ============================================================
-        // START - GIFT SHOP PRODUCTS
-        // ============================================================
+            // Static pages
+            'front.about',
+            'front.faqs',
+            'front.journal',
+            'front.atelier',
+            'front.author',
+            'front.editions',
+            'front.contactus',
+            'front.blogs',
+        ];
 
-        $gifts = GiftShop::where('is_active', 0)
+        foreach ($staticRoutes as $name)
+        {
+            $loc = route($name);
+
+            $xml .= '<url>';
+
+            $xml .= '<loc>'
+                . htmlspecialchars($loc, ENT_XML1, 'UTF-8')
+                . '</loc>';
+
+            $xml .= '<lastmod>'
+                . htmlspecialchars($todayTime, ENT_XML1, 'UTF-8')
+                . '</lastmod>';
+
+            $xml .= '<priority>0.60</priority>';
+
+            $xml .= '</url>' . "\n";
+        }
+
+
+        // ------------------------------------------------------------
+        // BLESSINGS LIBRARY PAGE
+        // ------------------------------------------------------------
+
+        $xml .= '<url>';
+
+        $xml .= '<loc>'
+            . htmlspecialchars(
+                route('front.blessings.library'),
+                ENT_XML1,
+                'UTF-8'
+            )
+            . '</loc>';
+
+        $xml .= '<lastmod>'
+            . htmlspecialchars($todayTime, ENT_XML1, 'UTF-8')
+            . '</lastmod>';
+
+        $xml .= '<priority>0.60</priority>';
+
+        $xml .= '</url>' . "\n";
+
+
+        // ------------------------------------------------------------
+        // INDIVIDUAL BLESSINGS
+        // ------------------------------------------------------------
+
+        $blessings = Blessing::where('is_active', 0)
+            ->whereNull('deleted_at')
             ->get();
 
-        foreach ($gifts as $gift)
+        foreach ($blessings as $blessing)
         {
-            if (empty($gift->product_url))
+            if (empty($blessing->slug))
             {
                 continue;
             }
 
-            $loc = route('front.gift.details', [
-                'product_slug' => $gift->product_url
+            $loc = route('front.blessings.library', [
+                'slug' => $blessing->slug
             ]);
 
-            $lastmod = optional($gift->updated_at)->toAtomString();
+            $lastmod = optional($blessing->updated_at)->toAtomString();
 
             $xml .= '<url>';
 
@@ -186,13 +331,10 @@ class SitemapController extends Controller
             $xml .= '</url>' . "\n";
         }
 
-        // ============================================================
-        // END - GIFT SHOP PRODUCTS
-        // ============================================================
-
 
         // ============================================================
-        // START - BLOG POSTS
+        // 5. ALL BLOGS
+        // PRIORITY: 0.60
         // ============================================================
 
         $blogs = Blog::where('status', 'Active')
@@ -229,124 +371,10 @@ class SitemapController extends Controller
             $xml .= '</url>' . "\n";
         }
 
-        // ============================================================
-        // END - BLOG POSTS
-        // ============================================================
-
 
         // ============================================================
-        // START - BLESSINGS
+        // END SITEMAP
         // ============================================================
-
-        $blessings = Blessing::where('is_active', 0)
-            ->whereNull('deleted_at')
-            ->get();
-
-        // Blessings Library Main Page
-
-        $xml .= '<url>';
-
-        $xml .= '<loc>'
-            . htmlspecialchars(
-                route('front.blessings.library'),
-                ENT_XML1,
-                'UTF-8'
-            )
-            . '</loc>';
-
-        $xml .= '<lastmod>'
-            . htmlspecialchars($todayTime, ENT_XML1, 'UTF-8')
-            . '</lastmod>';
-
-        $xml .= '<priority>0.60</priority>';
-
-        $xml .= '</url>' . "\n";
-
-
-        // Individual Blessings
-
-        foreach ($blessings as $blessing)
-        {
-            if (empty($blessing->slug))
-            {
-                continue;
-            }
-
-            $loc = route('front.blessings.library', [
-                'slug' => $blessing->slug
-            ]);
-
-            $lastmod = optional($blessing->updated_at)->toAtomString();
-
-            $xml .= '<url>';
-
-            $xml .= '<loc>'
-                . htmlspecialchars($loc, ENT_XML1, 'UTF-8')
-                . '</loc>';
-
-            if ($lastmod)
-            {
-                $xml .= '<lastmod>'
-                    . htmlspecialchars($lastmod, ENT_XML1, 'UTF-8')
-                    . '</lastmod>';
-            }
-
-            $xml .= '<priority>0.60</priority>';
-
-            $xml .= '</url>' . "\n";
-        }
-
-        // ============================================================
-        // END - BLESSINGS
-        // ============================================================
-
-
-        // ============================================================
-        // START - STATIC PAGES
-        // ============================================================
-
-        $staticRoutes = [
-            'front.about',
-            'front.faqs',
-            'front.journal',
-            'front.atelier',
-            'front.bespoke.commission',
-            'front.privacy',
-            'front.rituals',
-            'front.bespoke.wedding.hampers',
-            'front.everyday-sacred',
-            'front.memory-shelf',
-            'front.modern-majilis',
-            'front.architect-study',
-            'front.author',
-            'front.editions',
-            'front.contactus',
-            'front.blogs',
-        ];
-
-        foreach ($staticRoutes as $name)
-        {
-            $loc = route($name);
-
-            $xml .= '<url>';
-
-            $xml .= '<loc>'
-                . htmlspecialchars($loc, ENT_XML1, 'UTF-8')
-                . '</loc>';
-
-            $xml .= '<lastmod>'
-                . htmlspecialchars($todayTime, ENT_XML1, 'UTF-8')
-                . '</lastmod>';
-
-            $xml .= '<priority>0.60</priority>';
-
-            $xml .= '</url>' . "\n";
-        }
-
-        // ============================================================
-        // END - STATIC PAGES
-        // ============================================================
-
 
         $xml .= '</urlset>';
 
