@@ -15,8 +15,33 @@
 
 <section class="mt_60">
     <div class="container">
+        <div class="section_header mb-4">
+            <div class="gesture_filter">
+                <div class="gesture_filter_child">
+                    <h3 class="gesture_title">Category</h3>
+                    <select id="collection_category_filter" class="dropdown" onchange="window.location='{{ route('front.collections') }}?'+buildCollectionsQuery(this.value, document.getElementById('collection_price_filter').value)">
+                        <option value="">Select Category</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>{{ $category->category_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="gesture_filter_child">
+                    <h3 class="gesture_title">Price</h3>
+                    <select id="collection_price_filter" class="dropdown" onchange="window.location='{{ route('front.collections') }}?'+buildCollectionsQuery(document.getElementById('collection_category_filter').value, this.value)">
+                        <option value="">Select Price</option>
+                        @if(!empty($priceRanges))
+                            @foreach($priceRanges as $range)
+                                <option value="{{ $range['value'] }}" {{ request('price_range') == $range['value'] ? 'selected' : '' }}>{{ $range['label'] }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
+            </div>
+        </div>
+
         <div class="him_wrapper">
-            @if(isset($collections) && is_countable($collections) && count($collections))
+            @if(isset($collections) && $collections->isNotEmpty())
                 @foreach($collections as $key => $val)
                     <div class="him_prod">
                         <div class="him_prod_top">
@@ -29,20 +54,46 @@
                                 <a href="{{ route('front.product.details', $val->product_url) }}"><img class="w-100 mb-2 mb-md-4" src="{{ asset('public/noimg.jpg') }}" alt='No Image Found'></a>
                             @endif
                         </div>
-                            <div>
-                                <h3 class="sub_head mt-2"><a href="{{ route('front.product.details', $val->product_url) }}">{{ $val->product_name ?? '' }}</a></h3>
-                                <p class>{!! $val->short_description ?? '' !!}</p>
-                            </div>
+                        <div>
+                            <h3 class="sub_head mt-2"><a href="{{ route('front.product.details', $val->product_url) }}">{{ $val->product_name ?? '' }}</a></h3>
+                            <p class="fw-semibold text-dark mb-2">AED {{ number_format((float) preg_replace('/[^0-9.]/', '', $val->product_price), 0) }}</p>
+                            <p class>{!! $val->short_description ?? '' !!}</p>
+                        </div>
                         <div>
                             <a href="{{ route('front.product.details', $val->product_url) }}" class="com_btn">VIEW OBJECT </a>
                         </div>
                     </div>
                 @endforeach
+            @else
+                <div class="col-12 text-center">
+                    <img src="{{ asset('public/images/product-not-found.png') }}" alt="Collection products not found">
+                </div>
             @endif
-          
         </div>
+
+        @if($collections->hasPages())
+            <div class="d-flex justify-content-center mt-4">
+                {{ $collections->links() }}
+            </div>
+        @endif
     </div>
 </section>
+
+<script>
+    function buildCollectionsQuery(categoryId, priceRange) {
+        const params = new URLSearchParams();
+
+        if (categoryId) {
+            params.set('category_id', categoryId);
+        }
+
+        if (priceRange) {
+            params.set('price_range', priceRange);
+        }
+
+        return params.toString();
+    }
+</script>
 
 <section class="cta_footer mt_120">
     <div class="container">
