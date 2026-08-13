@@ -136,11 +136,11 @@ Route::name('front.')->group(function () {
     Route::get('/memory-shelf', [FrontController::class, 'getMemoryShelf'])->name('memory-shelf');
     Route::get('/modern-majilis', [FrontController::class, 'getModernMajilis'])->name('modern-majilis');
     Route::get('/architect-study', [FrontController::class, 'getArchitectStudy'])->name('architect-study');
+    // NOT MADE DYNAMIC - END
+
     Route::get('/author/salomi-kotecha', [FrontController::class, 'getAuthor'])->name('author');
     Route::get('/about', [FrontController::class, 'getAbout'])->name('about');
     Route::get('/editions', [FrontController::class, 'getEditions'])->name('editions');
-    // NOT MADE DYNAMIC - END
-
     Route::get('/thankyou', [FrontController::class, 'getThankYou'])->name('thankyou');
 
     Route::get('/blogs', [FrontController::class, 'getBlogs'])->name('blogs');
