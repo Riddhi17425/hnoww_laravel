@@ -241,8 +241,7 @@
                                                         alt="{{ $cart->product->product_name ?? 'Product Image' }}"></a>
                                             </td>
                                             <td class="" data-title="Product Name">
-                                                <p class="product-name mb-0"><a href=""
-                                                        target="_blank">{{ $cart->product->product_name ?? '' }}</a></p>
+                                                <p class="product-name mb-0"><a href="{{ route('front.product.details', $cart->product->product_url) }}">{{ $cart->product->product_name ?? '' }}</a></p>
                                             </td>
                                             <td class="price" data-title="Price"> <span class="unit-price"
                                                     data-price="{{ $cart->price }}">{{ $cart->price ?? '' }}</span></td>

@@ -39,7 +39,7 @@
             </div>
             <div class="col-lg-5 col-md-12 author-img-col">
                 <div class="author-img-wrapper">
-                    <img src="{{ asset('public/images/front/Authorimage.webp') }}" class="img-fluid w-100" alt="Salomi Kotecha">
+                    <img src="{{ asset('public/images/front/salomi-kotecha.webp') }}" class="img-fluid w-100" alt="Salomi Kotecha, founder of HNOWW">
                 </div>
             </div>
         </div>
@@ -92,7 +92,7 @@
 
                     </span>
                     <span>
-                        Build His Ritual.
+                        Objects chosen with care, designed to be lived with.
                     </span>
                     <span>
                         <svg width="146" height="11" viewBox="0 0 146 11" fill="none"
@@ -111,9 +111,9 @@
                     </span>
                 </p>
             </div>
-            <div>
+            <!-- <div>
                 <a href="#" class="com_btn border-white text-white">Shop Gifts For Him</a>
-            </div>
+            </div> -->
         </div>
     </div>
 </section>

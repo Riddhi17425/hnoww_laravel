@@ -210,8 +210,8 @@ class FrontController extends Controller
         //     }
         // }
 
-        $meta_title       = 'Luxury Home Decor & Desk Accessories Dubai | HNOWW';
-        $meta_description = 'Sculptural objects for the desk, home, and gifting. Discover brass decor, executive desk accessories, and modern interiors in Dubai.';
+        $meta_title       = 'Luxury Gifts Online | Unique Gift Items Dubai | HNOWW';
+        $meta_description = 'Shop luxury gifts online in Dubai at HNOWW. Discover unique gift items, bespoke collections, home decor, corporate gifts, and elegant presents for every occasion';
 
         return view('front.home', compact('herProduct', 'himProduct', 'homeProduct', 'corporateProduct', 'weddingProduct', /*'allProd',*/'allGifts', 'desiredProductsArray', 'instagramPosts', 'meta_title', 'meta_description'));
     }
@@ -826,7 +826,10 @@ class FrontController extends Controller
 
     public function getContactUs(Request $request)
     {
-        return view('front.contact_us');
+        $meta_title       = "Contact HNOWW | Luxury Gifting Enquiries, Dubai";
+        $meta_description = "Contact HNOWW for bespoke commissions, wedding gifting, corporate gifting or general enquiries. Reach us via WhatsApp, email, or appointment.";
+
+        return view('front.contact_us', compact('meta_title', 'meta_description'));
     }
 
     public function storeContactInquiry(Request $request)
@@ -935,8 +938,10 @@ class FrontController extends Controller
                 $q->where('is_active', 0)
                     ->whereNull('deleted_at');
             }])->get();
+        $meta_title       = "Frequently Asked Questions | HNOWW";
+        $meta_description = "Get answers on HNOWW's corporate gifting, wedding orders, UAE delivery, returns and concierge process, everything to know before you place an order.";
 
-        return view('front.faqs', compact('faq'));
+        return view('front.faqs', compact('faq', 'meta_title', 'meta_description'));
     }
 
     public function getCorporateVault(Request $request, $catSlug = null)
@@ -953,8 +958,10 @@ class FrontController extends Controller
         $corporateProduct = Product::select('id', 'product_name')->where('product_type', 2)->whereNull('deleted_at')->where('is_active', 0)->get();
         $weddingProduct   = Product::select('id', 'product_name')->where('product_type', 3)->whereNull('deleted_at')->where('is_active', 0)->get();
         $corporateKits    = CorporateKit::isActive()->notDeleted()->get();
+        $meta_title       = "Luxury Corporate Gifts Dubai | Customized Gifts | HNOWW";
+        $meta_description = "HNOWW's luxury corporate gifts Dubai offers include bespoke and customized corporate gifts, designed for executives that see gifting as ritual. Order Now!";
 
-        return view('front.corporate_vault', compact('categories', 'products', 'corporateProduct', 'weddingProduct', 'corporateKits'));
+        return view('front.corporate_vault', compact('categories', 'products', 'corporateProduct', 'weddingProduct', 'corporateKits', 'meta_title', 'meta_description'));
     }
 
     public function getCorporateDiwaliCollection(Request $request)
@@ -1750,9 +1757,11 @@ class FrontController extends Controller
 
     public function getJournal(Request $request)
     {
+        $meta_title = "The Journal | Rituals, Objects & Intentional Living | HNOWW";
+        $meta_description = "Explore The HNOWW Journal, a monthly edition on ritual, hosting, and objects that hold meaning. Reflections on intention, material, and the art of giving.";
         $journal = Journal::where('is_active', 0)->orderBy('sort_by', 'ASC')->get();
 
-        return view('front.journal', compact('journal'));
+        return view('front.journal', compact('journal', 'meta_title', 'meta_description'));
     }
 
     public function getBlessings(Request $request, $slug = null)
@@ -1781,8 +1790,8 @@ class FrontController extends Controller
                 abort(404);
             }
 
-            $meta_title       = $blessing->title ?? null;
-            $meta_description = $blessing->sub_title ?? null;
+            $meta_title       = $blessing->meta_title ?? null;
+            $meta_description = $blessing->meta_description ?? null;
             $og_image         = $blessing->image ? asset('public/images/admin/blessing/images/' . $blessing->image) : null;
 
             return view('front.blessing_detail', compact('blessing', 'meta_title', 'meta_description', 'og_image'));
@@ -1793,8 +1802,10 @@ class FrontController extends Controller
             ->whereNull('deleted_at')
             ->orderBy('id', 'DESC')
             ->get();
+        $meta_title       = 'The Blessing Library | Audio Poetic Gifting | HNOWW';
+        $meta_description = "Explore The Blessing Library by HNOWW, audio-poetic rituals to gift or share for weddings, new homes, birthdays, and life's meaningful moments in Dubai.";
 
-        return view('front.blessings', compact('blessings'));
+        return view('front.blessings', compact('blessings', 'meta_title', 'meta_description'));
     }
 
     public function blessingDetailLegacyRedirect(Request $request, $id = null)
@@ -1872,8 +1883,10 @@ class FrontController extends Controller
     {
         $corporateProduct = Product::select('id', 'product_name')->where('product_type', 2)->whereNull('deleted_at')->where('is_active', 0)->get();
         $weddingProduct   = Product::select('id', 'product_name')->where('product_type', 3)->whereNull('deleted_at')->where('is_active', 0)->get();
+        $meta_title       = 'The Atelier | Our Story & Craft | HNOWW';
+        $meta_description = "Discover the HNOWW Atelier, where philosophy, craft, and ritual meet. Sculptural objects made in small batches from stone, brass, and silver in Dubai.";
 
-        return view('front.atelier', compact('corporateProduct', 'weddingProduct'));
+        return view('front.atelier', compact('corporateProduct', 'weddingProduct', 'meta_title', 'meta_description'));
     }
 
     public function getWeddingVault(Request $request)
@@ -1959,8 +1972,10 @@ class FrontController extends Controller
     {
         // $weddingProduct = Product::select('id', 'product_name', 'short_description', 'list_page_img', 'product_url')->where('product_type', 3)->isActive()->notDeleted()->get();
         $weddingCategory = Category::select('id', 'category_name', 'title', 'banner_image', 'category_url', 'category_type')->where('category_type', 3)->isActive()->notDeleted()->get();
+        $meta_title = 'Luxury Wedding Gifts in Dubai | Ceremonial Objects | HNOWW';
+        $meta_description = "HNOWW crafts personalised wedding gifts in Dubai for ceremonial rituals, designs made to be kept as part of a couple's living story. Book your order now!";
 
-        return view('front.wedding_vault_inside', compact('weddingCategory'));
+        return view('front.wedding_vault_inside', compact('weddingCategory', 'meta_title', 'meta_description'));
     }
 
     public function getCeremonials($categoryId = null)
@@ -2081,7 +2096,10 @@ class FrontController extends Controller
     {
         //$allProd = Product::isActive()->notDeleted()->get();
         //return view('front.bespoke-commission', compact('allProd'));
-        return view('front.bespoke-commission');
+        $meta_title = 'Bespoke Luxury Gifts Dubai | Custom Creations | HNOWW';
+        $meta_description = 'Discover bespoke gifts in Dubai, thoughtfully designed and crafted for meaningful moments. Explore HNOWW’s custom luxury gifting and personalised creations.';
+        
+        return view('front.bespoke-commission', compact('meta_title', 'meta_description'));
     }
 
     public function getEverydaySacred()
@@ -2116,15 +2134,19 @@ class FrontController extends Controller
 
     public function getAbout()
     {
-        return view('front.about');
+        $meta_title="About HNOWW | Luxury Gifting Studio Dubai";
+        $meta_description="Learn about HNOWW, Dubai-based luxury gifting studio crafting sculptural objects with intention. Explore our story, framework, and founder's vision.";
+        
+        return view('front.about', compact('meta_title','meta_description'));
     }
 
     public function getBlogs()
     {
-        // $metaTitle="Our Blogs & Insights | Hnoww";
-        // $metaDescription="Explore our latest blogs & articles about the woven sack, FIBC industrial machines, HDPE/PP, jumbo bag-making machines, and many more.";
+        $meta_title="The HNOWW Blogs | Luxury Gifting & Home Decor Insights";
+        $meta_description="Explore the HNOWW blog for stories on luxury gifting, home decor, and intentional living. Curated insights on design, ritual, and the art of giving well.";
         $blogs = Blog::orderBy('id', 'desc')->whereNull('deleted_at')->where('status', 'Active')->get();
-        return view('front.blogs', compact( /*'metaTitle','metaDescription',*/'blogs'));
+         
+        return view('front.blogs', compact('meta_title','meta_description','blogs'));
     }
 
     public function getBlogDetails($url)
@@ -2154,7 +2176,10 @@ class FrontController extends Controller
 
     public function getEditions()
     {
-        return view('front.editions');
+        $meta_title = "Editions | Limited Design Collaborations | HNOWW";
+        $meta_description = "Discover HNOWW Editions, limited-run collaborations shaped by ritual, restraint, and design. Time-bound expressions, created slowly and never repeated.";
+       
+        return view('front.editions', compact('meta_title', 'meta_description'));
     }
 
     public function getThankYou()
@@ -2165,6 +2190,93 @@ class FrontController extends Controller
     public function getAuthor()
     {
         $blogs = Blog::orderBy('id', 'desc')->whereNull('deleted_at')->where('status', 'Active')->get();
-        return view('front.author', compact('blogs'));
+        $meta_title       = "Salomi Kotecha | Founder of HNOWW";
+        $meta_description = "Meet Salomi Kotecha, founder of HNOWW, and explore her writing on considered gifting, modern rituals, craftsmanship, hospitality and objects designed to stay.";
+
+        return view('front.author', compact('blogs', 'meta_title', 'meta_description'));
+    }
+
+     private function getProductPriceRangeOptions($minPrice, $maxPrice)
+    {
+        $minPrice = (float) $minPrice;
+        $maxPrice = (float) $maxPrice;
+
+        if ($minPrice <= 0 || $maxPrice <= 0 || $minPrice >= $maxPrice) {
+            return [];
+        }
+
+        $bucket = max(250, (int) ceil(($maxPrice - $minPrice) / 4));
+        $start  = (int) floor($minPrice / $bucket) * $bucket;
+        $end    = (int) ceil($maxPrice / $bucket) * $bucket;
+
+        $ranges = [];
+        for ($lower = $start; $lower < $end; $lower += $bucket) {
+            $upper = min($lower + $bucket, $end);
+            $ranges[] = [
+                'value' => $lower . '-' . $upper,
+                'label' => 'AED ' . number_format($lower, 0) . ' - AED ' . number_format($upper, 0),
+            ];
+        }
+
+        return $ranges;
+    }
+
+    public function collections(Request $request)
+    {
+        $meta_title       = "HNOWW Collections | Curated Luxury Gifts & Home Decor";
+        $meta_description = "Explore HNOWW's curated collections of luxury gifts and home decor, designed for meaningful moments and intentional living. Discover our thoughtfully crafted pieces.";
+
+        $collectionsQuery = Product::where('is_active', 0)
+            ->where('product_type', 1)
+            ->whereNull('deleted_at');
+
+        if ($request->filled('category_id') && $request->category_id != '') {
+            $collectionsQuery->where('category_id', $request->category_id);
+        }
+
+        if ($request->filled('price_range') && $request->price_range != '') {
+            $range = $request->price_range;
+            [$min, $max] = array_pad(explode('-', $range), 2, 0);
+            $min = (int) $min;
+            $max = (int) $max;
+
+            if ($max > 0) {
+                $collectionsQuery->whereRaw('CAST(REPLACE(REPLACE(REPLACE(product_price, ",", ""), "AED", ""), " ", "") AS DECIMAL(10,2)) BETWEEN ? AND ?', [$min, $max]);
+            } else {
+                $collectionsQuery->whereRaw('CAST(REPLACE(REPLACE(REPLACE(product_price, ",", ""), "AED", ""), " ", "") AS DECIMAL(10,2)) >= ?', [$min]);
+            }
+        }
+
+        $priceStats = (clone $collectionsQuery)
+            ->selectRaw('MIN(CAST(REPLACE(REPLACE(REPLACE(product_price, ",", ""), "AED", ""), " ", "") AS DECIMAL(10,2))) as min_price')
+            ->selectRaw('MAX(CAST(REPLACE(REPLACE(REPLACE(product_price, ",", ""), "AED", ""), " ", "") AS DECIMAL(10,2))) as max_price')
+            ->first();
+
+        $minProductPrice = (float) ($priceStats->min_price ?? 0);
+        $maxProductPrice = (float) ($priceStats->max_price ?? 0);
+        $priceRanges = $this->getProductPriceRangeOptions($minProductPrice, $maxProductPrice);
+
+        $categories = Category::isActive()->notDeleted()->orderBy('category_name')->get();
+
+        if ($categories->isEmpty()) {
+            $categories = collect([
+                (object) ['id' => 'for-her', 'category_name' => 'For Her', 'category_url' => 'for-her'],
+                (object) ['id' => 'for-him', 'category_name' => 'For Him', 'category_url' => 'for-him'],
+                (object) ['id' => 'for-home', 'category_name' => 'For Home', 'category_url' => 'for-home'],
+            ]);
+        }
+
+        if (empty($priceRanges)) {
+            $priceRanges = collect(config('global_values.gift_price_range', []))
+                ->map(function ($label, $value) {
+                    return ['value' => $value, 'label' => $label];
+                })
+                ->values()
+                ->all();
+        }
+
+        $collections = $collectionsQuery->orderByDesc('id')->paginate(12)->appends($request->query());
+
+        return view('front.collections', compact('collections', 'categories', 'priceRanges', 'meta_title', 'meta_description'));
     }
 }
