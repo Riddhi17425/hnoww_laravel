@@ -104,7 +104,9 @@ Route::name('front.')->group(function () {
     Route::get('/bespoke-gifts-dubai', [FrontController::class, 'getBespokeCommission'])->name('bespoke.commission');
     Route::get('/privacy', [FrontController::class, 'getprivacy'])->name('privacy');
 
-    Route::get('/corporate-gifts-dubai/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
+    Route::get('/luxury-corporate-gifts/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
+    Route::get('/corporate-diwali-collection-2026', [FrontController::class, 'getCorporateDiwaliCollection'])->name('corporate.diwali.collection');
+    Route::get('/raksha-bandhan-collection-2026', [FrontController::class, 'getRakshaBandhanCollection'])->name('raksha.bandhan.collection');
     Route::get('/get-products-by-category/{category_id}', [FrontController::class, 'getProductsByCategory'])->name('get.products.by.category');
     Route::get('/wedding-vault', [FrontController::class, 'getWeddingVault'])->name('wedding.vault');
     Route::post('/wedding-vault/send-email', [FrontController::class, 'sendUnlockWeddingEmail'])->name('wedding-vault.send-email');
@@ -122,11 +124,11 @@ Route::name('front.')->group(function () {
     Route::get('/memory-shelf', [FrontController::class, 'getMemoryShelf'])->name('memory-shelf');
     Route::get('/modern-majilis', [FrontController::class, 'getModernMajilis'])->name('modern-majilis');
     Route::get('/architect-study', [FrontController::class, 'getArchitectStudy'])->name('architect-study');
+    // NOT MADE DYNAMIC - END
+
     Route::get('/author/salomi-kotecha', [FrontController::class, 'getAuthor'])->name('author');
     Route::get('/about', [FrontController::class, 'getAbout'])->name('about');
     Route::get('/editions', [FrontController::class, 'getEditions'])->name('editions');
-    // NOT MADE DYNAMIC - END
-
     Route::get('/thankyou', [FrontController::class, 'getThankYou'])->name('thankyou');
 
     Route::get('/blogs', [FrontController::class, 'getBlogs'])->name('blogs');
