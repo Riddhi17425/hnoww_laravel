@@ -63,6 +63,14 @@ class SitemapController extends Controller
         // 3 = Wedding Categories
         // ============================================================
 
+        // Corporate category URLs that should NOT appear in sitemap
+        $excludedCorporateCategories = [
+            'the-desk',
+            'writing-thought-objects',
+            'frames-memory-objects',
+            'ritual-hospitality-objects',
+        ];
+
         $categories = Category::where('is_active', 0)
             ->whereNull('deleted_at')
             ->whereIn('category_type', [1, 2, 3])
@@ -75,13 +83,6 @@ class SitemapController extends Controller
                 continue;
             }
 
-            /*
-             * BASE CATEGORY
-             *
-             * /collections/luxury-gifts-for-her
-             * /collections/luxury-gifts-for-him
-             * /collections/luxury-home-decor
-             */
             if ($category->category_type == 1)
             {
                 if (empty($category->category_url))
@@ -93,15 +94,14 @@ class SitemapController extends Controller
                     'category_slug' => $category->category_url
                 ]);
             }
-
-            /*
-             * CORPORATE CATEGORY
-             *
-             * /corporate-gifts-dubai/{cat_slug}
-             */
             elseif ($category->category_type == 2)
             {
                 if (empty($category->category_url))
+                {
+                    continue;
+                }
+
+                if (in_array($category->category_url, $excludedCorporateCategories))
                 {
                     continue;
                 }
@@ -110,19 +110,12 @@ class SitemapController extends Controller
                     'cat_slug' => $category->category_url
                 ]);
             }
-
-            /*
-             * WEDDING CATEGORY
-             *
-             * /wedding-products/{category_id}
-             */
             elseif ($category->category_type == 3)
             {
                 $loc = route('front.ceremonials', [
                     'category_id' => $category->id
                 ]);
             }
-
             else
             {
                 continue;
@@ -221,15 +214,9 @@ class SitemapController extends Controller
 
         // ============================================================
         // 4. ALL PAGES
-        // PRIORITY: 0.60
-        //
-        // Includes:
-        // - Corporate main page
-        // - Bespoke main page
-        // - Wedding main page
-        // - Normal static pages
-        // - Blessings library
-        // - Individual blessings
+        // PRIORITY:
+        // - Main / Landing Pages: 0.80
+        // - Other Pages: 0.60
         // ============================================================
 
         $staticRoutes = [
@@ -249,9 +236,21 @@ class SitemapController extends Controller
             'front.blogs',
         ];
 
+        // Pages that should have priority 0.80
+        $highPriorityPages = [
+            'front.corporate.vault',
+            'front.bespoke.commission',
+            'front.wedding.vault.inside',
+        ];
+
         foreach ($staticRoutes as $name)
         {
             $loc = route($name);
+
+            // Set priority based on page type
+            $priority = in_array($name, $highPriorityPages)
+                ? '0.80'
+                : '0.60';
 
             $xml .= '<url>';
 
@@ -263,7 +262,9 @@ class SitemapController extends Controller
                 . htmlspecialchars($todayTime, ENT_XML1, 'UTF-8')
                 . '</lastmod>';
 
-            $xml .= '<priority>0.60</priority>';
+            $xml .= '<priority>'
+                . $priority
+                . '</priority>';
 
             $xml .= '</url>' . "\n";
         }
