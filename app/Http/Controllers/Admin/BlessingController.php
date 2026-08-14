@@ -97,6 +97,7 @@ class BlessingController extends Controller
             'sub_title'        => 'required|string|max:255',
             'description'      => 'required|string',
             'image'            => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'alt_text'         => 'nullable|string|max:255',
             'audio_content'    => 'required|max:700',
             'meta_title'       => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
@@ -156,6 +157,7 @@ class BlessingController extends Controller
         $blessing->sub_title        = $request->sub_title;
         $blessing->description      = $request->description;
         $blessing->is_active        = 0;
+        $blessing->alt_text         = $request->alt_text;
         $blessing->audio_content    = $content;
         $blessing->meta_title       = $request->meta_title;
         $blessing->meta_description = $request->meta_description;
@@ -245,6 +247,7 @@ class BlessingController extends Controller
             'sub_title'        => 'required|string|max:255',
             'description'      => 'required|string',
             'image'            => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'alt_text'         => 'nullable|string|max:255',
             'audio_content'    => 'required|max:700',
             'meta_title'       => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
@@ -301,6 +304,7 @@ class BlessingController extends Controller
         $blessing->title            = $request->title;
         $blessing->sub_title        = $request->sub_title;
         $blessing->description      = $request->description;
+        $blessing->alt_text         = $request->alt_text;
         $blessing->audio_content    = $content;
         $blessing->meta_title       = $request->meta_title;
         $blessing->meta_description = $request->meta_description;
