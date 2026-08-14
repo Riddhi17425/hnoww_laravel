@@ -98,7 +98,7 @@
                             data-image="{{ asset('public/images/admin/blessing/images/' . $val->image) }}"
                             data-audio="{{ route('front.blessings.audio', $val->id) }}">
                             <img class="img-fluid mb-md-4 mb-2"
-                                src="{{ asset('public/images/admin/blessing/images/' . $val->image) }}" alt="images">
+                                src="{{ asset('public/images/admin/blessing/images/' . $val->image) }}" alt="{{ $val->alt_text }}">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h3 class="sub_head">{{ $val->title ?? '' }}</h3>

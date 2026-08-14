@@ -16,7 +16,7 @@
             <!-- IMAGE -->
             <div class="audio-image">
                 <img src="{{ asset('public/images/admin/blessing/images/'.$blessing->image) }}"
-                     alt="{{ $blessing->title }}"
+                     alt="{{ $blessing->alt_text }}"
                      class="img-fluid">
             </div>
 

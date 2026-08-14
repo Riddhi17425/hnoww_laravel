@@ -60,6 +60,19 @@
                 @error('image') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Alt Text</label>
+                    <input
+                        type="text"
+                        name="alt_text"
+                        class="form-control"
+                        value="{{ old('alt_text') }}"
+                        placeholder="Enter image alt text"
+                    >
+                </div>
+            </div>
+
             {{-- <div class="col-md-6">
                 <label class="form-label">Audio File</label><span class="text-danger">*</span>
                 <input type="file" name="audio_file" class="form-control">

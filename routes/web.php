@@ -20,6 +20,7 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\RedirectIfNotAdmin;
 use Illuminate\Support\Facades\Artisan;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
