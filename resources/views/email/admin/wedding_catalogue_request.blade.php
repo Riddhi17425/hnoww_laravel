@@ -22,6 +22,14 @@
             <tr>
                 <td
                     style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #888888;">
+                    Phone Number:</td>
+                <td
+                    style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">
+                    {{ $phone }}</td>
+            </tr>
+            <tr>
+                <td
+                    style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #888888;">
                     Email:</td>
                 <td
                     style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">

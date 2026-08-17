@@ -66,13 +66,13 @@
                                 </div>
                             </div>
                             <!-- Phone -->
-                            {{-- <div class="col-lg-6">
-                        <div class="ct_input">
-                           <label class="sub_head">Phone Number </label>
-                           <input type="text" name="w_phone" placeholder="Enter your WhatsApp Phone Number" id="w_phone" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);" value="{{ old('w_phone') }}">
-                            @error('w_phone') <small class="text-danger">{{ $message }}</small> @enderror
-                        </div>
-                </div> --}}
+                            <div class="col-lg-6">
+                            <div class="ct_input">
+                            <label class="sub_head">Phone Number <span class="text-danger">*</span></label>
+                            <input type="text" name="w_phone" placeholder="Enter your Phone Number" id="w_phone" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);" value="{{ old('w_phone') }}">
+                                @error('w_phone') <small class="text-danger">{{ $message }}</small> @enderror
+                            </div>
+                    </div>
                 <!-- Email -->
                 <div class="col-lg-6">
                     <div class="ct_input">
@@ -83,7 +83,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <div class="ct_input">
                         <label class="sub_head">Role <span class="text-danger">*</span></label>
                         <select name="w_role" id="w_role">
