@@ -20,6 +20,7 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\RedirectIfNotAdmin;
 use Illuminate\Support\Facades\Artisan;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,22 +56,8 @@ Route::post('/newsletter-temp/store', [FrontController::class, 'storeNewsletterT
 Route::post('/check-email-unique', [FrontController::class, 'checkEmailUnique'])->name('front.check.email.unique');
 
 //========================Start Sitemap Routes========================
-
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
-
 //========================End Sitemap Routes========================
-
-
-/*
-Route::get('/sitemap-index.xml', [SitemapController::class, 'index'])->name('sitemap.index');
-Route::get('/post-sitemap.xml', [SitemapController::class, 'posts'])->name('sitemap.posts');
-Route::get('/page-sitemap.xml', [SitemapController::class, 'pages'])->name('sitemap.pages');
-Route::get('/product-sitemap.xml', [SitemapController::class, 'products'])->name('sitemap.products');
-Route::get('/category-sitemap.xml', [SitemapController::class, 'categories'])->name('sitemap.categories');
-Route::get('/gift-sitemap.xml', [SitemapController::class, 'gifts'])->name('sitemap.gifts');
-Route::get('/blessing-sitemap.xml', [SitemapController::class, 'blessings'])->name('sitemap.blessings');
-*/
-
 
 // Catch-all for frontend (coming soon)
 // Route::any('{any}', function () {
@@ -118,7 +105,9 @@ Route::name('front.')->group(function () {
     Route::get('/bespoke-gifts-dubai', [FrontController::class, 'getBespokeCommission'])->name('bespoke.commission');
     Route::get('/privacy', [FrontController::class, 'getprivacy'])->name('privacy');
 
-    Route::get('/corporate-gifts-dubai/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
+    Route::get('/luxury-corporate-gifts/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
+    Route::get('/corporate-diwali-collection-2026', [FrontController::class, 'getCorporateDiwaliCollection'])->name('corporate.diwali.collection');
+    Route::get('/raksha-bandhan-collection-2026', [FrontController::class, 'getRakshaBandhanCollection'])->name('raksha.bandhan.collection');
     Route::get('/get-products-by-category/{category_id}', [FrontController::class, 'getProductsByCategory'])->name('get.products.by.category');
     Route::get('/wedding-vault', [FrontController::class, 'getWeddingVault'])->name('wedding.vault');
     Route::post('/wedding-vault/send-email', [FrontController::class, 'sendUnlockWeddingEmail'])->name('wedding-vault.send-email');
@@ -310,5 +299,4 @@ Route::prefix('admin')->name('admin.')->group(function () {
         route::post('corporate-kit/update/status', [CorporateKitController::class, 'updateStatus'])->name('corporate-kit.update.status');
 
     });
-
 });

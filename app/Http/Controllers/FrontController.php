@@ -964,6 +964,40 @@ class FrontController extends Controller
         return view('front.corporate_vault', compact('categories', 'products', 'corporateProduct', 'weddingProduct', 'corporateKits', 'meta_title', 'meta_description'));
     }
 
+    public function getCorporateDiwaliCollection(Request $request)
+    {
+        $meta_title       = 'Corporate Diwali Collection 2026 | Luxury Corporate Gifts Dubai | HNOWW';
+        $meta_description = 'Explore HNOWW Corporate Diwali Collection 2026. Architectural desk objects, ritual instruments, and bespoke luxury gifting curated for corporate leadership and client relationships.';
+
+        $categories = Category::where('category_type', 2)->with(['products' => function ($query) {
+            $query->where('is_active', 0)->whereNull('deleted_at');
+        }])->where('is_active', 0)->whereNull('deleted_at')->get();
+        
+        $products         = Product::where('product_type', 2)->isActive()->notDeleted()->get();
+        $corporateProduct = Product::select('id', 'product_name')->where('product_type', 2)->whereNull('deleted_at')->where('is_active', 0)->get();
+        $weddingProduct   = Product::select('id', 'product_name')->where('product_type', 3)->whereNull('deleted_at')->where('is_active', 0)->get();
+        $corporateKits    = CorporateKit::isActive()->notDeleted()->get();
+
+        return view('front.corporate_diwali_collection', compact('meta_title', 'meta_description', 'categories', 'products', 'corporateProduct', 'weddingProduct', 'corporateKits'));
+    }
+
+    public function getRakshaBandhanCollection(Request $request)
+    {
+        $meta_title       = 'Raksha Bandhan Collection 2026 | Luxury Corporate Gifts Dubai | HNOWW';
+        $meta_description = 'Explore HNOWW Raksha Bandhan Collection 2026. Where the bond outlasts the thread.';
+
+        $categories = Category::where('category_type', 2)->with(['products' => function ($query) {
+            $query->where('is_active', 0)->whereNull('deleted_at');
+        }])->where('is_active', 0)->whereNull('deleted_at')->get();
+        
+        $products         = Product::where('product_type', 2)->isActive()->notDeleted()->get();
+        $corporateProduct = Product::select('id', 'product_name')->where('product_type', 2)->whereNull('deleted_at')->where('is_active', 0)->get();
+        $weddingProduct   = Product::select('id', 'product_name')->where('product_type', 3)->whereNull('deleted_at')->where('is_active', 0)->get();
+        $corporateKits    = CorporateKit::isActive()->notDeleted()->get();
+
+        return view('front.raksha_bandhan_collection', compact('meta_title', 'meta_description', 'categories', 'products', 'corporateProduct', 'weddingProduct', 'corporateKits'));
+    }
+
     public function getProductsByCategory(Request $request, $id)
     {
         $products = Product::where('category_id', $id)->select('id', 'product_name')->get();
