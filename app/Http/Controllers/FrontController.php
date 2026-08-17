@@ -2158,8 +2158,9 @@ class FrontController extends Controller
         $blogs = Blog::orderBy('id', 'desc')->whereNull('deleted_at')->where('status', 'Active')->get();
         $meta_title       = "Salomi Kotecha | Founder of HNOWW";
         $meta_description = "Meet Salomi Kotecha, founder of HNOWW, and explore her writing on considered gifting, modern rituals, craftsmanship, hospitality and objects designed to stay.";
-
-        return view('front.author', compact('blogs', 'meta_title', 'meta_description'));
+        $og_image         = asset('public/images/front/salomi-kotecha.webp');
+        
+        return view('front.author', compact('blogs', 'meta_title', 'meta_description', 'og_image'));
     }
 
      private function getProductPriceRangeOptions($minPrice, $maxPrice)
