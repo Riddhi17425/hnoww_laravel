@@ -6,6 +6,7 @@
     <div class="hero_content_inner">
         <h2 class="main_head mb-3">The Studio</h2>
         <p class="para sec_in_mb">We are here to assist with curation, commissions, and care.</p>
+        <a href="#contactForm" class="com_btn border-0 bg-white ">Get Enquiry</a>
     </div>
 </section>
 
@@ -103,7 +104,7 @@
 </section>
 
 <section class="mt_60 mb_120">
-    <div class="container">
+    <div class="container" id="contactForm">
         <div class="section_header">
             <p class="sub_head mb-0">
                 <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">

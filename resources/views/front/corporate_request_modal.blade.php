@@ -82,16 +82,23 @@
                             </div>
 
                              <!-- Email -->
-                <div class="col-lg-6">
-                    <div class="ct_input">
-                        <label class="sub_head">Email <span class="text-danger">*</span></label>
-                        <input type="email" name="email" placeholder="Enter your Email Address" id="email"
-                            value="{{ old('email') }}">
-                        @error('email') <small class="text-danger">{{ $message }}</small> @enderror
-                    </div>
-                </div>
-
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
+                                <div class="ct_input">
+                                    <label class="sub_head">Email <span class="text-danger">*</span></label>
+                                    <input type="email" name="email" placeholder="Enter your Email Address" id="email"
+                                        value="{{ old('email') }}">
+                                    @error('email') <small class="text-danger">{{ $message }}</small> @enderror
+                                </div>
+                            </div>
+                                <div class="col-lg-4">
+                                <div class="ct_input">
+                                    <label class="sub_head">Phone Number <span class="text-danger">*</span></label>
+                                    <input type="text" name="phone" placeholder="Enter your Phone Number" id="phone"
+                                        value="{{ old('phone') }}">
+                                    @error('phone') <small class="text-danger">{{ $message }}</small> @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
                                 <div class="ct_input">
                                     <label class="sub_head">Role / Designation <span
                                             class="text-danger">*</span></label>
