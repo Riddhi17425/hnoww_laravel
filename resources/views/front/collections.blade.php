@@ -1,6 +1,6 @@
 @include('layouts.frontheader', [
-    'meta_title' => '',
-    'meta_description' => ''
+    'meta_title' => $meta_title ?? '',
+    'meta_description' => $meta_description ?? ''
 ])
 
 <!-- hero section -->
@@ -19,116 +19,36 @@
             <div class="gesture_filter">
                 <div class="gesture_filter_child">
                     <h3 class="gesture_title">Category</h3>
-                    <input type="hidden" id="collection_category_filter" value="{{ request('category_id') }}">
-                    <div class="dropdown custom-filter-dropdown">
-                        @php
-                            $selectedCatName = 'Select Category';
-                            foreach($categories as $category) {
-                                if (request('category_id') == $category->id) {
-                                    $selectedCatName = $category->category_name;
-                                    break;
-                                }
-                            }
-                        @endphp
-                        <button class="btn dropdown-toggle" type="button" id="categoryDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ $selectedCatName }}
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="categoryDropdownBtn">
-                            <li><a class="dropdown-item {{ request('category_id') == '' ? 'active' : '' }}" href="javascript:void(0)" onclick="document.getElementById('collection_category_filter').value=''; window.location='{{ route('front.collections') }}?'+buildCollectionsQuery('', document.getElementById('collection_price_filter').value)">Select Category</a></li>
-                            @foreach($categories as $category)
-                                <li><a class="dropdown-item {{ request('category_id') == $category->id ? 'active' : '' }}" href="javascript:void(0)" onclick="document.getElementById('collection_category_filter').value='{{ $category->id }}'; window.location='{{ route('front.collections') }}?'+buildCollectionsQuery('{{ $category->id }}', document.getElementById('collection_price_filter').value)">{{ $category->category_name }}</a></li>
-                            @endforeach
-                        </ul>
-                    </div>
+                    <select id="collection_category_filter" class="dropdown">
+                        <option value="">Select Category</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
+                                {{ $category->category_name }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="gesture_filter_child">
                     <h3 class="gesture_title">Price</h3>
-                    <input type="hidden" id="collection_price_filter" value="{{ request('price_range') }}">
-                    <div class="dropdown custom-filter-dropdown">
-                        @php
-                            $selectedPriceName = 'Select Price';
-                            if(!empty($priceRanges)){
-                                foreach($priceRanges as $range) {
-                                    if (request('price_range') == $range['value']) {
-                                        $selectedPriceName = $range['label'];
-                                        break;
-                                    }
-                                }
-                            }
-                        @endphp
-                        <button class="btn dropdown-toggle" type="button" id="priceDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ $selectedPriceName }}
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="priceDropdownBtn">
-                            <li><a class="dropdown-item {{ request('price_range') == '' ? 'active' : '' }}" href="javascript:void(0)" onclick="document.getElementById('collection_price_filter').value=''; window.location='{{ route('front.collections') }}?'+buildCollectionsQuery(document.getElementById('collection_category_filter').value, '')">Select Price</a></li>
-                            @if(!empty($priceRanges))
-                                @foreach($priceRanges as $range)
-                                    <li><a class="dropdown-item {{ request('price_range') == $range['value'] ? 'active' : '' }}" href="javascript:void(0)" onclick="document.getElementById('collection_price_filter').value='{{ $range['value'] }}'; window.location='{{ route('front.collections') }}?'+buildCollectionsQuery(document.getElementById('collection_category_filter').value, '{{ $range['value'] }}')">{{ $range['label'] }}</a></li>
-                                @endforeach
-                            @endif
-                        </ul>
-                    </div>
+                    <select id="collection_price_filter" class="dropdown">
+                        <option value="">Select Price</option>
+                        @if(!empty($priceRanges))
+                            @foreach($priceRanges as $range)
+                                <option value="{{ $range['value'] }}" {{ request('price_range') == $range['value'] ? 'selected' : '' }}>
+                                    {{ $range['label'] }}
+                                </option>
+                            @endforeach
+                        @endif
+                    </select>
                 </div>
             </div>
         </div>
 
-        <div class="him_wrapper">
-            @if(isset($collections) && $collections->isNotEmpty())
-                @foreach($collections as $key => $val)
-                    <div class="him_prod">
-                        <div class="him_prod_top">
-                            @php
-                                $imagePath = public_path('images/admin/product_list/' . $val->list_page_img);
-                            @endphp
-                            @if(isset($val->list_page_img) && $val->list_page_img != '' && file_exists($imagePath))
-                                <a href="{{ route('front.product.details', $val->product_url) }}"><img class="img-fluid img_1" src="{{ isset($val->list_page_img) ? asset('public/images/admin/product_list/'.$val->list_page_img) : '' }}" alt="{{ $val->product_name ?? 'Product Image' }}"></a>
-                            @else
-                                <a href="{{ route('front.product.details', $val->product_url) }}"><img class="w-100 mb-2 mb-md-4" src="{{ asset('public/noimg.jpg') }}" alt='No Image Found'></a>
-                            @endif
-                        </div>
-                         <h3 class="sub_head mt-2"><a href="{{ route('front.product.details', $val->product_url) }}">{{ $val->product_name ?? '' }}</a></h3>
-                       <div class="d-lg-flex justify-content-between align-items-center">
-                         <div>
-                           
-                            <p class="fw-semibold text-dark mb-2">AED {{ number_format((float) preg_replace('/[^0-9.]/', '', $val->product_price), 0) }}</p>
-                            <p class>{!! $val->short_description ?? '' !!}</p>
-                        </div>
-                        <div>
-                            <a href="{{ route('front.product.details', $val->product_url) }}" class="com_btn">VIEW OBJECT </a>
-                        </div>
-                       </div>
-                    </div>
-                @endforeach
-            @else
-                <div class="col-12 text-center">
-                    <img src="{{ asset('public/images/product-not-found.png') }}" alt="Collection products not found">
-                </div>
-            @endif
+        <div id="collection-list-wrapper">
+            @include('front.partials.collection-list', ['collections' => $collections])
         </div>
-
-        @if($collections->hasPages())
-            <div class="d-flex justify-content-center mt-4">
-                {{ $collections->links() }}
-            </div>
-        @endif
     </div>
 </section>
-
-<script>
-    function buildCollectionsQuery(categoryId, priceRange) {
-        const params = new URLSearchParams();
-
-        if (categoryId) {
-            params.set('category_id', categoryId);
-        }
-
-        if (priceRange) {
-            params.set('price_range', priceRange);
-        }
-
-        return params.toString();
-    }
-</script>
 
 <section class="cta_footer mt_120">
     <div class="container">
@@ -174,4 +94,92 @@
         </div>
     </div>
 </section>
+
+@push('script')
+<script>
+    $(document).ready(function () {
+        const collectionsBaseUrl = '{{ route('front.collections') }}';
+
+        function fetchCollections(url, pushState = true) {
+            const targetUrl = url || collectionsBaseUrl;
+            const categoryId = $('#collection_category_filter').val() || '';
+            const priceRange = $('#collection_price_filter').val() || '';
+
+            const urlObj = new URL(targetUrl, window.location.origin);
+            if (categoryId) {
+                urlObj.searchParams.set('category_id', categoryId);
+            } else if (!url) {
+                urlObj.searchParams.delete('category_id');
+            }
+
+            if (priceRange) {
+                urlObj.searchParams.set('price_range', priceRange);
+            } else if (!url) {
+                urlObj.searchParams.delete('price_range');
+            }
+
+            $.ajax({
+                url: urlObj.toString(),
+                type: 'GET',
+                beforeSend: function () {
+                    $('#collection-list-wrapper').css({
+                        'opacity': '0.4',
+                        'transition': 'opacity 0.2s ease',
+                        'pointer-events': 'none'
+                    });
+                },
+                success: function (response) {
+                    $('#collection-list-wrapper').html(response);
+                    $('#collection-list-wrapper').css({
+                        'opacity': '1',
+                        'pointer-events': 'auto'
+                    });
+
+                    if (pushState) {
+                        history.pushState(null, '', urlObj.toString());
+                    }
+                },
+                error: function (xhr) {
+                    $('#collection-list-wrapper').css({
+                        'opacity': '1',
+                        'pointer-events': 'auto'
+                    });
+                    console.error('Failed to load collections:', xhr);
+                }
+            });
+        }
+
+        // Filter dropdown change event (resets to page 1)
+        $('#collection_category_filter, #collection_price_filter').on('change', function () {
+            fetchCollections(collectionsBaseUrl, true);
+        });
+
+        // AJAX pagination click event
+        $(document).on('click', '#collection-list-wrapper .pagination a', function (e) {
+            e.preventDefault();
+            const pageUrl = $(this).attr('href');
+            if (pageUrl && pageUrl !== '#' && pageUrl !== 'javascript:void(0)') {
+                fetchCollections(pageUrl, true);
+
+                $('html, body').animate({
+                    scrollTop: $('#collection-list-wrapper').offset().top - 120
+                }, 400);
+            }
+        });
+
+        // Handle browser Back / Forward buttons
+        window.addEventListener('popstate', function () {
+            const currentParams = new URLSearchParams(window.location.search);
+            const catId = currentParams.get('category_id') || '';
+            const pRange = currentParams.get('price_range') || '';
+
+            $('#collection_category_filter').val(catId);
+            $('#collection_price_filter').val(pRange);
+
+            fetchCollections(window.location.href, false);
+        });
+    });
+</script>
+@endpush
+
 @include('layouts.frontfooter')

@@ -32,6 +32,7 @@ initSummernote($('.faq-answer'));
             </div>
         </div>`;
         $('#faqWrapper').append(faqHtml);
+        initSummernote($('.faq-answer'));
     });
 
     // REMOVE FAQ
