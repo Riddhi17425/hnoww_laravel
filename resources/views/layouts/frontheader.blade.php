@@ -306,23 +306,47 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
 
             <div class="collapse navbar-collapse justify-content-between" id="mainNavbar">
                 <ul class="mx-auto nav_links">
-                    <li>
-                        <a href="{{ route('front.list', 'luxury-gifts-for-her') }}" data-text="for her">
-                            <span>for her</span>
+                    <li class="has-dropdown">
+                        <a href="#" data-text="Collection">
+                            <span>Collection</span>
+                            <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                            </svg>
                         </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ route('front.list', 'luxury-gifts-for-her') }}">For Her</a></li>
+                            <li><a href="{{ route('front.list', 'luxury-gifts-for-him') }}">For Him</a></li>
+                            <li><a href="{{ route('front.list', 'luxury-home-decor') }}">For Home</a></li>
+                        </ul>
                     </li>
+
                     <li>
-                        <a href="{{ route('front.list', 'luxury-gifts-for-him') }}" data-text="for him">
-                            <span>for him</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('front.list', 'luxury-home-decor') }}" data-text="for home">
-                            <span>for home</span>
+                        <a href="#" data-text="Wedding Vault">
+                            <span>Wedding Vault</span>
                         </a>
                     </li>
 
                     <li>
+                        <a href="#" data-text="Corporate Vault">
+                            <span>Corporate Vault</span>
+                        </a>
+                    </li>
+
+                    <li class="has-dropdown">
+                        <a href="#" data-text="Festival">
+                            <span>Festival</span>
+                            <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                            </svg>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Rakshabandhan</a></li>
+                            <li><a href="#">Diwali Corporate</a></li>
+                            <li><a href="#">Diwali Gifting</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="d-none">
                         <a href="{{ route('front.editions') }}" data-text="editions">
                             <span>editions</span>
                         </a>
@@ -338,24 +362,24 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
                         <ul class="dropdown-menu">
                             {{-- <li><a href="{{ route('front.list', ['for-him', 'worlds']) }}">The Architect’s
                             Study</a>
+                            </li>
+                            <li><a href="{{ route('front.list', ['for-her', 'worlds']) }}">The The Desert Rose</a></li>
+                            <li><a href="{{ route('front.list', ['for-home', 'worlds']) }}">The Modern Majlis</a></li> --}}
+                            <li><a href="#">The Ritual Table</a></li>
+                            <li><a href="#">The Table As Landscape</a></li>
+                        </ul>
                     </li>
-                    <li><a href="{{ route('front.list', ['for-her', 'worlds']) }}">The The Desert Rose</a></li>
-                    <li><a href="{{ route('front.list', ['for-home', 'worlds']) }}">The Modern Majlis</a></li> --}}
-                    <li><a href="#">The Ritual Table</a></li>
-                    <li><a href="#">The Table As Landscape</a></li>
-                </ul>
-                </li>
-                <li>
-                    <a href="{{ route('front.atelier') }}" data-text="the atelier">
-                        <span>the atelier</span>
-                    </a>
-                </li>
+                    <li class="d-none">
+                        <a href="{{ route('front.atelier') }}" data-text="the atelier">
+                            <span>the atelier</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <a href="{{ route('front.blogs') }}" data-text="Blogs">
-                        <span>Blogs</span>
-                    </a>
-                </li>
+                    <li>
+                        <a href="{{ route('front.blogs') }}" data-text="Blogs">
+                            <span>Blogs</span>
+                        </a>
+                    </li>
 
                 <!-- @auth
                     <li class="has-dropdown">

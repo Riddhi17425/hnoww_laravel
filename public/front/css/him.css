@@ -1,0 +1,70 @@
+.hero-section_inner
+{
+    position: relative;
+}
+
+.section_inner {
+    position: relative;
+}
+
+.sec_in_mb {
+    margin-bottom: 34px;
+}
+
+.hero_content_inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.hero_content_inner .sub_heads {
+    color: var(--white-color);
+    font-family: var(--heading-font);
+    font-size: 34px;
+    line-height: 38px;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.hero_content_inner .para {
+    color: var(--white-color);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+}
+
+.him_wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Exactly 2 equal columns */
+    gap: 80px 100px;
+    /* vertical 40px, horizontal 30px — adjust as you like */
+    /* optional: breathing space */
+}
+
+/* him_prod */
+.him_prod_top {
+    position: relative;
+    overflow: hidden;
+}
+
+.him_prod_top .icon_hert {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    z-index: 3;
+    cursor: pointer;
+}
+
+.him_prod .img_1 {
+    width: 100%;
+    display: block;
+}
+
+.him_prod .sub_head {
+    color: var(--dark-900);
+}
+
+/* him_prod */
