@@ -215,10 +215,22 @@
                     </svg>
                 </span>
             </p>
-            <h2 class="title_60"> Journal</h2>
+            <h2 class="title_60"> HNOWW Blogs</h2>
         </div>
         <div class="row gy-4 gy-md-0">
-            <div class="col-md-4">
+            @if(isset($blogs) && is_countable($blogs) && count($blogs) > 0)
+                @foreach($blogs as $blog)
+                    <div class="col-md-4">
+                        <div class="collection_box">
+                            <a href="{{ route('front.blog.detail', ['url' => $blog->url]) }}"><img class="img-fluid mb-2 mb-md-4"
+                                    src="{{ asset('/' . $blog->front_image) }}" alt="{{ $blog->front_image_alt ?? '' }}" loading="lazy">
+                            <h3 class="sub_head">{{ $blog->title ?? '' }}</h3>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+            <!-- <div class="col-md-4">
                 <div class="collection_box">
                     <img class="img-fluid mb-2 mb-md-4" src="{{asset('public/images/front/Journal1.webp')}}"
                         alt="images">
@@ -238,11 +250,11 @@
                         alt="images">
                     <h3 class="sub_head mb-0">Objects of Memory: Creating a Personal Shrine at Home</h3>
                 </div>
-            </div>
-        </div>
+            </div> -->
+        </div> 
 
         <div class="mt_35 text-center">
-            <a href="{{ route('front.journal') }}" class="com_btn">Read the Journal </a>
+            <a href="{{ route('front.blogs') }}" class="com_btn">Read The Blogs </a>
         </div>
 
     </div>

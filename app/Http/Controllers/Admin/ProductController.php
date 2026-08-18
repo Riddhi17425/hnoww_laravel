@@ -118,8 +118,14 @@ class ProductController extends Controller
             'category_type' => 'required',
             'product_name' => 'required|string|max:255',
             'product_price' => 'required|string|max:255',
-            // 'product_url' => 'required|string|max:255|unique:products,product_url',
-            'product_url' => ['required','string','max:255',Rule::unique('products', 'product_url')->whereNull('deleted_at')],
+            // 'product_url' => ['required','string','max:255',Rule::unique('products', 'product_url')->whereNull('deleted_at')],
+            'product_url' => ['required', 'string', 'max:255',
+                Rule::unique('products', 'product_url')
+                    ->where(function ($query) {
+                        return $query->where('product_type', $this->input('category_type'))
+                                     ->whereNull('deleted_at');
+                    }),
+            ],
             'product_stock' => 'required|integer|min:0',
             'list_img' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
             //'list_img' => 'required|image|mimes:jpg,jpeg,png,webp|max:5120',
@@ -242,12 +248,22 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'product_name' => 'required|string|max:255',
             'product_price' => 'required|string|max:255',
-            // 'product_url' => 'required|string|max:255|unique:products,product_url,' . $id,
-            'product_url' => [
-                'required','string','max:255',
-                Rule::unique('products', 'product_url')
-                    ->ignore($id)->whereNull('deleted_at'), // only non-deleted products
-            ],
+            // 'product_url' => [
+            //     'required','string','max:255',
+            //     Rule::unique('products', 'product_url')
+            //         ->ignore($id)->whereNull('deleted_at'), // only non-deleted products
+            // ],
+           'product_url' => [
+            'required',
+            'string',
+            'max:255',
+            Rule::unique('products', 'product_url')
+                ->ignore($id)
+                ->where(function ($query) use ($request) {
+                    return $query->where('product_type', $request->input('product_type'))
+                                 ->whereNull('deleted_at');
+                }),
+        ],
             'product_stock' => 'required|integer|min:0',
             // 'list_img' => 'required|image|mimes:jpg,jpeg,png,webp|max:5120',
             // 'detail_imgs'       => 'required|array|min:1',
