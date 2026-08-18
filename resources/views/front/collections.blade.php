@@ -19,23 +19,55 @@
             <div class="gesture_filter">
                 <div class="gesture_filter_child">
                     <h3 class="gesture_title">Category</h3>
-                    <select id="collection_category_filter" class="dropdown" onchange="window.location='{{ route('front.collections') }}?'+buildCollectionsQuery(this.value, document.getElementById('collection_price_filter').value)">
-                        <option value="">Select Category</option>
-                        @foreach($categories as $category)
-                            <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>{{ $category->category_name }}</option>
-                        @endforeach
-                    </select>
+                    <input type="hidden" id="collection_category_filter" value="{{ request('category_id') }}">
+                    <div class="dropdown custom-filter-dropdown">
+                        @php
+                            $selectedCatName = 'Select Category';
+                            foreach($categories as $category) {
+                                if (request('category_id') == $category->id) {
+                                    $selectedCatName = $category->category_name;
+                                    break;
+                                }
+                            }
+                        @endphp
+                        <button class="btn dropdown-toggle" type="button" id="categoryDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ $selectedCatName }}
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="categoryDropdownBtn">
+                            <li><a class="dropdown-item {{ request('category_id') == '' ? 'active' : '' }}" href="javascript:void(0)" onclick="document.getElementById('collection_category_filter').value=''; window.location='{{ route('front.collections') }}?'+buildCollectionsQuery('', document.getElementById('collection_price_filter').value)">Select Category</a></li>
+                            @foreach($categories as $category)
+                                <li><a class="dropdown-item {{ request('category_id') == $category->id ? 'active' : '' }}" href="javascript:void(0)" onclick="document.getElementById('collection_category_filter').value='{{ $category->id }}'; window.location='{{ route('front.collections') }}?'+buildCollectionsQuery('{{ $category->id }}', document.getElementById('collection_price_filter').value)">{{ $category->category_name }}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
                 <div class="gesture_filter_child">
                     <h3 class="gesture_title">Price</h3>
-                    <select id="collection_price_filter" class="dropdown" onchange="window.location='{{ route('front.collections') }}?'+buildCollectionsQuery(document.getElementById('collection_category_filter').value, this.value)">
-                        <option value="">Select Price</option>
-                        @if(!empty($priceRanges))
-                            @foreach($priceRanges as $range)
-                                <option value="{{ $range['value'] }}" {{ request('price_range') == $range['value'] ? 'selected' : '' }}>{{ $range['label'] }}</option>
-                            @endforeach
-                        @endif
-                    </select>
+                    <input type="hidden" id="collection_price_filter" value="{{ request('price_range') }}">
+                    <div class="dropdown custom-filter-dropdown">
+                        @php
+                            $selectedPriceName = 'Select Price';
+                            if(!empty($priceRanges)){
+                                foreach($priceRanges as $range) {
+                                    if (request('price_range') == $range['value']) {
+                                        $selectedPriceName = $range['label'];
+                                        break;
+                                    }
+                                }
+                            }
+                        @endphp
+                        <button class="btn dropdown-toggle" type="button" id="priceDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ $selectedPriceName }}
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="priceDropdownBtn">
+                            <li><a class="dropdown-item {{ request('price_range') == '' ? 'active' : '' }}" href="javascript:void(0)" onclick="document.getElementById('collection_price_filter').value=''; window.location='{{ route('front.collections') }}?'+buildCollectionsQuery(document.getElementById('collection_category_filter').value, '')">Select Price</a></li>
+                            @if(!empty($priceRanges))
+                                @foreach($priceRanges as $range)
+                                    <li><a class="dropdown-item {{ request('price_range') == $range['value'] ? 'active' : '' }}" href="javascript:void(0)" onclick="document.getElementById('collection_price_filter').value='{{ $range['value'] }}'; window.location='{{ route('front.collections') }}?'+buildCollectionsQuery(document.getElementById('collection_category_filter').value, '{{ $range['value'] }}')">{{ $range['label'] }}</a></li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,14 +86,17 @@
                                 <a href="{{ route('front.product.details', $val->product_url) }}"><img class="w-100 mb-2 mb-md-4" src="{{ asset('public/noimg.jpg') }}" alt='No Image Found'></a>
                             @endif
                         </div>
-                        <div>
-                            <h3 class="sub_head mt-2"><a href="{{ route('front.product.details', $val->product_url) }}">{{ $val->product_name ?? '' }}</a></h3>
+                         <h3 class="sub_head mt-2"><a href="{{ route('front.product.details', $val->product_url) }}">{{ $val->product_name ?? '' }}</a></h3>
+                       <div class="d-lg-flex justify-content-between align-items-center">
+                         <div>
+                           
                             <p class="fw-semibold text-dark mb-2">AED {{ number_format((float) preg_replace('/[^0-9.]/', '', $val->product_price), 0) }}</p>
                             <p class>{!! $val->short_description ?? '' !!}</p>
                         </div>
                         <div>
                             <a href="{{ route('front.product.details', $val->product_url) }}" class="com_btn">VIEW OBJECT </a>
                         </div>
+                       </div>
                     </div>
                 @endforeach
             @else
