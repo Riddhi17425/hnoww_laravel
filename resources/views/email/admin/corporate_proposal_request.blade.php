@@ -18,7 +18,10 @@
                 <td><strong>Company Name</strong></td>
                 <td>{{ $company_name }}</td>
             </tr>
-            
+            <tr>
+                <td><strong>Phone</strong></td>
+                <td>{{ $phone }}</td>
+            </tr>
             <tr>
                 <td><strong>Email</strong></td>
                 <td>{{ $email }}</td>

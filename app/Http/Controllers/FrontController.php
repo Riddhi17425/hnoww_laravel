@@ -219,7 +219,7 @@ class FrontController extends Controller
     public function getList(Request $request, $catSlug, $from = null)
     {
         $category    = Category::where('category_url', $catSlug)->first();
-        $catProducts = Product::select('id', 'category_id', 'product_url', 'product_name', 'short_description', 'list_page_img', 'is_active', 'deleted_at')->where('category_id', $category->id)->where('product_type', 1)->isActive()->notDeleted()->get();
+        $catProducts = Product::select('id', 'category_id', 'product_url', 'product_name', 'short_description', 'list_page_img', 'is_active', 'deleted_at')->where('category_id', $category->id)->where('product_type', 1)->orderBy('id', 'desc')->isActive()->notDeleted()->get();
 
         return view('front.list', compact('category', 'catProducts', 'catSlug', 'from'));
     }
@@ -1010,42 +1010,11 @@ class FrontController extends Controller
         $qualityRange    = config('global_values.quality_range');
         $corporateBudget = config('global_values.corporate_budget');
         $timeline        = config('global_values.corporate_timeline');
-        // $rules = [
-        //     'full_name'             => 'required|string|min:2|max:100',
-        //     'company_name'          => 'required|string|min:2|max:150',
-        //     'phone'                 => 'required|regex:/^[0-9\s\-\+\(\)]+$/|min:7|max:20',
-        //     'email'                 => 'required|email|max:150',
-        //     'product_of_interest'   => 'nullable|array',
-        //     'product_of_interest.*' => 'string',
-        //     'quantity_range'        => 'required|string',
-        //     'budget'                => 'nullable|string|max:100',
-        //     'branding_requirements' => 'nullable|string|max:255',
-        //     'delivery_date'         => 'required|date|after_or_equal:today',
-        //     'message'               => 'nullable|string|max:500',
-        // ];
-        // $messages = [
-        //     'full_name.required'             => 'Full Name is required.',
-        //     'full_name.min'                  => 'Full Name must be at least 2 characters.',
-        //     'full_name.max'                  => 'Full Name cannot be longer than 100 characters.',
-        //     'company_name.required'          => 'Company Organization is required.',
-        //     'phone.required'                 => 'Phone Number is required.',
-        //     'phone.regex'                   => 'Phone Number format is invalid.',
-        //     'phone.min'                     => 'Phone Number is too short.',
-        //     'phone.max'                     => 'Phone Number is too long.',
-        //     'email.required'                => 'Email Address is required.',
-        //     'email.email'                   => 'Email must be a valid email address.',
-        //     'quantity_range.required'       => 'Quantity Range is required.',
-        //     'quantity_range.in'             => 'Selected Quantity Range is invalid.',
-        //     'delivery_date.required'        => 'Delivery Timeline is required.',
-        //     'delivery_date.date'            => 'Delivery Timeline must be a valid date.',
-        //     'delivery_date.after_or_equal'  => 'Delivery Timeline cannot be in the past.',
-        //     'message.max'                   => 'Message cannot exceed 500 characters.',
-        // ];
         $rules = [
             'full_name'        => 'required|string|min:2|max:100',
             'company_name'     => 'required|string|min:2|max:150',
             'role'             => 'required|string|max:100',
-            //'phone'                 => 'nullable|regex:/^[0-9\s\-\+\(\)]+$/|min:7|max:20',
+            'phone'                 => 'nullable|regex:/^[0-9\s\-\+\(\)]+$/|min:7|max:20',
             'email'            => 'required|email|max:150',
             // 'nature_of_requirement'   => 'required|array|min:1',
             // 'nature_of_requirement.*' => 'string|max:150',
@@ -1063,9 +1032,9 @@ class FrontController extends Controller
             'company_name.max'          => 'Company Name cannot exceed 150 characters.',
             'role.required'             => 'Role / Designation is required.',
             'role.max'                  => 'Role cannot exceed 100 characters.',
-            // 'phone.regex'                => 'Phone Number format is invalid.',
-            // 'phone.min'                  => 'Phone Number is too short.',
-            // 'phone.max'                  => 'Phone Number is too long.',
+            'phone.regex'                => 'Phone Number format is invalid.',
+            'phone.min'                  => 'Phone Number is too short.',
+            'phone.max'                  => 'Phone Number is too long.',
             'email.required'            => 'Email Address is required.',
             'email.email'               => 'Email must be a valid email address.',
             // 'nature_of_requirement.required'   => 'Please select at least one Nature of Requirement.',
@@ -1093,6 +1062,7 @@ class FrontController extends Controller
             'full_name',
             'company_name',
             'role',
+            'phone',
             'email',
             'quantity_range',
             'corporate_budget',
@@ -1136,7 +1106,7 @@ class FrontController extends Controller
         $data            = [
             // 'name'        => $request->full_name,
             // 'company_name'        => $request->company_name,
-            // 'phone'        => $request->phone,
+            'phone'        => $request->phone,
             // 'email'       => $request->email,
             // 'product_of_interest' => $commaSeparatedProducts,
             // 'quantity_range'  => $qualityRange[$request->quantity_range],
@@ -1185,6 +1155,7 @@ class FrontController extends Controller
         "*Full Name:* {$request->full_name}\n" .
         "*Company Name:* {$request->company_name}\n" .
         "*Role / Designation:* {$request->role}\n" .
+        "*Phone Number:* {$request->phone}\n" .
         "*Email:* {$request->email}\n" .
         "*Quantity Range:* {$qualityRange}\n" .
         "*Budget Comfort:* {$corporateBudget}\n" .
@@ -1475,7 +1446,7 @@ class FrontController extends Controller
             // 'w_message'               => 'nullable|string|max:500',
 
             'w_full_name'     => 'required|string|min:2|max:100',
-            //'w_phone'          => 'nullable|regex:/^[0-9]+$/|min:7|max:15',
+            'w_phone'          => 'nullable|regex:/^[0-9]+$/|min:7|max:15',
             'w_email'         => 'required|email|max:150',
             'w_role'          => 'required|string|max:100',
             'w_location'      => 'nullable|string|max:150',
@@ -1486,35 +1457,15 @@ class FrontController extends Controller
             'w_budget_band'   => 'required|string|max:100',
             'w_message'       => 'nullable|string|max:500',
         ];
-        // $messages = [
-        //     'w_full_name.required'             => 'Full Name is required.',
-        //     'w_full_name.min'                  => 'Full Name must be at least 2 characters.',
-        //     'w_full_name.max'                  => 'Full Name cannot be longer than 100 characters.',
-        //     'w_company_name.required'          => 'Company Organization is required.',
-        //     'w_phone.required'                 => 'Phone Number is required.',
-        //     'w_phone.regex'                   => 'Phone Number format is invalid.',
-        //     'w_phone.min'                     => 'Phone Number is too short.',
-        //     'w_phone.max'                     => 'Phone Number is too long.',
-        //     'w_email.required'                => 'Email Address is required.',
-        //     'w_email.email'                   => 'Email must be a valid email address.',
-        //     'w_quantity_range.required'       => 'Quantity Range is required.',
-        //     'w_quantity_range.in'             => 'Selected Quantity Range is invalid.',
-        //     'w_delivery_date.required'        => 'Delivery Timeline is required.',
-        //     'w_delivery_date.date'            => 'Delivery Timeline must be a valid date.',
-        //     'w_delivery_date.after_or_equal'  => 'Delivery Timeline cannot be in the past.',
-        //     'w_message.max'                   => 'Message cannot exceed 500 characters.',
-        // ];
         $messages = [
             'w_full_name.required'          => 'Full Name is required.',
             'w_full_name.string'            => 'Full Name must be a valid text.',
             'w_full_name.min'               => 'Full Name must be at least 2 characters.',
             'w_full_name.max'               => 'Full Name cannot exceed 100 characters.',
-
-            // 'w_phone.required' => 'Phone Number is required.',
-            // 'w_phone.regex'    => 'Phone Number must contain only digits.',
-            // 'w_phone.min'      => 'Phone Number must be at least 7 digits.',
-            // 'w_phone.max'      => 'Phone Number cannot exceed 15 digits.',
-
+            'w_phone.required' => 'Phone Number is required.',
+            'w_phone.regex'    => 'Phone Number must contain only digits.',
+            'w_phone.min'      => 'Phone Number must be at least 7 digits.',
+            'w_phone.max'      => 'Phone Number cannot exceed 15 digits.',
             'w_email.required'              => 'Email Address is required.',
             'w_email.email'                 => 'Please enter a valid Email Address.',
             'w_email.max'                   => 'Email Address cannot exceed 150 characters.',
@@ -1569,7 +1520,7 @@ class FrontController extends Controller
             // 'delivery_date' => $request->w_delivery_date,
             // 'message' => $request->w_message,
             'full_name'    => $request->w_full_name,
-            //'phone'          => $request->w_phone,
+            'phone'          => $request->w_phone,
             'email'        => $request->w_email,
             'role'         => $role,
             'location'     => $request->w_location,
@@ -1628,7 +1579,7 @@ class FrontController extends Controller
         //         "— HNoWW";
         $message = "📩 *New Wedding Consultation Request*\n\n" .
         "*Full Name:* {$request->w_full_name}\n" .
-        //"*Phone:* {$request->w_phone}\n" .
+        "*Phone:* {$request->w_phone}\n" .
         "*Email:* {$request->w_email}\n" .
             "*Role:* {$role}\n" .
             "*Wedding Location:* " . ($request->w_location ?? 'N/A') . "\n" .
@@ -1885,8 +1836,9 @@ class FrontController extends Controller
         $weddingProduct   = Product::select('id', 'product_name')->where('product_type', 3)->whereNull('deleted_at')->where('is_active', 0)->get();
         $meta_title       = 'The Atelier | Our Story & Craft | HNOWW';
         $meta_description = "Discover the HNOWW Atelier, where philosophy, craft, and ritual meet. Sculptural objects made in small batches from stone, brass, and silver in Dubai.";
+        $blogs = Blog::whereNull('deleted_at')->where('status', 'Active')->latest('id')->take(3)->get();
 
-        return view('front.atelier', compact('corporateProduct', 'weddingProduct', 'meta_title', 'meta_description'));
+        return view('front.atelier', compact('corporateProduct', 'weddingProduct', 'meta_title', 'meta_description', 'blogs'));
     }
 
     public function getWeddingVault(Request $request)
@@ -2257,16 +2209,7 @@ class FrontController extends Controller
         $maxProductPrice = (float) ($priceStats->max_price ?? 0);
         $priceRanges = $this->getProductPriceRangeOptions($minProductPrice, $maxProductPrice);
 
-        $categories = Category::isActive()->notDeleted()->orderBy('category_name')->get();
-
-        if ($categories->isEmpty()) {
-            $categories = collect([
-                (object) ['id' => 'for-her', 'category_name' => 'For Her', 'category_url' => 'for-her'],
-                (object) ['id' => 'for-him', 'category_name' => 'For Him', 'category_url' => 'for-him'],
-                (object) ['id' => 'for-home', 'category_name' => 'For Home', 'category_url' => 'for-home'],
-            ]);
-        }
-
+        $categories = Category::isActive()->notDeleted()->where('category_type', 1)->orderBy('category_name')->get();
         if (empty($priceRanges)) {
             $priceRanges = collect(config('global_values.gift_price_range', []))
                 ->map(function ($label, $value) {
