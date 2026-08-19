@@ -179,7 +179,7 @@
             </div>
             @endif
 
-            <div class="mt-4 p-3" style="background: #F8F5F0; border: 1px solid #E5D5B5; border-radius: 8px; display: flex; align-items: center; gap: 15px;">
+            <!-- <div class="mt-4 p-3" style="background: #F8F5F0; border: 1px solid #E5D5B5; border-radius: 8px; display: flex; align-items: center; gap: 15px;">
                 <div style="color: #B58A46; flex-shrink: 0;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="20 12 20 22 4 22 4 12"></polyline>
@@ -190,10 +190,10 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="m-0" style="font-weight: 500; font-size: 16px; color: #0e2233; line-height: 1.4;">Want to add Gift Wrap / Personalized Card with this Product?</p>
+                    <p class="m-0" style="font-weight: 500; font-size: 16px; color: #0e2233; line-height: 1.4;">Want to add Gift Wrap with this Product?</p>
                     <p class="m-0 mt-1" style="font-size: 13px; color: #666;">You can add these options during checkout.</p>
                 </div>
-            </div>
+            </div> -->
 
             <div class="mt-3 p-3" style="background: #F8F5F0; border: 1px solid #E5D5B5; border-radius: 8px; display: flex; align-items: center; gap: 15px;">
                 <div style="color: #B58A46; flex-shrink: 0;">
