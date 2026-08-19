@@ -298,7 +298,7 @@ class CartController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|min:3',
             'contact_no' => 'required',
-            'whatsapp_no' => 'required',
+            //'whatsapp_no' => 'required',
             'emirate' => 'required',
             'address_line1' => 'required',
             'address_line2' => 'required',
@@ -313,7 +313,7 @@ class CartController extends Controller
             'user_id' => auth()->id() ?? null,
             'name' => $request->name,
             'contact_no' => $request->contact_no,
-            'whatsapp_no' => $request->whatsapp_no,
+            'whatsapp_no' => $request->whatsapp_no ?? null,
             'emirate' => $request->emirate,
             'address_line1' => $request->address_line1,
             'address_line2' => $request->address_line2,

@@ -72,12 +72,15 @@
                                 <a href="{{ route('front.product.details', $val->product_url) }}"><img class="w-100 mb-2 mb-md-4" src="{{ asset('public/noimg.jpg') }}" alt='No Image Found'></a>
                             @endif
                         </div>
+                        <h3 class="sub_head mt-2"><a href="{{ route('front.product.details', $val->product_url) }}">{{ $val->product_name ?? '' }}</a></h3>
+                        <div class="d-lg-flex justify-content-between align-items-center">
                             <div>
-                                <h3 class="sub_head mt-2"><a href="{{ route('front.product.details', $val->product_url) }}">{{ $val->product_name ?? '' }}</a></h3>
+                                <p class="fw-semibold text-dark mb-2">AED {{ number_format((float) preg_replace('/[^0-9.]/', '', $val->product_price), 0) }}</p>
                                 <p class>{!! $val->short_description ?? '' !!}</p>
                             </div>
-                        <div>
-                            <a href="{{ route('front.product.details', $val->product_url) }}" class="com_btn">VIEW OBJECT </a>
+                            <div>
+                                <a href="{{ route('front.product.details', $val->product_url) }}" class="com_btn">VIEW OBJECT </a>
+                            </div>
                         </div>
                     </div>
                 @endforeach
