@@ -531,11 +531,27 @@
         <div class="checkout-box summary-wrapper">
             <h5 class="sub_head mb-4">Payment Summary</h5>
 
+            <div class="mb-4 p-2" style="background: #F8F5F0; border: 1px dashed #B58A46; border-radius: 6px; display: flex; gap: 10px; align-items: center;">
+                <div style="color: #B58A46;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                        <rect x="2" y="7" width="20" height="5"></rect>
+                        <line x1="12" y1="22" x2="12" y2="7"></line>
+                        <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                        <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                    </svg>
+                </div>
+                <p class="m-0" style="color: #0e2233; font-size: 14px; font-weight: 500;">Gift wrapper added with this Product</p>
+            </div>
+
             <div class="summary-details">
                 <div class="summary-row">
                     <span class="label">Subtotal</span>
                     <span class="value"><span class="d-lg-none">AED</span> <br />{{ number_format($subTotal, 2) }}
                         AED</span>
+                </div>
+                <div class="summary-row mt-3">
+                    <span class="label" style="color: #B58A46; font-size: 13px;">Delivery charges based on Quantity</span>
                 </div>
             </div>
             {{-- <div class="summary-row">
