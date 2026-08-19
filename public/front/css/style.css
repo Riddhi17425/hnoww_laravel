@@ -365,13 +365,11 @@ a {
 .language-select {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 5px 12px;
-    /*border-radius:5px;*/
-    /*background:#0e0e0e;*/
-    border: 1px solid #c7b58c;
-    /*box-shadow:0 0 18px rgba(255,165,0,0.35);*/
-    width: 180px;
+    gap: 5px;
+    /* padding: 5px 10px; */
+    border: none;
+    width: auto;
+    cursor: pointer;
 }
 
 /* icon */
@@ -388,12 +386,15 @@ a {
 
 /* input */
 .language-select .dropdown-input-lan {
-    width: 100%;
+    width: 30px;
     border: none;
     background: transparent;
     color: #fff;
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: 500;
     cursor: pointer;
+    text-align: center;
+    padding: 0;
 }
 
 .language-select .dropdown-input-lan::placeholder {
@@ -409,8 +410,8 @@ a {
 .language-select .dropdown-list {
     position: absolute;
     top: calc(100% + 7px);
-    left: -43px;
-    right: -14px;
+    right: 0;
+    min-width: 150px;
     max-height: 240px;
     overflow-y: auto;
     background: #f9f9f9;
@@ -765,7 +766,7 @@ a {
     text-decoration: none;
     transition: var(--transition);
 }
-}
+
 
 
 /* Custom Pagination Styles */
@@ -814,7 +815,7 @@ a {
     border: none;
     border-bottom: 1px solid #bbb;
     border-radius: 0;
-    padding: 0 55px 8px 0;
+    padding: 0 55px 5px 0;
     color: var(--dark-900);
     font-size: 24px;
     font-weight: 400;

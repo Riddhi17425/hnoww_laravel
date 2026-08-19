@@ -5,7 +5,7 @@
     <img class="img-fluid" src="{{asset('public/images/front/bespoke-banner.webp')}}" alt="images">
 
     <div class="hero_content_inner">
-        <h2 class="main_head">Bespoke Commissions</h2>
+        <h2 class="main_head">Bespoke Gifts</h2>
         <p class="para">From imagination to heirloom. The art of bespoke creation.</p>
     </div>
 </section>
