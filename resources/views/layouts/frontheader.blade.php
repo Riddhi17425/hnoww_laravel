@@ -307,7 +307,7 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
             <div class="collapse navbar-collapse justify-content-between" id="mainNavbar">
                 <ul class="mx-auto nav_links">
                     <li class="has-dropdown">
-                        <a href="#" data-text="Collections">
+                        <a href="{{ route('front.collections') }}" data-text="Collections">
                             <span>Collections</span>
                             <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
                                 <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
@@ -321,13 +321,13 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
                     </li>
 
                     <li>
-                        <a href="#" data-text="Wedding Gifts">
+                        <a href="{{route('front.wedding.vault.inside')}}" data-text="Wedding Gifts">
                             <span>Wedding Gifts</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="#" data-text="Corporate Gifts">
+                        <a href="{{route('front.corporate.vault')}}" data-text="Corporate Gifts">
                             <span>Corporate Gifts</span>
                         </a>
                     </li>

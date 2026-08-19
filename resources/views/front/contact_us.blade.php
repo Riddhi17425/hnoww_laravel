@@ -83,7 +83,8 @@
                     <div>
                         <div class="mb-4">
                             <h3 class="sub_head">Location</h3>
-                            <p class="mb-0"><a href="https://maps.app.goo.gl/GcNVEWJPTW3xotjN6">Act tower 2, Burj area, Downtown Dubai, UAE</a></p>
+                            <!-- <p class="mb-0"><a href="https://maps.app.goo.gl/GcNVEWJPTW3xotjN6">Act tower 2, Burj area, Downtown Dubai, UAE</a></p> -->
+                            <p class="mb-0"><a href="https://maps.app.goo.gl/w8t4nf3FEoY8vBhg8">Act Tower 2, 4301, 13a Sheikh Mohammed bin Rashid Blvd - Burj Khalifa - Downtown Dubai - Dubai - United Arab Emirates</a></p>
                         </div>
                         <div>
                             <h3 class="sub_head">By Appointment Only</h3>

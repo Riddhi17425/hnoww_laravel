@@ -219,7 +219,7 @@ class FrontController extends Controller
     public function getList(Request $request, $catSlug, $from = null)
     {
         $category    = Category::where('category_url', $catSlug)->first();
-        $catProducts = Product::select('id', 'category_id', 'product_url', 'product_name', 'short_description', 'list_page_img', 'is_active', 'deleted_at')->where('category_id', $category->id)->where('product_type', 1)->orderBy('id', 'desc')->isActive()->notDeleted()->get();
+        $catProducts = Product::select('id', 'category_id', 'product_url', 'product_name', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'product_price')->where('category_id', $category->id)->where('product_type', 1)->orderBy('id', 'desc')->isActive()->notDeleted()->get();
 
         return view('front.list', compact('category', 'catProducts', 'catSlug', 'from'));
     }
@@ -2179,9 +2179,29 @@ class FrontController extends Controller
         $meta_title       = "HNOWW Collections | Curated Luxury Gifts & Home Decor";
         $meta_description = "Explore HNOWW's curated collections of luxury gifts and home decor, designed for meaningful moments and intentional living. Discover our thoughtfully crafted pieces.";
 
-        $collectionsQuery = Product::where('is_active', 0)
+        $baseQuery = Product::where('is_active', 0)
             ->where('product_type', 1)
             ->whereNull('deleted_at');
+
+        $priceStats = (clone $baseQuery)
+            ->selectRaw('MIN(CAST(REPLACE(REPLACE(REPLACE(product_price, ",", ""), "AED", ""), " ", "") AS DECIMAL(10,2))) as min_price')
+            ->selectRaw('MAX(CAST(REPLACE(REPLACE(REPLACE(product_price, ",", ""), "AED", ""), " ", "") AS DECIMAL(10,2))) as max_price')
+            ->first();
+
+        $minProductPrice = (float) ($priceStats->min_price ?? 0);
+        $maxProductPrice = (float) ($priceStats->max_price ?? 0);
+        $priceRanges = $this->getProductPriceRangeOptions($minProductPrice, $maxProductPrice);
+
+        if (empty($priceRanges)) {
+            $priceRanges = collect(config('global_values.gift_price_range', []))
+                ->map(function ($label, $value) {
+                    return ['value' => $value, 'label' => $label];
+                })
+                ->values()
+                ->all();
+        }
+
+        $collectionsQuery = clone $baseQuery;
 
         if ($request->filled('category_id') && $request->category_id != '') {
             $collectionsQuery->where('category_id', $request->category_id);
@@ -2200,26 +2220,13 @@ class FrontController extends Controller
             }
         }
 
-        $priceStats = (clone $collectionsQuery)
-            ->selectRaw('MIN(CAST(REPLACE(REPLACE(REPLACE(product_price, ",", ""), "AED", ""), " ", "") AS DECIMAL(10,2))) as min_price')
-            ->selectRaw('MAX(CAST(REPLACE(REPLACE(REPLACE(product_price, ",", ""), "AED", ""), " ", "") AS DECIMAL(10,2))) as max_price')
-            ->first();
-
-        $minProductPrice = (float) ($priceStats->min_price ?? 0);
-        $maxProductPrice = (float) ($priceStats->max_price ?? 0);
-        $priceRanges = $this->getProductPriceRangeOptions($minProductPrice, $maxProductPrice);
-
         $categories = Category::isActive()->notDeleted()->where('category_type', 1)->orderBy('category_name')->get();
-        if (empty($priceRanges)) {
-            $priceRanges = collect(config('global_values.gift_price_range', []))
-                ->map(function ($label, $value) {
-                    return ['value' => $value, 'label' => $label];
-                })
-                ->values()
-                ->all();
-        }
 
         $collections = $collectionsQuery->orderByDesc('id')->paginate(12)->appends($request->query());
+
+        if ($request->ajax()) {
+            return view('front.partials.collection-list', compact('collections'))->render();
+        }
 
         return view('front.collections', compact('collections', 'categories', 'priceRanges', 'meta_title', 'meta_description'));
     }
