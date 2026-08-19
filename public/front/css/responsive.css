@@ -442,6 +442,10 @@
         line-height: 30px;
     }
 
+    .custom-filter-dropdown .btn.dropdown-toggle {
+     font-size: 20px;
+    }
+
 }
 
 /*=========================                  =========================
@@ -514,7 +518,7 @@
 
     .nav_links li a {
         font-size: 14px;
-        line-height: 20px;
+        line-height: 15px;
     }
 
     .header_logo {
@@ -947,6 +951,10 @@
 @media (max-width: 1281px) {
     .container {
         max-width: 1070px !important;
+    }
+
+        .custom-filter-dropdown .btn.dropdown-toggle {
+        font-size: 18px;
     }
 
     .hero_content {

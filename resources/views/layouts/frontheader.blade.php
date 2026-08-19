@@ -307,8 +307,8 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
             <div class="collapse navbar-collapse justify-content-between" id="mainNavbar">
                 <ul class="mx-auto nav_links">
                     <li class="has-dropdown">
-                        <a href="{{ route('front.collections') }}" data-text="Collection">
-                            <span>Collection</span>
+                        <a href="{{ route('front.collections') }}" data-text="Collections">
+                            <span>Collections</span>
                             <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
                                 <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                             </svg>
@@ -321,20 +321,20 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
                     </li>
 
                     <li>
-                        <a href="{{route('front.wedding.vault.inside')}}" data-text="Wedding Vault">
-                            <span>Wedding Vault</span>
+                        <a href="{{route('front.wedding.vault.inside')}}" data-text="Wedding Gifts">
+                            <span>Wedding Gifts</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="{{route('front.corporate.vault')}}" data-text="Corporate Vault">
-                            <span>Corporate Vault</span>
+                        <a href="{{route('front.corporate.vault')}}" data-text="Corporate Gifts">
+                            <span>Corporate Gifts</span>
                         </a>
                     </li>
 
                     <li class="has-dropdown">
                         <a href="#" data-text="Festival">
-                            <span>Festival</span>
+                            <span>Festives</span>
                             <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
                                 <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                             </svg>
@@ -378,6 +378,12 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
                     <li>
                         <a href="{{ route('front.blogs') }}" data-text="Blogs">
                             <span>Blogs</span>
+                        </a>
+                    </li>
+
+                      <li>
+                        <a href="{{ route('front.contactus') }}" data-text="Contact">
+                            <span>Contact</span>
                         </a>
                     </li>
 
@@ -488,16 +494,18 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
                         <!--<span id="cart-count" class="cart-total cart_badge">{{ \App\Models\Cart::where('user_id', auth()->id())->sum('quantity') ?? 0 }}</span>-->
                     </a>
 
-                    <div class="language-select ms-lg-3">
-                        <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M16 28C18.66 27.9998 21.2446 27.1163 23.348 25.488C25.4515 23.8598 26.9546 21.5791 27.6213 19.004M16 28C13.34 27.9998 10.7554 27.1163 8.65197 25.488C6.54854 23.8598 5.04544 21.5791 4.37867 19.004M16 28C19.3133 28 22 22.6267 22 16C22 9.37334 19.3133 4 16 4M16 28C12.6867 28 10 22.6267 10 16C10 9.37334 12.6867 4 16 4M27.6213 19.004C27.868 18.044 28 17.0373 28 16C28.0033 13.9361 27.4718 11.9067 26.4573 10.1093M27.6213 19.004C24.0656 20.9752 20.0656 22.0064 16 22C11.784 22 7.82267 20.9133 4.37867 19.004M4.37867 19.004C4.12633 18.0226 3.9991 17.0133 4 16C4 13.86 4.56 11.8493 5.54267 10.1093M16 4C18.1283 3.99911 20.2186 4.56448 22.0563 5.63809C23.894 6.71169 25.4129 8.25489 26.4573 10.1093M16 4C13.8717 3.99911 11.7814 4.56448 9.94375 5.63809C8.10606 6.71169 6.58708 8.25489 5.54267 10.1093M26.4573 10.1093C23.5542 12.6239 19.8407 14.0055 16 14C12.0027 14 8.34667 12.5333 5.54267 10.1093"
-                                stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-
-                        <div class="dropdown-wrapper notranslate">
+                    <div class="language-select">
+                        <div class="dropdown-wrapper notranslate" id="dropdownTrigger" style="display:flex; align-items:center; cursor: pointer;">
+                            <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M16 28C18.66 27.9998 21.2446 27.1163 23.348 25.488C25.4515 23.8598 26.9546 21.5791 27.6213 19.004M16 28C13.34 27.9998 10.7554 27.1163 8.65197 25.488C6.54854 23.8598 5.04544 21.5791 4.37867 19.004M16 28C19.3133 28 22 22.6267 22 16C22 9.37334 19.3133 4 16 4M16 28C12.6867 28 10 22.6267 10 16C10 9.37334 12.6867 4 16 4M27.6213 19.004C27.868 18.044 28 17.0373 28 16C28.0033 13.9361 27.4718 11.9067 26.4573 10.1093M27.6213 19.004C24.0656 20.9752 20.0656 22.0064 16 22C11.784 22 7.82267 20.9133 4.37867 19.004M4.37867 19.004C4.12633 18.0226 3.9991 17.0133 4 16C4 13.86 4.56 11.8493 5.54267 10.1093M16 4C18.1283 3.99911 20.2186 4.56448 22.0563 5.63809C23.894 6.71169 25.4129 8.25489 26.4573 10.1093M16 4C13.8717 3.99911 11.7814 4.56448 9.94375 5.63809C8.10606 6.71169 6.58708 8.25489 5.54267 10.1093M26.4573 10.1093C23.5542 12.6239 19.8407 14.0055 16 14C12.0027 14 8.34667 12.5333 5.54267 10.1093"
+                                    stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
                             <input type="text" id="dropdownInput" class="dropdown-input-lan"
-                                placeholder="Select Language" readonly />
+                                placeholder="EN" readonly style="pointer-events: none;" />
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 2px;">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
                             <div class="dropdown-list" id="dropdownList">
                                 <div class="search-box">
                                     <input type="text" id="searchInput" placeholder="Search language..." />
@@ -893,8 +901,10 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
         renderList(filtered);
     });
 
+    const dropdownTrigger = document.getElementById('dropdownTrigger');
+
     // Toggle dropdown
-    dropdownInput.addEventListener('click', (e) => {
+    dropdownTrigger.addEventListener('click', (e) => {
         e.stopPropagation();
         dropdownList.classList.toggle('show');
     });

@@ -77,9 +77,9 @@
                                     data-bs-target="#requestWeddingCatalogue">Weddings & Celebrations</a></li>
                             <li><a href="javascript:void(0);" data-bs-toggle="modal"
                                     data-bs-target="#requestCorporateProposal">Corporate Rituals</a></li> --}}
-                            <li><a href="{{route('front.bespoke.commission')}}">Bespoke Commissions</a></li>
-                            <li><a href="{{route('front.wedding.vault.inside')}}">Wedding Vault</a></li>
-                            <li><a href="{{route('front.corporate.vault')}}">Corporate Vault</a></li>
+                            <li><a href="{{route('front.bespoke.commission')}}">Bespoke Gifts</a></li>
+                            <li><a href="{{route('front.wedding.vault.inside')}}">Wedding Gifts</a></li>
+                            <li><a href="{{route('front.corporate.vault')}}">Corporate Gifts</a></li>
                             <!--<li><a href="{{ route('front.ceremonials') }}">Ceremonial Objects</a></li>-->
                         </ul>
                     </div>
