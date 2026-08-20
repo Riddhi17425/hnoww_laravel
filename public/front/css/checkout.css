@@ -41,6 +41,7 @@
     margin-bottom: 24px;
     cursor: pointer;
     transition: background-color 0.2s;
+    gap: 12px; /* ensure minimum gap between text and checkbox */
 }
 .co-gift-wrapper:hover {
     background-color: #FDFBF7;
@@ -52,16 +53,19 @@
 }
 .co-gift-wrapper svg {
     color: var(--co-primary);
+    flex-shrink: 0; /* prevent icon from shrinking */
 }
 .co-gift-text {
     color: var(--co-text-main);
     font-size: 15px;
     font-weight: 500;
     margin: 0;
+    line-height: 1.4;
 }
 .co-gift-checkbox {
     width: 22px;
     height: 22px;
+    flex-shrink: 0; /* prevent checkbox from squishing */
     appearance: none;
     -webkit-appearance: none;
     border: 2px solid #B58A46; /* Thicker, visible gold border */
@@ -94,6 +98,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 16px;
+    gap: 12px;
 }
 .co-summary-label {
     font-size: 15px;
@@ -103,11 +108,13 @@
     font-size: 15px;
     font-weight: 600;
     color: var(--co-text-main);
+    text-align: right;
 }
 .co-delivery-val {
     color: var(--co-primary);
     font-size: 14px;
     font-weight: 500;
+    text-align: right;
 }
 
 /* Divider Lines */
@@ -130,16 +137,21 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 32px;
+    gap: 12px;
 }
 .co-total-label {
     font-size: 18px;
     font-weight: 700;
     color: var(--co-text-main);
+    line-height: 1.3;
 }
 .co-total-val {
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 600;
     color: var(--co-primary);
+    line-height: 1.3;
+    text-align: right;
+    white-space: nowrap;
 }
 
 /* Payment Card Box */
@@ -224,6 +236,38 @@
 }
 
 /* --- RESPONSIVE FIXES --- */
+@media (max-width: 1440px) {
+    .co-summary-wrapper {
+        padding: 24px;
+    }
+    .co-total-val {
+        font-size: 22px;
+    }
+    .co-total-label {
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .co-summary-wrapper {
+        padding: 20px;
+    }
+    .co-total-val {
+        font-size: 20px;
+    }
+    .co-total-label {
+        font-size: 16px;
+    }
+    .co-summary-label,
+    .co-summary-val,
+    .co-delivery-val {
+        font-size: 14px;
+    }
+    .co-gift-text {
+        font-size: 14px;
+    }
+}
+
 @media (max-width: 991px) {
     .co-summary-wrapper {
         margin-top: 30px; /* Add space between left form and right summary */
@@ -295,6 +339,23 @@
 
     .trust-badges {
         font-size: 12px;
+        flex-wrap: wrap;
+        text-align: center;
+    }
+
+    .co-btn-outline {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .co-support-box {
+        flex-direction: column;
+        text-align: center;
+        padding: 16px;
+    }
+    
+    .co-total-val {
+        font-size: 20px;
     }
 }
 /* --- LEFT COLUMN: ADDRESS & FORMS --- */
@@ -440,10 +501,14 @@
     width: 100%;
 }
 .co-input-group .iti__flag-container {
-    padding-left: 8px;
+    padding-left: 4px;
+}
+.co-input-group .iti__selected-flag {
+    background-color: transparent !important;
+    padding: 0 12px 0 12px !important;
 }
 .co-input-group .iti input {
-    padding-left: 52px !important;
+    /* removed fixed padding-left so intlTelInput can dynamically set it for dial codes */
 }
 
 /* --- RESPONSIVE FIXES (LEFT) --- */
@@ -455,6 +520,16 @@
 @media (max-width: 576px) {
     .co-left-wrapper {
         padding: 20px 16px;
+    }
+    .co-item-img {
+        width: 60px;
+        height: 60px;
+    }
+    .co-item-info h4 {
+        font-size: 14px;
+    }
+    .co-item-price {
+        font-size: 14px;
     }
 }
 /* --- PROGRESS STEPS --- */
@@ -482,6 +557,73 @@
     height: 1px;
     background-color: var(--co-border);
     margin: 0 16px;
+}
+
+/* --- COMPACT CART ITEMS (RIGHT SIDE) --- */
+.co-compact-items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--co-border);
+    margin-bottom: 24px;
+}
+.co-compact-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.co-compact-img-wrap {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    border: 1px solid var(--co-border);
+    background: #fff;
+    flex-shrink: 0;
+}
+.co-compact-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.co-compact-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--co-primary);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    z-index: 2;
+}
+.co-compact-info {
+    flex: 1;
+}
+.co-compact-info h5 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--co-text-main);
+    margin: 0;
+    font-family: var(--heading-font);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.co-compact-price {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--co-text-main);
+    white-space: nowrap;
 }
 
 /* --- TRUST BADGES (LEFT BOTTOM) --- */
@@ -563,17 +705,44 @@
 }
 
 @media (max-width: 768px) {
+    .co-progress-wrapper {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
     .co-progress-divider {
-        width: 20px;
-        margin: 0 8px;
+        width: 15px;
+        margin: 0 4px;
     }
     .co-progress-step {
         font-size: 12px;
     }
     .co-trust-section {
         flex-direction: column;
+        gap: 12px;
     }
     .co-trust-item {
         width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .co-progress-divider {
+        display: none;
+    }
+    .co-progress-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .co-progress-step {
+        width: 100%;
+        font-size: 13px;
+        background: #f8fafc;
+        padding: 10px 15px;
+        border-radius: 6px;
+    }
+    .co-progress-step.active {
+        background: #fdfbf7;
+        border: 1px solid var(--co-primary);
     }
 }
