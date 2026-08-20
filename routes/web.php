@@ -19,6 +19,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\FrontController;use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\RedirectIfNotAdmin;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\Admin\BannerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -297,7 +298,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('corporate-kits', CorporateKitController::class);
         route::get('corporate-kit/fetch', [CorporateKitController::class, 'getCorporateKits'])->name('corporate-kit.fetch');
         route::post('corporate-kit/update/status', [CorporateKitController::class, 'updateStatus'])->name('corporate-kit.update.status');
+         
 
+        Route::resource('banners', BannerController::class);
+        route::get('banner/fetch', [BannerController::class, 'getBanners'])->name('banner.fetch');
+        route::post('banner/update/status', [BannerController::class, 'updateStatus'])->name('banner.update.status');
     });
 
 });
