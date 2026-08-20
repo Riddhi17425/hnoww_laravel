@@ -15,7 +15,7 @@
             <div class="col-lg-6">
                 <div class="abiout_left">
                     <div class="abiout_left_tp">
-                        <img src="{{ asset('public/images/front/home_magic_left.svg') }}" alt="" class="img-fluid">
+                        <img src="{{ asset('public/images/front/footer-logo.svg') }}" alt="" class="img-fluid">
                         <p class="sub_head mb-0">In a fast-moving world, we believe objects should still hold meaning.
                         </p>
                     </div>

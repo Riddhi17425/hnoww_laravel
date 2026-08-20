@@ -333,14 +333,14 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
                     </li>
 
                     <li class="has-dropdown">
-                        <a href="#" data-text="Festives">
-                            <span>Festives</span>
+                        <a href="#" data-text="Festive Gifts">
+                            <span>Festive Gifts</span>
                             <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
                                 <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                             </svg>
                         </a>
                         <ul class="dropdown-menu">
-                           <li><a href="{{ route('front.raksha.bandhan.collection') }}">Rakshabandhan</a></li>
+                           <li><a href="{{ route('front.raksha.bandhan.collection') }}">Raksha Bandhan Gifts</a></li>
                             <!-- <li><a href="#">Diwali Corporate</a></li>
                             <li><a href="#">Diwali Gifting</a></li> -->
                         </ul>
