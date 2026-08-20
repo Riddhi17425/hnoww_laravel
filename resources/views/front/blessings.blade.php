@@ -98,7 +98,7 @@
                             data-image="{{ asset('public/images/admin/blessing/images/' . $val->image) }}"
                             data-audio="{{ route('front.blessings.audio', $val->id) }}">
                             <img class="img-fluid mb-md-4 mb-2"
-                                src="{{ asset('public/images/admin/blessing/images/' . $val->image) }}" alt="images">
+                                src="{{ asset('public/images/admin/blessing/images/' . $val->image) }}" alt="{{ $val->alt_text }}">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h3 class="sub_head">{{ $val->title ?? '' }}</h3>
@@ -115,7 +115,7 @@
             @else
                 <div class="text-center">
                     <img class="mb-md-4 mb-2" height="250px" width="250px"
-                        src="{{ asset('public/images/product-not-found.webp') }}" alt="images">
+                        src="{{ asset('public/images/no_img.png') }}" alt="images">
                 </div>
             @endif
         </div>
@@ -286,7 +286,7 @@
                                     <textarea name="message_note" placeholder="Notes" id="#" rows="1" aria-invalid="false"></textarea>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <!-- <div class="col-md-12">
                                 <div class="ct_input">
                                     <div class="remember-me mb-3">
                                         <span><input type="checkbox" value="1" id="addFlowersCheckbox"
@@ -302,7 +302,7 @@
                                         </label>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="d-flex justify-content-center gap-2">

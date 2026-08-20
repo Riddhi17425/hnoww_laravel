@@ -5,7 +5,7 @@
     <img class="img-fluid d-lg-none" src="{{ asset('public/images/front/banner_1_mobile.webp') }}" alt="images" loading="lazy">
     <div class="hero_content" style="top: 90%; left: 50%; transform: translateX(-50%); padding: 0 0;">
         <div>
-             <a href="{{ route('front.atelier') }}" class="com_btn border-0 bg-white d-lg-none">Explore The Works</a>
+             <a href="{{ route('front.collections') }}" class="com_btn border-0 bg-white d-lg-none">Explore The Works</a>
          <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white d-lg-none">Corporate Enquiries</a>
         </div>
     </div> --}}
@@ -16,7 +16,7 @@
         Your browser does not support the video tag.
     </video>
     <video autoplay muted loop class="hero_video d-md-none">
-        <source src="{{ asset('public/images/front/hero-video-mobile.mp4') }}" type="video/mp4">
+        <source src="{{ asset('public/images/front/hero-video-mobaile.mp4') }}" type="video/mp4">
         Your browser does not support the video tag.
     </video>
     <div class="hero_content">
@@ -24,7 +24,7 @@
         <h1 class="main_head">Objects Designed To Stay</h1>
         <p>Curated objects for the desk, the home & the relationships that matter.</p>
         <div>
-             <a href="{{ route('front.atelier') }}" class="com_btn border-0 bg-white d-lg-none">Explore The Works</a>
+             <a href="{{ route('front.collections') }}" class="com_btn border-0 bg-white d-lg-none">Explore The Works</a>
          <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white d-lg-none">Corporate Enquiries</a>
         </div>
     </div>
@@ -44,7 +44,7 @@
     </div>
 
         <div class="d-none d-lg-block home_btn ">
-            <a href="{{ route('front.atelier') }}" class="com_btn border-0 bg-white ">Explore The Works</a>
+            <a href="{{ route('front.collections') }}" class="com_btn border-0 bg-white ">Explore The Works</a>
             <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white ms-3">Corporate Enquiries</a>
        </div>
 
@@ -221,8 +221,7 @@
             </h2>
             <!-- 3️⃣ Left image (from left) -->
             <div class="text-end magic_wrapper_logo">
-                <img src="{{ asset('public/images/front/home_magic_left.svg') }}" loading="lazy" alt="Home Magic Left Image"
-                    class="img-fluid">
+                 <img src="{{ asset('public/images/front/footer-logo.svg') }}" loading="lazy" alt="Home Magic Left Image" class="img-fluid">
             </div>
 
             <!-- 2️⃣ Center image (scale 0 → 1) -->

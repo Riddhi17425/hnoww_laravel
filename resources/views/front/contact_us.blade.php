@@ -6,6 +6,7 @@
     <div class="hero_content_inner">
         <h2 class="main_head mb-3">The Studio</h2>
         <p class="para sec_in_mb">We are here to assist with curation, commissions, and care.</p>
+        <a href="#contactForm" class="com_btn border-0 bg-white ">Get Enquiry</a>
     </div>
 </section>
 
@@ -82,7 +83,8 @@
                     <div>
                         <div class="mb-4">
                             <h3 class="sub_head">Location</h3>
-                            <p class="mb-0"><a href="https://maps.app.goo.gl/GcNVEWJPTW3xotjN6">Act tower 2, Burj area, Downtown Dubai, UAE</a></p>
+                            <!-- <p class="mb-0"><a href="https://maps.app.goo.gl/GcNVEWJPTW3xotjN6">Act tower 2, Burj area, Downtown Dubai, UAE</a></p> -->
+                            <p class="mb-0"><a href="https://maps.app.goo.gl/w8t4nf3FEoY8vBhg8">Act Tower 2, 4301, 13a Sheikh Mohammed bin Rashid Blvd - Burj Khalifa - Downtown Dubai - Dubai - United Arab Emirates</a></p>
                         </div>
                         <div>
                             <h3 class="sub_head">By Appointment Only</h3>
@@ -103,7 +105,7 @@
 </section>
 
 <section class="mt_60 mb_120">
-    <div class="container">
+    <div class="container" id="contactForm">
         <div class="section_header">
             <p class="sub_head mb-0">
                 <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">

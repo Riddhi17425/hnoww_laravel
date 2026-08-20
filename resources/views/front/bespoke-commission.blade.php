@@ -5,7 +5,7 @@
     <img class="img-fluid" src="{{asset('public/images/front/bespoke-banner.webp')}}" alt="images">
 
     <div class="hero_content_inner">
-        <h2 class="main_head">Bespoke Commissions</h2>
+        <h2 class="main_head">Bespoke Gifts</h2>
         <p class="para">From imagination to heirloom. The art of bespoke creation.</p>
     </div>
 </section>
@@ -145,7 +145,7 @@ alt="{{ $val->product_name ?? 'Product Image' }}">
                     <img class="img-fluid mb-4" src="{{ asset('public/images/front/scope-of-worka1.webp') }}"
                         alt="images">
                     <h3 class="sub_head">Wedding Rituals</h3>
-                    <p>Custom trousseau trunks, ring ceremony trays, and bridal party gifting suites that honor the
+                    <p>Ring ceremony trays, and bridal party gifting suites that honor the
                         sanctity of the union.</p>
 
                 </div>

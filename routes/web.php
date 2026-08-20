@@ -11,15 +11,19 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\GiftShopController;
 use App\Http\Controllers\Admin\JournalController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\FestiveCategoryController;
+use App\Http\Controllers\Admin\FestiveProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\ProductTabController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\FrontController;use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\FrontController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\RedirectIfNotAdmin;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Admin\BannerController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,7 +38,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/send', function () {
-    Mail::raw('This is a test email sent from Laravel.', function ($message) {
+    Mail::raw('This is a test email sent from `Laravel.', function ($message) {
         $message->to('webdeveloper9.intelliworkz@gmail.com')
             ->subject('Test Mail from Laravel');
     });
@@ -54,13 +58,9 @@ Route::get('/clear', function () {
 Route::post('/newsletter-temp/store', [FrontController::class, 'storeNewsletterTempInquiry'])->name('newsletter.temp.store');
 Route::post('/check-email-unique', [FrontController::class, 'checkEmailUnique'])->name('front.check.email.unique');
 
-Route::get('/sitemap-index.xml', [SitemapController::class, 'index'])->name('sitemap.index');
-Route::get('/post-sitemap.xml', [SitemapController::class, 'posts'])->name('sitemap.posts');
-Route::get('/page-sitemap.xml', [SitemapController::class, 'pages'])->name('sitemap.pages');
-Route::get('/product-sitemap.xml', [SitemapController::class, 'products'])->name('sitemap.products');
-Route::get('/category-sitemap.xml', [SitemapController::class, 'categories'])->name('sitemap.categories');
-Route::get('/gift-sitemap.xml', [SitemapController::class, 'gifts'])->name('sitemap.gifts');
-Route::get('/blessing-sitemap.xml', [SitemapController::class, 'blessings'])->name('sitemap.blessings');
+//========================Start Sitemap Routes========================
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+//========================End Sitemap Routes========================
 
 // Catch-all for frontend (coming soon)
 // Route::any('{any}', function () {
@@ -69,10 +69,11 @@ Route::get('/blessing-sitemap.xml', [SitemapController::class, 'blessings'])->na
 
 //FRONT ROUTE
 Route::name('front.')->group(function () {
+    Route::get('/collections/raksha-bandhan-gifts-dubai', [FrontController::class, 'getRakshaBandhanCollection'])->name('raksha.bandhan.collection');
     Route::get('/', [FrontController::class, 'index'])->name('home');
     Route::get('stripe', [FrontController::class, 'getStripe']);                             // Temporary
     Route::post('stripe-post', [FrontController::class, 'stripePost'])->name('stripe.post'); // Temporary
-
+    Route::get('collections', [FrontController::class, 'collections'])->name('collections');
     Route::get('collections/{category_slug}/{from?}', [FrontController::class, 'getList'])->name('list');
     Route::get('/list/{category_slug}/{from?}', [FrontController::class, 'listLegacyRedirect'])->name('list.legacy');
     Route::get('product-details/{product_slug}', [FrontController::class, 'getProductDetails'])->name('product.details');
@@ -105,15 +106,18 @@ Route::name('front.')->group(function () {
     Route::post('store-ceremonial-inquiry', [FrontController::class, 'storeCeremonialInquiry'])->name('store.ceremonial.inquiry');
     Route::get('/gift-shop', [FrontController::class, 'getGiftShop'])->name('giftshop');
     Route::get('gift-details/{product_slug}', [FrontController::class, 'getGiftDetails'])->name('gift.details');
-    Route::get('/bespoke-luxury-gifts', [FrontController::class, 'getBespokeCommission'])->name('bespoke.commission');
+    Route::get('/bespoke-gifts-dubai', [FrontController::class, 'getBespokeCommission'])->name('bespoke.commission');
     Route::get('/privacy', [FrontController::class, 'getprivacy'])->name('privacy');
 
     Route::get('/luxury-corporate-gifts/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
+    Route::get('/corporate-diwali-collection-2026', [FrontController::class, 'getCorporateDiwaliCollection'])->name('corporate.diwali.collection');
+    
+    Route::post('/store-festival-inquiry', [FrontController::class, 'storeFestivalInquiry'])->name('store.festival.inquiry');
     Route::get('/get-products-by-category/{category_id}', [FrontController::class, 'getProductsByCategory'])->name('get.products.by.category');
     Route::get('/wedding-vault', [FrontController::class, 'getWeddingVault'])->name('wedding.vault');
     Route::post('/wedding-vault/send-email', [FrontController::class, 'sendUnlockWeddingEmail'])->name('wedding-vault.send-email');
     Route::post('/wedding-vault/verify-otp', [FrontController::class, 'verifyWeddingVaultOtp'])->name('wedding-vault.verify-otp');
-    Route::get('/luxury-wedding-gifts', [FrontController::class, 'getWeddingVaultInside'])->name('wedding.vault.inside');
+    Route::get('/wedding-gifts-dubai', [FrontController::class, 'getWeddingVaultInside'])->name('wedding.vault.inside');
 
     Route::get('/bespoke-commission', [FrontController::class, 'bespokeCommissionLegacyRedirect'])->name('bespoke.commission.legacy');
     Route::get('/corporate-vault/{cat_slug?}', [FrontController::class, 'corporateVaultLegacyRedirect'])->name('corporate.vault.legacy');
@@ -126,11 +130,11 @@ Route::name('front.')->group(function () {
     Route::get('/memory-shelf', [FrontController::class, 'getMemoryShelf'])->name('memory-shelf');
     Route::get('/modern-majilis', [FrontController::class, 'getModernMajilis'])->name('modern-majilis');
     Route::get('/architect-study', [FrontController::class, 'getArchitectStudy'])->name('architect-study');
-    Route::get('/author', [FrontController::class, 'getAuthor'])->name('author');
-    Route::get('/about', [FrontController::class, 'getAbout'])->name('about');
-    Route::get('/editions', [FrontController::class, 'getEditions'])->name('editions');
     // NOT MADE DYNAMIC - END
 
+    Route::get('/author/salomi-kotecha', [FrontController::class, 'getAuthor'])->name('author');
+    Route::get('/about', [FrontController::class, 'getAbout'])->name('about');
+    Route::get('/editions', [FrontController::class, 'getEditions'])->name('editions');
     Route::get('/thankyou', [FrontController::class, 'getThankYou'])->name('thankyou');
 
     Route::get('/blogs', [FrontController::class, 'getBlogs'])->name('blogs');
@@ -223,6 +227,30 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('delete-all-detail-images', [ProductController::class, 'deleteAllDetailImages'])->name('delete.alldetail.images');
         });
 
+        // FESTIVE CATEGORY
+        Route::prefix('festive-categories')->name('festive-categories.')->group(function () {
+            Route::get('/', [FestiveCategoryController::class, 'index'])->name('index');
+            Route::get('/fetch', [FestiveCategoryController::class, 'getCategories'])->name('fetch');
+            Route::get('/create', [FestiveCategoryController::class, 'create'])->name('create');
+            Route::post('/store', [FestiveCategoryController::class, 'store'])->name('store');
+            Route::get('/edit/{cat_id}', [FestiveCategoryController::class, 'edit'])->name('edit');
+            Route::put('/update/{cat_id}', [FestiveCategoryController::class, 'update'])->name('update');
+            Route::delete('/delete/{cat_id}', [FestiveCategoryController::class, 'delete'])->name('delete');
+            Route::post('/update-status', [FestiveCategoryController::class, 'updateStatus'])->name('update.status');
+        });
+
+        // FESTIVE PRODUCT
+        Route::prefix('festive-products')->name('festive-products.')->group(function () {
+            Route::get('/', [FestiveProductController::class, 'index'])->name('index');
+            Route::get('/fetch', [FestiveProductController::class, 'getProducts'])->name('fetch');
+            Route::get('/create', [FestiveProductController::class, 'create'])->name('create');
+            Route::post('/store', [FestiveProductController::class, 'store'])->name('store');
+            Route::get('/edit/{product_id}', [FestiveProductController::class, 'edit'])->name('edit');
+            Route::put('/update/{product_id}', [FestiveProductController::class, 'update'])->name('update');
+            Route::delete('/delete/{product_id}', [FestiveProductController::class, 'delete'])->name('delete');
+            Route::post('/update-status', [FestiveProductController::class, 'updateStatus'])->name('update.status');
+        });
+
         //PRODCUCT TABS
         Route::prefix('product-tabs')->name('product-tabs.')->group(function () {
             Route::get('/', [ProductTabController::class, 'index'])->name('index');
@@ -304,5 +332,4 @@ Route::prefix('admin')->name('admin.')->group(function () {
         route::get('banner/fetch', [BannerController::class, 'getBanners'])->name('banner.fetch');
         route::post('banner/update/status', [BannerController::class, 'updateStatus'])->name('banner.update.status');
     });
-
 });

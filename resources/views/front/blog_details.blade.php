@@ -908,7 +908,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12">
+                            <!-- <div class="col-md-12">
                                 <div class="ct_input">
                                     <div class="remember-me mb-3">
                                         <span><input type="checkbox" value="1" id="blogAddFlowersCheckbox" name="add_flowers"></span>
@@ -923,7 +923,7 @@
                                         </label>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="d-flex justify-content-center gap-2">

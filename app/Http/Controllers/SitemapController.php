@@ -1,144 +1,382 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Blessing;
 use App\Models\Blog;
 use App\Models\Category;
-use App\Models\GiftShop;
 use App\Models\Product;
 
 class SitemapController extends Controller
 {
+    // RETURN XML RESPONSE
     protected function xmlResponse(string $xml)
     {
-        return response($xml, 200)->header('Content-Type', 'application/xml');
+        return response($xml, 200)
+            ->header('Content-Type', 'application/xml');
     }
 
+    // COMPLETE SITEMAP
     public function index()
     {
-        $sitemaps = [
-            route('sitemap.posts'),
-            route('sitemap.pages'),
-            route('sitemap.products'),
-            route('sitemap.categories'),
-            route('sitemap.blessings'),
+        // STATIC TIME FOR HOMEPAGE AND STATIC PAGES
+        // Update this value whenever you want to record
+        // a new update time for static pages.
+        $todayTime = "2026-08-12T15:30:00+05:30";
+
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+
+
+        // ============================================================
+        // 1. HOMEPAGE
+        // PRIORITY: 1.00
+        // ============================================================
+
+        $xml .= '<url>';
+
+        $xml .= '<loc>'
+            . htmlspecialchars(
+                route('front.home'),
+                ENT_XML1,
+                'UTF-8'
+            )
+            . '</loc>';
+
+        $xml .= '<lastmod>'
+            . htmlspecialchars($todayTime, ENT_XML1, 'UTF-8')
+            . '</lastmod>';
+
+        $xml .= '<priority>1.00</priority>';
+
+        $xml .= '</url>' . "\n";
+
+
+        // ============================================================
+        // 2. ALL CATEGORIES + SUB-CATEGORIES
+        // PRIORITY: 0.80
+        //
+        // category_type:
+        // 1 = Base Categories
+        // 2 = Corporate Categories
+        // 3 = Wedding Categories
+        // ============================================================
+
+        // Corporate category URLs that should NOT appear in sitemap
+        $excludedCorporateCategories = [
+            'the-desk',
+            'writing-thought-objects',
+            'frames-memory-objects',
+            'ritual-hospitality-objects',
         ];
 
-        $xml  = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-        $xml .= '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
-        foreach ($sitemaps as $loc) {
-            $xml .= "<sitemap><loc>{$loc}</loc><lastmod>" . now()->toAtomString() . "</lastmod></sitemap>\n";
-        }
-        $xml .= '</sitemapindex>';
-
-        return $this->xmlResponse($xml);
-    }
-
-    public function posts()
-    {
-        $blogs = Blog::where('status', 'Active')->get();
-
-        $xml  = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
-        foreach ($blogs as $blog) {
-            $loc      = route('front.blog.detail', $blog->url);
-            $lastmod  = optional($blog->updated_at)->toAtomString();
-            $xml     .= "<url><loc>{$loc}</loc><lastmod>{$lastmod}</lastmod></url>\n";
-        }
-        $xml .= '</urlset>';
-
-        return $this->xmlResponse($xml);
-    }
-
-    public function products()
-    {
-        $products = Product::where('is_active', 0)->get();
-
-        $xml  = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
-        foreach ($products as $product) {
-            $loc      = route('front.product.details', $product->product_url);
-            $lastmod  = optional($product->updated_at)->toAtomString();
-            $xml     .= "<url><loc>{$loc}</loc><lastmod>{$lastmod}</lastmod></url>\n";
-        }
-        $xml .= '</urlset>';
-
-        return $this->xmlResponse($xml);
-    }
-
-    public function categories()
-    {
         $categories = Category::where('is_active', 0)
-            ->whereIn('category_url', ['luxury-gifts-for-her', 'luxury-gifts-for-him', 'luxury-home-decor'])
+            ->whereNull('deleted_at')
+            ->whereIn('category_type', [1, 2, 3])
             ->get();
 
-        $xml  = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
-        foreach ($categories as $category) {
-            $loc      = route('front.list', $category->category_url);
-            $lastmod  = optional($category->updated_at)->toAtomString();
-            $xml     .= "<url><loc>{$loc}</loc><lastmod>{$lastmod}</lastmod></url>\n";
-        }
-        $xml .= '</urlset>';
-
-        return $this->xmlResponse($xml);
-    }
-
-    public function gifts()
-    {
-        $gifts = GiftShop::where('is_active', 0)->get();
-
-        $xml  = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
-        foreach ($gifts as $gift) {
-            $loc      = route('front.gift.details', $gift->product_url);
-            $lastmod  = optional($gift->updated_at)->toAtomString();
-            $xml     .= "<url><loc>{$loc}</loc><lastmod>{$lastmod}</lastmod></url>\n";
-        }
-        $xml .= '</urlset>';
-
-        return $this->xmlResponse($xml);
-    }
-
-    public function blessings()
-    {
-        $blessings = Blessing::where('is_active', 0)->whereNull('deleted_at')->get();
-
-        $xml  = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
-
-        $xml .= "<url><loc>" . route('front.blessings.library') . "</loc></url>\n";
-
-        foreach ($blessings as $blessing) {
-            if (empty($blessing->slug)) {
-                continue; // skip any legacy rows without a slug
+        foreach ($categories as $category)
+        {
+            if (empty($category->id))
+            {
+                continue;
             }
-            $loc      = route('front.blessings.library', ['slug' => $blessing->slug]);
-            $lastmod  = optional($blessing->updated_at)->toAtomString();
-            $xml     .= "<url><loc>{$loc}</loc><lastmod>{$lastmod}</lastmod></url>\n";
+
+            if ($category->category_type == 1)
+            {
+                if (empty($category->category_url))
+                {
+                    continue;
+                }
+
+                $loc = route('front.list', [
+                    'category_slug' => $category->category_url
+                ]);
+            }
+            elseif ($category->category_type == 2)
+            {
+                if (empty($category->category_url))
+                {
+                    continue;
+                }
+
+                if (in_array($category->category_url, $excludedCorporateCategories))
+                {
+                    continue;
+                }
+
+                $loc = route('front.corporate.vault', [
+                    'cat_slug' => $category->category_url
+                ]);
+            }
+            elseif ($category->category_type == 3)
+            {
+                $loc = route('front.ceremonials', [
+                    'category_id' => $category->id
+                ]);
+            }
+            else
+            {
+                continue;
+            }
+
+            $lastmod = optional($category->updated_at)->toAtomString();
+
+            $xml .= '<url>';
+
+            $xml .= '<loc>'
+                . htmlspecialchars($loc, ENT_XML1, 'UTF-8')
+                . '</loc>';
+
+            if ($lastmod)
+            {
+                $xml .= '<lastmod>'
+                    . htmlspecialchars($lastmod, ENT_XML1, 'UTF-8')
+                    . '</lastmod>';
+            }
+
+            $xml .= '<priority>0.80</priority>';
+
+            $xml .= '</url>' . "\n";
         }
-        $xml .= '</urlset>';
 
-        return $this->xmlResponse($xml);
-    }
 
-    public function pages()
-    {
-        $staticRoutes = [
-            'front.home', 'front.about', 'front.faqs', 'front.journal',
-            'front.atelier', 'front.bespoke.commission',
-            'front.privacy', 'front.rituals', 'front.bespoke.wedding.hampers',
-            'front.everyday-sacred', 'front.memory-shelf', 'front.modern-majilis',
-            'front.architect-study', 'front.author', 'front.editions',
-            'front.contactus', 'front.blogs',
+        // ============================================================
+        // 3. ALL PRODUCTS
+        // PRIORITY: 0.80
+        //
+        // Includes:
+        // - Normal Products
+        // - Gift Shop Products
+        // ============================================================
+
+        // ------------------------------------------------------------
+        // NORMAL PRODUCTS
+        // ------------------------------------------------------------
+
+        // Product URLs that should NOT appear in sitemap
+        $excludedProductUrls = [
+            'the-fluted-pedestal',
+            'pedestal-platters',
+            'elephant-pedestal-cake-stand',
+            'malachite-monolith-frame',
+            'keepsake-boxes',
+            'card-holders',
+            'pen-holders-organisers',
+            'paperweights',
+            'silver-grid-frames',
+            'malachite-stone-frames',
+            'malachite-stem-sculpture',
+            'silver-leaf-bowl',
+            'lotus-bowl',
+            'the-offering-stand',
+            'the-peacock-vessel',
+            'the-malachite-offering-platter',
+            'kamadhenu-ceremonial-idol',
         ];
 
-        $xml  = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
-        foreach ($staticRoutes as $name) {
-            $loc  = route($name);
-            $xml .= "<url><loc>{$loc}</loc></url>\n";
+        $products = Product::where('is_active', 0)
+            ->whereNull('deleted_at')
+            ->whereNotIn('product_url', $excludedProductUrls)
+            ->get();
+
+        foreach ($products as $product)
+        {
+            if (empty($product->product_url))
+            {
+                continue;
+            }
+
+            $loc = route('front.product.details', [
+                'product_slug' => $product->product_url
+            ]);
+
+            $lastmod = optional($product->updated_at)->toAtomString();
+
+            $xml .= '<url>';
+
+            $xml .= '<loc>'
+                . htmlspecialchars($loc, ENT_XML1, 'UTF-8')
+                . '</loc>';
+
+            if ($lastmod)
+            {
+                $xml .= '<lastmod>'
+                    . htmlspecialchars($lastmod, ENT_XML1, 'UTF-8')
+                    . '</lastmod>';
+            }
+
+            $xml .= '<priority>0.80</priority>';
+
+            $xml .= '</url>' . "\n";
         }
+
+        // ============================================================
+        // 4. ALL PAGES
+        // PRIORITY:
+        // - Main / Landing Pages: 0.80
+        // - Other Pages: 0.60
+        // ============================================================
+
+        $staticRoutes = [
+            // Main / landing pages
+            'front.corporate.vault',
+            'front.bespoke.commission',
+            'front.wedding.vault.inside',
+
+            // Static pages
+            'front.about',
+            'front.faqs',
+            'front.journal',
+            'front.atelier',
+            'front.author',
+            'front.editions',
+            'front.contactus',
+            'front.blogs',
+        ];
+
+        // Pages that should have priority 0.80
+        $highPriorityPages = [
+            'front.corporate.vault',
+            'front.bespoke.commission',
+            'front.wedding.vault.inside',
+        ];
+
+        foreach ($staticRoutes as $name)
+        {
+            $loc = route($name);
+
+            // Set priority based on page type
+            $priority = in_array($name, $highPriorityPages)
+                ? '0.80'
+                : '0.60';
+
+            $xml .= '<url>';
+
+            $xml .= '<loc>'
+                . htmlspecialchars($loc, ENT_XML1, 'UTF-8')
+                . '</loc>';
+
+            $xml .= '<lastmod>'
+                . htmlspecialchars($todayTime, ENT_XML1, 'UTF-8')
+                . '</lastmod>';
+
+            $xml .= '<priority>'
+                . $priority
+                . '</priority>';
+
+            $xml .= '</url>' . "\n";
+        }
+
+
+        // ------------------------------------------------------------
+        // BLESSINGS LIBRARY PAGE
+        // ------------------------------------------------------------
+
+        $xml .= '<url>';
+
+        $xml .= '<loc>'
+            . htmlspecialchars(
+                route('front.blessings.library'),
+                ENT_XML1,
+                'UTF-8'
+            )
+            . '</loc>';
+
+        $xml .= '<lastmod>'
+            . htmlspecialchars($todayTime, ENT_XML1, 'UTF-8')
+            . '</lastmod>';
+
+        $xml .= '<priority>0.60</priority>';
+
+        $xml .= '</url>' . "\n";
+
+
+        // ------------------------------------------------------------
+        // INDIVIDUAL BLESSINGS
+        // ------------------------------------------------------------
+
+        $blessings = Blessing::where('is_active', 0)
+            ->whereNull('deleted_at')
+            ->get();
+
+        foreach ($blessings as $blessing)
+        {
+            if (empty($blessing->slug))
+            {
+                continue;
+            }
+
+            $loc = route('front.blessings.library', [
+                'slug' => $blessing->slug
+            ]);
+
+            $lastmod = optional($blessing->updated_at)->toAtomString();
+
+            $xml .= '<url>';
+
+            $xml .= '<loc>'
+                . htmlspecialchars($loc, ENT_XML1, 'UTF-8')
+                . '</loc>';
+
+            if ($lastmod)
+            {
+                $xml .= '<lastmod>'
+                    . htmlspecialchars($lastmod, ENT_XML1, 'UTF-8')
+                    . '</lastmod>';
+            }
+
+            $xml .= '<priority>0.60</priority>';
+
+            $xml .= '</url>' . "\n";
+        }
+
+
+        // ============================================================
+        // 5. ALL BLOGS
+        // PRIORITY: 0.60
+        // ============================================================
+
+        $blogs = Blog::where('status', 'Active')
+            ->get();
+
+        foreach ($blogs as $blog)
+        {
+            if (empty($blog->url))
+            {
+                continue;
+            }
+
+            $loc = route('front.blog.detail', [
+                'url' => $blog->url
+            ]);
+
+            $lastmod = optional($blog->updated_at)->toAtomString();
+
+            $xml .= '<url>';
+
+            $xml .= '<loc>'
+                . htmlspecialchars($loc, ENT_XML1, 'UTF-8')
+                . '</loc>';
+
+            if ($lastmod)
+            {
+                $xml .= '<lastmod>'
+                    . htmlspecialchars($lastmod, ENT_XML1, 'UTF-8')
+                    . '</lastmod>';
+            }
+
+            $xml .= '<priority>0.60</priority>';
+
+            $xml .= '</url>' . "\n";
+        }
+
+
+        // ============================================================
+        // END SITEMAP
+        // ============================================================
+
         $xml .= '</urlset>';
 
         return $this->xmlResponse($xml);

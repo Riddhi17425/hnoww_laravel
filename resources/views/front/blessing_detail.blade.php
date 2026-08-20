@@ -4,7 +4,7 @@
     <img class="img-fluid" src="{{asset('public/images/front/blessing-library-banner.webp')}}" alt="him banner">
 
     <div class="hero_content_inner">
-        <h2 class="main_head mb-3">The Blessing Detail</h2>
+        <h2 class="main_head mb-3">The HNOWW Blessing</h2>
         <p class="para sec_in_mb">Audio-poetic rituals to anchor the soul.</p>
     </div>
 </section>
@@ -16,7 +16,7 @@
             <!-- IMAGE -->
             <div class="audio-image">
                 <img src="{{ asset('public/images/admin/blessing/images/'.$blessing->image) }}"
-                     alt="{{ $blessing->title }}"
+                     alt="{{ $blessing->alt_text }}"
                      class="img-fluid">
             </div>
 

@@ -1,5 +1,7 @@
 @include('layouts.frontheader')
 
+<link rel="stylesheet" href="{{ asset('public/front/css/checkout.css') }}">
+
 <style>
 .theme-green .header-scrolled {
     background: #EDEAE4;
@@ -9,168 +11,17 @@
     color: #0e2233;
 }
 
+.theme-green .language-select svg polyline,
+.theme-green .language-select svg path {
+    stroke: #0e2233;
+}
+
 @media (max-width:767px) {
     .sticky-header {
         /*background: #EDEAE4;*/
     }
 
 }
-
-@media (max-width: 768px) {
-
-    /* Table structure ko block mein badalna */
-    .shopping-summery,
-    .shopping-summery tbody,
-    .checkout-table-row,
-    .checkout-table-row td {
-        display: block !important;
-        width: 100% !important;
-    }
-
-    .summary-wrapper {
-        padding: 0px;
-    }
-
-    /* Header hide karna */
-    .shopping-summery thead {
-        display: none !important;
-    }
-
-    /* Har row ko ek card banana */
-    .checkout-table-row {
-        position: relative !important;
-        padding: 15px 15px 15px 115px !important;
-        /* Left space for image */
-        margin-bottom: 20px !important;
-        /* border: 1px solid #f0f0f0 !important;
-        border-radius: 12px !important;
-        background: #fff !important;
-        min-height: 125px !important;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.03); */
-    }
-
-    /* 1. Image (Left Side) */
-    .checkout-table-row td:first-child {
-        position: absolute !important;
-        top: 15px !important;
-        left: 15px !important;
-        width: 85px !important;
-        padding: 0 !important;
-        border: none !important;
-    }
-
-    .checkout-table-row td:first-child img {
-        width: 85px !important;
-        height: 85px !important;
-        object-fit: cover;
-        /* border-radius: 8px; */
-    }
-
-    /* 2. Product Name (Top Middle) */
-    .checkout-table-row td:nth-child(2) {
-        padding: 0 35px 5px 0 !important;
-        /* Space for trash icon */
-        text-align: left !important;
-        border: none !important;
-        font-weight: 700;
-        font-size: 16px;
-        color: #1a1a1a;
-        font-family: var(--heading-font);
-    }
-
-    /* 3. Unit Price (Name ke niche) */
-    .checkout-table-row td:nth-child(4) {
-        /* Price column */
-        padding: 0 !important;
-        text-align: left !important;
-        border: none !important;
-        color: #777;
-        font-size: 14px;
-        margin-bottom: 8px;
-    }
-
-    /* 4. Quantity Pill (Bottom Left) */
-    .checkout-table-row td:nth-child(3) {
-        /* Quantity column */
-        padding: 5px 0 0 0 !important;
-        border: none !important;
-        display: flex;
-        justify-content: flex-start;
-    }
-
-    /* Quantity Pill Shape */
-    .increment_decrement {
-        display: inline-flex;
-        align-items: center;
-        border: 1px solid #eee;
-        border-radius: 30px;
-        /* Pill Shape */
-        padding: 3px 12px;
-        background: #fdfdfd;
-    }
-
-    /* 5. Total Price (Bottom Right) */
-    .checkout-table-row td:nth-child(5) {
-        /* Total column */
-        position: absolute !important;
-        bottom: 15px !important;
-        right: 15px !important;
-        padding: 0 !important;
-        border: none !important;
-        width: auto !important;
-    }
-
-    .checkout-table-row td:nth-child(5):before {
-        content: "AED ";
-        /* Currency prefix agar chahiye */
-        font-size: 12px;
-    }
-
-    .checkout-table-row td:nth-child(5) {
-        font-size: 18px;
-        font-weight: 700;
-        color: #b5a48b;
-        /* Gold shade */
-    }
-
-    /* 6. Trash Icon (Top Right) - Agar aapne add kiya hai */
-    .checkout-table-row td:last-child {
-        position: static !important;
-        top: 10px !important;
-        right: 10px !important;
-        padding: 0 !important;
-        border: none !important;
-    }
-
-    /* Labels hide karna */
-    .checkout-table-row td:before {
-        display: none !important;
-    }
-
-}
-
-/* Keep intl-tel-input aligned with checkout fields */
-#addressFormWrapper .ct_input .iti {
-    width: 100%;
-    margin-bottom: 0;
-    /* margin-top: 24px; */
-}
-
-#addressFormWrapper .ct_input .iti input {
-    margin-top: 24px !important;
-}
-
-#addressFormWrapper .ct_input .iti__flag-container {
-    top: 24px;
-    padding-bottom: 16px;
-}
-
-
-#addressFormWrapper .ct_input .iti__selected-flag {
-    background-color: transparent !important;
-    height: auto !important;
-}
-
 
 </style>
 
@@ -289,159 +140,171 @@
                     </svg>
                 </span>
             </p>
-            <h2 class="title_60">Shopping Bag</h2>
+            <h2 class="title_60">Secure Checkout</h2>
+        </div>
+
+        <div class="co-progress-wrapper d-none d-md-flex">
+            <div class="co-progress-step">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                Cart
+            </div>
+            <div class="co-progress-divider"></div>
+            <div class="co-progress-step active">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Shipping
+            </div>
+            <div class="co-progress-divider"></div>
+            <div class="co-progress-step">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                Payment
+            </div>
         </div>
 
         @if($cartItems->count() > 0)
         <div class="row gy-3 gy-lg-0 gx-lg-5">
             <!-- LEFT : Order Summary -->
             <div class="col-lg-8 col-12">
-                <div class="checkout-box">
-                    <div class="checkout-box">
-                        <div class="ct_form">
-                            @if($userAddresses->count() > 0)
-                            <h3 class="sub_head mb-3">Choose an Existing Address OR Add a New Address</h3>
+                <div class="co-left-wrapper">
+                    @if($userAddresses->count() > 0)
+                    <h3 class="co-summary-title mb-4">Shipping Address</h3>
 
-                            <div class="row address-selection mb-3 gy-4" style="--bs-gutter-x: 20px;">
-                                @foreach($userAddresses as $address)
-                                <div class="col-lg-6 col-md-6 col-12">
-                                    <label
-                                        class="address-card border p-3 rounded d-flex gap-3 justify-content-between align-items-start h-100"
-                                        style="cursor:pointer;">
-
-                                        <div>
-                                            <strong>{{ $address->name }}</strong><br>
-                                            {{ $address->address_line1 }}, {{ $address->address_line2 }}<br>
-                                            {{ $address->emirate }}<br>
-                                            {{ $address->contact_no }}<br>
-                                            @if(isset($address->whatsapp_no)){{ $address->whatsapp_no }}<br>@endif
-                                            @if($address->landmark)
-                                            Landmark: {{ $address->landmark }}
-                                            @endif
-                                        </div>
-
-                                        <div>
-                                            <input class="check_box_new mt-0" type="radio" name="selected_address" value="{{ $address->id }}">
-                                        </div>
-                                    </label>
+                    <div class="row address-selection mb-4 gy-4" style="--bs-gutter-x: 20px;">
+                        @foreach($userAddresses as $address)
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <label class="co-address-card w-100" style="cursor:pointer;" onclick="document.querySelectorAll('.co-address-card').forEach(c => c.classList.remove('selected')); this.classList.add('selected');">
+                                <div class="address-name">{{ $address->name }}</div>
+                                <div class="address-details">
+                                    {{ $address->address_line1 }}, {{ $address->address_line2 }}<br>
+                                    {{ $address->emirate }}<br>
+                                    {{ $address->contact_no }}
+                                    @if(isset($address->whatsapp_no)) <br>{{ $address->whatsapp_no }} @endif
+                                    @if($address->landmark) <br>Landmark: {{ $address->landmark }} @endif
                                 </div>
-                                @endforeach
-                            </div>
-                            @endif
+                                <input class="co-radio-btn" type="radio" name="selected_address" value="{{ $address->id }}">
+                            </label>
+                        </div>
+                        @endforeach
+                    </div>
+                    @endif
 
-                            <!-- Add New Address Button -->
-                            <button type="button" id="addNewAddressBtn" class="com_btn mb-3 bg-transparent">Add New Address</button>
+                    <!-- Add New Address Button -->
+                    <button type="button" id="addNewAddressBtn" class="co-btn-outline">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        Add New Address
+                    </button>
 
-                            <!-- Address Form -->
-                            <form method="POST" id="productInquiryForm"
-                                action="">
-                                @csrf
+                    <!-- Address Form -->
+                    <form method="POST" id="productInquiryForm" action="">
+                        @csrf
 
-                                <div id="addressFormWrapper" style="display:none;">
-                                    <div class="row" style="--bs-gutter-x: 35px;">
-                                        <div class="col-lg-6">
-                                            <div class="ct_input">
-                                                <label class="sub_head">Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="name" placeholder="Enter Name"
-                                                    value="{{ old('name') }}"
-                                                    oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();"
-                                                    class="@error('name') is-invalid @enderror">
-                                                @error('name') <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <div class="ct_input">
-                                                <label class="sub_head">Contact Number <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="tel" id="checkout-contact-no" name="contact_no" placeholder="Enter contact Number"
-                                                    value="{{ old('contact_no') }}"
-                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
-                                                    class="checkout-contact-country-select @error('contact_no') is-invalid @enderror">
-                                                <input type="hidden" name="contact_country" id="checkout-contact-country" value="">
-                                                @error('contact_no') <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <div class="ct_input">
-                                                <label class="sub_head">Emirate <span
-                                                        class="text-danger">*</span></label>
-                                                @php $emirates = config('global_values.emirates'); @endphp
-                                                <select name="emirate">
-                                                    <option value="">Select Emirate</option>
-                                                    @foreach($emirates as $emirate)
-                                                        <option value="{{ $emirate }}"
-                                                            {{ old('emirate') == $emirate ? 'selected' : '' }}>
-                                                            {{ $emirate }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                                {{-- <input type="text" name="emirate" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s{2,}/g, ' ').trimStart();" placeholder="Enter Emirate"
-                                                    value="{{ old('emirate') }}"
-                                                    class="@error('emirate') is-invalid @enderror"> --}}
-                                                @error('emirate') 
-                                                    <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="ct_input">
-                                                <label class="sub_head">Whatsapp Number <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="tel" id="checkout-whatsapp-no" name="whatsapp_no"
-                                                    value="{{ old('whatsapp_no') }}"
-                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
-                                                    class="checkout-whatsapp-country-select @error('whatsapp_no') is-invalid @enderror">
-                                                <input type="hidden" name="whatsapp_country" id="checkout-whatsapp-country" value="">
-                                                @error('whatsapp_no') <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <div class="ct_input">
-                                                <label class="sub_head text-nowrap">Flat/House No., Building/Apartment <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="text" name="address_line1"
-                                                    placeholder="Enter Details" class="fw-medium" value="">
-                                                @error('address_line1') <div class="invalid-feedback">{{ $message }}
-                                                </div> @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <div class="ct_input">
-                                                <label class="sub_head">Area, Street, Sector, Town <span
-                                                        class="text-danger">*</span></label>
-                                                <input type="text" name="address_line2"
-                                                    placeholder="Enter Details" class="fw-medium" value="">
-                                                @error('address_line2') <div class="invalid-feedback">{{ $message }}
-                                                </div> @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="ct_input">
-                                                <label class="sub_head">Landmark</label>
-                                                <textarea name="landmark" placeholder="Enter Landmark" rows="1"
-                                                    class="@error('landmark') is-invalid @enderror">{{ old('landmark') }}</textarea>
-                                                @error('landmark') <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-
+                        <div id="addressFormWrapper" style="display:none;">
+                            <h3 class="co-summary-title mb-4 mt-2">Enter New Address</h3>
+                            <div class="row" style="--bs-gutter-x: 24px;">
+                                
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="co-input-group">
+                                        <label class="co-input-label">Name <span class="text-danger">*</span></label>
+                                        <input type="text" name="name" placeholder="Enter Full Name"
+                                            value="{{ old('name') }}"
+                                            oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();"
+                                            class="co-input-field @error('name') is-invalid @enderror">
+                                        @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
                                 </div>
-                            </form>
 
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="co-input-group">
+                                        <label class="co-input-label">Contact Number <span class="text-danger">*</span></label>
+                                        <input type="tel" id="checkout-contact-no" name="contact_no" placeholder="Enter contact Number"
+                                            value="{{ old('contact_no') }}"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
+                                            class="co-input-field checkout-contact-country-select @error('contact_no') is-invalid @enderror">
+                                        <input type="hidden" name="contact_country" id="checkout-contact-country" value="">
+                                        @error('contact_no') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="co-input-group">
+                                        <label class="co-input-label">Emirate <span class="text-danger">*</span></label>
+                                        @php $emirates = config('global_values.emirates'); @endphp
+                                        <select name="emirate" class="co-input-field co-input-select">
+                                            <option value="">Select Emirate</option>
+                                            @foreach($emirates as $emirate)
+                                                <option value="{{ $emirate }}" {{ old('emirate') == $emirate ? 'selected' : '' }}>
+                                                    {{ $emirate }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('emirate') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="co-input-group">
+                                        <label class="co-input-label">Whatsapp Number </label>
+                                        <input type="tel" id="checkout-whatsapp-no" name="whatsapp_no"
+                                            value="{{ old('whatsapp_no') }}"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
+                                            class="co-input-field checkout-whatsapp-country-select @error('whatsapp_no') is-invalid @enderror">
+                                        <input type="hidden" name="whatsapp_country" id="checkout-whatsapp-country" value="">
+                                        @error('whatsapp_no') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="co-input-group">
+                                        <label class="co-input-label">Flat/House No., Building <span class="text-danger">*</span></label>
+                                        <input type="text" name="address_line1" placeholder="Enter Details" class="co-input-field" value="">
+                                        @error('address_line1') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <div class="co-input-group">
+                                        <label class="co-input-label">Area, Street, Sector, Town <span class="text-danger">*</span></label>
+                                        <input type="text" name="address_line2" placeholder="Enter Details" class="co-input-field" value="">
+                                        @error('address_line2') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="co-input-group">
+                                        <label class="co-input-label">Landmark</label>
+                                        <textarea name="landmark" placeholder="Enter Landmark" rows="2"
+                                            class="co-input-field co-input-textarea @error('landmark') is-invalid @enderror">{{ old('landmark') }}</textarea>
+                                        @error('landmark') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Trust Badges & Support -->
+                <div class="co-trust-section">
+                    <div class="co-trust-item">
+                        <div class="co-trust-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                        </div>
+                        <div class="co-trust-content">
+                            <h5>Secure Checkout</h5>
+                            <p>Your payment information is encrypted</p>
+                        </div>
+                    </div>
+
+                    <!-- Support Box -->
+                    <div class="co-support-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--co-primary); margin-top: 4px; flex-shrink: 0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        <div class="co-support-box-text">
+                            <h4>Need help with your order?</h4>
+                            <p>Call or WhatsApp us at <a href="tel:971502243720" class="co-support-box-link">+971 50 224 3720</a></p>
                         </div>
                     </div>
                 </div>
                 {{-- <div class="checkout-box">
-                    <div class="ct_form">
-
+                        <div class="ct_form">
                         @if($userAddresses->count() > 0)
                             <div class="ct_input mb-3">
                                 <label class="sub_head">Select Address</label>
@@ -449,167 +312,157 @@
                                     <option value="">-- Choose Existing Address --</option>
                                     @foreach($userAddresses as $address)
                                         <option value="{{ $address->id }}">
-                {{ $address->address_line1 }}, {{ $address->address_line2 }}, {{ $address->emirate }}
-                </option>
-                @endforeach
-                <option value="new">Add New Address</option>
-                </select>
-            </div>
-            @endif
+                                        {{ $address->address_line1 }}, {{ $address->address_line2 }}, {{ $address->emirate }}
+                                        </option>
+                                        @endforeach
+                                        <option value="new">Add New Address</option>
+                                        </select>
+                                    </div>
+                                    @endif
 
-            <form method="POST" id="productInquiryForm" action="{{ route('front.store.product.inquiry') }}">
-                @csrf
+                                    <form method="POST" id="productInquiryForm" action="{{ route('front.store.product.inquiry') }}">
+                                        @csrf
 
-                <div id="addressFormWrapper" style="{{ $userAddresses->count() > 0 ? 'display:none;' : '' }}">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="ct_input">
-                                <label class="sub_head">Name <span class="text-danger">*</span></label>
-                                <input type="text" name="name" placeholder="Enter Name" value="{{ old('name') }}"
-                                    oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();"
-                                    class="@error('name') is-invalid @enderror">
-                                @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                            </div>
-                        </div>
+                                        <div id="addressFormWrapper" style="{{ $userAddresses->count() > 0 ? 'display:none;' : '' }}">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="ct_input">
+                                                        <label class="sub_head">Name <span class="text-danger">*</span></label>
+                                                        <input type="text" name="name" placeholder="Enter Name" value="{{ old('name') }}"
+                                                            oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();"
+                                                            class="@error('name') is-invalid @enderror">
+                                                        @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                                    </div>
+                                                </div>
 
-                        <div class="col-lg-4">
-                            <div class="ct_input">
-                                <label class="sub_head">Contact Number <span class="text-danger">*</span></label>
-                                <input type="tel" id="checkout-contact-no-old" name="contact_no" placeholder="Enter contact Number"
-                                    value="{{ old('contact_no') }}"
-                                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
-                                    class="checkout-contact-country-select @error('contact_no') is-invalid @enderror">
-                                <input type="hidden" name="contact_country" id="checkout-contact-country-old" value="">
-                                @error('contact_no') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                            </div>
-                        </div>
+                                                <div class="col-lg-4">
+                                                    <div class="ct_input">
+                                                        <label class="sub_head">Contact Number <span class="text-danger">*</span></label>
+                                                        <input type="tel" id="checkout-contact-no-old" name="contact_no" placeholder="Enter contact Number"
+                                                            value="{{ old('contact_no') }}"
+                                                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
+                                                            class="checkout-contact-country-select @error('contact_no') is-invalid @enderror">
+                                                        <input type="hidden" name="contact_country" id="checkout-contact-country-old" value="">
+                                                        @error('contact_no') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                                    </div>
+                                                </div>
 
-                        <div class="col-lg-4">
-                            <div class="ct_input">
-                                <label class="sub_head">Emirate <span class="text-danger">*</span></label>
-                                <input type="text" name="emirate" placeholder="Enter Emirate"
-                                    value="{{ old('emirate') }}" class="@error('emirate') is-invalid @enderror">
-                                @error('emirate') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                            </div>
-                        </div>
+                                                <div class="col-lg-4">
+                                                    <div class="ct_input">
+                                                        <label class="sub_head">Emirate <span class="text-danger">*</span></label>
+                                                        <input type="text" name="emirate" placeholder="Enter Emirate"
+                                                            value="{{ old('emirate') }}" class="@error('emirate') is-invalid @enderror">
+                                                        @error('emirate') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                                    </div>
+                                                </div>
 
-                        <div class="col-lg-12">
-                            <div class="ct_input">
-                                <label class="sub_head">Address Line 1 <span class="text-danger">*</span></label>
-                                <input type="text" name="address_line1" placeholder="Enter Address Line 1"
-                                    class="fw-medium" value="">
-                                @error('address_line1') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                            </div>
-                        </div>
+                                                <div class="col-lg-12">
+                                                    <div class="ct_input">
+                                                        <label class="sub_head">Address Line 1 <span class="text-danger">*</span></label>
+                                                        <input type="text" name="address_line1" placeholder="Enter Address Line 1"
+                                                            class="fw-medium" value="">
+                                                        @error('address_line1') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                                    </div>
+                                                </div>
 
-                        <div class="col-lg-12">
-                            <div class="ct_input">
-                                <label class="sub_head">Address Line 2 <span class="text-danger">*</span></label>
-                                <input type="text" name="address_line2" placeholder="Enter Address Line 2"
-                                    class="fw-medium" value="">
-                                @error('address_line2') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                            </div>
-                        </div>
+                                                <div class="col-lg-12">
+                                                    <div class="ct_input">
+                                                        <label class="sub_head">Address Line 2 <span class="text-danger">*</span></label>
+                                                        <input type="text" name="address_line2" placeholder="Enter Address Line 2"
+                                                            class="fw-medium" value="">
+                                                        @error('address_line2') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                                    </div>
+                                                </div>
 
-                        <div class="col-lg-12">
-                            <div class="ct_input">
-                                <label class="sub_head">Landmark</label>
-                                <textarea name="landmark" placeholder="Enter Landmark" rows="1"
-                                    class="@error('landmark') is-invalid @enderror">{{ old('landmark') }}</textarea>
-                                @error('landmark') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-
-        </div>
-    </div> --}}
+                                                <div class="col-lg-12">
+                                                    <div class="ct_input">
+                                                        <label class="sub_head">Landmark</label>
+                                                        <textarea name="landmark" placeholder="Enter Landmark" rows="1"
+                                                            class="@error('landmark') is-invalid @enderror">{{ old('landmark') }}</textarea>
+                                                        @error('landmark') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                    </div> --}}
     </div>
     <!-- RIGHT : Price Summary + Payment -->
     <div class="col-lg-4 col-12">
-        <div class="checkout-box summary-wrapper">
-            <h5 class="sub_head mb-4">Payment Summary</h5>
+        <div class="co-summary-wrapper">
+            <h3 class="co-summary-title">Order Summary</h3>
 
-            <div class="summary-details">
-                <div class="summary-row">
-                    <span class="label">Subtotal</span>
-                    <span class="value"><span class="d-lg-none">AED</span> <br />{{ number_format($subTotal, 2) }}
-                        AED</span>
+            <!-- Compact Items List -->
+            <div class="co-compact-items">
+                @foreach($cartItems as $item)
+                <div class="co-compact-item">
+                    <div class="co-compact-img-wrap">
+                        <div class="co-compact-badge">{{ $item->quantity }}</div>
+                        <img src="{{ isset($item->product->list_page_img) ? asset('public/images/admin/product_list/'.$item->product->list_page_img) : '' }}" alt="{{ $item->product->product_name ?? 'Product' }}">
+                    </div>
+                    <div class="co-compact-info">
+                        <h5>{{ $item->product->product_name ?? 'Product' }}</h5>
+                    </div>
+                    <div class="co-compact-price">
+                        {{ number_format($item->price * $item->quantity, 2) }} AED
+                    </div>
                 </div>
-            </div>
-            {{-- <div class="summary-row">
-                <span class="label">Discount (FLAT 15% OFF)</span>
-                <span class="value text-muted" id="discounted-values"></span>
-            </div> --}}
-
-            <hr class="summary-divider">
-
-            <div class="summary-row total-row">
-                <span class="sub_head">You Pay</span>
-                <span class="sub_head" id="you-pay">{{ number_format($subTotal, 2) }} AED</span>
+                @endforeach
             </div>
 
-            <div class="payment_cont">
-                <h5 class="sub_head mb-4">Payment Options</h5>
+            <label class="co-gift-wrapper">
+                <div class="co-gift-wrapper-left">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                        <rect x="2" y="7" width="20" height="5"></rect>
+                        <line x1="12" y1="22" x2="12" y2="7"></line>
+                        <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                        <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                    </svg>
+                    <p class="co-gift-text">Gift wrapper added with this Product</p>
+                </div>
+                <input type="checkbox" name="gift_wrapper" class="co-gift-checkbox" checked>
+            </label>
 
-                {{-- <div class="faq_cont">
-                            <div class="faq_cont_acco">
-                                <h6 class="according_head sub_head" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse-1-1" aria-expanded="false" aria-controls="collapse-1-1">
-                                    Credit Card
-                                </h6>
+            <div class="co-summary-item">
+                <span class="co-summary-label">Subtotal</span>
+                <span class="co-summary-val">{{ number_format($subTotal, 2) }} AED</span>
+            </div>
+            <div class="co-summary-item">
+                <span class="co-summary-label">Delivery</span>
+                <span class="co-delivery-val">Calculated based on Qty</span>
+            </div>
 
-                                <div id="collapse-1-1" class="accordion-collapse collapse"
-                                    data-bs-parent="#accordion-1">
-                                    <div class="accordion-body"> --}}
+            <hr class="co-summary-divider">
+            <hr class="co-summary-divider-2">
+
+            <div class="co-total-row">
+                <span class="co-total-label">Total to Pay</span>
+                <span class="co-total-val" id="you-pay">{{ number_format($subTotal, 2) }} AED</span>
+            </div>
+
+            <div class="payment-methods-card">
+                <h4 class="payment-card-title">Secure Card Payment</h4>
                 <div id="card-element"></div>
                 <div id="error-message"></div>
-                {{-- </div>
-                                </div>
-                            </div> --}}
-
-                {{-- <div class="faq_cont_acco">
-                                <h6 class="according_head sub_head" data-bs-toggle="collapse"
-                                    data-bs-target="#collapse-1-2" aria-expanded="false" aria-controls="collapse-1-2">
-                                    option 2
-                                </h6>
-
-                                <div id="collapse-1-2" class="accordion-collapse collapse"
-                                    data-bs-parent="#accordion-2">
-                                    <div class="accordion-body">
-                                        <p>
-                                            Shipping usually takes 3–5 business days depending
-                                            on your location.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div> --}}
-
             </div>
 
-             <button type="button" id="payBtn" class="com_btn w-100 bg-transparent">
-                <span class="btn-text">Pay Securely</span>
+            <button type="button" id="payBtn" class="co-btn-primary">
+                <span class="btn-text">Place Order Securely</span>
                 <span class="btn-loader" style="display:none;">Processing...</span>
             </button>
 
-        {{-- <button type="submit" id="addressValidateBtn" class="com_btn w-100 bg-transparent">
-                            Pay Securely
-                        </button> --}}
+            <!-- <div class="trust-badges">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <span>SSL Encrypted &amp; Secure Payment</span>
+            </div> -->
 
-
-        <!-- <a href="{{ route('front.home') }}" class="com_btn text-center mt-3 w-100">
-                        Continue Shopping
-                    </a> -->
-        <a href="{{ route('front.home') }}" class="btn-continue">
-            CONTINUE SHOPPING
-        </a>
+            <a href="{{ route('front.home') }}" class="co-return-store">Return to Store</a>
         </div>
-
-        <!-- Stripe Placeholder -->
-
-       
-
     </div>
     </div>
     </div>
@@ -892,7 +745,7 @@ $(document).ready(async function() {
                 maxlength: 15
             },
             whatsapp_no: {
-                required: true,
+                //required: true,
                 digits: true,
                 minlength: 7,
                 maxlength: 15
@@ -925,7 +778,7 @@ $(document).ready(async function() {
                 maxlength: "Contact number cannot exceed 15 digits"
             },
             whatsapp_no: {
-                required: "Please enter your Whatsapp number",
+                //required: "Please enter your Whatsapp number",
                 digits: "Only numeric values are allowed",
                 minlength: "Whatsapp number must be at least 7 digits",
                 maxlength: "Whatsapp number cannot exceed 15 digits"
