@@ -67,7 +67,7 @@
             </p>
             <h2 class="title_60 mb-4">The Raksha Bandhan Gifts</h2>
             <p class="mb-4">Make Raksha Bandhan Memorable in Dubai with Curated HNOWW Rakhi Gifts.</p>
-            <!-- <a href="#" class="com_btn" data-bs-toggle="modal" data-bs-target="#requestCorporateProduct">ENQUIRE ABOUT RAKHI GIFTS</a> -->
+            <!--<a href="#" class="com_btn" data-bs-toggle="modal" data-bs-target="#requestCorporateProduct">ENQUIRE ABOUT RAKHI GIFTS</a>-->
         </div>
 
         <!-- 2 Items -->
