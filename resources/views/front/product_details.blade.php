@@ -190,7 +190,7 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="m-0" style="font-weight: 500; font-size: 16px; color: #0e2233; line-height: 1.4;">Want to add Gift Wrap / Personalized Card with this Product?</p>
+                    <p class="m-0" style="font-weight: 500; font-size: 16px; color: #0e2233; line-height: 1.4;">Want to add Gift Wrap with this Product?</p>
                     <p class="m-0 mt-1" style="font-size: 13px; color: #666;">You can add these options during checkout.</p>
                 </div>
             </div> -->

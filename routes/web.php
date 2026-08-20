@@ -107,7 +107,8 @@ Route::name('front.')->group(function () {
 
     Route::get('/luxury-corporate-gifts/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
     Route::get('/corporate-diwali-collection-2026', [FrontController::class, 'getCorporateDiwaliCollection'])->name('corporate.diwali.collection');
-    Route::get('/raksha-bandhan-collection-2026', [FrontController::class, 'getRakshaBandhanCollection'])->name('raksha.bandhan.collection');
+    Route::get('/festives/rakshabandhan', [FrontController::class, 'getRakshaBandhanCollection'])->name('raksha.bandhan.collection');
+    Route::post('/store-festival-inquiry', [FrontController::class, 'storeFestivalInquiry'])->name('store.festival.inquiry');
     Route::get('/get-products-by-category/{category_id}', [FrontController::class, 'getProductsByCategory'])->name('get.products.by.category');
     Route::get('/wedding-vault', [FrontController::class, 'getWeddingVault'])->name('wedding.vault');
     Route::post('/wedding-vault/send-email', [FrontController::class, 'sendUnlockWeddingEmail'])->name('wedding-vault.send-email');

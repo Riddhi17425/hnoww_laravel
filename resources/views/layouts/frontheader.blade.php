@@ -333,7 +333,7 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
                     </li>
 
                     <li class="has-dropdown">
-                        <a href="#" data-text="Festival">
+                        <a href="#" data-text="Festives">
                             <span>Festives</span>
                             <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
                                 <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
