@@ -67,7 +67,7 @@
             </p>
             <h2 class="title_60 mb-4">The Raksha Bandhan Gifts</h2>
             <p class="mb-4">Make Raksha Bandhan Memorable in Dubai with Curated HNOWW Rakhi Gifts.</p>
-            <a href="#" class="com_btn" data-bs-toggle="modal" data-bs-target="#requestCorporateProduct">ENQUIRE ABOUT RAKHI GIFTS</a>
+            <!-- <a href="#" class="com_btn" data-bs-toggle="modal" data-bs-target="#requestCorporateProduct">ENQUIRE ABOUT RAKHI GIFTS</a> -->
         </div>
 
         <!-- 2 Items -->
@@ -374,6 +374,77 @@ $(document).ready(function () {
         $('#rakshaBandhanProductName').val($(event.relatedTarget).data('product-name'));
     });
 });
+
+$("#rakshaBandhanInquiryForm").validate({
+        rules: {
+            name: {
+                required: true,
+                minlength: 2,
+                maxlength: 50,
+                lettersonly: true
+            },
+            email: {
+                required: true,
+                email: true,
+                noSpamEmail: true,
+                //uniqueEmail: true
+                //uniqueEmail: "ceremonial_inquiries"
+            },
+            contact_no: {
+                required: true,
+                validPhone: true,
+                number:true,
+            },
+            message: {
+                maxlength: 300
+            },
+        },
+        messages: {
+            name: {
+                required: "Please enter your name",
+                minlength: "Name must be at least 2 characters",
+                maxlength: "Name cannot be longer than 50 characters",
+                lettersonly: "Only letters and spaces are allowed"
+            },
+            email: {
+                required: "Please enter your email",
+                email: "Please enter a valid email address",
+                noSpamEmail: "This email address is not allowed",
+            },
+            contact_no: {
+                required: "Please enter your Contact number"
+            },
+            comment: {
+                maxlength: "Message cannot be longer than 300 characters"
+            },
+        },
+        errorElement: 'div',
+        errorPlacement: function(error, element) {
+            // error.addClass('invalid-feedback');
+            // if (element.attr("name") === "g-recaptcha-response") {
+            //     error.insertAfter(".g-recaptcha"); // show error below CAPTCHA
+            // } else {
+                error.insertAfter(element);
+            //}
+        },
+        highlight: function(element) {
+            $(element).addClass('is-invalid').removeClass('is-valid');
+        },
+        unhighlight: function(element) {
+            $(element).addClass('is-valid').removeClass('is-invalid');
+        },
+        submitHandler: function(form) {
+            if (!cmFormSubmitted) {
+                cmFormSubmitted = true;
+                const btn = $(form).find('button[type="submit"]');
+                if (btn.length) {
+                    btn.prop('disabled', true).text('Submitting...');
+                }
+                form.submit();
+            }
+        }
+    });
+
 </script>
 @endpush
 
