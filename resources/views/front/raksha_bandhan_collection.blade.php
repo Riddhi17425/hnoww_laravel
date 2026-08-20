@@ -76,7 +76,7 @@
                 <div class="desire_box">
                     <div class="ceremonial_box mb-3">
                         <img class="w-100" src="{{asset('public/images/front/Raksha-Bandhan/The-Memory-Box.webp')}}" alt="The Memory Box">
-                        <div class="inquire_bespoke">
+                        <!-- <div class="inquire_bespoke">
                             <a href="javascript:void(0);" class="inquire_link" data-bs-toggle="modal" data-bs-target="#requestCorporateProduct">
                                 INQUIRE FOR <br> BESPOKE <br>
                                 <span>
@@ -85,15 +85,23 @@
                                     </svg>
                                 </span>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="desire_box_bot_child">
                         <div>
                             <h3 class="sub_head mb-1">The Memory Box</h3>
+                              <p class="fw-semibold text-muted mb-3"><strong></strong>AED 550</p>
                             <p class="text-muted mb-3">A box for the memories</p>
-                            <p class="mb-0 text-muted">An onyx base beneath an engraved lotus-pond lid, made to hold the letters and small keepsakes siblings collect over years.</p>
+                          
+                            </div>
+                            <div>
+                                <a href="javascript:void(0);" class="com_btn" data-bs-toggle="modal" data-bs-target="#rakshaBandhanInquiry" data-product-name="The Memory Box">Inquire Now</a>
+                            </div>
+                            </div>
+                            <div>
+                            <!-- <p class="mb-0 text-muted">An onyx base beneath an engraved lotus-pond lid, made to hold the letters and small keepsakes siblings collect over years.</p> -->
                         </div>
-                    </div>
+                    
                 </div>
             </div>
 
@@ -101,7 +109,7 @@
                 <div class="desire_box">
                     <div class="ceremonial_box mb-3">
                         <img class="w-100" src="{{asset('public/images/front/Raksha-Bandhan/The-Luxury-Candle.webp')}}" alt="The Luxury Candle">
-                        <div class="inquire_bespoke">
+                        <!-- <div class="inquire_bespoke">
                             <a href="javascript:void(0);" class="inquire_link" data-bs-toggle="modal" data-bs-target="#requestCorporateProduct">
                                 INQUIRE FOR <br> BESPOKE <br>
                                 <span>
@@ -110,15 +118,23 @@
                                     </svg>
                                 </span>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="desire_box_bot_child">
                         <div>
                             <h3 class="sub_head mb-1">The Luxury Candle</h3>
+                             <p class="fw-semibold text-muted mb-3"><strong></strong>AED 120</p>
                             <p class="text-muted mb-3">A candle for the warmth</p>
-                            <p class="mb-0 text-muted">Becomes its own small ritual, one that brings the warmth of Raksha Bandhan back into the room long after the rakhi has come off.</p>
-                        </div>
-                    </div>
+                            
+                            </div>
+                            <div>
+                                <a href="javascript:void(0);" class="com_btn" data-bs-toggle="modal" data-bs-target="#rakshaBandhanInquiry" data-product-name="The Luxury Candle">Inquire Now</a>
+                            </div>
+                            
+                             </div>
+                            <!-- <p class="mb-0 text-muted">Becomes its own small ritual, one that brings the warmth of Raksha Bandhan back into the room long after the rakhi has come off.</p> -->
+                       
+                    
                 </div>
             </div>
 
@@ -126,7 +142,7 @@
                 <div class="desire_box">
                     <div class="ceremonial_box mb-3">
                         <img class="w-100" src="{{asset('public/images/front/Raksha-Bandhan/The-Lotus-Frame.webp')}}" alt="The Lotus Frame">
-                        <div class="inquire_bespoke">
+                        <!-- <div class="inquire_bespoke">
                             <a href="javascript:void(0);" class="inquire_link" data-bs-toggle="modal" data-bs-target="#requestCorporateProduct">
                                 INQUIRE FOR <br> BESPOKE <br>
                                 <span>
@@ -135,15 +151,22 @@
                                     </svg>
                                 </span>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="desire_box_bot_child">
                         <div>
                             <h3 class="sub_head mb-1">The Lotus Frame</h3>
+                            <p class="fw-semibold text-muted mb-3"><strong></strong>AED 450
+</p>
                             <p class="text-muted mb-3">A frame for the memories</p>
-                            <p class="mb-0 text-muted">A beautifully crafted frame to cherish your most treasured moments together.</p>
-                        </div>
-                    </div>
+                             
+                             </div>
+                            <div>
+                                <a href="javascript:void(0);" class="com_btn" data-bs-toggle="modal" data-bs-target="#rakshaBandhanInquiry" data-product-name="The Lotus Frame">Inquire Now</a>
+                            </div>
+                           </div>
+                            <!-- <p class="mb-0 text-muted">A beautifully crafted frame to cherish your most treasured moments together.</p> -->
+                    
                 </div>
             </div>
 
@@ -151,7 +174,7 @@
                 <div class="desire_box">
                     <div class="ceremonial_box mb-3">
                         <img class="w-100" src="{{asset('public/images/front/Raksha-Bandhan/The-Lotus-Plate.webp')}}" alt="The Lotus Plate">
-                        <div class="inquire_bespoke">
+                        <!-- <div class="inquire_bespoke">
                             <a href="javascript:void(0);" class="inquire_link" data-bs-toggle="modal" data-bs-target="#requestCorporateProduct">
                                 INQUIRE FOR <br> BESPOKE <br>
                                 <span>
@@ -160,15 +183,22 @@
                                     </svg>
                                 </span>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="desire_box_bot_child">
                         <div>
                             <h3 class="sub_head mb-1">The Lotus Plate</h3>
+                                <p class="fw-semibold text-muted mb-3"><strong></strong>AED 295</p>
                             <p class="text-muted mb-3">A plate for the ceremony</p>
-                            <p class="mb-0 text-muted">A delicate and thoughtful addition to honor the traditions of Raksha Bandhan.</p>
+                         
+                            </div>
+                            <div>
+                                <a href="javascript:void(0);" class="com_btn" data-bs-toggle="modal" data-bs-target="#rakshaBandhanInquiry" data-product-name="The Lotus Plate">Inquire Now</a>
+                            </div>
                         </div>
-                    </div>
+                            <!-- <p class="mb-0 text-muted">A delicate and thoughtful addition to honor the traditions of Raksha Bandhan.</p> -->
+                        
+                    
                 </div>
             </div>
         </div>
@@ -278,6 +308,74 @@
     </div>
 </section>
 
+
+<!-- Product Inquiry Modal -->
+<div class="modal fade audio_modal" id="rakshaBandhanInquiry" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="rakshaBandhanInquiryLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="audio-card d-grid">
+                    <div class="modal-header px-0 border-0">
+                        <h4 class="title_40 mb-0" id="rakshaBandhanInquiryLabel">Product Inquiry</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <form method="POST" action="{{ route('front.store.festival.inquiry') }}" id="rakshaBandhanInquiryForm" class="ct_form">
+                        @csrf
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Name</label>
+                                    <input type="text" name="name" placeholder="Enter your Name" value="{{ old('name') }}" required
+                                        oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '').replace(/\s+/g, ' ').trimStart();">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Inquire For Product</label>
+                                    <input type="text" id="rakshaBandhanProductName" name="product_name" value="" readonly required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Email</label>
+                                    <input type="email" name="email" placeholder="Enter your Email Address" value="{{ old('email') }}" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="ct_input">
+                                    <label class="sub_head">Contact Number</label>
+                                    <input type="text" name="contact_no" placeholder="Enter your Contact Number" value="{{ old('contact_no') }}"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="ct_input">
+                                    <label class="sub_head">Message</label>
+                                    <textarea name="message" placeholder="Enter your Message" rows="2">{{ old('message') }}</textarea>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 text-center">
+                                <button type="button" class="com_btn bg-transparent" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="com_btn bg-transparent ms-2">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@push('script')
+<script>
+$(document).ready(function () {
+    $('#rakshaBandhanInquiry').on('show.bs.modal', function (event) {
+        $('#rakshaBandhanProductName').val($(event.relatedTarget).data('product-name'));
+    });
+});
+</script>
+@endpush
 
 <!-- Modals -->
 @include('front.corporate_request_modal')
