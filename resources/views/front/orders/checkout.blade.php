@@ -11,168 +11,17 @@
     color: #0e2233;
 }
 
+.theme-green .language-select svg polyline,
+.theme-green .language-select svg path {
+    stroke: #0e2233;
+}
+
 @media (max-width:767px) {
     .sticky-header {
         /*background: #EDEAE4;*/
     }
 
 }
-
-@media (max-width: 768px) {
-
-    /* Table structure ko block mein badalna */
-    .shopping-summery,
-    .shopping-summery tbody,
-    .checkout-table-row,
-    .checkout-table-row td {
-        display: block !important;
-        width: 100% !important;
-    }
-
-    .summary-wrapper {
-        padding: 0px;
-    }
-
-    /* Header hide karna */
-    .shopping-summery thead {
-        display: none !important;
-    }
-
-    /* Har row ko ek card banana */
-    .checkout-table-row {
-        position: relative !important;
-        padding: 15px 15px 15px 115px !important;
-        /* Left space for image */
-        margin-bottom: 20px !important;
-        /* border: 1px solid #f0f0f0 !important;
-        border-radius: 12px !important;
-        background: #fff !important;
-        min-height: 125px !important;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.03); */
-    }
-
-    /* 1. Image (Left Side) */
-    .checkout-table-row td:first-child {
-        position: absolute !important;
-        top: 15px !important;
-        left: 15px !important;
-        width: 85px !important;
-        padding: 0 !important;
-        border: none !important;
-    }
-
-    .checkout-table-row td:first-child img {
-        width: 85px !important;
-        height: 85px !important;
-        object-fit: cover;
-        /* border-radius: 8px; */
-    }
-
-    /* 2. Product Name (Top Middle) */
-    .checkout-table-row td:nth-child(2) {
-        padding: 0 35px 5px 0 !important;
-        /* Space for trash icon */
-        text-align: left !important;
-        border: none !important;
-        font-weight: 700;
-        font-size: 16px;
-        color: #1a1a1a;
-        font-family: var(--heading-font);
-    }
-
-    /* 3. Unit Price (Name ke niche) */
-    .checkout-table-row td:nth-child(4) {
-        /* Price column */
-        padding: 0 !important;
-        text-align: left !important;
-        border: none !important;
-        color: #777;
-        font-size: 14px;
-        margin-bottom: 8px;
-    }
-
-    /* 4. Quantity Pill (Bottom Left) */
-    .checkout-table-row td:nth-child(3) {
-        /* Quantity column */
-        padding: 5px 0 0 0 !important;
-        border: none !important;
-        display: flex;
-        justify-content: flex-start;
-    }
-
-    /* Quantity Pill Shape */
-    .increment_decrement {
-        display: inline-flex;
-        align-items: center;
-        border: 1px solid #eee;
-        border-radius: 30px;
-        /* Pill Shape */
-        padding: 3px 12px;
-        background: #fdfdfd;
-    }
-
-    /* 5. Total Price (Bottom Right) */
-    .checkout-table-row td:nth-child(5) {
-        /* Total column */
-        position: absolute !important;
-        bottom: 15px !important;
-        right: 15px !important;
-        padding: 0 !important;
-        border: none !important;
-        width: auto !important;
-    }
-
-    .checkout-table-row td:nth-child(5):before {
-        content: "AED ";
-        /* Currency prefix agar chahiye */
-        font-size: 12px;
-    }
-
-    .checkout-table-row td:nth-child(5) {
-        font-size: 18px;
-        font-weight: 700;
-        color: #b5a48b;
-        /* Gold shade */
-    }
-
-    /* 6. Trash Icon (Top Right) - Agar aapne add kiya hai */
-    .checkout-table-row td:last-child {
-        position: static !important;
-        top: 10px !important;
-        right: 10px !important;
-        padding: 0 !important;
-        border: none !important;
-    }
-
-    /* Labels hide karna */
-    .checkout-table-row td:before {
-        display: none !important;
-    }
-
-}
-
-/* Keep intl-tel-input aligned with checkout fields */
-#addressFormWrapper .ct_input .iti {
-    width: 100%;
-    margin-bottom: 0;
-    /* margin-top: 24px; */
-}
-
-#addressFormWrapper .ct_input .iti input {
-    margin-top: 24px !important;
-}
-
-#addressFormWrapper .ct_input .iti__flag-container {
-    top: 24px;
-    padding-bottom: 16px;
-}
-
-
-#addressFormWrapper .ct_input .iti__selected-flag {
-    background-color: transparent !important;
-    height: auto !important;
-}
-
 
 </style>
 
@@ -294,7 +143,7 @@
             <h2 class="title_60">Secure Checkout</h2>
         </div>
 
-        <div class="co-progress-wrapper">
+        <div class="co-progress-wrapper d-none d-md-flex">
             <div class="co-progress-step">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
                 Cart
@@ -352,7 +201,7 @@
                             <h3 class="co-summary-title mb-4 mt-2">Enter New Address</h3>
                             <div class="row" style="--bs-gutter-x: 24px;">
                                 
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 col-md-6 col-12">
                                     <div class="co-input-group">
                                         <label class="co-input-label">Name <span class="text-danger">*</span></label>
                                         <input type="text" name="name" placeholder="Enter Full Name"
@@ -363,7 +212,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 col-md-6 col-12">
                                     <div class="co-input-group">
                                         <label class="co-input-label">Contact Number <span class="text-danger">*</span></label>
                                         <input type="tel" id="checkout-contact-no" name="contact_no" placeholder="Enter contact Number"
@@ -375,7 +224,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 col-md-6 col-12">
                                     <div class="co-input-group">
                                         <label class="co-input-label">Emirate <span class="text-danger">*</span></label>
                                         @php $emirates = config('global_values.emirates'); @endphp
@@ -391,7 +240,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 col-md-6 col-12">
                                     <div class="co-input-group">
                                         <label class="co-input-label">Whatsapp Number </label>
                                         <input type="tel" id="checkout-whatsapp-no" name="whatsapp_no"
@@ -403,7 +252,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 col-md-6 col-12">
                                     <div class="co-input-group">
                                         <label class="co-input-label">Flat/House No., Building <span class="text-danger">*</span></label>
                                         <input type="text" name="address_line1" placeholder="Enter Details" class="co-input-field" value="">
@@ -411,7 +260,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 col-md-6 col-12">
                                     <div class="co-input-group">
                                         <label class="co-input-label">Area, Street, Sector, Town <span class="text-danger">*</span></label>
                                         <input type="text" name="address_line2" placeholder="Enter Details" class="co-input-field" value="">
@@ -433,17 +282,8 @@
                     </form>
                 </div>
 
-                <!-- Trust Badges -->
+                <!-- Trust Badges & Support -->
                 <div class="co-trust-section">
-                    <div class="co-trust-item">
-                        <div class="co-trust-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
-                        </div>
-                        <div class="co-trust-content">
-                            <h5>Fast & Reliable Delivery</h5>
-                            <p>Orders are dispatched within 24 hours</p>
-                        </div>
-                    </div>
                     <div class="co-trust-item">
                         <div class="co-trust-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
@@ -453,14 +293,14 @@
                             <p>Your payment information is encrypted</p>
                         </div>
                     </div>
-                </div>
 
-                <!-- Support Box -->
-                <div class="co-support-box">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                    <div class="co-support-box-text">
-                        <h4>Need help with your order?</h4>
-                        <p>Call or WhatsApp us at <a href="#" class="co-support-box-link">+971-XXXXXXX</a></p>
+                    <!-- Support Box -->
+                    <div class="co-support-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--co-primary); margin-top: 4px; flex-shrink: 0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        <div class="co-support-box-text">
+                            <h4>Need help with your order?</h4>
+                            <p>Call or WhatsApp us at <a href="tel:971502243720" class="co-support-box-link" target="_blank">+971 50 224 3720</a></p>
+                        </div>
                     </div>
                 </div>
                 {{-- <div class="checkout-box">
@@ -552,6 +392,24 @@
     <div class="col-lg-4 col-12">
         <div class="co-summary-wrapper">
             <h3 class="co-summary-title">Order Summary</h3>
+
+            <!-- Compact Items List -->
+            <div class="co-compact-items">
+                @foreach($cartItems as $item)
+                <div class="co-compact-item">
+                    <div class="co-compact-img-wrap">
+                        <div class="co-compact-badge">{{ $item->quantity }}</div>
+                        <img src="{{ isset($item->product->list_page_img) ? asset('public/images/admin/product_list/'.$item->product->list_page_img) : '' }}" alt="{{ $item->product->product_name ?? 'Product' }}">
+                    </div>
+                    <div class="co-compact-info">
+                        <h5>{{ $item->product->product_name ?? 'Product' }}</h5>
+                    </div>
+                    <div class="co-compact-price">
+                        {{ number_format($item->price * $item->quantity, 2) }} AED
+                    </div>
+                </div>
+                @endforeach
+            </div>
 
             <label class="co-gift-wrapper">
                 <div class="co-gift-wrapper-left">

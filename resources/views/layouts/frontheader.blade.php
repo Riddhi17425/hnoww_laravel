@@ -340,9 +340,9 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
                             </svg>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Rakshabandhan</a></li>
-                            <li><a href="#">Diwali Corporate</a></li>
-                            <li><a href="#">Diwali Gifting</a></li>
+                            <li><a href="">Rakshabandhan</a></li>
+                            <!-- <li><a href="#">Diwali Corporate</a></li>
+                            <li><a href="#">Diwali Gifting</a></li> -->
                         </ul>
                     </li>
 
