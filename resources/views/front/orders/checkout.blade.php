@@ -299,7 +299,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--co-primary); margin-top: 4px; flex-shrink: 0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                         <div class="co-support-box-text">
                             <h4>Need help with your order?</h4>
-                            <p>Call or WhatsApp us at <a href="tel:971502243720" class="co-support-box-link" target="_blank">+971 50 224 3720</a></p>
+                            <p>Call or WhatsApp us at <a href="tel:971502243720" class="co-support-box-link">+971 50 224 3720</a></p>
                         </div>
                     </div>
                 </div>
@@ -453,13 +453,13 @@
                 <span class="btn-loader" style="display:none;">Processing...</span>
             </button>
 
-            <div class="trust-badges">
+            <!-- <div class="trust-badges">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                     <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                 </svg>
                 <span>SSL Encrypted &amp; Secure Payment</span>
-            </div>
+            </div> -->
 
             <a href="{{ route('front.home') }}" class="co-return-store">Return to Store</a>
         </div>

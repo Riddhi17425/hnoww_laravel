@@ -66,6 +66,7 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap')
 
 //FRONT ROUTE
 Route::name('front.')->group(function () {
+    Route::get('/collections/raksha-bandhan-gifts-dubai', [FrontController::class, 'getRakshaBandhanCollection'])->name('raksha.bandhan.collection');
     Route::get('/', [FrontController::class, 'index'])->name('home');
     Route::get('stripe', [FrontController::class, 'getStripe']);                             // Temporary
     Route::post('stripe-post', [FrontController::class, 'stripePost'])->name('stripe.post'); // Temporary
@@ -107,7 +108,7 @@ Route::name('front.')->group(function () {
 
     Route::get('/luxury-corporate-gifts/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
     Route::get('/corporate-diwali-collection-2026', [FrontController::class, 'getCorporateDiwaliCollection'])->name('corporate.diwali.collection');
-    Route::get('/collections/raksha-bandhan-gifts-dubai', [FrontController::class, 'getRakshaBandhanCollection'])->name('raksha.bandhan.collection');
+    
     Route::post('/store-festival-inquiry', [FrontController::class, 'storeFestivalInquiry'])->name('store.festival.inquiry');
     Route::get('/get-products-by-category/{category_id}', [FrontController::class, 'getProductsByCategory'])->name('get.products.by.category');
     Route::get('/wedding-vault', [FrontController::class, 'getWeddingVault'])->name('wedding.vault');
