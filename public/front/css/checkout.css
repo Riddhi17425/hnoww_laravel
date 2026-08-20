@@ -348,11 +348,7 @@
         justify-content: center;
     }
 
-    .co-support-box {
-        flex-direction: column;
-        text-align: center;
-        padding: 16px;
-    }
+
     
     .co-total-val {
         font-size: 20px;
@@ -670,13 +666,14 @@
 
 /* --- SUPPORT BOX --- */
 .co-support-box {
-    margin-top: 24px;
+    flex: 1;
+    min-width: 200px;
     background: #FAFAFA;
     border: 1px dashed var(--co-border);
     border-radius: 8px;
-    padding: 20px;
+    padding: 16px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 16px;
 }
 .co-support-box svg {
@@ -702,6 +699,7 @@
     font-weight: 600;
     color: var(--co-primary);
     text-decoration: underline;
+    white-space: nowrap;
 }
 
 @media (max-width: 768px) {
