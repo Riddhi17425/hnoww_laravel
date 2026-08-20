@@ -108,7 +108,7 @@ Route::name('front.')->group(function () {
     Route::get('/bespoke-gifts-dubai', [FrontController::class, 'getBespokeCommission'])->name('bespoke.commission');
     Route::get('/privacy', [FrontController::class, 'getprivacy'])->name('privacy');
 
-    Route::get('/luxury-corporate-gifts/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
+    Route::get('/corporate-gifts-dubai/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
     Route::get('/corporate-diwali-collection-2026', [FrontController::class, 'getCorporateDiwaliCollection'])->name('corporate.diwali.collection');
     
     Route::post('/store-festival-inquiry', [FrontController::class, 'storeFestivalInquiry'])->name('store.festival.inquiry');
