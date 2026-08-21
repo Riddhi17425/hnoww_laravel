@@ -75,6 +75,7 @@ Route::name('front.')->group(function () {
     Route::get('collections', [FrontController::class, 'collections'])->name('collections');
     Route::get('collections/{category_slug}/{from?}', [FrontController::class, 'getList'])->name('list');
     Route::get('/list/{category_slug}/{from?}', [FrontController::class, 'listLegacyRedirect'])->name('list.legacy');
+    Route::get('order-details/{id}', [FrontController::class, 'getOrderDetails'])->name('order.details');
     Route::get('product-details/{product_slug}', [FrontController::class, 'getProductDetails'])->name('product.details');
     Route::post('store-product-inquiry', [FrontController::class, 'storeProductInquiry'])->name('store.product.inquiry');
     // Route::post('/check-email-unique', [FrontController::class, 'checkEmailUnique'])
