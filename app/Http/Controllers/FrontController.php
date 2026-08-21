@@ -16,11 +16,13 @@ use App\Models\GiftBlessing;
 use App\Models\GiftShop;
 use App\Models\Journal;
 use App\Models\Newsletter;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductInquiry;
 use App\Models\RequestCatalogue;
 use App\Models\SharedDetail;
 use App\Models\User;
+use App\Models\UserAddress;
 use App\Models\WeddingCatalogueRequest;
 use App\Models\WhatsappGiftBlessing;
 use App\Services\ElevenLabsTextToSpeechService;
@@ -2161,7 +2163,13 @@ class FrontController extends Controller
     public function profile()
     {
         $user = User::where('id', auth()->id())->first();
-        return view('front.profile', compact('user'));
+        $orders = Order::where('user_id', auth()->id())
+            ->with('orderProducts')
+            ->latest()
+            ->get();
+        $addresses = UserAddress::where('user_id', auth()->id())->latest()->get();
+
+        return view('front.profile', compact('user', 'orders', 'addresses'));
     }
 
     public function getEditions()
