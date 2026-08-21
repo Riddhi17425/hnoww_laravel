@@ -163,6 +163,10 @@ Route::name('front.')->group(function () {
 
     Route::middleware(['auth'])->group(function () {
         Route::get('/profile', [FrontController::class, 'profile'])->name('profile');
+        Route::post('/profile/update', [AuthController::class, 'updateProfile'])->name('profile.update');
+        Route::post('/profile/password', [AuthController::class, 'changePassword'])->name('profile.password');
+        Route::post('/profile/address/{addressId?}', [AuthController::class, 'saveAddress'])->name('profile.address.save');
+        Route::delete('/profile/address/{addressId}', [AuthController::class, 'deleteAddress'])->name('profile.address.delete');
 
         Route::get('/order', [CartController::class, 'order'])->name('order.view');
         Route::get('/order-detail/{orderid}', [CartController::class, 'orderDetail'])->name('order_detail.view');
