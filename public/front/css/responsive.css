@@ -1903,12 +1903,17 @@
     } */
 
     .has-dropdown .dropdown-menu {
+        display: none; /* Hide by default on mobile */
         position: static;
         transform: none;
         box-shadow: none;
         background: transparent;
         padding-left: 15px;
         margin-top: 10px;
+    }
+
+    .has-dropdown.active .dropdown-menu {
+        display: block; /* Show when active */
     }
 
     .has-dropdown .dropdown-menu::before {
