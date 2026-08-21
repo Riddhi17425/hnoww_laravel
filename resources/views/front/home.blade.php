@@ -1,17 +1,16 @@
 @include('layouts.frontheader')
 <!-- hero section -->
-<section class="hero-section" style="height: 100%;">
-    {{-- <img class="img-fluid d-none d-lg-block" src="{{ asset('public/images/front/banner_1.webp') }}" alt="images" loading="lazy">
+<section class="hero-section" style="height: 100%">
+    <img class="img-fluid d-none d-lg-block" src="{{ asset('public/images/front/banner_1.webp') }}" alt="images" loading="lazy">
     <img class="img-fluid d-lg-none" src="{{ asset('public/images/front/banner_1_mobile.webp') }}" alt="images" loading="lazy">
     <div class="hero_content" style="top: 90%; left: 50%; transform: translateX(-50%); padding: 0 0;">
-        <div>
-             <a href="{{ route('front.collections') }}" class="com_btn border-0 bg-white d-lg-none">Explore The Works</a>
-         <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white d-lg-none">Corporate Enquiries</a>
+    <div>
+        <a href="{{ route('front.collections') }}" class="com_btn border-0 bg-white d-lg-none">Explore Collections</a>
+        <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white d-lg-none">View Rakhi Collection</a>
         </div>
-    </div> --}}
-
-    <section class="hero-section">
-     <video autoplay muted loop class="hero_video d-none d-md-block">
+    </div>
+<!-- <section class="hero-section"> -->
+    <!-- <video autoplay muted loop class="hero_video d-none d-md-block">
         <source src="{{ asset('public/images/front/hero-video.webm') }}" type="video/webm">
         Your browser does not support the video tag.
     </video>
@@ -27,7 +26,7 @@
              <a href="{{ route('front.collections') }}" class="com_btn border-0 bg-white d-lg-none">Explore The Works</a>
          <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white d-lg-none">Corporate Enquiries</a>
         </div>
-    </div>
+    </div> -->
 
     <div class="hero_left_right">
         <span><svg xmlns="http://www.w3.org/2000/svg" width="63" height="6" viewBox="0 0 63 6" fill="none">
@@ -43,10 +42,10 @@
             </svg></span>
     </div>
 
-        <div class="d-none d-lg-block home_btn ">
-            <a href="{{ route('front.collections') }}" class="com_btn border-0 bg-white ">Explore The Works</a>
-            <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white ms-3">Corporate Enquiries</a>
-       </div>
+    <div class="d-none d-lg-block home_btn ">
+        <a href="{{ route('front.collections') }}" class="com_btn border-0 bg-white ">Explore Collections</a>
+        <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white ms-3">View Rakhi Collection</a>
+    </div>
 
 
 </section>
@@ -131,7 +130,7 @@
                     </svg>
                 </span>
             </p>
-            <h2 class="title_60">Curated Expressions</h2>
+            <h2 class="title_60">Curated Gift Collections</h2>
         </div>
         <div class="row gy-4 gy-md-0">
             <div class="col-md-4">
@@ -437,7 +436,7 @@ alt="Curated Rituals 1" loading="lazy">
                 </span>
             </p>
             <!--<h2 class="title_60">Bespoke & Private Services</h2>-->
-            <h2 class="title_60">Bespoke Services</h2>
+            <h2 class="title_60">Bespoke Gifting Services</h2>
         </div>
         <div class="row gx-2 mobile_slider">
             <div class="col-md-6">
@@ -449,7 +448,7 @@ alt="Curated Rituals 1" loading="lazy">
                     </div>
                     <div class="bespoke_box_bot">
                         <p class="para">Ceremonial designs crafted to mark modern unions.</p>
-                       <span><a href="{{ route('front.wedding.vault') }}" data-bs-toggle="modal" data-bs-target="#requestWeddingCatalogue" class="com_btn">Request Wedding Catalogue</a></span>
+                       <span><a href="{{ route('front.wedding.vault.inside') }}" class="com_btn">EXPLORE WEDDING GIFTS</a></span>
                     </div>
                 </div>
             </div>
@@ -465,7 +464,7 @@ alt="Curated Rituals 1" loading="lazy">
                     <div class="bespoke_box_bot">
 
                         <p class="para">Articles designed to mark intentional partnerships.</p>
-                        <span><a href="{{ route('front.corporate.vault') }}" data-bs-toggle="modal" data-bs-target="#requestCorporateProposal" class="com_btn">The Corporate Edit</a></span>
+                        <span><a href="{{ route('front.corporate.vault') }}" class="com_btn">EXPLORE CORPORATE GIFTS</a></span>
                     </div>
                 </div>
             </div>
