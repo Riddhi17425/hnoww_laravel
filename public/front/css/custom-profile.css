@@ -182,6 +182,13 @@ button.com_btn {
 
 
 /* Orders Styles */
+.orders_list {
+    max-height: 520px;
+    overflow-y: auto;
+    padding-right: 8px;
+    -webkit-overflow-scrolling: touch;
+}
+
 .order_card {
     border: 1px solid #eee;
     padding: 20px;
@@ -192,6 +199,31 @@ button.com_btn {
 .order_card:hover {
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     border-color: #c7b58c;
+}
+
+@media (max-width: 1281px) {
+    .profile_tabs .nav-link {
+        font-size: 16px;
+        padding: 12px 18px;
+    }
+
+    .profile_content_wrapper {
+        padding: 30px;
+    }
+
+    .tab_title {
+        font-size: 24px;
+    }
+
+    .ct_input label.sub_head {
+        font-size: 15px;
+    }
+
+    .ct_input input,
+    .ct_input textarea {
+        font-size: 14px;
+    }
+
 }
 
 .order_id {
@@ -210,6 +242,12 @@ button.com_btn {
 .btn-outline-dark:hover {
     background: #0e2233;
     color: #fff;
+}
+
+@media (max-width: 1281px) {
+    .order_id {
+        font-size: 16px;
+    }
 }
 
 /* =========================================
