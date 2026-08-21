@@ -269,7 +269,7 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
                     <div class="user_menu">
 
                         <a href="{{route('front.profile')}}">My Profile</a>
-                        {{-- <a href="{{ route('front.order.view') }}">My Orders</a> --}}
+                        <a href="{{ route('front.order.view') }}">My Orders</a>
                         <!-- <a href="#">My Wishlist</a> -->
                         <a href="{{ route('front.logout') }}">Logout</a>
                     </div>
@@ -467,7 +467,7 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
                         <div class="user_menu">
 
                             <a href="{{route('front.profile')}}">My Profile</a>
-                            {{-- <a href="{{ route('front.order.view') }}">My Orders</a> --}}
+                            <a href="{{ route('front.order.view') }}">My Orders</a>
                             <!-- <a href="#">My Wishlist</a> -->
                             <a href="{{ route('front.logout') }}">Logout</a>
                         </div>

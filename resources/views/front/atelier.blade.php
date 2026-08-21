@@ -161,11 +161,13 @@
                             data-subtitle="{{ $val->sub_title }}" data-description="{{ strip_tags($val->description) }}"
                             data-image="{{ asset('public/images/admin/blessing/images/' . $val->image) }}"
                             data-audio="{{ route('front.blessings.audio', $val->id) }}">
-                            <img class="img-fluid mb-md-4 mb-2"
-                                src="{{ asset('public/images/admin/blessing/images/' . $val->image) }}" alt="{{ $val->alt_text }}">
+                            <a href="{{ route('front.blessings.library', $val->slug) }}">
+                                <img class="img-fluid mb-md-4 mb-2"
+                                    src="{{ asset('public/images/admin/blessing/images/' . $val->image) }}" alt="{{ $val->alt_text }}">
+                            </a>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h3 class="sub_head">{{ $val->title ?? '' }}</h3>
+                                    <a href="{{ route('front.blessings.library', $val->slug) }}"><h3 class="sub_head">{{ $val->title ?? '' }}</h3></a>
                                     <p class="mb-0">{{ $val->sub_title ?? '' }}</p>
                                 </div>
                             </div>

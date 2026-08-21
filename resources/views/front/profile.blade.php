@@ -65,14 +65,14 @@
                                 </svg>
                                 Personal Info
                             </button>
-                            <button class="nav-link" id="v-pills-orders-tab" data-bs-toggle="pill" data-bs-target="#v-pills-orders" type="button" role="tab" aria-controls="v-pills-orders" aria-selected="false" style="display: flex; align-items: center;">
+                            <!-- <button class="nav-link" id="v-pills-orders-tab" data-bs-toggle="pill" data-bs-target="#v-pills-orders" type="button" role="tab" aria-controls="v-pills-orders" aria-selected="false" style="display: flex; align-items: center;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2" style="margin-right: 8px;">
                                     <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
                                     <line x1="3" y1="6" x2="21" y2="6"></line>
                                     <path d="M16 10a4 4 0 0 1-8 0"></path>
                                 </svg>
                                 My Orders
-                            </button>
+                            </button> -->
                             <button class="nav-link" id="v-pills-password-tab" data-bs-toggle="pill" data-bs-target="#v-pills-password" type="button" role="tab" aria-controls="v-pills-password" aria-selected="false" style="display: flex; align-items: center;">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2" style="margin-right: 8px;">
                                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
@@ -241,18 +241,6 @@
 
                                         <p class="order_total fw-bold mb-0" style="color: #0e2233; font-size: 16px;">Total: AED {{ number_format($order->order_total, 2) }}</p>
                                         <a href="{{ route('front.order_detail.view', $order->id) }}" class="btn btn-sm btn-outline-dark">View Details</a>
-                                    </div>
-                                </div>
-                                <!-- Dummy Order Item 2 -->
-                                <div class="order_card mb-3">
-                                    <div class="d-flex justify-content-between align-items-center mb-2">
-                                        <h5 class="order_id">Order #ORD-20260715</h5>
-                                        <span class="badge bg-primary" style="font-weight: 400; padding: 6px 12px; border-radius: 4px; background-color: #B58A46 !important;">Processing</span>
-                                    </div>
-                                    <p class="mb-1 text-muted" style="font-size: 14px;">Placed on: Jul 15, 2026</p>
-                                    <div class="d-flex justify-content-between align-items-center mt-3">
-                                        <p class="order_total fw-bold mb-0" style="color: #0e2233; font-size: 16px;">Total: AED 1,200.00</p>
-                                        <a href="{{ route('front.order.details', 'ORD-20260715') }}" class="btn btn-sm btn-outline-dark">View Details</a>
                                     </div>
                                 </div>
                                 @empty

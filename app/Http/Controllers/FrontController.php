@@ -1735,7 +1735,6 @@ class FrontController extends Controller
     public function getBlessings(Request $request, $slug = null)
     {
         $blessingOfKeys = array_keys(config('global_values.blessing_of'));
-
         // Case 1: segment matches a category key -> filtered library listing
         if ($slug !== null && in_array($slug, $blessingOfKeys)) {
             $blessings = Blessing::where('is_active', 0)
@@ -1743,7 +1742,6 @@ class FrontController extends Controller
                 ->whereRaw("FIND_IN_SET(?, blessing_of)", [$slug])
                 ->orderBy('id', 'DESC')
                 ->get();
-
             return view('front.blessings', compact('blessings'));
         }
 
@@ -1753,8 +1751,7 @@ class FrontController extends Controller
                 ->whereNull('deleted_at')
                 ->where('slug', $slug)
                 ->first();
-
-            if (! $blessing) {
+            if (!$blessing) {
                 abort(404);
             }
 
