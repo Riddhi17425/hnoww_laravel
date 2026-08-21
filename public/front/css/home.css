@@ -12,7 +12,7 @@
 
 .hero-section .home_btn {
     position: absolute;
-    bottom: 4em;
+    bottom: 2em;
     left: 50%;
     transform: translateX(-50%);
 }

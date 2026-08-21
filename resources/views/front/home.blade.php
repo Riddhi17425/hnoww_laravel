@@ -1,32 +1,31 @@
 @include('layouts.frontheader')
 <!-- hero section -->
 <section class="hero-section" style="height: 100%;">
-    {{-- <img class="img-fluid d-none d-lg-block" src="{{ asset('public/images/front/banner_1.webp') }}" alt="images" loading="lazy">
-    <img class="img-fluid d-lg-none" src="{{ asset('public/images/front/banner_1_mobile.webp') }}" alt="images" loading="lazy">
+    <img class="img-fluid d-none d-lg-block" src="{{ asset('public/images/front/Raksha-Bandhan/Raksha-Bandhan-Banner.webp') }}" alt="images" loading="lazy">
+    <img class="img-fluid d-lg-none" src="{{ asset('public/images/front/Raksha-Bandhan/Raksha-Bandhan-Banner.webp') }}" alt="images" loading="lazy">
     <div class="hero_content" style="top: 90%; left: 50%; transform: translateX(-50%); padding: 0 0;">
         <div>
              <a href="{{ route('front.collections') }}" class="com_btn border-0 bg-white d-lg-none">Explore The Works</a>
          <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white d-lg-none">Corporate Enquiries</a>
         </div>
-    </div> --}}
+    </div> 
 
-    <section class="hero-section">
-     <video autoplay muted loop class="hero_video d-none d-md-block">
+    <!-- <video autoplay muted loop class="hero_video d-none d-md-block">
         <source src="{{ asset('public/images/front/hero-video.webm') }}" type="video/webm">
         Your browser does not support the video tag.
     </video>
     <video autoplay muted loop class="hero_video d-md-none">
         <source src="{{ asset('public/images/front/hero-video-mobaile.mp4') }}" type="video/mp4">
         Your browser does not support the video tag.
-    </video>
+    </video> -->
     <div class="hero_content">
-        <p class="mb-0 d-md-none">Designed in Dubai. Made to endure.</p>
+        <!-- <p class="mb-0 d-md-none">Designed in Dubai. Made to endure.</p>
         <h1 class="main_head">Objects Designed To Stay</h1>
-        <p>Curated objects for the desk, the home & the relationships that matter.</p>
-        <div>
+        <p>Curated objects for the desk, the home & the relationships that matter.</p> -->
+        <!-- <div>
              <a href="{{ route('front.collections') }}" class="com_btn border-0 bg-white d-lg-none">Explore The Works</a>
          <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white d-lg-none">Corporate Enquiries</a>
-        </div>
+        </div> -->
     </div>
 
     <div class="hero_left_right">
