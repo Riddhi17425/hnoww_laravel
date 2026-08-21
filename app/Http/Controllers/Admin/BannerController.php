@@ -83,8 +83,8 @@ class BannerController extends Controller
             $rules['mobile_image'] = 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048';
             $rules['alt_text']     = 'required|string|max:255';
         } else {
-            $rules['video']        = 'required|mimes:mp4,mov,avi|max:20480';
-            $rules['mobile_video'] = 'nullable|mimes:mp4,mov,avi|max:20480';
+            $rules['video']        = 'required|mimes:mp4,mov,avi,webm|max:20480';
+            $rules['mobile_video'] = 'nullable|mimes:mp4,mov,avi,webm|max:20480';
         }
 
         $validator = Validator::make($request->all(), $rules, [
@@ -104,7 +104,7 @@ class BannerController extends Controller
         $banner->title       = $request->title;
         $banner->type        = $request->type;
         $banner->description = $request->description;
-        $banner->is_active   = 0;
+        $banner->is_active   = $request->is_active ?? 0;
 
         if ($request->type == 'image') {
             $banner->alt_text = $request->alt_text;
@@ -178,8 +178,8 @@ class BannerController extends Controller
             $rules['mobile_image'] = 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048';
             $rules['alt_text']     = 'required|string|max:255';
         } else {
-            $rules['video']        = 'nullable|mimes:mp4,mov,avi|max:20480';
-            $rules['mobile_video'] = 'nullable|mimes:mp4,mov,avi|max:20480';
+            $rules['video']        = 'nullable|mimes:mp4,mov,avi,webm|max:20480';
+            $rules['mobile_video'] = 'nullable|mimes:mp4,mov,avi,webm|max:20480';
         }
 
         $validator = Validator::make($request->all(), $rules);
@@ -192,6 +192,7 @@ class BannerController extends Controller
         $banner->type        = $request->type;
         $banner->description = $request->description;
         $banner->alt_text    = $request->type == 'image' ? $request->alt_text : null;
+        $banner->is_active = $request->is_active ?? $banner->is_active;
         $banner->save();
 
         if ($request->type == 'image') {

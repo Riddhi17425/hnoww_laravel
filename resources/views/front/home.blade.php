@@ -11,23 +11,72 @@
     </div> --}}
 
     <section class="hero-section">
-     <video autoplay muted loop class="hero_video d-none d-md-block">
-        <source src="{{ asset('public/images/front/hero-video.webm') }}" type="video/webm">
-        Your browser does not support the video tag.
-    </video>
-    <video autoplay muted loop class="hero_video d-md-none">
-        <source src="{{ asset('public/images/front/hero-video-mobaile.mp4') }}" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+
+    @php
+        $activeBanner = $heroBanners->first();
+    @endphp
+
+    @if($activeBanner)
+
+        {{-- IMAGE TYPE BANNER --}}
+        @if($activeBanner->type == 'image')
+            @if(!empty($activeBanner->image))
+                <img class="img-fluid d-none d-md-block hero_video"
+                     src="{{ asset('public/images/admin/banner/images/'.$activeBanner->image) }}"
+                     alt="{{ $activeBanner->alt_text ?? $activeBanner->title }}" loading="lazy">
+            @endif
+            @if(!empty($activeBanner->mobile_image))
+                <img class="img-fluid d-md-none hero_video"
+                     src="{{ asset('public/images/admin/banner/images/'.$activeBanner->mobile_image) }}"
+                     alt="{{ $activeBanner->alt_text ?? $activeBanner->title }}" loading="lazy">
+            @elseif(!empty($activeBanner->image))
+                <img class="img-fluid d-md-none hero_video"
+                     src="{{ asset('public/images/admin/banner/images/'.$activeBanner->image) }}"
+                     alt="{{ $activeBanner->alt_text ?? $activeBanner->title }}" loading="lazy">
+            @endif
+        @endif
+
+        {{-- VIDEO TYPE BANNER --}}
+        @if($activeBanner->type == 'video')
+            @if(!empty($activeBanner->video))
+                <video autoplay muted loop class="hero_video d-none d-md-block">
+                    <source src="{{ asset('public/images/admin/banner/videos/'.$activeBanner->video) }}" type="video/{{ pathinfo($activeBanner->video, PATHINFO_EXTENSION) }}">
+                    Your browser does not support the video tag.
+                </video>
+            @endif
+            @if(!empty($activeBanner->mobile_video))
+                <video autoplay muted loop class="hero_video d-md-none">
+                    <source src="{{ asset('public/images/admin/banner/videos/'.$activeBanner->mobile_video) }}" type="video/{{ pathinfo($activeBanner->mobile_video, PATHINFO_EXTENSION) }}">
+                    Your browser does not support the video tag.
+                </video>
+            @elseif(!empty($activeBanner->video))
+                <video autoplay muted loop class="hero_video d-md-none">
+                    <source src="{{ asset('public/images/admin/banner/videos/'.$activeBanner->video) }}" type="video/{{ pathinfo($activeBanner->video, PATHINFO_EXTENSION) }}">
+                    Your browser does not support the video tag.
+                </video>
+            @endif
+        @endif
+
+    @else
+        {{-- FALLBACK: agar koi banner active nahi hai to purana static video dikhao --}}
+        <video autoplay muted loop class="hero_video d-none d-md-block">
+            <source src="{{ asset('public/images/front/hero-video.webm') }}" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+        <video autoplay muted loop class="hero_video d-md-none">
+            <source src="{{ asset('public/images/front/hero-video-mobaile.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    @endif
     <div class="hero_content">
-        <p class="mb-0 d-md-none">Designed in Dubai. Made to endure.</p>
-        <h1 class="main_head">Objects Designed To Stay</h1>
-        <p>Curated objects for the desk, the home & the relationships that matter.</p>
-        <div>
-             <a href="{{ route('front.collections') }}" class="com_btn border-0 bg-white d-lg-none">Explore The Works</a>
-         <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white d-lg-none">Corporate Enquiries</a>
-        </div>
+    <p class="mb-0 d-md-none">Designed in Dubai. Made to endure.</p>
+    <h1 class="main_head">{{ $activeBanner->title ?? 'Objects Designed To Stay' }}</h1>
+    <p>{!! $activeBanner->description ?? 'Curated objects for the desk, the home & the relationships that matter.' !!}</p>
+    <div>
+         <a href="{{ route('front.collections') }}" class="com_btn border-0 bg-white d-lg-none">Explore The Works</a>
+     <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white d-lg-none">Corporate Enquiries</a>
     </div>
+</div>
 
     <div class="hero_left_right">
         <span><svg xmlns="http://www.w3.org/2000/svg" width="63" height="6" viewBox="0 0 63 6" fill="none">

@@ -170,7 +170,7 @@ $(document).ready(function () {
         var allowedImageTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'image/webp']; // jpeg, png, jpg, gif, webp
         var maxImageSize = 2 * 1024 * 1024; // 2MB
 
-        var allowedVideoTypes = ['video/mp4', 'video/quicktime', 'video/x-msvideo']; // mp4, mov, avi
+        var allowedVideoTypes = ['video/mp4', 'video/quicktime', 'video/x-msvideo', 'video/webm']; // mp4, mov, avi, webm
         var maxVideoSize = 20 * 1024 * 1024; // 20MB
 
         if (type === 'image') {
@@ -226,7 +226,7 @@ $(document).ready(function () {
 
                 if (allowedVideoTypes.indexOf(vidFile.type) === -1) {
                     $videoInput.addClass('is-invalid');
-                    $videoInput.next('.invalid-feedback').text('Only mp4, mov, avi videos are allowed.');
+                    $videoInput.next('.invalid-feedback').text('Only mp4, mov, avi,webm videos are allowed.');
                     isValid = false;
                 } else if (vidFile.size > maxVideoSize) {
                     $videoInput.addClass('is-invalid');

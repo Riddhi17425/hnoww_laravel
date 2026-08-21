@@ -91,9 +91,9 @@
             <div class="col-md-12">
                 <label class="form-label">Status</label><span class="text-danger">*</span>
                 <select name="is_active" class="form-control">
-                    <option value="1" {{ old('is_active', $banner->is_active ?? 1) == 1 ? 'selected' : '' }}>Active</option>
-                    <option value="0" {{ old('is_active', $banner->is_active ?? 1) == 0 ? 'selected' : '' }}>In-Active</option>
-                </select>
+                <option value="0" {{ old('is_active', $banner->is_active ?? 0) == 0 ? 'selected' : '' }}>Active</option>
+                <option value="1" {{ old('is_active', $banner->is_active ?? 0) == 1 ? 'selected' : '' }}>In-Active</option>
+            </select>
             </div>
 
             <div class="col-md-12">
