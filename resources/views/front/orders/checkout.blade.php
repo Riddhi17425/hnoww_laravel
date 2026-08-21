@@ -420,7 +420,7 @@
                         <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
                         <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
                     </svg>
-                    <p class="co-gift-text">Gift wrapper added with this Product</p>
+                     <p class="co-gift-text">Want Gift Wrapping?</p>
                 </div>
                 <input type="checkbox" name="gift_wrapper" value="1" class="co-gift-checkbox">
             </label>
@@ -826,6 +826,19 @@ $(document).ready(async function() {
             }
         }
 
+        if (!clientSecret || !elements) {
+            $('#error-message').text('Please enter a valid amount first.');
+            setPayLoading(false);
+            return;
+        }
+
+        const { error: paymentElementError } = await elements.submit();
+        if (paymentElementError) {
+            $('#error-message').text(paymentElementError.message);
+            setPayLoading(false);
+            return;
+        }
+
         if (isAddingNew) {
             setCheckoutContactValue();
             setCheckoutWhatsappValue();
@@ -850,12 +863,6 @@ $(document).ready(async function() {
             addressId = selectedAddress;
         }
 
-        if (!clientSecret) {
-            $('#error-message').text('Please enter a valid amount first.');
-            setPayLoading(false);
-            return;
-        }
-        
         //const addressId = data.address_id;
         const { error } = await stripe.confirmPayment({
             elements,
