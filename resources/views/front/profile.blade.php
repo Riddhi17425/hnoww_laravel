@@ -45,7 +45,7 @@
                                 <input type="file" id="profile_upload" class="d-none" accept="image/*">
                             </div>
                             <h4 class="mt-3" style="font-family: 'Playfair Display', serif; color: #0e2233;">{{$user->name ?? 'John Doe'}}</h4>
-                            <p class="text-muted" style="font-family: 'Inter', sans-serif; font-size: 14px;">{{$user->email ?? 'johndoe@example.com'}}</p>
+                            <p class="text-muted" title="{{$user->email ?? 'johndoe@example.com'}}" style="font-family: 'Inter', sans-serif; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;">{{$user->email ?? 'johndoe@example.com'}}</p>
                         </div>
                         
                         <div class="nav flex-column nav-pills profile_tabs" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -94,25 +94,25 @@
                                 <h3 class="tab_title mb-4">Edit Profile</h3>
                                 <form>
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-lg-6 col-md-12 mb-3">
                                             <div class="ct_input">
                                                 <label for="name" class="sub_head">Name</label>
                                                 <input type="text" name="name" id="name" pattern="^[A-Za-z\s]+$" value="{{$user->name ?? ''}}" title="Please use only letters" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-lg-6 col-md-12 mb-3">
                                             <div class="ct_input">
                                                 <label for="email" class="sub_head">Email Address</label>
                                                 <input type="email" name="email" id="email" value="{{$user->email ?? ''}}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-lg-6 col-md-12 mb-3">
                                             <div class="ct_input">
                                                 <label for="phone" class="sub_head">Phone Number</label>
                                                 <input type="tel" name="phone" id="phone" value="{{$user->phone ?? ''}}" pattern="^\+?[1-9]\d{1,14}$" title="Please enter a valid phone number" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-lg-6 col-md-12 mb-3">
                                             <div class="ct_input">
                                                 <label for="dob" class="sub_head">Date of Birth</label>
                                                 <input type="date" name="dob" id="dob" value="{{$user->dob ?? ''}}" required>
@@ -120,7 +120,7 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="text-end mt-4">
+                                    <div class="text-end mt-lg-4">
                                         <button class="com_btn" type="submit">Save Changes</button>
                                     </div>
                                 </form>
@@ -169,7 +169,7 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="text-end mt-4">
+                                    <div class="text-end mt-lg-4">
                                         <button class="com_btn" type="submit">Update Password</button>
                                     </div>
                                 </form>
@@ -189,7 +189,7 @@
                                     <p class="mb-1 text-muted" style="font-size: 14px;">Placed on: Aug 21, 2026</p>
                                     <div class="d-flex justify-content-between align-items-center mt-3">
                                         <p class="order_total fw-bold mb-0" style="color: #0e2233; font-size: 16px;">Total: AED 450.00</p>
-                                        <button class="btn btn-sm btn-outline-dark">View Details</button>
+                                        <a href="{{ route('front.order.details', 'ORD-20260821') }}" class="btn btn-sm btn-outline-dark">View Details</a>
                                     </div>
                                 </div>
                                 <!-- Dummy Order Item 2 -->
@@ -201,7 +201,7 @@
                                     <p class="mb-1 text-muted" style="font-size: 14px;">Placed on: Jul 15, 2026</p>
                                     <div class="d-flex justify-content-between align-items-center mt-3">
                                         <p class="order_total fw-bold mb-0" style="color: #0e2233; font-size: 16px;">Total: AED 1,200.00</p>
-                                        <button class="btn btn-sm btn-outline-dark">View Details</button>
+                                        <a href="{{ route('front.order.details', 'ORD-20260715') }}" class="btn btn-sm btn-outline-dark">View Details</a>
                                     </div>
                                 </div>
                             </div>

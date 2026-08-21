@@ -225,6 +225,19 @@ class FrontController extends Controller
         return view('front.list', compact('category', 'catProducts', 'catSlug', 'from'));
     }
 
+    public function getOrderDetails(Request $request, $id)
+    {
+        // Dummy data for now, since we are building the UI first
+        $order = (object) [
+            'id' => $id,
+            'date' => 'Jul 15, 2026',
+            'status' => 'Processing',
+            'total' => 'AED 1,200.00'
+        ];
+        
+        return view('front.order_details', compact('order'));
+    }
+
     public function getProductDetails(Request $request, $productSlug)
     {
         $product             = Product::select('id', 'category_id', 'product_name', 'product_url', 'product_price', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'large_description', 'dimensions', 'detail_page_imgs', 'moq', 'short_note', 'product_stock', 'care_maintenance', 'meta_title', 'meta_description', 'materials', 'weight')->where('product_url', $productSlug)->isActive()->notDeleted()->first();
