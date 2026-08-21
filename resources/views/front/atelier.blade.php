@@ -153,6 +153,26 @@
             <h2 class="title_60">Blessing Library</h2>
         </div>
         <div class="row gy-4 gy-md-0">
+             @if (isset($blessings) && is_countable($blessings) && count($blessings) > 0)
+                @foreach ($blessings as $key => $val)
+                <div class="col-md-4 mb-4">
+                        <div class="gesture_box open-blessing" data-bs-toggle="modal" data-bs-target="#blessingPopup"
+                            data-id="{{ $val->id }}" data-slug="{{ $val->slug }}" data-title="{{ $val->title }}"
+                            data-subtitle="{{ $val->sub_title }}" data-description="{{ strip_tags($val->description) }}"
+                            data-image="{{ asset('public/images/admin/blessing/images/' . $val->image) }}"
+                            data-audio="{{ route('front.blessings.audio', $val->id) }}">
+                            <img class="img-fluid mb-md-4 mb-2"
+                                src="{{ asset('public/images/admin/blessing/images/' . $val->image) }}" alt="{{ $val->alt_text }}">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h3 class="sub_head">{{ $val->title ?? '' }}</h3>
+                                    <p class="mb-0">{{ $val->sub_title ?? '' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @else
             <div class="col-md-4">
                 <div class="desire_box">
                     <img class="w-100 mb-2 mb-md-4" src="{{asset('public/images/front/blessing-library1.webp')}}"
@@ -189,6 +209,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
 
         <div class="mt_35 text-center">
