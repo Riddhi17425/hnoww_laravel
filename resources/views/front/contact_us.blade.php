@@ -6,7 +6,7 @@
     <div class="hero_content_inner">
         <h2 class="main_head mb-3">The Studio</h2>
         <p class="para sec_in_mb">We are here to assist with curation, commissions, and care.</p>
-        <a href="#contactForm" class="com_btn border-0 bg-white ">Get Enquiry</a>
+        <a href="#contactForm" class="com_btn border-0 bg-white ">ENQUIRE NOW</a>
     </div>
 </section>
 

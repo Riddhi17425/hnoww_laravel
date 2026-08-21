@@ -175,7 +175,7 @@
                         <p class="mb-0 sub_head">Care and maintenance</p>
                     </span>
                 </div>
-                <p class="m-0">{!! $product->care_maintenance ?? '' !!}</p>`
+                <p class="m-0">{!! $product->care_maintenance ?? '' !!}</p>
             </div>
             @endif
 

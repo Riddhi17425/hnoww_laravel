@@ -162,7 +162,7 @@
 
         @if($cartItems->count() > 0)
         <div class="row gy-3 gy-lg-0 gx-lg-5">
-            <!-- LEFT : Order Summary -->
+            <!-- LEFT : Addresses -->
             <div class="col-lg-8 col-12">
                 <div class="co-left-wrapper">
                     @if($userAddresses->count() > 0)
@@ -420,9 +420,9 @@
                         <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
                         <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
                     </svg>
-                    <p class="co-gift-text">Gift wrapper added with this Product</p>
+                     <p class="co-gift-text">Want Gift Wrapping?</p>
                 </div>
-                <input type="checkbox" name="gift_wrapper" class="co-gift-checkbox" checked>
+                <input type="checkbox" name="gift_wrapper" value="1" class="co-gift-checkbox">
             </label>
 
             <div class="co-summary-item">
@@ -589,9 +589,6 @@ async function mountPaymentElement(clientSecret) {
 
     paymentElement.mount('#card-element');
 
-    // DISABLE INITIALLY
-    $('#payBtn').prop('disabled', true);
-
     // STRIPE VALIDATION
     paymentElement.on('change', function(event) {
 
@@ -602,18 +599,7 @@ async function mountPaymentElement(clientSecret) {
         if (event.error) {
 
             $('#error-message').text(event.error.message);
-
-            // KEEP DISABLED
-            $('#payBtn').prop('disabled', true);
-
             return;
-        }
-
-        // ENABLE ONLY WHEN COMPLETE
-        if (event.complete) {
-            $('#payBtn').prop('disabled', false);
-        } else {
-            $('#payBtn').prop('disabled', true);
         }
 
     });
@@ -821,7 +807,7 @@ $(document).ready(async function() {
         // if (!$("#productInquiryForm").valid()) {
         //     return;
         // }
-        setPayLoading(true); // ✅ START LOADING
+        setPayLoading(true); // START LOADING
 
         const selectedAddress = $('input[name="selected_address"]:checked').val();
         const isAddingNew = $('#addressFormWrapper').is(':visible');
@@ -838,6 +824,19 @@ $(document).ready(async function() {
                 setPayLoading(false);
                 return;
             }
+        }
+
+        if (!clientSecret || !elements) {
+            $('#error-message').text('Please enter a valid amount first.');
+            setPayLoading(false);
+            return;
+        }
+
+        const { error: paymentElementError } = await elements.submit();
+        if (paymentElementError) {
+            $('#error-message').text(paymentElementError.message);
+            setPayLoading(false);
+            return;
         }
 
         if (isAddingNew) {
@@ -864,16 +863,11 @@ $(document).ready(async function() {
             addressId = selectedAddress;
         }
 
-        if (!clientSecret) {
-            $('#error-message').text('Please enter a valid amount first.');
-            setPayLoading(false);
-            return;
-        }
         //const addressId = data.address_id;
         const { error } = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                return_url: sitePath + '/payment/success?address_id=' + addressId,
+                return_url: sitePath + '/payment/success?address_id=' + addressId + '&gift_wrapper=' + ($('.co-gift-checkbox').is(':checked') ? 1 : 0),
                 payment_method_data: {
                     billing_details: {
                         address: {

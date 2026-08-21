@@ -1839,8 +1839,9 @@ class FrontController extends Controller
         $meta_title       = 'The Atelier | Our Story & Craft | HNOWW';
         $meta_description = "Discover the HNOWW Atelier, where philosophy, craft, and ritual meet. Sculptural objects made in small batches from stone, brass, and silver in Dubai.";
         $blogs = Blog::whereNull('deleted_at')->where('status', 'Active')->latest('id')->take(3)->get();
+        $blessings = Blessing::where('is_active', 0)->whereNull('deleted_at')->latest('id')->take(3)->get();
 
-        return view('front.atelier', compact('corporateProduct', 'weddingProduct', 'meta_title', 'meta_description', 'blogs'));
+        return view('front.atelier', compact('corporateProduct', 'weddingProduct', 'meta_title', 'meta_description', 'blogs', 'blessings'));
     }
 
     public function getWeddingVault(Request $request)
