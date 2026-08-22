@@ -209,7 +209,7 @@
                                 <form method="POST" action="{{ route('front.profile.address.save') }}" id="addressForm">
                                     @csrf
                                     <input type="hidden" name="address_id" id="address_id">
-                                    <h4 id="addressFormTitle" class="mt-4 mb-3">Add New Address</h4>
+                                    <h5 id="addressFormTitle" class=" sub_head mb-4">Add New Address</h5>
                                     <div class="row">
                                         <div class="col-md-6"><div class="ct_input"><label class="sub_head">Name</label><input class="form-control" name="name" required></div></div>
                                         <div class="col-md-6"><div class="ct_input"><label class="sub_head">Contact Number</label><input class="form-control" name="contact_no" required></div></div>
