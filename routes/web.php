@@ -33,21 +33,7 @@ use Illuminate\Support\Facades\Artisan;
 | contains the "web" middleware group. Now create something great!
 |
 */
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/send', function () {
-    Mail::raw('This is a test email sent from Laravel.', function ($message) {
-        $message->to('webdeveloper9.intelliworkz@gmail.com')
-            ->subject('Test Mail from Laravel');
-    });
-
-    return 'Mail sent!';
-});
-
-Route::get('/check-mail', function () {
-    return view('email.front.blessing_mail');
-});
 
 Route::get('/clear', function () {
     Artisan::call('optimize:clear');
@@ -75,7 +61,6 @@ Route::name('front.')->group(function () {
     Route::get('collections', [FrontController::class, 'collections'])->name('collections');
     Route::get('collections/{category_slug}/{from?}', [FrontController::class, 'getList'])->name('list');
     Route::get('/list/{category_slug}/{from?}', [FrontController::class, 'listLegacyRedirect'])->name('list.legacy');
-    Route::get('order-details/{id}', [FrontController::class, 'getOrderDetails'])->name('order.details');
     Route::get('product-details/{product_slug}', [FrontController::class, 'getProductDetails'])->name('product.details');
     Route::post('store-product-inquiry', [FrontController::class, 'storeProductInquiry'])->name('store.product.inquiry');
     // Route::post('/check-email-unique', [FrontController::class, 'checkEmailUnique'])
