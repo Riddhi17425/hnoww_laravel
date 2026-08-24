@@ -12,6 +12,11 @@ class Category extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'faqs' => 'array',
+        'is_festive' => 'boolean',
+    ];
+
     public function scopeIsActive($query)
     {
         return $query->where('categories.is_active', 0);

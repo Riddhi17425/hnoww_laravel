@@ -55,6 +55,31 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label d-block">Category Placement</label>
+                                <div class="form-check form-switch mt-2">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        role="switch"
+                                        id="is_festive"
+                                        name="is_festive"
+                                        value="1"
+                                        {{ old('is_festive', $category->is_festive) == 1 ? 'checked' : '' }}
+                                    >
+                                    <label class="form-check-label" for="is_festive">
+                                        Display this category on Festive Page
+                                    </label>
+                                </div>
+                                <small class="text-muted">
+                                    When enabled, this category will be removed from the Collection menu.
+                                </small>
+                                @error('is_festive')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
                             <div class="col-md-12">
                                 <label class="form-label">Category Title</label>
                                 <div class="input-group mb-3">
@@ -70,6 +95,208 @@
                                 @error('description')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
+                            </div>
+
+                            <hr class="mt-4">
+
+                            <h5 class="fw-bold mb-3">Festive Section</h5>
+
+                            {{-- FESTIVE SECTION FIELDS --}}
+
+                            <div class="col-md-6">
+                                <label class="form-label">Celebration Label</label>
+                                <input type="text"
+                                    name="celebration_label"
+                                    class="form-control"
+                                    value="{{ old('celebration_label', $category->celebration_label) }}">
+
+                                @error('celebration_label')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Celebration Title</label>
+                                <input type="text"
+                                    name="celebration_title"
+                                    class="form-control"
+                                    value="{{ old('celebration_title', $category->celebration_title) }}">
+
+                                @error('celebration_title')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-12">
+                                <label class="form-label">Celebration Description</label>
+                                <textarea name="celebration_description"
+                                        class="form-control"
+                                        rows="4">{{ old('celebration_description', $category->celebration_description) }}</textarea>
+
+                                @error('celebration_description')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Celebration Image</label>
+                                <input type="file"
+                                    name="celebration_image"
+                                    class="form-control">
+
+                                @if($category->celebration_image)
+                                    <div class="mt-2">
+                                        <img src="{{ url('public/images/admin/category_celebration/' . $category->celebration_image) }}"
+                                            width="150"
+                                            alt="Celebration Image">
+                                    </div>
+                                @endif
+
+                                @error('celebration_image')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+
+                            {{-- COLLECTION SECTION --}}
+
+                            <div class="col-md-12 mt-3">
+                                <h6 class="fw-bold">Collection Section</h6>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Collection Label</label>
+                                <input type="text"
+                                    name="collection_label"
+                                    class="form-control"
+                                    value="{{ old('collection_label', $category->collection_label) }}">
+
+                                @error('collection_label')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Collection Title</label>
+                                <input type="text"
+                                    name="collection_title"
+                                    class="form-control"
+                                    value="{{ old('collection_title', $category->collection_title) }}">
+
+                                @error('collection_title')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-12">
+                                <label class="form-label">Collection Description</label>
+                                <textarea name="collection_description"
+                                        class="form-control"
+                                        rows="4">{{ old('collection_description', $category->collection_description) }}</textarea>
+
+                                @error('collection_description')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+
+                            {{-- FAQ SECTION --}}
+
+                            <div class="col-md-12 mt-3">
+                                <h6 class="fw-bold">FAQs</h6>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div id="faq-wrapper">
+
+                                    @php
+                                        $faqs = old('faqs');
+
+                                        if ($faqs === null)
+                                        {
+                                            $faqs = $category->faqs;
+                                        }
+
+                                        // If FAQs are still a JSON string, decode them
+                                        if (is_string($faqs))
+                                        {
+                                            $faqs = json_decode($faqs, true);
+                                        }
+
+                                        // Safety check
+                                        if (!is_array($faqs))
+                                        {
+                                            $faqs = [];
+                                        }
+                                    @endphp
+
+                                    @if(!empty($faqs))
+                                        @foreach($faqs as $index => $faq)
+                                            <div class="faq-item border rounded p-3 mb-3">
+                                                <div class="row g-3">
+                                                    <div class="col-md-12">
+                                                        <label class="form-label">Question</label>
+
+                                                        <input type="text"
+                                                            name="faqs[{{ $index }}][question]"
+                                                            class="form-control"
+                                                            value="{{ $faq['question'] ?? '' }}"
+                                                            placeholder="Enter FAQ question">
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <label class="form-label">Answer</label>
+                                                        <textarea name="faqs[{{ $index }}][answer]"
+                                                                class="form-control"
+                                                                rows="3"
+                                                                placeholder="Enter FAQ answer">{{ $faq['answer'] ?? '' }}</textarea>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <button type="button"
+                                                                class="btn btn-danger btn-sm remove-faq">
+                                                            Remove FAQ
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <div class="faq-item border rounded p-3 mb-3">
+                                            <div class="row g-3">
+                                                <div class="col-md-12">
+                                                    <label class="form-label">Question</label>
+                                                    <input type="text"
+                                                        name="faqs[0][question]"
+                                                        class="form-control"
+                                                        placeholder="Enter FAQ question">
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <label class="form-label">Answer</label>
+                                                    <textarea name="faqs[0][answer]"
+                                                            class="form-control"
+                                                            rows="3"
+                                                            placeholder="Enter FAQ answer"></textarea>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <button type="button"
+                                                            class="btn btn-danger btn-sm remove-faq"
+                                                            style="display:none;">
+                                                        Remove FAQ
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+
+                                <button type="button"
+                                        id="add-faq"
+                                        class="btn btn-secondary btn-sm">
+                                    + Add FAQ
+                                </button>
                             </div>
 
                             <div class="col-md-12">
@@ -191,6 +418,54 @@ $(document).ready(function() {
                        .replace(/\s+/g, '-')
                        .replace(/-+/g, '-');
         $('#category_url').val(slug);
+    });
+
+    let faqIndex = {{ count($faqs) > 0 ? count($faqs) : 1 }};
+
+    $('#add-faq').on('click', function () {
+
+        let faqHtml = `
+            <div class="faq-item border rounded p-3 mb-3">
+
+                <div class="row g-3">
+
+                    <div class="col-md-12">
+                        <label class="form-label">Question</label>
+
+                        <input type="text"
+                            name="faqs[${faqIndex}][question]"
+                            class="form-control"
+                            placeholder="Enter FAQ question">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="form-label">Answer</label>
+
+                        <textarea name="faqs[${faqIndex}][answer]"
+                                class="form-control"
+                                rows="3"
+                                placeholder="Enter FAQ answer"></textarea>
+                    </div>
+
+                    <div class="col-md-12">
+                        <button type="button"
+                                class="btn btn-danger btn-sm remove-faq">
+                            Remove FAQ
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        `;
+
+        $('#faq-wrapper').append(faqHtml);
+
+        faqIndex++;
+    });
+
+    $(document).on('click', '.remove-faq', function () {
+        $(this).closest('.faq-item').remove();
     });
     
 });

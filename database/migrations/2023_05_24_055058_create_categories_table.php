@@ -27,7 +27,23 @@ class CreateCategoriesTable extends Migration
             $table->string('magic_title')->nullable();
             $table->string('magic_image')->nullable();
             $table->string('magic_description', 500)->nullable();
+
+            // Celebration Section
+            $table->string('celebration_label')->nullable();
+            $table->string('celebration_title')->nullable();
+            $table->text('celebration_description')->nullable();
+            $table->string('celebration_image')->nullable();
+
+            // Collection Section
+            $table->string('collection_label')->nullable();
+            $table->string('collection_title')->nullable();
+            $table->text('collection_description')->nullable();
+
+            // FAQs
+            $table->json('faqs')->nullable();
+
             $table->tinyInteger('category_type')->default(0)->comment("0 = Basic 1 = Corporate 2 = Wedding");
+            $table->tinyInteger('is_festive')->default(0)->comment("0 = Collection 1 = Festive");
             $table->string('button_text', 500)->nullable();
             $table->tinyInteger('is_active')->default(1)->comment("0 = Active 1 = In-active");
             $table->softDeletes();
