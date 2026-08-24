@@ -89,6 +89,33 @@ $(document).ready(function () {
             });
         }
     });
+
+    $(document).on('click', '.send_blog_mail', function () {
+        let button = $(this);
+        let url = window.APP_URLS.sendPublishedMail.replace(':id', button.data('id'));
+
+        if (!confirm('Send this blog to all newsletter subscribers?')) {
+            return;
+        }
+
+        button.prop('disabled', true);
+        $.ajax({
+            url: url,
+            type: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': window.APP_URLS.csrfToken
+            },
+            success: function (response) {
+                alert(response.message);
+            },
+            error: function (xhr) {
+                alert(xhr.responseJSON?.message || 'Unable to send the blog email.');
+            },
+            complete: function () {
+                button.prop('disabled', false);
+            }
+        });
+    });
 });
 
 
