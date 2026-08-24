@@ -63,7 +63,17 @@
                     style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">
                     {{ $order_id ?? '' }}</td>
             </tr>
-            
+            @if(isset($gift_wrapper) && $gift_wrapper)
+            <tr>
+                <td
+                    style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #888888;">
+                    Is Gift Wrapped:</td>
+                <td
+                    style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">
+                    {{ $gift_wrapper ? 'Yes' : 'No' }}
+                </td>
+            </tr>
+            @endif
             <tr>
                 <td
                     style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #888888;">

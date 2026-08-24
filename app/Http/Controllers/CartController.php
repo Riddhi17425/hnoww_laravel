@@ -207,10 +207,12 @@ class CartController extends Controller
 
             $orderId = '';
             $order = null;
+            $orderNumber = '';
             if(isset($cartItems) && is_countable($cartItems) && count($cartItems) > 0){
                 $order = new Order();
                 $order->user_id = auth()->id();
                 $order->order_address_id = $addressId;
+                $order->gift_wrapper = $request->boolean('gift_wrapper');
                 $order->status = 'confirmed';
                 $order->subtotal = $subTotal;
                 // $order->discount_percent = config('global_values.discount_percent');
@@ -225,6 +227,7 @@ class CartController extends Controller
                 $randomNum = rand(1000, 9999);
                 $order->order_number = 'ORD-'.$order->id.'-'.auth()->id().'-'.$randomNum;
                 $order->save();
+                $orderNumber = $order->order_number;
                 foreach($cartItems as $k => $cart){
                     $orderProduct = new OrderProduct();
                     $orderProduct->order_id = $order->id;
@@ -247,16 +250,17 @@ class CartController extends Controller
         
             // SEND MAIL TO USER AND ADMIN
             $adminEmail = $this->adminEmail;
-            $adminSubject = 'New Order Placed - '.$order->order_number;
+            $adminSubject = 'New Order Placed - '.$orderNumber;
             $userDetails = auth()->user();
             $userEmail = $userDetails->email;
             $data = [
                 'name'        => $userDetails->name ?? null,
                 'email'        => $userDetails->email ?? null,
-                'order_id'  => $order->order_number ?? null,
+                'order_id'  => $orderNumber ?? null,
                 'status'       => $order->status ?? null,
                 'order_total'  => $order->order_total ?? null,
                 'order_products' => $order->orderProducts ?? null,
+                'gift_wrapper' => $order->gift_wrapper ?? null,
             ];
 
             try {
@@ -338,13 +342,12 @@ class CartController extends Controller
     {
         $orderData = Order::where('user_id', auth()->id())->orderBy('id', 'desc')->get();
 
-        // Use dot notation to reach front/orders/order.php
         return view('front.orders.order', compact('orderData'));
     }
     public function orderDetail($orderId)
     {
         $orderDetails = Order::where('id', $orderId)->with(['user', 'orderProducts', 'orderAddress'])->first();
-        // Use dot notation to reach front/orders/order.php
+        
         return view('front.orders.order_detail', compact('orderDetails'));
     }
 

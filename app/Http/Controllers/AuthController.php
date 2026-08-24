@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\{User, WhatsappInquiry, Cart};
+use App\Models\UserAddress;
 use Auth;
 use Session;
 use Hash;
@@ -19,6 +20,88 @@ class AuthController extends Controller
     public function getAuth(Request $request, $page = null){
         $pageVal = $page ?? 'login';
         return view('front.register', compact('pageVal'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = $request->user();
+
+        if ($request->hasFile('profile_image')) {
+            $request->validate([
+                'profile_image' => 'image|mimes:jpg,jpeg,png,webp|max:2048',
+            ]);
+
+            $uploadPath = public_path('images/front/profile');
+            if (!is_dir($uploadPath)) {
+                mkdir($uploadPath, 0755, true);
+            }
+
+            if ($user->profile_image && file_exists($uploadPath.'/'.$user->profile_image)) {
+                unlink($uploadPath.'/'.$user->profile_image);
+            }
+
+            $imageName = uniqid('profile_', true).'.'.$request->file('profile_image')->extension();
+            $request->file('profile_image')->move($uploadPath, $imageName);
+            $user->profile_image = $imageName;
+            $user->save();
+
+            return back()->with('success', 'Profile image updated successfully.');
+        }
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,'.$user->id,
+            'phone' => 'required|string|max:15',
+            'dob' => 'nullable',
+        ]);
+
+        $user->update($validated);
+
+        return back()->with('success', 'Profile updated successfully.');
+    }
+
+    public function changePassword(Request $request)
+    {
+        $validated = $request->validate([
+            'new_password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $request->user()->update([
+            'password' => Hash::make($validated['new_password']),
+        ]);
+
+        return back()->with('success', 'Password updated successfully.');
+    }
+
+    public function saveAddress(Request $request, $addressId = null)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|min:3|max:255',
+            'contact_no' => 'required|string|max:20',
+            'whatsapp_no' => 'nullable|string|max:20',
+            'emirate' => 'required|string|max:255',
+            'address_line1' => 'required|string|max:500',
+            'address_line2' => 'required|string|max:500',
+            'landmark' => 'nullable|string|max:500',
+        ]);
+
+        $user = $request->user();
+        $address = $addressId
+            ? UserAddress::where('user_id', $user->id)->findOrFail($addressId)
+            : new UserAddress();
+
+        $address->fill($validated);
+        $address->user_id = $user->id;
+        $address->save();
+
+        return back()->with('success', $addressId ? 'Address updated successfully.' : 'Address added successfully.');
+    }
+
+    public function deleteAddress(Request $request, $addressId)
+    {
+        UserAddress::where('user_id', $request->user()->id)->findOrFail($addressId)->delete();
+
+        return back()->with('success', 'Address deleted successfully.');
     }
 
     public function submitRegister(Request $request){

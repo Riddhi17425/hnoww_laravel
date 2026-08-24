@@ -251,6 +251,9 @@
                             @endif
                         </div>
                     </div>
+                    <!-- <div class="text-center mt-5">
+                        <button class="com_btn">Download Invoice</button>
+                    </div> -->
                     <div class="mt-4">
                         <a href="{{ route('front.order.view') }}" class="com_btn" data-product-id="9"> Back to Order</a>
                     </div>

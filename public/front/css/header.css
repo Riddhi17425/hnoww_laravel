@@ -104,14 +104,16 @@ header .navbar {
     transition: transform 0.35s ease;
 }
 
-/* hover effect */
-.nav_links li a:hover span {
-    transform: translateY(-100%);
-    color: var(--gold-color);
-}
+/* hover effect only on desktop to prevent mobile tap issues */
+@media (min-width: 992px) {
+    .nav_links li a:hover span {
+        transform: translateY(-100%);
+        color: var(--gold-color);
+    }
 
-.nav_links li a:hover::after {
-    transform: translateY(-100%);
+    .nav_links li a:hover::after {
+        transform: translateY(-100%);
+    }
 }
 
 .navbar_right {
@@ -465,4 +467,28 @@ header .navbar {
 
 .alert.alert-success::after:hover {
     opacity: 1;
+}
+
+/* --- Mobile Dropdown Accordion Fix --- */
+@media (max-width: 991px) {
+    .has-dropdown .dropdown-menu {
+        position: static !important;
+        display: none;
+        opacity: 1 !important;
+        transform: none !important;
+        min-width: 100% !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        padding-left: 15px !important;
+        margin-top: 10px !important;
+    }
+    
+    .has-dropdown.active .dropdown-menu {
+        display: block !important;
+    }
+
+    .has-dropdown.active .dropdown-arrow {
+        transform: rotate(180deg);
+        color: var(--gold-color);
+    }
 }
