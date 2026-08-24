@@ -177,6 +177,7 @@ class CategoryController extends Controller
             'meta_description',
             'category_url',
             'is_festive',
+            'is_inquiry',
             'category_type',
             'magic_heading_first',
             'magic_heading_second',
@@ -192,6 +193,7 @@ class CategoryController extends Controller
         ]);
 
         $data['is_festive'] = $request->has('is_festive') ? 1 : 0;
+        $data['is_inquiry'] = $request->has('is_inquiry') ? 1 : 0;
 
         if ($request->hasFile('banner_image')) {
             // $image = $request->file('banner_image');
@@ -311,6 +313,7 @@ class CategoryController extends Controller
             'category_url',
             'category_type',
             'is_festive',
+            'is_inquiry',
             'magic_heading_first',
             'magic_heading_second',
             'magic_title',
@@ -325,6 +328,7 @@ class CategoryController extends Controller
         ]);
 
         $data['is_festive'] = $request->has('is_festive') ? 1 : 0;
+        $data['is_inquiry'] = $request->has('is_inquiry') ? 1 : 0;
 
         if ($request->hasFile('banner_image')) {
             // $image = $request->file('banner_image');

@@ -44,6 +44,7 @@ class CreateCategoriesTable extends Migration
 
             $table->tinyInteger('category_type')->default(0)->comment("0 = Basic 1 = Corporate 2 = Wedding");
             $table->tinyInteger('is_festive')->default(0)->comment("0 = Collection 1 = Festive");
+            $table->tinyInteger('is_inquiry')->default(0)->comment('0 = View Detail, 1 = Inquire Now');
             $table->string('button_text', 500)->nullable();
             $table->tinyInteger('is_active')->default(1)->comment("0 = Active 1 = In-active");
             $table->softDeletes();
