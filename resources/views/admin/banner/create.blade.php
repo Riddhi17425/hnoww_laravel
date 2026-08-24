@@ -16,9 +16,10 @@
         <div class="row g-3">
 
             <div class="col-md-6">
-                <label class="form-label">Title</label><span class="text-danger">*</span>
+                {{-- <label class="form-label">Title</label><span class="text-danger">*</span> --}}
+                <label class="form-label">Title</label>
                 <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}">
-                <div class="invalid-feedback">The banners title field is required.</div>
+                {{-- <div class="invalid-feedback">The banners title field is required.</div> --}}
                 @error('title') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
@@ -29,7 +30,7 @@
                     <option value="image" {{ old('type') == 'image' ? 'selected' : '' }}>Image</option>
                     <option value="video" {{ old('type') == 'video' ? 'selected' : '' }}>Video</option>
                 </select>
-                <div class="invalid-feedback">The type field is required.</div>
+                {{-- <div class="invalid-feedback">The type field is required.</div> --}}
                 @error('type') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
@@ -38,7 +39,7 @@
                 <div class="col-md-6">
                     <label class="form-label">Image</label><span class="text-danger">*</span>
                     <input type="file" name="image" id="image" class="form-control">
-                    <div class="invalid-feedback">The banners image field is required.</div>
+                    {{-- <div class="invalid-feedback">The banners image field is required.</div> --}}
                     @error('image') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="col-md-6">
@@ -49,7 +50,7 @@
                 <div class="col-md-6" id="alt_text_field">
                     <label class="form-label">Alt Text</label><span class="text-danger">*</span>
                     <input type="text" name="alt_text" id="alt_text" class="form-control" value="{{ old('alt_text') }}">
-                    <div class="invalid-feedback">The banners alt field is required.</div>
+                    {{-- <div class="invalid-feedback">The banners alt field is required.</div> --}}
                     @error('alt_text') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
             </div>
@@ -59,7 +60,7 @@
                 <div class="col-md-6">
                     <label class="form-label">Video</label><span class="text-danger">*</span>
                     <input type="file" name="video" id="video" class="form-control">
-                    <div class="invalid-feedback">The banners video field is required.</div>
+                    {{-- <div class="invalid-feedback">The banners video field is required.</div> --}}
                     @error('video') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="col-md-6">
@@ -78,11 +79,25 @@
             </div>
 
             <div class="col-md-12">
-                <label class="form-label">Description</label><span class="text-danger">*</span>
+                {{-- <label class="form-label">Description</label><span class="text-danger">*</span> --}}
+                <label class="form-label">Description</label>
                 <textarea name="description" id="description" class="form-control">{{ old('description') }}</textarea>
-                <div class="invalid-feedback">The banners desc field is required.</div>
+                {{-- <div class="invalid-feedback">The banners desc field is required.</div> --}}
                 @error('description') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
+              
+             <div class="col-md-6">
+                <label class="form-label">Button Text</label>
+                <input type="text" name="button_text" class="form-control" value="{{ old('button_text') }}" placeholder="e.g. Explore Collection">
+                @error('button_text') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Button Link</label>
+                <input type="text" name="button_link" class="form-control" value="{{ old('button_link') }}" placeholder="e.g. /collections/raksha-bandhan">
+                @error('button_link') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
 
             <div class="col-md-12">
                 <button type="submit" class="btn btn-primary">Save</button>
@@ -93,6 +108,7 @@
 @endsection
 
 @push('custom_scripts')
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.19.5/jquery.validate.min.js"></script>
 <script src="{{ asset('public/js/admin/banner.js') }}" defer></script>
 <script>
 $(document).ready(function() {

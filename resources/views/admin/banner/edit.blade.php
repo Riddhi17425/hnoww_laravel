@@ -19,7 +19,7 @@
             <div class="col-md-6">
                 <label class="form-label">Title</label><span class="text-danger">*</span>
                 <input type="text" name="title" id="title" class="form-control" value="{{ old('title', $banner->title ?? '') }}">
-                <div class="invalid-feedback">The banners title field is required.</div>
+                {{-- <div class="invalid-feedback">The banners title field is required.</div> --}}
                 @error('title') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
@@ -30,7 +30,7 @@
                     <option value="image" {{ old('type', $banner->type ?? '') == 'image' ? 'selected' : '' }}>Image</option>
                     <option value="video" {{ old('type', $banner->type ?? '') == 'video' ? 'selected' : '' }}>Video</option>
                 </select>
-                <div class="invalid-feedback">The type field is required.</div>
+                {{-- <div class="invalid-feedback">The type field is required.</div> --}}
                 @error('type') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
@@ -40,7 +40,7 @@
                     <label class="form-label">Image</label>
                     <input type="file" name="image" id="image" class="form-control"
                         {{ !empty($banner->image) ? 'data-has-existing="true"' : '' }}>
-                    <div class="invalid-feedback">The banners image field is required.</div>
+                    {{-- <div class="invalid-feedback">The banners image field is required.</div> --}}
                     @if(!empty($banner->image))
                         <img src="{{ asset('public/images/admin/banner/images/'.$banner->image) }}" width="100" class="mt-2 d-block">
                     @endif
@@ -49,6 +49,7 @@
                 <div class="col-md-6">
                     <label class="form-label">Mobile Image</label>
                     <input type="file" name="mobile_image" class="form-control">
+                    {{-- <div class="invalid-feedback">The banners mobile image field is required.</div> --}}
                     @if(!empty($banner->mobile_image))
                         <img src="{{ asset('public/images/admin/banner/images/'.$banner->mobile_image) }}" width="100" class="mt-2 d-block">
                     @endif
@@ -57,7 +58,7 @@
                 <div class="col-md-6" id="alt_text_field">
                     <label class="form-label">Alt Text</label><span class="text-danger">*</span>
                     <input type="text" name="alt_text" id="alt_text" class="form-control" value="{{ old('alt_text', $banner->alt_text ?? '') }}">
-                    <div class="invalid-feedback">The banners alt field is required.</div>
+                    {{-- <div class="invalid-feedback">The banners alt field is required.</div> --}}
                     @error('alt_text') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
             </div>
@@ -68,7 +69,7 @@
                     <label class="form-label">Video</label>
                     <input type="file" name="video" id="video" class="form-control"
                         {{ !empty($banner->video) ? 'data-has-existing="true"' : '' }}>
-                    <div class="invalid-feedback">The banners video field is required.</div>
+                    {{-- <div class="invalid-feedback">The banners video field is required.</div> --}}
                     @if(!empty($banner->video))
                         <video width="150" controls class="mt-2 d-block">
                             <source src="{{ asset('public/images/admin/banner/videos/'.$banner->video) }}">
@@ -79,6 +80,7 @@
                 <div class="col-md-6">
                     <label class="form-label">Mobile Video</label>
                     <input type="file" name="mobile_video" class="form-control">
+                    {{-- <div class="invalid-feedback">The banners mobile video field is required.</div> --}}
                     @if(!empty($banner->mobile_video))
                         <video width="150" controls class="mt-2 d-block">
                             <source src="{{ asset('public/images/admin/banner/videos/'.$banner->mobile_video) }}">
@@ -99,8 +101,20 @@
             <div class="col-md-12">
                 <label class="form-label">Description</label><span class="text-danger">*</span>
                 <textarea name="description" id="description" class="form-control">{{ old('description', $banner->description ?? '') }}</textarea>
-                <div class="invalid-feedback">The banners desc field is required.</div>
+                {{-- <div class="invalid-feedback">The banners desc field is required.</div> --}}
                 @error('description') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+                
+              <div class="col-md-6">
+                <label class="form-label">Button Text</label>
+                <input type="text" name="button_text" class="form-control" value="{{ old('button_text', $banner->button_text ?? '') }}" placeholder="e.g. Explore Collection">
+                @error('button_text') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Button Link</label>
+                <input type="text" name="button_link" class="form-control" value="{{ old('button_link', $banner->button_link ?? '') }}" placeholder="e.g. /collections/raksha-bandhan">
+                @error('button_link') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
             <div class="col-md-12">
@@ -112,6 +126,7 @@
 @endsection
 
 @push('custom_scripts')
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.19.5/jquery.validate.min.js"></script>
 <script src="{{ asset('public/js/admin/banner.js') }}" defer></script>
 <script>
 $(document).ready(function() {

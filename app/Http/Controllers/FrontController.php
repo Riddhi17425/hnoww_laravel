@@ -989,8 +989,8 @@ class FrontController extends Controller
 
     public function getRakshaBandhanCollection(Request $request)
     {
-        $meta_title       = 'Raksha Bandhan Collection 2026 | Luxury Corporate Gifts Dubai | HNOWW';
-        $meta_description = 'Explore HNOWW Raksha Bandhan Collection 2026. Where the bond outlasts the thread.';
+        $meta_title       = 'Raksha Bandhan Gifts in Dubai | Rakhi Collections | HNOWW';
+        $meta_description = "Discover HNOWW's raksha bandhan gifts for Indian families in Dubai, curated pieces for brother and sister that mark the bond, not just the occasion.";
 
         $categories = Category::where('category_type', 2)->with(['products' => function ($query) {
             $query->where('is_active', 0)->whereNull('deleted_at');
@@ -1000,8 +1000,9 @@ class FrontController extends Controller
         $corporateProduct = Product::select('id', 'product_name')->where('product_type', 2)->whereNull('deleted_at')->where('is_active', 0)->get();
         $weddingProduct   = Product::select('id', 'product_name')->where('product_type', 3)->whereNull('deleted_at')->where('is_active', 0)->get();
         $corporateKits    = CorporateKit::isActive()->notDeleted()->get();
+        $og_image = asset('public/images/front/Raksha-Bandhan/Rakhi-Edition.webp');
 
-        return view('front.raksha_bandhan_collection', compact('meta_title', 'meta_description', 'categories', 'products', 'corporateProduct', 'weddingProduct', 'corporateKits'));
+        return view('front.raksha_bandhan_collection', compact('meta_title', 'meta_description', 'categories', 'products', 'corporateProduct', 'weddingProduct', 'corporateKits', 'og_image'));
     }
 
     public function getProductsByCategory(Request $request, $id)
@@ -1843,8 +1844,9 @@ class FrontController extends Controller
         $meta_title       = 'The Atelier | Our Story & Craft | HNOWW';
         $meta_description = "Discover the HNOWW Atelier, where philosophy, craft, and ritual meet. Sculptural objects made in small batches from stone, brass, and silver in Dubai.";
         $blogs = Blog::whereNull('deleted_at')->where('status', 'Active')->latest('id')->take(3)->get();
+        $blessings = Blessing::where('is_active', 0)->whereNull('deleted_at')->latest('id')->take(3)->get();
 
-        return view('front.atelier', compact('corporateProduct', 'weddingProduct', 'meta_title', 'meta_description', 'blogs'));
+        return view('front.atelier', compact('corporateProduct', 'weddingProduct', 'meta_title', 'meta_description', 'blogs', 'blessings'));
     }
 
     public function getWeddingVault(Request $request)

@@ -2041,6 +2041,13 @@
         width: 90%;
     }
 
+    
+    .hero-section .home_btn
+    {
+        width: 100%;
+        text-align: center;
+    }
+
 
 }
 

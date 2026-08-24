@@ -6,22 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('banners', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('orders', function (Blueprint $table) {
+            $table->boolean('gift_wrapper')->default(false)->after('order_address_id');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('banners');
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dropColumn('gift_wrapper');
+        });
     }
 };

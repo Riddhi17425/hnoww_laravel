@@ -9,7 +9,7 @@
             <h3>Banners List</h3>
         </div>
         <div class="col-md-6 text-end">
-            {{-- <a href="{{ route('admin.banners.create') }}" class="btn btn-primary">Add Banner</a> --}}
+             <a href="{{ route('admin.banners.create') }}" class="btn btn-primary">Add Banner</a>
         </div>
     </div>
     <div class="col-md-2 mb-3">

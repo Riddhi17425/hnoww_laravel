@@ -72,10 +72,16 @@ class BannerController extends Controller
 
     public function store(Request $request)
     {
+        // $rules = [
+        //     'title'       => 'required|string|max:255',
+        //     'type'        => 'required|in:image,video',
+        //     'description' => 'required|string',
+        // ];
+
         $rules = [
-            'title'       => 'required|string|max:255',
+            'title'       => 'nullable|string|max:255',
             'type'        => 'required|in:image,video',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
         ];
 
         if ($request->type == 'image') {
@@ -89,7 +95,7 @@ class BannerController extends Controller
 
         $validator = Validator::make($request->all(), $rules, [
             'title.required'       => 'The title is required.',
-            'type.required'        => 'Please select a category.',
+            'type.required'        => 'Please select a type.',
             'description.required' => 'The description is required.',
             'image.required'       => 'An image is required.',
             'video.required'       => 'A video is required.',
@@ -104,6 +110,8 @@ class BannerController extends Controller
         $banner->title       = $request->title;
         $banner->type        = $request->type;
         $banner->description = $request->description;
+        $banner->button_text = $request->button_text;
+        $banner->button_link = $request->button_link;
         $banner->is_active   = $request->is_active ?? 0;
 
         if ($request->type == 'image') {
@@ -167,20 +175,28 @@ class BannerController extends Controller
     {
         $banner = Banner::findOrFail($id);
 
+        // $rules = [
+        //     'title'       => 'required|string|max:255',
+        //     'type'        => 'required|in:image,video',
+        //     'description' => 'required|string',
+        // ];
+
         $rules = [
-            'title'       => 'required|string|max:255',
+            'title'       => 'nullable|string|max:255',
             'type'        => 'required|in:image,video',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
         ];
 
-        if ($request->type == 'image') {
-            $rules['image']        = 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048';
-            $rules['mobile_image'] = 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048';
-            $rules['alt_text']     = 'required|string|max:255';
-        } else {
-            $rules['video']        = 'nullable|mimes:mp4,mov,avi,webm|max:20480';
-            $rules['mobile_video'] = 'nullable|mimes:mp4,mov,avi,webm|max:20480';
-        }
+        // if ($request->type == 'image') {
+        //     $rules['image']        = 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048';
+        //     $rules['mobile_image'] = 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048';
+        //     $rules['alt_text']     = 'required|string|max:255';
+        //     $rules['button_text'] = 'nullable|string|max:255';
+        //     $rules['button_link'] = 'nullable|string|max:500';
+        // } else {
+        //     $rules['video']        = 'nullable|mimes:mp4,mov,avi,webm|max:20480';
+        //     $rules['mobile_video'] = 'nullable|mimes:mp4,mov,avi,webm|max:20480';
+        // }
 
         $validator = Validator::make($request->all(), $rules);
 
@@ -192,6 +208,8 @@ class BannerController extends Controller
         $banner->type        = $request->type;
         $banner->description = $request->description;
         $banner->alt_text    = $request->type == 'image' ? $request->alt_text : null;
+        $rules['button_text'] = 'nullable|string|max:255';
+        $rules['button_link'] = 'nullable|string|max:500';
         $banner->is_active = $request->is_active ?? $banner->is_active;
         $banner->save();
 

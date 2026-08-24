@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('mobile_image')->nullable();
             $table->string('alt_text')->nullable();
+            $table->string('button_text')->nullable();
+            $table->string('button_link')->nullable();
             $table->string('video')->nullable();
             $table->string('mobile_video')->nullable();
             $table->tinyInteger('is_active')->default(1)->comment("0 = Active 1 = In-active");

@@ -133,134 +133,209 @@ $(document).ready(function() {
     }
 });
 
-// ---------------- CLIENT-SIDE VALIDATION (Add/Edit Banner form) ----------------
+// ----------------OLD CLIENT-SIDE VALIDATION (Add/Edit Banner form) ----------------
+// $(document).ready(function () {
+//     var $form = $('#bannerForm');
+//     if ($form.length === 0) return;
+
+//     $form.on('submit', function (e) {
+//         var isValid = true;
+
+//         // reset previous state
+//         $form.find('.is-invalid').removeClass('is-invalid');
+
+//         // Always-required fields
+//         // var alwaysRequired = ['#title', '#type', '#description'];
+//         var alwaysRequired = ['#type'];
+
+//         alwaysRequired.forEach(function (sel) {
+//             var $field = $(sel);
+//             if ($field.length === 0) return;
+
+//             var val = $field.val();
+
+//             // special case: summernote editor for description
+//             if (sel === '#description') {
+//                 val = $('#description').summernote('code').replace(/<(.|\n)*?>/g, '').trim();
+//             }
+
+//             if (!val || val.trim() === '') {
+//                 $field.addClass('is-invalid');
+//                 isValid = false;
+//             }
+//         });
+
+//         // Conditional fields based on selected type
+//         var type = $('#type').val();
+
+//         var allowedImageTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'image/webp']; // jpeg, png, jpg, gif, webp
+//         var maxImageSize = 2 * 1024 * 1024; // 2MB
+
+//         var allowedVideoTypes = ['video/mp4', 'video/quicktime', 'video/x-msvideo', 'video/webm']; // mp4, mov, avi, webm
+//         var maxVideoSize = 20 * 1024 * 1024; // 20MB
+
+//         // if (type === 'image') {
+//         //     var $imageInput = $('#image');
+//         //     var hasExistingImage = $imageInput.data('has-existing') === true;
+
+//         //     if ($imageInput.length && $imageInput[0].files.length === 0 && !hasExistingImage) {
+//         //         $imageInput.addClass('is-invalid');
+//         //         $imageInput.next('.invalid-feedback').text('The banners image field is required.');
+//         //         isValid = false;
+//         //     } else if ($imageInput.length && $imageInput[0].files.length > 0) {
+//         //         var imgFile = $imageInput[0].files[0];
+
+//         //         if (allowedImageTypes.indexOf(imgFile.type) === -1) {
+//         //             $imageInput.addClass('is-invalid');
+//         //             $imageInput.next('.invalid-feedback').text('Only jpeg, png, jpg, gif, webp images are allowed.');
+//         //             isValid = false;
+//         //         } else if (imgFile.size > maxImageSize) {
+//         //             $imageInput.addClass('is-invalid');
+//         //             $imageInput.next('.invalid-feedback').text('Image size must not be greater than 2MB.');
+//         //             isValid = false;
+//         //         }
+//         //     }
+
+//         //     // Mobile image (optional field, but validate type/size if a file is chosen)
+//         //     var $mobileImageInput = $('input[name="mobile_image"]');
+//         //     if ($mobileImageInput.length && $mobileImageInput[0].files.length > 0) {
+//         //         var mobileImgFile = $mobileImageInput[0].files[0];
+//         //         if (allowedImageTypes.indexOf(mobileImgFile.type) === -1) {
+//         //             $mobileImageInput.addClass('is-invalid');
+//         //             isValid = false;
+//         //         } else if (mobileImgFile.size > maxImageSize) {
+//         //             $mobileImageInput.addClass('is-invalid');
+//         //             isValid = false;
+//         //         }
+//         //     }
+
+//         //     var $altInput = $('#alt_text');
+//         //     if ($altInput.length && (!$altInput.val() || $altInput.val().trim() === '')) {
+//         //         $altInput.addClass('is-invalid');
+//         //         isValid = false;
+//         //     }
+//         // } else if (type === 'video') {
+//         //     var $videoInput = $('#video');
+//         //     var hasExistingVideo = $videoInput.data('has-existing') === true;
+
+//         //     if ($videoInput.length && $videoInput[0].files.length === 0 && !hasExistingVideo) {
+//         //         $videoInput.addClass('is-invalid');
+//         //         $videoInput.next('.invalid-feedback').text('The banners video field is required.');
+//         //         isValid = false;
+//         //     } else if ($videoInput.length && $videoInput[0].files.length > 0) {
+//         //         var vidFile = $videoInput[0].files[0];
+
+//         //         if (allowedVideoTypes.indexOf(vidFile.type) === -1) {
+//         //             $videoInput.addClass('is-invalid');
+//         //             $videoInput.next('.invalid-feedback').text('Only mp4, mov, avi,webm videos are allowed.');
+//         //             isValid = false;
+//         //         } else if (vidFile.size > maxVideoSize) {
+//         //             $videoInput.addClass('is-invalid');
+//         //             $videoInput.next('.invalid-feedback').text('Video size must not be greater than 20MB.');
+//         //             isValid = false;
+//         //         }
+//         //     }
+
+//         //     // Mobile video (optional field, but validate type/size if a file is chosen)
+//         //     var $mobileVideoInput = $('input[name="mobile_video"]');
+//         //     if ($mobileVideoInput.length && $mobileVideoInput[0].files.length > 0) {
+//         //         var mobileVidFile = $mobileVideoInput[0].files[0];
+//         //         if (allowedVideoTypes.indexOf(mobileVidFile.type) === -1) {
+//         //             $mobileVideoInput.addClass('is-invalid');
+//         //             isValid = false;
+//         //         } else if (mobileVidFile.size > maxVideoSize) {
+//         //             $mobileVideoInput.addClass('is-invalid');
+//         //             isValid = false;
+//         //         }
+//         //     }
+//         // }
+
+//         // if (!isValid) {
+//         //     e.preventDefault();
+//         //     // scroll to first invalid field
+//         //     var $first = $form.find('.is-invalid').first();
+//         //     if ($first.length) {
+//         //         $('html, body').animate({ scrollTop: $first.offset().top - 100 }, 300);
+//         //     }
+//         // }
+//     });
+
+//     // remove is-invalid as soon as user starts fixing the field
+//     $form.on('input change', 'input, textarea, select', function () {
+//         $(this).removeClass('is-invalid');
+//     });
+// });
+// ---------------- END OLD CLIENT-SIDE VALIDATION (Add/Edit Banner form) ----------------
+
+// ----------------NEW SIMPLE JQUERY VALIDATION (Add/Edit Banner form) ----------------
 $(document).ready(function () {
     var $form = $('#bannerForm');
     if ($form.length === 0) return;
 
-    $form.on('submit', function (e) {
-        var isValid = true;
-
-        // reset previous state
-        $form.find('.is-invalid').removeClass('is-invalid');
-
-        // Always-required fields
-        var alwaysRequired = ['#title', '#type', '#description'];
-
-        alwaysRequired.forEach(function (sel) {
-            var $field = $(sel);
-            if ($field.length === 0) return;
-
-            var val = $field.val();
-
-            // special case: summernote editor for description
-            if (sel === '#description') {
-                val = $('#description').summernote('code').replace(/<(.|\n)*?>/g, '').trim();
-            }
-
-            if (!val || val.trim() === '') {
-                $field.addClass('is-invalid');
-                isValid = false;
-            }
-        });
-
-        // Conditional fields based on selected type
-        var type = $('#type').val();
-
-        var allowedImageTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'image/webp']; // jpeg, png, jpg, gif, webp
-        var maxImageSize = 2 * 1024 * 1024; // 2MB
-
-        var allowedVideoTypes = ['video/mp4', 'video/quicktime', 'video/x-msvideo', 'video/webm']; // mp4, mov, avi, webm
-        var maxVideoSize = 20 * 1024 * 1024; // 20MB
-
-        if (type === 'image') {
-            var $imageInput = $('#image');
-            var hasExistingImage = $imageInput.data('has-existing') === true;
-
-            if ($imageInput.length && $imageInput[0].files.length === 0 && !hasExistingImage) {
-                $imageInput.addClass('is-invalid');
-                $imageInput.next('.invalid-feedback').text('The banners image field is required.');
-                isValid = false;
-            } else if ($imageInput.length && $imageInput[0].files.length > 0) {
-                var imgFile = $imageInput[0].files[0];
-
-                if (allowedImageTypes.indexOf(imgFile.type) === -1) {
-                    $imageInput.addClass('is-invalid');
-                    $imageInput.next('.invalid-feedback').text('Only jpeg, png, jpg, gif, webp images are allowed.');
-                    isValid = false;
-                } else if (imgFile.size > maxImageSize) {
-                    $imageInput.addClass('is-invalid');
-                    $imageInput.next('.invalid-feedback').text('Image size must not be greater than 2MB.');
-                    isValid = false;
+    $form.validate({
+        rules: {
+            type: {
+                required: true
+            },
+            image: {
+                required: function () {
+                    return $('#type').val() === 'image' && !$('#image').data('has-existing');
+                },
+                accept: "image/jpeg,image/png,image/jpg,image/gif,image/webp"
+            },
+            mobile_image: {
+                accept: "image/jpeg,image/png,image/jpg,image/gif,image/webp"
+            },
+            alt_text: {
+                required: function () {
+                    return $('#type').val() === 'image';
                 }
+            },
+            video: {
+                required: function () {
+                    return $('#type').val() === 'video' && !$('#video').data('has-existing');
+                },
+                accept: "video/mp4,video/quicktime,video/x-msvideo,video/webm"
+            },
+            mobile_video: {
+                accept: "video/mp4,video/quicktime,video/x-msvideo,video/webm"
             }
+        },
 
-            // Mobile image (optional field, but validate type/size if a file is chosen)
-            var $mobileImageInput = $('input[name="mobile_image"]');
-            if ($mobileImageInput.length && $mobileImageInput[0].files.length > 0) {
-                var mobileImgFile = $mobileImageInput[0].files[0];
-                if (allowedImageTypes.indexOf(mobileImgFile.type) === -1) {
-                    $mobileImageInput.addClass('is-invalid');
-                    isValid = false;
-                } else if (mobileImgFile.size > maxImageSize) {
-                    $mobileImageInput.addClass('is-invalid');
-                    isValid = false;
-                }
+        messages: {
+            type: {
+                required: "Please select a type (Image or Video)."
+            },
+            image: {
+                required: "Please upload an image.",
+                accept: "Only jpeg, png, jpg, gif, webp images are allowed."
+            },
+            mobile_image: {
+                accept: "Only jpeg, png, jpg, gif, webp images are allowed."
+            },
+            alt_text: {
+                required: "Please enter alt text for the image."
+            },
+            video: {
+                required: "Please upload a video.",
+                accept: "Only mp4, mov, avi, webm videos are allowed."
+            },
+            mobile_video: {
+                accept: "Only mp4, mov, avi, webm videos are allowed."
             }
+        },
 
-            var $altInput = $('#alt_text');
-            if ($altInput.length && (!$altInput.val() || $altInput.val().trim() === '')) {
-                $altInput.addClass('is-invalid');
-                isValid = false;
-            }
-        } else if (type === 'video') {
-            var $videoInput = $('#video');
-            var hasExistingVideo = $videoInput.data('has-existing') === true;
+        errorElement: 'div',
+        errorClass: 'invalid-feedback d-block',
+        highlight: function (element) {
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element) {
+            $(element).removeClass('is-invalid');
+        },
 
-            if ($videoInput.length && $videoInput[0].files.length === 0 && !hasExistingVideo) {
-                $videoInput.addClass('is-invalid');
-                $videoInput.next('.invalid-feedback').text('The banners video field is required.');
-                isValid = false;
-            } else if ($videoInput.length && $videoInput[0].files.length > 0) {
-                var vidFile = $videoInput[0].files[0];
-
-                if (allowedVideoTypes.indexOf(vidFile.type) === -1) {
-                    $videoInput.addClass('is-invalid');
-                    $videoInput.next('.invalid-feedback').text('Only mp4, mov, avi,webm videos are allowed.');
-                    isValid = false;
-                } else if (vidFile.size > maxVideoSize) {
-                    $videoInput.addClass('is-invalid');
-                    $videoInput.next('.invalid-feedback').text('Video size must not be greater than 20MB.');
-                    isValid = false;
-                }
-            }
-
-            // Mobile video (optional field, but validate type/size if a file is chosen)
-            var $mobileVideoInput = $('input[name="mobile_video"]');
-            if ($mobileVideoInput.length && $mobileVideoInput[0].files.length > 0) {
-                var mobileVidFile = $mobileVideoInput[0].files[0];
-                if (allowedVideoTypes.indexOf(mobileVidFile.type) === -1) {
-                    $mobileVideoInput.addClass('is-invalid');
-                    isValid = false;
-                } else if (mobileVidFile.size > maxVideoSize) {
-                    $mobileVideoInput.addClass('is-invalid');
-                    isValid = false;
-                }
-            }
+        submitHandler: function (form) {
+            form.submit();
         }
-
-        if (!isValid) {
-            e.preventDefault();
-            // scroll to first invalid field
-            var $first = $form.find('.is-invalid').first();
-            if ($first.length) {
-                $('html, body').animate({ scrollTop: $first.offset().top - 100 }, 300);
-            }
-        }
-    });
-
-    // remove is-invalid as soon as user starts fixing the field
-    $form.on('input change', 'input, textarea, select', function () {
-        $(this).removeClass('is-invalid');
     });
 });
