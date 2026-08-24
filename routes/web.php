@@ -291,6 +291,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('/update/{blog_id}', [BlogController::class, 'update'])->name('update');
             Route::delete('/delete/{blog_id}', [BlogController::class, 'delete'])->name('delete');
             Route::post('/update-status', [BlogController::class, 'updateStatus'])->name('update.status');
+            Route::post('/send-published-mail/{blog_id}', [BlogController::class, 'sendPublishedMail'])->name('send.published.mail');
         });
 
         Route::resource('journals', JournalController::class);
