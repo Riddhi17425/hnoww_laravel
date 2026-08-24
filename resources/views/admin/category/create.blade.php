@@ -38,6 +38,7 @@
                                 </select>
                                 @error('category_type') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
+
                             <div class="col-md-4">
                                 <label class="form-label">Category Name</label><span class="text-danger">*</span>
                                 <input type="text" name="category_name" class="form-control" value="{{ old('category_name') }}" id="category_name">
@@ -54,6 +55,31 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label d-block">Category Placement</label>
+                                <div class="form-check form-switch mt-2">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        role="switch"
+                                        id="is_festive"
+                                        name="is_festive"
+                                        value="1"
+                                        {{ old('is_festive') ? 'checked' : '' }}
+                                    >
+                                    <label class="form-check-label" for="is_festive">
+                                        Display this category on Festive Page
+                                    </label>
+                                </div>
+                                <small class="text-muted">
+                                    When enabled, this category will be removed from the Collection menu.
+                                </small>
+                                @error('is_festive')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
                             <div class="col-md-12">
                                 <label class="form-label">Category Title</label>
                                 <div class="input-group mb-3">
@@ -70,6 +96,150 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+
+                            <hr class="mt-4">
+
+                            <h5 class="fw-bold mb-3">Festive Section</h5>
+
+                            {{-- FESTIVE SECTION FIELDS --}}
+
+                            <div class="col-md-6">
+                                <label class="form-label">Celebration Label</label>
+                                <input type="text"
+                                    name="celebration_label"
+                                    class="form-control"
+                                    value="{{ old('celebration_label') }}">
+
+                                @error('celebration_label')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Celebration Title</label>
+                                <input type="text"
+                                    name="celebration_title"
+                                    class="form-control"
+                                    value="{{ old('celebration_title') }}">
+
+                                @error('celebration_title')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-12">
+                                <label class="form-label">Celebration Description</label>
+                                <textarea name="celebration_description"
+                                        class="form-control"
+                                        rows="4">{{ old('celebration_description') }}</textarea>
+
+                                @error('celebration_description')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Celebration Image</label>
+                                <input type="file"
+                                    name="celebration_image"
+                                    class="form-control">
+
+                                @error('celebration_image')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+
+                            {{-- COLLECTION SECTION --}}
+
+                            <div class="col-md-12 mt-3">
+                                <h6 class="fw-bold">Collection Section</h6>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Collection Label</label>
+                                <input type="text"
+                                    name="collection_label"
+                                    class="form-control"
+                                    value="{{ old('collection_label') }}">
+
+                                @error('collection_label')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label">Collection Title</label>
+                                <input type="text"
+                                    name="collection_title"
+                                    class="form-control"
+                                    value="{{ old('collection_title') }}">
+
+                                @error('collection_title')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-12">
+                                <label class="form-label">Collection Description</label>
+                                <textarea name="collection_description"
+                                        class="form-control"
+                                        rows="4">{{ old('collection_description') }}</textarea>
+
+                                @error('collection_description')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+
+                            {{-- FAQ SECTION --}}
+
+                            <div class="col-md-12 mt-3">
+                                <h6 class="fw-bold">FAQs</h6>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div id="faq-wrapper">
+
+                                    <div class="faq-item border rounded p-3 mb-3">
+                                        <div class="row g-3">
+
+                                            <div class="col-md-12">
+                                                <label class="form-label">Question</label>
+                                                <input type="text"
+                                                    name="faqs[0][question]"
+                                                    class="form-control"
+                                                    placeholder="Enter FAQ question">
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <label class="form-label">Answer</label>
+                                                <textarea name="faqs[0][answer]"
+                                                        class="form-control"
+                                                        rows="3"
+                                                        placeholder="Enter FAQ answer"></textarea>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <button type="button"
+                                                        class="btn btn-danger btn-sm remove-faq"
+                                                        style="display:none;">
+                                                    Remove FAQ
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <button type="button"
+                                        id="add-faq"
+                                        class="btn btn-secondary btn-sm">
+                                    + Add FAQ
+                                </button>
+                            </div>
+
                             <div class="col-md-12">
                                 <label class="form-label">Meta Title</label><span class="text-danger">*</span>
                                 <input type="text" name="meta_title" class="form-control" value="{{ old('meta_title') }}">
@@ -175,6 +345,50 @@ $(document).ready(function() {
             ['view', ['fullscreen', 'codeview']],
             ['help', ['help']]
         ]
+    });
+
+    let faqIndex = 1;
+
+    $('#add-faq').on('click', function () {
+
+        let faqHtml = `
+            <div class="faq-item border rounded p-3 mb-3">
+                <div class="row g-3">
+
+                    <div class="col-md-12">
+                        <label class="form-label">Question</label>
+                        <input type="text"
+                            name="faqs[${faqIndex}][question]"
+                            class="form-control"
+                            placeholder="Enter FAQ question">
+                    </div>
+
+                    <div class="col-md-12">
+                        <label class="form-label">Answer</label>
+                        <textarea name="faqs[${faqIndex}][answer]"
+                                class="form-control"
+                                rows="3"
+                                placeholder="Enter FAQ answer"></textarea>
+                    </div>
+
+                    <div class="col-md-12">
+                        <button type="button"
+                                class="btn btn-danger btn-sm remove-faq">
+                            Remove FAQ
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        `;
+
+        $('#faq-wrapper').append(faqHtml);
+
+        faqIndex++;
+    });
+
+    $(document).on('click', '.remove-faq', function () {
+        $(this).closest('.faq-item').remove();
     });
 });
 </script>

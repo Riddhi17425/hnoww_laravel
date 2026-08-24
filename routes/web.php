@@ -11,8 +11,6 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\GiftShopController;
 use App\Http\Controllers\Admin\JournalController;
 use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\FestiveCategoryController;
-use App\Http\Controllers\Admin\FestiveProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\ProductTabController;
 use App\Http\Controllers\Admin\UserController;
@@ -215,30 +213,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('delete-all-detail-images', [ProductController::class, 'deleteAllDetailImages'])->name('delete.alldetail.images');
         });
 
-        // FESTIVE CATEGORY
-        Route::prefix('festive-categories')->name('festive-categories.')->group(function () {
-            Route::get('/', [FestiveCategoryController::class, 'index'])->name('index');
-            Route::get('/fetch', [FestiveCategoryController::class, 'getCategories'])->name('fetch');
-            Route::get('/create', [FestiveCategoryController::class, 'create'])->name('create');
-            Route::post('/store', [FestiveCategoryController::class, 'store'])->name('store');
-            Route::get('/edit/{cat_id}', [FestiveCategoryController::class, 'edit'])->name('edit');
-            Route::put('/update/{cat_id}', [FestiveCategoryController::class, 'update'])->name('update');
-            Route::delete('/delete/{cat_id}', [FestiveCategoryController::class, 'delete'])->name('delete');
-            Route::post('/update-status', [FestiveCategoryController::class, 'updateStatus'])->name('update.status');
-        });
-
-        // FESTIVE PRODUCT
-        Route::prefix('festive-products')->name('festive-products.')->group(function () {
-            Route::get('/', [FestiveProductController::class, 'index'])->name('index');
-            Route::get('/fetch', [FestiveProductController::class, 'getProducts'])->name('fetch');
-            Route::get('/create', [FestiveProductController::class, 'create'])->name('create');
-            Route::post('/store', [FestiveProductController::class, 'store'])->name('store');
-            Route::get('/edit/{product_id}', [FestiveProductController::class, 'edit'])->name('edit');
-            Route::put('/update/{product_id}', [FestiveProductController::class, 'update'])->name('update');
-            Route::delete('/delete/{product_id}', [FestiveProductController::class, 'delete'])->name('delete');
-            Route::post('/update-status', [FestiveProductController::class, 'updateStatus'])->name('update.status');
-        });
-
         //PRODCUCT TABS
         Route::prefix('product-tabs')->name('product-tabs.')->group(function () {
             Route::get('/', [ProductTabController::class, 'index'])->name('index');
@@ -251,7 +225,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/update-status', [ProductTabController::class, 'updateStatus'])->name('update.status');
         });
 
-        //PRODCUCT TABS
+        //PRODCUCT IMAGES
         Route::prefix('product-images')->name('product-images.')->group(function () {
             Route::get('/', [ProductImageController::class, 'index'])->name('index');
             Route::get('/fetch', [ProductImageController::class, 'getProductImages'])->name('fetch');
