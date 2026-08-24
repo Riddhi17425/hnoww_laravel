@@ -736,13 +736,26 @@ class FrontController extends Controller
             }
 
             // WhatsApp link (user must click to open)
-            $waUrl = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode('New Newsletter subscription with Email Id - ' . $newsletter->email);
+            // $waUrl = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode('New Newsletter subscription with Email Id - ' . $newsletter->email);
 
-            return response()->json([
-                'success'     => true,
-                'message'     => 'Subscription successful!',
-                'whatsappUrl' => $waUrl,
-            ]);
+            // return response()->json([
+            //     'success'     => true,
+            //     'message'     => 'Subscription successful!',
+            //     'whatsappUrl' => $waUrl,
+            // ]);
+
+            if ($request->expectsJson()) {
+                session()->flash('thankyou_message', 'Thank you for subscribing to our newsletter!');
+
+                return response()->json([
+                    'success'      => true,
+                    'message'      => 'Thank you for subscribing to our newsletter!',
+                    'redirect_url' => route('front.thankyou'),
+                ]);
+            }
+
+            return redirect()->route('front.thankyou')
+                ->with('thankyou_message', 'Thank you for subscribing to our newsletter!');
 
         } catch (\Exception $e) {
             Log::error('Newsletter subscription failed: ' . $e->getMessage());
@@ -2184,7 +2197,9 @@ class FrontController extends Controller
 
     public function getThankYou()
     {
-        return view('front.orders.thankyou');
+        return view('front.orders.thankyou', [
+            'msg' => session('thankyou_message'),
+        ]);
     }
 
     public function getAuthor()
