@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BespokeCommissionEnquiry;
 use App\Models\Blessing;
+use App\Models\Banner;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\CeremonialInquiry;
@@ -215,8 +216,12 @@ class FrontController extends Controller
 
         $meta_title       = 'Luxury Gifts Online | Unique Gift Items Dubai | HNOWW';
         $meta_description = 'Shop luxury gifts online in Dubai at HNOWW. Discover unique gift items, bespoke collections, home decor, corporate gifts, and elegant presents for every occasion';
+        
+        $heroBanners = Banner::where('is_active', 0)
+        ->orderBy('id', 'desc')
+        ->get();
 
-        return view('front.home', compact('herProduct', 'himProduct', 'homeProduct', 'corporateProduct', 'weddingProduct', /*'allProd',*/'allGifts', 'desiredProductsArray', 'instagramPosts', 'meta_title', 'meta_description'));
+        return view('front.home', compact('herProduct', 'himProduct', 'homeProduct', 'corporateProduct', 'weddingProduct', /*'allProd',*/'allGifts', 'desiredProductsArray', 'instagramPosts', 'meta_title', 'meta_description','heroBanners'));
     }
 
     public function getList(Request $request, $catSlug, $from = null)
