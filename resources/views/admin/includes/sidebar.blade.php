@@ -69,6 +69,15 @@
                 </ul>
             </li>
 
+            <li class="{{ request()->routeIs('admin.banners*') ? '' : 'collapsed' }}">
+                <a class="m-link {{ request()->routeIs('admin.banners*') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-banners" href="#">
+                    <i class="icofont-image fs-5"></i> <span>Banners</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
+                <ul class="sub-menu collapse {{ request()->routeIs('admin.banners*') ? 'show' : '' }}" id="menu-banners">
+                    <li><a class="ms-link {{ request()->routeIs('admin.banners.index') ? 'active' : '' }}" href="{{ route('admin.banners.index') }}">List</a></li>
+                    <li><a class="ms-link {{ request()->routeIs('admin.banners.create') ? 'active' : '' }}" href="{{ route('admin.banners.create') }}">Add</a></li>
+                </ul>
+            </li>
+
             <li class="{{ request()->routeIs('admin.users*') ? '' : 'collapsed' }}">
                 <a class="m-link {{ request()->routeIs('admin.users*') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#users" href="#">
                     <i class="icofont-users fs-5"></i> <span>Users</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
