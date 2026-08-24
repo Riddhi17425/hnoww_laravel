@@ -3,7 +3,7 @@ $current_route = Route::currentRouteName();
 $is_green = ($current_route === 'front.product.details' || $current_route === 'front.gift.details' || $current_route ===
 'front.auth' || $current_route === 'front.cart.view' || $current_route === 'front.checkout.view' || $current_route ===
 'front.order.view' || $current_route === 'front.order_detail.view' || $current_route === 'front.profile' ||
-$current_route === 'front.get.forgot.password' || $current_route === 'front.get.reset.password' );
+$current_route === 'front.order.details' || $current_route === 'front.get.forgot.password' || $current_route === 'front.get.reset.password' );
 
 @endphp
 <!DOCTYPE html>
@@ -269,7 +269,7 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
                     <div class="user_menu">
 
                         <a href="{{route('front.profile')}}">My Profile</a>
-                        {{-- <a href="{{ route('front.order.view') }}">My Orders</a> --}}
+                        <a href="{{ route('front.order.view') }}">My Orders</a>
                         <!-- <a href="#">My Wishlist</a> -->
                         <a href="{{ route('front.logout') }}">Logout</a>
                     </div>
@@ -467,7 +467,7 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
                         <div class="user_menu">
 
                             <a href="{{route('front.profile')}}">My Profile</a>
-                            {{-- <a href="{{ route('front.order.view') }}">My Orders</a> --}}
+                            <a href="{{ route('front.order.view') }}">My Orders</a>
                             <!-- <a href="#">My Wishlist</a> -->
                             <a href="{{ route('front.logout') }}">Logout</a>
                         </div>
@@ -961,20 +961,25 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
     </script>
 
     <script>
-    document.querySelectorAll('.has-dropdown > a').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            if (window.innerWidth < 992) {
-                e.preventDefault(); // Prevent following the "#" link
-                const parent = this.parentElement;
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('.has-dropdown > a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (window.innerWidth < 992) {
+                    e.preventDefault(); // Prevent following the link on mobile
+                    const parent = this.parentElement;
+                    const wasActive = parent.classList.contains('active');
 
-                // Toggle active class on the <li>
-                parent.classList.toggle('active');
+                    // Close all open dropdowns
+                    document.querySelectorAll('.has-dropdown').forEach(item => {
+                        item.classList.remove('active');
+                    });
 
-                // Optional: Close other open dropdowns
-                document.querySelectorAll('.has-dropdown').forEach(item => {
-                    if (item !== parent) item.classList.remove('active');
-                });
-            }
+                    // If the clicked one wasn't active, open it
+                    if (!wasActive) {
+                        parent.classList.add('active');
+                    }
+                }
+            });
         });
     });
 
@@ -996,6 +1001,7 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
 
         navLinks.forEach((link) => {
             link.addEventListener('mouseenter', function() {
+                if (window.innerWidth < 992) return; // Disable hover JS on mobile
                 // Remove red from all
                 navLinks.forEach(l => l.style.color = '');
                 // Set hovered to red
@@ -1003,6 +1009,7 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
             });
 
             link.addEventListener('mouseleave', function() {
+                if (window.innerWidth < 992) return; // Disable hover JS on mobile
                 // When mouse leaves a link, check if any sibling is hovered
                 // If not, reset to default (first = red)
                 setTimeout(() => {
@@ -1017,7 +1024,11 @@ $current_route === 'front.get.forgot.password' || $current_route === 'front.get.
         // ↑ Replace with your actual Products nav trigger selector
 
         if (productsMenuTrigger) {
-            productsMenuTrigger.addEventListener('mouseenter', resetColors);
+            productsMenuTrigger.addEventListener('mouseenter', () => {
+                if (window.innerWidth >= 992) {
+                    resetColors();
+                }
+            });
         }
     });
     </script>

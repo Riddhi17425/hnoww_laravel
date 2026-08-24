@@ -5,12 +5,33 @@
 
 <!-- hero section -->
 <section class="hero-section_inner">
-    <img class="img-fluid" src="{{ asset('public/images/front/for-him-banner.webp')}}" alt="him banner">
+
+    @if(!empty($category->banner_image) && file_exists(public_path('images/admin/category_banner/'.$category->banner_image)))
+        <img class="img-fluid test"
+             src="{{ asset('public/images/admin/category_banner/'.$category->banner_image) }}"
+             alt="{{ $category->category_name ?? 'Category Banner' }}">
+    @else
+        <img class="img-fluid test"
+             src="{{ asset('public/images/front/for-him-banner.webp') }}"
+             alt="{{ $category->category_name ?? 'Category Banner' }}">
+    @endif
 
     <div class="hero_content_inner">
-        <h2 class="main_head">{{$category ? $category->category_name : '' }}</h2>
-        <p class="sub_heads sec_in_mb">{{$category ? $category->title : '' }}</p>
-        <p class="para mb-0">{{$category ? $category->description : '' }}</p>
+        <h2 class="main_head">
+            {{ $category->category_name ?? '' }}
+        </h2>
+
+        @if(!empty($category->title))
+            <p class="sub_heads sec_in_mb">
+                {{ $category->title }}
+            </p>
+        @endif
+
+        @if(!empty($category->description))
+            <p class="para mb-0">
+                {{ $category->description }}
+            </p>
+        @endif
     </div>
 </section>
 
@@ -56,6 +77,148 @@
 </section>
 @endif
 
+<!-- START - CELEBRATION SECTION -->
+@if(
+    !empty($category->celebration_label) ||
+    !empty($category->celebration_title) ||
+    !empty($category->celebration_description) ||
+    !empty($category->celebration_image)
+)
+
+<section class="mt_120">
+    <div class="container">
+
+        <div class="section_header">
+            @if(!empty($category->celebration_label))
+                <p class="sub_head mb-0">
+
+                    <span>
+                        <svg width="63" height="6" viewBox="0 0 63 6" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z"
+                                fill="#B58A46">
+                            </path>
+                        </svg>
+                    </span>
+
+                    <span>{{ $category->celebration_label }}</span>
+
+                    <span>
+                        <svg width="63" height="6" viewBox="0 0 63 6" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z"
+                                fill="#B58A46">
+                            </path>
+                        </svg>
+                    </span>
+
+                </p>
+            @endif
+
+            @if(!empty($category->celebration_title))
+                <h2 class="title_60">
+                    {{ $category->celebration_title }}
+                </h2>
+            @endif
+
+        </div>
+
+        @if(!empty($category->celebration_description))
+            <div class="exists_content">
+                <div class="col-lg-10 m-auto text-center">
+
+                    <p class="sub_head_inter">
+                        {!! nl2br(e($category->celebration_description)) !!}
+                    </p>
+
+                </div>
+            </div>
+        @endif
+
+
+        @if(!empty($category->celebration_image))
+            <div class="mt-5">
+
+                <img
+                    class="img-fluid w-100"
+                    src="{{ asset('public/images/admin/category_celebration/' . $category->celebration_image) }}"
+                    alt="{{ $category->celebration_title ?? 'Celebration' }}">
+
+            </div>
+        @endif
+
+    </div>
+</section>
+
+@endif
+<!-- END - CELEBRATION SECTION -->
+
+<!-- START - COLLECTION SECTION -->
+@if(
+    !empty($category->collection_label) ||
+    !empty($category->collection_title) ||
+    !empty($category->collection_description)
+)
+
+<section class="mt_120 mb_120">
+    <div class="container">
+
+        <!-- Section Header -->
+        <div class="section_header text-center mb-5">
+
+            @if(!empty($category->collection_label))
+                <p class="sub_head mb-0">
+
+                    <span>
+                        <svg width="63" height="6" viewBox="0 0 63 6" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z"
+                                fill="#B58A46">
+                            </path>
+                        </svg>
+                    </span>
+
+                    <span>
+                        {{ $category->collection_label }}
+                    </span>
+
+                    <span>
+                        <svg width="63" height="6" viewBox="0 0 63 6" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z"
+                                fill="#B58A46">
+                            </path>
+                        </svg>
+                    </span>
+
+                </p>
+            @endif
+
+
+            @if(!empty($category->collection_title))
+                <h2 class="title_60 mb-4">
+                    {{ $category->collection_title }}
+                </h2>
+            @endif
+
+
+            @if(!empty($category->collection_description))
+                <p class="mb-4">
+                    {!! nl2br(e($category->collection_description)) !!}
+                </p>
+            @endif
+
+        </div>
+    </div>
+</section>
+@endif
+<!-- END - COLLECTION SECTION -->
+
+<!-- START - PRODUCT DISPLAY SECTION -->
 <section class="mt_60">
     <div class="container">
         <div class="him_wrapper">
@@ -128,7 +291,46 @@
         </div>
     </div>
 </section>
+<!-- END - PRODUCT DISPLAY SECTION -->
 
+<!-- START - FAQ SECTION -->
+@if(!empty($category->faqs) && is_array($category->faqs) && count($category->faqs) > 0)
+<section class="mt_120 mb_120">
+    <div class="container">
+        <h2 class="title_60 mb-5">FAQs</h2>
+        <div class="faq_cont">
+            <div class="accordion" id="accordion-category-faq">
+                @foreach($category->faqs as $key => $faq)
+                    @if(!empty($faq['question']) || !empty($faq['answer']))
+                        <div class="faq_cont_acco">
+                            <h2 class="according_head sub_head collapsed"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapse-faq-{{ $key }}"
+                                aria-expanded="false"
+                                aria-controls="collapse-faq-{{ $key }}">
+                                {{ $faq['question'] ?? '' }}
+                            </h2>
+
+                            <div id="collapse-faq-{{ $key }}"
+                                class="accordion-collapse collapse"
+                                data-bs-parent="#accordion-category-faq">
+                                <div class="accordion-body">
+                                    <p class="mb-0 text-muted">
+                                        {!! nl2br(e($faq['answer'] ?? '')) !!}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+        </div>
+    </div>
+</section>
+@endif
+<!-- END - FAQ SECTION -->
+
+<!-- START - ABOVE FOOTER SECTION -->
 <section class="cta_footer mt_120">
     <div class="container">
         <div class="cta_ftwrapper">
@@ -186,4 +388,5 @@
         </div>
     </div>
 </section>
+<!-- END - ABOVE FOOTER SECTION -->
 @include('layouts.frontfooter')

@@ -118,4 +118,20 @@
     </div>
 </section>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Person",
+  "name": "Salomi Kotecha",
+  "url": "https://hnoww.com/author/salomi-kotecha",
+  "image": "https://hnoww.com/public/images/front/salomi-kotecha.webp",
+  "sameAs": "https://www.linkedin.com/in/salomi-kotecha-93b9a6131/",
+  "jobTitle": "Founder",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "HNOWW"
+  }  
+}    
+</script>
+
 @include('layouts.frontfooter')

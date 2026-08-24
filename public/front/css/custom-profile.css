@@ -163,9 +163,32 @@
     color: #B58A46;
 }
 
+.ct_input .password-toggle-icon svg {
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+.ct_input .password-toggle-icon:hover svg {
+    color: #0e2233;
+}
+
+/* Fix for com_btn on button elements */
+button.com_btn {
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+}
+
 
 
 /* Orders Styles */
+.orders_list {
+    max-height: 520px;
+    overflow-y: auto;
+    padding-right: 8px;
+    -webkit-overflow-scrolling: touch;
+}
+
 .order_card {
     border: 1px solid #eee;
     padding: 20px;
@@ -176,6 +199,31 @@
 .order_card:hover {
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     border-color: #c7b58c;
+}
+
+@media (max-width: 1281px) {
+    .profile_tabs .nav-link {
+        font-size: 16px;
+        padding: 12px 18px;
+    }
+
+    .profile_content_wrapper {
+        padding: 30px;
+    }
+
+    .tab_title {
+        font-size: 24px;
+    }
+
+    .ct_input label.sub_head {
+        font-size: 15px;
+    }
+
+    .ct_input input,
+    .ct_input textarea {
+        font-size: 14px;
+    }
+
 }
 
 .order_id {
@@ -194,4 +242,89 @@
 .btn-outline-dark:hover {
     background: #0e2233;
     color: #fff;
+}
+
+@media (max-width: 1281px) {
+    .order_id {
+        font-size: 16px;
+    }
+}
+
+/* =========================================
+   Mobile Responsive Styles (max-width: 767px)
+   ========================================= */
+@media (max-width: 767px) {
+    .profile_sidebar {
+        padding: 20px 15px;
+    }
+
+    /* Convert vertical tabs to horizontal scrolling on mobile */
+    .profile_tabs {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-bottom: 5px;
+        -webkit-overflow-scrolling: touch;
+        gap: 10px;
+        /* Hide scrollbar */
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    
+    .profile_tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .profile_tabs .nav-link {
+        white-space: nowrap;
+        margin-bottom: 0 !important;
+        flex: 0 0 auto;
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+    
+    .profile_tabs .nav-link.text-danger {
+        margin-top: 0 !important;
+    }
+
+    .ct_form {
+        padding: 0;
+    }
+    
+    .profile_content_wrapper {
+        padding: 25px 15px;
+        min-height: auto;
+    }
+
+    .tab_title {
+        font-size: 22px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .profile_img_wrapper {
+        width: 90px;
+        height: 90px;
+    }
+
+    .edit_icon {
+        width: 28px;
+        height: 28px;
+        bottom: 0;
+        right: 5px;
+    }
+    
+    .edit_icon svg {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .text-end {
+        text-align: center !important;
+    }
+    
+    .com_btn {
+        width: 100%;
+        margin-top: 10px;
+    }
 }

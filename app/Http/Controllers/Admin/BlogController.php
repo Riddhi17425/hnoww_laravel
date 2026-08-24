@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Blog;
+use App\Models\Newsletter;
+use App\Mail\BlogPublished;
 use Str;
 use DataTables; 
 
@@ -43,6 +46,9 @@ class BlogController extends Controller
                     <a href="' . $editUrl . '" class="btn btn-outline-primary btn-sm">
                         <i class="icofont-edit"></i>
                     </a>
+                    <button type="button" class="btn btn-outline-success btn-sm send_blog_mail" data-id="' . $row->id . '" title="Send blog to newsletter subscribers">
+                        <i class="icofont-email"></i>
+                    </button>
                     <button type="button" class="btn btn-outline-danger btn-sm delete_blogs" data-id="' . $row->id . '">
                         <i class="icofont-ui-delete"></i>
                     </button>
@@ -50,6 +56,32 @@ class BlogController extends Controller
             })
             ->rawColumns(['action', 'status'])
             ->make(true);
+    }
+
+    public function sendPublishedMail($id)
+    {
+        $blog = Blog::where('id', $id)
+            ->where('status', 'Active')
+            ->whereNull('deleted_at')
+            ->first();
+
+        if (!$blog) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Only active, non-deleted blogs can be emailed.',
+            ], 422);
+        }
+
+        $newsletters = Newsletter::whereNotNull('email')->get();
+
+        foreach ($newsletters as $newsletter) {
+            Mail::to($newsletter->email)->send(new BlogPublished($blog));
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => $newsletters->count() . ' newsletter email(s) sent successfully.',
+        ]);
     }
 
     public function create(){

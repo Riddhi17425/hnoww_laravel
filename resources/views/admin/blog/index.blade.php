@@ -42,6 +42,7 @@
         getBlogsData: "{{ route('admin.blogs.fetch') }}",
         deleteblogs:"{{ route('admin.blogs.delete' , [':id']) }}",
         updateStatus:"{{ route('admin.blogs.update.status') }}",
+        sendPublishedMail: "{{ route('admin.blogs.send.published.mail', [':id']) }}",
         csrfToken: "{{ csrf_token() }}",
         image_path: "{{ asset('/') }}"
     };

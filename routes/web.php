@@ -34,21 +34,7 @@ use App\Http\Controllers\Admin\BannerController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/send', function () {
-    Mail::raw('This is a test email sent from `Laravel.', function ($message) {
-        $message->to('webdeveloper9.intelliworkz@gmail.com')
-            ->subject('Test Mail from Laravel');
-    });
-
-    return 'Mail sent!';
-});
-
-Route::get('/check-mail', function () {
-    return view('email.front.blessing_mail');
-});
 
 Route::get('/clear', function () {
     Artisan::call('optimize:clear');
@@ -88,8 +74,7 @@ Route::name('front.')->group(function () {
     Route::get('/faqs', [FrontController::class, 'getFaqs'])->name('faqs');
     Route::get('/journal', [FrontController::class, 'getJournal'])->name('journal');
     Route::get('/blessings-library/{slug?}', [FrontController::class, 'getBlessings'])->name('blessings.library');
-    Route::get('/blessings-detail/{id?}', [FrontController::class, 'blessingDetailLegacyRedirect'])
-        ->name('blessings.detail.legacy');
+    Route::get('/blessings-detail/{id?}', [FrontController::class, 'blessingDetailLegacyRedirect'])->name('blessings.detail.legacy');
     Route::get('/blessings-audio/{blessing}', [FrontController::class, 'blessingAudio'])->name('blessings.audio');
     Route::post('/gift-blessing', [FrontController::class, 'storeGiftBlessing'])->name('store.gift.blessing');
     Route::post('/shared-details', [FrontController::class, 'storeSharedDetail'])->name('store.shared.detail');
@@ -164,6 +149,10 @@ Route::name('front.')->group(function () {
 
     Route::middleware(['auth'])->group(function () {
         Route::get('/profile', [FrontController::class, 'profile'])->name('profile');
+        Route::post('/profile/update', [AuthController::class, 'updateProfile'])->name('profile.update');
+        Route::post('/profile/password', [AuthController::class, 'changePassword'])->name('profile.password');
+        Route::post('/profile/address/{addressId?}', [AuthController::class, 'saveAddress'])->name('profile.address.save');
+        Route::delete('/profile/address/{addressId}', [AuthController::class, 'deleteAddress'])->name('profile.address.delete');
 
         Route::get('/order', [CartController::class, 'order'])->name('order.view');
         Route::get('/order-detail/{orderid}', [CartController::class, 'orderDetail'])->name('order_detail.view');
@@ -263,7 +252,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/update-status', [ProductTabController::class, 'updateStatus'])->name('update.status');
         });
 
-        //PRODCUCT TABS
+        //PRODCUCT IMAGES
         Route::prefix('product-images')->name('product-images.')->group(function () {
             Route::get('/', [ProductImageController::class, 'index'])->name('index');
             Route::get('/fetch', [ProductImageController::class, 'getProductImages'])->name('fetch');
@@ -303,6 +292,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('/update/{blog_id}', [BlogController::class, 'update'])->name('update');
             Route::delete('/delete/{blog_id}', [BlogController::class, 'delete'])->name('delete');
             Route::post('/update-status', [BlogController::class, 'updateStatus'])->name('update.status');
+            Route::post('/send-published-mail/{blog_id}', [BlogController::class, 'sendPublishedMail'])->name('send.published.mail');
         });
 
         Route::resource('journals', JournalController::class);

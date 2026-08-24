@@ -370,7 +370,7 @@
                     </svg>
                 </span>
             </p>
-            <h2 class="title_60">Of Desire</h2>
+            <h2 class="title_60">Curated Gift Collections</h2>
         </div>
         <div class="desire_slider">
 
@@ -519,122 +519,39 @@ alt="Curated Rituals 1" loading="lazy">
 </div>
 </section> --}}
 
-    <!--The Bespoke & Private Services -->
-    <section class="mt_120">
-        <div class="container-fluid">
-            <div class="section_header">
-                <p class="sub_head mb-0">
-                    <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z"
-                                fill="#B58A46" />
-                        </svg>
-                    </span>
-                    <span>Our</span>
-                    <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z"
-                                fill="#B58A46" />
-                        </svg>
-                    </span>
-                </p>
-                <!--<h2 class="title_60">Bespoke & Private Services</h2>-->
-                <h2 class="title_60">Bespoke Services</h2>
-            </div>
-            <div class="row gx-2 mobile_slider">
-                <div class="col-md-6">
-                    <div class="bespoke_box">
-                        <div class="bespoke_box_top">
-                            <img class="img-fluid" src="{{ asset('public/images/front/bespoke1.webp') }}"
-                                alt="Bespoke Service 1" loading="lazy">
-                            <p class="title_40">Weddings & Celebrations</p>
-                        </div>
-                        <div class="bespoke_box_bot">
-                            <p class="para">Ceremonial designs crafted to mark modern unions.</p>
-                            <span><a href="{{ route('front.wedding.vault') }}" data-bs-toggle="modal"
-                                    data-bs-target="#requestWeddingCatalogue" class="com_btn">Request Wedding
-                                    Catalogue</a></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="bespoke_box">
-
-                        <div class="bespoke_box_top_2">
-                            <img class="img-fluid" src="{{ asset('public/images/front/bespoke2.webp') }}"
-                                alt="Bespoke Service 2" loading="lazy">
-                            <p class="title_40">Corporate Rituals</p>
-                        </div>
-                        <div class="bespoke_box_bot">
-
-                            <p class="para">Articles designed to mark intentional partnerships.</p>
-                            <span><a href="{{ route('front.corporate.vault') }}" data-bs-toggle="modal"
-                                    data-bs-target="#requestCorporateProposal" class="com_btn">The Corporate
-                                    Edit</a></span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+<!--The Bespoke & Private Services -->
+<section class="mt_120">
+    <div class="container-fluid">
+        <div class="section_header">
+            <p class="sub_head mb-0">
+                <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z"
+                            fill="#B58A46" />
+                    </svg>
+                </span>
+                <span>Our</span>
+                <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z"
+                            fill="#B58A46" />
+                    </svg>
+                </span>
+            </p>
+            <!--<h2 class="title_60">Bespoke & Private Services</h2>-->
+            <h2 class="title_60">Bespoke Gifting Services</h2>
         </div>
-    </section>
-
-    <!--The Editions -->
-    <section class="mt_120 mb_120">
-        <div class="container">
-            <div class="section_header">
-                <p class="sub_head mb-0">
-                    <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z"
-                                fill="#B58A46" />
-                        </svg>
-                    </span>
-                    <span>the</span>
-                    <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z"
-                                fill="#B58A46" />
-                        </svg>
-                    </span>
-                </p>
-                <!--<h2 class="title_60">Editions</h2>-->
-                <h2 class="title_60">House Journal</h2>
-            </div>
-            <div class="row mobile_slider">
-                <div class="col-md-4">
-                    <div class="collection_box">
-                        <a href="{{ route('front.blessings.library') }}"><img class="img-fluid mb-4"
-                                src="{{ asset('public/images/front/editions1.webp') }}" alt="House Journal 1"
-                                loading="lazy"></a>
-                        <h3 class="sub_head">The Blessing Library</h3>
-                        <p style="height:40px;">Written blessings and words of intention for home, union, and self.</p>
-                        <a href="{{ route('front.blessings.library') }}" class="com_btn">Explore </a>
+        <div class="row gx-2 mobile_slider">
+            <div class="col-md-6">
+                <div class="bespoke_box">
+                    <div class="bespoke_box_top">
+                        <img class="img-fluid" src="{{ asset('public/images/front/bespoke1.webp') }}" alt="Bespoke Service 1"
+                            loading="lazy">
+                        <p class="title_40">Weddings & Celebrations</p>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="collection_box">
-                        <a href="{{ route('front.journal') }}"><img class="img-fluid mb-4"
-                                src="{{ asset('public/images/front/editions2.webp') }}" alt="House Journal 2"
-                                loading="lazy"></a>
-                        <h3 class="sub_head">The Journal</h3>
-                        <p style="height:40px;">Reflections on design, ritual, and contemporary living.</p>
-                        <a href="{{ route('front.journal') }}" class="com_btn">Explore</a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="collection_box">
-                        <a href="{{ route('front.bespoke.commission') }}"><img class="img-fluid mb-4"
-                                src="{{ asset('public/images/front/editions3.webp') }}" alt="House Journal 3"
-                                loading="lazy"></a>
-                        <h3 class="sub_head">Bespoke Commissions</h3>
-                        <p style="height:40px;">Collaborative creations shaped around personal rituals and intent.</p>
-                        <a href="{{ route('front.bespoke.commission') }}" class="com_btn">Explore</a>
+                    <div class="bespoke_box_bot">
+                        <p class="para">Ceremonial designs crafted to mark modern unions.</p>
+                       <span><a href="{{ route('front.wedding.vault.inside') }}" class="com_btn">EXPLORE WEDDING GIFTS</a></span>
                     </div>
                 </div>
             </div>
@@ -670,12 +587,15 @@ alt="Curated Rituals 1" loading="lazy">
                 <div class="left-card">
                     <img class="home_instagram" src="{{ asset('public/images/front/Instagram_logo_home.svg') }}"
                         alt="Instagram Logo" class="mb-4" loading="lazy">
+                    <div class="bespoke_box_top_2">
+                        <img class="img-fluid" src="{{ asset('public/images/front/bespoke2.webp') }}" alt="Bespoke Service 2"
+                            loading="lazy">
+                        <p class="title_40">Corporate Rituals</p>
+                    </div>
+                    <div class="bespoke_box_bot">
 
-                    <div>
-                        <h4 class="sub_head_inter my-4">The Collection, In Motion.</h4>
-                        <p>
-                            Architectural Objects in context. <br /> Follow the work at @h.noww
-                        </p>
+                        <p class="para">Articles designed to mark intentional partnerships.</p>
+                        <span><a href="{{ route('front.corporate.vault') }}" class="com_btn">EXPLORE CORPORATE GIFTS</a></span>
                     </div>
                     <a href="https://www.instagram.com/h.noww" target="_blank" class="com_btn mt-2">Follow on
                         Instagram</a>

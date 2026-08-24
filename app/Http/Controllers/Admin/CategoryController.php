@@ -127,6 +127,18 @@ class CategoryController extends Controller
             'banner_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             // 'button_text' => 'required_if:category_type,2|string|max:255',
             'button_text' => 'nullable|string|max:255',
+            'celebration_label' => 'nullable|string|max:255',
+            'celebration_title' => 'nullable|string|max:255',
+            'celebration_description' => 'nullable|string',
+            'celebration_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+
+            'collection_label' => 'nullable|string|max:255',
+            'collection_title' => 'nullable|string|max:255',
+            'collection_description' => 'nullable|string',
+
+            'faqs' => 'nullable|array',
+            'faqs.*.question' => 'nullable|string',
+            'faqs.*.answer' => 'nullable|string',
         ], [
             'category_name.required' => 'Category name is required.',
             'category_name.string' => 'Category name must be a valid string.',
@@ -164,13 +176,22 @@ class CategoryController extends Controller
             'meta_title',
             'meta_description',
             'category_url',
+            'is_festive',
             'category_type',
             'magic_heading_first',
             'magic_heading_second',
             'magic_title',
             'magic_description',
-            'button_text'
+            'button_text',
+            'celebration_label',
+            'celebration_title',
+            'celebration_description',
+            'collection_label',
+            'collection_title',
+            'collection_description',
         ]);
+
+        $data['is_festive'] = $request->has('is_festive') ? 1 : 0;
 
         if ($request->hasFile('banner_image')) {
             // $image = $request->file('banner_image');
@@ -188,7 +209,26 @@ class CategoryController extends Controller
             $image->move(public_path('images/admin/category_magic'), $imageName);
             $data['magic_image'] = $imageName;
         }
+
+        if ($request->hasFile('celebration_image'))
+        {
+            $image = $request->file('celebration_image');
+            $imageName = $image->getClientOriginalName();
+
+            $image->move(
+                public_path('images/admin/category_celebration'),
+                $imageName
+            );
+
+            $data['celebration_image'] = $imageName;
+        }
+
         $data['is_active'] = 0;
+
+        $data['faqs'] = $request->filled('faqs')
+            ? $request->faqs
+            : null;
+
         Category::create($data);
 
         return redirect()->route('admin.categories.index')->with('success', 'Category added successfully');
@@ -218,6 +258,18 @@ class CategoryController extends Controller
             'banner_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
             // 'button_text' => 'required_if:category_type,2|string|max:255',
             'button_text' => 'nullable|string|max:255',
+            'celebration_label' => 'nullable|string|max:255',
+            'celebration_title' => 'nullable|string|max:255',
+            'celebration_description' => 'nullable|string',
+            'celebration_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+
+            'collection_label' => 'nullable|string|max:255',
+            'collection_title' => 'nullable|string|max:255',
+            'collection_description' => 'nullable|string',
+
+            'faqs' => 'nullable|array',
+            'faqs.*.question' => 'nullable|string',
+            'faqs.*.answer' => 'nullable|string',
         ], [
             'category_name.required' => 'Category name is required.',
             'category_name.string' => 'Category name must be a valid string.',
@@ -258,12 +310,21 @@ class CategoryController extends Controller
             'meta_description',
             'category_url',
             'category_type',
+            'is_festive',
             'magic_heading_first',
             'magic_heading_second',
             'magic_title',
             'magic_description',
-            'button_text'
+            'button_text',
+            'celebration_label',
+            'celebration_title',
+            'celebration_description',
+            'collection_label',
+            'collection_title',
+            'collection_description',
         ]);
+
+        $data['is_festive'] = $request->has('is_festive') ? 1 : 0;
 
         if ($request->hasFile('banner_image')) {
             // $image = $request->file('banner_image');
@@ -285,6 +346,24 @@ class CategoryController extends Controller
             $image->move(public_path('images/admin/category_magic'), $imageName);
             $data['magic_image'] = $imageName;
         }
+
+        if ($request->hasFile('celebration_image'))
+        {
+            $image = $request->file('celebration_image');
+            $imageName = $image->getClientOriginalName();
+
+            $image->move(
+                public_path('images/admin/category_celebration'),
+                $imageName
+            );
+
+            $data['celebration_image'] = $imageName;
+        }
+
+        $data['faqs'] = $request->filled('faqs')
+            ? $request->faqs
+            : null;
+
         $category->update($data);
 
         return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully');

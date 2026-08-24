@@ -17,11 +17,13 @@ use App\Models\GiftBlessing;
 use App\Models\GiftShop;
 use App\Models\Journal;
 use App\Models\Newsletter;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductInquiry;
 use App\Models\RequestCatalogue;
 use App\Models\SharedDetail;
 use App\Models\User;
+use App\Models\UserAddress;
 use App\Models\WeddingCatalogueRequest;
 use App\Models\WhatsappGiftBlessing;
 use App\Services\ElevenLabsTextToSpeechService;
@@ -1725,7 +1727,6 @@ class FrontController extends Controller
     public function getBlessings(Request $request, $slug = null)
     {
         $blessingOfKeys = array_keys(config('global_values.blessing_of'));
-
         // Case 1: segment matches a category key -> filtered library listing
         if ($slug !== null && in_array($slug, $blessingOfKeys)) {
             $blessings = Blessing::where('is_active', 0)
@@ -1733,7 +1734,6 @@ class FrontController extends Controller
                 ->whereRaw("FIND_IN_SET(?, blessing_of)", [$slug])
                 ->orderBy('id', 'DESC')
                 ->get();
-
             return view('front.blessings', compact('blessings'));
         }
 
@@ -1743,8 +1743,7 @@ class FrontController extends Controller
                 ->whereNull('deleted_at')
                 ->where('slug', $slug)
                 ->first();
-
-            if (! $blessing) {
+            if (!$blessing) {
                 abort(404);
             }
 
@@ -2166,7 +2165,13 @@ class FrontController extends Controller
     public function profile()
     {
         $user = User::where('id', auth()->id())->first();
-        return view('front.profile', compact('user'));
+        $orders = Order::where('user_id', auth()->id())
+            ->with('orderProducts')
+            ->latest()
+            ->get();
+        $addresses = UserAddress::where('user_id', auth()->id())->latest()->get();
+
+        return view('front.profile', compact('user', 'orders', 'addresses'));
     }
 
     public function getEditions()

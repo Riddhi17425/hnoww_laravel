@@ -113,19 +113,20 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $categoryType = request()->input('category_type');
         $validator = Validator::make($request->all(), [
             'category_id' => 'required|exists:categories,id',
             'category_type' => 'required',
             'product_name' => 'required|string|max:255',
             'product_price' => 'required|string|max:255',
-            // 'product_url' => ['required','string','max:255',Rule::unique('products', 'product_url')->whereNull('deleted_at')],
-            'product_url' => ['required', 'string', 'max:255',
-                Rule::unique('products', 'product_url')
-                    ->where(function ($query) {
-                        return $query->where('product_type', $this->input('category_type'))
-                                     ->whereNull('deleted_at');
-                    }),
-            ],
+            'product_url' => ['required','string','max:255',Rule::unique('products', 'product_url')->whereNull('deleted_at')],
+                'product_url' => ['required', 'string', 'max:255',
+                    Rule::unique('products', 'product_url')
+                        ->where(function ($query) use ($categoryType) {
+                            return $query->where('product_type', $categoryType)
+                                        ->whereNull('deleted_at');
+                        }),
+                ],
             'product_stock' => 'required|integer|min:0',
             'list_img' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
             //'list_img' => 'required|image|mimes:jpg,jpeg,png,webp|max:5120',
@@ -181,7 +182,6 @@ class ProductController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-
         $data = $request->only([
             'category_id', 'product_name', 'product_price', 'short_description', 'large_description',
             'meta_title', 'meta_description', 'product_url', 'dimensions', 'materials', 'moq', 'short_note', 'product_stock', 'weight', 'care_maintenance'
