@@ -146,7 +146,7 @@
             <!--</h2>-->
             <!-- 3️⃣ Left image (from left) -->
             <div class="text-lg-end ">
-                <img src="{{ asset('public/images/front/home_magic_left.svg') }}" loading="lazy" alt=""
+                <img src="{{ asset('public/images/front/footer-logo.svg') }}" loading="lazy" alt=""
                     class="img-fluid">
             </div>
 

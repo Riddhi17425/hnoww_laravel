@@ -45,7 +45,7 @@
             </h2>
             <!-- 3️⃣ Left image (from left) -->
             <div class="text-end magic_wrapper_logo">
-                <img src="{{ asset('public/images/front/home_magic_left.svg') }}" loading="lazy" alt="" class="img-fluid">
+                <img src="{{ asset('public/images/front/footer-logo.svg') }}" loading="lazy" alt="" class="img-fluid">
             </div>
 
             <!-- 2️⃣ Center image (scale 0 → 1) -->

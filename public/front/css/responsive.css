@@ -443,7 +443,7 @@
     }
 
     .custom-filter-dropdown .btn.dropdown-toggle {
-     font-size: 20px;
+        font-size: 20px;
     }
 
 }
@@ -953,7 +953,7 @@
         max-width: 1070px !important;
     }
 
-        .custom-filter-dropdown .btn.dropdown-toggle {
+    .custom-filter-dropdown .btn.dropdown-toggle {
         font-size: 18px;
     }
 
@@ -1291,7 +1291,7 @@
         display: flex;
         gap: 20px;
         flex-direction: column;
-        margin: 25px 0;
+        margin: 35px 0;
     }
 
     .hero-section img {
@@ -1902,13 +1902,31 @@
         height: 640px;
     } */
 
+    /* Premium Animated Accordion Dropdown for Mobile */
     .has-dropdown .dropdown-menu {
+        display: block !important;
+        /* Required for max-height transition */
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
         position: static;
-        transform: none;
-        box-shadow: none;
-        background: transparent;
-        padding-left: 15px;
-        margin-top: 10px;
+        transform: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        border: none !important;
+        /* Remove Bootstrap default border */
+        padding: 0 0 0 15px !important;
+        /* Remove top/bottom padding to collapse fully */
+        margin: 0 0 0 10px !important;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-in-out, margin 0.3s ease;
+    }
+
+    .has-dropdown.active .dropdown-menu {
+        max-height: 500px;
+        opacity: 1;
+        margin-top: 10px !important;
+        margin-bottom: 15px !important;
+        border-left: 1px solid rgba(255, 255, 255, 0.15) !important;
     }
 
     .has-dropdown .dropdown-menu::before {
@@ -1917,6 +1935,50 @@
 
     .has-dropdown .dropdown-menu li {
         color: var(--white);
+        transform: translateX(-15px);
+        opacity: 0;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    }
+
+    .has-dropdown.active .dropdown-menu li {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    /* Staggered animation delays for sub-menu items */
+    .has-dropdown.active .dropdown-menu li:nth-child(1) {
+        transition-delay: 0.10s;
+    }
+
+    .has-dropdown.active .dropdown-menu li:nth-child(2) {
+        transition-delay: 0.15s;
+    }
+
+    .has-dropdown.active .dropdown-menu li:nth-child(3) {
+        transition-delay: 0.20s;
+    }
+
+    .has-dropdown.active .dropdown-menu li:nth-child(4) {
+        transition-delay: 0.25s;
+    }
+
+    .has-dropdown.active .dropdown-menu li:nth-child(5) {
+        transition-delay: 0.30s;
+    }
+
+    .has-dropdown.active .dropdown-menu li:nth-child(6) {
+        transition-delay: 0.35s;
+    }
+
+    .has-dropdown.active .dropdown-menu li:nth-child(7) {
+        transition-delay: 0.40s;
+    }
+
+    .dropdown-menu li a {
+        padding: 8px 15px !important;
+        font-size: 15px;
+        letter-spacing: 0.5px;
+        opacity: 0.85;
     }
 
     .has-dropdown.active .dropdown-arrow {
@@ -1928,7 +1990,23 @@
     .dropdown-menu li a:active,
     .dropdown-menu li a:focus {
         background: transparent !important;
-        color: var(--gold-color) !important;
+        color: var(--white) !important;
+    }
+
+    /* Disable duplicate text sliding effect completely on mobile */
+    .nav_links li a::after {
+        display: none !important;
+    }
+
+    /* Ensure all links and dropdown arrows stay white on hover/click in mobile */
+    .nav_links li a:active,
+    .nav_links li a:focus,
+    .nav_links li a:active span,
+    .nav_links li a:focus span,
+    .has-dropdown:active .dropdown-arrow,
+    .has-dropdown.active .dropdown-arrow {
+        transform: none !important;
+        color: var(--white) !important;
     }
 
     .hero_content .main_head {
@@ -2042,6 +2120,19 @@
     }
 
 
+    .language-select .dropdown-list {
+
+        min-width: 200px;
+
+        left: 0px;
+    }
+
+    .has-dropdown {
+    padding: 0px 0;
+}
+
+
+
 }
 
 
@@ -2148,7 +2239,7 @@
         color: var(--white-color);
     }
 
-     .theme-white .has-dropdown .dropdown-menu li a {
+    .theme-white .has-dropdown .dropdown-menu li a {
         color: var(--white-color) !important;
     }
 

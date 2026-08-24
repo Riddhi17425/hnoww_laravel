@@ -31,21 +31,7 @@ use Illuminate\Support\Facades\Artisan;
 | contains the "web" middleware group. Now create something great!
 |
 */
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/send', function () {
-    Mail::raw('This is a test email sent from Laravel.', function ($message) {
-        $message->to('webdeveloper9.intelliworkz@gmail.com')
-            ->subject('Test Mail from Laravel');
-    });
-
-    return 'Mail sent!';
-});
-
-Route::get('/check-mail', function () {
-    return view('email.front.blessing_mail');
-});
 
 Route::get('/clear', function () {
     Artisan::call('optimize:clear');
@@ -85,8 +71,7 @@ Route::name('front.')->group(function () {
     Route::get('/faqs', [FrontController::class, 'getFaqs'])->name('faqs');
     Route::get('/journal', [FrontController::class, 'getJournal'])->name('journal');
     Route::get('/blessings-library/{slug?}', [FrontController::class, 'getBlessings'])->name('blessings.library');
-    Route::get('/blessings-detail/{id?}', [FrontController::class, 'blessingDetailLegacyRedirect'])
-        ->name('blessings.detail.legacy');
+    Route::get('/blessings-detail/{id?}', [FrontController::class, 'blessingDetailLegacyRedirect'])->name('blessings.detail.legacy');
     Route::get('/blessings-audio/{blessing}', [FrontController::class, 'blessingAudio'])->name('blessings.audio');
     Route::post('/gift-blessing', [FrontController::class, 'storeGiftBlessing'])->name('store.gift.blessing');
     Route::post('/shared-details', [FrontController::class, 'storeSharedDetail'])->name('store.shared.detail');
@@ -106,7 +91,7 @@ Route::name('front.')->group(function () {
     Route::get('/bespoke-gifts-dubai', [FrontController::class, 'getBespokeCommission'])->name('bespoke.commission');
     Route::get('/privacy', [FrontController::class, 'getprivacy'])->name('privacy');
 
-    Route::get('/luxury-corporate-gifts/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
+    Route::get('/corporate-gifts-dubai/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
     Route::get('/corporate-diwali-collection-2026', [FrontController::class, 'getCorporateDiwaliCollection'])->name('corporate.diwali.collection');
     
     Route::post('/store-festival-inquiry', [FrontController::class, 'storeFestivalInquiry'])->name('store.festival.inquiry');
@@ -161,6 +146,10 @@ Route::name('front.')->group(function () {
 
     Route::middleware(['auth'])->group(function () {
         Route::get('/profile', [FrontController::class, 'profile'])->name('profile');
+        Route::post('/profile/update', [AuthController::class, 'updateProfile'])->name('profile.update');
+        Route::post('/profile/password', [AuthController::class, 'changePassword'])->name('profile.password');
+        Route::post('/profile/address/{addressId?}', [AuthController::class, 'saveAddress'])->name('profile.address.save');
+        Route::delete('/profile/address/{addressId}', [AuthController::class, 'deleteAddress'])->name('profile.address.delete');
 
         Route::get('/order', [CartController::class, 'order'])->name('order.view');
         Route::get('/order-detail/{orderid}', [CartController::class, 'orderDetail'])->name('order_detail.view');
