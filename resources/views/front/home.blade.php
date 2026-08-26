@@ -599,6 +599,7 @@ alt="Curated Rituals 1" loading="lazy">
     </div>
 </section>
 
+@if(isset($instagramPosts) && is_countable($instagramPosts) && count($instagramPosts) > 0)
 <!--The social  -->
 <section class="mt_120 mb_120">
     <div class="container">
@@ -664,7 +665,7 @@ alt="Curated Rituals 1" loading="lazy">
         </div>
     </div>
 </section>
-
+@endif
 
 <div class="modal fade audio_modal" id="productInquiry" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="productInquiryLabel" aria-hidden="true">
