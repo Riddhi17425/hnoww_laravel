@@ -208,10 +208,10 @@ class BannerController extends Controller
         $banner->type        = $request->type;
         $banner->description = $request->description;
         $banner->alt_text    = $request->type == 'image' ? $request->alt_text : null;
-        $rules['button_text'] = 'nullable|string|max:255';
-        $rules['button_link'] = 'nullable|string|max:500';
+        $banner->button_text = $request->button_text;
+        $banner->button_link = $request->button_link;
         $banner->is_active = $request->is_active ?? $banner->is_active;
-        $banner->save();
+        
 
         if ($request->type == 'image') {
             if ($request->hasFile('image')) {
