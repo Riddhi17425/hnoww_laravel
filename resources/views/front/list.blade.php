@@ -29,7 +29,7 @@
 
         @if(!empty($category->description))
             <p class="para mb-0">
-                {{ $category->description }}
+                {!! $category->description !!}
             </p>
         @endif
     </div>
@@ -130,7 +130,7 @@
                 <div class="col-lg-10 m-auto text-center">
 
                     <p class="sub_head_inter">
-                        {!! nl2br(e($category->celebration_description)) !!}
+                        {!! $category->celebration_description ?? '' !!}
                     </p>
 
                 </div>
@@ -208,7 +208,7 @@
 
             @if(!empty($category->collection_description))
                 <p class="mb-4">
-                    {!! nl2br(e($category->collection_description)) !!}
+                    {!! $category->collection_description !!}
                 </p>
             @endif
 

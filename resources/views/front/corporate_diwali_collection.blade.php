@@ -179,7 +179,10 @@
                     Every gift includes an individual story card
                 </h3>
                 <p class="mb-4">
-                    Depending on the selected piece, personalisation may include the recipient's name, a company message, a commemorative note, or a photograph or project visual placed inside the frame. Corporate orders are available in flexible quantities, subject to the selected product and level of personalisation.
+                    Depending on the selected piece, personalisation may include the recipient's name, a company message, a commemorative note, or a photograph or project visual placed inside the frame.
+                </p>
+                <p class="mb-4">
+                    Corporate orders are available in flexible quantities, subject to the selected product and level of personalisation.
                 </p>
                 <div>
                     <a href="#" class="com_btn" data-bs-toggle="modal" data-bs-target="#requestCorporateProposal">

@@ -43,10 +43,15 @@ class AppServiceProvider extends ServiceProvider
             return $body->success;
         });
 
+        $headerCategories = \App\Models\Category::where('is_active', 0)
+        ->orderBy('id', 'asc')
+        ->get();
+
         View::composer('layouts.frontheader', function ($view) {
             $collectionCategories = Category::isActive()
                 ->notDeleted()
                 ->where('is_festive', 0)
+                ->where('category_type', 1)
                 ->orderBy('id', 'DESC')
                 ->get();
 

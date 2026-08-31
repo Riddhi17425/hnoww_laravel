@@ -6,13 +6,6 @@ $is_green = ($current_route === 'front.product.details' || $current_route === 'f
 'front.order.view' || $current_route === 'front.order_detail.view' || $current_route === 'front.profile' ||
 $current_route === 'front.order.details' || $current_route === 'front.get.forgot.password' || $current_route === 'front.get.reset.password' );
 
-$headerCategories = \App\Models\Category::where('is_active', 0)
-        ->orderBy('id', 'asc')
-        ->get();
-
-$collectionCategories = $headerCategories->where('is_festive', 0);
-$festiveCategories = $headerCategories->where('is_festive', 1);
-
 @endphp
 <!DOCTYPE html>
 <html>
@@ -398,8 +391,19 @@ $festiveCategories = $headerCategories->where('is_festive', 1);
                                 @endforeach
                             </ul>
                         </li>
+                    @else
+                    <li class="has-dropdown">
+                        <a href="#" data-text="Festive Gifts">
+                            <span>Festive Gifts</span>
+                            <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                            </svg>
+                        </a>
+                        <ul class="dropdown-menu">
+                           <li><a href="{{ route('front.raksha.bandhan.collection') }}">Raksha Bandhan Gifts</a></li>
+                        </ul>
+                    </li> 
                     @endif
-
                     <li class="d-none">
                         <a href="{{ route('front.editions') }}" data-text="editions">
                             <span>editions</span>
