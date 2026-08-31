@@ -227,7 +227,17 @@ class FrontController extends Controller
     public function getList(Request $request, $catSlug, $from = null)
     {
         $category    = Category::where('category_url', $catSlug)->first();
-        $catProducts = Product::select('id', 'category_id', 'product_url', 'product_name', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'product_price')->where('category_id', $category->id)->where('product_type', 1)->orderBy('id', 'desc')->isActive()->notDeleted()->get();
+        $catProducts = Product::select('id', 'category_id', 'product_url', 'product_name', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'product_price')
+            ->where('product_type', 1)
+            ->where(function($query) use ($category) {
+                $query->where('category_id', $category->id)
+                      ->orWhereRaw("FIND_IN_SET(?, shown_in_other_categories)", [$category->id]);
+            })
+            ->orderBy('id', 'desc')
+            ->isActive()
+            ->notDeleted()
+            ->distinct()
+            ->get();
 
         return view('front.list', compact('category', 'catProducts', 'catSlug', 'from'));
     }

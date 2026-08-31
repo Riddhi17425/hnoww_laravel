@@ -45,6 +45,25 @@
                 @error('category_id') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
+            {{-- Want to show in another category? --}}
+            <div class="col-md-4">
+                <label class="form-label">Want to show in another category?</label>
+                <select name="shown_in_other_categories[]" id="shown_in_other_categories" class="form-control" multiple>
+                    @forelse($otherCategories as $category)
+                        <option value="{{ $category->id }}"
+                            @if($product->shown_in_other_categories)
+                                {{ in_array($category->id, explode(',', $product->shown_in_other_categories)) ? 'selected' : '' }}
+                            @endif>
+                            {{ $category->category_name }}
+                        </option>
+                    @empty
+                        <option disabled>No categories available</option>
+                    @endforelse
+                </select>
+                <small class="form-text text-muted">Hold Ctrl/Cmd to select multiple categories</small>
+                @error('shown_in_other_categories') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
             {{-- Product Price --}}
             <div class="col-md-4">
                 <label class="form-label">Product Price</label><span class="text-danger">*</span>
@@ -236,6 +255,54 @@ $(document).ready(function() {
         ]
     });
 
+    // Handle category type or category change to update "shown_in_other_categories" dropdown
+    $('#category_type, #category_id').on('change', function() {
+        updateOtherCategoriesDropdown();
+    });
 });
+
+function updateOtherCategoriesDropdown() {
+    const categoryType = $('#category_type').val();
+    const currentCategoryId = $('#category_id').val();
+    
+    if (categoryType === null || categoryType === '') {
+        $('#shown_in_other_categories').html('<option disabled>Please select category type first</option>');
+        return;
+    }
+    
+    if (currentCategoryId === null || currentCategoryId === '') {
+        $('#shown_in_other_categories').html('<option disabled>Please select category first</option>');
+        return;
+    }
+    
+    // Make AJAX call to get categories
+    $.ajax({
+        url: '{{ route("admin.products.getOtherCategories") }}',
+        method: 'GET',
+        data: {
+            current_category_id: currentCategoryId
+        },
+        dataType: 'json',
+        success: function(response) {
+            if (response.success && response.categories.length > 0) {
+                let html = '';
+                // Get currently selected values before updating
+                const currentSelectedIds = Array.from(document.querySelectorAll('#shown_in_other_categories option:selected')).map(o => o.value);
+                
+                response.categories.forEach(function(category) {
+                    const selected = currentSelectedIds.includes(String(category.id)) ? 'selected' : '';
+                    html += '<option value="' + category.id + '" ' + selected + '>' + category.category_name + '</option>';
+                });
+                
+                $('#shown_in_other_categories').html(html);
+            } else {
+                $('#shown_in_other_categories').html('<option disabled>No categories available</option>');
+            }
+        },
+        error: function() {
+            $('#shown_in_other_categories').html('<option disabled>Error loading categories</option>');
+        }
+    });
+}
 </script>
 @endpush
