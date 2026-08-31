@@ -228,7 +228,7 @@ class FrontController extends Controller
     {
         $category    = Category::where('category_url', $catSlug)->first();
         $catProducts = Product::select('id', 'category_id', 'product_url', 'product_name', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'product_price')
-            ->where('product_type', 1)
+            //->where('product_type', 1)
             ->where(function($query) use ($category) {
                 $query->where('category_id', $category->id)
                       ->orWhereRaw("FIND_IN_SET(?, shown_in_other_categories)", [$category->id]);
