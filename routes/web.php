@@ -58,9 +58,9 @@ Route::get('/clear', function () {
 Route::post('/newsletter-temp/store', [FrontController::class, 'storeNewsletterTempInquiry'])->name('newsletter.temp.store');
 Route::post('/check-email-unique', [FrontController::class, 'checkEmailUnique'])->name('front.check.email.unique');
 
-//========================Start Sitemap Routes========================
+// START - SITEMAP ROUTE
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
-//========================End Sitemap Routes========================
+// END - SITEMAP ROUTE
 
 // Catch-all for frontend (coming soon)
 // Route::any('{any}', function () {
@@ -78,8 +78,7 @@ Route::name('front.')->group(function () {
     Route::get('/list/{category_slug}/{from?}', [FrontController::class, 'listLegacyRedirect'])->name('list.legacy');
     Route::get('product-details/{product_slug}', [FrontController::class, 'getProductDetails'])->name('product.details');
     Route::post('store-product-inquiry', [FrontController::class, 'storeProductInquiry'])->name('store.product.inquiry');
-    // Route::post('/check-email-unique', [FrontController::class, 'checkEmailUnique'])
-    //  ->name('check.email.unique');
+    // Route::post('/check-email-unique', [FrontController::class, 'checkEmailUnique'])->name('check.email.unique');
     Route::post('/newsletter/store', [FrontController::class, 'storeNewsletterInquiry'])->name('newsletter.store');
     Route::get('/request-catalogue', [FrontController::class, 'getRequestCatalogue'])->name('request.catalogue');
     Route::post('store-request-catalogue', [FrontController::class, 'storeRequestCatalogue'])->name('store.request.catalogue');
@@ -88,8 +87,7 @@ Route::name('front.')->group(function () {
     Route::get('/faqs', [FrontController::class, 'getFaqs'])->name('faqs');
     Route::get('/journal', [FrontController::class, 'getJournal'])->name('journal');
     Route::get('/blessings-library/{slug?}', [FrontController::class, 'getBlessings'])->name('blessings.library');
-    Route::get('/blessings-detail/{id?}', [FrontController::class, 'blessingDetailLegacyRedirect'])
-        ->name('blessings.detail.legacy');
+    Route::get('/blessings-detail/{id?}', [FrontController::class, 'blessingDetailLegacyRedirect'])->name('blessings.detail.legacy');
     Route::get('/blessings-audio/{blessing}', [FrontController::class, 'blessingAudio'])->name('blessings.audio');
     Route::post('/gift-blessing', [FrontController::class, 'storeGiftBlessing'])->name('store.gift.blessing');
     Route::post('/shared-details', [FrontController::class, 'storeSharedDetail'])->name('store.shared.detail');
@@ -229,30 +227,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('delete-all-detail-images', [ProductController::class, 'deleteAllDetailImages'])->name('delete.alldetail.images');
         });
 
-        // FESTIVE CATEGORY
-        // Route::prefix('festive-categories')->name('festive-categories.')->group(function () {
-        //     Route::get('/', [FestiveCategoryController::class, 'index'])->name('index');
-        //     Route::get('/fetch', [FestiveCategoryController::class, 'getCategories'])->name('fetch');
-        //     Route::get('/create', [FestiveCategoryController::class, 'create'])->name('create');
-        //     Route::post('/store', [FestiveCategoryController::class, 'store'])->name('store');
-        //     Route::get('/edit/{cat_id}', [FestiveCategoryController::class, 'edit'])->name('edit');
-        //     Route::put('/update/{cat_id}', [FestiveCategoryController::class, 'update'])->name('update');
-        //     Route::delete('/delete/{cat_id}', [FestiveCategoryController::class, 'delete'])->name('delete');
-        //     Route::post('/update-status', [FestiveCategoryController::class, 'updateStatus'])->name('update.status');
-        // });
-
-        // FESTIVE PRODUCT
-        // Route::prefix('festive-products')->name('festive-products.')->group(function () {
-        //     Route::get('/', [FestiveProductController::class, 'index'])->name('index');
-        //     Route::get('/fetch', [FestiveProductController::class, 'getProducts'])->name('fetch');
-        //     Route::get('/create', [FestiveProductController::class, 'create'])->name('create');
-        //     Route::post('/store', [FestiveProductController::class, 'store'])->name('store');
-        //     Route::get('/edit/{product_id}', [FestiveProductController::class, 'edit'])->name('edit');
-        //     Route::put('/update/{product_id}', [FestiveProductController::class, 'update'])->name('update');
-        //     Route::delete('/delete/{product_id}', [FestiveProductController::class, 'delete'])->name('delete');
-        //     Route::post('/update-status', [FestiveProductController::class, 'updateStatus'])->name('update.status');
-        // });
-
         //PRODCUCT TABS
         Route::prefix('product-tabs')->name('product-tabs.')->group(function () {
             Route::get('/', [ProductTabController::class, 'index'])->name('index');
@@ -332,8 +306,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('corporate-kits', CorporateKitController::class);
         route::get('corporate-kit/fetch', [CorporateKitController::class, 'getCorporateKits'])->name('corporate-kit.fetch');
         route::post('corporate-kit/update/status', [CorporateKitController::class, 'updateStatus'])->name('corporate-kit.update.status');
-         
-
+        
         Route::resource('banners', BannerController::class);
         route::get('banner/fetch', [BannerController::class, 'getBanners'])->name('banner.fetch');
         route::post('banner/update/status', [BannerController::class, 'updateStatus'])->name('banner.update.status');
