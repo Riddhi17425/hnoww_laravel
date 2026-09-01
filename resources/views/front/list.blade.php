@@ -230,12 +230,32 @@
                                 $imagePath = public_path('images/admin/product_list/' . $val->list_page_img);
                             @endphp
                             @if(isset($val->list_page_img) && $val->list_page_img != '' && file_exists($imagePath))
-                                <a href="{{ route('front.product.details', $val->product_url) }}"><img class="img-fluid img_1" src="{{ isset($val->list_page_img) ? asset('public/images/admin/product_list/'.$val->list_page_img) : '' }}" alt="{{ $val->product_name ?? 'Product Image' }}"></a>
+                                @if(!$category->is_inquiry)
+                                    <a href="{{ route('front.product.details', $val->product_url) }}">
+                                @endif
+                                    <img class="img-fluid img_1" src="{{ isset($val->list_page_img) ? asset('public/images/admin/product_list/'.$val->list_page_img) : '' }}" alt="{{ $val->product_name ?? 'Product Image' }}">
+                                @if(!$category->is_inquiry)
+                                    </a>
+                                @endif
                             @else
-                                <a href="{{ route('front.product.details', $val->product_url) }}"><img class="w-100 mb-2 mb-md-4" src="{{ asset('public/noimg.jpg') }}" alt='No Image Found'></a>
+                                @if(!$category->is_inquiry)
+                                <a href="{{ route('front.product.details', $val->product_url) }}">
+                                @endif
+                                    <img class="w-100 mb-2 mb-md-4" src="{{ asset('public/noimg.jpg') }}" alt='No Image Found'>
+                                @if(!$category->is_inquiry)
+                                </a>
+                                @endif
                             @endif
                         </div>
-                        <h3 class="sub_head mt-2"><a href="{{ route('front.product.details', $val->product_url) }}">{{ $val->product_name ?? '' }}</a></h3>
+                        <h3 class="sub_head mt-2">
+                            @if(!$category->is_inquiry)
+                            <a href="{{ route('front.product.details', $val->product_url) }}">
+                            @endif
+                                {{ $val->product_name ?? '' }}
+                            @if(!$category->is_inquiry)
+                            </a>
+                            @endif
+                        </h3>
                         <div class="d-lg-flex justify-content-between align-items-center">
                             <div>
                                 <p class="fw-semibold text-dark mb-2">AED {{ number_format((float) preg_replace('/[^0-9.]/', '', $val->product_price), 0) }}</p>
@@ -249,7 +269,7 @@
                                         data-bs-toggle="modal"
                                         data-bs-target="#productInquiryModal"
                                         data-product-name="{{ $val->product_name ?? '' }}">
-                                        INQUIRE NOW
+                                        Chat on WhatsApp
                                     </button>
                                 @else
                                     <a href="{{ route('front.product.details', $val->product_url) }}" class="com_btn">
