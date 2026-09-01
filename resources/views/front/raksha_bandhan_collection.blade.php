@@ -74,7 +74,7 @@
         <div class="row gy-5">
             <div class="col-md-6">
                 <div class="desire_box">
-                    <div class="ceremonial_box mb-3">
+                    <div class="ceremonial_box mb-3" style="width:auto;">
                         <img class="w-100" src="{{asset('public/images/front/Raksha-Bandhan/The-Memory-Box.webp')}}" alt="The Memory Box">
                         <!-- <div class="inquire_bespoke">
                             <a href="javascript:void(0);" class="inquire_link" data-bs-toggle="modal" data-bs-target="#requestCorporateProduct">
@@ -107,7 +107,7 @@
 
             <div class="col-md-6">
                 <div class="desire_box">
-                    <div class="ceremonial_box mb-3">
+                    <div class="ceremonial_box mb-3" style="width:auto;">
                         <img class="w-100" src="{{asset('public/images/front/Raksha-Bandhan/The-Luxury-Candle.webp')}}" alt="The Luxury Candle">
                         <!-- <div class="inquire_bespoke">
                             <a href="javascript:void(0);" class="inquire_link" data-bs-toggle="modal" data-bs-target="#requestCorporateProduct">
@@ -140,7 +140,7 @@
 
             <div class="col-md-6">
                 <div class="desire_box">
-                    <div class="ceremonial_box mb-3">
+                    <div class="ceremonial_box mb-3" style="width:auto;">
                         <img class="w-100" src="{{asset('public/images/front/Raksha-Bandhan/The-Lotus-Frame.webp')}}" alt="The Lotus Frame">
                         <!-- <div class="inquire_bespoke">
                             <a href="javascript:void(0);" class="inquire_link" data-bs-toggle="modal" data-bs-target="#requestCorporateProduct">
@@ -172,7 +172,7 @@
 
             <div class="col-md-6">
                 <div class="desire_box">
-                    <div class="ceremonial_box mb-3">
+                    <div class="ceremonial_box mb-3" style="width:auto;">
                         <img class="w-100" src="{{asset('public/images/front/Raksha-Bandhan/The-Lotus-Plate.webp')}}" alt="The Lotus Plate">
                         <!-- <div class="inquire_bespoke">
                             <a href="javascript:void(0);" class="inquire_link" data-bs-toggle="modal" data-bs-target="#requestCorporateProduct">
