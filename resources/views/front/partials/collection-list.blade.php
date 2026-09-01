@@ -49,7 +49,7 @@
                             Chat On WhatsApp
                         </button>
                     @else
-                        <a href="{{ route('front.product.details', $val->product_url) }}" class="com_btn">
+                        <a href="{{ route('front.product.details', $val->product_url) }}" class="com_btn text-nowrap">
                             EXPLORE MORE
                         </a>
                     @endif
