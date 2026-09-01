@@ -74,7 +74,7 @@
         <div class="row gy-5">
             <div class="col-md-6">
                 <div class="desire_box">
-                    <div class="ceremonial_box mb-3">
+                    <div class="ceremonial_box mb-3" style="width:auto;">
                         <img class="w-100" src="{{asset('public/images/front/Raksha-Bandhan/The-Memory-Box.webp')}}" alt="The Memory Box">
                         <!-- <div class="inquire_bespoke">
                             <a href="javascript:void(0);" class="inquire_link" data-bs-toggle="modal" data-bs-target="#requestCorporateProduct">
@@ -107,7 +107,7 @@
 
             <div class="col-md-6">
                 <div class="desire_box">
-                    <div class="ceremonial_box mb-3">
+                    <div class="ceremonial_box mb-3" style="width:auto;">
                         <img class="w-100" src="{{asset('public/images/front/Raksha-Bandhan/The-Luxury-Candle.webp')}}" alt="The Luxury Candle">
                         <!-- <div class="inquire_bespoke">
                             <a href="javascript:void(0);" class="inquire_link" data-bs-toggle="modal" data-bs-target="#requestCorporateProduct">
@@ -140,7 +140,7 @@
 
             <div class="col-md-6">
                 <div class="desire_box">
-                    <div class="ceremonial_box mb-3">
+                    <div class="ceremonial_box mb-3" style="width:auto;">
                         <img class="w-100" src="{{asset('public/images/front/Raksha-Bandhan/The-Lotus-Frame.webp')}}" alt="The Lotus Frame">
                         <!-- <div class="inquire_bespoke">
                             <a href="javascript:void(0);" class="inquire_link" data-bs-toggle="modal" data-bs-target="#requestCorporateProduct">
@@ -158,8 +158,49 @@
                             <h3 class="sub_head mb-1">The Lotus Frame</h3>
                             <p class="fw-semibold text-muted mb-3"><strong></strong>AED 450
 </p>
-    <p class="text-muted mb-3">A frame for the memories</p>
-        
+                            <p class="text-muted mb-3">A frame for the memories</p>
+                             
+                             </div>
+                            <div>
+                                <a href="javascript:void(0);" class="com_btn" data-bs-toggle="modal" data-bs-target="#rakshaBandhanInquiry" data-product-name="The Lotus Frame">Inquire Now</a>
+                            </div>
+                           </div>
+                            <!-- <p class="mb-0 text-muted">A beautifully crafted frame to cherish your most treasured moments together.</p> -->
+                    
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="desire_box">
+                    <div class="ceremonial_box mb-3" style="width:auto;">
+                        <img class="w-100" src="{{asset('public/images/front/Raksha-Bandhan/The-Lotus-Plate.webp')}}" alt="The Lotus Plate">
+                        <!-- <div class="inquire_bespoke">
+                            <a href="javascript:void(0);" class="inquire_link" data-bs-toggle="modal" data-bs-target="#requestCorporateProduct">
+                                INQUIRE FOR <br> BESPOKE <br>
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="39" height="39" viewBox="0 0 39 39" fill="none">
+                                        <path d="M30.0501 8.93311L8.93555 30.0476M30.0501 8.93311H13.8081M30.0501 8.93311V25.175" stroke="white" stroke-width="1.77185" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </span>
+                            </a>
+                        </div> -->
+                    </div>
+                    <div class="desire_box_bot_child">
+                        <div>
+                            <h3 class="sub_head mb-1">The Lotus Plate</h3>
+                                <p class="fw-semibold text-muted mb-3"><strong></strong>AED 295</p>
+                            <p class="text-muted mb-3">A plate for the ceremony</p>
+                         
+                            </div>
+                            <div>
+                                <a href="javascript:void(0);" class="com_btn" data-bs-toggle="modal" data-bs-target="#rakshaBandhanInquiry" data-product-name="The Lotus Plate">Inquire Now</a>
+                            </div>
+                        </div>
+                            <!-- <p class="mb-0 text-muted">A delicate and thoughtful addition to honor the traditions of Raksha Bandhan.</p> -->
+                        
+                    
+                </div>
+            </div>
         </div>
     <div>
         <a href="javascript:void(0);" class="com_btn" data-bs-toggle="modal" data-bs-target="#rakshaBandhanInquiry" data-product-name="The Lotus Frame">Inquire Now</a>

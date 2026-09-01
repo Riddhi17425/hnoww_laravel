@@ -1,7 +1,5 @@
 @include('layouts.frontheader')
 <!-- hero section -->
-@include('layouts.frontheader')
-<!-- hero section -->
 {{-- <section class="hero-section" style="height: 100%;"> --}}
     {{-- <img class="img-fluid d-none d-lg-block"
         src="{{ asset('public/images/front/Raksha-Bandhan/Raksha-Bandhan-Banner.webp') }}" alt="images" loading="lazy">

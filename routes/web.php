@@ -69,7 +69,7 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap')
 
 //FRONT ROUTE
 Route::name('front.')->group(function () {
-    Route::get('/collections/raksha-bandhan-gifts-dubai', [FrontController::class, 'getRakshaBandhanCollection'])->name('raksha.bandhan.collection');
+    // Route::get('/collections/raksha-bandhan-gifts-dubai', [FrontController::class, 'getRakshaBandhanCollection'])->name('raksha.bandhan.collection');
     Route::get('/', [FrontController::class, 'index'])->name('home');
     Route::get('stripe', [FrontController::class, 'getStripe']);                             // Temporary
     Route::post('stripe-post', [FrontController::class, 'stripePost'])->name('stripe.post'); // Temporary
@@ -109,7 +109,7 @@ Route::name('front.')->group(function () {
     Route::get('/bespoke-gifts-dubai', [FrontController::class, 'getBespokeCommission'])->name('bespoke.commission');
     Route::get('/privacy', [FrontController::class, 'getprivacy'])->name('privacy');
 
-    Route::get('/luxury-corporate-gifts/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
+    Route::get('/corporate-gifts-dubai/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
     Route::get('/corporate-diwali-collection-2026', [FrontController::class, 'getCorporateDiwaliCollection'])->name('corporate.diwali.collection');
     
     Route::post('/store-festival-inquiry', [FrontController::class, 'storeFestivalInquiry'])->name('store.festival.inquiry');
@@ -223,6 +223,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('/update/{product_id}', [ProductController::class, 'update'])->name('update');
             Route::delete('/delete/{product_id}', [ProductController::class, 'delete'])->name('delete');
             Route::post('/update-status', [ProductController::class, 'updateStatus'])->name('update.status');
+            Route::get('/get-other-categories', [ProductController::class, 'getOtherCategories'])->name('getOtherCategories');
 
             Route::post('delete-detail-image', [ProductController::class, 'deleteDetailImage'])->name('delete.detail.image');
             Route::post('delete-all-detail-images', [ProductController::class, 'deleteAllDetailImages'])->name('delete.alldetail.images');

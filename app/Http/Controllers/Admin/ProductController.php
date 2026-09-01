@@ -238,7 +238,36 @@ class ProductController extends Controller
         $categories = Category::isActive()->notDeleted()->where('category_type', 1)->get();
         $corporateCategories = Category::isActive()->notDeleted()->where('category_type', 2)->get();
         $weddingCategories = Category::isActive()->notDeleted()->where('category_type', 3)->get();
-        return view('admin.product.edit', compact('product', 'categories', 'corporateCategories', 'weddingCategories'));
+        
+        // Get categories for "Show in other categories" dropdown (category_type = 1, is_active = 0, not deleted, excluding current category)
+        $otherCategories = Category::isActive()
+            ->notDeleted()
+            ->where('category_type', 1)
+            ->where('id', '!=', $product->category_id ?? 0)
+            ->get();
+            
+        return view('admin.product.edit', compact('product', 'categories', 'corporateCategories', 'weddingCategories', 'otherCategories'));
+    }
+    
+    /**
+     * Get categories for the "shown_in_other_categories" dropdown
+     * This is called via AJAX when the category type or category changes
+     * Always returns categories with category_type = 1
+     */
+    public function getOtherCategories(Request $request)
+    {
+        $currentCategoryId = $request->input('current_category_id');
+        
+        $categories = Category::isActive()
+            ->notDeleted()
+            ->where('category_type', 1)  // Always category_type = 1
+            ->where('id', '!=', $currentCategoryId ?? 0)
+            ->get(['id', 'category_name']);
+       
+        return response()->json([
+            'success' => true,
+            'categories' => $categories
+        ]);
     }
 
     public function update(Request $request, $id)
@@ -328,6 +357,13 @@ class ProductController extends Controller
             'category_id', 'product_name', 'product_price', 'short_description', 'large_description',
             'meta_title', 'meta_description', 'product_url', 'dimensions', 'materials', 'moq', 'short_note', 'product_stock', 'weight', 'care_maintenance'
         ]);
+        
+        // Handle shown_in_other_categories field
+        if ($request->has('shown_in_other_categories') && is_array($request->shown_in_other_categories)) {
+            $data['shown_in_other_categories'] = implode(',', $request->shown_in_other_categories);
+        } else {
+            $data['shown_in_other_categories'] = null;
+        }
         
         
         if ($request->hasFile('list_img')) {
