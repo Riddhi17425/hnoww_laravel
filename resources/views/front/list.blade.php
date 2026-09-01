@@ -29,7 +29,7 @@
 
         @if(!empty($category->description))
             <p class="para mb-0">
-                {{ $category->description }}
+                {!! $category->description !!}
             </p>
         @endif
     </div>
@@ -130,7 +130,7 @@
                 <div class="col-lg-10 m-auto text-center">
 
                     <p class="sub_head_inter">
-                        {!! nl2br(e($category->celebration_description)) !!}
+                        {!! $category->celebration_description ?? '' !!}
                     </p>
 
                 </div>
@@ -208,7 +208,7 @@
 
             @if(!empty($category->collection_description))
                 <p class="mb-4">
-                    {!! nl2br(e($category->collection_description)) !!}
+                    {!! $category->collection_description !!}
                 </p>
             @endif
 
@@ -230,20 +230,54 @@
                                 $imagePath = public_path('images/admin/product_list/' . $val->list_page_img);
                             @endphp
                             @if(isset($val->list_page_img) && $val->list_page_img != '' && file_exists($imagePath))
-                                <a href="{{ route('front.product.details', $val->product_url) }}"><img class="img-fluid img_1" src="{{ isset($val->list_page_img) ? asset('public/images/admin/product_list/'.$val->list_page_img) : '' }}" alt="{{ $val->product_name ?? 'Product Image' }}"></a>
+                                @if(!$category->is_inquiry)
+                                    <a href="{{ route('front.product.details', $val->product_url) }}">
+                                @endif
+                                    <img class="img-fluid img_1" src="{{ isset($val->list_page_img) ? asset('public/images/admin/product_list/'.$val->list_page_img) : '' }}" alt="{{ $val->product_name ?? 'Product Image' }}">
+                                @if(!$category->is_inquiry)
+                                    </a>
+                                @endif
                             @else
-                                <a href="{{ route('front.product.details', $val->product_url) }}"><img class="w-100 mb-2 mb-md-4" src="{{ asset('public/noimg.jpg') }}" alt='No Image Found'></a>
+                                @if(!$category->is_inquiry)
+                                <a href="{{ route('front.product.details', $val->product_url) }}">
+                                @endif
+                                    <img class="w-100 mb-2 mb-md-4" src="{{ asset('public/noimg.jpg') }}" alt='No Image Found'>
+                                @if(!$category->is_inquiry)
+                                </a>
+                                @endif
                             @endif
                         </div>
-                        <h3 class="sub_head mt-2"><a href="{{ route('front.product.details', $val->product_url) }}">{{ $val->product_name ?? '' }}</a></h3>
+                        <h3 class="sub_head mt-2">
+                            @if(!$category->is_inquiry)
+                            <a href="{{ route('front.product.details', $val->product_url) }}">
+                            @endif
+                                {{ $val->product_name ?? '' }}
+                            @if(!$category->is_inquiry)
+                            </a>
+                            @endif
+                        </h3>
                         <div class="d-lg-flex justify-content-between align-items-center">
                             <div>
                                 <p class="fw-semibold text-dark mb-2">AED {{ number_format((float) preg_replace('/[^0-9.]/', '', $val->product_price), 0) }}</p>
                                 <p class>{!! $val->short_description ?? '' !!}</p>
                             </div>
+
                             <div>
-                                <a href="{{ route('front.product.details', $val->product_url) }}" class="com_btn">VIEW OBJECT </a>
+                                @if($category->is_inquiry)
+                                    <button type="button"
+                                        class="com_btn bg-transparent product-inquiry-btn"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#productInquiryModal"
+                                        data-product-name="{{ $val->product_name ?? '' }}">
+                                        Chat on WhatsApp
+                                    </button>
+                                @else
+                                    <a href="{{ route('front.product.details', $val->product_url) }}" class="com_btn">
+                                        VIEW OBJECT
+                                    </a>
+                                @endif
                             </div>
+
                         </div>
                     </div>
                 @endforeach
@@ -293,6 +327,8 @@
 </section>
 <!-- END - PRODUCT DISPLAY SECTION -->
 
+@include('front.partials.product-inquiry-modal')
+
 <!-- START - FAQ SECTION -->
 @if(!empty($category->faqs) && is_array($category->faqs) && count($category->faqs) > 0)
 <section class="mt_120 mb_120">
@@ -331,62 +367,72 @@
 <!-- END - FAQ SECTION -->
 
 <!-- START - ABOVE FOOTER SECTION -->
-<section class="cta_footer mt_120">
-    <div class="container">
-        <div class="cta_ftwrapper">
-            <div>
-                <p class="sub_head mb-0">
-                    <span>
-                        <svg width="146" height="11" viewBox="0 0 146 11" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M10.6666 5.33325C10.6666 8.27877 8.27877 10.6666 5.33325 10.6666C2.38773 10.6666 -8.13802e-05 8.27877 -8.13802e-05 5.33325C-8.13802e-05 2.38773 2.38773 -8.13802e-05 5.33325 -8.13802e-05C8.27877 -8.13802e-05 10.6666 2.38773 10.6666 5.33325ZM145.333 5.33325V6.33325L5.33325 6.33325V5.33325V4.33325L145.333 4.33325V5.33325Z"
-                                fill="url(#paint0_linear_32_115)" />
-                            <defs>
-                                <linearGradient id="paint0_linear_32_115" x1="145.333" y1="5.83325" x2="5.33325"
-                                    y2="5.83325" gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#F8F7F3" stop-opacity="0" />
-                                    <stop offset="1" stop-color="#F8F7F3" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-
-                    </span>
-                    <span>
-                        @if(isset($catSlug) && $catSlug != null)
-                            @if(strtolower($catSlug) == 'luxury-home-decor')
-                            Craft Your Majlis.
+@if(!isset($catSlug) || strtolower($catSlug) != 'luxury-rakshabandhan')
+    <section class="cta_footer mt_120">
+        <div class="container">
+            <div class="cta_ftwrapper">
+                <div>
+                    <p class="sub_head mb-0">
+                        <span>
+                            <svg width="146" height="11" viewBox="0 0 146 11" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M10.6666 5.33325C10.6666 8.27877 8.27877 10.6666 5.33325 10.6666C2.38773 10.6666 -8.13802e-05 8.27877 -8.13802e-05 5.33325C-8.13802e-05 2.38773 2.38773 -8.13802e-05 5.33325 -8.13802e-05C8.27877 -8.13802e-05 10.6666 2.38773 10.6666 5.33325ZM145.333 5.33325V6.33325L5.33325 6.33325V5.33325V4.33325L145.333 4.33325V5.33325Z"
+                                    fill="url(#paint0_linear_32_115)" />
+                                <defs>
+                                    <linearGradient id="paint0_linear_32_115" x1="145.333" y1="5.83325" x2="5.33325"
+                                        y2="5.83325" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#F8F7F3" stop-opacity="0" />
+                                        <stop offset="1" stop-color="#F8F7F3" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </span>
+                        <span>
+                            @if(isset($catSlug) && $catSlug != null)
+                                @if(strtolower($catSlug) == 'luxury-home-decor')
+                                Craft Your Majlis.
+                                @endif
+                                @if(strtolower($catSlug) == 'luxury-gifts-for-her')
+                                Objects chosen with care, designed to be lived with.
+                                @endif
+                                @if(strtolower($catSlug) == 'luxury-gifts-for-him')
+                                Build His Ritual.
+                                @endif
                             @endif
-                            @if(strtolower($catSlug) == 'luxury-gifts-for-her')
-                            Objects chosen with care, designed to be lived with.
-                            @endif
-                            @if(strtolower($catSlug) == 'luxury-gifts-for-him')
-                            Build His Ritual.
-                            @endif
-                        @endif
-                    </span>
-                    <span>
-                        <svg width="146" height="11" viewBox="0 0 146 11" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M134.667 5.33325C134.667 8.27877 137.054 10.6666 140 10.6666C142.946 10.6666 145.333 8.27877 145.333 5.33325C145.333 2.38773 142.946 -8.13802e-05 140 -8.13802e-05C137.054 -8.13802e-05 134.667 2.38773 134.667 5.33325ZM0 5.33325L0 6.33325L140 6.33325V5.33325V4.33325L0 4.33325L0 5.33325Z"
-                                fill="url(#paint0_linear_32_114)" />
-                            <defs>
-                                <linearGradient id="paint0_linear_32_114" x1="0" y1="5.83325" x2="140" y2="5.83325"
-                                    gradientUnits="userSpaceOnUse">
-                                    <stop stop-color="#F8F7F3" stop-opacity="0" />
-                                    <stop offset="1" stop-color="#F8F7F3" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                    </span>
-                </p>
-            </div>
-            <div>
-                {{-- <a href="javascript:void(0);" class="btn_2">SHOP GIFTS {{$category ? $category->category_name : '' }}</a>    --}}
+                        </span>
+                        <span>
+                            <svg width="146" height="11" viewBox="0 0 146 11" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M134.667 5.33325C134.667 8.27877 137.054 10.6666 140 10.6666C142.946 10.6666 145.333 8.27877 145.333 5.33325C145.333 2.38773 142.946 -8.13802e-05 140 -8.13802e-05C137.054 -8.13802e-05 134.667 2.38773 134.667 5.33325ZM0 5.33325L0 6.33325L140 6.33325V5.33325V4.33325L0 4.33325L0 5.33325Z"
+                                    fill="url(#paint0_linear_32_114)" />
+                                <defs>
+                                    <linearGradient id="paint0_linear_32_114" x1="0" y1="5.83325" x2="140" y2="5.83325"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#F8F7F3" stop-opacity="0" />
+                                        <stop offset="1" stop-color="#F8F7F3" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </span>
+                    </p>
+                </div>
+                <div>
+                    {{-- <a href="javascript:void(0);" class="btn_2">SHOP GIFTS {{$category ? $category->category_name : '' }}</a>    --}}
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+@endif
 <!-- END - ABOVE FOOTER SECTION -->
+
 @include('layouts.frontfooter')
+
+<script>
+    $(document).on('click', '.product-inquiry-btn', function () {
+        let productName = $(this).data('product-name');
+
+        $('#productInquiryProductName').val(productName);
+    });
+</script>

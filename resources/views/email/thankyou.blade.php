@@ -12,8 +12,7 @@
 
 <body>
     
-    <P><b>Thankyou!
-            For Your Inquiry Our Team Will Contact You Soon!</b></P>
+    <P><b>{{ $msg ?? 'Thank you! For Your Inquiry Our Team Will Contact You Soon!' }}</b></P>
 </body>
 
 </html>

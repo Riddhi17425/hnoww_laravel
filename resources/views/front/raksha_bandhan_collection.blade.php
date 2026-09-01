@@ -5,7 +5,7 @@
     <img class="img-fluid" src="{{asset('public/images/front/Raksha-Bandhan/Raksha-Bandhan-Collection-2026-Banner.webp')}}" alt="Raksha Bandhan Banner">
 
     <div class="hero_content_inner">
-        <h1 class="main_head">Raksha Bandhan Collection 2026</h1>
+        <h2 class="main_head">Raksha Bandhan Collection 2026</h2>
         <p class="para">Where the bond outlasts the thread</p>
     </div>
 </section>
@@ -202,7 +202,48 @@
                 </div>
             </div>
         </div>
+    <div>
+        <a href="javascript:void(0);" class="com_btn" data-bs-toggle="modal" data-bs-target="#rakshaBandhanInquiry" data-product-name="The Lotus Frame">Inquire Now</a>
     </div>
+    </div>
+    <!-- <p class="mb-0 text-muted">A beautifully crafted frame to cherish your most treasured moments together.</p> -->
+
+</div>
+</div>
+
+<div class="col-md-6">
+    <div class="desire_box">
+        <div class="ceremonial_box mb-3">
+            <img class="w-100" src="{{asset('public/images/front/Raksha-Bandhan/The-Lotus-Plate.webp')}}" alt="The Lotus Plate">
+            <!-- <div class="inquire_bespoke">
+                <a href="javascript:void(0);" class="inquire_link" data-bs-toggle="modal" data-bs-target="#requestCorporateProduct">
+                    INQUIRE FOR <br> BESPOKE <br>
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="39" height="39" viewBox="0 0 39 39" fill="none">
+                            <path d="M30.0501 8.93311L8.93555 30.0476M30.0501 8.93311H13.8081M30.0501 8.93311V25.175" stroke="white" stroke-width="1.77185" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </span>
+                </a>
+            </div> -->
+        </div>
+        <div class="desire_box_bot_child">
+            <div>
+                <h3 class="sub_head mb-1">The Lotus Plate</h3>
+                    <p class="fw-semibold text-muted mb-3"><strong></strong>AED 295</p>
+                <p class="text-muted mb-3">A plate for the ceremony</p>
+                
+                </div>
+                <div>
+                    <a href="javascript:void(0);" class="com_btn" data-bs-toggle="modal" data-bs-target="#rakshaBandhanInquiry" data-product-name="The Lotus Plate">Inquire Now</a>
+                </div>
+            </div>
+                <!-- <p class="mb-0 text-muted">A delicate and thoughtful addition to honor the traditions of Raksha Bandhan.</p> -->
+            
+        
+    </div>
+</div>
+</div>
+</div>
 </section>
 
 <!-- FAQs Section -->
@@ -215,26 +256,26 @@
                 
                 <!-- FAQ Item 1 -->
                 <div class="faq_cont_acco">
-                    <h3 class="according_head sub_head collapsed" data-bs-toggle="collapse"
+                    <h2 class="according_head sub_head collapsed" data-bs-toggle="collapse"
                         data-bs-target="#collapse-faq-1" aria-expanded="false"
                         aria-controls="collapse-faq-1">
                         How do I order luxury Raksha Bandhan gifts from HNOWW?
-                    </h3>
+                    </h2>
                     <div id="collapse-faq-1" class="accordion-collapse collapse"
                         data-bs-parent="#accordion-rakhi-faq">
                         <div class="accordion-body">
-                            <p class="mb-0 text-muted">Most luxury Raksha Bandhan gifts can be ordered through WhatsApp or the product inquiry form. The HNOWW team can assist with piece selection, personalisation, and delivery coordination.</p>
+                            <p class="mb-0 text-muted">Most pieces are ordered through WhatsApp, and the Memory Box can be bought directly online. Either way, the team helps with piece selection, personalisation, and delivery timing.</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- FAQ Item 2 -->
                 <div class="faq_cont_acco">
-                    <h3 class="according_head sub_head collapsed" data-bs-toggle="collapse"
+                    <h2 class="according_head sub_head collapsed" data-bs-toggle="collapse"
                         data-bs-target="#collapse-faq-2" aria-expanded="false"
                         aria-controls="collapse-faq-2">
                         What is the delivery time for Raksha Bandhan gifts in Dubai?
-                    </h3>
+                    </h2>
                     <div id="collapse-faq-2" class="accordion-collapse collapse"
                         data-bs-parent="#accordion-rakhi-faq">
                         <div class="accordion-body">
@@ -245,11 +286,11 @@
 
                 <!-- FAQ Item 3 -->
                 <div class="faq_cont_acco">
-                    <h3 class="according_head sub_head collapsed" data-bs-toggle="collapse"
+                    <h2 class="according_head sub_head collapsed" data-bs-toggle="collapse"
                         data-bs-target="#collapse-faq-3" aria-expanded="false"
                         aria-controls="collapse-faq-3">
                         Is same-day delivery available for rakhi gifts?
-                    </h3>
+                    </h2>
                     <div id="collapse-faq-3" class="accordion-collapse collapse"
                         data-bs-parent="#accordion-rakhi-faq">
                         <div class="accordion-body">
@@ -260,11 +301,11 @@
 
                 <!-- FAQ Item 4 -->
                 <div class="faq_cont_acco">
-                    <h3 class="according_head sub_head collapsed" data-bs-toggle="collapse"
+                    <h2 class="according_head sub_head collapsed" data-bs-toggle="collapse"
                         data-bs-target="#collapse-faq-4" aria-expanded="false"
                         aria-controls="collapse-faq-4">
                         Can Raksha Bandhan gifts be personalised?
-                    </h3>
+                    </h2>
                     <div id="collapse-faq-4" class="accordion-collapse collapse"
                         data-bs-parent="#accordion-rakhi-faq">
                         <div class="accordion-body">
@@ -275,11 +316,11 @@
 
                 <!-- FAQ Item 5 -->
                 <div class="faq_cont_acco">
-                    <h3 class="according_head sub_head collapsed" data-bs-toggle="collapse"
+                    <h2 class="according_head sub_head collapsed" data-bs-toggle="collapse"
                         data-bs-target="#collapse-faq-5" aria-expanded="false"
                         aria-controls="collapse-faq-5">
                         Which Raksha Bandhan gifts suit sisters and brothers best?
-                    </h3>
+                    </h2>
                     <div id="collapse-faq-5" class="accordion-collapse collapse"
                         data-bs-parent="#accordion-rakhi-faq">
                         <div class="accordion-body">
@@ -290,11 +331,11 @@
 
                 <!-- FAQ Item 6 -->
                 <div class="faq_cont_acco">
-                    <h3 class="according_head sub_head collapsed" data-bs-toggle="collapse"
+                    <h2 class="according_head sub_head collapsed" data-bs-toggle="collapse"
                         data-bs-target="#collapse-faq-6" aria-expanded="false"
                         aria-controls="collapse-faq-6">
                         Do you deliver Raksha Bandhan gifts across the UAE?
-                    </h3>
+                    </h2>
                     <div id="collapse-faq-6" class="accordion-collapse collapse"
                         data-bs-parent="#accordion-rakhi-faq">
                         <div class="accordion-body">
@@ -368,136 +409,6 @@
 </div>
 
 @push('script')
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "CollectionPage",
-      "@id": "https://hnoww.com/collections/raksha-bandhan-gifts-dubai#collectionpage",
-      "url": "https://hnoww.com/collections/raksha-bandhan-gifts-dubai",
-      "name": "Raksha Bandhan Gifts in Dubai | Rakhi Collections | HNOWW",
-      "description": "Discover HNOWW's raksha bandhan gifts for Indian families in Dubai, curated pieces for brother and sister that mark the bond, not just the occasion.",
-      "image": "https://hnoww.com/public/images/front/Raksha-Bandhan/Rakhi-Edition.webp",
-      "isPartOf": {
-        "@type": "WebSite",
-        "@id": "https://hnoww.com/#website",
-        "url": "https://hnoww.com/",
-        "name": "HNOWW"
-      },
-      "breadcrumb": {
-        "@id": "https://hnoww.com/collections/raksha-bandhan-gifts-dubai#breadcrumb"
-      },
-      "mainEntity": {
-        "@id": "https://hnoww.com/collections/raksha-bandhan-gifts-dubai#itemlist"
-      }
-    },
-    {
-      "@type": "ItemList",
-      "@id": "https://hnoww.com/collections/raksha-bandhan-gifts-dubai#itemlist",
-      "name": "The Raksha Bandhan Gifts",
-      "description": "Make Raksha Bandhan Memorable in Dubai with Curated HNO̱WW Rakhi Gifts.",
-      "url": "https://hnoww.com/collections/raksha-bandhan-gifts-dubai",
-      "numberOfItems": 4,
-      "itemListOrder": "https://schema.org/ItemListOrderAscending",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "The Memory Box",
-          "url": "https://hnoww.com/product-details/the-memory-box"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "The Luxury Candle"       
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "The Lotus Frame"
-        },
-        {
-          "@type": "ListItem",
-          "position": 4,
-          "name": "The Lotus Plate"
-        }
-      ]
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": "https://hnoww.com/collections/raksha-bandhan-gifts-dubai#breadcrumb",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://hnoww.com/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Raksha Bandhan Gifts",
-          "item": "https://hnoww.com/collections/raksha-bandhan-gifts-dubai"
-        }
-      ]
-    }
-  ]
-}
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [{
-    "@type": "Question",
-    "name": "How do I order luxury Raksha Bandhan gifts from HNO̱WW?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Most luxury Raksha Bandhan gifts can be ordered through WhatsApp or the product inquiry form. The HNO̱WW team can assist with piece selection, personalisation, and delivery coordination."
-    }
-  },{
-    "@type": "Question",
-    "name": "What is the delivery time for Raksha Bandhan gifts in Dubai?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Delivery time typically depends on the selected pieces and personalisation requirements. Our team will provide an estimated timeline upon order confirmation."
-    }
-  },{
-    "@type": "Question",
-    "name": "Is same-day delivery available for rakhi gifts?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Yes, we do offer same-day delivery on select ready-to-ship items. Please check with our team for availability."
-    }
-  },{
-    "@type": "Question",
-    "name": "Can Raksha Bandhan gifts be personalised?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Yes, many of our pieces can be personalized with names, messages, or corporate branding."
-    }
-  },{
-    "@type": "Question",
-    "name": "Which Raksha Bandhan gifts suit sisters and brothers best?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Our team can recommend the perfect gifts based on the recipient's taste and style, from memory boxes to luxury candles and ceremonial objects."
-    }
-  },{
-    "@type": "Question",
-    "name": "Do you deliver Raksha Bandhan gifts across the UAE?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Yes, we provide delivery services across the UAE."
-    }
-  }]
-}
-</script>
-
 <script>
 $(document).ready(function () {
     $('#rakshaBandhanInquiry').on('show.bs.modal', function (event) {

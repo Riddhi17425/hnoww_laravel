@@ -20,7 +20,19 @@
                     <p class>{!! $val->short_description ?? '' !!}</p>
                 </div>
                 <div>
-                    <a href="{{ route('front.product.details', $val->product_url) }}" class="com_btn">VIEW OBJECT </a>
+                    @if($val->category && $val->category->is_inquiry)
+                        <button type="button"
+                            class="com_btn bg-transparent product-inquiry-btn"
+                            data-bs-toggle="modal"
+                            data-bs-target="#productInquiryModal"
+                            data-product-name="{{ $val->product_name ?? '' }}">
+                            INQUIRE NOW
+                        </button>
+                    @else
+                        <a href="{{ route('front.product.details', $val->product_url) }}" class="com_btn">
+                            VIEW OBJECT
+                        </a>
+                    @endif
                 </div>
                </div>
             </div>

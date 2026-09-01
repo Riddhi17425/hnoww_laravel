@@ -1,5 +1,6 @@
 @php
 $current_route = Route::currentRouteName();
+
 $is_green = ($current_route === 'front.product.details' || $current_route === 'front.gift.details' || $current_route ===
 'front.auth' || $current_route === 'front.cart.view' || $current_route === 'front.checkout.view' || $current_route ===
 'front.order.view' || $current_route === 'front.order_detail.view' || $current_route === 'front.profile' ||
@@ -306,7 +307,8 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
 
             <div class="collapse navbar-collapse justify-content-between" id="mainNavbar">
                 <ul class="mx-auto nav_links">
-                    <li class="has-dropdown">
+
+                    <!-- <li class="has-dropdown">
                         <a href="{{ route('front.collections') }}" data-text="Collections">
                             <span>Collections</span>
                             <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
@@ -317,6 +319,28 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
                             <li><a href="{{ route('front.list', 'luxury-gifts-for-her') }}">For Her</a></li>
                             <li><a href="{{ route('front.list', 'luxury-gifts-for-him') }}">For Him</a></li>
                             <li><a href="{{ route('front.list', 'luxury-home-decor') }}">For Home</a></li>
+                        </ul>
+                    </li> -->
+
+                    <li class="has-dropdown">
+                        <a href="{{ route('front.collections') }}" data-text="Collections">
+                            <span>Collections</span>
+                            <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                <path d="M1 1L6 6L11 1"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            @foreach($collectionCategories as $category)
+                                <li>
+                                    <a href="{{ route('front.list', $category->category_url) }}">
+                                        {{ $category->category_name }}
+                                    </a>
+                                </li>
+                            @endforeach
                         </ul>
                     </li>
 
@@ -331,21 +355,30 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
                             <span>Corporate Gifts</span>
                         </a>
                     </li>
+                    @if($festiveCategories->count() > 0)
+                        <li class="has-dropdown">
+                            <a href="#" data-text="Festive Gifts">
+                                <span>Festive Gifts</span>
 
-                    <li class="has-dropdown">
-                        <a href="#" data-text="Festive Gifts">
-                            <span>Festive Gifts</span>
-                            <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
-                                <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                            </svg>
-                        </a>
-                        <ul class="dropdown-menu">
-                           <li><a href="{{ route('front.raksha.bandhan.collection') }}">Raksha Bandhan Gifts</a></li>
-                            <!-- <li><a href="#">Diwali Corporate</a></li>
-                            <li><a href="#">Diwali Gifting</a></li> -->
-                        </ul>
-                    </li>
+                                <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                    <path d="M1 1L6 6L11 1"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </a>
 
+                            <ul class="dropdown-menu">
+                                @foreach($festiveCategories as $category)
+                                    <li>
+                                        <a href="{{ route('front.list', $category->category_url) }}">
+                                            {{ $category->category_name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                    @endif
                     <li class="d-none">
                         <a href="{{ route('front.editions') }}" data-text="editions">
                             <span>editions</span>

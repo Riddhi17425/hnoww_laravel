@@ -222,7 +222,7 @@ $(document).ready(function() {
                 required: true,
                 email: true,
                 noSpamEmail: true,
-                uniqueEmail: "newsletters" // dynamic table
+                // uniqueEmail: "newsletters" // dynamic table
             }
         },
         messages: {
@@ -245,16 +245,18 @@ $(document).ready(function() {
             $.ajax({
                 url: $form.attr('action'),
                 type: 'POST',
+                dataType: 'json',
+                headers: {
+                    'Accept': 'application/json'
+                },
                 data: $form.serialize(),
                 success: function(response) {
                     if (response.success) {
-                        $btn.prop('disabled', false).text(originalBtnText);
-                        $('#newsletterMessage').text(response.message);
-                        // Open WhatsApp link in new tab AFTER slight delay to ensure UI updates
-                        if (response.whatsappUrl) {
-                            setTimeout(function() {
-                                window.open(response.whatsappUrl, '_blank');
-                            }, 200);
+                        if (response.redirect_url) {
+                            window.location.href = response.redirect_url;
+                        } else {
+                            $btn.prop('disabled', false).text(originalBtnText);
+                            $('#newsletterMessage').text(response.message);
                         }
                         $form[0].reset();
                     } else {

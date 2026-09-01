@@ -16,7 +16,7 @@
 
     <div class="hero_content_inner">
         <h2 class="main_head">Thank You.</h2>
-        <h4 class="sub_head text-white">Your Inquiry has been sent Successfully. We will get back to you soon.</h4>
+        <h4 class="sub_head text-white">{{ $msg ?? 'Your Inquiry has been sent Successfully. We will get back to you soon.' }}</h4>
         {{-- <p class="text-white py-4">Your Inquiry has been received. We will get back to you soon.</p> --}}
     </div>
 </section>

@@ -80,6 +80,34 @@
                                 @enderror
                             </div>
 
+                            <div class="col-md-4">
+                                <label class="form-label d-block">Product Button Type</label>
+
+                                <div class="form-check form-switch mt-2">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        role="switch"
+                                        id="is_inquiry"
+                                        name="is_inquiry"
+                                        value="1"
+                                        {{ old('is_inquiry', $category->is_inquiry) ? 'checked' : '' }}
+                                    >
+
+                                    <label class="form-check-label" for="is_inquiry">
+                                        Show "Inquire Now" button for all category products
+                                    </label>
+                                </div>
+
+                                <small class="text-muted">
+                                    When disabled, all category products will display the "View Detail" button.
+                                </small>
+
+                                @error('is_inquiry')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
                             <div class="col-md-12">
                                 <label class="form-label">Category Title</label>
                                 <div class="input-group mb-3">
@@ -129,7 +157,7 @@
 
                             <div class="col-md-12">
                                 <label class="form-label">Celebration Description</label>
-                                <textarea name="celebration_description"
+                                <textarea name="celebration_description" id="celebration_description"
                                         class="form-control"
                                         rows="4">{{ old('celebration_description', $category->celebration_description) }}</textarea>
 
@@ -190,7 +218,7 @@
 
                             <div class="col-md-12">
                                 <label class="form-label">Collection Description</label>
-                                <textarea name="collection_description"
+                                <textarea name="collection_description" id="collection_description"
                                         class="form-control"
                                         rows="4">{{ old('collection_description', $category->collection_description) }}</textarea>
 
@@ -394,8 +422,7 @@
 @push('custom_scripts')
 <script>
 $(document).ready(function() {
-    $('#description').summernote({
-        placeholder: 'Enter Product Description here...',
+    const summernoteOptions = {
         height: 200,
         toolbar: [
             ['style', ['style']],
@@ -408,6 +435,21 @@ $(document).ready(function() {
             ['view', ['fullscreen', 'codeview']],
             ['help', ['help']]
         ]
+    };
+
+    $('#description').summernote({
+        ...summernoteOptions,
+        placeholder: 'Enter Category Description here...'
+    });
+
+    $('#celebration_description').summernote({
+        ...summernoteOptions,
+        placeholder: 'Enter Celebration Description here...'
+    });
+
+    $('#collection_description').summernote({
+        ...summernoteOptions,
+        placeholder: 'Enter Collection Description here...'
     });
 
     // Slug auto-generate

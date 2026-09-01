@@ -50,6 +50,8 @@
     </div>
 </section>
 
+@include('front.partials.product-inquiry-modal')
+
 <section class="cta_footer mt_120">
     <div class="container">
         <div class="cta_ftwrapper">
@@ -179,7 +181,15 @@
             fetchCollections(window.location.href, false);
         });
     });
+
+    $(document).on('click', '.product-inquiry-btn', function () {
+        let productName = $(this).data('product-name');
+
+        $('#productInquiryProductName').val(productName);
+    });
 </script>
+
+
 @endpush
 
 @include('layouts.frontfooter')
