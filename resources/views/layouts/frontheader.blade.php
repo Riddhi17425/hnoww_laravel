@@ -307,21 +307,6 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
 
             <div class="collapse navbar-collapse justify-content-between" id="mainNavbar">
                 <ul class="mx-auto nav_links">
-
-                    <!-- <li class="has-dropdown">
-                        <a href="{{ route('front.collections') }}" data-text="Collections">
-                            <span>Collections</span>
-                            <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
-                                <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                            </svg>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ route('front.list', 'luxury-gifts-for-her') }}">For Her</a></li>
-                            <li><a href="{{ route('front.list', 'luxury-gifts-for-him') }}">For Him</a></li>
-                            <li><a href="{{ route('front.list', 'luxury-home-decor') }}">For Home</a></li>
-                        </ul>
-                    </li> -->
-
                     <li class="has-dropdown">
                         <a href="{{ route('front.collections') }}" data-text="Collections">
                             <span>Collections</span>

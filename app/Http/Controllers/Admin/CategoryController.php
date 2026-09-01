@@ -79,29 +79,33 @@ class CategoryController extends Controller
             ->make(true);
     }
 
-    public function updateStatus(Request $request){
+    public function updateStatus(Request $request)
+    {
         $category = Category::find($request->id);
 
         if (!$category) {
             return response()->json([
-                'success' => false,
-                'message' => 'Category not found'
+                'success' => false
             ]);
         }
-        $checkProduct = Product::isActive()->notDeleted()->where('category_id', $request->id)->exists();
-        if($checkProduct && $request->status == 0){
-            return response()->json([
-                'success' => false,
-                'message' => 'You can not update status for this Category as it associated with any Product'
-            ]);
-        }
+
+        // $checkProduct = Product::isActive()
+        //     ->notDeleted()
+        //     ->where('category_id', $request->id)
+        //     ->exists();
+
+        // if ($checkProduct && $request->status == 0) {
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => 'You can not update status for this Category as it associated with any Product'
+        //     ]);
+        // }
 
         $category->is_active = $request->status;
         $category->save();
 
         return response()->json([
-            'success' => true,
-            'message' => 'Status updated successfully'
+            'success' => true
         ]);
     }
 

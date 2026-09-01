@@ -67,7 +67,8 @@ $(document).ready(function () {
 
 });
 
-function updateStatus(status, catId){
+function updateStatus(status, catId)
+{
     $.ajax({
         url:  window.APP_URLS.updateStatus,
         type: "POST",
@@ -79,16 +80,16 @@ function updateStatus(status, catId){
             status: status
         },
         success: function (response) {
-            console.log(response);
-            if (response.success) {
-                alert(response.message);
-            } else {
-                alert(response.message);
-            }
+            // console.log(response);
+            // if (response.success) {
+            //     alert(response.message);
+            // } else {
+            //     alert(response.message);
+            // }
             $('#categoryTable').DataTable().ajax.reload(null, false);
         },
         error: function () {
-            alert('Server error');
+            // alert('Server error');
         }
     });
 }

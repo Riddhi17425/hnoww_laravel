@@ -157,7 +157,7 @@ function updateStatus(status, productId){
         },
         success: function (response) {
             if (response.success) {
-                alert(response.message);
+                // alert(response.message);
                 // reload datatable if needed
                 $('#productTable').DataTable().ajax.reload(null, false);
             } else {
