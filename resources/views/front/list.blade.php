@@ -273,7 +273,7 @@
                                     </button>
                                 @else
                                     <a href="{{ route('front.product.details', $val->product_url) }}" class="com_btn">
-                                        VIEW OBJECT
+                                        VIEW DETAILS
                                     </a>
                                 @endif
                             </div>
@@ -293,7 +293,7 @@
                     </div>
 
                 <div>
-                    <a href="product-details.php" class="com_btn">VIEW OBJECT </a>
+                    <a href="product-details.php" class="com_btn">EXPLORE MORE </a>
                 </div>
             </div>
             <div class="him_prod">
@@ -306,7 +306,7 @@
                     </div>
 
                 <div>
-                    <a href="product-details.php" class="com_btn">VIEW OBJECT </a>
+                    <a href="product-details.php" class="com_btn">EXPLORE MORE </a>
                 </div>
             </div>
             <div class="him_prod">
@@ -319,7 +319,7 @@
                     </div>
 
                 <div>
-                    <a href="product-details.php" class="com_btn">VIEW OBJECT </a>
+                    <a href="product-details.php" class="com_btn">EXPLORE MORE </a>
                 </div>
             </div> --}}
         </div>
