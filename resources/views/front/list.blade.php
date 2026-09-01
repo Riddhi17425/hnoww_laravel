@@ -273,7 +273,7 @@
                                     </button>
                                 @else
                                     <a href="{{ route('front.product.details', $val->product_url) }}" class="com_btn">
-                                        VIEW DETAILS
+                                        EXPLORE MORE
                                     </a>
                                 @endif
                             </div>
