@@ -113,6 +113,7 @@ Route::name('front.')->group(function () {
     Route::get('/corporate-diwali-collection-2026', [FrontController::class, 'getCorporateDiwaliCollection'])->name('corporate.diwali.collection');
     
     Route::post('/store-festival-inquiry', [FrontController::class, 'storeFestivalInquiry'])->name('store.festival.inquiry');
+    Route::post('/store-basic-category-inquiry', [FrontController::class, 'storeBasicCategoryInquiry'])->name('store.basic.category.inquiry');
     Route::get('/get-products-by-category/{category_id}', [FrontController::class, 'getProductsByCategory'])->name('get.products.by.category');
     Route::get('/wedding-vault', [FrontController::class, 'gextWeddingVault'])->name('wedding.vault');
     Route::post('/wedding-vault/send-email', [FrontController::class, 'sendUnlockWeddingEmail'])->name('wedding-vault.send-email');
@@ -140,7 +141,7 @@ Route::name('front.')->group(function () {
     Route::get('/blogs', [FrontController::class, 'getBlogs'])->name('blogs');
     Route::get('/blog/{url}', [FrontController::class, 'getBlogDetails'])->name('blog.detail');
 
-                                                                                        // LOGIN & REGISTER
+    // LOGIN & REGISTER
     Route::get('front/auth/{page?}', [AuthController::class, 'getAuth'])->name('auth'); // used for both login & registration
     Route::post('front/register', [AuthController::class, 'submitRegister'])->name('register.post');
     Route::get('front/login', [AuthController::class, 'getLogin'])->name('login'); //un-used

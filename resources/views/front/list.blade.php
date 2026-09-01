@@ -3,7 +3,7 @@
     'meta_description' => $category->meta_description ?? \Illuminate\Support\Str::limit(strip_tags($category->description), 160)
 ])
 
-<!-- hero section -->
+<!-- HERO SECTION -->
 <section class="hero-section_inner">
 
     @if(!empty($category->banner_image) && file_exists(public_path('images/admin/category_banner/'.$category->banner_image)))
@@ -151,7 +151,6 @@
 
     </div>
 </section>
-
 @endif
 <!-- END - CELEBRATION SECTION -->
 
@@ -307,7 +306,59 @@
 </section>
 <!-- END - PRODUCT DISPLAY SECTION -->
 
-@include('front.partials.product-inquiry-modal')
+<!-- START - PERSONALISATION SECTION -->
+<section class="personalisation_section mt_120 mb_120">
+    <div class="container">
+        <!-- Section Header -->
+        <div class="section_header text-center mb-5">
+            <p class="sub_head mb-0">
+                <span>
+                    <svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z" fill="#B58A46"></path>
+                    </svg>
+                </span>
+                <span>THE</span>
+                <span>
+                    <svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z" fill="#B58A46"></path>
+                    </svg>
+                </span>
+            </p>
+            <h2 class="title_60">Personalisation</h2>
+        </div>
+
+        <!-- 2 Column Row -->
+        <div class="row align-items-center">
+            <!-- Image Left -->
+            <div class="col-lg-6 col-md-6 mb-4 mb-md-0 text-center">
+                <img class="img-fluid" src="{{ asset('public/images/front/diwali/Personalisation.webp') }}" alt="Personalisation Gift Box">
+            </div>
+
+            <!-- Content Right -->
+            <div class="col-lg-6 col-md-6 ps-lg-5">
+                <h3 class="title_40 mb-3">
+                    Every gift includes an individual story card
+                </h3>
+                <p class="mb-4">
+                    Depending on the selected piece, personalisation may include the recipient's name, a company message, a commemorative note, or a photograph or project visual placed inside the frame.
+                </p>
+                <p class="mb-4">
+                    Corporate orders are available in flexible quantities, subject to the selected product and level of personalisation.
+                </p>
+                <div>
+                    <a href="#" class="com_btn" data-bs-toggle="modal" data-bs-target="#requestCorporateProposal">
+                        REQUEST A CORPORATE PROPOSAL
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END - PERSONALISATION SECTION -->
+
+<!-- START - PERSONALISATION FORM -->
+@include('front.partials.festival-inquiry-modal')
+<!-- END - PERSONALISATION FORM -->
 
 <!-- START - FAQ SECTION -->
 @if(!empty($category->faqs) && is_array($category->faqs) && count($category->faqs) > 0)
@@ -410,6 +461,19 @@
 @include('layouts.frontfooter')
 
 <script>
+    $(document).ready(function () {
+        var productElement = $('#product_of_interest')[0];
+
+        if (productElement) {
+            new Choices(productElement, {
+                removeItemButton: true,
+                placeholder: true,
+                placeholderValue: 'Select products',
+                searchEnabled: true,
+            });
+        }
+    });
+
     $(document).on('click', '.product-inquiry-btn', function () {
         let productName = $(this).data('product-name');
 

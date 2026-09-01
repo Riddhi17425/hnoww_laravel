@@ -31,7 +31,8 @@ use App\Services\PaymentService;
 use App\Services\YetiWhatsappMesasgeService;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Http\Request;use Illuminate\Support\Facades\Cache;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -1034,12 +1035,9 @@ class FrontController extends Controller
         $timeline        = config('global_values.corporate_timeline');
         $rules = [
             'full_name'        => 'required|string|min:2|max:100',
-            'company_name'     => 'required|string|min:2|max:150',
             'role'             => 'required|string|max:100',
             'phone'                 => 'nullable|regex:/^[0-9\s\-\+\(\)]+$/|min:7|max:20',
             'email'            => 'required|email|max:150',
-            // 'nature_of_requirement'   => 'required|array|min:1',
-            // 'nature_of_requirement.*' => 'string|max:150',
             'quantity_range'   => 'required|string|max:50',
             'corporate_budget' => 'required|string|max:100',
             'timeline'         => 'required|string|max:50',
@@ -1049,9 +1047,6 @@ class FrontController extends Controller
             'full_name.required'        => 'Full Name is required.',
             'full_name.min'             => 'Full Name must be at least 2 characters.',
             'full_name.max'             => 'Full Name cannot be longer than 100 characters.',
-            'company_name.required'     => 'Company Name is required.',
-            'company_name.min'          => 'Company Name must be at least 2 characters.',
-            'company_name.max'          => 'Company Name cannot exceed 150 characters.',
             'role.required'             => 'Role / Designation is required.',
             'role.max'                  => 'Role cannot exceed 100 characters.',
             'phone.regex'                => 'Phone Number format is invalid.',
@@ -1961,34 +1956,92 @@ class FrontController extends Controller
     public function storeFestivalInquiry(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name'         => 'required|string|max:255',
-            'product_name' => 'required|string|max:255',
-            'email'        => 'required|email|max:255',
-            'contact_no'   => 'nullable|string|max:15',
-            'message'      => 'nullable|string',
+            'category_id' => 'required|exists:categories,id',
+            'name' => 'required|string|max:255',
+            'company_name' => 'nullable|string|max:150',
+            'email' => 'required|email|max:255',
+            'contact_no' => 'required|string|max:20',
+            'product_of_interest' => 'required|array|min:1',
+            'product_of_interest.*' => 'required|integer|exists:products,id',
+            'quantity_range' => 'required|string|max:255',
+            'budget' => 'nullable|string|max:255',
+            'branding_requirements' => 'nullable|string|max:255',
+            'delivery_date' => 'required|date',
+            'message' => 'nullable|string',
         ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+        if ($validator->fails())
+        {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
         }
 
+        // Verify selected products belong to current category
+        $selectedProducts = Product::whereIn(
+            'id',
+            $request->product_of_interest
+        )
+        ->where(
+            'category_id',
+            $request->category_id
+        )
+        ->pluck('id')
+        ->toArray();
+
+        // Check invalid products
+        if (count($selectedProducts) !== count($request->product_of_interest))
+        {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors([
+                    'product_of_interest' =>
+                        'One or more selected products are invalid.'
+                ]);
+        }
+
+        // Store Inquiry
         FestivalInquiry::create([
-            'name'         => $request->name,
-            'product_name' => $request->product_name,
-            'email'        => $request->email,
-            'contact_no'   => $request->contact_no,
-            'message'      => $request->message,
+            'category_id' => $request->category_id,
+            'name' => $request->name,
+            'company_name' => $request->company_name,
+            'product_of_interest' => $request->product_of_interest,
+            'email' => $request->email,
+            'contact_no' => $request->contact_no,
+            'quantity_range' => $request->quantity_range,
+            'budget' => $request->budget,
+            'branding_requirements' => $request->branding_requirements,
+            'delivery_date' => $request->delivery_date,
+            'message' => $request->message,
         ]);
 
-        $message = "*Rakshabandhan Product Inquiry*\n\n" .
-            "*Name:* {$request->name}\n" .
+        // WhatsApp Message
+        $products = Product::whereIn(
+            'id',
+            $request->product_of_interest
+        )
+        ->pluck('product_name')
+        ->implode(', ');
+
+        $message = "*New Corporate Proposal Request*\n\n" .
+            "*Full Name:* {$request->name}\n" .
+            "*Company Organization:* " . ($request->company_name ?: 'N/A') . "\n" .
+            "*Phone Number:* {$request->contact_no}\n" .
             "*Email:* {$request->email}\n" .
-            "*Contact No:* " . ($request->contact_no ?: 'N/A') . "\n" .
-            "*Product:* {$request->product_name}\n" .
+            "*Product of Interest:* {$products}\n" .
+            "*Quantity Range:* {$request->quantity_range}\n" .
+            "*Approximate Budget:* " . ($request->budget ?: 'N/A') . "\n" .
+            "*Branding Requirements:* " . ($request->branding_requirements ?: 'N/A') . "\n" .
+            "*Delivery Timeline:* {$request->delivery_date}\n" .
             "*Message:* " . ($request->message ?: 'N/A') . "\n\n" .
             "- HNOWW";
 
-        $url = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode($message);
+        $url = 'https://wa.me/' .
+            $this->adminWhatsappNo .
+            '?text=' .
+            urlencode($message);
 
         return back()->with('whatsapp_url', $url);
     }

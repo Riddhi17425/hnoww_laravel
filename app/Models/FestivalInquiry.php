@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Models;
-
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class FestivalInquiry extends Model
 {
-    use HasFactory;
-
     protected $guarded = [];
+    protected $casts = [
+        'product_of_interest' => 'array',
+    ];
 }
