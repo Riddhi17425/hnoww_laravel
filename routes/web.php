@@ -11,8 +11,6 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\GiftShopController;
 use App\Http\Controllers\Admin\JournalController;
 use App\Http\Controllers\Admin\ProductController;
-// use App\Http\Controllers\Admin\FestiveCategoryController;
-// use App\Http\Controllers\Admin\FestiveProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\ProductTabController;
 use App\Http\Controllers\Admin\UserController;
@@ -69,7 +67,6 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap')
 
 //FRONT ROUTE
 Route::name('front.')->group(function () {
-    // Route::get('/collections/raksha-bandhan-gifts-dubai', [FrontController::class, 'getRakshaBandhanCollection'])->name('raksha.bandhan.collection');
     Route::get('/', [FrontController::class, 'index'])->name('home');
     Route::get('stripe', [FrontController::class, 'getStripe']);                             // Temporary
     Route::post('stripe-post', [FrontController::class, 'stripePost'])->name('stripe.post'); // Temporary
@@ -113,7 +110,7 @@ Route::name('front.')->group(function () {
     Route::post('/store-festival-inquiry', [FrontController::class, 'storeFestivalInquiry'])->name('store.festival.inquiry');
     Route::post('/store-basic-category-inquiry', [FrontController::class, 'storeBasicCategoryInquiry'])->name('store.basic.category.inquiry');
     Route::get('/get-products-by-category/{category_id}', [FrontController::class, 'getProductsByCategory'])->name('get.products.by.category');
-    Route::get('/wedding-vault', [FrontController::class, 'gextWeddingVault'])->name('wedding.vault');
+    Route::get('/wedding-vault', [FrontController::class, 'getWeddingVault'])->name('wedding.vault');
     Route::post('/wedding-vault/send-email', [FrontController::class, 'sendUnlockWeddingEmail'])->name('wedding-vault.send-email');
     Route::post('/wedding-vault/verify-otp', [FrontController::class, 'verifyWeddingVaultOtp'])->name('wedding-vault.verify-otp');
     Route::get('/wedding-gifts-dubai', [FrontController::class, 'getWeddingVaultInside'])->name('wedding.vault.inside');
@@ -163,6 +160,10 @@ Route::name('front.')->group(function () {
 
     Route::middleware(['auth'])->group(function () {
         Route::get('/profile', [FrontController::class, 'profile'])->name('profile');
+        Route::post('/profile/update', [AuthController::class, 'updateProfile'])->name('profile.update');
+        Route::post('/profile/password', [AuthController::class, 'changePassword'])->name('profile.password');
+        Route::post('/profile/address/{addressId?}', [AuthController::class, 'saveAddress'])->name('profile.address.save');
+        Route::delete('/profile/address/{addressId}', [AuthController::class, 'deleteAddress'])->name('profile.address.delete');
 
         Route::get('/order', [CartController::class, 'order'])->name('order.view');
         Route::get('/order-detail/{orderid}', [CartController::class, 'orderDetail'])->name('order_detail.view');
@@ -298,10 +299,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         route::post('giftshop/update/status', [GiftShopController::class, 'updateStatus'])->name('giftshop.update.status');
         Route::post('gift/delete-detail-image', [GiftShopController::class, 'deleteGiftDetailImage'])->name('gift.delete.detail.image');
         Route::post('gift/delete-all-detail-images', [GiftShopController::class, 'deleteAllGiftDetailImages'])->name('gift.delete.alldetail.images');
-
-        Route::resource('corporate-kits', CorporateKitController::class);
-        route::get('corporate-kit/fetch', [CorporateKitController::class, 'getCorporateKits'])->name('corporate-kit.fetch');
-        route::post('corporate-kit/update/status', [CorporateKitController::class, 'updateStatus'])->name('corporate-kit.update.status');
 
         Route::resource('corporate-kits', CorporateKitController::class);
         route::get('corporate-kit/fetch', [CorporateKitController::class, 'getCorporateKits'])->name('corporate-kit.fetch');

@@ -42,7 +42,7 @@
                 <div>
                     @if($val->category && $val->category->is_inquiry)
                         <button type="button"
-                            class="com_btn bg-transparent product-inquiry-btn"
+                            class="com_btn bg-transparent product-inquiry-btn text-nowrap"
                             data-bs-toggle="modal"
                             data-bs-target="#productInquiryModal"
                             data-product-name="{{ $val->product_name ?? '' }}">
