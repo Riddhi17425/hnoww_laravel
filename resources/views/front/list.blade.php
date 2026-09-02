@@ -271,7 +271,7 @@
                                         Chat on WhatsApp
                                     </button>
                                 @else
-                                    <a href="{{ route('front.product.details', $val->product_url) }}" class="com_btn">
+                                    <a href="{{ route('front.product.details', $val->product_url) }}" class="com_btn text-nowrap">
                                         EXPLORE MORE
                                     </a>
                                 @endif
@@ -281,46 +281,7 @@
                     </div>
                 @endforeach
             @endif
-            {{-- <div class="him_prod">
-                <div class="him_prod_top">
-                    <img class="img-fluid img_1" src="{{ asset('public/images/front/desire2.webp')}}" alt="him_prod">
-                </div>
-
-                    <div>
-                        <h3 class="sub_head">The Oculus (Solo)</h3>
-                        <p>A compact ritual centerpiece for intimate hosting.</p>
-                    </div>
-
-                <div>
-                    <a href="product-details.php" class="com_btn">EXPLORE MORE </a>
-                </div>
-            </div>
-            <div class="him_prod">
-                <div class="him_prod_top">
-                    <img class="img-fluid img_1" src="{{ asset('public/images/front/desire3.webp')}}" alt="him_prod">
-                </div>
-                    <div>
-                        <h3 class="sub_head">The Hybrid Totem</h3>
-                        <p> A travertine + brass totem for sound and stillness.</p>
-                    </div>
-
-                <div>
-                    <a href="product-details.php" class="com_btn">EXPLORE MORE </a>
-                </div>
-            </div>
-            <div class="him_prod">
-                <div class="him_prod_top">
-                    <img class="img-fluid img_1" src="{{ asset('public/images/front/desire4.webp')}}" alt="him_prod">
-                </div>
-                    <div>
-                        <h3 class="sub_head">The Wireless Courtyard</h3>
-                        <p>A travertine charging stone — technology, grounded.</p>
-                    </div>
-
-                <div>
-                    <a href="product-details.php" class="com_btn">EXPLORE MORE </a>
-                </div>
-            </div> --}}
+           
         </div>
     </div>
 </section>
