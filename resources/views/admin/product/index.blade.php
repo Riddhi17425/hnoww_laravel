@@ -29,9 +29,14 @@
                 @endforeach
             </select>
         </div>
-
     </div>
     
+    <div class="row align-items-center">
+        <div id="message-pop-up" class="alert alert-dismissible fade show" role="alert" style="display: none">
+            <span id="success-message"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
 
     <div class="card">
         <div class="card-body">
