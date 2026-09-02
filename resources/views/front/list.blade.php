@@ -327,9 +327,9 @@
 <!-- END - PRODUCT DISPLAY SECTION -->
 
 <!-- START - PERSONALISATION SECTION -->
+@if($category->category_url == 'corporate-diwali-gifts-dubai')
 <section class="personalisation_section mt_120 mb_120">
     <div class="container">
-        <!-- Section Header -->
         <div class="section_header text-center mb-5">
             <p class="sub_head mb-0">
                 <span>
@@ -347,14 +347,10 @@
             <h2 class="title_60">Personalisation</h2>
         </div>
 
-        <!-- 2 Column Row -->
         <div class="row align-items-center">
-            <!-- Image Left -->
             <div class="col-lg-6 col-md-6 mb-4 mb-md-0 text-center">
                 <img class="img-fluid" src="{{ asset('public/images/front/diwali/Personalisation.webp') }}" alt="Personalisation Gift Box">
             </div>
-
-            <!-- Content Right -->
             <div class="col-lg-6 col-md-6 ps-lg-5">
                 <h3 class="title_40 mb-3">
                     Every gift includes an individual story card
@@ -375,7 +371,7 @@
     </div>
 </section>
 <!-- END - PERSONALISATION SECTION -->
-
+@endif
 <!-- START - PERSONALISATION FORM -->
 @include('front.partials.festival-inquiry-modal')
 <!-- END - PERSONALISATION FORM -->
