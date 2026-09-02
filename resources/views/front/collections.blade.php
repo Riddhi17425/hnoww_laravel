@@ -50,7 +50,7 @@
     </div>
 </section>
 
-@include('front.partials.product-inquiry-modal')
+@include('front.partials.festival-inquiry-modal')
 
 <section class="cta_footer mt_120">
     <div class="container">
@@ -188,8 +188,109 @@
         $('#productInquiryProductName').val(productName);
     });
 </script>
-
-
 @endpush
+
+<!-- START - COLLECTIONS PAGE SCHEMA -->
+@php
+
+$schemaHomeUrl = url('/');
+$schemaPageUrl = url()->current();
+
+// PAGE META DATA
+$schemaPageTitle = !empty($meta_title)
+    ? $meta_title
+    : 'HNOWW Collections | Curated Luxury Gifts & Home Decor';
+
+$schemaDescription = !empty($meta_description)
+    ? $meta_description
+    : "Explore HNOWW's curated collections of luxury gifts and home decor.";
+
+// COLLECTION PAGE IMAGE
+$schemaImage = asset(
+    'public/images/front/for-him-banner.webp'
+);
+
+// PRODUCT ITEM LIST
+$schemaItems = [];
+if (isset($collections) && $collections->count() > 0)
+{
+    foreach ($collections as $index => $collection)
+    {
+        $schemaItems[] = [
+            '@type' => 'ListItem',
+            'position' => $index + 1,
+            'name' => $collection->product_name ?? '',
+        ];
+    }
+}
+
+// COMPLETE JSON-LD SCHEMA
+$schemaData = [
+    '@context' => 'https://schema.org',
+    '@graph' => [
+
+        // COLLECTION PAGE
+        [
+            '@type' => 'CollectionPage',
+            '@id' => $schemaPageUrl . '#collectionpage',
+            'url' => $schemaPageUrl,
+            'name' => $schemaPageTitle,
+            'description' => $schemaDescription,
+            'image' => $schemaImage,
+            'isPartOf' => [
+                '@type' => 'WebSite',
+                '@id' => $schemaHomeUrl . '#website',
+                'url' => $schemaHomeUrl,
+                'name' => 'HNOWW',
+            ],
+            'breadcrumb' => [
+                '@id' => $schemaPageUrl . '#breadcrumb',
+            ],
+            'mainEntity' => [
+                '@id' => $schemaPageUrl . '#itemlist',
+            ],
+        ],
+        [
+            '@type' => 'ItemList',
+            '@id' => $schemaPageUrl . '#itemlist',
+            'name' => 'HNOWW Collections',
+            'description' => $schemaDescription,
+            'url' => $schemaPageUrl,
+            'numberOfItems' => count($schemaItems),
+            'itemListElement' => $schemaItems,
+        ],
+
+        // BREADCRUMB
+        [
+            '@type' => 'BreadcrumbList',
+            '@id' => $schemaPageUrl . '#breadcrumb',
+            'itemListElement' => [
+                [
+                    '@type' => 'ListItem',
+                    'position' => 1,
+                    'name' => 'Home',
+                    'item' => $schemaHomeUrl,
+                ],
+                [
+                    '@type' => 'ListItem',
+                    'position' => 2,
+                    'name' => 'Collections',
+                    'item' => $schemaPageUrl,
+                ],
+            ],
+        ],
+    ],
+];
+@endphp
+
+<script type="application/ld+json">
+{!! json_encode(
+    $schemaData,
+    JSON_UNESCAPED_SLASHES |
+    JSON_UNESCAPED_UNICODE |
+    JSON_PRETTY_PRINT
+) !!}
+</script>
+<!-- END - COLLECTIONS PAGE SCHEMA -->
 
 @include('layouts.frontfooter')
