@@ -49,7 +49,7 @@
         </div>
     </div>
 </section>
-
+@include('front.partials.product-inquiry-modal')
 @include('front.partials.festival-inquiry-modal')
 
 <section class="cta_footer mt_120">
