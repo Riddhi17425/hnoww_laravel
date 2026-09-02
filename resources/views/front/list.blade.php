@@ -271,7 +271,7 @@
                                         Chat on WhatsApp
                                     </button>
                                 @else
-                                    <a href="{{ route('front.product.details', $val->product_url) }}" class="com_btn">
+                                    <a href="{{ route('front.product.details', $val->product_url) }}" class="com_btn text-nowrap">
                                         EXPLORE MORE
                                     </a>
                                 @endif
@@ -281,55 +281,16 @@
                     </div>
                 @endforeach
             @endif
-            {{-- <div class="him_prod">
-                <div class="him_prod_top">
-                    <img class="img-fluid img_1" src="{{ asset('public/images/front/desire2.webp')}}" alt="him_prod">
-                </div>
-
-                    <div>
-                        <h3 class="sub_head">The Oculus (Solo)</h3>
-                        <p>A compact ritual centerpiece for intimate hosting.</p>
-                    </div>
-
-                <div>
-                    <a href="product-details.php" class="com_btn">EXPLORE MORE </a>
-                </div>
-            </div>
-            <div class="him_prod">
-                <div class="him_prod_top">
-                    <img class="img-fluid img_1" src="{{ asset('public/images/front/desire3.webp')}}" alt="him_prod">
-                </div>
-                    <div>
-                        <h3 class="sub_head">The Hybrid Totem</h3>
-                        <p> A travertine + brass totem for sound and stillness.</p>
-                    </div>
-
-                <div>
-                    <a href="product-details.php" class="com_btn">EXPLORE MORE </a>
-                </div>
-            </div>
-            <div class="him_prod">
-                <div class="him_prod_top">
-                    <img class="img-fluid img_1" src="{{ asset('public/images/front/desire4.webp')}}" alt="him_prod">
-                </div>
-                    <div>
-                        <h3 class="sub_head">The Wireless Courtyard</h3>
-                        <p>A travertine charging stone — technology, grounded.</p>
-                    </div>
-
-                <div>
-                    <a href="product-details.php" class="com_btn">EXPLORE MORE </a>
-                </div>
-            </div> --}}
+           
         </div>
     </div>
 </section>
 <!-- END - PRODUCT DISPLAY SECTION -->
 
 <!-- START - PERSONALISATION SECTION -->
+@if($category->category_url == 'corporate-diwali-gifts-dubai')
 <section class="personalisation_section mt_120 mb_120">
     <div class="container">
-        <!-- Section Header -->
         <div class="section_header text-center mb-5">
             <p class="sub_head mb-0">
                 <span>
@@ -347,14 +308,10 @@
             <h2 class="title_60">Personalisation</h2>
         </div>
 
-        <!-- 2 Column Row -->
         <div class="row align-items-center">
-            <!-- Image Left -->
             <div class="col-lg-6 col-md-6 mb-4 mb-md-0 text-center">
                 <img class="img-fluid" src="{{ asset('public/images/front/diwali/Personalisation.webp') }}" alt="Personalisation Gift Box">
             </div>
-
-            <!-- Content Right -->
             <div class="col-lg-6 col-md-6 ps-lg-5">
                 <h3 class="title_40 mb-3">
                     Every gift includes an individual story card
@@ -375,8 +332,9 @@
     </div>
 </section>
 <!-- END - PERSONALISATION SECTION -->
-
+@endif
 <!-- START - PERSONALISATION FORM -->
+@include('front.partials.product-inquiry-modal')
 @include('front.partials.festival-inquiry-modal')
 <!-- END - PERSONALISATION FORM -->
 

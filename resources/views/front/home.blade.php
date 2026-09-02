@@ -350,15 +350,17 @@
         @foreach($desiredProductsArray as $key => $val)
         <div class="desire_box">
             <div class="desire_box_top mb-4">
-                <img class="img-fluid img_1"
-                    src="{{ isset($val->list_page_img) ? asset('public/images/admin/product_list/'.$val->list_page_img) : '' }}"
-                    alt="{{ $val->product_name ?? 'Product Image' }}" loading="lazy">
+                <a href="{{ route('front.product.details', $val->product_url) }}">
+                    <img class="img-fluid img_1"
+                        src="{{ isset($val->list_page_img) ? asset('public/images/admin/product_list/'.$val->list_page_img) : '' }}"
+                        alt="{{ $val->product_name ?? 'Product Image' }}" loading="lazy">
+                </a>
                 <span class="icon_hert">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="28" viewBox="0 0 30 28" fill="none">
                     </svg>
                 </span>
-                <div class="desire_box_top_child">
-                  {{-- <a href="javascript:void(0);" class="desire_box_top_child_inner" data-bs-toggle="modal"
+                {{-- <div class="desire_box_top_child">
+                  <a href="javascript:void(0);" class="desire_box_top_child_inner" data-bs-toggle="modal"
                     data-bs-target="#productInquiry" data-product-name="{{ $val->product_name }}"
                     data-product-id="{{ $val->id }}">
                     <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
@@ -367,12 +369,10 @@
                             stroke="white" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                     <span>Enquire Now</span>
-                    </a> --}}
-                    {{-- <a href="jsvascript:void(0);" class="desire_box_top_child_inner @auth add_to_cart_btn @endauth"
+                    </a> 
+                     <a href="jsvascript:void(0);" class="desire_box_top_child_inner @auth add_to_cart_btn @endauth"
                         @auth data-product-id="{{ $val->id }}" @else data-bs-toggle="modal"
-                        data-bs-target="#loginRequiredModal" @endauth> --}}
-
-                    {{-- TEMPORARY ORDER FLOW PAUSED --}}
+                        data-bs-target="#loginRequiredModal" @endauth> 
                     <button type="button" class="desire_box_top_child_inner add_to_cart_btn" data-product-id="{{ $val->id }}">
                         <svg width="19" height="19" viewBox="0 0 19 19" fill="none">
                             <path
@@ -380,12 +380,14 @@
                         </svg>
                         <span>Add to Cart</span>
                     </button>
-                </div>
+                </div>--}}
             </div>
 
             <div class="desire_box_bot_child">
                 <div>
-                    <h3 class="sub_head">{{$val->product_name ?? ''}}</h3>
+                    <a href="{{ route('front.product.details', $val->product_url) }}">
+                        <h3 class="sub_head">{{$val->product_name ?? ''}}</h3>
+                    </a>
                     <p>{!! $val->short_description ?? '' !!}</p>
                     <!--<p class="price"><a href="#">AED 1,980</a></p>-->
                 </div>
