@@ -373,6 +373,7 @@
 <!-- END - PERSONALISATION SECTION -->
 @endif
 <!-- START - PERSONALISATION FORM -->
+@include('front.partials.product-inquiry-modal')
 @include('front.partials.festival-inquiry-modal')
 <!-- END - PERSONALISATION FORM -->
 
