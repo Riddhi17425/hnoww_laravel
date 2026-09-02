@@ -478,6 +478,182 @@
 @endif
 <!-- END - ABOVE FOOTER SECTION -->
 
+<!-- START - COLLECTIONS PAGE SCHEMA -->
+@php
+
+// CURRENT PAGE DATA
+$schemaPageUrl = url()->current();
+$schemaHomeUrl = url('/');
+$schemaCategoryName = $category->category_name ?? '';
+
+// PAGE TITLE
+$schemaPageTitle = !empty($category->meta_title)
+    ? $category->meta_title
+    : $schemaCategoryName . ' | HNOWW';
+
+
+// PAGE DESCRIPTION
+$schemaDescription = !empty($category->meta_description)
+    ? $category->meta_description
+    : strip_tags($category->description ?? '');
+
+// CATEGORY IMAGE
+$schemaImage = null;
+
+if ( !empty($category->celebration_image) && file_exists
+        ( public_path('images/admin/category_celebration/' . $category->celebration_image ) ) ) 
+{
+    $schemaImage = asset('public/images/admin/category_celebration/' . $category->celebration_image );
+}
+elseif ( !empty($category->banner_image) &&
+    file_exists( public_path('images/admin/category_banner/' . $category->banner_image ) ) ) 
+{
+    $schemaImage = asset( 'public/images/admin/category_banner/' . $category->banner_image );
+}
+
+// PRODUCT ITEM LIST
+$schemaProducts = [];
+if (isset($catProducts) && $catProducts->count() > 0)
+{
+    foreach ($catProducts as $index => $product)
+    {
+        $schemaProducts[] = [
+            '@type' => 'ListItem',
+            'position' => $index + 1,
+            'name' => $product->product_name ?? '',
+        ];
+    }
+}
+
+// COMPLETE JSON-LD SCHEMA
+$schemaData = [
+    '@context' => 'https://schema.org',
+    '@graph' => [
+
+        // COLLECTION PAGE
+        [
+            '@type' => 'CollectionPage',
+            '@id' => $schemaPageUrl . '#collectionpage',
+            'url' => $schemaPageUrl,
+            'name' => $schemaPageTitle,
+            'description' => $schemaDescription,
+            'image' => $schemaImage,
+            'isPartOf' => [
+                '@type' => 'WebSite',
+                '@id' => $schemaHomeUrl . '#website',
+                'url' => $schemaHomeUrl,
+                'name' => 'HNOWW',
+            ],
+
+            'breadcrumb' => [
+                '@id' => $schemaPageUrl . '#breadcrumb',
+            ],
+
+            'mainEntity' => [
+                '@id' => $schemaPageUrl . '#itemlist',
+            ],
+        ],
+
+        // PRODUCT ITEM LIST
+        [
+            '@type' => 'ItemList',
+            '@id' => $schemaPageUrl . '#itemlist',
+            'name' => $schemaCategoryName,
+            'description' => $schemaDescription,
+            'url' => $schemaPageUrl,
+            'numberOfItems' => count($schemaProducts),
+            'itemListOrder' =>
+                'https://schema.org/ItemListOrderDescending',
+            'itemListElement' => $schemaProducts,
+        ],
+
+        // BREADCRUMB
+        [
+            '@type' => 'BreadcrumbList',
+            '@id' => $schemaPageUrl . '#breadcrumb',
+            'itemListElement' => [
+                [
+                    '@type' => 'ListItem',
+                    'position' => 1,
+                    'name' => 'Home',
+                    'item' => $schemaHomeUrl,
+                ],
+                [
+                    '@type' => 'ListItem',
+                    'position' => 2,
+                    'name' => 'Collections',
+                    'item' => $schemaHomeUrl . '/collections',
+                ],
+                [
+                    '@type' => 'ListItem',
+                    'position' => 3,
+                    'name' => $schemaCategoryName,
+                    'item' => $schemaPageUrl,
+                ],
+            ],
+        ],
+    ],
+];
+@endphp
+
+<script type="application/ld+json">
+{!! json_encode(
+    $schemaData,
+    JSON_UNESCAPED_SLASHES |
+    JSON_UNESCAPED_UNICODE |
+    JSON_PRETTY_PRINT
+) !!}
+</script>
+<!-- END - COLLECTIONS PAGE SCHEMA -->
+
+<!-- START - FAQ SCHEMA -->
+@if(!empty($category->faqs) && is_array($category->faqs) && count($category->faqs) > 0)
+    @php
+        $schemaFaqs = [];
+        foreach ($category->faqs as $faq)
+        {
+            $question = trim($faq['question'] ?? '');
+            $answer = trim($faq['answer'] ?? '');
+
+            if (!empty($question) && !empty($answer))
+            {
+                $schemaFaqs[] = [
+                    '@type' => 'Question',
+                    'name' => strip_tags($question),
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => trim(
+                            preg_replace(
+                                '/\s+/',
+                                ' ',
+                                strip_tags($answer)
+                            )
+                        ),
+                    ],
+                ];
+            }
+        }
+
+        $faqSchema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'FAQPage',
+            'mainEntity' => $schemaFaqs,
+        ];
+    @endphp
+
+    @if(count($schemaFaqs) > 0)
+        <script type="application/ld+json">
+            {!! json_encode(
+                $faqSchema,
+                JSON_UNESCAPED_SLASHES |
+                JSON_UNESCAPED_UNICODE |
+                JSON_PRETTY_PRINT
+            ) !!}
+        </script>
+    @endif
+@endif
+<!-- END - FAQ SCHEMA  -->
+
 @include('layouts.frontfooter')
 
 <script>
