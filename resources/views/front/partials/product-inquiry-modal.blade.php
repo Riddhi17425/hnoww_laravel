@@ -24,7 +24,7 @@
                     </div>
 
                     <form method="POST"
-                        action="{{ route('front.store.festival.inquiry') }}"
+                        action="{{ route('front.store.festival.product.inquiry') }}"
                         id="productInquiryForm"
                         class="ct_form">
 

@@ -107,6 +107,7 @@ Route::name('front.')->group(function () {
     Route::get('/corporate-gifts-dubai/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
     Route::get('/corporate-diwali-collection-2026', [FrontController::class, 'getCorporateDiwaliCollection'])->name('corporate.diwali.collection');
     
+    Route::post('/store-festival-product-inquiry', [FrontController::class, 'storeFestivalProductInquiry'])->name('store.festival.product.inquiry');
     Route::post('/store-festival-inquiry', [FrontController::class, 'storeFestivalInquiry'])->name('store.festival.inquiry');
     Route::post('/store-basic-category-inquiry', [FrontController::class, 'storeBasicCategoryInquiry'])->name('store.basic.category.inquiry');
     Route::get('/get-products-by-category/{category_id}', [FrontController::class, 'getProductsByCategory'])->name('get.products.by.category');
