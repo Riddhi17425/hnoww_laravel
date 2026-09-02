@@ -85,7 +85,8 @@ class CategoryController extends Controller
 
         if (!$category) {
             return response()->json([
-                'success' => false
+                'success' => false,
+                'message' => 'Product not found'
             ]);
         }
 
@@ -105,14 +106,14 @@ class CategoryController extends Controller
         $category->save();
 
         return response()->json([
-            'success' => true
+            'success' => true,
+            'message' => 'Status updated successfully'
         ]);
     }
 
     public function create()
     {
         return view('admin.category.create');
-
     }
 
     public function store(Request $request)

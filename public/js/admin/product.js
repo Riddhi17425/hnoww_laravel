@@ -158,14 +158,25 @@ function updateStatus(status, productId){
         success: function (response) {
             if (response.success) {
                 // alert(response.message);
+                $("#message-pop-up").attr('style', 'display:block');
+
+                $("#message-pop-up")
+                    .removeClass('alert-warning alert-danger')
+                    .addClass('alert-success');
+
+                $("#success-message").html(response.message);
+                // console.log('test');
+
+                setTimeout(() => {
+                    $("#message-pop-up").attr('style', 'display:none');
+                }, 3000);
+
                 // reload datatable if needed
                 $('#productTable').DataTable().ajax.reload(null, false);
-            } else {
-                alert('Something went wrong');
-            }
+            } 
         },
         error: function () {
-            alert('Server error');
+            // alert('Server error');
         }
     });
 }

@@ -86,6 +86,19 @@ function updateStatus(status, catId)
             // } else {
             //     alert(response.message);
             // }
+
+            if (response.success)
+            {
+                $("#message-pop-up").attr('style', 'display:block');
+                $("#message-pop-up").removeClass('alert-warning');
+                $("#message-pop-up").addClass('alert-success');
+                $("#success-message").html(response.message);
+
+                setTimeout(() => {
+                    $("#message-pop-up").attr('style', 'display:none');
+                }, 3000);
+            }
+
             $('#categoryTable').DataTable().ajax.reload(null, false);
         },
         error: function () {
