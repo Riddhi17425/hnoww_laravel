@@ -1963,6 +1963,41 @@ class FrontController extends Controller
         return view('front.ceremonials', compact('products', 'category'));
     }
 
+    public function storeFestivalProductInquiry(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name'         => 'required|string|max:255',
+            'product_name' => 'required|string|max:255',
+            'email'        => 'required|email|max:255',
+            'contact_no'   => 'nullable|string|max:15',
+            'message'      => 'nullable|string',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        FestivalInquiry::create([
+            'name'         => $request->name,
+            'product_name' => $request->product_name,
+            'email'        => $request->email,
+            'contact_no'   => $request->contact_no,
+            'message'      => $request->message,
+        ]);
+
+        $message = "*Rakshabandhan Product Inquiry*\n\n" .
+            "*Name:* {$request->name}\n" .
+            "*Email:* {$request->email}\n" .
+            "*Contact No:* " . ($request->contact_no ?: 'N/A') . "\n" .
+            "*Product:* {$request->product_name}\n" .
+            "*Message:* " . ($request->message ?: 'N/A') . "\n\n" .
+            "- HNOWW";
+
+        $url = 'https://wa.me/' . $this->adminWhatsappNo . '?text=' . urlencode($message);
+
+        return back()->with('whatsapp_url', $url);
+    }
+
     public function storeFestivalInquiry(Request $request)
     {
         $validator = Validator::make($request->all(), [
