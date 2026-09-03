@@ -169,7 +169,7 @@ class CartController extends Controller
             return $item->price * $item->quantity;
         });
         $userAddresses = UserAddress::where('user_id', auth()->id())->where('is_confirm', 1)->get();
-
+      
         return view('front.orders.checkout', compact('cartItems', 'subTotal', 'userAddresses'));
     }
 

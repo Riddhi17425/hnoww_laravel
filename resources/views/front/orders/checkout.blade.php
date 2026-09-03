@@ -609,7 +609,11 @@ $(document).ready(async function() {
     const checkoutContactInput = document.querySelector("#checkout-contact-no");
     const checkoutContactCountry = document.querySelector("#checkout-contact-country");
     let checkoutContactIti = null;
-    if (checkoutContactInput && window.intlTelInput) {
+
+    if (checkoutContactInput && window.intlTelInput)
+    {
+        /*
+        // OLD CODE - AUTO DETECT COUNTRY USING IP    
         checkoutContactIti = window.intlTelInput(checkoutContactInput, {
             initialCountry: "auto",
             separateDialCode: true,
@@ -624,6 +628,15 @@ $(document).ready(async function() {
                     });
             },
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        }); */
+
+        // NEW CODE - FIXED UAE FLAG AND +971 COUNTRY CODE
+        checkoutContactIti = window.intlTelInput(checkoutContactInput, {
+            initialCountry: "ae",
+            onlyCountries: ["ae"],
+            separateDialCode: true,
+            allowDropdown: false,
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
         });
     }
 
@@ -631,7 +644,10 @@ $(document).ready(async function() {
     const checkoutWhatsappCountry = document.querySelector("#checkout-whatsapp-country");
     let checkoutWhatsappIti = null;
 
-    if (checkoutWhatsappInput && window.intlTelInput) {
+    if (checkoutWhatsappInput && window.intlTelInput)
+    {
+        /*
+        // OLD CODE - AUTO DETECT COUNTRY USING IP    
         checkoutWhatsappIti = window.intlTelInput(checkoutWhatsappInput, {
             initialCountry: "auto",
             separateDialCode: true,
@@ -645,6 +661,15 @@ $(document).ready(async function() {
                         callback("ae"); // fallback country
                     });
             },
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        }); */
+
+        // NEW CODE - FIXED UAE FLAG AND +971 COUNTRY CODE
+        checkoutWhatsappIti = window.intlTelInput(checkoutWhatsappInput, {
+            initialCountry: "ae",
+            onlyCountries: ["ae"],
+            separateDialCode: true,
+            allowDropdown: false,
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
         });
     }
@@ -709,6 +734,7 @@ $(document).ready(async function() {
 
     // Add New Address button click
     $('#addNewAddressBtn').on('click', function() {
+        console.log('TEST');
         $('#addressFormWrapper').slideDown();
         $('input[name="selected_address"]').prop('checked', false);
     });

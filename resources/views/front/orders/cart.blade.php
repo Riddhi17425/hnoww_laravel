@@ -374,6 +374,14 @@
                             <div class="d-flex flex-column align-items-center gap-2 mt-4">
                                 <button type="button" id="btn-email-next" class="btn-auth-primary com_btn">Continue</button>
                                 <button type="button" class="btn-auth-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <!-- START - DIRECT SIGN UP BUTTON -->
+                                <p class="mb-0 mt-2">
+                                    Don't have an account?
+                                    <button type="button" id="btn-direct-signup" class="btn-auth-secondary p-0 ms-1">
+                                        Sign Up
+                                    </button>
+                                </p>
+                                <!-- END - DIRECT SIGN UP BUTTON -->
                             </div>
                         </div>
 
@@ -418,6 +426,20 @@
                                 <input type="text" name="name" id="checkout_name" class="form-control shadow-none" placeholder=" ">
                                 <label for="checkout_name">Full Name</label>
                             </div>
+                            
+                            <!-- START - REGISTER EMAIL FIELD -->
+                            <div class="form-floating">
+                                <input
+                                    type="email"
+                                    name="register_email"
+                                    id="checkout_register_email"
+                                    class="form-control shadow-none"
+                                    placeholder=" "
+                                >
+                                <label for="checkout_register_email">Email Address</label>
+                            </div>
+                            <!-- END - REGISTER EMAIL FIELD -->
+
                             <div class="form-floating password_wrap">
                                 <input type="password" name="reg_password" id="checkout_reg_password" class="form-control shadow-none" placeholder=" ">
                                 <label for="checkout_reg_password">Password (min 6 characters)</label>
@@ -515,12 +537,17 @@ window.appData = {
 $(document).ready(function() {
     var isRegistered = false;
     var userEmail = '';
+
     var checkoutAuthValidator = $('#checkout-auth-form').validate({
         ignore: ':hidden',
         errorElement: 'div',
         errorClass: 'text-danger mt-1',
         rules: {
             email: {
+                required: true,
+                email: true
+            },
+            register_email: {
                 required: true,
                 email: true
             },
@@ -543,6 +570,10 @@ $(document).ready(function() {
         },
         messages: {
             email: {
+                required: 'Please enter your email address.',
+                email: 'Please enter a valid email address.'
+            },
+            register_email: {
                 required: 'Please enter your email address.',
                 email: 'Please enter a valid email address.'
             },
@@ -585,7 +616,8 @@ $(document).ready(function() {
                 email: email
             },
             success: function(response) {
-                $('#btn-email-next').prop('disabled', false).text('Next');
+                // $('#btn-email-next').prop('disabled', false).text('Next');
+                $('#btn-email-next').prop('disabled', false).text('Continue');
                 if (response.success) {
                     userEmail = email;
                     if (response.registered) {
@@ -599,6 +631,9 @@ $(document).ready(function() {
                         $('#checkoutAuthTitle').text('Create Account');
                         $('#step-email').addClass('d-none');
                         $('#step-register').removeClass('d-none');
+                        $('#checkout_register_email')
+                            .val(email)
+                            .prop('readonly', true);
                         $('#checkout_name').attr('required', true);
                         $('#checkout_reg_password').attr('required', true);
                         $('#checkout_reg_password_confirmation').attr('required', true);
@@ -608,11 +643,46 @@ $(document).ready(function() {
                 }
             },
             error: function(xhr) {
-                $('#btn-email-next').prop('disabled', false).text('Next');
+                // $('#btn-email-next').prop('disabled', false).text('Next');
+                $('#btn-email-next').prop('disabled', false).text('Continue');
                 showError(getAjaxErrorMessage(xhr));
             }
         });
     });
+
+    // START - DIRECT SIGN UP FUNCTIONALITY
+    $('#btn-direct-signup').click(function() {
+
+        hideError();
+
+        // Set registration mode
+        isRegistered = false;
+
+        // Hide all existing steps
+        $('.auth-step').addClass('d-none');
+
+        // Update modal title
+        $('#checkoutAuthTitle').text('Create Account');
+
+        // Show existing registration step
+        $('#step-register').removeClass('d-none');
+
+       // Make registration fields required
+        $('#checkout_name').attr('required', true);
+        $('#checkout_register_email')
+            .val('')
+            .prop('readonly', false)
+            .attr('required', true);
+        $('#checkout_reg_password').attr('required', true);
+        $('#checkout_reg_password_confirmation').attr('required', true);
+
+        // Login password should not be required
+        $('#checkout_password').removeAttr('required').val('');
+
+        // Reset validation errors
+        checkoutAuthValidator.resetForm();
+    });
+    // END - DIRECT SIGN UP FUNCTIONALITY
 
     $('#btn-login-back, #btn-register-back').click(function() {
         hideError();
@@ -622,6 +692,12 @@ $(document).ready(function() {
 
         $('#checkout_password').removeAttr('required').val('');
         $('#checkout_name').removeAttr('required').val('');
+        // START - RESET DIRECT SIGN UP EMAIL
+        $('#checkout_register_email')
+            .removeAttr('required')
+            .prop('readonly', false)
+            .val('');
+        // END - RESET DIRECT SIGN UP EMAIL
         $('#checkout_reg_password').removeAttr('required').val('');
         $('#checkout_reg_password_confirmation').removeAttr('required').val('');
         checkoutAuthValidator.resetForm();
@@ -640,10 +716,11 @@ $(document).ready(function() {
         submitBtn.prop('disabled', true).text('Processing...');
 
         var url = isRegistered ? "{{ route('front.checkout.login') }}" : "{{ route('front.checkout.register') }}";
+        var registrationEmail = $('#checkout_register_email').val().trim();
 
         var formData = {
             _token: "{{ csrf_token() }}",
-            email: userEmail
+            email: isRegistered ? userEmail : registrationEmail
         };
 
         if (isRegistered) {
@@ -681,6 +758,12 @@ $(document).ready(function() {
         $('#checkout_email').val('');
         $('#checkout_password').removeAttr('required').val('');
         $('#checkout_name').removeAttr('required').val('');
+        // START - RESET REGISTER EMAIL
+        $('#checkout_register_email')
+            .removeAttr('required')
+            .prop('readonly', false)
+            .val('');
+        // END - RESET REGISTER EMAIL
         $('#checkout_reg_password').removeAttr('required').val('');
         $('#checkout_reg_password_confirmation').removeAttr('required').val('');
         checkoutAuthValidator.resetForm();
@@ -718,4 +801,5 @@ function togglePasswordSvg(inputId, el) {
 }
 </script>
 @endpush
+
 @include('layouts.frontfooter')
