@@ -744,3 +744,39 @@
         border: 1px solid var(--co-primary);
     }
 }
+
+/* ---------------- SECURE PAYMENT COMPACT STYLES ---------------- */
+.co-secure-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #e8f5e9;
+    color: #1b5e20;
+    border: 1px solid #a5d6a7;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 12px;
+}
+
+.co-trust-inline-bar {
+    border-top: 1px solid #f0f0f0;
+}
+
+.co-trust-pill {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    color: #444444;
+    font-weight: 500;
+}
+
+.co-card-icon {
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s;
+}
+
+.co-card-icon:hover {
+    transform: translateY(-1px);
+}
