@@ -85,7 +85,7 @@
                             <div class="text-center">
                                 <button class="com_btn bg-transparent w-100" type="submit">Login</button>
                                 <div class="mt-3">
-                                    <p>Already Have An Account? <a href="javascript:void(0);" onclick="toggleForm();"
+                                    <p>Don't have an account? <a href="javascript:void(0);" onclick="toggleForm();"
                                             style="color:var(--dark-900);"><u> Sign
                                                 Up</u></a></p>
                                 </div>
@@ -221,7 +221,7 @@
                                     <div class="text-center">
                                         <button class="com_btn bg-transparent w-75" type="submit">Register</button>
                                         <div class="mt-3">
-                                            <p>Don't Have An Account? <a href="javascript:void(0);"
+                                            <p>Already Have An Account? <a href="javascript:void(0);"
                                                     onclick="toggleForm();" style="color:var(--dark-900);"><u>Sign
                                                         in</u></a></p>
                                         </div>

@@ -25,7 +25,7 @@
                     <div class="formBx">
                         <!-- Forgot Password Box -->
                         <div class="ct_form">
-                            <h3 class="title_60">Forogt Password</h3>
+                            <h3 class="title_60">Forgot Password</h3>
                             <form method="POST" id="forgotPasswordForm" action="{{ route('front.post.forgot.password') }}">
                             @csrf
                                 <div class="ct_input">
