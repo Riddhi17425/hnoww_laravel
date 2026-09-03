@@ -2356,4 +2356,90 @@ class FrontController extends Controller
 
         return view('front.collections', compact('collections', 'categories', 'priceRanges', 'meta_title', 'meta_description'));
     }
+
+    public function liveSearch(Request $request)
+    {
+        $q = trim($request->get('q', ''));
+        if (strlen($q) < 2) {
+            return response()->json([
+                'status' => true,
+                'products' => [],
+                'categories' => [],
+                'blogs' => [],
+                'total' => 0
+            ]);
+        }
+
+        // 1. Products
+        $products = Product::where('is_active', 0)
+            ->whereNull('deleted_at')
+            ->where(function ($query) use ($q) {
+                $query->where('product_name', 'LIKE', "%{$q}%")
+                    ->orWhere('short_description', 'LIKE', "%{$q}%")
+                    ->orWhere('materials', 'LIKE', "%{$q}%")
+                    ->orWhere('short_note', 'LIKE', "%{$q}%");
+            })
+            ->with('category')
+            ->limit(12)
+            ->get()
+            ->map(function ($item) {
+                $img = $item->list_page_img ? asset('public/images/admin/product_list/' . $item->list_page_img) : asset('public/images/front/placeholder.jpg');
+                return [
+                    'id' => $item->id,
+                    'name' => $item->product_name,
+                    'price' => 'AED ' . number_format((float)str_replace([',', 'AED', ' '], '', $item->product_price), 2),
+                    'category' => $item->category->category_name ?? '',
+                    'url' => route('front.product.details', $item->product_url),
+                    'image' => $img,
+                    'type' => 'product'
+                ];
+            });
+
+        // 2. Categories
+        $categories = Category::where('is_active', 0)
+            ->whereNull('deleted_at')
+            ->where(function ($query) use ($q) {
+                $query->where('category_name', 'LIKE', "%{$q}%")
+                    ->orWhere('title', 'LIKE', "%{$q}%")
+                    ->orWhere('description', 'LIKE', "%{$q}%");
+            })
+            ->limit(6)
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'name' => $item->category_name,
+                    'url' => route('front.list', $item->category_url),
+                    'type' => 'category'
+                ];
+            });
+
+        // 3. Blogs
+        $blogs = Blog::where('status', 'Active')
+            ->whereNull('deleted_at')
+            ->where(function ($query) use ($q) {
+                $query->where('title', 'LIKE', "%{$q}%")
+                    ->orWhere('short_description', 'LIKE', "%{$q}%");
+            })
+            ->limit(6)
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'name' => $item->title,
+                    'url' => route('front.blog.detail', $item->url),
+                    'type' => 'blog'
+                ];
+            });
+
+        $totalCount = $products->count() + $categories->count() + $blogs->count();
+
+        return response()->json([
+            'status' => true,
+            'products' => $products,
+            'categories' => $categories,
+            'blogs' => $blogs,
+            'total' => $totalCount
+        ]);
+    }
 }

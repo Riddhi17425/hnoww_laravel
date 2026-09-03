@@ -68,6 +68,7 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap')
 //FRONT ROUTE
 Route::name('front.')->group(function () {
     Route::get('/', [FrontController::class, 'index'])->name('home');
+    Route::get('/live-search', [FrontController::class, 'liveSearch'])->name('live.search');
     Route::get('stripe', [FrontController::class, 'getStripe']);                             // Temporary
     Route::post('stripe-post', [FrontController::class, 'stripePost'])->name('stripe.post'); // Temporary
     Route::get('collections', [FrontController::class, 'collections'])->name('collections');
