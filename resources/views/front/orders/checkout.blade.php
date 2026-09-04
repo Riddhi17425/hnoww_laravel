@@ -446,18 +446,14 @@
                 <div class="d-flex align-items-center justify-content-between mb-2 pb-2" style="border-bottom: 1px solid #f0f0f0;">
                     <div class="d-flex align-items-center gap-2">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B58A46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                        <h4 class="payment-card-title m-0" style="font-size: 15px; font-weight: 600; color: #111111;">Payment Method</h4>
+                        <h4 class="payment-card-title m-0" style="font-size: 15px; font-weight: 600; color: #111111;">Secure Payment</h4>
                     </div>
-                    <div class="d-flex gap-1 align-items-center">
-                        <!-- Visa Logo -->
+                    <!-- <div class="d-flex gap-1 align-items-center">
                         <svg class="co-card-icon" viewBox="0 0 36 24" width="28" height="18"><rect width="36" height="24" rx="3" fill="#1A1F71"/><path d="M13.8 16.5l1.6-9.5h2.6l-1.6 9.5h-2.6zm6.8-9.3c-.5-.2-1.3-.4-2.3-.4-2.5 0-4.3 1.3-4.3 3.2 0 1.4 1.3 2.2 2.2 2.7.9.5 1.2.8 1.2 1.2 0 .6-.8.9-1.5.9-1 0-1.6-.2-2.4-.5l-.3-.2-.4 2.3c.7.3 1.9.6 3.2.6 2.7 0 4.5-1.3 4.5-3.3 0-1.1-.7-2-2.1-2.6-.9-.4-1.4-.7-1.4-1.2 0-.4.5-.8 1.4-.8.8 0 1.4.2 1.9.4l.2.1.3-2.3zm6.6-.2h-2c-.6 0-1.1.2-1.3.8l-3.7 8.7h2.7l.5-1.5h3.3l.3 1.5h2.4l-2.2-9.5zm-2.8 6l1.3-3.6.8 3.6h-2.1zm-15.6-5.8l-2.6 6.5-.3-1.4c-.5-1.6-2-3.3-3.7-4.1l2.4 8.7h2.7l4.1-9.7h-2.6z" fill="#FFF"/></svg>
-                        <!-- Mastercard Logo -->
                         <svg class="co-card-icon" viewBox="0 0 36 24" width="28" height="18"><rect width="36" height="24" rx="3" fill="#252525"/><circle cx="14" cy="12" r="7" fill="#EB001B"/><circle cx="22" cy="12" r="7" fill="#F79E1B"/><path d="M18 6.8a6.9 6.9 0 0 1 2.6 5.2 6.9 6.9 0 0 1-2.6 5.2 6.9 6.9 0 0 1-2.6-5.2A6.9 6.9 0 0 1 18 6.8z" fill="#FF5F00"/></svg>
-                        <!-- Amex Logo -->
                         <svg class="co-card-icon" viewBox="0 0 36 24" width="28" height="18"><rect width="36" height="24" rx="3" fill="#006FCF"/><path d="M6 14.5l1.2-3.2h1.5l1.2 3.2h1.5v-5h-1.6l-1.8 4.2-1.8-4.2H4v5h2zm7.5 0h4.2v-1.2h-2.6v-.7h2.3v-1.2h-2.3v-.6h2.6v-1.3h-4.2v5zm5.5 0h1.5l1.1-2.2 1.1 2.2h1.6l-1.9-3.4 1.8-3.1h-1.5l-1.1 2.1-1.1-2.1h-1.6l1.8 3.1-1.9 3.4z" fill="#FFF"/></svg>
-                        <!-- Stripe Badge -->
                         <svg class="co-card-icon" viewBox="0 0 36 24" width="28" height="18"><rect width="36" height="24" rx="3" fill="#635BFF"/><path d="M16.5 10.3c0-.6.5-.9 1.3-.9 1.2 0 2.6.4 3.7 1v-3c-1.3-.5-2.6-.7-3.8-.7-3.1 0-5.2 1.6-5.2 4.2 0 4.1 5.6 3.4 5.6 5.2 0 .7-.6 1-1.5 1-1.4 0-3.1-.6-4.3-1.3v3.1c1.4.6 2.9.9 4.3.9 3.2 0 5.4-1.6 5.4-4.2-.1-4.4-5.5-3.6-5.5-5.3z" fill="#FFF"/></svg>
-                    </div>
+                    </div> -->
                 </div>
                 <div id="card-element" class="mt-3"></div>
                 <div id="error-message"></div>
@@ -472,9 +468,9 @@
             <!-- ONLY POWERED BY STRIPE BADGE -->
             <div class="co-powered-stripe-only mt-3 text-center">
                 <span class="d-inline-flex align-items-center gap-2" style="font-size: 13px; color: #555555; font-weight: 500;">
-                    Powered by 
-                    <svg viewBox="0 0 36 24" width="28" height="18" style="vertical-align: middle;"><rect width="36" height="24" rx="3" fill="#635BFF"/><path d="M16.5 10.3c0-.6.5-.9 1.3-.9 1.2 0 2.6.4 3.7 1v-3c-1.3-.5-2.6-.7-3.8-.7-3.1 0-5.2 1.6-5.2 4.2 0 4.1 5.6 3.4 5.6 5.2 0 .7-.6 1-1.5 1-1.4 0-3.1-.6-4.3-1.3v3.1c1.4.6 2.9.9 4.3.9 3.2 0 5.4-1.6 5.4-4.2-.1-4.4-5.5-3.6-5.5-5.3z" fill="#FFF"/></svg>
-                    <strong style="color: #635BFF; font-size: 14px; font-weight: 700;">stripe</strong>
+                    Powered by
+                    <!-- <svg viewBox="0 0 36 24" width="28" height="18" style="vertical-align: middle;"><rect width="36" height="24" rx="3" fill="#635BFF"/><path d="M16.5 10.3c0-.6.5-.9 1.3-.9 1.2 0 2.6.4 3.7 1v-3c-1.3-.5-2.6-.7-3.8-.7-3.1 0-5.2 1.6-5.2 4.2 0 4.1 5.6 3.4 5.6 5.2 0 .7-.6 1-1.5 1-1.4 0-3.1-.6-4.3-1.3v3.1c1.4.6 2.9.9 4.3.9 3.2 0 5.4-1.6 5.4-4.2-.1-4.4-5.5-3.6-5.5-5.3z" fill="#FFF"/></svg> -->
+                    <strong style="color: #635BFF; font-size: 14px; font-weight: 700;">Stripe</strong>
                 </span>
             </div>
 
