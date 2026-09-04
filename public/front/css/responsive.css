@@ -949,8 +949,13 @@
 ===========================                  ===========================*/
 
 @media (max-width: 1281px) {
+    
     .container {
         max-width: 1070px !important;
+    }
+
+    .nav_links li {
+        margin: 0 10px;
     }
 
     .custom-filter-dropdown .btn.dropdown-toggle {

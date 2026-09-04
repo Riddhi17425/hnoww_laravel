@@ -259,6 +259,33 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
             </div>
 
             <div class="d-flex gap-3 align-items-center">
+                <!-- Mobile Search Dropdown Wrapper -->
+                <div class="search_dropdown_wrapper d-lg-none">
+                    <a href="javascript:void(0)" class="search_icon searchDropdownTrigger" title="Search">
+                        <img src="<?php echo $is_green ? asset('public/images/front/serach-icon-black.svg') : asset('public/images/front/search-icon.svg') ?>" alt="Search">
+                    </a>
+
+                    <!-- Mobile Search Dropdown Menu -->
+                    <div class="search_dropdown_menu">
+                        <form class="hoverSearchForm" onsubmit="return false;">
+                            <div class="search_dropdown_input_box">
+                                <input type="text" name="q" class="hoverSearchInput" placeholder="Search luxury gifts, collections..." autocomplete="off">
+                                <button type="button" class="search_dropdown_submit" title="Search">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                </button>
+                            </div>
+                        </form>
+
+                        <div class="search_dropdown_content">
+                            <div class="hoverSearchDefaultState">
+                                <div class="p-2 text-center text-muted small">Type 2 or more characters to search...</div>
+                            </div>
+
+                            <div class="hoverSearchLiveResults" style="display: none;"></div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- User Dropdown -->
                 <div class="user_dropdown d-lg-none">
                     <span class="user_icon">
@@ -461,18 +488,32 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
 
                 <div class="navbar_right">
 
-                    <!-- Search Dropdown -->
-                    <!-- <div class="search_dropdown">
-                    <a href="javascript:void(0)" class="search_icon">
-                        <img src=" <?php echo $is_green ? asset('public/images/front/serach-icon-black.svg') : asset('public/images/front/search-icon.svg') ?>"
-                            alt="Search">
-                    </a>
+                    <!-- Search Dropdown Wrapper -->
+                    <div class="search_dropdown_wrapper d-none d-lg-block">
+                        <a href="javascript:void(0)" class="search_icon searchDropdownTrigger" title="Search">
+                            <img src="<?php echo $is_green ? asset('public/images/front/serach-icon-black.svg') : asset('public/images/front/search-icon.svg') ?>" alt="Search">
+                        </a>
 
-                    <div class="search_box">
-                        <input type="text" placeholder="Search here...">
-                        <button type="button">Search</button>
+                        <!-- Hover Search Dropdown Menu -->
+                        <div class="search_dropdown_menu" id="searchDropdownMenu">
+                            <form id="hoverSearchForm" onsubmit="return false;">
+                                <div class="search_dropdown_input_box">
+                                    <input type="text" name="q" id="hoverSearchInput" placeholder="Search luxury gifts, collections..." autocomplete="off">
+                                    <button type="button" class="search_dropdown_submit" title="Search">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                    </button>
+                                </div>
+                            </form>
+
+                            <div class="search_dropdown_content" id="searchDropdownContent">
+                                <div id="hoverSearchDefaultState">
+                                    <div class="p-2 text-center text-muted small">Type 2 or more characters to search...</div>
+                                </div>
+
+                                <div id="hoverSearchLiveResults" style="display: none;"></div>
+                            </div>
+                        </div>
                     </div>
-                </div> -->
 
                     <!-- User Dropdown -->
                     <div class="user_dropdown d-none d-lg-block">
@@ -1041,12 +1082,118 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
         const productsMenuTrigger = document.querySelector('a[href*="Products"], .nav-item.has-dropdown');
         // ↑ Replace with your actual Products nav trigger selector
 
-        if (productsMenuTrigger) {
-            productsMenuTrigger.addEventListener('mouseenter', () => {
-                if (window.innerWidth >= 992) {
-                    resetColors();
-                }
-            });
+        /* ---------------- SEARCH DROPDOWN CLICK & LIVE SEARCH JAVASCRIPT ---------------- */
+        const hoverSearchTrigger = document.getElementById('hoverSearchTrigger');
+        const searchDropdownMenu = document.getElementById('searchDropdownMenu');
+        const hoverSearchInput = document.getElementById('hoverSearchInput');
+        const hoverSearchDefaultState = document.getElementById('hoverSearchDefaultState');
+        const hoverSearchLiveResults = document.getElementById('hoverSearchLiveResults');
+
+        /* ---------------- MULTI-INSTANCE SEARCH DROPDOWN CLICK & LIVE SEARCH ---------------- */
+        document.querySelectorAll('.search_dropdown_wrapper').forEach(wrapper => {
+            const trigger = wrapper.querySelector('.searchDropdownTrigger');
+            const dropdown = wrapper.querySelector('.search_dropdown_menu');
+            const input = wrapper.querySelector('.hoverSearchInput');
+            const defaultState = wrapper.querySelector('.hoverSearchDefaultState');
+            const liveResults = wrapper.querySelector('.hoverSearchLiveResults');
+
+            if (trigger && dropdown) {
+                trigger.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // Close all other search dropdowns
+                    document.querySelectorAll('.search_dropdown_menu').forEach(d => {
+                        if (d !== dropdown) d.classList.remove('active');
+                    });
+
+                    dropdown.classList.toggle('active');
+                    if (dropdown.classList.contains('active') && input) {
+                        setTimeout(() => input.focus(), 150);
+                    }
+                });
+
+                dropdown.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            }
+
+            let debounce = null;
+            if (input && liveResults) {
+                input.addEventListener('input', function() {
+                    const query = this.value.trim();
+                    clearTimeout(debounce);
+
+                    if (query.length < 2) {
+                        if (defaultState) defaultState.style.display = 'block';
+                        liveResults.style.display = 'none';
+                        liveResults.innerHTML = '';
+                        return;
+                    }
+
+                    if (defaultState) defaultState.style.display = 'none';
+                    liveResults.style.display = 'block';
+                    liveResults.innerHTML = `<div class="p-3 text-center text-muted small"><span class="spinner-border spinner-border-sm me-2"></span> Searching...</div>`;
+
+                    debounce = setTimeout(() => {
+                        fetch(`{{ route('front.live.search') }}?q=${encodeURIComponent(query)}`)
+                            .then(res => res.json())
+                            .then(data => {
+                                if (!data.status || data.total === 0) {
+                                    liveResults.innerHTML = `<div class="p-3 text-center text-muted small">No results found for "${escapeHtml(query)}".</div>`;
+                                    return;
+                                }
+
+                                let html = '';
+
+                                // Collections
+                                if (data.categories && data.categories.length > 0) {
+                                    html += `<div class="search_dropdown_section_title">Collections</div><div class="search_dropdown_chips mb-3">`;
+                                    data.categories.forEach(cat => {
+                                        html += `<a href="${cat.url}" class="search_dropdown_chip">${escapeHtml(cat.name)}</a>`;
+                                    });
+                                    html += `</div>`;
+                                }
+
+                                // Products
+                                if (data.products && data.products.length > 0) {
+                                    html += `<div class="search_dropdown_section_title">Products (${data.products.length})</div><div class="search_dropdown_featured_list">`;
+                                    data.products.forEach(prod => {
+                                        html += `
+                                            <a href="${prod.url}" class="search_dropdown_item">
+                                                <img src="${prod.image}" alt="${escapeHtml(prod.name)}" class="search_dropdown_item_img">
+                                                <div class="search_dropdown_item_info">
+                                                    <div class="search_dropdown_item_name">${escapeHtml(prod.name)}</div>
+                                                    <div class="search_dropdown_item_price">${prod.price}</div>
+                                                </div>
+                                            </a>`;
+                                    });
+                                    html += `</div>`;
+                                }
+
+                                liveResults.innerHTML = html;
+                            })
+                            .catch(err => {
+                                liveResults.innerHTML = `<div class="p-3 text-center text-danger small">Error loading results</div>`;
+                            });
+                    }, 300);
+                });
+
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        return false;
+                    }
+                });
+            }
+        });
+
+        document.addEventListener('click', function() {
+            document.querySelectorAll('.search_dropdown_menu').forEach(d => d.classList.remove('active'));
+        });
+
+        function escapeHtml(str) {
+            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
         }
     });
     </script>
