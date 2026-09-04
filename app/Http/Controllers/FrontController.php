@@ -2406,6 +2406,7 @@ class FrontController extends Controller
         }
 
         // 1. Products
+        /*
         $products = Product::where('is_active', 0)
             ->whereNull('deleted_at')
             ->where(function ($query) use ($q) {
@@ -2423,6 +2424,64 @@ class FrontController extends Controller
                     'id' => $item->id,
                     'name' => $item->product_name,
                     'price' => 'AED ' . number_format((float)str_replace([',', 'AED', ' '], '', $item->product_price), 2),
+                    'category' => $item->category->category_name ?? '',
+                    'url' => route('front.product.details', $item->product_url),
+                    'image' => $img,
+                    'type' => 'product'
+                ];
+            });*/
+
+        // 1. Products
+        $products = Product::where('is_active', 0)
+            ->whereNull('deleted_at')
+
+            // Only Basic products
+            ->where('product_type', 1)
+
+            // Only products having a detail page URL
+            ->whereNotNull('product_url')
+            ->where('product_url', '!=', '')
+
+            ->where(function ($query) use ($q) {
+                $query->where('product_name', 'LIKE', "%{$q}%")
+                    ->orWhere('materials', 'LIKE', "%{$q}%")
+                    ->orWhere('short_note', 'LIKE', "%{$q}%");
+            })
+
+            // Search relevance / priority
+            ->orderByRaw("
+                CASE
+                    WHEN product_name = ? THEN 1
+                    WHEN product_name LIKE ? THEN 2
+                    WHEN product_name LIKE ? THEN 3
+                    WHEN short_note LIKE ? THEN 4
+                    WHEN materials LIKE ? THEN 5
+                    ELSE 6
+                END
+            ", [
+                $q,
+                "{$q}%",
+                "%{$q}%",
+                "%{$q}%",
+                "%{$q}%"
+            ])
+
+            ->with('category')
+            ->limit(12)
+            ->get()
+            ->map(function ($item) {
+
+                $img = $item->list_page_img
+                    ? asset('public/images/admin/product_list/' . $item->list_page_img)
+                    : asset('public/images/front/placeholder.jpg');
+
+                return [
+                    'id' => $item->id,
+                    'name' => $item->product_name,
+                    'price' => 'AED ' . number_format(
+                        (float) str_replace([',', 'AED', ' '], '', $item->product_price),
+                        2
+                    ),
                     'category' => $item->category->category_name ?? '',
                     'url' => route('front.product.details', $item->product_url),
                     'image' => $img,
