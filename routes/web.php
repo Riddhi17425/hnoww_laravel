@@ -109,7 +109,7 @@ Route::name('front.')->group(function () {
     
     Route::post('/store-festival-product-inquiry', [FrontController::class, 'storeFestivalProductInquiry'])->name('store.festival.product.inquiry');
     Route::post('/store-festival-inquiry', [FrontController::class, 'storeFestivalInquiry'])->name('store.festival.inquiry');
-    Route::post('/store-basic-category-inquiry', [FrontController::class, 'storeBasicCategoryInquiry'])->name('store.basic.category.inquiry');
+
     Route::get('/get-products-by-category/{category_id}', [FrontController::class, 'getProductsByCategory'])->name('get.products.by.category');
     Route::get('/wedding-vault', [FrontController::class, 'getWeddingVault'])->name('wedding.vault');
     Route::post('/wedding-vault/send-email', [FrontController::class, 'sendUnlockWeddingEmail'])->name('wedding-vault.send-email');
@@ -281,6 +281,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('/update/{blog_id}', [BlogController::class, 'update'])->name('update');
             Route::delete('/delete/{blog_id}', [BlogController::class, 'delete'])->name('delete');
             Route::post('/update-status', [BlogController::class, 'updateStatus'])->name('update.status');
+            Route::post('/send-published-mail/{blog_id}', [BlogController::class, 'sendPublishedMail'])->name('send.published.mail');
         });
 
         Route::resource('journals', JournalController::class);
