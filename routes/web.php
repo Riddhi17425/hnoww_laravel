@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\ProductTabController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\TestCheckoutController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\RedirectIfNotAdmin;
@@ -186,6 +187,14 @@ Route::name('front.')->group(function () {
 
     Route::post('/cookie-consent', [AuthController::class, 'cookieConsent']);
     Route::post('/whatsaap-inquiry', [AuthController::class, 'whatsaapInquiry'])->name('whatsaap.inquiry');
+
+    // ==========================================
+    // TEST CHECKOUT ROUTES (ISOLATED FROM LIVE)
+    // ==========================================
+    Route::get('/checkout-test', [TestCheckoutController::class, 'getCheckout'])->name('checkout.test.view');
+    Route::post('/checkout-test/store-address', [TestCheckoutController::class, 'storeAddress'])->name('checkout.test.store.address');
+    Route::post('/checkout-test/process', [TestCheckoutController::class, 'checkoutProcess'])->name('checkout.test.process');
+    Route::get('/checkout-test/payment/success', [TestCheckoutController::class, 'paymentSuccess'])->name('checkout.test.payment.success');
 
 });
 
