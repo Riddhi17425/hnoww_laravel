@@ -517,7 +517,8 @@ function setPayLoading(state) {
 }
 
 
-const stripe = Stripe("{{ env('STRIPE_KEY') }}"); // <--- You MUST do this once upfront
+const stripe = Stripe("{{ env('STRIPE_KEY') }}");
+
 let elements;
 let paymentElement;
 let clientSecret;

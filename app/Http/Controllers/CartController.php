@@ -191,109 +191,130 @@ class CartController extends Controller
 
     public function paymentSuccess(Request $request){
         \Log::info("PAYMENT RESPONSE - " . json_encode($request->all()));
+
+        $paymentIntent = $request->payment_intent ?? null;
         $addressId = $request->address_id ?? null;
-        if(isset($request['redirect_status']) && strtolower($request['redirect_status']) == 'succeeded'){
-            $cartItems = Cart::where('user_id', auth()->id())->get();
-            // Calculate subtotal
-            $subTotal = $cartItems->sum(function($item) {
-                return $item->price * $item->quantity;
+
+        if (!empty($paymentIntent)) {
+            $existingOrder = Order::where('stripe_payment_intent', $paymentIntent)->first();
+            if ($existingOrder) {
+                \Log::info('Stripe redirect skipped because order already exists for payment intent: ' . $paymentIntent);
+                return redirect()->route('front.get.success', $existingOrder->id);
+            }
+        }
+
+        if (isset($request['redirect_status']) && strtolower($request['redirect_status']) == 'succeeded') {
+            $order = $this->createOrderFromSuccessfulPayment($request, $addressId);
+
+            if (!$order) {
+                return redirect()->route('front.get.failed', 0);
+            }
+
+            $this->sendOrderSuccessNotifications($order, $addressId);
+            return redirect()->route('front.get.success', $order->id);
+        }
+
+        return redirect()->route('front.get.failed', 0);
+    }
+
+    protected function createOrderFromSuccessfulPayment(Request $request, $addressId)
+    {
+        $user = auth()->user();
+        if (!$user) {
+            return null;
+        }
+
+        $cartItems = Cart::where('user_id', $user->id)->get();
+        if ($cartItems->isEmpty()) {
+            return null;
+        }
+
+        $subTotal = $cartItems->sum(function ($item) {
+            return $item->price * $item->quantity;
+        });
+
+        $order = Order::create([
+            'user_id' => $user->id,
+            'order_address_id' => $addressId,
+            'gift_wrapper' => $request->boolean('gift_wrapper'),
+            'status' => 'confirmed',
+            'subtotal' => $subTotal,
+            'discount_percent' => 0,
+            'discount' => 0,
+            'order_total' => $subTotal,
+            'stripe_payment_intent' => $request->payment_intent ?? null,
+            'stripe_payment_intent_client_secret' => $request->payment_intent_client_secret ?? null,
+            'payment_status' => 'paid',
+        ]);
+
+        $order->order_number = 'ORD-' . $order->id . '-' . $user->id . '-' . rand(1000, 9999);
+        $order->save();
+
+        foreach ($cartItems as $cart) {
+            OrderProduct::create([
+                'order_id' => $order->id,
+                'product_id' => $cart->product_id,
+                'price' => $cart->price,
+                'quantity' => $cart->quantity,
+                'subtotal' => ($cart->price * $cart->quantity),
+            ]);
+
+            $cart->delete();
+        }
+
+        UserAddress::where(['user_id' => $user->id, 'is_confirm' => 0])
+            ->where('is_primary', '!=', 1)
+            ->delete();
+
+        $orderAddress = UserAddress::find($addressId);
+        if ($orderAddress) {
+            $orderAddress->is_confirm = 1;
+            $orderAddress->save();
+        }
+
+        return $order;
+    }
+
+    protected function sendOrderSuccessNotifications(Order $order, $addressId): void
+    {
+        $adminEmail = $this->adminEmail;
+        $adminSubject = 'New Order Placed - ' . $order->order_number;
+        $userDetails = auth()->user();
+        $userEmail = $userDetails->email;
+        $data = [
+            'name' => $userDetails->name ?? null,
+            'email' => $userDetails->email ?? null,
+            'order_id' => $order->order_number ?? null,
+            'status' => $order->status ?? null,
+            'order_total' => $order->order_total ?? null,
+            'order_products' => $order->orderProducts ?? null,
+            'gift_wrapper' => $order->gift_wrapper ?? null,
+        ];
+
+        try {
+            Mail::send('email.admin.order_success', $data, function ($message) use ($adminEmail, $adminSubject) {
+                $message->to($this->adminEmail)->subject($adminSubject);
             });
 
-            //ADD FLAT 15% DISCOUNT 
-            // $discount = ($subTotal * config('global_values.discount_percent')) / 100; // Calculate discount based on global value
-            // $OrderTotal = $subTotal - $discount; // Calculate total after discount    
+            Mail::send('email.front.order_success', $data, function ($message) use ($userEmail) {
+                $message->to($userEmail)->subject('Order Placed Successfully');
+            });
+        } catch (\Throwable $e) {
+            \Log::error('Inquiry Mail sending failed: ' . $e->getMessage());
+        }
 
-            $OrderTotal = $subTotal; // WITHOUT DISCOUNT CALCULATION
-
-            $orderId = '';
-            $order = null;
-            $orderNumber = '';
-            if(isset($cartItems) && is_countable($cartItems) && count($cartItems) > 0){
-                $order = new Order();
-                $order->user_id = auth()->id();
-                $order->order_address_id = $addressId;
-                $order->gift_wrapper = $request->boolean('gift_wrapper');
-                $order->status = 'confirmed';
-                $order->subtotal = $subTotal;
-                // $order->discount_percent = config('global_values.discount_percent');
-                // $order->discount = $discount;
-                $order->discount_percent = 0;
-                $order->discount = 0;
-                $order->order_total = $OrderTotal;    
-                $order->stripe_payment_intent = $request['payment_intent'] ?? null;
-                $order->stripe_payment_intent_client_secret = $request['payment_intent_client_secret'] ?? null;
-                $order->payment_status = 'paid';
-                $order->save();    
-                $randomNum = rand(1000, 9999);
-                $order->order_number = 'ORD-'.$order->id.'-'.auth()->id().'-'.$randomNum;
-                $order->save();
-                $orderNumber = $order->order_number;
-                foreach($cartItems as $k => $cart){
-                    $orderProduct = new OrderProduct();
-                    $orderProduct->order_id = $order->id;
-                    $orderProduct->product_id = $cart->product_id;
-                    $orderProduct->price = $cart->price;
-                    $orderProduct->quantity = $cart->quantity;
-                    $orderProduct->subtotal = ($cart->price * $cart->quantity);
-                    $orderProduct->save();
-                    $cart->delete();
-                }  
-                $orderId = $order->id;
-            }
-
-            $orderAddress = UserAddress::where(['user_id' => auth()->id(), 'is_confirm' => 0])->where('is_primary', '!=', 1)->delete();
+        try {
             $orderAddress = UserAddress::find($addressId);
-            if ($orderAddress) {
-                $orderAddress->is_confirm = 1;
-                $orderAddress->save();
-            }
-        
-            // SEND MAIL TO USER AND ADMIN
-            $adminEmail = $this->adminEmail;
-            $adminSubject = 'New Order Placed - '.$orderNumber;
-            $userDetails = auth()->user();
-            $userEmail = $userDetails->email;
-            $data = [
-                'name'        => $userDetails->name ?? null,
-                'email'        => $userDetails->email ?? null,
-                'order_id'  => $orderNumber ?? null,
-                'status'       => $order->status ?? null,
-                'order_total'  => $order->order_total ?? null,
-                'order_products' => $order->orderProducts ?? null,
-                'gift_wrapper' => $order->gift_wrapper ?? null,
-            ];
-
-            try {
-                Mail::send('email.admin.order_success', $data, function ($message) use ($adminEmail, $adminSubject) {
-                    $message->to($this->adminEmail)->subject($adminSubject);
-                });
-        
-                Mail::send('email.front.order_success', $data, function ($message) use ($userEmail) {
-                    $message->to($userEmail)->subject('Order Placed Successfully');
-                });
-            } catch (Exception $e) {
-                Log::error('Inquiry Mail sending failed: '.$e->getMessage());
-            }
-
-            // SEND WHATSAPP MESSSAGE
-            try {
-                $whatsappNumber = preg_replace('/\D+/', '', $orderAddress->whatsapp_no ?? '');
-                if($whatsappNumber != ''){
-                    // Keep legacy local UAE numbers working, but avoid double prefix
-                    $order->whatsapp_no = strlen($whatsappNumber) <= 10 ? '971'.$whatsappNumber : $whatsappNumber;
-                    $messageResponse = $this->yetiWhatsappMesasgeService->sendWhatsappNotification($order);
-                    if($messageResponse){
-                        // Handle successful message sending
-                        \Log::info('WhatsApp message sent successfully: '. json_encode($messageResponse));
-                    }
+            $whatsappNumber = preg_replace('/\D+/', '', $orderAddress->whatsapp_no ?? '');
+            if ($whatsappNumber != '') {
+                $order->whatsapp_no = strlen($whatsappNumber) <= 10 ? '971' . $whatsappNumber : $whatsappNumber;
+                $messageResponse = $this->yetiWhatsappMesasgeService->sendWhatsappNotification($order);
+                if ($messageResponse) {
+                    \Log::info('WhatsApp message sent successfully: ' . json_encode($messageResponse));
                 }
-            } catch (Exception $e) {
-                \Log::error('WhatsApp message sending failed: '.$e->getMessage());
             }
-            return redirect()->route('front.get.success', $orderId);
-        }else{
-            return redirect()->route('front.get.failed', $orderId);
-            
+        } catch (\Throwable $e) {
+            \Log::error('WhatsApp message sending failed: ' . $e->getMessage());
         }
     }
 

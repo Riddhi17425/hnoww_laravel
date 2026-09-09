@@ -1,26 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\{AdminController, BlessingController, BlogController, CategoryController, CeremonialController, CorporateKitController, FaqController, GiftShopController, JournalController, ProductController, ProductImageController, ProductTabController, UserController, BannerController};
 use App\Http\Controllers\Admin\Auth\LoginController;
-use App\Http\Controllers\Admin\BlessingController;
-use App\Http\Controllers\Admin\BlogController;
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\CeremonialController;
-use App\Http\Controllers\Admin\CorporateKitController;
-use App\Http\Controllers\Admin\FaqController;
-use App\Http\Controllers\Admin\GiftShopController;
-use App\Http\Controllers\Admin\JournalController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\ProductImageController;
-use App\Http\Controllers\Admin\ProductTabController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\FrontController;
-use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\{AuthController, CartController, FrontController, SitemapController};
 use App\Http\Middleware\RedirectIfNotAdmin;
-use Illuminate\Support\Facades\Artisan;
-use App\Http\Controllers\Admin\BannerController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,22 +16,7 @@ use App\Http\Controllers\Admin\BannerController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Route;
-
-Route::get('/send', function () {
-    Mail::raw('This is a test email sent from Laravel.', function ($message) {
-        $message->to('webdeveloper9.intelliworkz@gmail.com')
-            ->subject('Test Mail from Laravel');
-    });
-
-    return 'Mail sent!';
-});
-
-Route::get('/check-mail', function () {
-    return view('email.front.blessing_mail');
-});
-
+use Illuminate\Support\Facades\Artisan;
 Route::get('/clear', function () {
     Artisan::call('optimize:clear');
     return 'Application cache cleared!';
@@ -137,6 +106,7 @@ Route::name('front.')->group(function () {
 
     Route::get('/blogs', [FrontController::class, 'getBlogs'])->name('blogs');
     Route::get('/blog/{url}', [FrontController::class, 'getBlogDetails'])->name('blog.detail');
+    
 
     // LOGIN & REGISTER
     Route::get('front/auth/{page?}', [AuthController::class, 'getAuth'])->name('auth'); // used for both login & registration
