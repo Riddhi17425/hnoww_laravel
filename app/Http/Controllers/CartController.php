@@ -233,10 +233,19 @@ class CartController extends Controller
             return $item->price * $item->quantity;
         });
 
+        $giftNote = trim((string) $request->input('gift_note', ''));
+        if ($request->boolean('gift_wrapper') && $giftNote !== '') {
+            $giftNoteWords = preg_split('/\s+/', $giftNote);
+            $giftNote = implode(' ', array_slice($giftNoteWords ?: [], 0, 30));
+        } else {
+            $giftNote = null;
+        }
+
         $order = Order::create([
             'user_id' => $user->id,
             'order_address_id' => $addressId,
             'gift_wrapper' => $request->boolean('gift_wrapper'),
+            'gift_note' => $giftNote,
             'status' => 'confirmed',
             'subtotal' => $subTotal,
             'discount_percent' => 0,
@@ -289,6 +298,7 @@ class CartController extends Controller
             'order_total' => $order->order_total ?? null,
             'order_products' => $order->orderProducts ?? null,
             'gift_wrapper' => $order->gift_wrapper ?? null,
+            'gift_note' => $order->gift_note ?? null,
         ];
 
         try {
