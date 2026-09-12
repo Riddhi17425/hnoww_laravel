@@ -8,6 +8,8 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Cache, DB, Http, Log, Mail, Validator};
 
+use Illuminate\Support\Facades\Storage;
+
 class FrontController extends Controller
 {
     protected $adminEmail;
@@ -63,8 +65,47 @@ class FrontController extends Controller
 
     }
 
+    // protected function generateOrderLabel(string $orderId): array
+    // {
+    //     $response = \Illuminate\Support\Facades\Http::withHeaders($this->headers())
+    //         ->get('https://api.staging.quiqup.com/order_label/' . $orderId);
+
+    //     \Log::info('Quickup order label response: ' . json_encode($response->json()));
+    //     return $response->json();
+    // }
+    // protected function headers(): array
+    // {
+    //     return [
+    //         'Authorization' => 'Bearer ' . 'ak_37FHBHNS8SD6NBRHN796A5CNDAB4CRBN',
+    //         'Content-Type' => 'application/pdf',
+    //         'Accept' => 'application/pdf',
+    //     ];
+    // }
     public function index(Request $request)
     {
+        // $orderId = '26013836';
+        // $response = Http::withHeaders($this->headers())
+        //     ->get('https://api.staging.quiqup.com/order_label/' . $orderId);
+        //     if (
+        //         $response->successful() &&
+        //         $response->header('Content-Type') === 'application/pdf' &&
+        //         str_starts_with($response->body(), '%PDF')
+        //     ) {
+        //         Storage::disk('public')->put(
+        //             'quiqup-labels/' . $orderId . '.pdf',
+        //             $response->body()
+        //         );
+
+        //     } else {
+        //         Log::error('Invalid Quiqup PDF response', [
+        //             'status' => $response->status(),
+        //             'content_type' => $response->header('Content-Type'),
+        //             'content_disposition' => $response->header('Content-Disposition'),
+        //             'body' => $response->body(),
+        //         ]);
+        //     }
+        // die;
+
         $selectFields = [
             'id', 'category_id', 'product_name', 'short_description', 'is_active', 'deleted_at', 'product_url', 'list_page_img',
         ];

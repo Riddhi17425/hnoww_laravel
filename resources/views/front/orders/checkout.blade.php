@@ -425,7 +425,7 @@
                 <input type="checkbox" name="gift_wrapper" value="1" class="co-gift-checkbox">
             </label>
 
-            <div id="gift-note-wrapper" class="mt-3" style="display:none;">
+            <div id="gift-note-wrapper" class="mt-3 mb-3" style="display:none;">
                 <label class="co-input-label" for="gift_note">Gift Note</label>
                 <textarea id="gift_note" name="gift_note" class="co-input-field co-input-textarea" rows="3" maxlength="220" placeholder="Write a short note for the gift recipient"></textarea>
                 <small id="gift-note-help" class="text-danger" style="display:none;">
@@ -439,7 +439,7 @@
             </div>
             <div class="co-summary-item">
                 <span class="co-summary-label">Delivery</span>
-                <span class="co-delivery-val">Calculated based on Qty</span>
+                <span class="co-delivery-val">30.00 AED</span>
             </div>
 
             <hr class="co-summary-divider">
@@ -475,10 +475,9 @@
 
             <!-- ONLY POWERED BY STRIPE BADGE -->
             <div class="co-powered-stripe-only mt-3 text-center">
-                <span class="d-inline-flex align-items-center gap-2" style="font-size: 13px; color: #555555; font-weight: 500;">
+                <span style="font-size: 13px; color: #555555; font-weight: 500;">
                     Powered by
-                    <!-- <svg viewBox="0 0 36 24" width="28" height="18" style="vertical-align: middle;"><rect width="36" height="24" rx="3" fill="#635BFF"/><path d="M16.5 10.3c0-.6.5-.9 1.3-.9 1.2 0 2.6.4 3.7 1v-3c-1.3-.5-2.6-.7-3.8-.7-3.1 0-5.2 1.6-5.2 4.2 0 4.1 5.6 3.4 5.6 5.2 0 .7-.6 1-1.5 1-1.4 0-3.1-.6-4.3-1.3v3.1c1.4.6 2.9.9 4.3.9 3.2 0 5.4-1.6 5.4-4.2-.1-4.4-5.5-3.6-5.5-5.3z" fill="#FFF"/></svg> -->
-                    <strong style="color: #635BFF; font-size: 14px; font-weight: 700;">Stripe</strong>
+                    <strong style="color: #635BFF; font-size: 14px; font-weight: 700;">stripe</strong>
                 </span>
             </div>
 
