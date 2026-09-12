@@ -29,6 +29,7 @@ use App\Models\WhatsappGiftBlessing;
 use App\Services\ElevenLabsTextToSpeechService;
 use App\Services\PaymentService;
 use App\Services\YetiWhatsappMesasgeService;
+use App\Services\GoogleSheetService;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -376,7 +377,7 @@ class FrontController extends Controller
         return back()->with('success', 'Your inquiry has been submitted successfully!');
     }
 
-    public function storeGiftBlessing(Request $request)
+    public function storeGiftBlessing(Request $request, GoogleSheetService $googleSheetService)
     {
         $validator = Validator::make($request->all(), [
             'blessing_id'         => 'required',
@@ -418,6 +419,34 @@ class FrontController extends Controller
         ];
 
         $gift       = GiftBlessing::create($data);
+
+        $blessing = $gift->blessing;
+
+        $googleSheetSuccess = $googleSheetService->send('Blessing Library', [
+            'Submitted At' => now()->format('Y-m-d H:i:s'),
+            'Form Type' => 'Blessing - Gmail',
+            'Blessing' => optional($blessing)->title ?? '',
+
+            'From Name' => $request->from_name ?? '',
+            'From Email' => $request->from_email ?? '',
+            'From Phone' => $request->from_phone ?? '',
+
+            'To Name' => $request->to_name ?? '',
+            'To Email' => $request->to_email ?? '',
+            'To Phone' => $request->to_phone ?? '',
+
+            'Address Line 1' => $request->address_line1 ?? '',
+            'Address Line 2' => $request->address_line2 ?? '',
+            'Emirate' => $request->emirate ?? '',
+            'Landmark' => $request->landmark ?? '',
+            'Message / Notes' => $request->message_note ?? '',
+        ]);
+
+        if (!$googleSheetSuccess) 
+        {
+            Log::error('Gift blessing could not be sent to Google Sheet.');
+        }
+
         $adminEmail = $this->adminEmail;
         $userEmail  = $request->from_email;
         $toEmail    = $request->to_email;
@@ -544,7 +573,7 @@ class FrontController extends Controller
         ]);
     }
 
-    public function storeWhatsappGiftBlessing(Request $request)
+    public function storeWhatsappGiftBlessing(Request $request, GoogleSheetService $googleSheetService)
     {
         $validator = Validator::make($request->all(), [
             'blessing_id'    => 'required|exists:blessings,id',
@@ -574,8 +603,22 @@ class FrontController extends Controller
         ]);
 
         $blessing  = \App\Models\Blessing::find($request->blessing_id);
-        $shareLink = route('front.blessings.library', ['slug' => $blessing->slug ?? '']);
 
+        $googleSheetSuccess = $googleSheetService->send('Blessing Library', [
+            'Submitted At' => now()->format('Y-m-d H:i:s'),
+            'Form Type' => 'Blessing - WhatsApp',
+            'Blessing' => $blessing->title ?? '',
+            'Sender Name' => $request->sender_name,
+            'Receiver Name' => $request->receiver_name,
+            'Receiver WhatsApp Number' => $request->receiver_phone,
+        ]);
+
+        if (!$googleSheetSuccess)
+        {
+            Log::error('WhatsApp blessing could not be sent to Google Sheet.');
+        }
+
+        $shareLink = route('front.blessings.library', ['slug' => $blessing->slug ?? '']);
         $message = "Hello, {$request->receiver_name}\n" .
             "{$request->sender_name} has shared a blessing with you, {$blessing->title}, an audio-poetic blessing by HNOWW. 🙏\n" .
             "{$shareLink}";
@@ -1038,7 +1081,7 @@ class FrontController extends Controller
         return response()->json($products);
     }
 
-    public function storeCorporateProposalRequest(Request $request)
+    public function storeCorporateProposalRequest(Request $request, GoogleSheetService $googleSheetService)
     {
         $qualityRange    = config('global_values.quality_range');
         $corporateBudget = config('global_values.corporate_budget');
@@ -1111,6 +1154,32 @@ class FrontController extends Controller
         // }
 
         CorporateProposalRequest::create($data);
+
+        $qualityRangeValue    = $qualityRange[$request->quantity_range] ?? '';
+        $corporateBudgetValue = $corporateBudget[$request->corporate_budget] ?? '';
+        $timelineValue        = $timeline[$request->timeline] ?? '';
+
+        $googleSheetSuccess = $googleSheetService->send('Corporate', [
+            'Submitted At'   => now()->format('Y-m-d H:i:s'),
+            'Form Type'      => 'Corporate Catalogue Request',
+            'Full Name'      => $request->full_name,
+            'Email'          => $request->email,
+            'Phone'          => $request->phone,
+            'Company Name'   => $request->company_name,
+            'Designation'    => $request->role,
+            'Category Name'  => '',
+            'Product Name'   => '',
+            'Quantity'       => $qualityRangeValue,
+            'Budget'         => $corporateBudgetValue,
+            'Timeline'       => $timelineValue,
+            'Message'        => $request->message ?? '',
+        ]);
+
+        if (!$googleSheetSuccess)
+        {
+            Log::error('Corporate catalogue request could not be sent to Google Sheet.');
+        }
+
         // $commaSeparatedRequirements = '';
         // $requirements = $request->nature_of_requirement;
         // if (isset($requirements) && is_countable($requirements) && count($requirements) > 0) {
@@ -1202,7 +1271,7 @@ class FrontController extends Controller
         return redirect()->back()->with('success', 'Corporate proposal request submitted successfully.');
     }
 
-    public function storeCorporateProductRequest(Request $request)
+    public function storeCorporateProductRequest(Request $request, GoogleSheetService $googleSheetService)
     {
         $qualityRange    = config('global_values.quality_range');
         $corporateBudget = config('global_values.corporate_budget');
@@ -1268,11 +1337,58 @@ class FrontController extends Controller
         CorporateProposalRequest::create($data);
 
         $commaSeparatedProducts = '';
-        $productIds             = $request->cp_product_of_interest;
-        $productNames           = Product::whereIn('id', $productIds)->pluck('product_name')->toArray();
-        if (isset($productNames) && is_countable($productNames) && count($productNames) > 0) {
+        $commaSeparatedCategories = '';
+
+        $productIds = $request->cp_product_of_interest ?? [];
+
+        if (!empty($productIds))
+        {
+            $products = Product::with('category')
+                ->whereIn('id', $productIds)
+                ->get();
+
+            $productNames = $products
+                ->pluck('product_name')
+                ->filter()
+                ->toArray();
+
+            $categoryNames = $products
+                ->map(function ($product) {
+                    return $product->category->category_name ?? '';
+                })
+                ->filter()
+                ->unique()
+                ->toArray();
+
             $commaSeparatedProducts = implode(', ', $productNames);
+            $commaSeparatedCategories = implode(', ', $categoryNames);
         }
+
+        $qualityRangeValue = $qualityRange[$request->cp_quantity_range] ?? '';
+        $corporateBudgetValue = $corporateBudget[$request->cp_corporate_budget] ?? '';
+        $timelineValue = $timeline[$request->cp_delivery_date] ?? '';
+
+        $googleSheetSuccess = $googleSheetService->send('Corporate', [
+            'Submitted At'   => now()->format('Y-m-d H:i:s'),
+            'Form Type'      => 'Corporate Product Inquiry',
+            'Full Name'      => $request->cp_full_name,
+            'Email'          => $request->cp_email,
+            'Phone'          => $request->cp_phone,
+            'Company Name'   => $request->cp_company_name,
+            'Designation'    => '',
+            'Category Name'  => $commaSeparatedCategories,
+            'Product Name'   => $commaSeparatedProducts,
+            'Quantity'       => $qualityRangeValue,
+            'Budget'         => $corporateBudgetValue,
+            'Timeline'       => $timelineValue,
+            'Message'        => $request->cp_message ?? '',
+        ]);
+
+        if (!$googleSheetSuccess)
+        {
+            Log::error('Corporate product request could not be sent to Google Sheet.');
+        }
+
         // SEND MAIL TO USER AND ADMIN
         $adminEmail       = $this->adminEmail;
         $userEmail        = $request->cp_email;
@@ -1455,7 +1571,7 @@ class FrontController extends Controller
         return redirect()->back()->with('success', 'Wedding Catalogue request submitted successfully.');
     }
 
-    public function storeWeddingCatalogueRequest(Request $request)
+    public function storeWeddingCatalogueRequest(Request $request, GoogleSheetService $googleSheetService)
     {
         // $qualityRange = config('global_values.quality_range');
         $weddingRole = config('global_values.wedding_role');
@@ -1567,6 +1683,23 @@ class FrontController extends Controller
 
         WeddingCatalogueRequest::create($data);
 
+        $googleSheetService->send('Wedding', [
+            'Submitted At'     => now()->format('Y-m-d H:i:s'),
+            'Form Type'        => 'Wedding Gifting Consultation',
+            'Full Name'        => $request->w_full_name,
+            'Email'            => $request->w_email,
+            'Phone'            => $request->w_phone,
+            'Role'             => $role,
+            'Wedding Location' => $request->w_location,
+            'Wedding Date'     => $request->w_wedding_date,
+            'Looking For'      => $lookingFor,
+            'Guest Count'      => $request->w_guest_count,
+            'Budget Band'      => $request->w_budget_band,
+            'Category Name'    => '',
+            'Product Name'     => '',
+            'Message'          => $request->w_message,
+        ]);
+
         // $commaSeparatedProducts = '';
         // $productIds = $request->w_product_of_interest;
         // $productNames = Product::whereIn('id', $productIds)->pluck('product_name')->toArray();
@@ -1628,7 +1761,7 @@ class FrontController extends Controller
         return redirect()->back()->with('success', 'Wedding Catalogue request submitted successfully.');
     }
 
-    public function storeBespokeCommissionRequest(Request $request)
+    public function storeBespokeCommissionRequest(Request $request, GoogleSheetService $googleSheetService)
     {
         $commissionType = config('global_values.commission_type');
         $timelineValues = config('global_values.timeline');
@@ -1691,7 +1824,24 @@ class FrontController extends Controller
         // Save to database
         BespokeCommissionEnquiry::create($data);
 
-                                         // Prepare email data
+        $googleSheetSuccess = $googleSheetService->send('Bespoke Journey', [
+            'Submitted At' => now()->format('Y-m-d H:i:s'),
+            'Full Name' => $data['full_name'],
+            'Email' => $data['email'],
+            'Phone' => $data['phone'],
+            'Intended Timeline' => $data['timeline'],
+            'Budget Comfort Range' => $data['budget'],
+            'Type of Commission' => $data['type_of_commission'],
+            'What You Are Hoping To Create' => $data['customer_hoping_to_create'] ?? '',
+            'Anything else we should know' => $data['additional_message'] ?? '',
+        ]);
+
+        if (!$googleSheetSuccess)
+        {
+            Log::error('Bespoke commission request could not be sent to Google Sheet.');
+        }
+
+        // Prepare email data
         $adminEmail = $this->adminEmail; // Set in controller
         $userEmail  = $request->bc_email;
         $emailData  = $data;
@@ -1963,7 +2113,7 @@ class FrontController extends Controller
         return view('front.ceremonials', compact('products', 'category'));
     }
 
-    public function storeFestivalProductInquiry(Request $request)
+    public function storeFestivalProductInquiry(Request $request, GoogleSheetService $googleSheetService)
     {
         $validator = Validator::make($request->all(), [
             'name'         => 'required|string|max:255',
@@ -1985,6 +2135,21 @@ class FrontController extends Controller
             'message'      => $request->message,
         ]);
 
+        $googleSheetSuccess = $googleSheetService->send('Festival Inquiry', [
+            'Submitted At' => now()->format('Y-m-d H:i:s'),
+            'Form Type' => 'Festive Product Inquiry',
+            'Name' => $request->name,
+            'Product Name' => $request->product_name,
+            'Email' => $request->email,
+            'Phone Number' => $request->contact_no ?? '',
+            'Message' => $request->message ?? '',
+        ]);
+
+        if (!$googleSheetSuccess)
+        {
+            Log::error('Festival product inquiry could not be sent to Google Sheet.');
+        }
+
         $message = "*Rakshabandhan Product Inquiry*\n\n" .
             "*Name:* {$request->name}\n" .
             "*Email:* {$request->email}\n" .
@@ -1998,7 +2163,7 @@ class FrontController extends Controller
         return back()->with('whatsapp_url', $url);
     }
 
-    public function storeFestivalInquiry(Request $request)
+    public function storeFestivalInquiry(Request $request, GoogleSheetService $googleSheetService)
     {
         $validator = Validator::make($request->all(), [
             'category_id' => 'required|exists:categories,id',
@@ -2047,6 +2212,11 @@ class FrontController extends Controller
                 ]);
         }
 
+        // Get product names
+        $products = Product::whereIn( 'id', $request->product_of_interest)
+                ->pluck('product_name')
+                ->implode(', ');
+
         // Store Inquiry
         FestivalInquiry::create([
             'category_id' => $request->category_id,
@@ -2062,14 +2232,27 @@ class FrontController extends Controller
             'message' => $request->message,
         ]);
 
-        // WhatsApp Message
-        $products = Product::whereIn(
-            'id',
-            $request->product_of_interest
-        )
-        ->pluck('product_name')
-        ->implode(', ');
+        $googleSheetSuccess = $googleSheetService->send('Festival Inquiry', [
+            'Submitted At' => now()->format('Y-m-d H:i:s'),
+            'Form Type' => 'Personalization Form',
+            'Name' => $request->name,
+            'Company Organization' => $request->company_name ?? '',
+            'Phone Number' => $request->contact_no ?? '',
+            'Email' => $request->email ?? '',
+            'Product of Interest' => $products,
+            'Quantity Range' => $request->quantity_range ?? '',
+            'Approximate Budget' => $request->budget ?? '',
+            'Branding Requirements' => $request->branding_requirements ?? '',
+            'Delivery Timeline' => $request->delivery_date ?? '',
+            'Message' => $request->message ?? '',
+        ]);
 
+        if (!$googleSheetSuccess)
+        {
+            Log::error('Personalization form could not be sent to Google Sheet.');
+        }
+
+        // WhatsApp Message
         $message = "*New Corporate Proposal Request*\n\n" .
             "*Full Name:* {$request->name}\n" .
             "*Company Organization:* " . ($request->company_name ?: 'N/A') . "\n" .
@@ -2091,7 +2274,7 @@ class FrontController extends Controller
         return back()->with('whatsapp_url', $url);
     }
 
-    public function storeCeremonialInquiry(Request $request)
+    public function storeCeremonialInquiry(Request $request, GoogleSheetService $googleSheetService)
     {
         $validator = Validator::make($request->all(), [
             'name'          => 'required|string|max:255',
@@ -2122,7 +2305,28 @@ class FrontController extends Controller
             'contact_no'    => $request->contact_no,
             'message'       => $request->message ?? null,
         ]);
-        $ceremonial = Product::where('id', $request->ceremonial_id)->first();
+        // $ceremonial = Product::where('id', $request->ceremonial_id)->first();
+
+        $ceremonial = Product::with('category')->where('id', $request->ceremonial_id)->first();
+        $categoryName = $ceremonial->category->category_name ?? '';
+
+        $googleSheetService->send('Wedding', [
+            'Submitted At'     => now()->format('Y-m-d H:i:s'),
+            'Form Type'        => 'Wedding Product Inquiry',
+            'Full Name'        => $request->name,
+            'Email'            => $request->email,
+            'Phone'            => $request->contact_no,
+            'Role'             => '',
+            'Wedding Location' => '',
+            'Wedding Date'     => '',
+            'Looking For'      => '',
+            'Guest Count'      => '',
+            'Budget Band'      => '',
+            'Category Name'    => $categoryName,
+            'Product Name'     => $ceremonial->product_name ?? '',
+            'Message'          => $request->message ?? '',
+        ]);
+
         // SEND MAIL TO USER AND ADMIN
         $adminEmail = $this->adminEmail;
         $userEmail  = $request->email;

@@ -288,6 +288,7 @@ alt="{{ $val->product_name ?? 'Product Image' }}">
     </div>
 </div>
 
+<!-- START - BEGIN YOUR JOURNEY POPUP FORM -->
 <div class="modal fade wedding_catalogue_modal" id="bespokeCommission" data-bs-backdrop="static"
     data-bs-keyboard="false" tabindex="-1" aria-labelledby="bespokeCommissionLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen modal-dialog-centered">
@@ -299,7 +300,7 @@ alt="{{ $val->product_name ?? 'Product Image' }}">
                 <div class="container">
 
                     <div class="text-center mb-5">
-                        <h4 class="title_60 mb-3" style="color: var(--dark-900)">Begin a Bespoke Conversation</h4>
+                        <h4 class="title_60 mb-3" style="color: var(--dark-900)">Begin a Bespoke Conversationnsss</h4>
                         <p class="sub_head_inter" style="font-family: var(--heading-font); font-style: italic;">
                             We accept a limited number of bespoke commissions each year. <br> This form begins a
                             conversation
@@ -444,162 +445,163 @@ alt="{{ $val->product_name ?? 'Product Image' }}">
         </div>
     </div>
 </div>
+<!-- END - BEGIN YOUR JOURNEY POPUP FORM -->
 
 @push('script')
 <script>
-var bcFormSubmitted = false;
-document.addEventListener('DOMContentLoaded', function() {
-    const commissionSelect = document.getElementById('bc_type_of_commission');
-    const otherField = document.getElementById('other_commission_field');
-    commissionSelect.addEventListener('change', function() {
-        if (this.value === 'other') {
-            otherField.style.display = 'block';
-        } else {
-            otherField.style.display = 'none';
-        }
-    });
-});
-
-$(document).ready(function() {
-    $('#productInquiry').on('show.bs.modal', function(event) {
-        let button = $(event.relatedTarget);
-        let productName = button.data('product-name');
-        let productId = button.data('product-id');
-
-        $('#product_name').val(productName);
-        $('#product_id').val(productId);
-    });
-});
-
-$("#bespokeCommissionForm").validate({
-    ignore: [],
-    rules: {
-        bc_full_name: {
-            required: true,
-            minlength: 2,
-            maxlength: 50,
-            lettersonly: true
-        },
-
-        bc_email: {
-            required: true,
-            email: true,
-            noSpamEmail: true,
-            uniqueEmail: "bespoke_commission_enquiries"
-        },
-
-        bc_phone: {
-            digits: true,
-            minlength: 8,
-            maxlength: 15
-        },
-
-        bc_type_of_commission: {
-            required: true
-        },
-
-        bc_type_of_commission_other: {
-            required: function() {
-                return $("#bc_type_of_commission").val() === "other";
-            },
-            minlength: 2,
-            maxlength: 100
-        },
-
-        bc_customer_hoping_to_create: {
-            required: true,
-            minlength: 10,
-            maxlength: 1000
-        },
-
-        bc_timeline: {
-            required: true
-        },
-
-        bc_budget: {
-            required: true
-        },
-
-        bc_additional_message: {
-            maxlength: 500
-        }
-    },
-
-    messages: {
-        bc_full_name: {
-            required: "Please enter your full name",
-            minlength: "Full name must be at least 2 characters",
-            maxlength: "Full name cannot exceed 50 characters",
-            lettersonly: "Full name can only contain letters and spaces"
-        },
-
-        bc_email: {
-            required: "Please enter your email address",
-            email: "Please enter a valid email address"
-        },
-
-        bc_phone: {
-            digits: "Phone number must contain only digits",
-            minlength: "Phone number is too short",
-            maxlength: "Phone number is too long"
-        },
-
-        bc_type_of_commission: {
-            required: "Please select type of commission"
-        },
-
-        bc_type_of_commission_other: {
-            required: "Please specify the type of commission",
-            minlength: "Please enter at least 2 characters",
-            maxlength: "Maximum 100 characters allowed"
-        },
-
-        bc_customer_hoping_to_create: {
-            required: "Please tell us what you are hoping to create",
-            minlength: "Message must be at least 10 characters",
-            maxlength: "Message cannot exceed 1000 characters"
-        },
-
-        bc_timeline: {
-            required: "Please select intended timeline"
-        },
-
-        bc_budget: {
-            required: "Please select budget comfort range"
-        },
-
-        bc_additional_message: {
-            maxlength: "Additional message cannot exceed 500 characters"
-        }
-    },
-
-    errorElement: "small",
-
-    errorPlacement: function(error, element) {
-        error.addClass("text-danger");
-        error.insertAfter(element);
-    },
-
-    highlight: function(element) {
-        $(element).addClass("is-invalid").removeClass("is-valid");
-    },
-
-    unhighlight: function(element) {
-        $(element).addClass("is-valid").removeClass("is-invalid");
-    },
-
-    submitHandler: function(form) {
-        if (!bcFormSubmitted) {
-            bcFormSubmitted = true;
-            const btn = $(form).find('button[type="submit"]');
-            if (btn.length) {
-                btn.prop("disabled", true).text("Submitting...");
+    var bcFormSubmitted = false;
+    document.addEventListener('DOMContentLoaded', function() {
+        const commissionSelect = document.getElementById('bc_type_of_commission');
+        const otherField = document.getElementById('other_commission_field');
+        commissionSelect.addEventListener('change', function() {
+            if (this.value === 'other') {
+                otherField.style.display = 'block';
+            } else {
+                otherField.style.display = 'none';
             }
+        });
+    });
 
-            form.submit();
+    $(document).ready(function() {
+        $('#productInquiry').on('show.bs.modal', function(event) {
+            let button = $(event.relatedTarget);
+            let productName = button.data('product-name');
+            let productId = button.data('product-id');
+
+            $('#product_name').val(productName);
+            $('#product_id').val(productId);
+        });
+    });
+
+    $("#bespokeCommissionForm").validate({
+        ignore: [],
+        rules: {
+            bc_full_name: {
+                required: true,
+                minlength: 2,
+                maxlength: 50,
+                lettersonly: true
+            },
+
+            bc_email: {
+                required: true,
+                email: true,
+                noSpamEmail: true,
+                uniqueEmail: "bespoke_commission_enquiries"
+            },
+
+            bc_phone: {
+                digits: true,
+                minlength: 8,
+                maxlength: 15
+            },
+
+            bc_type_of_commission: {
+                required: true
+            },
+
+            bc_type_of_commission_other: {
+                required: function() {
+                    return $("#bc_type_of_commission").val() === "other";
+                },
+                minlength: 2,
+                maxlength: 100
+            },
+
+            bc_customer_hoping_to_create: {
+                required: true,
+                minlength: 10,
+                maxlength: 1000
+            },
+
+            bc_timeline: {
+                required: true
+            },
+
+            bc_budget: {
+                required: true
+            },
+
+            bc_additional_message: {
+                maxlength: 500
+            }
+        },
+
+        messages: {
+            bc_full_name: {
+                required: "Please enter your full name",
+                minlength: "Full name must be at least 2 characters",
+                maxlength: "Full name cannot exceed 50 characters",
+                lettersonly: "Full name can only contain letters and spaces"
+            },
+
+            bc_email: {
+                required: "Please enter your email address",
+                email: "Please enter a valid email address"
+            },
+
+            bc_phone: {
+                digits: "Phone number must contain only digits",
+                minlength: "Phone number is too short",
+                maxlength: "Phone number is too long"
+            },
+
+            bc_type_of_commission: {
+                required: "Please select type of commission"
+            },
+
+            bc_type_of_commission_other: {
+                required: "Please specify the type of commission",
+                minlength: "Please enter at least 2 characters",
+                maxlength: "Maximum 100 characters allowed"
+            },
+
+            bc_customer_hoping_to_create: {
+                required: "Please tell us what you are hoping to create",
+                minlength: "Message must be at least 10 characters",
+                maxlength: "Message cannot exceed 1000 characters"
+            },
+
+            bc_timeline: {
+                required: "Please select intended timeline"
+            },
+
+            bc_budget: {
+                required: "Please select budget comfort range"
+            },
+
+            bc_additional_message: {
+                maxlength: "Additional message cannot exceed 500 characters"
+            }
+        },
+
+        errorElement: "small",
+
+        errorPlacement: function(error, element) {
+            error.addClass("text-danger");
+            error.insertAfter(element);
+        },
+
+        highlight: function(element) {
+            $(element).addClass("is-invalid").removeClass("is-valid");
+        },
+
+        unhighlight: function(element) {
+            $(element).addClass("is-valid").removeClass("is-invalid");
+        },
+
+        submitHandler: function(form) {
+            if (!bcFormSubmitted) {
+                bcFormSubmitted = true;
+                const btn = $(form).find('button[type="submit"]');
+                if (btn.length) {
+                    btn.prop("disabled", true).text("Submitting...");
+                }
+
+                form.submit();
+            }
         }
-    }
-});
+    });
 </script>
 @endpush
 

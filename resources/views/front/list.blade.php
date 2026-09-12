@@ -331,8 +331,9 @@
         </div>
     </div>
 </section>
-<!-- END - PERSONALISATION SECTION -->
 @endif
+<!-- END - PERSONALISATION SECTION -->
+
 <!-- START - PERSONALISATION FORM -->
 @include('front.partials.product-inquiry-modal')
 @include('front.partials.festival-inquiry-modal')

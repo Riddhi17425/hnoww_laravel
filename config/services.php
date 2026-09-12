@@ -60,4 +60,8 @@ return [
         'use_speaker_boost' => env('ELEVENLABS_USE_SPEAKER_BOOST'),
     ],
 
+    'google_sheet' => [
+        'webhook_url' => env('GOOGLE_SHEET_WEBHOOK_URL'),
+    ],
+
 ];
