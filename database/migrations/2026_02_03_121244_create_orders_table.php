@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('order_address_id')->nullable();
+            $table->boolean('gift_wrapper')->default(false);
+            $table->text('gift_note')->nullable();
             $table->string('order_number')->nullable();
             $table->string('status')->default('pending')->comment('pending', 'confirmed', 'canceled');
             $table->decimal('subtotal', 10, 2);   

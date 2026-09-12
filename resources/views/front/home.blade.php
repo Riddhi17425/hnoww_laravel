@@ -92,7 +92,7 @@
                 <p>Curated objects for the desk, the home & the relationships that matter.</p>
             @endif
         </div>
-
+        @if (empty($activeBanner))
         <div class="hero_left_right">
             <span><svg xmlns="http://www.w3.org/2000/svg" width="63" height="6" viewBox="0 0 63 6"
                     fill="none">
@@ -107,9 +107,10 @@
                         fill="white" />
                 </svg></span>
         </div>
+        @endif
 
         <div class="home_btn ">
-            <a href="{{ route('front.collections') }}" class="com_btn border-0 bg-white ">Explore The Works</a>
+            <a href="{{ route('front.collections') }}" class="com_btn border-0 bg-white ">Explore Collections</a>
             {{-- <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white ms-3">Corporate Enquiries</a> --}}
             @if(!empty($activeBanner->button_text) && !empty($activeBanner->button_link))
                 <a href="{{ $activeBanner->button_link }}" class="com_btn border-0 bg-white ms-3">{{ $activeBanner->button_text }}</a>

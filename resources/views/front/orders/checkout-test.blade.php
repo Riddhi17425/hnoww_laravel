@@ -1090,6 +1090,7 @@ $(document).ready(async function() {
             });
 
             paymentRequest.canMakePayment().then(function(result) {
+                console.log("Stripe canMakePayment result:", result);
                 if (result) {
                     if (result.applePay) {
                         canUseApplePay = true;
@@ -1106,7 +1107,9 @@ $(document).ready(async function() {
                             });
                             prAppleBtn.mount('#stripe-apple-pay-element');
                             $('#directApplePayBtn').hide();
-                        } catch(e) {}
+                        } catch(e) {
+                            console.warn("Apple Pay button mount error:", e);
+                        }
                     }
                     if (result.googlePay) {
                         canUseGooglePay = true;
@@ -1123,9 +1126,15 @@ $(document).ready(async function() {
                             });
                             prGoogleBtn.mount('#stripe-google-pay-element');
                             $('#directGooglePayBtn').hide();
-                        } catch(e) {}
+                        } catch(e) {
+                            console.warn("Google Pay button mount error:", e);
+                        }
                     }
+                } else {
+                    console.warn("Stripe canMakePayment returned null (No supported wallet ready on this browser/device).");
                 }
+            }).catch(function(err) {
+                console.error("Stripe canMakePayment error:", err);
             });
 
             paymentRequest.on('paymentmethod', async function(ev) {

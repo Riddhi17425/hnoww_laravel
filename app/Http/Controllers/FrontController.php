@@ -1,52 +1,18 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\BespokeCommissionEnquiry;
-use App\Models\Blessing;
-use App\Models\Banner;
-use App\Models\Blog;
-use App\Models\Category;
-use App\Models\CeremonialInquiry;
-use App\Models\ContactInquiry;
-use App\Models\CorporateKit;
-use App\Models\CorporateKitRequest;
-use App\Models\CorporateProposalRequest;
-use App\Models\FaqType;
-use App\Models\FestivalInquiry;
-use App\Models\GiftBlessing;
-use App\Models\GiftShop;
-use App\Models\Journal;
-use App\Models\Newsletter;
-use App\Models\Order;
-use App\Models\Product;
-use App\Models\ProductInquiry;
-use App\Models\RequestCatalogue;
-use App\Models\SharedDetail;
-use App\Models\User;
-use App\Models\UserAddress;
-use App\Models\WeddingCatalogueRequest;
-use App\Models\WhatsappGiftBlessing;
-use App\Services\ElevenLabsTextToSpeechService;
-use App\Services\PaymentService;
-use App\Services\YetiWhatsappMesasgeService;
+use App\Models\{BespokeCommissionEnquiry, Blessing, Banner, Blog, Category, CeremonialInquiry, ContactInquiry, CorporateKit, CorporateKitRequest, CorporateProposalRequest, FaqType, FestivalInquiry, GiftBlessing, GiftShop, Journal, Newsletter, Order, Product, ProductInquiry, RequestCatalogue, SharedDetail, User, UserAddress, WeddingCatalogueRequest, WhatsappGiftBlessing};
+use App\Services\{ElevenLabsTextToSpeechService, PaymentService, YetiWhatsappMesasgeService};
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Validator;
-
-// use App\Models\Order;
+use Illuminate\Support\Facades\{Cache, DB, Http, Log, Mail, Validator};
 
 class FrontController extends Controller
 {
     protected $adminEmail;
     protected $adminWhatsappNo;
     protected $paymentService;
-
     protected $yetiWhatsappMesasgeService;
 
     public function __construct(PaymentService $paymentService, YetiWhatsappMesasgeService $yetiWhatsappMesasgeService)
@@ -99,20 +65,6 @@ class FrontController extends Controller
 
     public function index(Request $request)
     {
-        // $adminEmail = 'webdeveloper9.intelliworkz@gmail.com';
-        // Mail::html('<b>Test 1</b>', function ($message) use ($adminEmail) {
-        //     $message->to($adminEmail)->subject('TEST MAIL 1');
-        // });
-        // die;
-        // $order = Order::where('id', 1)->with('user')->first();
-        // $order->whatsapp_no = '916354910945';
-        // $messageResponse = $this->yetiWhatsappMesasgeService->sendWhatsappNotification($order);
-        // if($messageResponse){
-        //     // Handle successful message sending
-        //     \Log::info('WhatsApp message sent successfully: '. json_encode($messageResponse));
-        // }
-        // die;
-
         $selectFields = [
             'id', 'category_id', 'product_name', 'short_description', 'is_active', 'deleted_at', 'product_url', 'list_page_img',
         ];

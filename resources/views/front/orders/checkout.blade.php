@@ -425,6 +425,14 @@
                 <input type="checkbox" name="gift_wrapper" value="1" class="co-gift-checkbox">
             </label>
 
+            <div id="gift-note-wrapper" class="mt-3" style="display:none;">
+                <label class="co-input-label" for="gift_note">Gift Note</label>
+                <textarea id="gift_note" name="gift_note" class="co-input-field co-input-textarea" rows="3" maxlength="220" placeholder="Write a short note for the gift recipient"></textarea>
+                <small id="gift-note-help" class="text-danger" style="display:none;">
+                    Maximum 30 words.
+                </small>
+            </div>
+
             <div class="co-summary-item">
                 <span class="co-summary-label">Subtotal</span>
                 <span class="co-summary-val">{{ number_format($subTotal, 2) }} AED</span>
@@ -517,7 +525,8 @@ function setPayLoading(state) {
 }
 
 
-const stripe = Stripe("{{ env('STRIPE_KEY') }}"); // <--- You MUST do this once upfront
+const stripe = Stripe("{{ env('STRIPE_KEY') }}");
+
 let elements;
 let paymentElement;
 let clientSecret;
@@ -738,6 +747,24 @@ $(document).ready(async function() {
             : "";
     }
 
+    function toggleGiftNote() {
+        const checked = $('.co-gift-checkbox').is(':checked');
+        $('#gift-note-wrapper').toggle(checked);
+
+        if (!checked) {
+            $('#gift_note').val('');
+            $('#gift-note-help').hide();
+        }
+    }
+
+    $('#gift_note').on('input', function () {
+        const text = $(this).val().trim();
+        const words = text ? text.split(/\s+/).length : 0;
+
+        $('#gift-note-help').toggle(words > 30);
+    });
+    $('.co-gift-checkbox').on('change', toggleGiftNote);
+
     // Check on page load
     if ($('input[name="selected_address"]').length === 0) {
         // No existing addresses
@@ -903,10 +930,12 @@ $(document).ready(async function() {
         }
 
         //const addressId = data.address_id;
+        const giftNote = $('.co-gift-checkbox').is(':checked') ? $('#gift_note').val().trim() : '';
+
         const { error } = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                return_url: sitePath + '/payment/success?address_id=' + addressId + '&gift_wrapper=' + ($('.co-gift-checkbox').is(':checked') ? 1 : 0),
+                return_url: sitePath + '/payment/success?address_id=' + addressId + '&gift_wrapper=' + ($('.co-gift-checkbox').is(':checked') ? 1 : 0) + '&gift_note=' + encodeURIComponent(giftNote),
                 payment_method_data: {
                     billing_details: {
                         address: {
