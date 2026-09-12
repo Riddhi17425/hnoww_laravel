@@ -149,6 +149,11 @@ Route::name('front.')->group(function () {
     Route::post('/checkout/login', [AuthController::class, 'checkoutLogin'])->name('checkout.login');
     Route::post('/checkout/register', [AuthController::class, 'checkoutRegister'])->name('checkout.register');
 
+    // CHECKOUT FORGOT PASSWORD - OTP FLOW
+    Route::post('/checkout/forgot-password/send-otp', [AuthController::class, 'checkoutSendForgotPasswordOtp'])->name('checkout.forgot-password.send-otp');
+    Route::post('/checkout/forgot-password/verify-otp', [AuthController::class, 'checkoutVerifyForgotPasswordOtp'])->name('checkout.forgot-password.verify-otp');
+    Route::post('/checkout/forgot-password/reset', [AuthController::class, 'checkoutResetPassword'])->name('checkout.forgot-password.reset');
+
     // FORGOT PASSWORD
     Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('get.forgot.password');
     Route::post('/post-forgot-password', [AuthController::class, 'sendResetLink'])->name('post.forgot.password');

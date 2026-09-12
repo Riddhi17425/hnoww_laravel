@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\{User, WhatsappInquiry, Cart};
 use App\Models\UserAddress;
+use App\Mail\PasswordResetOtpMail;
+use App\Models\PasswordResetOtp;
 use Auth;
 use Session;
 use Hash;
@@ -495,4 +497,199 @@ class AuthController extends Controller
         ]);
     }
 
+    // START - SEND OTP TO THE REGISTERED EMAIL
+    public function checkoutSendForgotPasswordOtp(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:255|exists:users,email',
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()->first(),
+            ]);
+        }
+
+        $email = strtolower(trim($request->email));
+
+        // Make sure the email belongs to a registered user
+        $user = User::where('email', $email)->first();
+
+        if (!$user)
+        {
+            return response()->json([
+                'success' => false,
+                'message' => 'This email address is not registered.',
+            ]);
+        }
+
+        // Delete any previous OTP for this email
+        PasswordResetOtp::where('email', $email)->delete();
+
+        // Generate 6 digit OTP
+        $otp = random_int(100000, 999999);
+
+        // Store hashed OTP
+        PasswordResetOtp::create([
+            'email' => $email,
+            'otp' => Hash::make($otp),
+            'expires_at' => now()->addMinutes(10),
+        ]);
+
+        try
+        {
+            Mail::to($email)->send(new PasswordResetOtpMail($otp));
+            return response()->json([
+                'success' => true,
+                'message' => 'OTP has been sent to your registered email address.',
+            ]);
+
+        }
+        catch (\Exception $e)
+        {
+            // Remove OTP if email could not be sent
+            PasswordResetOtp::where('email', $email)->delete();
+            return response()->json([
+                'success' => false,
+                // 'message' => 'Unable to send OTP. Please try again later.',
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+    // END - SEND OTP TO THE REGISTERED EMAIL
+
+    // START - VERIFY OTP FOR THE FORGOT PASSWORD
+    public function checkoutVerifyForgotPasswordOtp(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:255',
+            'otp' => 'required|digits:6',
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()->first(),
+            ]);
+        }
+
+        $email = strtolower(trim($request->email));
+
+        $otpRecord = PasswordResetOtp::where('email', $email)
+            ->latest()
+            ->first();
+
+        if (!$otpRecord)
+        {
+            return response()->json([
+                'success' => false,
+                'message' => 'OTP not found. Please request a new OTP.',
+            ]);
+        }
+
+        if (now()->greaterThan($otpRecord->expires_at))
+        {
+            $otpRecord->delete();
+
+            return response()->json([
+                'success' => false,
+                'message' => 'OTP has expired. Please request a new OTP.',
+            ]);
+        }
+
+        if (!Hash::check($request->otp, $otpRecord->otp))
+        {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid OTP. Please check the OTP and try again.',
+            ]);
+        }
+
+        // OTP successfully verified
+        $otpRecord->delete();
+
+        // Store verified state temporarily in session
+        Session::put('checkout_password_reset_email', $email);
+        Session::put(
+            'checkout_password_reset_verified_until',
+            now()->addMinutes(10)
+        );
+
+        return response()->json([
+            'success' => true,
+            'message' => 'OTP verified successfully.',
+        ]);
+    }
+    // END - VERIFY OTP FOR THE FORGOT PASSWORD
+
+    // START - RESET PASSWORD AFTER CLICKING ON FORGOT PASSWORD
+    public function checkoutResetPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'password' => 'required|min:6',
+            'password_confirmation' => 'required|same:password',
+        ], [
+            'password_confirmation.same' => 'Password and confirm password must match.',
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()->first(),
+            ]);
+        }
+
+        $email = Session::get('checkout_password_reset_email');
+        $verifiedUntil = Session::get('checkout_password_reset_verified_until');
+
+        if (!$email || !$verifiedUntil)
+        {
+            return response()->json([
+                'success' => false,
+                'message' => 'Password reset session has expired. Please request a new OTP.',
+            ]);
+        }
+
+        if (now()->greaterThan($verifiedUntil))
+        {
+            Session::forget([
+                'checkout_password_reset_email',
+                'checkout_password_reset_verified_until',
+            ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Password reset session has expired. Please request a new OTP.',
+            ]);
+        }
+
+        $user = User::where('email', $email)->first();
+
+        if (!$user)
+        {
+            return response()->json([
+                'success' => false,
+                'message' => 'User account not found.',
+            ]);
+        }
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        // Clear reset session
+        Session::forget([
+            'checkout_password_reset_email',
+            'checkout_password_reset_verified_until',
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Your password has been updated successfully.',
+        ]);
+    }
+    // END - RESET PASSWORD AFTER CLICKING ON FORGOT PASSWORD
 }

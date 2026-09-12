@@ -363,7 +363,9 @@
                     <form id="checkout-auth-form">
                         @csrf
 
-                        <div id="checkout-auth-alert" class="alert alert-danger d-none py-2 px-3 mb-3 text-start"></div>
+                        <div id="checkout-auth-alert"
+                            class="alert d-none py-2 px-3 mb-3 text-start">
+                        </div>
 
                         <div id="step-email" class="auth-step">
                             <p>Please enter your email address to continue.</p>
@@ -415,9 +417,211 @@
                                 </span>
                             </div>
                             <div class="d-flex flex-column align-items-center gap-2 mt-4">
-                                <button type="submit" id="btn-login-submit" class="btn-auth-primary com_btn">Login & Checkout</button>
-                                <button type="button" id="btn-login-back" class="btn-auth-secondary"><- Back</button>
+                                <button type="submit" id="btn-login-submit" class="btn-auth-primary com_btn">
+                                    Login & Checkout
+                                </button>
+
+                                <div class="d-flex align-items-center gap-3">
+                                    <button type="button" id="btn-login-back" class="btn-auth-secondary">
+                                        <- Back
+                                    </button>
+
+                                    <button type="button" id="btn-forgot-password" class="btn-auth-secondary">
+                                        Forgot Password?
+                                    </button>
+                                </div>
                             </div>
+                        </div>
+
+                        <div id="step-forgot-password" class="auth-step d-none">
+                            <p>
+                                We have sent a verification OTP to your
+                                <strong id="forgot-password-email"></strong>
+                                email address.
+                            </p>
+
+                            <div class="form-floating">
+                                <input
+                                    type="text"
+                                    name="forgot_otp"
+                                    id="checkout_forgot_otp"
+                                    class="form-control shadow-none"
+                                    placeholder=" "
+                                    maxlength="6"
+                                    inputmode="numeric"
+                                >
+                                <label for="checkout_forgot_otp">
+                                    Enter OTP
+                                </label>
+                            </div>
+
+                            <p class="small text-muted mt-2 mb-0">
+                                OTP is valid for 10 minutes.
+                            </p>
+
+                            <div class="d-flex flex-column align-items-center gap-2 mt-4">
+
+                                <button type="button"
+                                    id="btn-verify-forgot-otp"
+                                    class="btn-auth-primary com_btn">
+                                    Verify OTP
+                                </button>
+
+                                <button type="button"
+                                        id="btn-resend-forgot-otp"
+                                        class="btn-auth-secondary"
+                                        disabled>
+                                    Resend OTP <span id="forgot-otp-timer">(60s)</span>
+                                </button>
+
+                                <button type="button"
+                                    id="btn-forgot-back"
+                                    class="btn-auth-secondary">
+                                    <- Back
+                                </button>
+
+                            </div>
+                        </div>
+
+                        <div id="step-reset-password" class="auth-step d-none">
+
+                            <p>
+                                OTP verified successfully. Please create your new password.
+                            </p>
+
+                            <div class="form-floating password_wrap">
+                                <input
+                                    type="password"
+                                    name="forgot_password"
+                                    id="checkout_forgot_password"
+                                    class="form-control shadow-none"
+                                    placeholder=" "
+                                >
+
+                                <label for="checkout_forgot_password">
+                                    New Password
+                                </label>
+
+                                <span class="toggle_password"
+                                    onclick="togglePasswordSvg('checkout_forgot_password', this)">
+
+                                    <svg class="eye-open" width="24" height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+
+                                        <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12"
+                                            stroke="#000"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round" />
+
+                                        <path d="M1 12C1 12 5 20 12 20C19 20 23 12 23 12"
+                                            stroke="#000"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round" />
+
+                                        <path
+                                            d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
+                                            stroke="#000"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+
+                                    <svg class="eye-close" width="24" height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+
+                                        <path
+                                            d="M2 2L22 22M6.71277 6.7226C3.66479 8.79527 2 12 2 12C2 12 5.63636 19 12 19C14.0503 19 15.8174 18.2734 17.2711 17.2884M11 5.05822C11.3254 5.02013 11.6588 5 12 5C18.3636 5 22 12 22 12C22 12 21.3082 13.3317 20 14.8335M14 14.2361C13.4692 14.7111 12.7684 15 12 15C10.3431 15 9 13.6561 9 12C9 11.1763 9.33193 10.4302 9.86932 9.88808"
+                                            stroke="#000"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+
+                                </span>
+                            </div>
+
+                            <div class="form-floating password_wrap mt-3">
+
+                                <input
+                                    type="password"
+                                    name="forgot_password_confirmation"
+                                    id="checkout_forgot_password_confirmation"
+                                    class="form-control shadow-none"
+                                    placeholder=" "
+                                >
+
+                                <label for="checkout_forgot_password_confirmation">
+                                    Confirm New Password
+                                </label>
+
+                                <span class="toggle_password"
+                                    onclick="togglePasswordSvg('checkout_forgot_password_confirmation', this)">
+
+                                    <svg class="eye-open" width="24" height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+
+                                        <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12"
+                                            stroke="#000"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round" />
+
+                                        <path d="M1 12C1 12 5 20 12 20C19 20 23 12 23 12"
+                                            stroke="#000"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round" />
+
+                                        <path
+                                            d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
+                                            stroke="#000"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+
+                                    <svg class="eye-close" width="24" height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+
+                                        <path
+                                            d="M2 2L22 22M6.71277 6.7226C3.66479 8.79527 2 12 2 12C2 12 5.63636 19 12 19C18.3636 19 22 12 22 12C22 12 21.3082 14.8335 20 14.8335M11 5.05822C11.3254 5.02013 11.6588 5 12 5C18.3636 5 22 12 22 12C22 12 21.3082 13.3317 20 14.8335M14 14.2361C13.4692 14.7111 12.7684 15 12 15C10.3431 15 9 13.6561 9 12C9 11.1763 9.33193 10.4302 9.86932 9.88808"
+                                            stroke="#000"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round" />
+
+                                    </svg>
+
+                                </span>
+
+                            </div>
+
+                            <div class="d-flex flex-column align-items-center gap-2 mt-4">
+
+                                <button type="button"
+                                    id="btn-reset-forgot-password"
+                                    class="btn-auth-primary com_btn">
+                                    Update Password
+                                </button>
+
+                                <button type="button"
+                                    id="btn-reset-password-back"
+                                    class="btn-auth-secondary">
+                                    <- Back
+                                </button>
+
+                            </div>
+
                         </div>
 
                         <div id="step-register" class="auth-step d-none">
@@ -500,7 +704,6 @@
                                     <- </span> Back</button>
                             </div>
                         </div>
-
                     </form>
                 </div>
             </div>
@@ -512,293 +715,638 @@
 <script src="{{ asset('public/js/front/cart.js') }} "></script>
 
 <script>
-{{-- var discountPercent = parseFloat(@json($discountPercent));
-$(document).ready(function () {
-    // FOR DISCOUNT CALCULATION
-    var subTotal = parseFloat(@json($subTotal)); 
-    $cartSubTotal =  subTotal; // Assuming this value is set from the server-side
-    $discount = ($cartSubTotal * discountPercent) / 100; // Calculate discount based on global value
-    $discountedTotal = $cartSubTotal - $discount; // Calculate total after discount    
-    $('#discounted-values').text(`- AED ${$discount.toFixed(2)}`); // Display discount  
-    $('#you-pay').text(`AED ${$discountedTotal.toFixed(2)}`); // Display total after discount
-}); --}}
+    {{-- var discountPercent = parseFloat(@json($discountPercent));
+    $(document).ready(function () {
+        // FOR DISCOUNT CALCULATION
+        var subTotal = parseFloat(@json($subTotal)); 
+        $cartSubTotal =  subTotal; // Assuming this value is set from the server-side
+        $discount = ($cartSubTotal * discountPercent) / 100; // Calculate discount based on global value
+        $discountedTotal = $cartSubTotal - $discount; // Calculate total after discount    
+        $('#discounted-values').text(`- AED ${$discount.toFixed(2)}`); // Display discount  
+        $('#you-pay').text(`AED ${$discountedTotal.toFixed(2)}`); // Display total after discount
+    }); --}}
 
-$(document).on('change', '.input-number', function() {
-    clearTimeout(window.cartTimer);
-    window.cartTimer = setTimeout(function() {
-        $('#cart-update-form').submit();
-    }, 300); // debounce
-});
-window.appData = {
-    emptyCartImage: "{{ asset('public/images/front/emty_cart.webp') }}",
-    homeUrl: "{{ route('front.home') }}"
-};
-
-$(document).ready(function() {
-    var isRegistered = false;
-    var userEmail = '';
-
-    var checkoutAuthValidator = $('#checkout-auth-form').validate({
-        ignore: ':hidden',
-        errorElement: 'div',
-        errorClass: 'text-danger mt-1',
-        rules: {
-            email: {
-                required: true,
-                email: true
-            },
-            register_email: {
-                required: true,
-                email: true
-            },
-            password: {
-                required: true,
-                minlength: 6
-            },
-            name: {
-                required: true,
-                minlength: 2
-            },
-            reg_password: {
-                required: true,
-                minlength: 6
-            },
-            reg_password_confirmation: {
-                required: true,
-                equalTo: '#checkout_reg_password'
-            }
-        },
-        messages: {
-            email: {
-                required: 'Please enter your email address.',
-                email: 'Please enter a valid email address.'
-            },
-            register_email: {
-                required: 'Please enter your email address.',
-                email: 'Please enter a valid email address.'
-            },
-            password: {
-                required: 'Please enter your password.',
-                minlength: 'Password must be at least 6 characters.'
-            },
-            name: {
-                required: 'Please enter your name.',
-                minlength: 'Name must be at least 2 characters.'
-            },
-            reg_password: {
-                required: 'Please enter a password.',
-                minlength: 'Password must be at least 6 characters.'
-            },
-            reg_password_confirmation: {
-                required: 'Please confirm your password.',
-                equalTo: 'Password and confirm password must match.'
-            }
-        }
+    $(document).on('change', '.input-number', function() {
+        clearTimeout(window.cartTimer);
+        window.cartTimer = setTimeout(function() {
+            $('#cart-update-form').submit();
+        }, 300); // debounce
     });
 
-    $('#btn-email-next').click(function() {
-        var emailInput = $('#checkout_email');
-        var email = emailInput.val().trim();
+    window.appData = {
+        emptyCartImage: "{{ asset('public/images/front/emty_cart.webp') }}",
+        homeUrl: "{{ route('front.home') }}"
+    };
 
-        emailInput.val(email);
-        if (!emailInput.valid()) {
-            return;
+    $(document).ready(function() {
+        var isRegistered = false;
+        var userEmail = '';
+
+        var forgotOtpTimer = null;
+        var forgotOtpSeconds = 60;
+
+        function startForgotOtpTimer()
+        {
+            clearInterval(forgotOtpTimer);
+            forgotOtpSeconds = 60;
+
+            var resendBtn = $('#btn-resend-forgot-otp');
+            var timer = $('#forgot-otp-timer');
+
+            resendBtn.prop('disabled', true);
+            timer.text('(60s)');
+
+            forgotOtpTimer = setInterval(function() {
+                forgotOtpSeconds--;
+                timer.text('(' + forgotOtpSeconds + 's)');
+
+                if (forgotOtpSeconds <= 0)
+                {
+                    clearInterval(forgotOtpTimer);
+                    forgotOtpTimer = null;
+                    timer.text('');
+                    resendBtn.prop('disabled', false);
+                }
+            }, 1000);
         }
 
-        hideError();
-        $('#btn-email-next').prop('disabled', true).text('Checking...');
+        var checkoutAuthValidator = $('#checkout-auth-form').validate({
+            ignore: ':hidden',
+            errorElement: 'div',
+            errorClass: 'text-danger mt-1',
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+                register_email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true,
+                    minlength: 6
+                },
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                reg_password: {
+                    required: true,
+                    minlength: 6
+                },
+                reg_password_confirmation: {
+                    required: true,
+                    equalTo: '#checkout_reg_password'
+                },
+                forgot_otp: {
+                    required: true,
+                    digits: true,
+                    minlength: 6,
+                    maxlength: 6
+                },
 
-        $.ajax({
-            url: "{{ route('front.checkout.check-email') }}",
-            type: "POST",
-            data: {
-                _token: "{{ csrf_token() }}",
-                email: email
+                forgot_password: {
+                    required: true,
+                    minlength: 6
+                },
+
+                forgot_password_confirmation: {
+                    required: true,
+                    equalTo: '#checkout_forgot_password'
+                }
             },
-            success: function(response) {
-                // $('#btn-email-next').prop('disabled', false).text('Next');
-                $('#btn-email-next').prop('disabled', false).text('Continue');
-                if (response.success) {
-                    userEmail = email;
-                    if (response.registered) {
-                        isRegistered = true;
-                        $('#checkoutAuthTitle').text('Welcome Back');
-                        $('#step-email').addClass('d-none');
-                        $('#step-login').removeClass('d-none');
-                        $('#checkout_password').attr('required', true);
+            messages: {
+                email: {
+                    required: 'Please enter your email address.',
+                    email: 'Please enter a valid email address.'
+                },
+                register_email: {
+                    required: 'Please enter your email address.',
+                    email: 'Please enter a valid email address.'
+                },
+                password: {
+                    required: 'Please enter your password.',
+                    minlength: 'Password must be at least 6 characters.'
+                },
+                name: {
+                    required: 'Please enter your name.',
+                    minlength: 'Name must be at least 2 characters.'
+                },
+                reg_password: {
+                    required: 'Please enter a password.',
+                    minlength: 'Password must be at least 6 characters.'
+                },
+                reg_password_confirmation: {
+                    required: 'Please confirm your password.',
+                    equalTo: 'Password and confirm password must match.'
+                },
+                forgot_otp: {
+                    required: 'Please enter the OTP.',
+                    digits: 'OTP must contain only numbers.',
+                    minlength: 'OTP must be 6 digits.',
+                    maxlength: 'OTP must be 6 digits.'
+                },
+
+                forgot_password: {
+                    required: 'Please enter your new password.',
+                    minlength: 'Password must be at least 6 characters.'
+                },
+
+                forgot_password_confirmation: {
+                    required: 'Please confirm your new password.',
+                    equalTo: 'Password and confirm password must match.'
+                }
+            }
+        });
+
+        $('#btn-email-next').click(function() {
+            var emailInput = $('#checkout_email');
+            var email = emailInput.val().trim();
+
+            emailInput.val(email);
+            if (!emailInput.valid())
+            {
+                return;
+            }
+
+            hideError();
+            $('#btn-email-next').prop('disabled', true).text('Checking...');
+
+            $.ajax({
+                url: "{{ route('front.checkout.check-email') }}",
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    email: email
+                },
+                success: function(response) {
+                    // $('#btn-email-next').prop('disabled', false).text('Next');
+                    $('#btn-email-next').prop('disabled', false).text('Continue');
+                    if (response.success) {
+                        userEmail = email;
+                        if (response.registered) {
+                            isRegistered = true;
+                            $('#checkoutAuthTitle').text('Welcome Back');
+                            $('#forgot-password-email').text(userEmail);
+                            $('#step-email').addClass('d-none');
+                            $('#step-login').removeClass('d-none');
+                            $('#checkout_password').attr('required', true);
+                        } else {
+                            isRegistered = false;
+                            $('#checkoutAuthTitle').text('Create Account');
+                            $('#step-email').addClass('d-none');
+                            $('#step-register').removeClass('d-none');
+                            $('#checkout_register_email')
+                                .val(email)
+                                .prop('readonly', true);
+                            $('#checkout_name').attr('required', true);
+                            $('#checkout_reg_password').attr('required', true);
+                            $('#checkout_reg_password_confirmation').attr('required', true);
+                        }
                     } else {
-                        isRegistered = false;
-                        $('#checkoutAuthTitle').text('Create Account');
-                        $('#step-email').addClass('d-none');
-                        $('#step-register').removeClass('d-none');
-                        $('#checkout_register_email')
-                            .val(email)
-                            .prop('readonly', true);
-                        $('#checkout_name').attr('required', true);
-                        $('#checkout_reg_password').attr('required', true);
-                        $('#checkout_reg_password_confirmation').attr('required', true);
+                        showError(response.message);
                     }
-                } else {
-                    showError(response.message);
+                },
+                error: function(xhr) {
+                    // $('#btn-email-next').prop('disabled', false).text('Next');
+                    $('#btn-email-next').prop('disabled', false).text('Continue');
+                    showError(getAjaxErrorMessage(xhr));
                 }
-            },
-            error: function(xhr) {
-                // $('#btn-email-next').prop('disabled', false).text('Next');
-                $('#btn-email-next').prop('disabled', false).text('Continue');
-                showError(getAjaxErrorMessage(xhr));
-            }
+            });
         });
-    });
 
-    // START - DIRECT SIGN UP FUNCTIONALITY
-    $('#btn-direct-signup').click(function() {
+        // START - DIRECT SIGN UP FUNCTIONALITY
+        $('#btn-direct-signup').click(function() {
 
-        hideError();
+            hideError();
 
-        // Set registration mode
-        isRegistered = false;
+            // Set registration mode
+            isRegistered = false;
 
-        // Hide all existing steps
-        $('.auth-step').addClass('d-none');
+            // Hide all existing steps
+            $('.auth-step').addClass('d-none');
 
-        // Update modal title
-        $('#checkoutAuthTitle').text('Create Account');
+            // Update modal title
+            $('#checkoutAuthTitle').text('Create Account');
 
-        // Show existing registration step
-        $('#step-register').removeClass('d-none');
+            // Show existing registration step
+            $('#step-register').removeClass('d-none');
 
-       // Make registration fields required
-        $('#checkout_name').attr('required', true);
-        $('#checkout_register_email')
-            .val('')
-            .prop('readonly', false)
-            .attr('required', true);
-        $('#checkout_reg_password').attr('required', true);
-        $('#checkout_reg_password_confirmation').attr('required', true);
+        // Make registration fields required
+            $('#checkout_name').attr('required', true);
+            $('#checkout_register_email')
+                .val('')
+                .prop('readonly', false)
+                .attr('required', true);
+            $('#checkout_reg_password').attr('required', true);
+            $('#checkout_reg_password_confirmation').attr('required', true);
 
-        // Login password should not be required
-        $('#checkout_password').removeAttr('required').val('');
+            // Login password should not be required
+            $('#checkout_password').removeAttr('required').val('');
 
-        // Reset validation errors
-        checkoutAuthValidator.resetForm();
-    });
-    // END - DIRECT SIGN UP FUNCTIONALITY
+            // Reset validation errors
+            checkoutAuthValidator.resetForm();
+        });
+        // END - DIRECT SIGN UP FUNCTIONALITY
 
-    $('#btn-login-back, #btn-register-back').click(function() {
-        hideError();
-        $('#checkoutAuthTitle').text('Continue to Checkout');
-        $('.auth-step').addClass('d-none');
-        $('#step-email').removeClass('d-none');
+        $('#btn-login-back, #btn-register-back').click(function() {
+            hideError();
+            $('#checkoutAuthTitle').text('Continue to Checkout');
+            $('.auth-step').addClass('d-none');
+            $('#step-email').removeClass('d-none');
 
-        $('#checkout_password').removeAttr('required').val('');
-        $('#checkout_name').removeAttr('required').val('');
-        // START - RESET DIRECT SIGN UP EMAIL
-        $('#checkout_register_email')
-            .removeAttr('required')
-            .prop('readonly', false)
-            .val('');
-        // END - RESET DIRECT SIGN UP EMAIL
-        $('#checkout_reg_password').removeAttr('required').val('');
-        $('#checkout_reg_password_confirmation').removeAttr('required').val('');
-        checkoutAuthValidator.resetForm();
-    });
+            $('#checkout_password').removeAttr('required').val('');
+            $('#checkout_name').removeAttr('required').val('');
+            // START - RESET DIRECT SIGN UP EMAIL
+            $('#checkout_register_email')
+                .removeAttr('required')
+                .prop('readonly', false)
+                .val('');
+            // END - RESET DIRECT SIGN UP EMAIL
+            $('#checkout_reg_password').removeAttr('required').val('');
+            $('#checkout_reg_password_confirmation').removeAttr('required').val('');
+            checkoutAuthValidator.resetForm();
+        });
 
-    $('#checkout-auth-form').submit(function(e) {
-        e.preventDefault();
-        hideError();
+        $('#checkout-auth-form').submit(function(e) {
+            e.preventDefault();
+            hideError();
 
-        if (!$(this).valid()) {
-            return;
-        }
+            if (!$(this).valid())
+            {
+                return;
+            }
 
-        var submitBtn = isRegistered ? $('#btn-login-submit') : $('#btn-register-submit');
-        var originalBtnText = submitBtn.text();
-        submitBtn.prop('disabled', true).text('Processing...');
+            var submitBtn = isRegistered ? $('#btn-login-submit') : $('#btn-register-submit');
+            var originalBtnText = submitBtn.text();
+            submitBtn.prop('disabled', true).text('Processing...');
 
-        var url = isRegistered ? "{{ route('front.checkout.login') }}" : "{{ route('front.checkout.register') }}";
-        var registrationEmail = $('#checkout_register_email').val().trim();
+            var url = isRegistered ? "{{ route('front.checkout.login') }}" : "{{ route('front.checkout.register') }}";
+            var registrationEmail = $('#checkout_register_email').val().trim();
 
-        var formData = {
-            _token: "{{ csrf_token() }}",
-            email: isRegistered ? userEmail : registrationEmail
-        };
+            var formData = {
+                _token: "{{ csrf_token() }}",
+                email: isRegistered ? userEmail : registrationEmail
+            };
 
-        if (isRegistered) {
-            formData.password = $('#checkout_password').val();
-        } else {
-            formData.name = $('#checkout_name').val().trim();
-            formData.reg_password = $('#checkout_reg_password').val();
-            formData.reg_password_confirmation = $('#checkout_reg_password_confirmation').val();
-        }
+            if (isRegistered)
+            {
+                formData.password = $('#checkout_password').val();
+            }
+            else
+            {
+                formData.name = $('#checkout_name').val().trim();
+                formData.reg_password = $('#checkout_reg_password').val();
+                formData.reg_password_confirmation = $('#checkout_reg_password_confirmation').val();
+            }
 
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: formData,
-            success: function(response) {
-                if (response.success) {
-                    window.location.href = response.redirect_url;
-                } else {
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: formData,
+                success: function(response) {
+                    if (response.success)
+                    {
+                        window.location.href = response.redirect_url;
+                    } 
+                    else
+                    {
+                        submitBtn.prop('disabled', false).text(originalBtnText);
+                        showError(response.message);
+                    }
+                },
+                error: function(xhr) {
                     submitBtn.prop('disabled', false).text(originalBtnText);
-                    showError(response.message);
+                    showError(getAjaxErrorMessage(xhr));
                 }
-            },
-            error: function(xhr) {
-                submitBtn.prop('disabled', false).text(originalBtnText);
-                showError(getAjaxErrorMessage(xhr));
+            });
+        });
+
+        $('#checkoutAuthModal').on('hidden.bs.modal', function () {
+            hideError();
+            clearInterval(forgotOtpTimer);
+            forgotOtpTimer = null;
+            forgotOtpSeconds = 60;
+
+            $('#btn-resend-forgot-otp')
+                .prop('disabled', true)
+                .html('Resend OTP <span id="forgot-otp-timer">(60s)</span>');
+
+            $('#checkoutAuthTitle').text('Continue to Checkout');
+            $('.auth-step').addClass('d-none');
+            $('#step-email').removeClass('d-none');
+            $('#checkout_email').val('');
+            $('#checkout_password').removeAttr('required').val('');
+            $('#checkout_name').removeAttr('required').val('');
+            // START - RESET REGISTER EMAIL
+            $('#checkout_register_email')
+                .removeAttr('required')
+                .prop('readonly', false)
+                .val('');
+            // END - RESET REGISTER EMAIL
+            $('#checkout_reg_password').removeAttr('required').val('');
+            $('#checkout_reg_password_confirmation').removeAttr('required').val('');
+            $('#checkout_forgot_otp').val('');
+            $('#checkout_forgot_password').val('');
+            $('#checkout_forgot_password_confirmation').val('');
+            checkoutAuthValidator.resetForm();
+            isRegistered = false;
+            userEmail = '';
+        });
+
+        function showError(msg)
+        {
+            $('#checkout-auth-alert')
+                .removeClass('d-none alert-success')
+                .addClass('alert-danger')
+                .text(msg);
+        }
+
+        function showSuccess(msg)
+        {
+            $('#checkout-auth-alert')
+                .removeClass('d-none alert-danger')
+                .addClass('alert-success')
+                .text(msg);
+        }
+
+        function hideError()
+        {
+            $('#checkout-auth-alert')
+                .addClass('d-none')
+                .removeClass('alert-danger alert-success')
+                .text('');
+        }
+
+        function getAjaxErrorMessage(xhr)
+        {
+            if (xhr.responseJSON && xhr.responseJSON.message)
+            {
+                return xhr.responseJSON.message;
             }
+
+            return 'Something went wrong. Please try again.';
+        }
+
+        // FORGOT PASSWORD - SEND OTP
+        $('#btn-forgot-password').click(function() {
+
+            hideError();
+
+            if (!userEmail)
+            {
+                showError('Email address is missing. Please go back and try again.');
+                return;
+            }
+
+            var btn = $(this);
+            var originalText = btn.text();
+
+            btn.prop('disabled', true).text('Sending...');
+
+            $.ajax({
+                url: "{{ route('front.checkout.forgot-password.send-otp') }}",
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    email: userEmail
+                },
+
+                success: function(response)
+                {
+                    if (response.success)
+                    {
+                        $('#checkoutAuthTitle').text('Verify OTP');
+                        $('#forgot-password-email').text(userEmail);
+                        $('.auth-step').addClass('d-none');
+                        $('#step-forgot-password').removeClass('d-none');
+                        $('#checkout_forgot_otp').val('');
+
+                        // Start 60 second resend timer
+                        startForgotOtpTimer();
+                    }
+                    else
+                    {
+                        showError(response.message);
+                    }
+                },
+
+                error: function(xhr)
+                {
+                    showError(getAjaxErrorMessage(xhr));
+                },
+
+                complete: function()
+                {
+                    btn.prop('disabled', false).text(originalText);
+                }
+            });
+        });
+
+        // VERIFY OTP
+        $('#btn-verify-forgot-otp').click(function() {
+            hideError();
+            var otpInput = $('#checkout_forgot_otp');
+
+            if (!otpInput.valid())
+            {
+                return;
+            }
+
+            var btn = $(this);
+            var originalText = btn.text();
+
+            btn.prop('disabled', true).text('Verifying...');
+
+            $.ajax({
+                url: "{{ route('front.checkout.forgot-password.verify-otp') }}",
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    email: userEmail,
+                    otp: otpInput.val().trim()
+                },
+
+                success: function(response)
+                {
+                    if (response.success)
+                    {
+                        $('#checkoutAuthTitle').text('Reset Password');
+                        $('.auth-step').addClass('d-none');
+                        $('#step-reset-password').removeClass('d-none');
+                        $('#checkout_forgot_password').val('');
+                        $('#checkout_forgot_password_confirmation').val('');
+                    }
+                    else
+                    {
+                        showError(response.message);
+                    }
+                },
+
+                error: function(xhr)
+                {
+                    showError(getAjaxErrorMessage(xhr));
+                },
+
+                complete: function()
+                {
+                    btn.prop('disabled', false).text(originalText);
+                }
+            });
+        });
+
+        // RESEND OTP
+        $('#btn-resend-forgot-otp').click(function() {
+            hideError();
+
+            if (!userEmail)
+            {
+                showError('Email address is missing. Please go back and try again.');
+                return;
+            }
+
+            var btn = $(this);
+
+            btn.prop('disabled', true);
+            btn.text('Sending...');
+
+            $.ajax({
+                url: "{{ route('front.checkout.forgot-password.send-otp') }}",
+                type: "POST",
+
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    email: userEmail
+                },
+
+                success: function(response) {
+                    if (response.success)
+                    {
+                        $('#checkout_forgot_otp').val('');
+                        showSuccess('A new OTP has been sent to your registered email address.');
+
+                        // Start 60 second timer again
+                        btn.html('Resend OTP <span id="forgot-otp-timer">(60s)</span>');
+                        startForgotOtpTimer();
+                    }
+                    else
+                    {
+                        btn.prop('disabled', false);
+                        btn.html('Resend OTP');
+                        showError(response.message);
+                    }
+                },
+
+                error: function(xhr) {
+                    btn.prop('disabled', false);
+                    btn.html('Resend OTP');
+                    showError(getAjaxErrorMessage(xhr));
+                }
+            });
+        });
+
+        // FORGOT PASSWORD - UPDATE PASSWORD
+        $('#btn-reset-forgot-password').click(function() {
+            hideError();
+
+            var password = $('#checkout_forgot_password');
+            var confirmation = $('#checkout_forgot_password_confirmation');
+
+            if (!password.valid() || !confirmation.valid())
+            {
+                return;
+            }
+
+            var btn = $(this);
+            var originalText = btn.text();
+
+            btn.prop('disabled', true).text('Updating...');
+
+            $.ajax({
+                url: "{{ route('front.checkout.forgot-password.reset') }}",
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    password: password.val(),
+                    password_confirmation: confirmation.val()
+                },
+
+                success: function(response)
+                {
+                    if (response.success)
+                    {
+
+                        // Password has been successfully changed
+                        showSuccess('Password updated successfully. Please login with your new password.');
+
+                        setTimeout(function()
+                        {
+                            $('#checkoutAuthTitle').text('Welcome Back');
+                            $('.auth-step').addClass('d-none');
+                            $('#step-login').removeClass('d-none');
+                            $('#checkout_password').val('');
+                            $('#checkout_forgot_password').val('');
+                            $('#checkout_forgot_password_confirmation').val('');
+                        }, 1500);
+                    } 
+                    else
+                    {
+                        showError(response.message);
+                    }
+                },
+
+                error: function(xhr)
+                {
+                    showError(getAjaxErrorMessage(xhr));
+                },
+
+                complete: function()
+                {
+                    btn.prop('disabled', false).text(originalText);
+                }
+            });
+        });
+
+        // FORGOT PASSWORD - BACK TO LOGIN
+        $('#btn-forgot-back').click(function() {
+            hideError();
+
+            $('#checkoutAuthTitle').text('Welcome Back');
+            $('.auth-step').addClass('d-none');
+            $('#step-login').removeClass('d-none');
+            $('#checkout_forgot_otp').val('');
+            checkoutAuthValidator.resetForm();
+        });
+
+        // RESET PASSWORD - BACK
+        $('#btn-reset-password-back').click(function() {
+            hideError();
+
+            $('#checkoutAuthTitle').text('Verify OTP');
+            $('.auth-step').addClass('d-none');
+            $('#step-forgot-password').removeClass('d-none');
+            $('#checkout_forgot_password').val('');
+            $('#checkout_forgot_password_confirmation').val('');
+            checkoutAuthValidator.resetForm();
         });
     });
 
-    $('#checkoutAuthModal').on('hidden.bs.modal', function () {
-        hideError();
-        $('#checkoutAuthTitle').text('Continue to Checkout');
-        $('.auth-step').addClass('d-none');
-        $('#step-email').removeClass('d-none');
-        $('#checkout_email').val('');
-        $('#checkout_password').removeAttr('required').val('');
-        $('#checkout_name').removeAttr('required').val('');
-        // START - RESET REGISTER EMAIL
-        $('#checkout_register_email')
-            .removeAttr('required')
-            .prop('readonly', false)
-            .val('');
-        // END - RESET REGISTER EMAIL
-        $('#checkout_reg_password').removeAttr('required').val('');
-        $('#checkout_reg_password_confirmation').removeAttr('required').val('');
-        checkoutAuthValidator.resetForm();
-        isRegistered = false;
-        userEmail = '';
-    });
+    function togglePasswordSvg(inputId, el)
+    {
+        const input = document.getElementById(inputId);
 
-    function showError(msg) {
-        $('#checkout-auth-alert').text(msg).removeClass('d-none');
-    }
-
-    function hideError() {
-        $('#checkout-auth-alert').addClass('d-none').text('');
-    }
-
-    function getAjaxErrorMessage(xhr) {
-        if (xhr.responseJSON && xhr.responseJSON.message) {
-            return xhr.responseJSON.message;
+        if (input.type === "password")
+        {
+            input.type = "text";
+            el.classList.add("active");
         }
-
-        return 'Something went wrong. Please try again.';
+        else
+        {
+            input.type = "password";
+            el.classList.remove("active");
+        }
     }
-});
-
-function togglePasswordSvg(inputId, el) {
-    const input = document.getElementById(inputId);
-
-    if (input.type === "password") {
-        input.type = "text";
-        el.classList.add("active");
-    } else {
-        input.type = "password";
-        el.classList.remove("active");
-    }
-}
 </script>
 @endpush
 
