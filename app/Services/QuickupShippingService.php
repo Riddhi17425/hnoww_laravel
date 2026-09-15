@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Order;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage; 
 
 class QuickupShippingService
 {
@@ -51,7 +52,8 @@ class QuickupShippingService
         $payload = [
             "kind" => "partner_next_day",
             "notes" => $order->gift_note ?? "",
-            "payment_amount" => (float) ($order->total_amount ?? 0),
+            // 'payment_amount' => (int) (round($order->order_total) ?? 0),
+            'payment_amount' => config('global_values.shipping_warehouse_details.country') !== 'UAE' ? 0 : (int) (round($order->order_total) ?? 0),
             "payment_mode" => "pre_paid",
             // "disallowed_payment_types" => [
             //     "cash"
@@ -80,12 +82,12 @@ class QuickupShippingService
                 "contact_phone" => $address->contact_no ?? "",
                 "partner_order_id" => $order->order_number ?? "ORD-" . $order->id, 
                 "share_tracking" => true,
-                //"contact_email" => $order->user->email ?? "",
+                "contact_email" => $order->user->email ?? "",
                 "notes" => $order->gift_note ?? "",
                 "address" => [
-                    "address1" => $address->address_line1 ?? "",
+                    "address1" => $address->address_line1 ?? "" ,
                     "address2" => $address->address_line2 ?? "",
-                    "country" => "",
+                    "country" => config('global_values.shipping_warehouse_details.country'),
                     "town" => $address->emirate ?? 'Dubai',
                 ],
             ],
@@ -94,22 +96,21 @@ class QuickupShippingService
                 [
                     "name" => $order->order_number ?? "ORD-" . $order->id,
                     "quantity" => count($products) > 0 ? count($products) : 1,
+                    // "quantity" => 1,
                     "parcel_barcode" => 'P' . $order->id . time(),
                 ],
             ],
         ];
-
         $response = Http::withHeaders($this->headers())->post($this->baseUrl . '/orders', $payload);
         if (!$response->successful()) {
             throw new \RuntimeException('Quickup order creation failed: ' . $response->body());
         }
         $responseData = $response->json();
         $orderId = $responseData['order']['id'] ?? null;
-        \Log::info(
-            'Quickup order creation response: ' . json_encode($responseData) .
-            ' | Status Code: ' . $response->status()
-        );
-        \Log::info('orderId: ' . $orderId);
+        // \Log::info(
+        //     'Quickup order creation response: ' . json_encode($responseData) .
+        //     ' | Status Code: ' . $response->status()
+        // );
         if (!$orderId) {
             throw new \RuntimeException('Quickup order creation failed: Missing order ID in response.');
         }
@@ -117,7 +118,7 @@ class QuickupShippingService
         $readyResponse = $this->markOrderReadyForCollection((string) $orderId);
 
         return array_merge($responseData, [
-            // 'ready_for_collection' => $readyResponse,
+            'ready_for_collection' => $readyResponse,
             // 'order_label' => $labelResponse,
             // 'awb' => $labelResponse['awb'] ?? $labelResponse['tracking_number'] ?? null,
         ]);
@@ -134,13 +135,18 @@ class QuickupShippingService
 
     protected function markOrderReadyForCollection(string $orderId): array
     {
-        $response = Http::withHeaders($this->headers())
-            ->put($this->baseUrl . '/orders/' . $orderId . '/ready_for_collection');
-
-        \Log::info('Quickup order ready_for_collection response: ' . json_encode($response->json()));
-
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $this->apiKey,
+        ])->put($this->baseUrl .'/orders/' . $orderId . '/ready_for_collection'
+        );
+        \Log::info('Quiqup ready_for_collection response', [
+            'status' => $response->status(),
+            'body' => $response->body(),
+        ]);
         if (!$response->successful()) {
-            throw new \RuntimeException('Quickup ready_for_collection failed: ' . $response->body());
+            throw new \RuntimeException(
+                'Quiqup ready_for_collection failed: ' . $response->body()
+            );
         }
 
         return $response->json();
@@ -150,7 +156,7 @@ class QuickupShippingService
     {
         $response = Http::withHeaders($this->headers())
             ->get($this->baseUrl . '/order_label/' . $orderId);
-        \Log::info('Quickup order label response: ' . json_encode($response->json()));
+        // \Log::info('Quickup order label response: ' . json_encode($response->json()));
         if ($response->successful() && $response->header('Content-Type') === 'application/pdf' && str_starts_with($response->body(), '%PDF')
         ) {
             Storage::disk('public')->put(
