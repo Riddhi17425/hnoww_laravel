@@ -27,8 +27,12 @@ return new class extends Migration
             $table->string('stripe_payment_intent')->nullable();   
             $table->string('stripe_payment_intent_client_secret')->nullable();    
             $table->string('payment_status')->default('unpaid')->comment('unpaid', 'paid', 'failed')->nullable();
+            $table->string('shipping_status')->nullable();
+            $table->string('quiqup_order_id')->nullable();
+            $table->string('quiqup_parcel_barcode')->nullable();
+            $table->string('quiqup_tracking_url')->nullable();
+            $table->text('quiqup_order_creation_response')->nullable();
             $table->timestamps();
-
             // Foreign Keys
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

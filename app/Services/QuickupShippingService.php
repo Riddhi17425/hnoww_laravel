@@ -114,6 +114,14 @@ class QuickupShippingService
         if (!$orderId) {
             throw new \RuntimeException('Quickup order creation failed: Missing order ID in response.');
         }
+
+        $order->quiqup_order_id = (string) $orderId;
+        $order->quiqup_parcel_barcode = $responseData['order']['items'][0]['parcel_barcode'] ?? null;
+        $order->quiqup_tracking_url = $responseData['order']['tracking_url'] ?? null;
+        $order->quiqup_order_creation_response = json_encode($responseData);
+        $order->shipping_status = $responseData['order']['state'] ?? null;
+        $order->save();
+
         $this->generateOrderLabel((string) $orderId, $order->order_number);
         $readyResponse = $this->markOrderReadyForCollection((string) $orderId);
 

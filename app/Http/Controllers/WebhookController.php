@@ -79,7 +79,65 @@ class WebhookController extends Controller
     }
 
     public function handleQuickupWebhook(Request $request){
-        
+        $payload = $request->getContent();
+        $signature = $request->header('X-Webhook-Signature');
+        $secret = (string) env('QUICKUP_WEBHOOK_SECRET', '');
+
+        if (empty($payload)) {
+            Log::warning('Quiqup webhook received with an empty payload.');
+            return response()->json(['error' => 'Invalid payload'], 400);
+        }
+        \Log::info('Quiqup webhook received: ' . $payload);
+        if ($secret && (!$signature || !$this->hasValidWebhookSignature($payload, $signature, $secret))) {
+            Log::warning('Quiqup webhook signature verification failed.');
+            return response()->json(['error' => 'Invalid signature'], 400);
+        }
+
+        $data = json_decode($payload, true);
+        if (!is_array($data) || !is_array($order = $data['order'] ?? $data)) {
+            Log::warning('Quiqup webhook payload is not valid JSON.');
+            return response()->json(['error' => 'Invalid payload'], 400);
+        }
+
+        $quickupOrderId = data_get($order, 'id');
+        $partnerOrderNumber = data_get($order, 'partner_order_id');
+        $localOrder = Order::where('quiqup_order_id', (string) $quickupOrderId)
+            ->when($partnerOrderNumber, fn ($query) => $query->orWhere('order_number', $partnerOrderNumber))
+            ->first();
+
+        if (!$localOrder) {
+            Log::warning('Quiqup webhook received for unknown order.', [
+                'quiqup_order_id' => $quickupOrderId,
+                'partner_order_id' => $partnerOrderNumber,
+            ]);
+            return response()->json(['status' => 'ignored']);
+        }
+
+        $localOrder->fill(array_filter([
+            'quiqup_order_id' => $quickupOrderId,
+            'quiqup_parcel_barcode' => data_get($order, 'items.0.parcel_barcode'),
+            'quiqup_tracking_url' => data_get($order, 'tracking_url')
+                ?: data_get($order, 'destination.tracking_url'),
+            'shipping_status' => data_get($order, 'state')
+                ?: data_get($order, 'status')
+                ?: data_get($order, 'last_event'),
+        ]))->save();
+
+        Log::info('Quiqup webhook processed.', [
+            'order_id' => $localOrder->id,
+            'shipping_status' => $localOrder->shipping_status,
+        ]);
+
+        return response()->json(['status' => 'success']);
     }
-    
+
+    protected function hasValidWebhookSignature(string $payload, string $signature, string $secret)
+    {
+        $expectedSignature = hash_hmac('sha256', $payload, $secret);
+        $providedSignature = str_starts_with($signature, 'sha256=')
+            ? substr($signature, 7)
+            : $signature;
+
+        return hash_equals($expectedSignature, $providedSignature);
+    }
 }
