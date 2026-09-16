@@ -117,8 +117,6 @@
 </section> -->
 
 <!-- new updat code -->
-
-
 <section class="mt_60 mb_120">
    {{-- @php 
          $discountPercent = config('global_values.discount_percent', 0);
