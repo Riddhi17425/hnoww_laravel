@@ -496,7 +496,7 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
 
                         <!-- Hover Search Dropdown Menu -->
                         <div class="search_dropdown_menu" id="searchDropdownMenu">
-                            <form id="hoverSearchForm" onsubmit="return false;">
+                            <form id="hoverSearchForm" class="hoverSearchForm" onsubmit="return false;">
                                 <div class="search_dropdown_input_box">
                                     <input type="text" name="q" id="hoverSearchInput" class="hoverSearchInput" placeholder="Search luxury gifts, collections..." autocomplete="off">
                                     <button type="button" class="search_dropdown_submit" title="Search">
@@ -567,7 +567,7 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
                             </svg>
                             <div class="dropdown-list" id="dropdownList">
                                 <div class="search-box">
-                                    <input type="text" id="searchInput" placeholder="Search language..." />
+                                    <input type="text" id="searchInput" placeholder="Search language..." autocomplete="off" />
                                 </div>
                                 <div class="list-items" id="listItems"></div>
                             </div>
@@ -943,7 +943,7 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
             div.textContent = lang.name;
             div.dataset.code = lang.code;
             div.addEventListener('click', () => {
-                dropdownInput.value = lang.name;
+                // dropdownInput.value = lang.name; // Removed to keep EN always
                 dropdownList.classList.remove('show');
                 changeLanguage(lang.code);
             });
@@ -966,6 +966,11 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
     dropdownTrigger.addEventListener('click', (e) => {
         e.stopPropagation();
         dropdownList.classList.toggle('show');
+    });
+
+    // Prevent click inside dropdown from toggling it off
+    dropdownList.addEventListener('click', (e) => {
+        e.stopPropagation();
     });
 
     // Close when clicking outside
@@ -1011,9 +1016,9 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
             const langCode = value.split('/')[2];
             const lang = languages.find(l => l.code === langCode);
             if (lang) {
-                dropdownInput.value = lang.name;
+                // dropdownInput.value = lang.name; // Removed to keep EN always
             } else {
-                dropdownInput.value = 'Select Language';
+                // dropdownInput.value = 'Select Language'; // Removed to keep EN always
             }
         }
     });
