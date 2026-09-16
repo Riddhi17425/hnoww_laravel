@@ -306,7 +306,8 @@ class CartController extends Controller
             'emirate' => 'required',
             'address_line1' => 'required',
             'address_line2' => 'required',
-            'landmark' => 'required',
+            // 'landmark' => 'required',
+            'landmark' => 'nullable|string',
         ]);
 
         if (auth()->check()) {
