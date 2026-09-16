@@ -496,9 +496,9 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
 
                         <!-- Hover Search Dropdown Menu -->
                         <div class="search_dropdown_menu" id="searchDropdownMenu">
-                            <form id="hoverSearchForm" onsubmit="return false;">
+                            <form id="hoverSearchForm" class="hoverSearchForm" onsubmit="return false;">
                                 <div class="search_dropdown_input_box">
-                                    <input type="text" name="q" id="hoverSearchInput" placeholder="Search luxury gifts, collections..." autocomplete="off">
+                                    <input type="text" name="q" id="hoverSearchInput" class="hoverSearchInput" placeholder="Search luxury gifts, collections..." autocomplete="off">
                                     <button type="button" class="search_dropdown_submit" title="Search">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                                     </button>
@@ -506,11 +506,11 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
                             </form>
 
                             <div class="search_dropdown_content" id="searchDropdownContent">
-                                <div id="hoverSearchDefaultState">
+                                <div id="hoverSearchDefaultState" class="hoverSearchDefaultState">
                                     <div class="p-2 text-center text-muted small">Type 2 or more characters to search...</div>
                                 </div>
 
-                                <div id="hoverSearchLiveResults" style="display: none;"></div>
+                                <div id="hoverSearchLiveResults" class="hoverSearchLiveResults" style="display: none;"></div>
                             </div>
                         </div>
                     </div>
@@ -567,7 +567,7 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
                             </svg>
                             <div class="dropdown-list" id="dropdownList">
                                 <div class="search-box">
-                                    <input type="text" id="searchInput" placeholder="Search language..." />
+                                    <input type="text" id="searchInput" placeholder="Search language..." autocomplete="off" />
                                 </div>
                                 <div class="list-items" id="listItems"></div>
                             </div>
@@ -943,7 +943,7 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
             div.textContent = lang.name;
             div.dataset.code = lang.code;
             div.addEventListener('click', () => {
-                dropdownInput.value = lang.name;
+                // dropdownInput.value = lang.name; // Removed to keep EN always
                 dropdownList.classList.remove('show');
                 changeLanguage(lang.code);
             });
@@ -966,6 +966,11 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
     dropdownTrigger.addEventListener('click', (e) => {
         e.stopPropagation();
         dropdownList.classList.toggle('show');
+    });
+
+    // Prevent click inside dropdown from toggling it off
+    dropdownList.addEventListener('click', (e) => {
+        e.stopPropagation();
     });
 
     // Close when clicking outside
@@ -1011,9 +1016,9 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
             const langCode = value.split('/')[2];
             const lang = languages.find(l => l.code === langCode);
             if (lang) {
-                dropdownInput.value = lang.name;
+                // dropdownInput.value = lang.name; // Removed to keep EN always
             } else {
-                dropdownInput.value = 'Select Language';
+                // dropdownInput.value = 'Select Language'; // Removed to keep EN always
             }
         }
     });
