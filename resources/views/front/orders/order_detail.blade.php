@@ -1080,9 +1080,9 @@
                     </div>
                     @if($orderDetails->orderAddress)
                         <div class="address-grid">
-                            <!-- Left Column: Recipient Information -->
+                            <!-- Left Column: User Information -->
                             <div class="address-column">
-                                <div class="address-subheading">Recipient Details</div>
+                                <div class="address-subheading">User Details</div>
 
                                 <!-- Name -->
                                 <div class="address-entry">
@@ -1093,7 +1093,7 @@
                                         </svg>
                                     </div>
                                     <div class="address-entry-content">
-                                        <div class="address-entry-label">Recipient Name</div>
+                                        <div class="address-entry-label">Name</div>
                                         <div class="address-entry-val fw-semibold" style="font-size: 16px; font-family: var(--heading-font);">
                                             {{ $orderDetails->orderAddress->name ?? '-' }}
                                         </div>
@@ -1205,126 +1205,7 @@
                     @endif
                 </div>
 
-                <!-- 3. ORDER TRACKING SECTION (NEW) -->
-                <div class="order_detail_wrapper order_detail_card">
-                    <div class="order_detail_head my-2 mb-4">
-                        <h5 class="sub_head pb-2 text-center d-flex align-items-center justify-content-center gap-3">
-                            <span>
-                                <svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z" fill="#B58A46" /></svg>
-                            </span>
-                            <span>Order Tracking</span>
-                            <span>
-                                <svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z" fill="#B58A46" /></svg>
-                            </span>
-                        </h5>
-                    </div>
-                    @php
-                        $rawStatus = strtolower(trim($orderDetails->status ?? 'pending'));
-                        $currentStep = 1;
-                        if ($rawStatus === 'confirmed') {
-                            $currentStep = 2;
-                        } elseif (in_array($rawStatus, ['processing', 'in_process', 'packed', 'preparing'])) {
-                            $currentStep = 3;
-                        } elseif (in_array($rawStatus, ['shipped', 'dispatched', 'in_transit', 'out_for_delivery'])) {
-                            $currentStep = 4;
-                        } elseif (in_array($rawStatus, ['delivered', 'completed'])) {
-                            $currentStep = 5;
-                        }
-                    @endphp
-
-                    <div class="tracking-timeline-horizontal">
-                        <!-- Step 1: Order Placed -->
-                        <div class="tracking-node {{ $currentStep > 1 ? 'is-completed' : ($currentStep == 1 ? 'is-active' : '') }}">
-                            <div class="tracking-node-stepnum">01</div>
-                            <div class="tracking-node-iconbox">
-                                <svg class="order-icon" viewBox="0 0 24 24" fill="none">
-                                    <path d="M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9l-6-6H9z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M14 3v6h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M9 14l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <div class="tracking-node-content">
-                                <div class="tracking-node-title">Order Placed</div>
-                                <div class="tracking-node-desc">
-                                    {{ \Carbon\Carbon::parse($orderDetails->created_at)->format('M d, Y') }}
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 2: Order Confirmed -->
-                        <div class="tracking-node {{ $currentStep > 2 ? 'is-completed' : ($currentStep == 2 ? 'is-active' : '') }}">
-                            <div class="tracking-node-stepnum">02</div>
-                            <div class="tracking-node-iconbox">
-                                <svg class="order-icon" viewBox="0 0 24 24" fill="none">
-                                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/>
-                                    <path d="M8.5 12.5l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <div class="tracking-node-content">
-                                <div class="tracking-node-title">Order Confirmed</div>
-                                <div class="tracking-node-desc">
-                                    {{ $currentStep >= 2 ? 'Verified & accepted' : 'Pending verification' }}
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 3: Processing -->
-                        <div class="tracking-node {{ $currentStep > 3 ? 'is-completed' : ($currentStep == 3 ? 'is-active' : '') }}">
-                            <div class="tracking-node-stepnum">03</div>
-                            <div class="tracking-node-iconbox">
-                                <svg class="order-icon" viewBox="0 0 24 24" fill="none">
-                                    <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M3.27 6.96L12 12.01l8.73-5.05" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <line x1="12" y1="22.08" x2="12" y2="12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                                </svg>
-                            </div>
-                            <div class="tracking-node-content">
-                                <div class="tracking-node-title">Processing</div>
-                                <div class="tracking-node-desc">
-                                    {{ $currentStep >= 3 ? 'Carefully packaging' : 'Awaiting packaging' }}
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 4: Shipped -->
-                        <div class="tracking-node {{ $currentStep > 4 ? 'is-completed' : ($currentStep == 4 ? 'is-active' : '') }}">
-                            <div class="tracking-node-stepnum">04</div>
-                            <div class="tracking-node-iconbox">
-                                <svg class="order-icon" viewBox="0 0 24 24" fill="none">
-                                    <rect x="2" y="5" width="13" height="11" rx="1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M15 9h3.5a1 1 0 0 1 .8.4L22 13v3h-7V9z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <circle cx="6.5" cy="18.5" r="2.5" stroke="currentColor" stroke-width="1.6"/>
-                                    <circle cx="17.5" cy="18.5" r="2.5" stroke="currentColor" stroke-width="1.6"/>
-                                </svg>
-                            </div>
-                            <div class="tracking-node-content">
-                                <div class="tracking-node-title">Shipped</div>
-                                <div class="tracking-node-desc">
-                                    {{ $currentStep >= 4 ? 'Dispatched with courier' : 'Handover to courier' }}
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Step 5: Delivered -->
-                        <div class="tracking-node {{ $currentStep == 5 ? 'is-completed is-active' : '' }}">
-                            <div class="tracking-node-stepnum">05</div>
-                            <div class="tracking-node-iconbox">
-                                <svg class="order-icon" viewBox="0 0 24 24" fill="none">
-                                    <path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-9.5z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M9 13.5l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <div class="tracking-node-content">
-                                <div class="tracking-node-title">Delivered</div>
-                                <div class="tracking-node-desc">
-                                    {{ $currentStep == 5 ? 'Safely delivered' : 'Final destination' }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 4. PRODUCT IN THIS ORDER SECTION (50% 50% TWO-COLUMN LAYOUT) -->
+                <!-- 3. PRODUCT IN THIS ORDER SECTION (50% 50% TWO-COLUMN LAYOUT) -->
                 <div class="order_detail_wrapper order_detail_card">
                     <div class="order_detail_head my-2 mb-4">
                         <h5 class="sub_head pb-2 text-center d-flex align-items-center justify-content-center gap-3">
@@ -1340,7 +1221,7 @@
                     @if (isset($orderDetails->orderProducts) && is_countable($orderDetails->orderProducts) && count($orderDetails->orderProducts) > 0)
                         <div class="row g-4 product-cards-row">
                             @foreach ($orderDetails->orderProducts as $item)
-                            <div class="col-lg-6 col-md-6 col-12">
+                            <div class="@if(count($orderDetails->orderProducts) > 1) col-lg-6 col-md-6 col-12 @else col-12 @endif">
                                 <div class="product-luxury-card">
                                     <!-- Product Image -->
                                     <a href="{{ route('front.product.details', $item->product->product_url ?? '#') }}" class="product-thumb-wrapper">
@@ -1392,6 +1273,127 @@
                     @else
                         <p class="text-muted text-center py-4 mb-0" style="font-style: italic;">No products found in this order.</p>
                     @endif
+                </div>
+
+                <!-- 4. ORDER TRACKING SECTION (NEW) -->
+                <div class="order_detail_wrapper order_detail_card">
+                    <div class="order_detail_head my-2 mb-4">
+                        <h5 class="sub_head pb-2 text-center d-flex align-items-center justify-content-center gap-3">
+                            <span>
+                                <svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z" fill="#B58A46" /></svg>
+                            </span>
+                            <span>Order Tracking</span>
+                            <span>
+                                <svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z" fill="#B58A46" /></svg>
+                            </span>
+                        </h5>
+                    </div>
+                    @php
+                        $rawStatus = strtolower(trim($orderDetails->shipping_status ?? $orderDetails->status ?? 'pending'));
+                        $isCancelled = $rawStatus === 'cancelled';
+                        $currentStep = 1;
+                        if (in_array($rawStatus, ['out_for_collection', 'collection_failed', 'collected', 'received_at_depot', 'on_hold', 'delivery_failed'])) {
+                            $currentStep = 2;
+                        } elseif ($rawStatus === 'out_for_delivery') {
+                            $currentStep = 3;
+                        } elseif ($rawStatus === 'delivery_complete') {
+                            $currentStep = 4;
+                        }
+                    @endphp
+
+                    <div class="tracking-timeline-horizontal">
+                        <!-- Step 1: Order Confirm -->
+                        <div class="tracking-node {{ $isCancelled ? 'is-completed' : ($currentStep > 1 ? 'is-completed' : ($currentStep == 1 ? 'is-active' : '')) }}">
+                            <div class="tracking-node-stepnum">01</div>
+                            <div class="tracking-node-iconbox">
+                                <svg class="order-icon" viewBox="0 0 24 24" fill="none">
+                                    <path d="M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9l-6-6H9z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M14 3v6h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M9 14l2 2 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="tracking-node-content">
+                                <div class="tracking-node-title">Order Confirm</div>
+                                <div class="tracking-node-desc">
+                                    {{ in_array($rawStatus, ['pending', 'ready_for_collection']) ? 'Order received' : 'Confirmed' }}
+                                </div>
+                            </div>
+                        </div>
+
+                        @if($isCancelled)
+                        <!-- Step 2: Order Canceled -->
+                        <div class="tracking-node is-completed is-active">
+                            <div class="tracking-node-stepnum">02</div>
+                            <div class="tracking-node-iconbox">
+                                <svg class="order-icon" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/>
+                                    <path d="M8.5 8.5l7 7M15.5 8.5l-7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="tracking-node-content">
+                                <div class="tracking-node-title">Order Canceled</div>
+                                <div class="tracking-node-desc">Order canceled</div>
+                            </div>
+                        </div>
+                        @endif
+
+                        @unless($isCancelled)
+                        <!-- Step 2: In Process -->
+                        <div class="tracking-node {{ $isCancelled ? '' : ($currentStep > 2 ? 'is-completed' : ($currentStep == 2 ? 'is-active' : '')) }}">
+                            <div class="tracking-node-stepnum">02</div>
+                            <div class="tracking-node-iconbox">
+                                <svg class="order-icon" viewBox="0 0 24 24" fill="none">
+                                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/>
+                                    <path d="M8.5 12.5l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="tracking-node-content">
+                                <div class="tracking-node-title">In Process</div>
+                                <div class="tracking-node-desc">
+                                    {{ $currentStep >= 2 ? 'Being processed' : 'Awaiting processing' }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Out for Delivery -->
+                        <div class="tracking-node {{ $isCancelled ? '' : ($currentStep > 3 ? 'is-completed' : ($currentStep == 3 ? 'is-active' : '')) }}">
+                            <div class="tracking-node-stepnum">03</div>
+                            <div class="tracking-node-iconbox">
+                                <svg class="order-icon" viewBox="0 0 24 24" fill="none">
+                                    <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M3.27 6.96L12 12.01l8.73-5.05" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <line x1="12" y1="22.08" x2="12" y2="12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="tracking-node-content">
+                                <div class="tracking-node-title">Out for Delivery</div>
+                                <div class="tracking-node-desc">
+                                    {{ $currentStep >= 3 ? 'With the courier' : 'Awaiting dispatch' }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Delivered -->
+                        <div class="tracking-node {{ $isCancelled ? '' : ($currentStep > 4 ? 'is-completed' : ($currentStep == 4 ? 'is-active' : '')) }}">
+                            <div class="tracking-node-stepnum">04</div>
+                            <div class="tracking-node-iconbox">
+                                <svg class="order-icon" viewBox="0 0 24 24" fill="none">
+                                    <rect x="2" y="5" width="13" height="11" rx="1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M15 9h3.5a1 1 0 0 1 .8.4L22 13v3h-7V9z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <circle cx="6.5" cy="18.5" r="2.5" stroke="currentColor" stroke-width="1.6"/>
+                                    <circle cx="17.5" cy="18.5" r="2.5" stroke="currentColor" stroke-width="1.6"/>
+                                </svg>
+                            </div>
+                            <div class="tracking-node-content">
+                                <div class="tracking-node-title">Delivered</div>
+                                <div class="tracking-node-desc">
+                                    {{ $currentStep == 4 ? 'Successfully delivered' : 'Final destination' }}
+                                </div>
+                            </div>
+                            @endunless
+                        </div>
+
+                    </div>
                 </div>
 
                 <!-- 5. BACK TO ORDER BUTTON (CENTERED WITH ARROW) -->

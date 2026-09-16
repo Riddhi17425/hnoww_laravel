@@ -80,7 +80,7 @@ class WebhookController extends Controller
 
     public function handleQuickupWebhook(Request $request){
         $payload = $request->getContent();
-        $signature = $request->header('X-Webhook-Signature');
+        $signature = $request->header('X-Signature');
         $secret = (string) env('QUICKUP_WEBHOOK_SECRET', '');
 
         if (empty($payload)) {
@@ -94,9 +94,18 @@ class WebhookController extends Controller
         }
 
         $data = json_decode($payload, true);
-        if (!is_array($data) || !is_array($order = $data['order'] ?? $data)) {
+        if (!is_array($data)) {
             Log::warning('Quiqup webhook payload is not valid JSON.');
             return response()->json(['error' => 'Invalid payload'], 400);
+        }
+
+        if (isset($data['type']) && $data['type'] !== 'order') {
+            return response()->json(['status' => 'ignored']);
+        }
+
+        $order = $data['payload'] ?? $data['order'] ?? $data;
+        if (!is_array($order)) {
+            return response()->json(['error' => 'Invalid order payload'], 422);
         }
 
         $quickupOrderId = data_get($order, 'id');
@@ -133,9 +142,9 @@ class WebhookController extends Controller
 
     protected function hasValidWebhookSignature(string $payload, string $signature, string $secret)
     {
-        $expectedSignature = hash_hmac('sha256', $payload, $secret);
-        $providedSignature = str_starts_with($signature, 'sha256=')
-            ? substr($signature, 7)
+        $expectedSignature = hash_hmac('sha1', $payload, $secret);
+        $providedSignature = str_starts_with($signature, 'sha1=')
+            ? substr($signature, 5)
             : $signature;
 
         return hash_equals($expectedSignature, $providedSignature);
