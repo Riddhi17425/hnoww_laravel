@@ -32,11 +32,17 @@ $(document).ready(function () {
             { data: 'order_number', name: 'order_number' },
             { data: 'user_details', name:"user_details", orderable:false, searchable:false },
             { data: 'status', name: 'status' },
-            { data: 'subtotal', name: 'subtotal' },
-            { data: 'order_total', name: 'order_total' },
+            { data: 'subtotal', name: 'subtotal', render: formatAmount },
+            { data: 'shipping_charges', name: 'shipping_charges', render: formatAmount },
+            { data: 'order_total', name: 'order_total', render: formatAmount },
             { data: 'action', name: 'action', orderable:false, searchable:false },
         ]
     });
+
+    function formatAmount(data) {
+        var amount = parseFloat(data || 0);
+        return amount.toFixed(2) + ' AED';
+    }
 
     // Trigger table reload when dropdown changes
     $('#user_id').change(function () {

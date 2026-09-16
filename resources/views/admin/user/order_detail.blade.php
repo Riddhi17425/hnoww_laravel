@@ -9,9 +9,12 @@
     {{-- Page Title --}}
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h4 class="fw-bold">Order Details</h4>
-        <span class="badge bg-light text-dark px-3 py-2">
-            Order #{{ $order->order_number }}
-        </span>
+        <div class="text-end">
+            <div class="text-uppercase text-muted small fw-semibold mb-1">Order Number</div>
+            <span class="badge bg-primary text-white px-3 py-2 fs-6 shadow-sm">
+                 #{{ $order->order_number ?? $order->id }}
+            </span>
+        </div>
     </div>
 
     {{-- Order + User Info --}}
@@ -48,11 +51,21 @@
                         <span>{{ $order->created_at->format('d M Y, h:i A') }}</span>
                     </div>
 
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal</span>
+                        <span>AED {{ number_format($order->subtotal ?? 0, 2) }}</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Shipping Charges</span>
+                        <span>AED {{ number_format($order->shipping_charges ?? 0, 2) }}</span>
+                    </div>
+
                     <hr>
 
                     <div class="d-flex justify-content-between fs-5 fw-bold">
                         <span>Total</span>
-                        <span class="text-success">₹{{ number_format($order->order_total, 2) }}</span>
+                        <span class="text-success">AED {{ number_format($order->order_total ?? 0, 2) }}</span>
                     </div>
                 </div>
             </div>
@@ -69,6 +82,17 @@
                     <p class="mb-2"><strong>Name:</strong> {{ $order->user->name ?? 'N/A' }}</p>
                     <p class="mb-2"><strong>Email:</strong> {{ $order->user->email ?? 'N/A' }}</p>
                     <p class="mb-0"><strong>Phone:</strong> {{ $order->user->phone ?? 'N/A' }}</p>
+
+                    @if($hasAwb)
+                    <div class="d-flex flex-wrap gap-2 mt-4 pt-3 border-top">
+                        <a href="{{ route('admin.users.orders.awb', $order->id) }}" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-eye me-1"></i> View AWB
+                        </a>
+                        <a href="{{ route('admin.users.orders.awb', ['orderid' => $order->id, 'download' => 1]) }}" class="btn btn-primary btn-sm">
+                            <i class="bi bi-download me-1"></i> Download AWB PDF
+                        </a>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -157,7 +181,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="text-center">₹{{ number_format($item->price, 2) }}</td>
+                            <td class="text-center">AED {{ number_format($item->price, 2) }}</td>
                             <td class="text-center">
                                 <span class="badge bg-light text-dark px-3">
                                     {{ $item->quantity }}
@@ -172,7 +196,7 @@
                             @endif --}}
                             <td class="text-center">
                                 <span class="badge bg-light text-dark px-3">
-                                    ₹{{ number_format($item->order_total, 2) }}
+                                    AED {{ number_format($item->subtotal ?? 0, 2) }}
                                 </span>
                             </td>
                             {{-- <td class="text-end fw-bold">

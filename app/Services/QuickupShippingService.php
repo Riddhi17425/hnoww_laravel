@@ -107,10 +107,10 @@ class QuickupShippingService
         }
         $responseData = $response->json();
         $orderId = $responseData['order']['id'] ?? null;
-        // \Log::info(
-        //     'Quickup order creation response: ' . json_encode($responseData) .
-        //     ' | Status Code: ' . $response->status()
-        // );
+        \Log::info(
+            'Quickup order creation response: ' . json_encode($responseData) .
+            ' | Status Code: ' . $response->status()
+        );
         if (!$orderId) {
             throw new \RuntimeException('Quickup order creation failed: Missing order ID in response.');
         }

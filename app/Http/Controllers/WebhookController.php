@@ -77,4 +77,9 @@ class WebhookController extends Controller
         $order->status = $orderStatus;
         $order->save();
     }
+
+    public function handleQuickupWebhook(Request $request){
+        
+    }
+    
 }

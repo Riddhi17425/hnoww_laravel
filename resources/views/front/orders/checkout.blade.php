@@ -438,8 +438,8 @@
                 <span class="co-summary-val">{{ number_format($subTotal, 2) }} AED</span>
             </div>
             <div class="co-summary-item">
-                <span class="co-summary-label">Delivery</span>
-                <span class="co-delivery-val">30.00 AED</span>
+                <span class="co-summary-label">Shipping Charges</span>
+                <span class="co-delivery-val">{{ number_format($shippingCharges, 2) }} AED</span>
             </div>
 
             <hr class="co-summary-divider">
@@ -447,7 +447,7 @@
 
             <div class="co-total-row">
                 <span class="co-total-label">Total to Pay</span>
-                <span class="co-total-val" id="you-pay">{{ number_format($subTotal, 2) }} AED</span>
+                <span class="co-total-val" id="you-pay">{{ number_format($subTotal + $shippingCharges, 2) }} AED</span>
             </div>
 
             <div class="payment-methods-card">
@@ -498,7 +498,7 @@
 
 @push('script')
 <script>
-var $discountedTotal = parseFloat(@json($subTotal));
+var $discountedTotal = parseFloat(@json($subTotal + $shippingCharges));
 
 $(document).ready(function () {
     // FOR DISCOUNT CALCULATION
