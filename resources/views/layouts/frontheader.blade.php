@@ -498,7 +498,7 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
                         <div class="search_dropdown_menu" id="searchDropdownMenu">
                             <form id="hoverSearchForm" onsubmit="return false;">
                                 <div class="search_dropdown_input_box">
-                                    <input type="text" name="q" id="hoverSearchInput" placeholder="Search luxury gifts, collections..." autocomplete="off">
+                                    <input type="text" name="q" id="hoverSearchInput" class="hoverSearchInput" placeholder="Search luxury gifts, collections..." autocomplete="off">
                                     <button type="button" class="search_dropdown_submit" title="Search">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                                     </button>
@@ -506,11 +506,11 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
                             </form>
 
                             <div class="search_dropdown_content" id="searchDropdownContent">
-                                <div id="hoverSearchDefaultState">
+                                <div id="hoverSearchDefaultState" class="hoverSearchDefaultState">
                                     <div class="p-2 text-center text-muted small">Type 2 or more characters to search...</div>
                                 </div>
 
-                                <div id="hoverSearchLiveResults" style="display: none;"></div>
+                                <div id="hoverSearchLiveResults" class="hoverSearchLiveResults" style="display: none;"></div>
                             </div>
                         </div>
                     </div>
@@ -1158,16 +1158,31 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
                                 // Products
                                 if (data.products && data.products.length > 0) {
                                     html += `<div class="search_dropdown_section_title">Products (${data.products.length})</div><div class="search_dropdown_featured_list">`;
+
                                     data.products.forEach(prod => {
+
+                                        const productCategory = prod.category
+                                            ? ` | ${escapeHtml(prod.category)}`
+                                            : '';
+
                                         html += `
                                             <a href="${prod.url}" class="search_dropdown_item">
                                                 <img src="${prod.image}" alt="${escapeHtml(prod.name)}" class="search_dropdown_item_img">
+
                                                 <div class="search_dropdown_item_info">
-                                                    <div class="search_dropdown_item_name">${escapeHtml(prod.name)}</div>
-                                                    <div class="search_dropdown_item_price">${prod.price}</div>
+
+                                                    <div class="search_dropdown_item_name">
+                                                        ${escapeHtml(prod.name)}${productCategory}
+                                                    </div>
+
+                                                    <div class="search_dropdown_item_price">
+                                                        ${prod.price}
+                                                    </div>
+
                                                 </div>
                                             </a>`;
                                     });
+
                                     html += `</div>`;
                                 }
 
