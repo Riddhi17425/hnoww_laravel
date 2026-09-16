@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\{User, Order, OrderProduct};
 use DataTables;
 
@@ -71,6 +72,24 @@ class UserController extends Controller
 
     public function viewOrderDetails(Request $request, $id){
         $order = Order::where('id', $id)->with(['user', 'orderProducts', 'orderAddress'])->first();
-        return view('admin.user.order_detail', compact('order'));
+        $awbPath = 'quiqup-labels/' . ($order->order_number ?? 'ORD-' . $order->id) . '.pdf';
+        $hasAwb = Storage::disk('public')->exists($awbPath);
+
+        return view('admin.user.order_detail', compact('order', 'awbPath', 'hasAwb'));
+    }
+
+    public function awb(Request $request, $id){
+        $order = Order::findOrFail($id);
+        $fileName = ($order->order_number ?? 'ORD-' . $order->id) . '.pdf';
+        $awbPath = 'quiqup-labels/' . $fileName;
+        $disk = Storage::disk('public');
+
+        abort_unless($disk->exists($awbPath), 404);
+
+        if ($request->boolean('download')) {
+            return $disk->download($awbPath, $fileName, ['Content-Type' => 'application/pdf']);
+        }
+
+        return response()->file($disk->path($awbPath), ['Content-Type' => 'application/pdf']);
     }
 }

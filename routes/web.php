@@ -246,6 +246,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             route::get('/get-orders', [UserController::class, 'getOrders'])->name('orders');
             route::get('/fetch-orders', [UserController::class, 'fetchOrders'])->name('orders.fetch');
             route::get('/view-order-details/{orderid}', [UserController::class, 'viewOrderDetails'])->name('orders.details');
+            route::get('/order-awb/{orderid}', [UserController::class, 'awb'])->name('orders.awb');
         });
 
         Route::prefix('blogs')->name('blogs.')->group(function () {

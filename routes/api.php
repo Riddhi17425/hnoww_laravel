@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/stripe/webhook', [WebhookController::class, 'handleStripeWebhook']);
+Route::post('/quiqup-webhook', [WebhookController::class, 'handleQuickupWebhook']);

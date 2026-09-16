@@ -8,6 +8,8 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{Cache, DB, Http, Log, Mail, Validator};
 
+use Illuminate\Support\Facades\Storage;
+
 class FrontController extends Controller
 {
     protected $adminEmail;
@@ -62,7 +64,7 @@ class FrontController extends Controller
         ]);
 
     }
-
+    
     public function index(Request $request)
     {
         $selectFields = [

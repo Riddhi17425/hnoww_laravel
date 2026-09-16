@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\{Product, Cart, Order, OrderProduct, UserAddress};
 use Illuminate\Support\Facades\Validator;
-use App\Services\{PaymentService, YetiWhatsappMesasgeService};
+use App\Services\{PaymentService, QuickupShippingService, YetiWhatsappMesasgeService};
 use Stripe;
 use Session;
 use Auth;
@@ -13,13 +13,17 @@ use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
+    private const SHIPPING_CHARGES = 30.00;
+
     protected $paymentService;
     protected $yetiWhatsappMesasgeService;
-    public function __construct(PaymentService $paymentService, YetiWhatsappMesasgeService $yetiWhatsappMesasgeService)
+    protected $quickupShippingService;
+    public function __construct(PaymentService $paymentService, YetiWhatsappMesasgeService $yetiWhatsappMesasgeService, QuickupShippingService $quickupShippingService)
     {
         $this->adminEmail = config('global_values.admin_email');
         $this->paymentService = $paymentService;
         $this->yetiWhatsappMesasgeService = $yetiWhatsappMesasgeService;
+        $this->quickupShippingService = $quickupShippingService;
     }
 
     public function getCart(Request $request){
@@ -168,9 +172,10 @@ class CartController extends Controller
         $subTotal = $cartItems->sum(function ($item) {
             return $item->price * $item->quantity;
         });
+        $shippingCharges = self::SHIPPING_CHARGES;
         $userAddresses = UserAddress::where('user_id', auth()->id())->where('is_confirm', 1)->get();
       
-        return view('front.orders.checkout', compact('cartItems', 'subTotal', 'userAddresses'));
+        return view('front.orders.checkout', compact('cartItems', 'subTotal', 'shippingCharges', 'userAddresses'));
     }
 
     public function checkoutProcess(Request $request, PaymentService $paymentService){
@@ -183,7 +188,12 @@ class CartController extends Controller
                 'message' => $validator->errors()->first(),
             ]);
         }
-        $intent = $paymentService->createPaymentIntent($request->amount);
+        $cartItems = Cart::where('user_id', auth()->id())->get();
+        $subTotal = $cartItems->sum(function ($item) {
+            return $item->price * $item->quantity;
+        });
+        $total = $subTotal + self::SHIPPING_CHARGES;
+        $intent = $paymentService->createPaymentIntent($total);
         return response()->json([
             'client_secret' => $intent->client_secret
         ]);
@@ -210,6 +220,12 @@ class CartController extends Controller
                 return redirect()->route('front.get.failed', 0);
             }
 
+            try {
+                $this->quickupShippingService->createOrder($order);
+            } catch (\Throwable $e) {
+                \Log::error('Quickup order creation failed: ' . $e->getMessage());
+            }
+
             $this->sendOrderSuccessNotifications($order, $addressId);
             return redirect()->route('front.get.success', $order->id);
         }
@@ -232,6 +248,7 @@ class CartController extends Controller
         $subTotal = $cartItems->sum(function ($item) {
             return $item->price * $item->quantity;
         });
+        $shippingCharges = self::SHIPPING_CHARGES;
 
         $giftNote = trim((string) $request->input('gift_note', ''));
         if ($request->boolean('gift_wrapper') && $giftNote !== '') {
@@ -250,7 +267,8 @@ class CartController extends Controller
             'subtotal' => $subTotal,
             'discount_percent' => 0,
             'discount' => 0,
-            'order_total' => $subTotal,
+            'shipping_charges' => $shippingCharges,
+            'order_total' => $subTotal + $shippingCharges,
             'stripe_payment_intent' => $request->payment_intent ?? null,
             'stripe_payment_intent_client_secret' => $request->payment_intent_client_secret ?? null,
             'payment_status' => 'paid',
@@ -295,6 +313,7 @@ class CartController extends Controller
             'email' => $userDetails->email ?? null,
             'order_id' => $order->order_number ?? null,
             'status' => $order->status ?? null,
+            'shipping_charges' => $order->shipping_charges ?? 0,
             'order_total' => $order->order_total ?? null,
             'order_products' => $order->orderProducts ?? null,
             'gift_wrapper' => $order->gift_wrapper ?? null,

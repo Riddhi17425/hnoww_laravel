@@ -76,10 +76,18 @@
             <tr>
                 <td
                     style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #888888;">
+                    Shipping Charges:</td>
+                <td
+                    style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">
+                    AED {{ number_format($shipping_charges ?? 0, 2) }}</td>
+            </tr>
+            <tr>
+                <td
+                    style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #888888;">
                     Order Total:</td>
                 <td
                     style="border: 1px solid #dddddd; padding: 15px; font-family: Arial, sans-serif; font-size: 14px; color: #555555;">
-                    {{ $order_total }}</td>
+                    AED {{ number_format($order_total ?? 0, 2) }}</td>
             </tr>
         </table>
 

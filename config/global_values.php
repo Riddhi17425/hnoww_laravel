@@ -117,4 +117,13 @@ return [
         "Fujairah",
     ],
 
+    'shipping_warehouse_details' => [
+        'contact_phone' => '+971509509274',
+        'contact_name' => 'Viral Kotecha',
+        'address1' => '1st Road',
+        'address2' => '104G',
+        'country'  => 'UAE',
+        'town'     => 'Dubai',
+    ],
+
 ];
