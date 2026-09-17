@@ -30,10 +30,8 @@ class QuickupShippingService
         }
 
         $orderProducts = $order->orderProducts()->with('product')->get();
-
         $products = $orderProducts->map(function ($orderProduct) {
             $product = $orderProduct->product;
-
             return [
                 'sku' => $product ? 'SKU-' . $product->id : 'ORDER-PRODUCT-' . $orderProduct->id,
                 'quantity' => (int) ($orderProduct->quantity ?? 1),
@@ -49,12 +47,22 @@ class QuickupShippingService
             ];
         })->values()->all();
 
+        $items = $orderProducts->map(function ($orderProduct) {
+            $product = $orderProduct->product;
+            return [
+                'name' => $product ? $product->product_name : 'ORDER-PRODUCT-' . $orderProduct->id,
+                // 'quantity' => (int)($orderProduct->quantity ?? 1),
+                'quantity' => 1,
+                'parcel_barcode' => $product ? 'SKU-' . $product->id : 'ORDER-PRODUCT-' . $orderProduct->id,
+            ];
+        })->values()->all();
+        $paymentMode = 'pre_paid';  
         $payload = [
             "kind" => "partner_next_day",
             "notes" => $order->gift_note ?? "",
-            // 'payment_amount' => (int) (round($order->order_total) ?? 0),
-            'payment_amount' => config('global_values.shipping_warehouse_details.country') !== 'UAE' ? 0 : (int) (round($order->order_total) ?? 0),
-            "payment_mode" => "pre_paid",
+            // 'payment_amount' => config('global_values.shipping_warehouse_details.country') !== 'UAE' ? 0 : (int) (round($order->order_total) ?? 0),
+            'payment_amount' => $paymentMode == 'pre_paid' ? 0 : (int) (round($order->order_total) ?? 0),
+            "payment_mode" => $paymentMode,
             // "disallowed_payment_types" => [
             //     "cash"
             // ],
@@ -91,16 +99,18 @@ class QuickupShippingService
                     "town" => $address->emirate ?? 'Dubai',
                 ],
             ],
-            //'products' => $products,
+            'products' => $products,
             "items" => [
                 [
                     "name" => $order->order_number ?? "ORD-" . $order->id,
-                    "quantity" => count($products) > 0 ? count($products) : 1,
-                    // "quantity" => 1,
-                    "parcel_barcode" => 'P' . $order->id . time(),
+                    "quantity" => 1,
+                    "parcel_barcode" => '',
+                    // "parcel_barcode" => 'P' . $order->id . time(),
                 ],
             ],
+            // "items" => $items
         ];
+        \Log::info('Creating Quickup order with payload: ' . json_encode($payload));
         $response = Http::withHeaders($this->headers())->post($this->baseUrl . '/orders', $payload);
         if (!$response->successful()) {
             throw new \RuntimeException('Quickup order creation failed: ' . $response->body());
