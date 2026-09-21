@@ -178,7 +178,7 @@
                                     @if(isset($address->whatsapp_no)) <br>{{ $address->whatsapp_no }} @endif
                                     @if($address->landmark) <br>Landmark: {{ $address->landmark }} @endif
                                 </div>
-                                <input class="co-radio-btn" type="radio" name="selected_address" value="{{ $address->id }}">
+                                <input class="co-radio-btn" type="radio" name="selected_address" value="{{ $address->id }}" data-emirate="{{ $address->emirate }}">
                             </label>
                         </div>
                         @endforeach
@@ -496,7 +496,24 @@
 
 @push('script')
 <script>
-var $discountedTotal = parseFloat(@json($subTotal + $shippingCharges));
+var $subtotal = parseFloat(@json($subTotal));
+var $shippingCharges = parseFloat(@json($shippingCharges));
+var $discountedTotal = $subtotal + $shippingCharges;
+
+function getShippingChargeByEmirate(emirate) {
+    return String(emirate || '').trim().toLowerCase() === 'dubai' ? 30 : 50;
+}
+
+function updateCheckoutSummary(emirate) {
+    const shippingCharge = getShippingChargeByEmirate(emirate);
+    const total = $subtotal + shippingCharge;
+
+    $shippingCharges = shippingCharge;
+    $discountedTotal = total;
+
+    $('.co-delivery-val').text(`${shippingCharge.toFixed(2)} AED`);
+    $('#you-pay').text(`${total.toFixed(2)} AED`);
+}
 
 $(document).ready(function () {
     // FOR DISCOUNT CALCULATION
@@ -529,6 +546,9 @@ let paymentElement;
 let clientSecret;
 
 async function createPaymentIntent(amount) {
+    const selectedAddress = $('input[name="selected_address"]:checked');
+    const selectedEmirate = selectedAddress.length ? selectedAddress.data('emirate') : $('select[name="emirate"]').val();
+
     const response = await fetch('checkout/process', {
         method: 'POST',
         headers: {
@@ -536,10 +556,17 @@ async function createPaymentIntent(amount) {
             'X-CSRF-TOKEN': '{{ csrf_token() }}'
         },
         body: JSON.stringify({
-            amount
+            amount,
+            address_id: selectedAddress.length ? selectedAddress.val() : null,
+            emirate: selectedEmirate || null
         })
     });
+
     const data = await response.json();
+    if (!response.ok || !data.status) {
+        throw new Error(data.message || 'Payment setup failed.');
+    }
+
     return data.client_secret;
 }
 
@@ -762,23 +789,55 @@ $(document).ready(async function() {
     });
     $('.co-gift-checkbox').on('change', toggleGiftNote);
 
+    function refreshPaymentForCurrentSelection() {
+        const selectedAddress = $('input[name="selected_address"]:checked');
+        const selectedEmirate = selectedAddress.length ? selectedAddress.data('emirate') : $('select[name="emirate"]').val();
+
+        updateCheckoutSummary(selectedEmirate || '');
+
+        if (clientSecret && elements) {
+            elements.unmount();
+        }
+
+        if ($subtotal > 0) {
+            createPaymentIntent($discountedTotal).then(secret => {
+                clientSecret = secret;
+                return mountPaymentElement(clientSecret);
+            }).catch(() => {
+                $('#error-message').text('Something went wrong while updating the payment summary.');
+            });
+        }
+    }
+
     // Check on page load
     if ($('input[name="selected_address"]').length === 0) {
         // No existing addresses
         $('#addressFormWrapper').show();
         $('#addNewAddressBtn').hide();
+    } else {
+        const initialSelected = $('input[name="selected_address"]:checked');
+        if (initialSelected.length) {
+            updateCheckoutSummary(initialSelected.data('emirate') || '');
+        }
     }
 
     // Add New Address button click
     $('#addNewAddressBtn').on('click', function() {
-        console.log('TEST');
         $('#addressFormWrapper').slideDown();
         $('input[name="selected_address"]').prop('checked', false);
+        updateCheckoutSummary($('select[name="emirate"]').val() || '');
     });
 
     // Hide form if existing address selected
     $('input[name="selected_address"]').on('change', function() {
         $('#addressFormWrapper').slideUp();
+        refreshPaymentForCurrentSelection();
+    });
+
+    $('select[name="emirate"]').on('change', function() {
+        if ($('#addressFormWrapper').is(':visible')) {
+            refreshPaymentForCurrentSelection();
+        }
     });
 
     $("#productInquiryForm").validate({

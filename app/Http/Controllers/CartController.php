@@ -13,7 +13,17 @@ use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
-    private const SHIPPING_CHARGES = 30.00;
+    private const DUBAI_SHIPPING_CHARGE = 30.00;
+    private const OTHER_EMIRATES_SHIPPING_CHARGE = 50.00;
+
+    public static function calculateShippingCharges($emirate = null): float
+    {
+        $normalizedEmirate = is_string($emirate) ? trim($emirate) : '';
+
+        return strtolower($normalizedEmirate) === 'dubai'
+            ? self::DUBAI_SHIPPING_CHARGE
+            : self::OTHER_EMIRATES_SHIPPING_CHARGE;
+    }
 
     protected $paymentService;
     protected $yetiWhatsappMesasgeService;
@@ -172,7 +182,7 @@ class CartController extends Controller
         $subTotal = $cartItems->sum(function ($item) {
             return $item->price * $item->quantity;
         });
-        $shippingCharges = self::SHIPPING_CHARGES;
+        $shippingCharges = self::calculateShippingCharges();
         $userAddresses = UserAddress::where('user_id', auth()->id())->where('is_confirm', 1)->get();
       
         return view('front.orders.checkout', compact('cartItems', 'subTotal', 'shippingCharges', 'userAddresses'));
@@ -180,22 +190,72 @@ class CartController extends Controller
 
     public function checkoutProcess(Request $request, PaymentService $paymentService){
         $validator = Validator::make($request->all(), [
-            'amount' => 'required|numeric|min:1'
+            'amount' => 'required|numeric|min:1',
+            'address_id' => 'nullable|exists:user_addresses,id',
+            'emirate' => 'nullable|string',
         ]);
+
         if ($validator->fails()) {
             return response()->json([
                 'status' => false,
                 'message' => $validator->errors()->first(),
-            ]);
+            ], 422);
         }
-        $cartItems = Cart::where('user_id', auth()->id())->get();
+
+        $user = auth()->user();
+        if (!$user) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Authentication required.',
+            ], 401);
+        }
+
+        $cartItems = Cart::where('user_id', $user->id)->get();
+        if ($cartItems->isEmpty()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Cart is empty.',
+            ], 422);
+        }
+
         $subTotal = $cartItems->sum(function ($item) {
-            return $item->price * $item->quantity;
+            return (float) $item->price * (int) $item->quantity;
         });
-        $total = $subTotal + self::SHIPPING_CHARGES;
-        $intent = $paymentService->createPaymentIntent($total);
+
+        $shippingCharge = 0.0;
+        if ($request->filled('address_id')) {
+            $address = UserAddress::where('id', $request->address_id)
+                ->where('user_id', $user->id)
+                ->first();
+
+            if (!$address) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Invalid address selected.',
+                ], 422);
+            }
+
+            $shippingCharge = self::calculateShippingCharges($address->emirate ?? null);
+        } else {
+            $shippingCharge = self::calculateShippingCharges($request->emirate ?? null);
+        }
+
+        $expectedAmount = round($subTotal + $shippingCharge, 2);
+        $submittedAmount = round((float) $request->amount, 2);
+
+        if (abs($submittedAmount - $expectedAmount) > 0.01) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Invalid payment amount.',
+            ], 422);
+        }
+
+        $intent = $paymentService->createPaymentIntent($expectedAmount);
+
         return response()->json([
-            'client_secret' => $intent->client_secret
+            'status' => true,
+            'client_secret' => $intent->client_secret,
+            'amount' => $expectedAmount,
         ]);
     }
 
@@ -248,7 +308,9 @@ class CartController extends Controller
         $subTotal = $cartItems->sum(function ($item) {
             return $item->price * $item->quantity;
         });
-        $shippingCharges = self::SHIPPING_CHARGES;
+
+        $orderAddress = UserAddress::find($addressId);
+        $shippingCharges = self::calculateShippingCharges($orderAddress->emirate ?? null);
 
         $giftNote = trim((string) $request->input('gift_note', ''));
         if ($request->boolean('gift_wrapper') && $giftNote !== '') {
@@ -293,7 +355,6 @@ class CartController extends Controller
             ->where('is_primary', '!=', 1)
             ->delete();
 
-        $orderAddress = UserAddress::find($addressId);
         if ($orderAddress) {
             $orderAddress->is_confirm = 1;
             $orderAddress->save();

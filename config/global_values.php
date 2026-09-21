@@ -119,9 +119,9 @@ return [
 
     'shipping_warehouse_details' => [
         'contact_phone' => '+971509509274',
-        'contact_name' => 'Viral Kotecha',
-        'address1' => '1st Road',
-        'address2' => '104G',
+        'contact_name' => 'Salomi Kotecha',
+        'address1' => 'Act tower 2, 4301',
+        'address2' => 'Downtown Dubai',
         'country'  => 'UAE',
         'town'     => 'Dubai',
     ],
