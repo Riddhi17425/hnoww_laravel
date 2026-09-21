@@ -471,7 +471,14 @@
                 <span class="btn-loader" style="display:none;">Processing...</span>
             </button>
 
-            <!-- ONLY POWERED BY STRIPE BADGE -->
+            <div class="co-payment-logos" aria-label="Accepted payment methods">
+                <img src="{{ asset('public/images/front/payment-icon/visa-logo.png') }}" alt="Visa">
+                <img src="{{ asset('public/images/front/payment-icon/mastercard-logo.png') }}" alt="Mastercard">
+                <img src="{{ asset('public/images/front/payment-icon/american-express-logo.png') }}" alt="American Express">
+                <img src="{{ asset('public/images/front/payment-icon/apple-pay-logo.png') }}" alt="Apple Pay">
+                <img src="{{ asset('public/images/front/payment-icon/google-pay-logo.png') }}" alt="Google Pay">
+            </div>
+
             <div class="co-powered-stripe-only mt-3 text-center">
                 <span style="font-size: 13px; color: #555555; font-weight: 500;">
                     Powered by
