@@ -212,13 +212,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 8px;
     margin-top: 14px;
 }
 .co-payment-logos img {
-    width: 58px;
-    height: 42px;
+    width: 30px;
     object-fit: contain;
     display: block;
 }
@@ -357,10 +356,10 @@
         gap: 6px;
     }
 
-    .co-payment-logos img {
+    /* .co-payment-logos img {
         width: 54px;
         height: 40px;
-    }
+    } */
 
     .trust-badges {
         font-size: 12px;
