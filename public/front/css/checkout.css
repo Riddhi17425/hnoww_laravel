@@ -207,6 +207,22 @@
     cursor: not-allowed;
 }
 
+/* Accepted payment methods */
+.co-payment-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+}
+.co-payment-logos img {
+    width: 58px;
+    height: 42px;
+    object-fit: contain;
+    display: block;
+}
+
 /* Trust Badges */
 .trust-badges {
     display: flex;
@@ -335,6 +351,15 @@
     .co-btn-primary {
         height: 50px;
         font-size: 15px;
+    }
+
+    .co-payment-logos {
+        gap: 6px;
+    }
+
+    .co-payment-logos img {
+        width: 54px;
+        height: 40px;
     }
 
     .trust-badges {
