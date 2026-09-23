@@ -6,7 +6,7 @@ use App\Models\Order;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage; 
 
-class QuickupShippingService
+class QuiqupShippingService
 {
     protected string $baseUrl;
     protected string $apiKey;
