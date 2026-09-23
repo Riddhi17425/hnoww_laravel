@@ -1291,6 +1291,18 @@
                     @php
                         $rawStatus = strtolower(trim($orderDetails->shipping_status ?? $orderDetails->status ?? 'pending'));
                         $isCancelled = $rawStatus === 'cancelled';
+                        $orderConfirmDate = $orderDetails->created_at ? \Carbon\Carbon::parse($orderDetails->created_at) : null;
+                        $orderEmirate = strtolower(trim((string) ($orderDetails->orderAddress->emirate ?? '')));
+                        $deliveryStartDays = $orderEmirate === 'dubai' ? 2 : 6;
+                        $deliveryEndDays = $orderEmirate === 'dubai' ? 3 : 7;
+                        $expectedDeliveryStart = $orderConfirmDate ? addBusinessDays($orderConfirmDate, $deliveryStartDays) : null;
+                        $expectedDeliveryEnd = $orderConfirmDate ? addBusinessDays($orderConfirmDate, $deliveryEndDays) : null;
+                        $expectedDeliveryText = $orderEmirate === 'dubai'
+                            ? 'Within 2-3 business days'
+                            : 'Within 6-7 business days';
+                        $expectedDeliveryRange = $orderConfirmDate && $expectedDeliveryStart && $expectedDeliveryEnd
+                            ? $expectedDeliveryStart->format('d M, Y') . ' - ' . $expectedDeliveryEnd->format('d M, Y')
+                            : 'N/A';
                         $currentStep = 1;
                         if (in_array($rawStatus, ['out_for_collection', 'collection_failed', 'collected', 'received_at_depot', 'on_hold', 'delivery_failed'])) {
                             $currentStep = 2;
@@ -1300,6 +1312,20 @@
                             $currentStep = 4;
                         }
                     @endphp
+
+                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+                        <div class="text-start">
+                            <div class="address-entry-label">Expected Delivery</div>
+                            <div class="address-entry-val fw-semibold">{{ $expectedDeliveryRange }}</div>
+                            <div class="small text-muted mt-1">{{ $expectedDeliveryText }}</div>
+                        </div>
+                        <div class="text-start">
+                            <div class="address-entry-label">Order Confirm Date</div>
+                            <div class="address-entry-val fw-semibold">
+                                {{ $orderConfirmDate ? $orderConfirmDate->format('d M, Y') : 'N/A' }}
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="tracking-timeline-horizontal">
                         <!-- Step 1: Order Confirm -->
@@ -1315,7 +1341,7 @@
                             <div class="tracking-node-content">
                                 <div class="tracking-node-title">Order Confirm</div>
                                 <div class="tracking-node-desc">
-                                    {{ in_array($rawStatus, ['pending', 'ready_for_collection']) ? 'Order received' : 'Confirmed' }}
+                                    {{ $orderConfirmDate ? 'Confirmed on ' . $orderConfirmDate->format('d M, Y') : (in_array($rawStatus, ['pending', 'ready_for_collection']) ? 'Order received' : 'Confirmed') }}
                                 </div>
                             </div>
                         </div>

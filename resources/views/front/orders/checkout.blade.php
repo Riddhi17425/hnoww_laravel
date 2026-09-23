@@ -16,11 +16,92 @@
     stroke: #0e2233;
 }
 
+.checkout-delivery-card {
+    margin-top: 0.75rem;
+    padding: 16px 18px;
+    background: linear-gradient(135deg, #fffdf9 0%, #f5efe7 100%);
+    border: 1px solid #e7d7b6;
+    border-radius: 14px;
+    box-shadow: 0 8px 18px rgba(9, 25, 35, 0.04);
+    width: 100%;
+}
+
+.checkout-delivery-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(181, 138, 70, 0.2);
+}
+
+.checkout-delivery-header svg {
+    width: 28px;
+    height: 28px;
+    padding: 6px;
+    border-radius: 10px;
+    background: rgba(181, 138, 70, 0.12);
+    color: #b58a46;
+    flex-shrink: 0;
+}
+
+.checkout-delivery-title {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    color: #0e2233;
+    letter-spacing: 0.2px;
+}
+
+.checkout-delivery-list {
+    display: grid;
+    gap: 8px;
+}
+
+.checkout-delivery-row {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px;
+    line-height: 1.6;
+    color: #0e2233;
+    padding: 2px 0;
+}
+
+.checkout-delivery-label {
+    font-weight: 700;
+    min-width: 120px;
+    color: #0e2233;
+}
+
+.checkout-delivery-value {
+    color: #574d3d;
+}
+
 @media (max-width:767px) {
     .sticky-header {
         /*background: #EDEAE4;*/
     }
 
+    .checkout-delivery-card {
+        padding: 14px 12px;
+    }
+
+    .checkout-delivery-header {
+        align-items: flex-start;
+        margin-bottom: 8px;
+    }
+
+    .checkout-delivery-row {
+        display: block;
+        line-height: 1.7;
+    }
+
+    .checkout-delivery-label {
+        display: block;
+        min-width: auto;
+        margin-bottom: 2px;
+    }
 }
 
 </style>
@@ -301,6 +382,30 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="checkout-delivery-card">
+                <div class="checkout-delivery-header">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="1" y="3" width="15" height="13"></rect>
+                        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                        <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                        <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                    </svg>
+                    <p class="checkout-delivery-title">Estimated Delivery</p>
+                </div>
+
+                <div class="checkout-delivery-list">
+                    <div class="checkout-delivery-row">
+                        <span class="checkout-delivery-label">Dubai:</span>
+                        <span class="checkout-delivery-value">Within a 2-3 business days</span>
+                    </div>
+                    <div class="checkout-delivery-row">
+                        <span class="checkout-delivery-label">Other Emirates:</span>
+                        <span class="checkout-delivery-value">Within a 6-7 business days</span>
+                    </div>
+                </div>
+            </div>
+
                 {{-- <div class="checkout-box">
                         <div class="ct_form">
                         @if($userAddresses->count() > 0)
