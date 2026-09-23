@@ -1,4 +1,4 @@
-    @extends('admin.layouts.app')
+@extends('admin.layouts.app')
 
 @section('title', 'Edit Product')
 
@@ -168,6 +168,12 @@
                 <textarea name="materials" id="materials" class="form-control" rows="4">{{ old('materials', $product->materials) }}</textarea>
                 @error('materials') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
+            
+            <div class="col-md-12">
+                <label class="form-label">Product Dimensions</label>
+                <textarea name="dimensions" id="dimensions" class="form-control" rows="4">{{ old('dimensions', $product->dimensions) }}</textarea>
+                @error('dimensions') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
 
             <div class="col-md-4">
                 <label class="form-label">Height (cm)</label>
@@ -251,7 +257,7 @@ $(document).ready(function() {
         $('#short_description').val($('#short_description').summernote('code'));
     });
     
-    $('#short_description,#large_description,#care_maintenance, #materials').summernote({
+    $('#short_description,#large_description,#care_maintenance, #materials, #dimensions').summernote({
         placeholder: 'Enter Product Description here...',
         height: 300,
         toolbar: [
