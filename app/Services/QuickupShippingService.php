@@ -47,15 +47,19 @@ class QuickupShippingService
             ];
         })->values()->all();
 
-        $items = $orderProducts->map(function ($orderProduct) {
+        $items = [];
+        foreach ($orderProducts as $orderProduct) {
             $product = $orderProduct->product;
-            return [
-                'name' => $product ? $product->product_name : 'ORDER-PRODUCT-' . $orderProduct->id,
-                // 'quantity' => (int)($orderProduct->quantity ?? 1),
-                'quantity' => 1,
-                'parcel_barcode' => $product ? 'SKU-' . $product->id : 'ORDER-PRODUCT-' . $orderProduct->id,
-            ];
-        })->values()->all();
+            $itemQuantity = max((int) ($orderProduct->quantity ?? 1), 1);
+            for ($i = 0; $i < $itemQuantity; $i++) {
+                $items[] = [
+                    'name' => $product ? $product->product_name : 'ORDER-PRODUCT-' . $orderProduct->id,
+                    'quantity' => 1,
+                    'parcel_barcode' => '',
+                    // 'parcel_barcode' => $product ? 'SKU-' . $product->id : 'ORDER-PRODUCT-' . $orderProduct->id,
+                ];
+            }
+        }
         $paymentMode = 'pre_paid';  
         $payload = [
             "kind" => "partner_next_day",
@@ -100,15 +104,14 @@ class QuickupShippingService
                 ],
             ],
             'products' => $products,
-            "items" => [
-                [
-                    "name" => $order->order_number ?? "ORD-" . $order->id,
-                    "quantity" => 1,
-                    "parcel_barcode" => '',
-                    // "parcel_barcode" => 'P' . $order->id . time(),
-                ],
-            ],
-            // "items" => $items
+            // "items" => [
+            //     [
+            //         "name" => $order->order_number ?? "ORD-" . $order->id,
+            //         "quantity" => 1,
+            //         "parcel_barcode" => '',
+            //     ],
+            // ],
+            "items" => $items
         ];
         \Log::info('Creating Quickup order with payload: ' . json_encode($payload));
         $response = Http::withHeaders($this->headers())->post($this->baseUrl . '/orders', $payload);

@@ -2593,28 +2593,27 @@ class FrontController extends Controller
             ->whereNotNull('product_url')
             ->where('product_url', '!=', '')
             ->where(function ($query) use ($q) {
-                $query->where('product_name', 'LIKE', "%{$q}%")
-                    ->orWhere('materials', 'LIKE', "%{$q}%")
-                    ->orWhere('short_note', 'LIKE', "%{$q}%");
+                $query->where('product_name', 'LIKE', "%{$q}%");
+                    // ->orWhere('materials', 'LIKE', "%{$q}%")
+                    // ->orWhere('short_note', 'LIKE', "%{$q}%");
             })
             ->orderByRaw("
                 CASE
                     WHEN product_name = ? THEN 1
                     WHEN product_name LIKE ? THEN 2
                     WHEN product_name LIKE ? THEN 3
-                    WHEN short_note LIKE ? THEN 4
-                    WHEN materials LIKE ? THEN 5
-                    ELSE 6
+                    ELSE 4
                 END
             ", [
                 $q,
                 "{$q}%",
                 "%{$q}%",
-                "%{$q}%",
-                "%{$q}%"
             ])
-            ->select('id', 'product_name', 'product_price', 'list_page_img', 'product_url', 'category_id')
+            ->select('id', 'product_name', 'category_id', 'product_price', 'list_page_img', 'product_url')
             ->with(['category:id,category_name'])
+            ->whereHas('category', function ($query) {
+                $query->where('is_active', 0)->whereNull('deleted_at')->where('is_festive', 0);
+            })
             //->limit(12)
             ->get()
             ->map(function ($item) {
