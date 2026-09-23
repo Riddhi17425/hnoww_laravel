@@ -1034,6 +1034,7 @@
                                     <th scope="col" class="text-nowrap">ORDER STATUS</th>
                                     <th scope="col" class="text-nowrap">PAYMENT STATUS</th>
                                     <th scope="col" class="text-nowrap">SUB TOTAL</th>
+                                    <th scope="col" class="text-nowrap">SHIPPING CHARGES</th>
                                     {{-- @if(isset($orderDetails->discount) && $orderDetails->discount != null)
                                         <th scope="col" class="text-nowrap">DISCOUNT</th>
                                     @endif --}}
@@ -1055,6 +1056,7 @@
                                         </span>
                                     </td>
                                     <td>{{number_format($orderDetails->subtotal, 2) ?? '-'}}</td>
+                                    <td>{{number_format($orderDetails->shipping_charges ?? 0, 2) ?? '-'}}</td>
                                     {{-- @if(isset($orderDetails->discount) && $orderDetails->discount != null)
                                         <td>{{number_format($orderDetails->discount, 2) ?? '-'}}</td>
                                     @endif --}}
