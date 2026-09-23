@@ -154,10 +154,23 @@
                 {{$product->weight ?? '' }}
             </div>
             @endif
-            @if(isset($product->dimensions) && $product->dimensions != '')
+            @php
+                $dimensionFields = [
+                    'Height' => $product->height ? $product->height . ' cm' : null,
+                    'Width' => $product->width ? $product->width . ' cm' : null,
+                    'Length' => $product->length ? $product->length . ' cm' : null,
+                ];
+            @endphp
+            @if(array_filter($dimensionFields))
             <h4 class="sub_head mb-4 mt-3">Dimensions</h4>
             <div class="pro_details_info_list">
-                {!! $product->dimensions ?? '' !!}
+                <ul class="mb-0 ps-3">
+                    @foreach($dimensionFields as $label => $value)
+                        @if($value)
+                            <li><b>{{ $label }}:</b> {{ $value }}</li>
+                        @endif
+                    @endforeach
+                </ul>
             </div>
             @endif
 

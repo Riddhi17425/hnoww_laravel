@@ -90,7 +90,7 @@
             </div>
 
             <div class="col-md-3">
-                <label class="form-label">Product Weight</label>
+                <label class="form-label">Product Weight (Kg)</label>
                 <input type="text" name="weight" id="weight" class="form-control" value="{{ old('weight') }}">
                 @error('weight') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
@@ -113,10 +113,22 @@
                 @error('materials') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
-            <div class="col-md-12">
-                <label class="form-label">Product Dimensions</label>
-                <textarea name="dimensions" id="dimensions" class="form-control" rows="4">{{ old('dimensions') }}</textarea>
-                @error('dimensions') <span class="text-danger">{{ $message }}</span> @enderror
+            <div class="col-md-4">
+                <label class="form-label">Height (cm)</label>
+                <input type="number" step="0.01" min="0" name="height" id="height" class="form-control" value="{{ old('height') }}">
+                @error('height') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Width (cm)</label>
+                <input type="number" step="0.01" min="0" name="width" id="width" class="form-control" value="{{ old('width') }}">
+                @error('width') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Length (cm)</label>
+                <input type="number" step="0.01" min="0" name="length" id="length" class="form-control" value="{{ old('length') }}">
+                @error('length') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
             
             <div class="col-md-12">
@@ -176,7 +188,7 @@ const corporateCategories = @json($corporateCategories);
 const weddingCategories = @json($weddingCategories);
 
 $(document).ready(function() {
-    $('#dimensions, #materials, #large_description, #short_description, #care_maintenance').summernote({
+    $('#materials, #large_description, #short_description, #care_maintenance').summernote({
         placeholder: 'Enter Product Description here...',
         height: 300,
         toolbar: [
