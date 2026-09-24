@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\{Product, Cart, Order, OrderProduct, UserAddress};
 use Illuminate\Support\Facades\Validator;
-use App\Services\{PaymentService, QuickupShippingService, YetiWhatsappMesasgeService};
+use App\Services\{PaymentService, QuiqupShippingService, YetiWhatsappMesasgeService};
 use Stripe;
 use Session;
 use Auth;
@@ -27,13 +27,13 @@ class CartController extends Controller
 
     protected $paymentService;
     protected $yetiWhatsappMesasgeService;
-    protected $quickupShippingService;
-    public function __construct(PaymentService $paymentService, YetiWhatsappMesasgeService $yetiWhatsappMesasgeService, QuickupShippingService $quickupShippingService)
+    protected $quiqupShippingService;
+    public function __construct(PaymentService $paymentService, YetiWhatsappMesasgeService $yetiWhatsappMesasgeService, QuiqupShippingService $quiqupShippingService)
     {
         $this->adminEmail = config('global_values.admin_email');
         $this->paymentService = $paymentService;
         $this->yetiWhatsappMesasgeService = $yetiWhatsappMesasgeService;
-        $this->quickupShippingService = $quickupShippingService;
+        $this->quiqupShippingService = $quiqupShippingService;
     }
 
     public function getCart(Request $request){
@@ -305,7 +305,7 @@ class CartController extends Controller
             }
 
             try {
-                $this->quickupShippingService->createOrder($order);
+                $this->quiqupShippingService->createOrder($order);
             } catch (\Throwable $e) {
                 \Log::error('Quickup order creation failed: ' . $e->getMessage());
             }
