@@ -293,7 +293,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="co-input-group">
-                                        <label class="co-input-label">Contact Number <span class="text-danger">*</span></label>
+                                        <label class="co-input-label">Contact Number </label>
                                         <input type="tel" id="checkout-contact-no" name="contact_no" placeholder="Enter contact Number"
                                             value="{{ old('contact_no') }}"
                                             oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
@@ -321,7 +321,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="co-input-group">
-                                        <label class="co-input-label">Whatsapp Number </label>
+                                        <label class="co-input-label">Whatsapp Number <span class="text-danger">*</span></label>
                                         <input type="tel" id="checkout-whatsapp-no" name="whatsapp_no"
                                             value="{{ old('whatsapp_no') }}"
                                             oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 15);"
@@ -959,13 +959,13 @@ $(document).ready(async function() {
                 minlength: 3
             },
             contact_no: {
-                required: true,
+                // required: true,
                 digits: true,
                 minlength: 7,
                 maxlength: 15
             },
             whatsapp_no: {
-                //required: true,
+                required: true,
                 digits: true,
                 minlength: 7,
                 maxlength: 15
@@ -992,13 +992,13 @@ $(document).ready(async function() {
                 minlength: "Name must be at least 3 characters long"
             },
             contact_no: {
-                required: "Please enter your contact number",
+                // required: "Please enter your contact number",
                 digits: "Only numeric values are allowed",
                 minlength: "Contact number must be at least 7 digits",
                 maxlength: "Contact number cannot exceed 15 digits"
             },
             whatsapp_no: {
-                //required: "Please enter your Whatsapp number",
+                required: "Please enter your Whatsapp number",
                 digits: "Only numeric values are allowed",
                 minlength: "Whatsapp number must be at least 7 digits",
                 maxlength: "Whatsapp number cannot exceed 15 digits"

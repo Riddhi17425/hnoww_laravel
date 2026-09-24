@@ -182,6 +182,7 @@ class FrontController extends Controller
         $category    = Category::where('category_url', $catSlug)->first();
         $catProducts = Product::select('id', 'category_id', 'product_url', 'product_name', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'product_price')
             //->where('product_type', 1)
+            ->where('product_url', 'not like', 'test-%')
             ->where(function($query) use ($category) {
                 $query->where('category_id', $category->id)
                       ->orWhereRaw("FIND_IN_SET(?, shown_in_other_categories)", [$category->id]);
@@ -198,9 +199,9 @@ class FrontController extends Controller
     public function getProductDetails(Request $request, $productSlug)
     {
         $product             = Product::select('id', 'category_id', 'product_name', 'product_url', 'product_price', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'large_description', 'height', 'width', 'length', 'detail_page_imgs', 'moq', 'short_note', 'product_stock', 'care_maintenance', 'meta_title', 'meta_description', 'materials', 'weight')->where('product_url', $productSlug)->isActive()->notDeleted()->first();
-        $productDetailImages = $product->detail_page_imgs ? json_decode($product->detail_page_imgs) : '';
+        $productDetailImages = $product != '' && $product->detail_page_imgs ? json_decode($product->detail_page_imgs) : '';
         $productTab          = $product->tabs ?? [];
-        if (! isset($product) && $product == '') {
+        if (!isset($product) && $product == '') {
             return redirect()->back()->with('error', 'Product not Found');
         }
 
@@ -216,7 +217,7 @@ class FrontController extends Controller
     public function getGiftDetails(Request $request, $productSlug)
     {
         $product             = GiftShop::select('id', 'gift_for', 'to_celebrate', 'product_name', 'product_price', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'large_description', 'dimensions', 'detail_page_imgs', 'product_url', 'meta_title', 'meta_description')->where('product_url', $productSlug)->isActive()->notDeleted()->first();
-        $productDetailImages = $product->detail_page_imgs ? json_decode($product->detail_page_imgs) : '';
+        $productDetailImages = $product != '' && $product->detail_page_imgs ? json_decode($product->detail_page_imgs) : '';
         if (! isset($product) && $product == '') {
             return redirect()->back()->with('error', 'Product not Found');
         }
@@ -2497,6 +2498,7 @@ class FrontController extends Controller
 
         $baseQuery = Product::where('is_active', 0)
             ->where('product_type', 1)
+            ->where('product_url', 'not like', 'test-%')
             ->whereNull('deleted_at');
 
         $priceStats = (clone $baseQuery)
