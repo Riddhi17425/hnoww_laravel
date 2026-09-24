@@ -497,6 +497,98 @@ class AuthController extends Controller
         ]);
     }
 
+    public function checkoutSendGuestOtp(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()->first(),
+            ]);
+        }
+
+        $email = strtolower(trim($request->email));
+        PasswordResetOtp::where('email', $email)->delete();
+
+        $otp = random_int(100000, 999999);
+        PasswordResetOtp::create([
+            'email' => $email,
+            'otp' => Hash::make($otp),
+            'expires_at' => now()->addMinutes(10),
+        ]);
+
+        try {
+            Mail::to($email)->send(new \App\Mail\GuestOrderOtpMail($otp));
+
+            Session::put('guest_checkout_email', $email);
+            Session::put('guest_checkout_email_verified_until', null);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'OTP has been sent to your email address.',
+            ]);
+        } catch (\Exception $e) {
+            PasswordResetOtp::where('email', $email)->delete();
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    public function checkoutVerifyGuestOtp(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:255',
+            'otp' => 'required|digits:6',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()->first(),
+            ]);
+        }
+
+        $email = strtolower(trim($request->email));
+        $otpRecord = PasswordResetOtp::where('email', $email)->latest()->first();
+
+        if (!$otpRecord) {
+            return response()->json([
+                'success' => false,
+                'message' => 'OTP not found. Please request a new OTP.',
+            ]);
+        }
+
+        if (now()->greaterThan($otpRecord->expires_at)) {
+            $otpRecord->delete();
+            return response()->json([
+                'success' => false,
+                'message' => 'OTP has expired. Please request a new OTP.',
+            ]);
+        }
+
+        if (!Hash::check($request->otp, $otpRecord->otp)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid OTP. Please check the OTP and try again.',
+            ]);
+        }
+
+        $otpRecord->delete();
+        Session::put('guest_checkout_email', $email);
+        Session::put('guest_checkout_email_verified_until', now()->addMinutes(30));
+
+        return response()->json([
+            'success' => true,
+            'redirect_url' => route('front.checkout.view'),
+            'message' => 'Email verified successfully.',
+        ]);
+    }
+
     // START - SEND OTP TO THE REGISTERED EMAIL
     public function checkoutSendForgotPasswordOtp(Request $request)
     {

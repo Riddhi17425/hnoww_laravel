@@ -135,6 +135,18 @@ Route::name('front.')->group(function () {
     Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add.ajax');
     Route::post('/cart/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
 
+    Route::get('/checkout', [CartController::class, 'getCheckout'])->name('checkout.view');
+    Route::post('/checkout/store-address', [CartController::class, 'storeAddress'])->name('checkout.store.address');
+    Route::post('/checkout/process', [CartController::class, 'checkoutProcess'])->name('checkout.process');
+    Route::post('/checkout/guest/send-otp', [AuthController::class, 'checkoutSendGuestOtp'])->name('checkout.guest.send-otp');
+    Route::post('/checkout/guest/verify-otp', [AuthController::class, 'checkoutVerifyGuestOtp'])->name('checkout.guest.verify-otp');
+    Route::get('/guest-order/{token}', [CartController::class, 'guestOrderAccess'])->name('guest.order.access');
+    Route::post('/guest-order/{token}/verify', [CartController::class, 'verifyGuestOrderAccess'])->name('guest.order.verify');
+    Route::get('/guest-order/{token}/details', [CartController::class, 'guestOrderDetails'])->name('guest.order.details');
+    Route::get('/payment/success', [CartController::class, 'paymentSuccess'])->name('payment.success');
+    Route::get('/get/success/{orderid?}', [CartController::class, 'getSuccess'])->name('get.success');
+    Route::get('/get/failed/{orderid}', [CartController::class, 'getFailed'])->name('get.failed');
+
     Route::middleware(['auth'])->group(function () {
         Route::get('/profile', [FrontController::class, 'profile'])->name('profile');
         Route::post('/profile/update', [AuthController::class, 'updateProfile'])->name('profile.update');
@@ -148,13 +160,6 @@ Route::name('front.')->group(function () {
         // Route::get('/cart', [CartController::class, 'getCart'])->name('cart.view');
         // Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add.ajax');
         // Route::post('/cart/delete', [CartController::class, 'deleteCart'])->name('cart.delete');
-
-        Route::get('/checkout', [CartController::class, 'getCheckout'])->name('checkout.view');
-        Route::post('/checkout/store-address', [CartController::class, 'storeAddress'])->name('checkout.store.address');
-        Route::post('/checkout/process', [CartController::class, 'checkoutProcess'])->name('checkout.process');
-        Route::get('/payment/success', [CartController::class, 'paymentSuccess'])->name('payment.success');
-        Route::get('/get/success/{orderid?}', [CartController::class, 'getSuccess'])->name('get.success');
-        Route::get('/get/failed/{orderid}', [CartController::class, 'getFailed'])->name('get.failed');
 
         Route::get('front/logout', [AuthController::class, 'logout'])->name('logout');
     });

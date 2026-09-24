@@ -37,6 +37,14 @@
         <h2 style="margin: 0 0 20px 0; font-family: 'Times New Roman', Times, serif; font-size: 24px; color: #222222; font-weight: bold;">
             Your Order Summary</h2>
 
+        @if(!empty($guest_order_access_url))
+        <p style="margin: 0 0 20px 0; font-family: Arial, sans-serif; font-size: 16px; color: #555555;">
+            You can securely view your order using this link:
+            <br>
+            <a href="{{ $guest_order_access_url }}" style="color: #1d4f78; text-decoration: underline;">{{ $guest_order_access_url }}</a>
+        </p>
+        @endif
+
         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%"
             style="border-collapse: collapse;">
             <tr>

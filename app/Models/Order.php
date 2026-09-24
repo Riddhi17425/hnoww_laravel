@@ -8,7 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
+
     protected $guarded = [];
+
+    protected $casts = [
+        'guest_email_verified_at' => 'datetime',
+        'guest_order_token_expires_at' => 'datetime',
+    ];
 
     public function user()
     {
@@ -25,4 +31,27 @@ class Order extends Model
         return $this->belongsTo(UserAddress::class, 'order_address_id', 'id');
     }
 
+    public function guestOrderAccessUrl(): string
+    {
+        if (empty($this->guest_order_token)) {
+            return '';
+        }
+
+        return route('front.guest.order.access', ['token' => $this->guest_order_token]);
+    }
+
+    public function guestOrderTokenIsValid(?string $token = null): bool
+    {
+        if (empty($this->guest_order_token)) {
+            return false;
+        }
+
+        $checkToken = $token ?? $this->guest_order_token;
+
+        if ($this->guest_order_token_expires_at && now()->greaterThan($this->guest_order_token_expires_at)) {
+            return false;
+        }
+
+        return hash_equals((string) $this->guest_order_token, (string) $checkToken);
+    }
 }
