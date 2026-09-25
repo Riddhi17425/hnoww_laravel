@@ -755,7 +755,7 @@
                             </div>
                             <div class="d-flex flex-column align-items-center gap-2 mt-4">
                                 <button type="submit" id="btn-guest-email-submit" class="btn-auth-primary com_btn">Send OTP</button>
-                                <button type="button" id="btn-guest-modal-back" class="btn-auth-secondary">Back</button>
+                                <button type="button" id="btn-guest-modal-back" class="btn-auth-secondary p-0">Back</button>
                             </div>
                         </div>
 
