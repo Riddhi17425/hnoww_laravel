@@ -139,7 +139,7 @@
             @endif
 
             <form id="guest-order-otp-form" method="POST" action="{{ route('front.guest.order.verify', ['token' => $token]) }}">
-                @csrf
+                @csrft
                 <div class="guest-otp-field">
                     <label for="guest_order_otp">Enter OTP</label>
                     <input type="text" name="otp" id="guest_order_otp" class="otp-input" maxlength="6" inputmode="numeric" autocomplete="one-time-code" placeholder="······" required>
