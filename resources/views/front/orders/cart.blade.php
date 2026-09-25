@@ -20,6 +20,7 @@
 }
 
 /* Checkout Authentication Modal Styling */
+#guestCheckoutModal .modal-content,
 #checkoutAuthModal .modal-content {
     background-color: #faf9f6; /* Soft warm luxury background */
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E"); /* Subtle noise texture */
@@ -29,12 +30,14 @@
     padding: 20px;
 }
 
+#guestCheckoutModal .modal-header,
 #checkoutAuthModal .modal-header {
     border-bottom: none;
     padding-bottom: 0;
     position: relative;
 }
 
+#guestCheckoutModal .modal-title,
 #checkoutAuthModal .modal-title {
     /* font-family: var(--heading-font);
     font-size: 26px;
@@ -44,6 +47,7 @@
     text-transform: uppercase; */
 }
 
+#guestCheckoutModal .btn-close,
 #checkoutAuthModal .btn-close {
     background-color: transparent;
     border: 1px solid rgba(199, 181, 140, 0.3);
@@ -57,12 +61,14 @@
     background-size: 10px;
 }
 
+#guestCheckoutModal .btn-close:hover,
 #checkoutAuthModal .btn-close:hover {
     opacity: 1;
     border-color: var(--gold-color);
     background-color: rgba(199, 181, 140, 0.1);
 }
 
+#guestCheckoutModal .modal-body,
 #checkoutAuthModal .modal-body {
     padding-top: 15px;
 }
@@ -76,10 +82,12 @@
 } */
 
 /* Floating labels custom style for luxury look */
+#guestCheckoutModal .form-floating,
 #checkoutAuthModal .form-floating {
     margin-bottom: 20px;
 }
 
+#guestCheckoutModal .form-floating .form-control,
 #checkoutAuthModal .form-floating .form-control {
     background-color: transparent !important;
     border: none;
@@ -93,10 +101,12 @@
     transition: border-color 0.3s ease;
 }
 
+#guestCheckoutModal .form-floating .form-control:focus,
 #checkoutAuthModal .form-floating .form-control:focus {
     border-bottom-color: var(--gold-color);
 }
 
+#guestCheckoutModal .form-floating label,
 #checkoutAuthModal .form-floating label {
     padding: 12px 0;
     color: var(--dark-900);
@@ -105,13 +115,16 @@
     transform-origin: 0 0;
 }
 
+#guestCheckoutModal .form-floating .form-control:focus ~ label,,
 #checkoutAuthModal .form-floating .form-control:focus ~ label,
+#guestCheckoutModal .form-floating .form-control:not(:placeholder-shown) ~ label,
 #checkoutAuthModal .form-floating .form-control:not(:placeholder-shown) ~ label {
     color: var(--gold-color);
     transform: scale(0.85) translateY(-12px);
 }
 
 /* Submit and Action Buttons */
+#guestCheckoutModal .btn-auth-primary,
 #checkoutAuthModal .btn-auth-primary {
     width: 100%;
     background-color: var(--dark-900);
@@ -128,12 +141,14 @@
     border-radius: 0; */
 }
 /* 
+#guestCheckoutModal .btn-auth-primary:hover,
 #checkoutAuthModal .btn-auth-primary:hover {
     background-color: var(--gold-color);
     border-color: var(--gold-color);
     color: var(--white-color);
 } */
 
+#guestCheckoutModal .btn-auth-secondary,
 #checkoutAuthModal .btn-auth-secondary {
     display: inline-block;
     background: transparent;
@@ -150,12 +165,14 @@
     cursor: pointer;
 }
 
+#guestCheckoutModal .btn-auth-secondary:hover,
 #checkoutAuthModal .btn-auth-secondary:hover {
     color: var(--dark-900);
     text-decoration: underline;
 }
 
 /* Alert Styling */
+#guestCheckoutModal .alert-danger,
 #checkoutAuthModal .alert-danger {
     border-radius: 0;
     border: 1px solid #d32f2f;
@@ -166,6 +183,7 @@
 }
 
 /* JQuery Validation Error */
+#guestCheckoutModal .text-danger.mt-1,
 #checkoutAuthModal .text-danger.mt-1 {
     font-size: 12.5px;
     color: #d32f2f !important;
@@ -332,11 +350,6 @@
                                 <a class="com_btn w-100 text-center @auth @else user_icon @endauth" @auth href="{{ route('front.checkout.view') }}" @else data-bs-toggle="modal" data-bs-target="#checkoutAuthModal" @endauth>
                                     PROCEED TO CHECKOUT
                                 </a>
-                                @guest
-                                <button type="button" class="btn-continue w-100 mt-3" data-bs-toggle="modal" data-bs-target="#guestCheckoutModal">
-                                    CONTINUE AS GUEST
-                                </button>
-                                @endguest
                                 <a href="{{ route('front.home') }}" class="btn-continue mt-3">
                                     CONTINUE SHOPPING
                                 </a>
@@ -753,9 +766,9 @@
                                 <input type="email" name="guest_email" id="guest_email" class="form-control shadow-none" placeholder=" " required>
                                 <label for="guest_email">Email address</label>
                             </div>
-                            <div class="d-flex flex-column align-items-center gap-2 mt-4">
-                                <button type="submit" id="btn-guest-email-submit" class="btn-auth-primary com_btn">Send OTP</button>
-                                <button type="button" id="btn-guest-modal-back" class="btn-auth-secondary">Back</button>
+                            <div class="d-flex flex-row align-items-center justify-content-center gap-3 mt-4">
+                                <button type="submit" id="btn-guest-email-submit" class="btn-auth-primary com_btn" style="width:auto;">Send OTP</button>
+                                <button type="button" id="btn-guest-modal-back" class="btn-auth-secondary mt-0">Back</button>
                             </div>
                         </div>
 
