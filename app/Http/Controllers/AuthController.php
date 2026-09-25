@@ -284,8 +284,20 @@ class AuthController extends Controller
     }
 
     public function logout(Request $request){
+        $guestEmail = Session::get('guest_checkout_email');
+        $guestVerifiedUntil = Session::get('guest_checkout_email_verified_until');
+
         Session::forget('user');
         Auth::logout();
+
+        if ($guestEmail) {
+            Session::put('guest_checkout_email', $guestEmail);
+        }
+
+        if ($guestVerifiedUntil) {
+            Session::put('guest_checkout_email_verified_until', $guestVerifiedUntil);
+        }
+
         request()->session()->flash('success','Logout successfully');
 
         return back();
@@ -511,6 +523,14 @@ class AuthController extends Controller
         }
 
         $email = strtolower(trim($request->email));
+
+        if (User::where('email', $email)->exists()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'This email is already registered. Please proceed using login.',
+            ], 409);
+        }
+
         PasswordResetOtp::where('email', $email)->delete();
 
         $otp = random_int(100000, 999999);

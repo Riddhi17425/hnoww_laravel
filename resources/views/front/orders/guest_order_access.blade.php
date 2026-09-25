@@ -1,45 +1,78 @@
 @include('layouts.frontheader')
 
 <style>
-    .guest-order-wrap {
-        max-width: 560px;
-        margin: 80px auto;
-        padding: 40px 28px;
-        border: 1px solid #d8d0c7;
-        background: #fff;
-        box-shadow: 0 12px 35px rgba(0,0,0,0.04);
+    body {
+        background: #f5f2ee;
     }
+
+    .guest-order-wrap {
+        max-width: 680px;
+        margin: 80px auto;
+        padding: 42px 30px 32px;
+        border: 1px solid #d9d0c7;
+        background: rgba(255,255,255,0.8);
+        box-shadow: 0 18px 50px rgba(17, 24, 39, 0.06);
+    }
+
     .guest-order-wrap h2 {
         font-family: 'Times New Roman', serif;
-        font-size: 38px;
+        font-size: clamp(2.5rem, 4vw, 4rem);
         margin-bottom: 18px;
+        color: #1d2c3b;
+        text-align: center;
+        letter-spacing: -0.04em;
+        font-weight: 500;
     }
+
     .guest-order-wrap p {
-        color: #554f4a;
+        color: #4d4a45;
         margin-bottom: 22px;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        text-align: center;
     }
+
     .guest-order-wrap .alert {
         margin-bottom: 18px;
     }
+
+    .otp-box {
+        max-width: 420px;
+        margin: 0 auto;
+        padding: 30px 20px;
+        border: 1px solid #d8d0c7;
+        background: #fff;
+    }
+
     .otp-input {
         width: 100%;
-        letter-spacing: 0.35rem;
+        letter-spacing: 0.5rem;
         text-align: center;
-        font-size: 22px;
+        font-size: 2rem;
         padding: 16px 12px;
         border: 1px solid #d6cfc5;
         border-radius: 0;
+        background: #fff;
+        color: #1d2c3b;
     }
+
     .guest-btn {
-        display: inline-block;
+        display: block;
+        width: 100%;
         margin-top: 20px;
-        padding: 14px 28px;
-        border: 1px solid #1e1e1e;
-        background: #1e1e1e;
+        padding: 16px 28px;
+        border: 1px solid #1d2c3b;
+        background: #1d2c3b;
         color: #fff;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.12em;
         cursor: pointer;
+        font-weight: 600;
+        transition: all 0.2s ease;
+    }
+
+    .guest-btn:hover {
+        background: #0f1b29;
     }
 </style>
 
@@ -52,10 +85,12 @@
 
         <form id="guest-order-otp-form" method="POST" action="{{ route('front.guest.order.verify', ['token' => $token]) }}">
             @csrf
-            <div class="form-group">
-                <input type="text" name="otp" id="guest_order_otp" class="otp-input" maxlength="6" inputmode="numeric" placeholder="••••••" required>
+            <div class="otp-box">
+                <div class="form-group">
+                    <input type="text" name="otp" id="guest_order_otp" class="otp-input" maxlength="6" inputmode="numeric" placeholder="••••••" required>
+                </div>
+                <button type="submit" class="guest-btn">Verify OTP</button>
             </div>
-            <button type="submit" class="guest-btn">Verify OTP</button>
         </form>
     </div>
 </div>

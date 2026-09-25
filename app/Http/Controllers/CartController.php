@@ -182,7 +182,7 @@ class CartController extends Controller
         $verifiedUntil = session('guest_checkout_email_verified_until');
 
         if (!auth()->check() && (!$guestEmail || !$verifiedUntil || now()->greaterThan($verifiedUntil))) {
-            return redirect()->route('front.cart.view')->with('error', 'Please verify your email before checkout.');
+            return redirect()->route('front.cart.view')->with('error', 'Please login or continue as guest to checkout.');
         }
 
         if (auth()->check()) {

@@ -332,7 +332,12 @@
                                 <a class="com_btn w-100 text-center @auth @else user_icon @endauth" @auth href="{{ route('front.checkout.view') }}" @else data-bs-toggle="modal" data-bs-target="#checkoutAuthModal" @endauth>
                                     PROCEED TO CHECKOUT
                                 </a>
-                                <a href="{{ route('front.home') }}" class="btn-continue">
+                                @guest
+                                <button type="button" class="btn-continue w-100 mt-3" data-bs-toggle="modal" data-bs-target="#guestCheckoutModal">
+                                    CONTINUE AS GUEST
+                                </button>
+                                @endguest
+                                <a href="{{ route('front.home') }}" class="btn-continue mt-3">
                                     CONTINUE SHOPPING
                                 </a>
                             </div>
@@ -375,22 +380,24 @@
                             </div>
                             <div class="d-flex flex-column align-items-center gap-2 mt-4">
                                 <button type="button" id="btn-email-next" class="btn-auth-primary com_btn">Continue</button>
-                                <button type="button" id="btn-guest-continue" class="btn-auth-secondary">Continue as Guest</button>
-                                <!-- <button type="button" class="btn-auth-secondary" data-bs-dismiss="modal">Cancel</button> -->
-                                <!-- START - DIRECT SIGN UP BUTTON -->
                                 <p class="mb-0 mt-2">
                                     Don't have an account?
                                     <button type="button" id="btn-direct-signup" class="btn-auth-secondary p-0 ms-1">
                                         Sign Up
                                     </button>
                                 </p>
-                                <!-- END - DIRECT SIGN UP BUTTON -->
                             </div>
                         </div>
 
                         <div id="step-guest-otp" class="auth-step d-none">
                             <p>We have sent a verification OTP to <strong id="guest-otp-email"></strong>.</p>
+
                             <div class="form-floating">
+                                <input type="email" id="guest_otp_email_display" class="form-control shadow-none" placeholder=" " disabled>
+                                <label for="guest_otp_email_display">Email address</label>
+                            </div>
+
+                            <div class="form-floating mt-3">
                                 <input type="text" name="guest_otp" id="checkout_guest_otp" class="form-control shadow-none" placeholder=" " maxlength="6" inputmode="numeric">
                                 <label for="checkout_guest_otp">Enter OTP</label>
                             </div>
@@ -726,6 +733,55 @@
     </div>
 </div>
 
+<div class="modal fade auth_modal" id="guestCheckoutModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title w-100 text-center title_40" id="guestCheckoutTitle">Continue as Guest</p>
+                <button type="button" class="btn-close position-absolute" data-bs-dismiss="modal" id="closeGuestCheckoutModalBtn"></button>
+            </div>
+            <div class="modal-body text-center">
+                <div class="ct_form">
+                    <form id="guest-checkout-form">
+                        @csrf
+                        <div id="guest-checkout-alert" class="alert d-none py-2 px-3 mb-3 text-start"></div>
+
+                        <div id="guest-step-email" class="guest-step">
+                            <p>Please enter your email address to receive an OTP.</p>
+                            <div class="form-floating">
+                                <input type="email" name="guest_email" id="guest_email" class="form-control shadow-none" placeholder=" " required>
+                                <label for="guest_email">Email address</label>
+                            </div>
+                            <div class="d-flex flex-column align-items-center gap-2 mt-4">
+                                <button type="submit" id="btn-guest-email-submit" class="btn-auth-primary com_btn">Send OTP</button>
+                                <button type="button" id="btn-guest-modal-back" class="btn-auth-secondary">Back</button>
+                            </div>
+                        </div>
+
+                        <div id="guest-step-otp" class="guest-step d-none">
+                            <p>We have sent a verification OTP to <strong id="guest-email-display"></strong>.</p>
+                            <div class="form-floating">
+                                <input type="email" id="guest_email_display" class="form-control shadow-none" placeholder=" " disabled>
+                                <label for="guest_email_display">Email address</label>
+                            </div>
+                            <div class="form-floating mt-3">
+                                <input type="text" name="guest_otp" id="guest_checkout_otp" class="form-control shadow-none" placeholder=" " maxlength="6" inputmode="numeric" required>
+                                <label for="guest_checkout_otp">Enter OTP</label>
+                            </div>
+                            <p class="small text-muted mt-2 mb-0">OTP is valid for 10 minutes.</p>
+                            <div class="d-flex flex-column align-items-center gap-2 mt-4">
+                                <button type="button" id="btn-verify-guest-checkout-otp" class="btn-auth-primary com_btn">Verify & Continue</button>
+                                <button type="button" id="btn-resend-guest-checkout-otp" class="btn-auth-secondary" disabled>Resend OTP <span id="guest-checkout-otp-timer">(60s)</span></button>
+                                <button type="button" id="btn-guest-otp-back" class="btn-auth-secondary"><- Back</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @push('script')
 <script src="{{ asset('public/js/front/cart.js') }} "></script>
 
@@ -756,6 +812,7 @@
     $(document).ready(function() {
         var isRegistered = false;
         var userEmail = '';
+        var guestCheckoutEmail = '';
 
         var forgotOtpTimer = null;
         var forgotOtpSeconds = 60;
@@ -794,6 +851,39 @@
 
             var resendBtn = $('#btn-resend-guest-otp');
             var timer = $('#guest-otp-timer');
+
+            if (resendBtn.length) {
+                resendBtn.prop('disabled', true);
+                timer.text('(60s)');
+            }
+
+            guestOtpTimer = setInterval(function() {
+                guestOtpSeconds--;
+                if (timer.length) {
+                    timer.text('(' + guestOtpSeconds + 's)');
+                }
+
+                if (guestOtpSeconds <= 0)
+                {
+                    clearInterval(guestOtpTimer);
+                    guestOtpTimer = null;
+                    if (timer.length) {
+                        timer.text('');
+                    }
+                    if (resendBtn.length) {
+                        resendBtn.prop('disabled', false);
+                    }
+                }
+            }, 1000);
+        }
+
+        function startGuestCheckoutOtpTimer()
+        {
+            clearInterval(guestOtpTimer);
+            guestOtpSeconds = 60;
+
+            var resendBtn = $('#btn-resend-guest-checkout-otp');
+            var timer = $('#guest-checkout-otp-timer');
 
             resendBtn.prop('disabled', true);
             timer.text('(60s)');
@@ -902,6 +992,44 @@
             }
         });
 
+        function showGuestOtpStep(email) {
+            guestCheckoutEmail = email;
+            $('#guest-email-display').text(email);
+            $('#guest_email_display').val(email);
+            $('#guest-step-email').addClass('d-none');
+            $('#guest-step-otp').removeClass('d-none');
+            $('#guest_checkout_otp').val('');
+            startGuestCheckoutOtpTimer();
+        }
+
+        function sendGuestOtp(email) {
+            hideError();
+            hideGuestError();
+            guestCheckoutEmail = email;
+
+            $.ajax({
+                url: "{{ route('front.checkout.guest.send-otp') }}",
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    email: email
+                },
+                success: function(response) {
+                    if (response.success) {
+                        showGuestOtpStep(email);
+                    } else {
+                        showError(response.message);
+                        showGuestError(response.message);
+                    }
+                },
+                error: function(xhr) {
+                    var msg = getAjaxErrorMessage(xhr);
+                    showError(msg);
+                    showGuestError(msg);
+                }
+            });
+        }
+
         $('#btn-email-next').click(function() {
             var emailInput = $('#checkout_email');
             var email = emailInput.val().trim();
@@ -934,7 +1062,10 @@
                             $('#step-login').removeClass('d-none');
                             $('#checkout_password').attr('required', true);
                         } else {
-                            showError('This email is not registered. Please continue as guest or sign up.');
+                            $('#checkoutAuthModal').modal('hide');
+                            $('#guestCheckoutModal').modal('show');
+                            $('#guest_email').val(email);
+                            sendGuestOtp(email);
                         }
                     } else {
                         showError(response.message);
@@ -956,35 +1087,10 @@
                 return;
             }
 
-            hideError();
-            userEmail = email;
-            $('#guest-otp-email').text(userEmail);
-            $('#btn-guest-continue').prop('disabled', true).text('Sending...');
-
-            $.ajax({
-                url: "{{ route('front.checkout.guest.send-otp') }}",
-                type: "POST",
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    email: email
-                },
-                success: function(response) {
-                    $('#btn-guest-continue').prop('disabled', false).text('Continue as Guest');
-                    if (response.success) {
-                        $('#checkoutAuthTitle').text('Verify Guest Email');
-                        $('.auth-step').addClass('d-none');
-                        $('#step-guest-otp').removeClass('d-none');
-                        $('#checkout_guest_otp').val('');
-                        startGuestOtpTimer();
-                    } else {
-                        showError(response.message);
-                    }
-                },
-                error: function(xhr) {
-                    $('#btn-guest-continue').prop('disabled', false).text('Continue as Guest');
-                    showError(getAjaxErrorMessage(xhr));
-                }
-            });
+            $('#checkoutAuthModal').modal('hide');
+            $('#guestCheckoutModal').modal('show');
+            $('#guest_email').val(email);
+            sendGuestOtp(email);
         });
 
         $('#btn-verify-guest-otp').click(function() {
@@ -1060,8 +1166,86 @@
             $('#checkoutAuthTitle').text('Login to Checkout');
             $('.auth-step').addClass('d-none');
             $('#step-email').removeClass('d-none');
+            $('#checkout_email').prop('disabled', false);
+            $('#guest_otp_email_display').val('');
             $('#checkout_guest_otp').val('');
             checkoutAuthValidator.resetForm();
+        });
+
+        $('#guestCheckoutModal').on('hidden.bs.modal', function () {
+            hideGuestError();
+            clearInterval(guestOtpTimer);
+            guestOtpTimer = null;
+            $('#guestCheckoutTitle').text('Continue as Guest');
+            $('#guest-step-otp').addClass('d-none');
+            $('#guest-step-email').removeClass('d-none');
+            $('#guest_email').val('');
+            $('#guest_email_display').val('');
+            $('#guest_checkout_otp').val('');
+            $('#btn-resend-guest-checkout-otp').prop('disabled', true).html('Resend OTP <span id="guest-checkout-otp-timer">(60s)</span>');
+            guestCheckoutEmail = '';
+        });
+
+        $('#guest-checkout-form').on('submit', function (e) {
+            e.preventDefault();
+            var guestEmail = $('#guest_email').val().trim();
+            if (!guestEmail) {
+                showGuestError('Please enter your email address.');
+                return;
+            }
+            sendGuestOtp(guestEmail);
+        });
+
+        $('#btn-guest-email-submit').on('click', function () {
+            $('#guest-checkout-form').trigger('submit');
+        });
+
+        $('#btn-verify-guest-checkout-otp').on('click', function () {
+            hideGuestError();
+            var otp = $('#guest_checkout_otp').val().trim();
+            if (!/^\d{6}$/.test(otp)) {
+                showGuestError('Please enter a valid 6-digit OTP.');
+                return;
+            }
+
+            $.ajax({
+                url: "{{ route('front.checkout.guest.verify-otp') }}",
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    email: guestCheckoutEmail,
+                    otp: otp
+                },
+                success: function (response) {
+                    if (response.success) {
+                        window.location.href = response.redirect_url;
+                    } else {
+                        showGuestError(response.message || 'Invalid OTP.');
+                    }
+                },
+                error: function (xhr) {
+                    showGuestError(getAjaxErrorMessage(xhr));
+                }
+            });
+        });
+
+        $('#btn-resend-guest-checkout-otp').on('click', function () {
+            if (!guestCheckoutEmail) return;
+            sendGuestOtp(guestCheckoutEmail);
+        });
+
+        $('#btn-guest-otp-back').on('click', function () {
+            hideGuestError();
+            $('#guest-step-otp').addClass('d-none');
+            $('#guest-step-email').removeClass('d-none');
+            $('#guest_checkout_otp').val('');
+            $('#guest_email').val(guestCheckoutEmail);
+            guestCheckoutEmail = '';
+        });
+
+        $('#btn-guest-modal-back').on('click', function () {
+            $('#guestCheckoutModal').modal('hide');
+            $('#checkoutAuthModal').modal('show');
         });
 
         // START - DIRECT SIGN UP FUNCTIONALITY
@@ -1184,7 +1368,8 @@
             $('#checkoutAuthTitle').text('Continue to Checkout');
             $('.auth-step').addClass('d-none');
             $('#step-email').removeClass('d-none');
-            $('#checkout_email').val('');
+            $('#checkout_email').prop('disabled', false).val('');
+            $('#guest_otp_email_display').val('');
             $('#checkout_password').removeAttr('required').val('');
             $('#checkout_name').removeAttr('required').val('');
             $('#checkout_register_email')
@@ -1212,6 +1397,14 @@
                 .text(msg);
         }
 
+        function showGuestError(msg)
+        {
+            $('#guest-checkout-alert')
+                .removeClass('d-none alert-success')
+                .addClass('alert-danger')
+                .text(msg);
+        }
+
         function showSuccess(msg)
         {
             $('#checkout-auth-alert')
@@ -1227,6 +1420,19 @@
                 .removeClass('alert-danger alert-success')
                 .text('');
         }
+
+        function hideGuestError()
+        {
+            $('#guest-checkout-alert')
+                .addClass('d-none')
+                .removeClass('alert-danger alert-success')
+                .text('');
+        }
+
+        $('#checkout_email, #guest_email, #guest_checkout_otp').on('input', function () {
+            hideError();
+            hideGuestError();
+        });
 
         function getAjaxErrorMessage(xhr)
         {
