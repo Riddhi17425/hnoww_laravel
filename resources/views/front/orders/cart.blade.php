@@ -376,7 +376,7 @@
                             <div class="d-flex flex-column align-items-center gap-2 mt-4">
                                 <button type="button" id="btn-email-next" class="btn-auth-primary com_btn">Continue</button>
                                 <button type="button" id="btn-guest-continue" class="btn-auth-secondary">Continue as Guest</button>
-                                <button type="button" class="btn-auth-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <!-- <button type="button" class="btn-auth-secondary" data-bs-dismiss="modal">Cancel</button> -->
                                 <!-- START - DIRECT SIGN UP BUTTON -->
                                 <p class="mb-0 mt-2">
                                     Don't have an account?
