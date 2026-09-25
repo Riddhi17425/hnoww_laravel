@@ -107,10 +107,6 @@
     }
 
     @media (max-width: 575px) {
-        .guest-order-section {
-            padding: 150px 0 70px;
-        }
-
         .guest-order-wrap {
             padding: 30px 20px;
         }
@@ -139,7 +135,7 @@
             @endif
 
             <form id="guest-order-otp-form" method="POST" action="{{ route('front.guest.order.verify', ['token' => $token]) }}">
-                @csrft
+                @csrf
                 <div class="guest-otp-field">
                     <label for="guest_order_otp">Enter OTP</label>
                     <input type="text" name="otp" id="guest_order_otp" class="otp-input" maxlength="6" inputmode="numeric" autocomplete="one-time-code" placeholder="······" required>
