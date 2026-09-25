@@ -380,6 +380,7 @@
                             </div>
                             <div class="d-flex flex-column align-items-center gap-2 mt-4">
                                 <button type="button" id="btn-email-next" class="btn-auth-primary com_btn">Continue</button>
+                                <button type="button" id="btn-continue-as-guest-link" class="btn-auth-secondary p-0">Continue as a Guest</button>
                                 <p class="mb-0 mt-2">
                                     Don't have an account?
                                     <button type="button" id="btn-direct-signup" class="btn-auth-secondary p-0 ms-1">
@@ -1076,6 +1077,14 @@
                     showError(getAjaxErrorMessage(xhr));
                 }
             });
+        });
+
+        $('#btn-continue-as-guest-link').on('click', function () {
+            hideError();
+            var typedEmail = $('#checkout_email').val().trim();
+            $('#checkoutAuthModal').modal('hide');
+            $('#guestCheckoutModal').modal('show');
+            $('#guest_email').val(typedEmail);
         });
 
         $('#btn-guest-continue').click(function() {
