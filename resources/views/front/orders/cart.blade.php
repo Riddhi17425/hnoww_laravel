@@ -1049,6 +1049,10 @@
             hideGuestError();
             guestCheckoutEmail = email;
 
+            var sendBtn = $('#btn-guest-email-submit');
+            var originalText = sendBtn.text();
+            sendBtn.prop('disabled', true).text('Sending...');
+
             $.ajax({
                 url: "{{ route('front.checkout.guest.send-otp') }}",
                 type: "POST",
@@ -1068,6 +1072,9 @@
                     var msg = getAjaxErrorMessage(xhr);
                     showError(msg);
                     showGuestError(msg);
+                },
+                complete: function() {
+                    sendBtn.prop('disabled', false).text(originalText);
                 }
             });
         }
@@ -1258,6 +1265,9 @@
                 return;
             }
 
+            var verifyBtn = $(this);
+            verifyBtn.prop('disabled', true).text('Verifying...');
+
             $.ajax({
                 url: "{{ route('front.checkout.guest.verify-otp') }}",
                 type: 'POST',
@@ -1275,13 +1285,21 @@
                 },
                 error: function (xhr) {
                     showGuestError(getAjaxErrorMessage(xhr));
+                },
+                complete: function () {
+                    verifyBtn.prop('disabled', false).text('Verify & Continue');
                 }
             });
         });
 
         $('#btn-resend-guest-checkout-otp').on('click', function () {
             if (!guestCheckoutEmail) return;
+            var resendBtn = $(this);
+            resendBtn.prop('disabled', true).text('Sending...');
             sendGuestOtp(guestCheckoutEmail);
+            setTimeout(function () {
+                resendBtn.prop('disabled', false).html('Resend OTP <span id="guest-checkout-otp-timer">(60s)</span>');
+            }, 1000);
         });
 
         $('#btn-guest-otp-back').on('click', function () {

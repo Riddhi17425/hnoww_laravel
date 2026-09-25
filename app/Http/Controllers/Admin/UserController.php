@@ -30,33 +30,39 @@ class UserController extends Controller
 
         if (isset($request->user_id) && $request->user_id != '') {
             $query = $query->where('user_id', (int)$request->user_id);
-        }       
-        return Datatables::of($query)      
-            ->addColumn('user_details', function ($result) {
-                if(isset($result->user_id)){
-                    $userDetails = '';
-                    if($result->user){
-                        if($result->user->name)
-                            $userDetails .= '<b>User Name</b> - ' . $result->user->name.'<br/>';
-                        if($result->user->email)
-                            $userDetails .= '<b>User Email Id</b> - ' . $result->user->email.'<br/>';
-                        if($result->user->phone)
-                            $userDetails .= '<b>User Phone Number</b> - ' . $result->user->phone.'<br/>';
-                        if($result->user->address)
-                            $userDetails .= '<b>User Address</b> - ' . $result->user->address;
-                    }
-                    return $userDetails;
-                }else{
-                   return '-';
-                }  
-            })  
+        }
+
+        if (isset($request->customer_type) && $request->customer_type !== '') {
+            if ($request->customer_type === 'guest') {
+                $query = $query->whereNull('user_id');
+            } elseif ($request->customer_type === 'normal') {
+                $query = $query->whereNotNull('user_id');
+            }
+        }
+
+        return Datatables::of($query)
+            ->addColumn('customer_type', function ($order) {
+                return $order->getCustomerTypeLabel();
+            })
+            ->addColumn('user_details', function ($order) {
+                $customer = $order->getCustomerDetails();
+
+                if ($order->user_id && $order->user) {
+                    $details = [];
+                    if ($customer['name'] !== '-') $details[] = '<b>Name</b> - ' . e($customer['name']);
+                    if ($customer['email'] !== '-') $details[] = '<b>Email</b> - ' . e($customer['email']);
+                    if ($customer['phone'] !== '-') $details[] = '<b>Phone</b> - ' . e($customer['phone']);
+                    return implode('<br>', $details) ?: '-';
+                }
+
+                return '<b>Guest Email</b> - ' . e($customer['email']);
+            })
+            ->editColumn('order_number', function ($order) {
+                return e($order->getOrderNumberDisplay());
+            })
             ->editColumn('status', function ($result) {
-                if(isset($result->status)){
-                    return strtoupper($result->status);
-                }else{
-                   return '-';
-                }  
-            })      
+                return isset($result->status) ? strtoupper($result->status) : '-';
+            })
             ->addColumn('action', function ($row) {
                 $viewUrl = route('admin.users.orders.details', $row->id);
                 return '
@@ -64,9 +70,8 @@ class UserController extends Controller
                         <i class="icofont-eye"></i>
                     </a>
                 ';
-            })    
-            //->escapeColumns([])  
-            ->rawColumns(['user_id', 'action', 'user_details'])
+            })
+            ->rawColumns(['user_details', 'action'])
             ->make(true);
     }
 

@@ -24,18 +24,31 @@ $(document).ready(function () {
         ajax: {
             url: window.APP_URLS.getOrders,
             data: function(d) {
-               d.user_id = $('#user_id').val(); // send dropdown value
+               d.user_id = $('#user_id').val();
+               d.customer_type = $('#customer_type_filter').val();
             }
         },
         order: [[0, 'desc']],
         columns: [
             { data: 'order_number', name: 'order_number' },
-            { data: 'user_details', name:"user_details", orderable:false, searchable:false },
+            {
+                data: 'customer_type',
+                name: 'customer_type',
+                orderable: false,
+                searchable: false,
+                render: function(data) {
+                    if (data === 'Guest User') {
+                        return '<span class="badge bg-warning text-dark px-2 py-1">Guest User</span>';
+                    }
+                    return '<span class="badge bg-success px-2 py-1">Normal User</span>';
+                }
+            },
+            { data: 'user_details', name: 'user_details', orderable: false, searchable: false },
             { data: 'status', name: 'status' },
             { data: 'subtotal', name: 'subtotal', render: formatAmount },
             { data: 'shipping_charges', name: 'shipping_charges', render: formatAmount },
             { data: 'order_total', name: 'order_total', render: formatAmount },
-            { data: 'action', name: 'action', orderable:false, searchable:false },
+            { data: 'action', name: 'action', orderable: false, searchable: false },
         ]
     });
 
@@ -45,9 +58,7 @@ $(document).ready(function () {
     }
 
     // Trigger table reload when dropdown changes
-    $('#user_id').change(function () {
+    $('#user_id, #customer_type_filter').change(function () {
         orderTable.draw();
     });
-    
-    
 });

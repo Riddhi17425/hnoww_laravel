@@ -11,17 +11,28 @@
                     <h3 class="mb-1">Orders List</h3>
                     <p class="text-muted mb-0">Review customer orders and payment totals.</p>
                 </div>
-                @if(isset($users) && is_countable($users) && count($users) > 0)
-                <div style="min-width: 220px;">
-                    <label for="user_id" class="form-label mb-1">Filter by user</label>
-                    <select id="user_id" class="form-control input-default">
-                        <option value="">-- Select User --</option>
-                        @foreach($users as $key => $val)
-                            <option value="{{ $val->id }}">{{ $val->name }}</option>
-                        @endforeach
-                    </select>
+                <div class="d-flex flex-wrap gap-3 align-items-end">
+                    @if(isset($users) && is_countable($users) && count($users) > 0)
+                    <div style="min-width: 220px;">
+                        <label for="user_id" class="form-label mb-1">Filter by user</label>
+                        <select id="user_id" class="form-control input-default">
+                            <option value="">-- Select User --</option>
+                            @foreach($users as $key => $val)
+                                <option value="{{ $val->id }}">{{ $val->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    @endif
+
+                    <div style="min-width: 220px;">
+                        <label for="customer_type_filter" class="form-label mb-1">Filter by customer type</label>
+                        <select id="customer_type_filter" class="form-control input-default">
+                            <option value="">-- All --</option>
+                            <option value="guest">Guest User</option>
+                            <option value="normal">Normal User</option>
+                        </select>
+                    </div>
                 </div>
-                @endif
             </div>
 
             <div class="table-responsive">
@@ -29,6 +40,7 @@
                     <thead>
                         <tr>
                             <th>Order Number</th>
+                            <th>Customer Type</th>
                             <th>User Details</th>
                             <th>Order Status</th>
                             <th>Sub Total (AED)</th>

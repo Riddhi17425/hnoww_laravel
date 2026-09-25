@@ -244,7 +244,7 @@
             <!-- LEFT : Addresses -->
             <div class="col-lg-8 col-12">
                 <div class="co-left-wrapper">
-                    @if($userAddresses->count() > 0)
+                    @if(auth()->check() && $userAddresses->count() > 0)
                     <h3 class="co-summary-title mb-4">Shipping Address</h3>
 
                     <div class="row address-selection mb-4 gy-4" style="--bs-gutter-x: 20px;">

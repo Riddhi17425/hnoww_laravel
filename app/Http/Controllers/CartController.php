@@ -190,7 +190,7 @@ class CartController extends Controller
             $userAddresses = UserAddress::where('user_id', auth()->id())->where('is_confirm', 1)->get();
         } else {
             $cartItems = Cart::where('session_id', Session::getId())->get();
-            $userAddresses = UserAddress::where('user_id', null)->where('contact_no', '!=', null)->get();
+            $userAddresses = collect();
         }
 
         $subTotal = $cartItems->sum(function ($item) {
@@ -503,6 +503,12 @@ class CartController extends Controller
             abort(404, 'Guest order access link is invalid or expired.');
         }
 
+        if ($order->isDelivered()) {
+            return response()->view('front.orders.link_expired', [
+                'message' => 'This order link has expired.',
+            ], 410);
+        }
+
         $email = strtolower(trim($order->guest_email));
         if ($email) {
             \App\Models\PasswordResetOtp::where('email', $email)->delete();
@@ -531,10 +537,20 @@ class CartController extends Controller
                 : abort(404, 'Order access link is invalid.');
         }
 
+        if ($order->isDelivered()) {
+            return $request->expectsJson() || $request->ajax()
+                ? response()->json(['success' => false, 'message' => 'This order link has expired.'], 410)
+                : response()->view('front.orders.link_expired', [
+                    'message' => 'This order link has expired.',
+                ], 410);
+        }
+
         if ($order->guest_order_token_expires_at && now()->greaterThan($order->guest_order_token_expires_at)) {
             return $request->expectsJson() || $request->ajax()
                 ? response()->json(['success' => false, 'message' => 'This order link has expired.'], 410)
-                : abort(410, 'This order link has expired.');
+                : response()->view('front.orders.link_expired', [
+                    'message' => 'This order link has expired.',
+                ], 410);
         }
 
         $otpRecord = \App\Models\PasswordResetOtp::where('email', strtolower(trim($order->guest_email)))
@@ -565,6 +581,12 @@ class CartController extends Controller
         $order = Order::where('guest_order_token', $token)->first();
         if (!$order) {
             abort(404, 'Order not found.');
+        }
+
+        if ($order->isDelivered()) {
+            return response()->view('front.orders.link_expired', [
+                'message' => 'This order link has expired.',
+            ], 410);
         }
 
         $sessionAccess = session('guest_order_access_' . $order->id);

@@ -52,4 +52,38 @@ class GuestCheckoutFlowTest extends TestCase
 
         $response->assertRedirect(route('front.guest.order.details', ['token' => 'redirect-token-123']));
     }
+
+    public function test_guest_order_access_is_expired_when_order_is_delivered()
+    {
+        $order = Order::create([
+            'user_id' => null,
+            'guest_email' => 'delivered@example.com',
+            'guest_order_token' => 'delivered-token-123',
+            'guest_order_token_expires_at' => now()->addDay(),
+            'status' => 'delivered',
+            'subtotal' => 100,
+            'discount_percent' => 0,
+            'discount' => 0,
+            'shipping_charges' => 0,
+            'order_total' => 100,
+        ]);
+
+        $this->assertFalse($order->guestOrderTokenIsValid());
+
+        $this->get(route('front.guest.order.access', ['token' => 'delivered-token-123']))
+            ->assertStatus(410);
+    }
+
+    public function test_order_number_and_customer_type_fallbacks_are_generated_for_guest_orders()
+    {
+        $order = new Order([
+            'id' => 999,
+            'user_id' => null,
+            'guest_email' => 'guest-fallback@example.com',
+            'status' => 'confirmed',
+        ]);
+
+        $this->assertSame('ORD-999', $order->getOrderNumberDisplay());
+        $this->assertSame('Guest User', $order->getCustomerTypeLabel());
+    }
 }

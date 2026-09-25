@@ -76,12 +76,19 @@
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body">
                     <h6 class="fw-bold mb-3 text-dark">
-                        <i class="bi bi-person-circle"></i> Customer Details
+                        <i class="bi bi-person-circle"></i>
+                        {{ $order->user_id ? 'Customer Details' : 'Guest User Details' }}
                     </h6>
 
-                    <p class="mb-2"><strong>Name:</strong> {{ $order->user->name ?? 'N/A' }}</p>
-                    <p class="mb-2"><strong>Email:</strong> {{ $order->user->email ?? 'N/A' }}</p>
-                    <p class="mb-0"><strong>Phone:</strong> {{ $order->user->phone ?? 'N/A' }}</p>
+                    @if($order->user_id && $order->user)
+                        <p class="mb-2"><strong>Name:</strong> {{ $order->user->name ?? 'N/A' }}</p>
+                        <p class="mb-2"><strong>Email:</strong> {{ $order->user->email ?? 'N/A' }}</p>
+                        <p class="mb-0"><strong>Phone:</strong> {{ $order->user->phone ?? 'N/A' }}</p>
+                    @else
+                        <p class="mb-2"><strong>Customer Type:</strong> <span class="badge bg-warning text-dark">Guest User</span></p>
+                        <p class="mb-2"><strong>Guest Email:</strong> {{ $order->guest_email ?? 'N/A' }}</p>
+                        <p class="mb-0"><strong>Guest Order:</strong> {{ $order->getOrderNumberDisplay() }}</p>
+                    @endif
 
                     @if($hasAwb)
                     <div class="d-flex flex-wrap gap-2 mt-4 pt-3 border-top">
@@ -135,6 +142,13 @@
                         </p>
                     @else
                         <p class="text-muted">No address found for this order.</p>
+                    @endif
+
+                    @if(!$order->user_id)
+                        <div class="mt-3 pt-3 border-top">
+                            <p class="mb-1"><strong>Guest Email:</strong> {{ $order->guest_email ?? 'N/A' }}</p>
+                            <p class="mb-0"><strong>Guest Customer:</strong> Yes</p>
+                        </div>
                     @endif
 
                 </div>
