@@ -190,6 +190,34 @@
     text-align: left;
     margin-top: 4px !important;
 }
+#guestCheckoutModal .btn-guest-back {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid var(--dark-900);
+    color: var(--dark-900);
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#guestCheckoutModal .btn-guest-back:hover {
+    background: var(--dark-900);
+    color: var(--white-color);
+}
+
+#guestCheckoutModal .btn-guest-back svg {
+    transition: transform 0.3s ease;
+}
+
+#guestCheckoutModal .btn-guest-back:hover svg {
+    transform: translateX(-3px);
+}
 </style>
 <section class="mt_60 mb_120">
     {{-- @php 
@@ -766,9 +794,9 @@
                                 <input type="email" name="guest_email" id="guest_email" class="form-control shadow-none" placeholder=" " required>
                                 <label for="guest_email">Email address</label>
                             </div>
-                            <div class="d-flex flex-row align-items-center justify-content-center gap-3 mt-4">
+                            <div class="d-flex flex-row justify-content-center align-items-stretch gap-3 mt-4">
                                 <button type="submit" id="btn-guest-email-submit" class="btn-auth-primary com_btn" style="width:auto;">Send OTP</button>
-                                <button type="button" id="btn-guest-modal-back" class="btn-auth-secondary mt-0">Back</button>
+                                <button type="button" id="btn-guest-modal-back" class="btn-guest-back"><svg width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M15 6H1M6 1L1 6l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Back</span></button>
                             </div>
                         </div>
 
@@ -786,7 +814,7 @@
                             <div class="d-flex flex-column align-items-center gap-2 mt-4">
                                 <button type="button" id="btn-verify-guest-checkout-otp" class="btn-auth-primary com_btn">Verify & Continue</button>
                                 <button type="button" id="btn-resend-guest-checkout-otp" class="btn-auth-secondary" disabled>Resend OTP <span id="guest-checkout-otp-timer">(60s)</span></button>
-                                <button type="button" id="btn-guest-otp-back" class="btn-auth-secondary"><- Back</button>
+                                <button type="button" id="btn-guest-otp-back" class="btn-guest-back"><svg width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M15 6H1M6 1L1 6l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Back</span></button>
                             </div>
                         </div>
                     </form>
