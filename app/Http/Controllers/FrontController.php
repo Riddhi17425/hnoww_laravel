@@ -205,7 +205,7 @@ class FrontController extends Controller
             return redirect()->back()->with('error', 'Product not Found');
         }
 
-        $similarProduct = Product::select('id', 'category_id', 'product_name', 'product_price', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'product_url')->where('category_id', $product->category_id)->where('id', '!=', $product->id)->isActive()->notDeleted()->latest('id')->take(3)->get();
+        $similarProduct = Product::select('id', 'category_id', 'product_name', 'product_price', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'product_url')->where('category_id', $product->category_id)->where('id', '!=', $product->id)->where('product_url', 'not like', 'test-%')->isActive()->notDeleted()->latest('id')->take(3)->get();
 
         $meta_title       = $product->meta_title ?? $product->product_name;
         $meta_description = $product->meta_description ?? strip_tags($product->short_description);
