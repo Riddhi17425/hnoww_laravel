@@ -4,6 +4,238 @@
     'meta_description' => $product->meta_description ?? \Illuminate\Support\Str::limit(strip_tags($product->description), 160)
 ])
 
+{{-- START - PRODUCT SCHEMA --}}
+@php
+    // Product URL
+    $schemaProductUrl = url('/product-details/' . $product->product_url);
+
+    // Product Images
+    $schemaImages = [];
+
+    // Listing image
+    if (!empty($product->list_page_img))
+    {
+        $schemaImages[] = asset('public/images/admin/product_list/' . $product->list_page_img);
+    }
+
+    // Detail images
+    /*
+    if (!empty($productDetailImages) && is_array($productDetailImages))
+    {
+        foreach ($productDetailImages as $image) 
+        {
+            if (!empty($image))
+            {
+                $schemaImages[] = asset( 'public/images/admin/product_detail/' . $image);
+            }
+        }
+    }*/
+
+    // Remove duplicate images
+    $schemaImages = array_values(array_unique($schemaImages));
+
+    //Product Description
+    $schemaDescription = trim( strip_tags($product->meta_description ?? '') );
+
+    if (empty($schemaDescription))
+    {
+        $schemaDescription = trim( strip_tags($product->short_description ?? '') );
+    }
+
+    // Product Material
+    $schemaMaterial = trim(
+        preg_replace(
+            '/\s+/',
+            ' ',
+            strip_tags($product->materials ?? '')
+        )
+    );
+
+    // Product Weight
+    $schemaWeight = null;
+
+    if (!empty($product->weight)) 
+    {
+        $weightText = strtolower( trim(strip_tags($product->weight)) );
+
+        // Extract numeric value
+        preg_match('/([0-9]+(?:\.[0-9]+)?)/', $weightText, $weightMatch);
+
+        if (!empty($weightMatch[1]))
+        {
+            $weightValue = (float) $weightMatch[1];
+
+            // Convert grams/gms to KG
+            if (
+                str_contains($weightText, 'gms') ||
+                str_contains($weightText, 'gram') ||
+                preg_match('/\bg\b/', $weightText)
+            ) 
+            {
+                $weightValue = $weightValue / 1000;
+            }
+
+            $schemaWeight = [
+                '@type' => 'QuantitativeValue',
+                'value' => $weightValue,
+                'unitCode' => 'KGM',
+            ];
+        }
+    }
+
+    // Product Dimensions
+
+    $schemaHeight = null;
+    $schemaWidth  = null;
+    $schemaDepth  = null;
+
+    if (!empty($product->dimensions))
+    {
+        $dimensionText = strtolower( strip_tags($product->dimensions) );
+
+        // Height
+        if (preg_match('/(?:^|\s)h(?:eight)?\s*[:\-]?\s*([0-9]+(?:\.[0-9]+)?)/i', $dimensionText, $match))
+        {
+            $schemaHeight = [
+                '@type' => 'QuantitativeValue',
+                'value' => (float) $match[1],
+                'unitText' => 'in',
+            ];
+        }
+
+        // Width
+        if (preg_match('/(?:^|\s)w(?:idth)?\s*[:\-]?\s*([0-9]+(?:\.[0-9]+)?)/i', $dimensionText, $match))
+        {
+            $schemaWidth = [
+                '@type' => 'QuantitativeValue',
+                'value' => (float) $match[1],
+                'unitText' => 'in',
+            ];
+        }
+
+        // Depth
+        if (preg_match('/(?:^|\s)d(?:epth)?\s*[:\-]?\s*([0-9]+(?:\.[0-9]+)?)/i', $dimensionText, $match))
+        {
+            $schemaDepth = [
+                '@type' => 'QuantitativeValue',
+                'value' => (float) $match[1],
+                'unitText' => 'in',
+            ];
+        }
+    }
+
+    // Product Price
+    $schemaPrice = preg_replace(
+        '/[^0-9.]/',
+        '',
+        $product->product_price ?? ''
+    );
+
+
+    // Product Availability
+    $schemaAvailability = ((int) ($product->product_stock ?? 0) > 0)
+        ? 'https://schema.org/InStock'
+        : 'https://schema.org/OutOfStock';
+
+    // Product Schema
+    $productSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Product',
+        '@id' => $schemaProductUrl . '#product',
+        'name' => $product->meta_title ?? '',
+        'description' => $schemaDescription,
+        'url' => $schemaProductUrl,
+        'image' => $schemaImages,
+        'brand' => [
+            '@type' => 'Brand',
+            'name' => 'HNO̱WW',
+        ],
+    ];
+
+    // Material
+    if (!empty($schemaMaterial))
+    {
+        $productSchema['material'] = $schemaMaterial;
+    }
+
+    // Weight
+    if (!empty($schemaWeight))
+    {
+        $productSchema['weight'] = $schemaWeight;
+    }
+
+    // Height
+    if (!empty($schemaHeight))
+    {
+        $productSchema['height'] = $schemaHeight;
+    }
+
+    // Width
+    if (!empty($schemaWidth))
+    {
+        $productSchema['width'] = $schemaWidth;
+    }
+
+    // Depth
+    if (!empty($schemaDepth))
+    {
+        $productSchema['depth'] = $schemaDepth;
+    }
+
+    // Offer
+    if (!empty($schemaPrice))
+    {
+        $productSchema['offers'] = [
+            '@type' => 'Offer',
+            'url' => $schemaProductUrl,
+            'priceCurrency' => 'AED',
+            'price' => $schemaPrice,
+            'availability' => $schemaAvailability,
+            'itemCondition' => 'https://schema.org/NewCondition',
+            'seller' => [
+                '@type' => 'Organization',
+                'name' => 'HNO̱WW',
+                'url' => url('/'),
+            ],
+        ];
+    }
+@endphp
+
+<script type="application/ld+json">
+{!! json_encode(
+    $productSchema,
+    JSON_UNESCAPED_SLASHES |
+    JSON_UNESCAPED_UNICODE |
+    JSON_PRETTY_PRINT
+) !!}
+</script>
+{{-- END - PRODUCT SCHEMA --}}
+
+{{-- START - BREADCRUMBS SCHEMA --}}
+{{-- BREADCRUMB SCHEMA --}}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": "{{ url()->current() }}#breadcrumb",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "{{ url('/') }}"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": {!! json_encode($product->product_name ?? '') !!},
+            "item": "{{ url('/product-details/' . ($product->product_url ?? '')) }}"
+        }
+    ]
+}
+</script>
+{{-- END - BREADCRUMBS SCHEMA --}}
+
 <style>
 .theme-green .header-scrolled {
     background: #EDEAE4;
