@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin\{AdminController, BlessingController, BlogController, CategoryController, CeremonialController, CorporateKitController, FaqController, GiftShopController, JournalController, ProductController, ProductImageController, ProductTabController, UserController, BannerController};
 use App\Http\Controllers\Admin\Auth\LoginController;
-use App\Http\Controllers\{AuthController, CartController, FrontController, SitemapController};
+use App\Http\Controllers\{AuthController, CartController, FrontController, InvoiceController, SitemapController};
 use App\Http\Middleware\RedirectIfNotAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -144,6 +144,7 @@ Route::name('front.')->group(function () {
 
         Route::get('/order', [CartController::class, 'order'])->name('order.view');
         Route::get('/order-detail/{orderid}', [CartController::class, 'orderDetail'])->name('order_detail.view');
+        Route::get('/order-detail/{orderid}/invoice', [InvoiceController::class, 'customerDownload'])->name('invoice.download');
 
         // Route::get('/cart', [CartController::class, 'getCart'])->name('cart.view');
         // Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add.ajax');
@@ -246,6 +247,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             route::get('/get-orders', [UserController::class, 'getOrders'])->name('orders');
             route::get('/fetch-orders', [UserController::class, 'fetchOrders'])->name('orders.fetch');
             route::get('/view-order-details/{orderid}', [UserController::class, 'viewOrderDetails'])->name('orders.details');
+            Route::get('/view-order-details/{orderid}/invoice', [InvoiceController::class, 'adminDownload'])->name('orders.invoice');
             route::get('/order-awb/{orderid}', [UserController::class, 'awb'])->name('orders.awb');
         });
 

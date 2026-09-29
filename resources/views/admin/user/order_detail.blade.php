@@ -14,6 +14,11 @@
             <span class="badge bg-primary text-white px-3 py-2 fs-6 shadow-sm">
                  #{{ $order->order_number ?? $order->id }}
             </span>
+            <div class="mt-2">
+                <a href="{{ route('admin.users.orders.invoice', $order->id) }}" class="btn btn-sm" style="border: 1px solid #c7b58c; color: #8c7950; background: #faf9f6;">
+                    <i class="bi bi-download me-1"></i> Download Invoice
+                </a>
+            </div>
         </div>
     </div>
 

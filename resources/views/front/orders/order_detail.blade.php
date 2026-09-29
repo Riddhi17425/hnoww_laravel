@@ -1,5 +1,27 @@
 @include('layouts.frontheader')
 <style>
+    .order-invoice-download {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 0 26px;
+        border: 1px solid #c7b58c;
+        color: #8c7950;
+        background: #faf9f6;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: background-color .2s ease, color .2s ease;
+    }
+
+    .order-invoice-download:hover {
+        color: #fff;
+        background: #b8a477;
+    }
+
     .theme-green .header-scrolled {
         background: #EDEAE4;
     }
@@ -1025,6 +1047,9 @@
 
                 <!-- 1. ORDER SUMMARY TABLE (PELE JESA ORIGINAL & FULLY RESPONSIVE) -->
                 <div class="order_detail_wrapper mb-4">
+                    <div class="d-flex justify-content-end">
+                        <a href="{{ route('front.invoice.download', $orderDetails->id) }}" class="order-invoice-download">Download Invoice</a>
+                    </div>
                     <div class="table-responsive order-summary-responsive">
                         <table class="table shopping-summery mb-0" style="--bs-table-bg:--bs-table-bg;">
                             <thead>

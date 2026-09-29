@@ -10,6 +10,7 @@ use Stripe;
 use Session;
 use Auth;
 use Illuminate\Support\Facades\Mail;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CartController extends Controller
 {
@@ -382,12 +383,24 @@ class CartController extends Controller
         ];
 
         try {
+            $invoice = null;
+            try {
+                $invoiceOrder = Order::with(['user', 'orderAddress', 'orderProducts.product'])->findOrFail($order->id);
+                $invoice = Pdf::loadView('invoices.order', ['order' => $invoiceOrder])->output();
+            } catch (\Throwable $e) {
+                \Log::error('Order invoice generation failed: ' . $e->getMessage());
+            }
+
             Mail::send('email.admin.order_success', $data, function ($message) use ($adminEmail, $adminSubject) {
                 $message->to($this->adminEmail)->subject($adminSubject);
             });
 
-            Mail::send('email.front.order_success', $data, function ($message) use ($userEmail) {
+            Mail::send('email.front.order_success', $data, function ($message) use ($userEmail, $invoice, $order) {
                 $message->to($userEmail)->subject('Order Placed Successfully');
+                if ($invoice !== null) {
+                    $fileName = 'Invoice-' . ($order->order_number ?? $order->id) . '.pdf';
+                    $message->attachData($invoice, $fileName, ['mime' => 'application/pdf']);
+                }
             });
         } catch (\Throwable $e) {
             \Log::error('Inquiry Mail sending failed: ' . $e->getMessage());
