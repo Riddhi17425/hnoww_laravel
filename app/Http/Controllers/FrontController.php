@@ -182,6 +182,7 @@ class FrontController extends Controller
         $category    = Category::where('category_url', $catSlug)->first();
         $catProducts = Product::select('id', 'category_id', 'product_url', 'product_name', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'product_price')
             //->where('product_type', 1)
+            ->where('product_url', 'not like', 'test-%')
             ->where(function($query) use ($category) {
                 $query->where('category_id', $category->id)
                       ->orWhereRaw("FIND_IN_SET(?, shown_in_other_categories)", [$category->id]);
@@ -197,10 +198,10 @@ class FrontController extends Controller
 
     public function getProductDetails(Request $request, $productSlug)
     {
-        $product             = Product::select('id', 'category_id', 'product_name', 'product_url', 'product_price', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'large_description', 'dimensions', 'detail_page_imgs', 'moq', 'short_note', 'product_stock', 'care_maintenance', 'meta_title', 'meta_description', 'materials', 'weight')->where('product_url', $productSlug)->isActive()->notDeleted()->first();
-        $productDetailImages = $product->detail_page_imgs ? json_decode($product->detail_page_imgs) : '';
+        $product             = Product::select('id', 'category_id', 'product_name', 'product_url', 'product_price', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'large_description', 'height', 'width', 'length', 'detail_page_imgs', 'moq', 'short_note', 'product_stock', 'care_maintenance', 'meta_title', 'meta_description', 'materials', 'weight')->where('product_url', $productSlug)->isActive()->notDeleted()->first();
+        $productDetailImages = $product != '' && $product->detail_page_imgs ? json_decode($product->detail_page_imgs) : '';
         $productTab          = $product->tabs ?? [];
-        if (! isset($product) && $product == '') {
+        if (!isset($product) && $product == '') {
             return redirect()->back()->with('error', 'Product not Found');
         }
 
@@ -216,7 +217,7 @@ class FrontController extends Controller
     public function getGiftDetails(Request $request, $productSlug)
     {
         $product             = GiftShop::select('id', 'gift_for', 'to_celebrate', 'product_name', 'product_price', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'large_description', 'dimensions', 'detail_page_imgs', 'product_url', 'meta_title', 'meta_description')->where('product_url', $productSlug)->isActive()->notDeleted()->first();
-        $productDetailImages = $product->detail_page_imgs ? json_decode($product->detail_page_imgs) : '';
+        $productDetailImages = $product != '' && $product->detail_page_imgs ? json_decode($product->detail_page_imgs) : '';
         if (! isset($product) && $product == '') {
             return redirect()->back()->with('error', 'Product not Found');
         }
@@ -2497,6 +2498,7 @@ class FrontController extends Controller
 
         $baseQuery = Product::where('is_active', 0)
             ->where('product_type', 1)
+            ->where('product_url', 'not like', 'test-%')
             ->whereNull('deleted_at');
 
         $priceStats = (clone $baseQuery)
@@ -2593,28 +2595,27 @@ class FrontController extends Controller
             ->whereNotNull('product_url')
             ->where('product_url', '!=', '')
             ->where(function ($query) use ($q) {
-                $query->where('product_name', 'LIKE', "%{$q}%")
-                    ->orWhere('materials', 'LIKE', "%{$q}%")
-                    ->orWhere('short_note', 'LIKE', "%{$q}%");
+                $query->where('product_name', 'LIKE', "%{$q}%");
+                    // ->orWhere('materials', 'LIKE', "%{$q}%")
+                    // ->orWhere('short_note', 'LIKE', "%{$q}%");
             })
             ->orderByRaw("
                 CASE
                     WHEN product_name = ? THEN 1
                     WHEN product_name LIKE ? THEN 2
                     WHEN product_name LIKE ? THEN 3
-                    WHEN short_note LIKE ? THEN 4
-                    WHEN materials LIKE ? THEN 5
-                    ELSE 6
+                    ELSE 4
                 END
             ", [
                 $q,
                 "{$q}%",
                 "%{$q}%",
-                "%{$q}%",
-                "%{$q}%"
             ])
-            ->select('id', 'product_name', 'product_price', 'list_page_img', 'product_url', 'category_id')
+            ->select('id', 'product_name', 'category_id', 'product_price', 'list_page_img', 'product_url')
             ->with(['category:id,category_name'])
+            ->whereHas('category', function ($query) {
+                $query->where('is_active', 0)->whereNull('deleted_at')->where('is_festive', 0);
+            })
             //->limit(12)
             ->get()
             ->map(function ($item) {

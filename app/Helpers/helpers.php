@@ -32,3 +32,28 @@ function backendRoute($key) {
 function backendRoutePut($key, $args = []) {
 	return routePut(backendRoute($key), $args);
 }
+
+function addBusinessDays($date, $days) {
+    if (!$date instanceof DateTimeInterface) {
+        return $date;
+    }
+
+    $result = \Carbon\Carbon::instance($date)->copy();
+    $offset = (int) $days;
+
+    while ($offset > 0) {
+        $result->addDay();
+        if (!in_array($result->dayOfWeek, [0, 6], true)) {
+            $offset--;
+        }
+    }
+
+    while ($offset < 0) {
+        $result->subDay();
+        if (!in_array($result->dayOfWeek, [0, 6], true)) {
+            $offset++;
+        }
+    }
+
+    return $result;
+}

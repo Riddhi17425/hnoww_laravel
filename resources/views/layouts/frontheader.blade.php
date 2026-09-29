@@ -588,7 +588,7 @@ $current_route === 'front.order.details' || $current_route === 'front.get.forgot
     </div>
 
 
-    <script>
+<script>
     // Your languages array (unchanged)
     const languages = [{
             code: 'ar',

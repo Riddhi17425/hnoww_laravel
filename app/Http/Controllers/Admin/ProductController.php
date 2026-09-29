@@ -135,7 +135,9 @@ class ProductController extends Controller
             'short_note' => 'nullable|string|max:255',
             'short_description' => 'nullable|string|max:500',
             'large_description' => 'nullable|string|max:5000',
-            'dimensions' => 'nullable|string|max:5000',
+            'height' => 'nullable|numeric|min:0|max:999999.99',
+            'width' => 'nullable|numeric|min:0|max:999999.99',
+            'length' => 'nullable|numeric|min:0|max:999999.99',
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:1000',
         ], [
@@ -168,8 +170,15 @@ class ProductController extends Controller
             'short_description.max' => 'Product short description cannot exceed 500 characters.',
             'large_description.string' => 'Product large description must be a valid string.',
             'large_description.max' => 'Product large description cannot exceed 5000 characters.',
-            'dimensions.string' => 'Product Dimension must be a valid string.',
-            'dimensions.max' => 'Product Dimension cannot exceed 5000 characters.',
+            'height.numeric' => 'Height must be a valid number.',
+            'height.min' => 'Height cannot be negative.',
+            'height.max' => 'Height is too large.',
+            'width.numeric' => 'Width must be a valid number.',
+            'width.min' => 'Width cannot be negative.',
+            'width.max' => 'Width is too large.',
+            'length.numeric' => 'Length must be a valid number.',
+            'length.min' => 'Length cannot be negative.',
+            'length.max' => 'Length is too large.',
             //'meta_title.required' => 'Meta title is required.',
             'meta_title.string' => 'Meta title must be a valid string.',
             'meta_title.max' => 'Meta title cannot exceed 255 characters.',
@@ -184,7 +193,7 @@ class ProductController extends Controller
         }
         $data = $request->only([
             'category_id', 'product_name', 'product_price', 'short_description', 'large_description',
-            'meta_title', 'meta_description', 'product_url', 'dimensions', 'materials', 'moq', 'short_note', 'product_stock', 'weight', 'care_maintenance'
+            'meta_title', 'meta_description', 'product_url', 'height', 'width', 'length', 'materials', 'moq', 'short_note', 'product_stock', 'weight', 'care_maintenance'
         ]);
 
         // STORE LIST PAGE IMAGE (SINGLE)
@@ -305,7 +314,9 @@ class ProductController extends Controller
             'short_note' => 'nullable|string|max:255',
             'short_description' => 'nullable|string|max:500',
             'large_description' => 'nullable|string|max:5000',
-            'dimensions' => 'nullable|string|max:5000',
+            'height' => 'nullable|numeric|min:0|max:999999.99',
+            'width' => 'nullable|numeric|min:0|max:999999.99',
+            'length' => 'nullable|numeric|min:0|max:999999.99',
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:1000',
         ], [
@@ -337,8 +348,15 @@ class ProductController extends Controller
             'short_description.max' => 'Product short description cannot exceed 500 characters.',
             'large_description.string' => 'Product large description must be a valid string.',
             'large_description.max' => 'Product large description cannot exceed 5000 characters.',
-            'dimensions.string' => 'Product Dimension must be a valid string.',
-            'dimensions.max' => 'Product Dimension cannot exceed 5000 characters.',
+            'height.numeric' => 'Height must be a valid number.',
+            'height.min' => 'Height cannot be negative.',
+            'height.max' => 'Height is too large.',
+            'width.numeric' => 'Width must be a valid number.',
+            'width.min' => 'Width cannot be negative.',
+            'width.max' => 'Width is too large.',
+            'length.numeric' => 'Length must be a valid number.',
+            'length.min' => 'Length cannot be negative.',
+            'length.max' => 'Length is too large.',
             //'meta_title.required' => 'Meta title is required.',
             'meta_title.string' => 'Meta title must be a valid string.',
             'meta_title.max' => 'Meta title cannot exceed 255 characters.',
@@ -355,7 +373,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $data = $request->only([
             'category_id', 'product_name', 'product_price', 'short_description', 'large_description',
-            'meta_title', 'meta_description', 'product_url', 'dimensions', 'materials', 'moq', 'short_note', 'product_stock', 'weight', 'care_maintenance'
+            'meta_title', 'meta_description', 'product_url', 'height', 'width', 'length', 'materials', 'moq', 'short_note', 'product_stock', 'weight', 'care_maintenance'
         ]);
         
         // Handle shown_in_other_categories field
