@@ -74,6 +74,12 @@
     color: #574d3d;
 }
 
+.add_to_cart_btn
+{
+    background: var(--secondary-color) !important;
+    color: var( --white-color) !important;
+}
+
 @media (max-width:767px) {
     .sticky-header {
         /*background: #EDEAE4;*/
