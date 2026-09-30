@@ -21,6 +21,10 @@ class CartController extends Controller
     {
         $normalizedEmirate = is_string($emirate) ? trim($emirate) : '';
 
+        if ($normalizedEmirate === '') {
+            return self::DUBAI_SHIPPING_CHARGE;
+        }
+
         return strtolower($normalizedEmirate) === 'dubai'
             ? self::DUBAI_SHIPPING_CHARGE
             : self::OTHER_EMIRATES_SHIPPING_CHARGE;
