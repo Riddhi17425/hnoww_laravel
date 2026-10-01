@@ -415,7 +415,6 @@
 @php
     $aara_films = [
         [
-            'poster' => asset('public/images/front/aara-sec1.webp'),
             'video' => asset('public/reel_videos/aara_flowers.webm'),
             'duration' => '0:45',
             'title' => 'Light the Table',
@@ -423,7 +422,6 @@
             'alt' => 'Light the Table — HNOWW x Aara Diwali film',
         ],
         [
-            'poster' => asset('public/images/front/aara-sec1.webp'),
             'video'  => asset('public/reel_videos/hnoww_aara_diwaliVO.webm'),
             'duration' => '0:[00]',
             'title' => 'Bring in the Florals',
@@ -431,7 +429,6 @@
             'alt' => 'Bring in the Florals — HNOWW x Aara Diwali film',
         ],
         [
-            'poster' => asset('public/images/front/aara-sec1.webp'),
             'video'  => asset('public/reel_videos/hnoww_aara_products.webm'),
             'duration' => '0:[00]',
             'title' => 'Place the Objects',
@@ -439,7 +436,6 @@
             'alt' => 'Place the Objects — HNOWW x Aara Diwali film',
         ],
         [
-            'poster' => asset('public/images/front/aara-sec1.webp'),
             'video'  => asset('public/reel_videos/hnoww_aara-interview.webm'),
             'duration' => '0:[00]',
             'title' => 'Place the Objects',
@@ -447,7 +443,6 @@
             'alt' => 'Place the Objects — HNOWW x Aara Diwali film',
         ],
         [
-            'poster' => asset('public/images/front/aara-sec1.webp'),
             'video'  => asset('public/reel_videos/hnoww_nandi.webm'),
             'duration' => '0:[00]',
             'title' => 'Place the Objects',
@@ -455,7 +450,6 @@
             'alt' => 'Place the Objects — HNOWW x Aara Diwali film',
         ],
         [
-            'poster' => asset('public/images/front/aara-sec1.webp'),
             'video'  => asset('public/reel_videos/hnoww_website.webm'),
             'duration' => '0:[00]',
             'title' => 'Place the Objects',
@@ -491,15 +485,15 @@
             Three gestures bring The Festive Table to life.
         </p>
 
-        <div class="aara_film_grid">
+        <div class="aara_film_grid aara_film_slider">
             @foreach ($aara_films as $i => $film)
-                <div>
-                    <div class="aara_film_media" data-video="{{ $film['video'] }}">
-                        <img src="{{ $film['poster'] }}" alt="{{ $film['alt'] }}" loading="lazy">
-                        <span class="aara_film_play" role="button" aria-label="Play video">
+                <div class="aara_film_slide">
+                    <div class="aara_film_media" role="button" tabindex="0" aria-label="Play {{ $film['title'] }} video">
+                        <video src="{{ $film['video'] }}" muted loop playsinline preload="none" aria-label="{{ $film['alt'] }}"></video>
+                        <span class="aara_film_play" aria-hidden="true">
                             <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
                         </span>
-                        <span class="aara_film_duration">{{ $film['duration'] }}</span>
+                        <!-- <span class="aara_film_duration">{{ $film['duration'] }}</span> -->
                     </div>
                     <div class="aara_film_caption">
                         <span class="aara_film_num">{{ sprintf('%02d', $i + 1) }}</span>
@@ -517,32 +511,77 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.aara_film_media').forEach(function (media) {
-            media.addEventListener('click', function () {
-                if (media.classList.contains('is-playing')) {
-                    return;
+        var filmSlider = $('.aara_film_slider');
+        if (filmSlider.length && !filmSlider.hasClass('slick-initialized')) {
+            filmSlider.slick({
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                infinite: false,
+                dots: true,
+                arrows: true,
+                prevArrow: '<button type="button" class="aara_film_arrow aara_film_arrow_prev" aria-label="Previous reels">&#8592;</button>',
+                nextArrow: '<button type="button" class="aara_film_arrow aara_film_arrow_next" aria-label="Next reels">&#8594;</button>',
+                responsive: [
+                    { breakpoint: 992, settings: { slidesToShow: 2 } },
+                    { breakpoint: 640, settings: { slidesToShow: 1 } }
+                ]
+            });
+        }
+
+        function playFilmPreview(video) {
+            video.preload = 'metadata';
+            video.play().catch(function () {});
+        }
+
+        var filmObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                var video = entry.target.querySelector('video');
+                if (!video || entry.target.classList.contains('is-playing')) return;
+                if (entry.isIntersecting) {
+                    playFilmPreview(video);
+                } else {
+                    video.pause();
                 }
+            });
+        }, { threshold: 0.25 });
 
-                var videoUrl = media.getAttribute('data-video');
-                var video = document.createElement('video');
-                video.src = videoUrl;
-                video.controls = true;
-                video.autoplay = true;
-                video.playsInline = true;
+        document.querySelectorAll('.aara_film_media').forEach(function (media) {
+            var video = media.querySelector('video');
+            filmObserver.observe(media);
 
-                var revertToPoster = function () {
-                    if (media.contains(video)) {
-                        media.removeChild(video);
-                    }
-                    media.classList.remove('is-playing');
-                };
-
-                video.addEventListener('pause', revertToPoster);
-                video.addEventListener('ended', revertToPoster);
-
+            function startFilm() {
+                if (media.classList.contains('is-playing')) return;
                 media.classList.add('is-playing');
-                media.appendChild(video);
-                video.play();
+                video.controls = true;
+                video.loop = false;
+                video.muted = false;
+                video.currentTime = 0;
+                video.play().catch(function () {
+                    media.classList.remove('is-playing');
+                    video.controls = false;
+                    video.loop = true;
+                    video.muted = true;
+                });
+            }
+
+            function returnToPreview() {
+                media.classList.remove('is-playing');
+                video.controls = false;
+                video.loop = true;
+                video.muted = true;
+                if (media.getBoundingClientRect().width > 0) playFilmPreview(video);
+            }
+
+            media.addEventListener('click', startFilm);
+            media.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    startFilm();
+                }
+            });
+            video.addEventListener('ended', returnToPreview);
+            video.addEventListener('pause', function () {
+                if (media.classList.contains('is-playing')) returnToPreview();
             });
         });
     });
