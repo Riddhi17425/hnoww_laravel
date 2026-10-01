@@ -99,7 +99,7 @@
                     <div class="aara_collab_brand aara_collab_brand_aara">
                         <h3 class="aara_collab_brand_name aara_collab_brand_name_aara">aara</h3>
                         <p class="aara_collab_brand_tag">Floral Design Studio</p>
-                        <p class="aara_collab_brand_desc">[One line on Aara from their team.]</p>
+                        <p class="aara_collab_brand_desc">Seasonal floral design and bespoke arrangements, crafted in Dubai.</p>
                     </div>
                 </div>
             </div>
@@ -217,7 +217,7 @@
         <div class="aara_edit_grid_top">
             <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/Aara/4th_collection/Gaj Silver Elephants (set of two).webp') }}" alt="Gaj Silver Elephants (set of two) — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/The Twin Columns.webp') }}" alt="The Twin Columns — HNOWW Diwali gifting, Dubai" loading="lazy">
                     <span class="aara_edit_card_badge">HNOWW</span>
                 </div>
                 <div class="aara_edit_card_body">
@@ -233,7 +233,7 @@
             <div class="aara_edit_grid_top_right">
                 <div class="aara_edit_card">
                     <div class="aara_edit_card_img">
-                        <img src="{{ asset('public/images/front/Aara/4th_collection/Lotus Bowl.webp') }}" alt="Lotus Bowl — HNOWW Diwali gifting, Dubai" loading="lazy">
+                        <img src="{{ asset('public/images/front/Aara/4th_collection/Gaj Silver Elephants (set of two).webp') }}" alt="Lotus Bowl — HNOWW Diwali gifting, Dubai" loading="lazy">
                         <span class="aara_edit_card_badge">HNOWW</span>
                     </div>
                     <div class="aara_edit_card_body">
@@ -248,7 +248,7 @@
 
                 <div class="aara_edit_card">
                     <div class="aara_edit_card_img">
-                        <img src="{{ asset('public/images/front/Aara/4th_collection/Mehr Candleholder and Vase Duo.webp') }}" alt="Mehr Candleholder and Vase Duo — HNOWW Diwali gifting, Dubai" loading="lazy">
+                        <img src="{{ asset('public/images/front/Aara/4th_collection/Sandooq Silver Dry Fruit Box.webp') }}" alt="Mehr Candleholder and Vase Duo — HNOWW Diwali gifting, Dubai" loading="lazy">
                         <span class="aara_edit_card_badge">HNOWW</span>
                     </div>
                     <div class="aara_edit_card_body">
@@ -263,7 +263,7 @@
 
                 <div class="aara_edit_card">
                     <div class="aara_edit_card_img">
-                        <img src="{{ asset('public/images/front/Aara/4th_collection/Gaj Silver Urli (small).webp') }}" alt="Gaj Silver Urli (small) — HNOWW Diwali gifting, Dubai" loading="lazy">
+                        <img src="{{ asset('public/images/front/Aara/4th_collection/Tara Silver Serving Tray.webp') }}" alt="Gaj Silver Urli (small) — HNOWW Diwali gifting, Dubai" loading="lazy">
                         <span class="aara_edit_card_badge">HNOWW</span>
                     </div>
                     <div class="aara_edit_card_body">
@@ -278,7 +278,7 @@
 
                 <div class="aara_edit_card">
                     <div class="aara_edit_card_img">
-                        <img src="{{ asset('public/images/front/Aara/4th_collection/Tara Silver Serving Tray.webp') }}" alt="Tara Silver Serving Tray — HNOWW Diwali gifting, Dubai" loading="lazy">
+                        <img src="{{ asset('public/images/front/Aara/4th_collection/The Gathering.webp') }}" alt="Tara Silver Serving Tray — HNOWW Diwali gifting, Dubai" loading="lazy">
                         <span class="aara_edit_card_badge">HNOWW</span>
                     </div>
                     <div class="aara_edit_card_body">
@@ -296,78 +296,16 @@
         <div class="aara_edit_grid_bottom">
             <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/aara-sec1.webp') }}" alt="The Festive Centrepiece — Aara Floral Luxury arrangement, Dubai" loading="lazy">
-                    <span class="aara_edit_card_badge">Aara</span>
-                </div>
-                <div class="aara_edit_card_body">
-                    <div class="aara_edit_card_row">
-                        <h3 class="aara_edit_card_title">[The Festive Centrepiece]</h3>
-                        <span class="aara_edit_card_price">AED [Price]</span>
-                    </div>
-                    <p class="aara_edit_card_desc">Marigold, dahlia and quiet colour.</p>
-                    <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20Festive%20Centrepiece" target="_blank" rel="noopener" class="aara_edit_card_link">Order on WhatsApp <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-                </div>
-            </div>
-
-            <div class="aara_edit_card">
-                <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/diwali/Lotus Lights.webp') }}" alt="Marigold & Rose — Aara Floral Luxury arrangement, Dubai" loading="lazy">
-                </div>
-                <div class="aara_edit_card_body">
-                    <div class="aara_edit_card_row">
-                        <h3 class="aara_edit_card_title">[Marigold &amp; Rose]</h3>
-                        <span class="aara_edit_card_price">AED [Price]</span>
-                    </div>
-                    <p class="aara_edit_card_desc">For the welcome at the door.</p>
-                    <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20Marigold%20%26%20Rose" target="_blank" rel="noopener" class="aara_edit_card_link">Order on WhatsApp <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-                </div>
-            </div>
-
-            <div class="aara_edit_card">
-                <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/diwali/Personalisation.webp') }}" alt="Rouge Roses — Aara Floral Luxury arrangement, Dubai" loading="lazy">
-                </div>
-                <div class="aara_edit_card_body">
-                    <div class="aara_edit_card_row">
-                        <h3 class="aara_edit_card_title">[Rouge Roses]</h3>
-                        <span class="aara_edit_card_price">AED [Price]</span>
-                    </div>
-                    <p class="aara_edit_card_desc">Colour, softness, movement.</p>
-                    <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20Rouge%20Roses" target="_blank" rel="noopener" class="aara_edit_card_link">Order on WhatsApp <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-                </div>
-            </div>
-        </div>
-
-        <div class="aara_edit_grid_extra">
-            <p class="aara_edit_extra_label">More from the Edit</p>
-
-            <div class="aara_edit_card">
-                <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/Aara/4th_collection/Ganesh Mantra Tealight Holder.webp') }}" alt="Ganesh Mantra Tealight Holder — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/Gaj Silver Urli (small).webp') }}" alt="Gaj Silver Urli (small) — HNOWW Diwali gifting, Dubai" loading="lazy">
                     <span class="aara_edit_card_badge">HNOWW</span>
                 </div>
                 <div class="aara_edit_card_body">
                     <div class="aara_edit_card_row">
-                        <h3 class="aara_edit_card_title">Ganesh Mantra Tealight Holder</h3>
+                        <h3 class="aara_edit_card_title">Gaj Silver Urli (small)</h3>
                         <span class="aara_edit_card_price">AED [Price]</span>
                     </div>
-                    <p class="aara_edit_card_desc">Light, carried with intention.</p>
-                    <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20Ganesh%20Mantra%20Tealight%20Holder" target="_blank" rel="noopener" class="aara_edit_card_link">Order on WhatsApp <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-                </div>
-            </div>
-
-            <div class="aara_edit_card">
-                <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/Aara/4th_collection/Sandooq Silver Dry Fruit Box.webp') }}" alt="Sandooq Silver Dry Fruit Box — HNOWW Diwali gifting, Dubai" loading="lazy">
-                    <span class="aara_edit_card_badge">HNOWW</span>
-                </div>
-                <div class="aara_edit_card_body">
-                    <div class="aara_edit_card_row">
-                        <h3 class="aara_edit_card_title">Sandooq Silver Dry Fruit Box</h3>
-                        <span class="aara_edit_card_price">AED [Price]</span>
-                    </div>
-                    <p class="aara_edit_card_desc">A box for the season's offerings.</p>
-                    <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20Sandooq%20Silver%20Dry%20Fruit%20Box" target="_blank" rel="noopener" class="aara_edit_card_link">Order on WhatsApp <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    <p class="aara_edit_card_desc">Made to hold the season.</p>
+                    <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20Gaj%20Silver%20Urli%20(small)" target="_blank" rel="noopener" class="aara_edit_card_link">Order on WhatsApp <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
             </div>
 
@@ -388,7 +326,71 @@
 
             <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/Aara/4th_collection/The Gathering.webp') }}" alt="The Gathering — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/Mehr Candleholder and Vase Duo.webp') }}" alt="Mehr Candleholder and Vase Duo — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <span class="aara_edit_card_badge">HNOWW</span>
+                </div>
+                <div class="aara_edit_card_body">
+                    <div class="aara_edit_card_row">
+                        <h3 class="aara_edit_card_title">Mehr Candleholder and Vase Duo</h3>
+                        <span class="aara_edit_card_price">AED [Price]</span>
+                    </div>
+                    <p class="aara_edit_card_desc">Light and bloom, side by side.</p>
+                    <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20Mehr%20Candleholder%20and%20Vase%20Duo" target="_blank" rel="noopener" class="aara_edit_card_link">Order on WhatsApp <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="aara_edit_grid_extra">
+            <p class="aara_edit_extra_label">More from the Edit</p>
+
+            <div class="aara_edit_card">
+                <div class="aara_edit_card_img">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/Two Tier Dessert Stand.webp') }}" alt="Ganesh Mantra Tealight Holder — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <span class="aara_edit_card_badge">HNOWW</span>
+                </div>
+                <div class="aara_edit_card_body">
+                    <div class="aara_edit_card_row">
+                        <h3 class="aara_edit_card_title">Ganesh Mantra Tealight Holder</h3>
+                        <span class="aara_edit_card_price">AED [Price]</span>
+                    </div>
+                    <p class="aara_edit_card_desc">Light, carried with intention.</p>
+                    <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20Ganesh%20Mantra%20Tealight%20Holder" target="_blank" rel="noopener" class="aara_edit_card_link">Order on WhatsApp <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                </div>
+            </div>
+
+            <div class="aara_edit_card">
+                <div class="aara_edit_card_img">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/Lotus Bowl.webp') }}" alt="Sandooq Silver Dry Fruit Box — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <span class="aara_edit_card_badge">HNOWW</span>
+                </div>
+                <div class="aara_edit_card_body">
+                    <div class="aara_edit_card_row">
+                        <h3 class="aara_edit_card_title">Sandooq Silver Dry Fruit Box</h3>
+                        <span class="aara_edit_card_price">AED [Price]</span>
+                    </div>
+                    <p class="aara_edit_card_desc">A box for the season's offerings.</p>
+                    <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20Sandooq%20Silver%20Dry%20Fruit%20Box" target="_blank" rel="noopener" class="aara_edit_card_link">Order on WhatsApp <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                </div>
+            </div>
+
+            <div class="aara_edit_card">
+                <div class="aara_edit_card_img">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/Zoya Silver Serving Tray.webp') }}" alt="Silver Serving Tongs — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <span class="aara_edit_card_badge">HNOWW</span>
+                </div>
+                <div class="aara_edit_card_body">
+                    <div class="aara_edit_card_row">
+                        <h3 class="aara_edit_card_title">Silver Serving Tongs</h3>
+                        <span class="aara_edit_card_price">AED [Price]</span>
+                    </div>
+                    <p class="aara_edit_card_desc">Service, with a little shine.</p>
+                    <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20Silver%20Serving%20Tongs" target="_blank" rel="noopener" class="aara_edit_card_link">Order on WhatsApp <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                </div>
+            </div>
+
+            <div class="aara_edit_card">
+                <div class="aara_edit_card_img">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/Ganesh Mantra Tealight Holder.webp') }}" alt="The Gathering — HNOWW Diwali gifting, Dubai" loading="lazy">
                     <span class="aara_edit_card_badge">HNOWW</span>
                 </div>
                 <div class="aara_edit_card_body">
@@ -401,7 +403,7 @@
                 </div>
             </div>
 
-            <div class="aara_edit_card">
+            <!-- <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
                     <img src="{{ asset('public/images/front/Aara/4th_collection/The Twin Columns.webp') }}" alt="The Twin Columns — HNOWW Diwali gifting, Dubai" loading="lazy">
                     <span class="aara_edit_card_badge">HNOWW</span>
@@ -444,7 +446,7 @@
                     <p class="aara_edit_card_desc">A tray for the table's centre.</p>
                     <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20Zoya%20Silver%20Serving%20Tray" target="_blank" rel="noopener" class="aara_edit_card_link">Order on WhatsApp <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <div class="aara_edit_footer_cta">
@@ -569,18 +571,18 @@
 <!-- infinite image gallery strip -->
 @php
     $aara_gallery_products = [
-        'Gaj Silver Elephants (set of two)',
-        'Gaj Silver Urli (small)',
-        'Ganesh Mantra Tealight Holder',
-        'Lotus Bowl',
-        'Mehr Candleholder and Vase Duo',
-        'Sandooq Silver Dry Fruit Box',
-        'Silver Serving Tongs',
         'Tara Silver Serving Tray',
         'The Gathering',
+        'Sandooq Silver Dry Fruit Box',
+        'Gaj Silver Elephants (set of two)',
+        'Silver Serving Tongs',
         'The Twin Columns',
+        'Mehr Candleholder and Vase Duo',
         'Two Tier Dessert Stand',
+        'Gaj Silver Urli (small)',
+        'Lotus Bowl',
         'Zoya Silver Serving Tray',
+        'Ganesh Mantra Tealight Holder',
     ];
     $aara_gallery_images = collect($aara_gallery_products)->map(function ($name) {
         return [
