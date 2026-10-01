@@ -10,6 +10,7 @@ use Stripe;
 use Session;
 use Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class CartController extends Controller
@@ -89,19 +90,20 @@ class CartController extends Controller
             $cart = $cart->where('session_id', $session_id)->first();
         }
 
-        $requestedQty = $request->quantity ?? 1;
+        $requestedQty = (int) $request->input('quantity', 1);
+        $existingQty = $cart ? (int) $cart->quantity : 0;
         if(isset($request->cart_id) && $request->cart_id != ''){
             $totalQty = $requestedQty;   
         }else{
-            $existingQty = $cart ? $cart->quantity : 0;
             $totalQty = $existingQty + $requestedQty;
         }
        
         // Stock check
-        if ($totalQty > $product->product_stock) {
+        $availableStock = max(0, (int) $product->product_stock - (isset($request->cart_id) && $request->cart_id != '' ? 0 : $existingQty));
+        if ((int) $product->product_stock < 1 || $totalQty > (int) $product->product_stock) {
             return response()->json([
                 'status'  => false,
-                'message' => 'Not enough stock available.',
+                'message' => 'You cannot add more quantity.',
                 'data'    => [
                     'available_stock' => $product->product_stock,
                     'already_in_cart' => $existingQty,
@@ -123,13 +125,13 @@ class CartController extends Controller
             }
         } else {
             // Only create if quantity > 0
-            if ($request->quantity > 0) {
+            if ($requestedQty > 0) {
                 Cart::create([
                     'user_id'    => $user_id != '' ? $user_id : null,
                     'session_id' => $session_id != '' ? $session_id : null,
                     'product_id' => $product->id,
                     'price'      => $product->product_price,
-                    'quantity'   => $request->quantity,
+                    'quantity'   => $requestedQty,
                 ]);
             }
         }
@@ -223,6 +225,17 @@ class CartController extends Controller
             ], 422);
         }
 
+        foreach ($cartItems as $cartItem) {
+            $product = Product::find($cartItem->product_id);
+            $stock = (int) ($product->product_stock ?? 0);
+            if (!$product || (int) $cartItem->quantity > $stock) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Please update the quantity for ' . ($product->product_name ?? 'the item') . ' in your cart. The requested quantity is not available.',
+                ], 422);
+            }
+        }
+
         $subTotal = $cartItems->sum(function ($item) {
             return (float) $item->price * (int) $item->quantity;
         });
@@ -305,18 +318,6 @@ class CartController extends Controller
             return null;
         }
 
-        $cartItems = Cart::where('user_id', $user->id)->get();
-        if ($cartItems->isEmpty()) {
-            return null;
-        }
-
-        $subTotal = $cartItems->sum(function ($item) {
-            return $item->price * $item->quantity;
-        });
-
-        $orderAddress = UserAddress::find($addressId);
-        $shippingCharges = self::calculateShippingCharges($orderAddress->emirate ?? null);
-
         $giftNote = trim((string) $request->input('gift_note', ''));
         if ($request->boolean('gift_wrapper') && $giftNote !== '') {
             $giftNoteWords = preg_split('/\s+/', $giftNote);
@@ -325,47 +326,76 @@ class CartController extends Controller
             $giftNote = null;
         }
 
-        $order = Order::create([
-            'user_id' => $user->id,
-            'order_address_id' => $addressId,
-            'gift_wrapper' => $request->boolean('gift_wrapper'),
-            'gift_note' => $giftNote,
-            'status' => 'confirmed',
-            'subtotal' => $subTotal,
-            'discount_percent' => 0,
-            'discount' => 0,
-            'shipping_charges' => $shippingCharges,
-            'order_total' => $subTotal + $shippingCharges,
-            'stripe_payment_intent' => $request->payment_intent ?? null,
-            'stripe_payment_intent_client_secret' => $request->payment_intent_client_secret ?? null,
-            'payment_status' => 'paid',
-        ]);
+        return DB::transaction(function () use ($request, $addressId, $user, $giftNote) {
+            $cartItems = Cart::where('user_id', $user->id)->lockForUpdate()->get();
+            if ($cartItems->isEmpty()) {
+                return null;
+            }
 
-        $order->order_number = 'ORD-' . $order->id . '-' . $user->id . '-' . rand(1000, 9999);
-        $order->save();
+            $products = Product::whereIn('id', $cartItems->pluck('product_id')->unique())
+                ->orderBy('id')
+                ->lockForUpdate()
+                ->get()
+                ->keyBy('id');
 
-        foreach ($cartItems as $cart) {
-            OrderProduct::create([
-                'order_id' => $order->id,
-                'product_id' => $cart->product_id,
-                'price' => $cart->price,
-                'quantity' => $cart->quantity,
-                'subtotal' => ($cart->price * $cart->quantity),
+            foreach ($cartItems as $cart) {
+                $product = $products->get($cart->product_id);
+                if (!$product || (int) $cart->quantity > (int) $product->product_stock) {
+                    return null;
+                }
+            }
+
+            $subTotal = $cartItems->sum(function ($item) {
+                return $item->price * $item->quantity;
+            });
+            $orderAddress = UserAddress::find($addressId);
+            $shippingCharges = self::calculateShippingCharges($orderAddress->emirate ?? null);
+
+            $order = Order::create([
+                'user_id' => $user->id,
+                'order_address_id' => $addressId,
+                'gift_wrapper' => $request->boolean('gift_wrapper'),
+                'gift_note' => $giftNote,
+                'status' => 'confirmed',
+                'subtotal' => $subTotal,
+                'discount_percent' => 0,
+                'discount' => 0,
+                'shipping_charges' => $shippingCharges,
+                'order_total' => $subTotal + $shippingCharges,
+                'stripe_payment_intent' => $request->payment_intent ?? null,
+                'stripe_payment_intent_client_secret' => $request->payment_intent_client_secret ?? null,
+                'payment_status' => 'paid',
             ]);
 
-            $cart->delete();
-        }
+            $order->order_number = 'ORD-' . $order->id . '-' . $user->id . '-' . rand(1000, 9999);
+            $order->save();
 
-        UserAddress::where(['user_id' => $user->id, 'is_confirm' => 0])
-            ->where('is_primary', '!=', 1)
-            ->delete();
+            foreach ($cartItems as $cart) {
+                $product = $products->get($cart->product_id);
+                OrderProduct::create([
+                    'order_id' => $order->id,
+                    'product_id' => $cart->product_id,
+                    'price' => $cart->price,
+                    'quantity' => $cart->quantity,
+                    'subtotal' => ($cart->price * $cart->quantity),
+                ]);
 
-        if ($orderAddress) {
-            $orderAddress->is_confirm = 1;
-            $orderAddress->save();
-        }
+                $product->product_stock = (int) $product->product_stock - (int) $cart->quantity;
+                $product->save();
+                $cart->delete();
+            }
 
-        return $order;
+            UserAddress::where(['user_id' => $user->id, 'is_confirm' => 0])
+                ->where('is_primary', '!=', 1)
+                ->delete();
+
+            if ($orderAddress) {
+                $orderAddress->is_confirm = 1;
+                $orderAddress->save();
+            }
+
+            return $order;
+        });
     }
 
     protected function sendOrderSuccessNotifications(Order $order, $addressId): void
