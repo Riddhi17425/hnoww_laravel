@@ -43,13 +43,36 @@
     }
 
     // Product Material
-    $schemaMaterial = trim(
-        preg_replace(
-            '/\s+/',
-            ' ',
-            strip_tags($product->materials ?? '')
-        )
-    );
+    $schemaMaterial = [];
+
+    if (!empty($product->materials))
+    {
+        $materialHtml = $product->materials;
+
+        // Extract each <li> as a separate material
+        preg_match_all(
+            '/<li[^>]*>(.*?)<\/li>/is',
+            $materialHtml,
+            $materialMatches
+        );
+
+        if (!empty($materialMatches[1]))
+        {
+            foreach ($materialMatches[1] as $material)
+            {
+                // Remove HTML tags such as <b>
+                $material = trim(strip_tags($material));
+
+                // Normalize spaces
+                $material = preg_replace('/\s+/', ' ', $material);
+
+                if (!empty($material))
+                {
+                    $schemaMaterial[] = $material;
+                }
+            }
+        }
+    }
 
     // Product Weight
     $schemaWeight = null;
