@@ -87,7 +87,7 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     line-height: 1.8;
-    opacity: 0.85;
+    /* opacity: 0.85; */
     z-index: 2;
 }
 
@@ -133,7 +133,7 @@
 .aara_hero_label {
     font-family: var(--body-font);
     color: var(--gold-color);
-    font-size: 13px;
+    /* font-size: 13px; */
     font-weight: 500;
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -156,7 +156,7 @@
 
 .aara_hero_para {
     color: var(--white-color);
-    opacity: 0.85;
+    /* opacity: 0.85; */
     margin-bottom: 34px;
 }
 
@@ -192,7 +192,7 @@
     gap: 14px;
     color: var(--gold-color);
     text-transform: uppercase;
-    font-size: 14px;
+    /* font-size: 14px; */
     letter-spacing: 2px;
     margin-bottom: 20px;
 }
@@ -333,8 +333,8 @@
 .aara_collab_brand_tag {
     font-family: var(--body-font);
     color: var(--secondary-color);
-    font-size: 11px;
-    font-weight: 600;
+    /* font-size: 11px; */
+    /* font-weight: 600; */
     letter-spacing: 1.5px;
     text-transform: uppercase;
     margin-bottom: 10px;
@@ -342,9 +342,9 @@
 
 .aara_collab_brand_desc {
     font-family: var(--body-font);
-    color: var(--grey-666);
-    font-size: 14px;
-    line-height: 22px;
+    /* color: var(--grey-666); */
+    /* font-size: 14px; */
+    /* line-height: 22px; */
 }
 
 .aara_collab_images {
@@ -398,7 +398,7 @@
 }
 
 .aara_pairing_content > * {
-    max-width: 460px;
+    /* max-width: 460px; */
 }
 
 .aara_pairing_title {
@@ -419,7 +419,7 @@
 .aara_pairing_para {
     color: var(--white-color);
     opacity: 0.7;
-    max-width: 420px;
+    /* max-width: 420px; */
     margin-bottom: 34px;
 }
 
@@ -531,7 +531,7 @@
 }
 
 .aara_edit_para {
-    max-width: 300px;
+    max-width: 540px;
 }
 
 .aara_edit_grid_top {
@@ -552,6 +552,8 @@
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     gap: 24px;
+    margin-top: 24px;
+    padding-top: 44px;
 }
 
 .aara_edit_grid_extra {
@@ -560,7 +562,7 @@
     gap: 24px;
     margin-top: 24px;
     padding-top: 44px;
-    border-top: 1px solid rgba(14, 34, 51, 0.12);
+    /* border-top: 1px solid rgba(14, 34, 51, 0.12); */
 }
 
 .aara_edit_extra_label {
@@ -621,16 +623,14 @@
     font-family: var(--heading-font);
     font-style: italic;
     color: var(--dark-900);
-    font-size: 17px;
+    /* font-size: 17px; */
     font-weight: 500;
-    line-height: 24px;
-    min-height: 48px;
 }
 
 .aara_edit_card_price {
     font-family: var(--body-font);
     color: var(--grey-666);
-    font-size: 12px;
+    /* font-size: 12px; */
     white-space: nowrap;
 }
 
@@ -638,7 +638,7 @@
     font-family: var(--heading-font);
     font-style: italic;
     color: var(--secondary-color);
-    font-size: 13px;
+    /* font-size: 13px; */
     margin: 4px 0 12px;
 }
 
@@ -646,7 +646,7 @@
     display: inline-block;
     font-family: var(--body-font);
     color: var(--dark-900);
-    font-size: 11px;
+    /* font-size: 11px; */
     font-weight: 600;
     letter-spacing: 1.5px;
     text-transform: uppercase;
@@ -770,8 +770,8 @@
 
 .aara_film_intro {
     color: var(--white-color);
-    opacity: 0.7;
-    max-width: 480px;
+    /* opacity: 0.7; */
+    max-width: 558px;
     margin-bottom: 44px;
 }
 
@@ -786,7 +786,7 @@
     font-family: var(--heading-font);
     font-style: italic;
     color: var(--gold-color);
-    font-size: 14px;
+    font-size: 24px;
     flex-shrink: 0;
 }
 
@@ -794,16 +794,16 @@
     display: block;
     font-family: var(--body-font);
     color: var(--white-color);
-    font-size: 16px;
+    font-size: 24px;
     font-weight: 500;
-    margin-bottom: 6px;
+    margin-bottom: 15px;
 }
 
 .aara_film_caption_desc {
     font-family: var(--body-font);
     color: var(--white-color);
-    opacity: 0.6;
-    font-size: 13px;
+    /* opacity: 0.6; */
+    /* font-size: 13px; */
     line-height: 20px;
     margin-bottom: 10px;
 }
@@ -941,8 +941,8 @@
 .aara_faq_answer p {
     font-family: var(--body-font);
     color: var(--grey-666);
-    font-size: 18px;
-    line-height: 26px;
+    /* font-size: 18px; */
+    /* line-height: 26px; */
     margin: 0;
 }
 
@@ -1014,8 +1014,8 @@
 .aara_cta_eyebrow {
     color: var(--gold-color);
     text-transform: uppercase;
-    font-size: 13px;
-    font-weight: 600;
+    /* font-size: 13px; */
+    /* font-weight: 600; */
     letter-spacing: 2px;
     margin-bottom: 16px;
 }
@@ -1038,8 +1038,8 @@
 .aara_cta_meta {
     font-family: var(--body-font);
     color: var(--white-color);
-    opacity: 0.8;
-    font-size: 14px;
+    /* opacity: 0.8; */
+    /* font-size: 14px; */
     margin-bottom: 34px;
 }
 
@@ -1073,6 +1073,50 @@
 /* =========================================
    Responsive — all media queries grouped below
    ========================================= */
+
+
+
+@media (max-width: 1601px)
+{
+    .aara_faq_question {
+   
+    font-size: 21px;
+} 
+
+
+.aara_hero_vertical_text {
+    font-size: 15px;
+}
+
+.aara_hero_title {
+    font-size: 54px;
+}
+
+.aara_collab_title {
+    font-size: 38px;
+}
+
+.aara_edit_para {
+    max-width: 449px;
+}
+
+.aara_section_label {
+    font-size: 14px;
+}
+
+.aara_edit_card_title {
+    font-size: 18px;
+}
+
+.aara_film_header {
+    margin-bottom: 25px;
+}
+
+.aara_film_caption_title {
+    font-size: 22px;
+}
+
+}
 
 @media (max-width: 991px) {
     .aara_collab_title {
@@ -1121,6 +1165,21 @@
 }
 
 @media (max-width: 767px) {
+
+    .aara_section_label,.aara_pairing_title,.aara_pairing_para,.aara_edit_title,.aara_edit_para,.aara_film_title,.aara_film_hint,.aara_film_intro,.aara_gallery_title,.aara_gallery_body,.aara_faq_title,.aara_faq_para,.aara_cta_eyebrow,.aara_cta_title,.aara_cta_meta,.aara_film_hint
+    {
+        text-align: center;
+    }
+
+    .aara_film_hint
+    {
+        width: 100%;
+    }
+
+    .aara_edit_grid_bottom {
+    gap: 36px;
+}
+
     .aara_hero {
         min-height: 100vh;
     }
@@ -1172,11 +1231,25 @@
     }
 
     .aara_faq_title {
-        font-size: 38px;
+        font-size: 34px;
+    }
+
+    .aara_faq_item {
+        padding: 20px 0;
     }
 
     .aara_faq_question {
+        font-size: 17px;
+        gap: 14px;
+    }
+
+    .aara_faq_icon {
         font-size: 19px;
+    }
+
+    .aara_faq_answer p {
+        font-size: 14px;
+        line-height: 22px;
     }
 
     .aara_cta {
@@ -1199,5 +1272,42 @@
         border-left: 0;
         padding-top: 24px;
         border-top: 1px solid rgba(14, 34, 51, 0.12);
+    }
+
+    .aara_faq_item {
+        padding: 18px 0;
+    }
+
+    .aara_faq_question {
+        gap: 12px;
+        font-size: 16px;
+    }
+
+    .aara_faq_icon {
+        font-size: 17px;
+    }
+
+    .aara_faq_answer p {
+        font-size: 13px;
+        line-height: 21px;
+    }
+}
+
+@media (max-width: 480px) {
+    .aara_faq_title {
+        font-size: 28px;
+    }
+
+    .aara_faq_item {
+        padding: 16px 0;
+    }
+
+    .aara_faq_question {
+        font-size: 15px;
+        gap: 10px;
+    }
+
+    .aara_faq_icon {
+        font-size: 16px;
     }
 }
