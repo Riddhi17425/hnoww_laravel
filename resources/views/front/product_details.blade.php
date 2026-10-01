@@ -522,8 +522,6 @@
                 {{--@if($product->product_url == 'the-sovereign-weight' || $product->product_url == 'the-wireless-courtyard')
                     <button type="button" class="com_btn" data-bs-toggle="modal" data-bs-target="#productInquiry">Reserved for June Delivery </button>
                 @else --}}
-
-
                     @if((int) ($product->product_stock ?? 0) <= 0)
                         <button type="button" class="com_btn out_of_stock_btn" disabled>Out of Stock</button>
                         <a href="https://wa.me/971509509274?text={{ urlencode('Hi, I am interested in ' . ($product->product_name ?? 'this product') . ' which is currently out of stock. Can you help?') }}" target="_blank" rel="noopener" class="com_btn whatsapp_inquiry_btn">
