@@ -451,7 +451,18 @@
                 {{--@if($product->product_url == 'the-sovereign-weight' || $product->product_url == 'the-wireless-courtyard')
                     <button type="button" class="com_btn" data-bs-toggle="modal" data-bs-target="#productInquiry">Reserved for June Delivery </button>
                 @else --}}
-                    <button type="button" class="com_btn add_to_cart_btn" data-product-id="{{ $product->id }}" id="cartSubmitBtn"> Add to Cart</button>
+                    @if((int) ($product->product_stock ?? 0) < 1)
+                        <button type="button" class="com_btn add_to_cart_btn" disabled aria-disabled="true">Out of Stock</button>
+                        @php
+                            $stockMessage = 'Hi, I am interested in ' . ($product->product_name ?? 'this product') . '. It is currently out of stock. Please let me know if it becomes available.';
+                            $adminWhatsapp = preg_replace('/[^0-9]/', '', config('global_values.admin_whatsapp_no', ''));
+                        @endphp
+                        @if($adminWhatsapp)
+                            <a href="https://wa.me/{{ $adminWhatsapp }}?text={{ rawurlencode($stockMessage) }}" class="com_btn" target="_blank" rel="noopener noreferrer">Contact us on WhatsApp</a>
+                        @endif
+                    @else
+                        <button type="button" class="com_btn add_to_cart_btn" data-product-id="{{ $product->id }}" id="cartSubmitBtn"> Add to Cart</button>
+                    @endif
                     {{-- <button type="button" class="com_btn buy_now_btn" data-product-id="{{ $product->id }}" id="buyNowBtn"> Buy Now</button> --}}
                 {{-- @endif --}}
             </div>
