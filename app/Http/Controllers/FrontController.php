@@ -1008,6 +1008,15 @@ class FrontController extends Controller
         return view('front.corporate_diwali_collection', compact('meta_title', 'meta_description', 'categories', 'products', 'corporateProduct', 'weddingProduct', 'corporateKits'));
     }
 
+    public function getHnowwAaraDiwaliEdition(Request $request)
+    {
+        $meta_title       = 'HNOWW x Aara | The Festive Table | Diwali Edition 2026 | Dubai';
+        $meta_description = 'HNOWW x Aara Diwali Edition 2026: architectural HNOWW objects paired with fresh Aara Floral Luxury arrangements for the festive table. Order online, delivered across Dubai & the UAE.';
+        $og_image          = asset('public/images/front/hero-banner.webp');
+
+        return view('front.hnoww_aara_diwali', compact('meta_title', 'meta_description', 'og_image'));
+    }
+
     public function getRakshaBandhanCollection(Request $request)
     {
         $meta_title       = 'Raksha Bandhan Gifts in Dubai | Rakhi Collections | HNOWW';
