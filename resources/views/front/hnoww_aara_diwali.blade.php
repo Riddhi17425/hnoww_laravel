@@ -8,7 +8,7 @@
     $aara_marquee_items = array_merge($aara_marquee_items, $aara_marquee_items, $aara_marquee_items, $aara_marquee_items);
 @endphp
 <section class="aara_hero">
-    <video class="aara_hero_video" src="{{ asset('public/images/front/aara/HNoww_Website.mp4') }}" autoplay muted loop playsinline poster="{{ asset('public/images/front/hero-banner.webp') }}"></video>
+    <video class="aara_hero_video" src="{{ asset('public/images/front/Aara/HNoww_Website.mp4') }}" autoplay muted loop playsinline poster="{{ asset('public/images/front/hero-banner.webp') }}"></video>
 
     <div class="aara_hero_vertical">
         <span class="aara_hero_vertical_line"></span>
@@ -106,7 +106,7 @@
 
             <div class="col-lg-6">
                 <div class="aara_collab_images">
-                    <img class="aara_collab_img_collage" src="{{ asset('public/images/front/aara/Collage.webp') }}" alt="HNOWW x Aara — florals and objects styled together, Dubai">
+                    <img class="aara_collab_img_collage" src="{{ asset('public/images/front/Aara/Collage.webp') }}" alt="HNOWW x Aara — florals and objects styled together, Dubai">
                 </div>
             </div>
         </div>
@@ -116,7 +116,7 @@
 <!-- The Festive Table Set -->
 <section class="aara_pairing">
     <div class="aara_pairing_media">
-        <img src="{{ asset('public/images/front/aara/3rd_tableSet.webp') }}" alt="The Festive Table Set — HNOWW x Aara Diwali gifting, Dubai" loading="lazy">
+        <img src="{{ asset('public/images/front/Aara/3rd_tableSet.webp') }}" alt="The Festive Table Set — HNOWW x Aara Diwali gifting, Dubai" loading="lazy">
         <span class="aara_pairing_badge">The Pairing</span>
     </div>
 
@@ -217,7 +217,7 @@
         <div class="aara_edit_grid_top">
             <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/aara/4th_collection/Gaj Silver Elephants (set of two).webp') }}" alt="Gaj Silver Elephants (set of two) — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/Gaj Silver Elephants (set of two).webp') }}" alt="Gaj Silver Elephants (set of two) — HNOWW Diwali gifting, Dubai" loading="lazy">
                     <span class="aara_edit_card_badge">HNOWW</span>
                 </div>
                 <div class="aara_edit_card_body">
@@ -233,7 +233,7 @@
             <div class="aara_edit_grid_top_right">
                 <div class="aara_edit_card">
                     <div class="aara_edit_card_img">
-                        <img src="{{ asset('public/images/front/aara/4th_collection/Lotus Bowl.webp') }}" alt="Lotus Bowl — HNOWW Diwali gifting, Dubai" loading="lazy">
+                        <img src="{{ asset('public/images/front/Aara/4th_collection/Lotus Bowl.webp') }}" alt="Lotus Bowl — HNOWW Diwali gifting, Dubai" loading="lazy">
                         <span class="aara_edit_card_badge">HNOWW</span>
                     </div>
                     <div class="aara_edit_card_body">
@@ -248,7 +248,7 @@
 
                 <div class="aara_edit_card">
                     <div class="aara_edit_card_img">
-                        <img src="{{ asset('public/images/front/aara/4th_collection/Mehr Candleholder and Vase Duo.webp') }}" alt="Mehr Candleholder and Vase Duo — HNOWW Diwali gifting, Dubai" loading="lazy">
+                        <img src="{{ asset('public/images/front/Aara/4th_collection/Mehr Candleholder and Vase Duo.webp') }}" alt="Mehr Candleholder and Vase Duo — HNOWW Diwali gifting, Dubai" loading="lazy">
                         <span class="aara_edit_card_badge">HNOWW</span>
                     </div>
                     <div class="aara_edit_card_body">
@@ -263,7 +263,7 @@
 
                 <div class="aara_edit_card">
                     <div class="aara_edit_card_img">
-                        <img src="{{ asset('public/images/front/aara/4th_collection/Gaj Silver Urli (small).webp') }}" alt="Gaj Silver Urli (small) — HNOWW Diwali gifting, Dubai" loading="lazy">
+                        <img src="{{ asset('public/images/front/Aara/4th_collection/Gaj Silver Urli (small).webp') }}" alt="Gaj Silver Urli (small) — HNOWW Diwali gifting, Dubai" loading="lazy">
                         <span class="aara_edit_card_badge">HNOWW</span>
                     </div>
                     <div class="aara_edit_card_body">
@@ -278,7 +278,7 @@
 
                 <div class="aara_edit_card">
                     <div class="aara_edit_card_img">
-                        <img src="{{ asset('public/images/front/aara/4th_collection/Tara Silver Serving Tray.webp') }}" alt="Tara Silver Serving Tray — HNOWW Diwali gifting, Dubai" loading="lazy">
+                        <img src="{{ asset('public/images/front/Aara/4th_collection/Tara Silver Serving Tray.webp') }}" alt="Tara Silver Serving Tray — HNOWW Diwali gifting, Dubai" loading="lazy">
                         <span class="aara_edit_card_badge">HNOWW</span>
                     </div>
                     <div class="aara_edit_card_body">
@@ -343,7 +343,7 @@
 
             <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/aara/4th_collection/Ganesh Mantra Tealight Holder.webp') }}" alt="Ganesh Mantra Tealight Holder — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/Ganesh Mantra Tealight Holder.webp') }}" alt="Ganesh Mantra Tealight Holder — HNOWW Diwali gifting, Dubai" loading="lazy">
                     <span class="aara_edit_card_badge">HNOWW</span>
                 </div>
                 <div class="aara_edit_card_body">
@@ -358,7 +358,7 @@
 
             <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/aara/4th_collection/Sandooq Silver Dry Fruit Box.webp') }}" alt="Sandooq Silver Dry Fruit Box — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/Sandooq Silver Dry Fruit Box.webp') }}" alt="Sandooq Silver Dry Fruit Box — HNOWW Diwali gifting, Dubai" loading="lazy">
                     <span class="aara_edit_card_badge">HNOWW</span>
                 </div>
                 <div class="aara_edit_card_body">
@@ -373,7 +373,7 @@
 
             <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/aara/4th_collection/Silver Serving Tongs.webp') }}" alt="Silver Serving Tongs — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/Silver Serving Tongs.webp') }}" alt="Silver Serving Tongs — HNOWW Diwali gifting, Dubai" loading="lazy">
                     <span class="aara_edit_card_badge">HNOWW</span>
                 </div>
                 <div class="aara_edit_card_body">
@@ -388,7 +388,7 @@
 
             <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/aara/4th_collection/The Gathering.webp') }}" alt="The Gathering — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/The Gathering.webp') }}" alt="The Gathering — HNOWW Diwali gifting, Dubai" loading="lazy">
                     <span class="aara_edit_card_badge">HNOWW</span>
                 </div>
                 <div class="aara_edit_card_body">
@@ -403,7 +403,7 @@
 
             <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/aara/4th_collection/The Twin Columns.webp') }}" alt="The Twin Columns — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/The Twin Columns.webp') }}" alt="The Twin Columns — HNOWW Diwali gifting, Dubai" loading="lazy">
                     <span class="aara_edit_card_badge">HNOWW</span>
                 </div>
                 <div class="aara_edit_card_body">
@@ -418,7 +418,7 @@
 
             <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/aara/4th_collection/Two Tier Dessert Stand.webp') }}" alt="Two Tier Dessert Stand — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/Two Tier Dessert Stand.webp') }}" alt="Two Tier Dessert Stand — HNOWW Diwali gifting, Dubai" loading="lazy">
                     <span class="aara_edit_card_badge">HNOWW</span>
                 </div>
                 <div class="aara_edit_card_body">
@@ -433,7 +433,7 @@
 
             <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/aara/4th_collection/Zoya Silver Serving Tray.webp') }}" alt="Zoya Silver Serving Tray — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/Zoya Silver Serving Tray.webp') }}" alt="Zoya Silver Serving Tray — HNOWW Diwali gifting, Dubai" loading="lazy">
                     <span class="aara_edit_card_badge">HNOWW</span>
                 </div>
                 <div class="aara_edit_card_body">
@@ -584,7 +584,7 @@
     ];
     $aara_gallery_images = collect($aara_gallery_products)->map(function ($name) {
         return [
-            'src' => asset('public/images/front/aara/5th_Slider/' . $name . '.webp'),
+            'src' => asset('public/images/front/Aara/5th_Slider/' . $name . '.webp'),
             'alt' => $name . ' — HNOWW Diwali gifting, Dubai',
         ];
     })->all();
@@ -761,7 +761,7 @@
 
 <!-- Closing CTA -->
 <section class="aara_cta">
-    <img src="{{ asset('public/images/front/aara/CTA.webp') }}" alt="Set your table before Diwali — HNOWW x Aara Floral Luxury, Dubai" loading="lazy">
+    <img src="{{ asset('public/images/front/Aara/CTA.webp') }}" alt="Set your table before Diwali — HNOWW x Aara Floral Luxury, Dubai" loading="lazy">
 
     <div class="aara_cta_content">
         <div class="aara_cta_logos aara_hero_logos">
