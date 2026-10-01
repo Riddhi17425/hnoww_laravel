@@ -34,14 +34,14 @@
         </p>
 
         <div class="aara_hero_btns">
-            <a href="{{ route('front.giftshop') }}" class="com_btn_light">Shop the Festive Table <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+            <a href="javascript:void(0);" class="com_btn_light">Shop the Festive Table <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
             <!-- <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20HNOWW%20x%20Aara%20Diwali%20Edition" target="_blank" rel="noopener" class="com_btn_light">Order on WhatsApp</a> -->
         </div>
     </div>
 
     <div class="aara_hero_corner">
         Delivered across the UAE<br>
-        Order by [Date]
+        <!-- Order by [Date] -->
     </div>
 
     <!-- auto-scrolling text strip -->
@@ -175,11 +175,11 @@
 
         <div class="aara_pairing_price_row">
             <span class="aara_pairing_price_label">From</span>
-            <span class="aara_pairing_price">AED [650]</span>
+            <span class="aara_pairing_price">AED 650</span>
         </div>
 
         <div class="aara_pairing_btns">
-            <a href="{{ route('front.giftshop') }}" class="com_btn_light">Shop the Set <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+            <a href="javascript:void(0);" class="com_btn_light">Shop the Set <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
             <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20complete%20HNOWW%20x%20Aara%20Festive%20Table%20Set" target="_blank" rel="noopener" class="aara_pairing_link">Enquire about the complete setting</a>
         </div>
     </div>
@@ -223,10 +223,10 @@
                 <div class="aara_edit_card_body">
                     <div class="aara_edit_card_row">
                         <h3 class="aara_edit_card_title">The Twin Columns</h3>
-                        <span class="aara_edit_card_price">750</span>
+                        <span class="aara_edit_card_price">AED 750</span>
                     </div>
                     <p class="aara_edit_card_desc">For two candles at two heights.</p>
-                    <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20Gaj%20Silver%20Elephants%20(set%20of%20two)" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
             </div>
 
@@ -239,10 +239,10 @@
                     <div class="aara_edit_card_body">
                         <div class="aara_edit_card_row">
                             <h3 class="aara_edit_card_title">Gaj Silver Elephants</h3>
-                            <span class="aara_edit_card_price">AED [325]</span>
+                            <span class="aara_edit_card_price">AED 325</span>
                         </div>
                         <p class="aara_edit_card_desc">For good luck, placed facing the door.</p>
-                        <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20Lotus%20Bowl" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                        <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                     </div>
                 </div>
 
@@ -254,10 +254,10 @@
                     <div class="aara_edit_card_body">
                         <div class="aara_edit_card_row">
                             <h3 class="aara_edit_card_title">Architectural Silver Jar</h3>
-                            <span class="aara_edit_card_price">AED [295]</span>
+                            <span class="aara_edit_card_price">AED 295</span>
                         </div>
                         <p class="aara_edit_card_desc">For one thing, kept well.</p>
-                        <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20Mehr%20Candleholder%20and%20Vase%20Duo" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                        <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                     </div>
                 </div>
 
@@ -269,10 +269,10 @@
                     <div class="aara_edit_card_body">
                         <div class="aara_edit_card_row">
                             <h3 class="aara_edit_card_title">Tara Silver Serving Tray</h3>
-                            <span class="aara_edit_card_price">AED [575]</span>
+                            <span class="aara_edit_card_price">AED 575</span>
                         </div>
                         <p class="aara_edit_card_desc">Made to hold the season.</p>
-                        <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20Gaj%20Silver%20Urli%20(small)" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                        <a href="javascript:void(0);"  rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                     </div>
                 </div>
 
@@ -284,10 +284,10 @@
                     <div class="aara_edit_card_body">
                         <div class="aara_edit_card_row">
                             <h3 class="aara_edit_card_title">The Gathering</h3>
-                            <span class="aara_edit_card_price">AED [850]</span>
+                            <span class="aara_edit_card_price">AED 850</span>
                         </div>
                         <p class="aara_edit_card_desc">For a centrepiece that holds the fruit.</p>
-                        <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20Tara%20Silver%20Serving%20Tray" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                        <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                     </div>
                 </div>
             </div>
@@ -302,10 +302,10 @@
                 <div class="aara_edit_card_body">
                     <div class="aara_edit_card_row">
                         <h3 class="aara_edit_card_title">Gaj Silver Urli</h3>
-                        <span class="aara_edit_card_price">AED [425]</span>
+                        <span class="aara_edit_card_price">AED 425</span>
                     </div>
                     <p class="aara_edit_card_desc">For water, flame and flowers.</p>
-                    <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20Gaj%20Silver%20Urli%20(small)" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
             </div>
 
@@ -317,10 +317,10 @@
                 <div class="aara_edit_card_body">
                     <div class="aara_edit_card_row">
                         <h3 class="aara_edit_card_title">Silver Serving Tongs</h3>
-                        <span class="aara_edit_card_price">AED [Price]</span>
+                        <span class="aara_edit_card_price">AED 200</span>
                     </div>
                     <p class="aara_edit_card_desc">Service, with a little shine.</p>
-                    <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20Silver%20Serving%20Tongs" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
             </div>
 
@@ -332,10 +332,10 @@
                 <div class="aara_edit_card_body">
                     <div class="aara_edit_card_row">
                         <h3 class="aara_edit_card_title">Mehr Candleholder and Vase Duo</h3>
-                        <span class="aara_edit_card_price">AED [575]</span>
+                        <span class="aara_edit_card_price">AED 575</span>
                     </div>
                     <p class="aara_edit_card_desc">For flowers by day and flame by evening.</p>
-                    <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20Mehr%20Candleholder%20and%20Vase%20Duo" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
             </div>
         </div>
@@ -351,10 +351,10 @@
                 <div class="aara_edit_card_body">
                     <div class="aara_edit_card_row">
                         <h3 class="aara_edit_card_title">Two Tier Dessert Stand</h3>
-                        <span class="aara_edit_card_price">AED [300]</span>
+                        <span class="aara_edit_card_price">AED 300</span>
                     </div>
                     <p class="aara_edit_card_desc">For height where there is no room.</p>
-                    <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20Ganesh%20Mantra%20Tealight%20Holder" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
             </div>
 
@@ -366,10 +366,10 @@
                 <div class="aara_edit_card_body">
                     <div class="aara_edit_card_row">
                         <h3 class="aara_edit_card_title">Lotus Bowl</h3>
-                        <span class="aara_edit_card_price">AED [345]</span>
+                        <span class="aara_edit_card_price">AED 345</span>
                     </div>
                     <p class="aara_edit_card_desc">For a candle, incense or a single flower.</p>
-                    <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20Sandooq%20Silver%20Dry%20Fruit%20Box" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
             </div>
 
@@ -381,10 +381,10 @@
                 <div class="aara_edit_card_body">
                     <div class="aara_edit_card_row">
                         <h3 class="aara_edit_card_title">Zoya Silver Serving Tray</h3>
-                        <span class="aara_edit_card_price">AED [550]</span>
+                        <span class="aara_edit_card_price">AED 550</span>
                     </div>
                     <p class="aara_edit_card_desc">For sweets, lifted on a low foot.</p>
-                    <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20Silver%20Serving%20Tongs" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
             </div>
 
@@ -396,17 +396,17 @@
                 <div class="aara_edit_card_body">
                     <div class="aara_edit_card_row">
                         <h3 class="aara_edit_card_title">Ganesh Mantra Tealight Holder</h3>
-                        <span class="aara_edit_card_price">AED [220]</span>
+                        <span class="aara_edit_card_price">AED 220</span>
                     </div>
                     <p class="aara_edit_card_desc">For a prayer lit from behind.</p>
-                    <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20The%20Gathering" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
             </div>
 
         </div>
 
         <div class="aara_edit_footer_cta">
-            <a href="{{ route('front.giftshop') }}" class="com_btn">Shop All Pieces <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+            <a href="javascript:void(0);" class="com_btn">Shop All Pieces <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
         </div>
     </div>
 </section>
@@ -500,7 +500,7 @@
                         <div>
                             <span class="aara_film_caption_title">{{ $film['title'] }}</span>
                             <p class="aara_film_caption_desc">{{ $film['desc'] }}</p>
-                            <span class="aara_film_watch">Watch</span>
+                            <!-- <span class="aara_film_watch">Watch</span> -->
                         </div>
                     </div>
                 </div>
@@ -802,7 +802,7 @@
         </p>
 
         <div class="aara_cta_btns">
-            <a href="{{ route('front.giftshop') }}" class="aara_cta_btn_solid">Shop the Festive Table <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+            <a href="javascript:void(0);" class="aara_cta_btn_solid">Shop the Festive Table <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
             <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20complete%20HNOWW%20x%20Aara%20Festive%20Table%20Set" target="_blank" rel="noopener" class="com_btn_light">Enquire About the Complete Setting</a>
         </div>
     </div>

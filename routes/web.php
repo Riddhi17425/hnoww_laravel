@@ -36,7 +36,7 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap')
 
 //FRONT ROUTE
 Route::name('front.')->group(function () {
-    Route::get('/hnoww-x-aara-diwali-edition', [FrontController::class, 'getHnowwAaraDiwaliEdition'])->name('hnoww.aara.diwali');
+    Route::get('/hnoww-aara-diwali-edition', [FrontController::class, 'getHnowwAaraDiwaliEdition'])->name('hnoww.aara.diwali');
 
     Route::get('/', [FrontController::class, 'index'])->name('home');
     Route::get('/live-search', [FrontController::class, 'liveSearch'])->name('live.search');

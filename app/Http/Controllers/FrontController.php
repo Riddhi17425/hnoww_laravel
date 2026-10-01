@@ -1037,7 +1037,7 @@ class FrontController extends Controller
     {
         $meta_title       = 'HNOWW x Aara | The Festive Table | Diwali Edition 2026 | Dubai';
         $meta_description = 'HNOWW x Aara Diwali Edition 2026: architectural HNOWW objects paired with fresh Aara Floral Luxury arrangements for the festive table. Order online, delivered across Dubai & the UAE.';
-        $og_image          = asset('public/images/front/hero-banner.webp');
+        $og_image          = '';
  
         return view('front.hnoww_aara_diwali', compact('meta_title', 'meta_description', 'og_image'));
     }
