@@ -6,50 +6,39 @@
 
 {{-- START - PRODUCT SCHEMA --}}
 @php
-    // Product URL
+    
     $schemaProductUrl = url('/product-details/' . $product->product_url);
 
-    // Product Images
     $schemaImages = [];
-
-    // Listing image
     if (!empty($product->list_page_img))
     {
-        $schemaImages[] = asset('public/images/admin/product_list/' . $product->list_page_img);
+        $schemaImages[] = asset(
+            'public/images/admin/product_list/' . $product->list_page_img
+        );
     }
 
-    // Detail images
-    /*
-    if (!empty($productDetailImages) && is_array($productDetailImages))
-    {
-        foreach ($productDetailImages as $image) 
-        {
-            if (!empty($image))
-            {
-                $schemaImages[] = asset( 'public/images/admin/product_detail/' . $image);
-            }
-        }
-    }*/
-
-    // Remove duplicate images
     $schemaImages = array_values(array_unique($schemaImages));
 
-    //Product Description
-    $schemaDescription = trim( strip_tags($product->meta_description ?? '') );
+    $schemaDescription = trim(
+        strip_tags($product->meta_description ?? '')
+    );
 
     if (empty($schemaDescription))
     {
-        $schemaDescription = trim( strip_tags($product->short_description ?? '') );
+        $schemaDescription = trim(
+            strip_tags($product->short_description ?? '')
+        );
     }
 
-    // Product Material
+    // PRODUCT MATERIAL
+
     $schemaMaterial = [];
 
     if (!empty($product->materials))
     {
         $materialHtml = $product->materials;
 
-        // Extract each <li> as a separate material
+        // Extract each <li>
         preg_match_all(
             '/<li[^>]*>(.*?)<\/li>/is',
             $materialHtml,
@@ -60,40 +49,56 @@
         {
             foreach ($materialMatches[1] as $material)
             {
-                // Remove HTML tags such as <b>
                 $material = trim(strip_tags($material));
-
-                // Normalize spaces
                 $material = preg_replace('/\s+/', ' ', $material);
-
                 if (!empty($material))
                 {
                     $schemaMaterial[] = $material;
                 }
             }
         }
+        else
+        {
+            $material = trim(
+                preg_replace(
+                    '/\s+/',
+                    ' ',
+                    strip_tags($materialHtml)
+                )
+            );
+
+            if (!empty($material))
+            {
+                $schemaMaterial[] = $material;
+            }
+        }
     }
 
-    // Product Weight
+
+    // PRODUCT WEIGHT
+
     $schemaWeight = null;
-
-    if (!empty($product->weight)) 
+    if (!empty($product->weight))
     {
-        $weightText = strtolower( trim(strip_tags($product->weight)) );
+        $weightText = strtolower(
+            trim(strip_tags($product->weight))
+        );
 
-        // Extract numeric value
-        preg_match('/([0-9]+(?:\.[0-9]+)?)/', $weightText, $weightMatch);
+        preg_match(
+            '/([0-9]+(?:\.[0-9]+)?)/',
+            $weightText,
+            $weightMatch
+        );
 
         if (!empty($weightMatch[1]))
         {
-            $weightValue = (float) $weightMatch[1];
+            $weightValue = round((float) $weightMatch[1], 2);
 
-            // Convert grams/gms to KG
             if (
                 str_contains($weightText, 'gms') ||
                 str_contains($weightText, 'gram') ||
                 preg_match('/\bg\b/', $weightText)
-            ) 
+            )
             {
                 $weightValue = $weightValue / 1000;
             }
@@ -106,61 +111,63 @@
         }
     }
 
-    // Product Dimensions
+    // PRODUCT DIMENSIONS
 
     $schemaHeight = null;
     $schemaWidth  = null;
     $schemaDepth  = null;
-
-    if (!empty($product->dimensions))
+    
+    // Height
+    if ($product->height !== null && $product->height !== '')
     {
-        $dimensionText = strtolower( strip_tags($product->dimensions) );
-
-        // Height
-        if (preg_match('/(?:^|\s)h(?:eight)?\s*[:\-]?\s*([0-9]+(?:\.[0-9]+)?)/i', $dimensionText, $match))
-        {
-            $schemaHeight = [
-                '@type' => 'QuantitativeValue',
-                'value' => (float) $match[1],
-                'unitText' => 'in',
-            ];
-        }
-
-        // Width
-        if (preg_match('/(?:^|\s)w(?:idth)?\s*[:\-]?\s*([0-9]+(?:\.[0-9]+)?)/i', $dimensionText, $match))
-        {
-            $schemaWidth = [
-                '@type' => 'QuantitativeValue',
-                'value' => (float) $match[1],
-                'unitText' => 'in',
-            ];
-        }
-
-        // Depth
-        if (preg_match('/(?:^|\s)d(?:epth)?\s*[:\-]?\s*([0-9]+(?:\.[0-9]+)?)/i', $dimensionText, $match))
-        {
-            $schemaDepth = [
-                '@type' => 'QuantitativeValue',
-                'value' => (float) $match[1],
-                'unitText' => 'in',
-            ];
-        }
+        $schemaHeight = [
+            '@type' => 'QuantitativeValue',
+            'value' => (float) $product->height,
+            'unitText' => 'in',
+        ];
     }
+    
+    // Width
+    if ($product->width !== null && $product->width !== '')
+    {
+        $schemaWidth = [
+            '@type' => 'QuantitativeValue',
+            'value' => (float) $product->width,
+            'unitText' => 'in',
+        ];
+    }
+    
+    // Depth
+    // Database column is "length", but schema property is "depth"
+    if ($product->length !== null && $product->length !== '')
+    {
+        $schemaDepth = [
+            '@type' => 'QuantitativeValue',
+            'value' => (float) $product->length,
+            'unitText' => 'in',
+        ];
+    }
+    
+    // PRODUCT PRICE
 
-    // Product Price
     $schemaPrice = preg_replace(
         '/[^0-9.]/',
         '',
         $product->product_price ?? ''
     );
 
+    $schemaPrice = $schemaPrice !== '' ? (float) $schemaPrice : null;
 
-    // Product Availability
-    $schemaAvailability = ((int) ($product->product_stock ?? 0) > 0)
-        ? 'https://schema.org/InStock'
-        : 'https://schema.org/OutOfStock';
+    // PRODUCT AVAILABILITY
 
-    // Product Schema
+    $schemaAvailability =
+        ((int) ($product->product_stock ?? 0) > 0)
+            ? 'https://schema.org/InStock'
+            : 'https://schema.org/OutOfStock';
+
+
+    // PRODUCT SCHEMA
+
     $productSchema = [
         '@context' => 'https://schema.org',
         '@type' => 'Product',
@@ -171,54 +178,100 @@
         'image' => $schemaImages,
         'brand' => [
             '@type' => 'Brand',
-            'name' => 'HNO̱WW',
+            'name' => 'HNOWW',
         ],
     ];
 
-    // Material
+    // MATERIAL
     if (!empty($schemaMaterial))
     {
         $productSchema['material'] = $schemaMaterial;
     }
 
-    // Weight
+    //  WEIGHT
     if (!empty($schemaWeight))
     {
         $productSchema['weight'] = $schemaWeight;
     }
 
-    // Height
+    // HEIGHT
     if (!empty($schemaHeight))
     {
         $productSchema['height'] = $schemaHeight;
     }
 
-    // Width
+    // WIDTH
     if (!empty($schemaWidth))
     {
         $productSchema['width'] = $schemaWidth;
     }
 
-    // Depth
+    // DEPTH
     if (!empty($schemaDepth))
     {
         $productSchema['depth'] = $schemaDepth;
     }
 
-    // Offer
+    // OFFER
     if (!empty($schemaPrice))
     {
         $productSchema['offers'] = [
             '@type' => 'Offer',
+            '@id' => $schemaProductUrl . '#offer',
             'url' => $schemaProductUrl,
-            'priceCurrency' => 'AED',
             'price' => $schemaPrice,
+            'priceCurrency' => 'AED',
             'availability' => $schemaAvailability,
             'itemCondition' => 'https://schema.org/NewCondition',
-            'seller' => [
-                '@type' => 'Organization',
-                'name' => 'HNO̱WW',
-                'url' => url('/'),
+           
+            // SHIPPING DETAILS
+            'shippingDetails' => [
+                [
+                    '@type' => 'OfferShippingDetails',
+                    'shippingDestination' => [
+                        '@type' => 'DefinedRegion',
+                        'addressCountry' => 'AE',
+                        'addressRegion' => 'Dubai',
+                    ],
+
+                    'deliveryTime' => [
+                        '@type' => 'ShippingDeliveryTime',
+                        'handlingTime' => [
+                            '@type' => 'QuantitativeValue',
+                            'minValue' => 0,
+                            'maxValue' => 1,
+                            'unitCode' => 'DAY',
+                        ],
+                        'transitTime' => [
+                            '@type' => 'QuantitativeValue',
+                            'minValue' => 2,
+                            'maxValue' => 3,
+                            'unitCode' => 'DAY',
+                        ],
+                    ],
+                ],
+                [
+                    '@type' => 'OfferShippingDetails',
+                    'shippingDestination' => [
+                        '@type' => 'DefinedRegion',
+                        'addressCountry' => 'AE',
+                    ],
+                    'deliveryTime' => [
+                        '@type' => 'ShippingDeliveryTime',
+                        'handlingTime' => [
+                            '@type' => 'QuantitativeValue',
+                            'minValue' => 0,
+                            'maxValue' => 1,
+                            'unitCode' => 'DAY',
+                        ],
+                        'transitTime' => [
+                            '@type' => 'QuantitativeValue',
+                            'minValue' => 6,
+                            'maxValue' => 7,
+                            'unitCode' => 'DAY',
+                        ],
+                    ],
+                ],
             ],
         ];
     }
