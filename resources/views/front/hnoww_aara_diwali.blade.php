@@ -8,7 +8,7 @@
     $aara_marquee_items = array_merge($aara_marquee_items, $aara_marquee_items, $aara_marquee_items, $aara_marquee_items);
 @endphp
 <section class="aara_hero">
-    <video class="aara_hero_video" src="{{ asset('public/images/front/Aara/HNoww_Website.mp4') }}" autoplay muted loop playsinline poster="{{ asset('public/images/front/hero-banner.webp') }}"></video>
+    <video class="aara_hero_video" src="{{ asset('public/images/front/Aara/HNoww_Website.mp4') }}" autoplay muted loop playsinline poster="{{ asset('public/images/front/Aara/imageHNoww_Website_poster.webp') }}"></video>
 
     <div class="aara_hero_vertical">
         <span class="aara_hero_vertical_line"></span>
@@ -18,9 +18,9 @@
 
     <div class="aara_hero_content">
         <div class="aara_hero_logos">
-            <span class="brand_hnoww">HNOWW</span>
+            <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="brand_hnoww_logo">
             <span class="brand_x">×</span>
-            <span class="brand_aara">aara</span>
+            <img src="{{ asset('public/images/front/Aara/aara-logo-white.svg') }}" alt="aara" class="brand_aara_logo">
         </div>
 
         <p class="aara_hero_label">A HNOWW &times; aara collaboration</p>
@@ -34,7 +34,7 @@
         </p>
 
         <div class="aara_hero_btns">
-            <a href="javascript:void(0);" class="com_btn_light">Shop the Festive Table <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+            <a href="#festive-table-collection" class="com_btn_light">Shop the Festive Table <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
             <!-- <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20HNOWW%20x%20Aara%20Diwali%20Edition" target="_blank" rel="noopener" class="com_btn_light">Order on WhatsApp</a> -->
         </div>
     </div>
@@ -92,13 +92,13 @@
 
                 <div class="aara_collab_brands">
                     <div class="aara_collab_brand">
-                        <h3 class="aara_collab_brand_name">HNOWW</h3>
-                        <p class="aara_collab_brand_tag">Objects &amp; Luxury Gifting</p>
+                        <img src="{{ asset('public/images/front/Hnoww-logo.svg') }}" alt="HNOWW" class="aara_collab_brand_logo">
+                        <p class="aara_collab_brand_tag">OBJECTS DESIGNED TO STAY</p>
                         <p class="aara_collab_brand_desc">Architectural objects and luxury gifting, designed in Dubai.</p>
                     </div>
                     <div class="aara_collab_brand aara_collab_brand_aara">
-                        <h3 class="aara_collab_brand_name aara_collab_brand_name_aara">aara</h3>
-                        <p class="aara_collab_brand_tag">Floral Design Studio</p>
+                        <img src="{{ asset('public/images/front/Aara/aara-logo-grey.svg') }}" alt="aara" class="aara_collab_brand_logo aara_collab_brand_logo_aara">
+                        <p class="aara_collab_brand_tag">FLORAL LUXURY</p>
                         <p class="aara_collab_brand_desc">Seasonal floral design and bespoke arrangements, crafted in Dubai.</p>
                     </div>
                 </div>
@@ -109,6 +109,233 @@
                     <img class="aara_collab_img_collage" src="{{ asset('public/images/front/Aara/Collage.webp') }}" alt="HNOWW x Aara — florals and objects styled together, Dubai">
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- The Festive Table Collection -->
+<section class="aara_edit mt_120 mb_120" id="festive-table-collection">
+    <div class="container">
+        <div class="aara_edit_header">
+            <div>
+                <p class="sub_head mb-0 aara_section_label">
+                    <span>
+                        <svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z" fill="#B58A46"></path>
+                        </svg>
+                    </span>
+                    <span>The Objects Behind the Setting</span>
+                    <span>
+                        <svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z" fill="#B58A46"></path>
+                        </svg>
+                    </span>
+                </p>
+                <h2 class="aara_edit_title">The Festive Table<br><em>Collection</em></h2>
+            </div>
+            <p class="aara_edit_para">
+                Everything you saw in the Reel, brought together in one place.
+                Objects selected for the table, but never limited to it.
+                Pieces that catch the light, hold a moment, bring something unexpected to a setting, and
+                continue to live beautifully long after the celebration is over.
+                For Diwali. For festive gatherings. For the years in between.
+            </p>
+        </div>
+
+        <div class="aara_edit_grid_top">
+            <div class="aara_edit_card">
+                <div class="aara_edit_card_img">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/The Twin Columns.webp') }}" alt="The Twin Columns — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
+                </div>
+                <div class="aara_edit_card_body">
+                    <div class="aara_edit_card_row">
+                        <h3 class="aara_edit_card_title">The Twin Columns</h3>
+                        <span class="aara_edit_card_price">AED 750</span>
+                    </div>
+                    <p class="aara_edit_card_desc">For two candles at two heights.</p>
+                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                </div>
+            </div>
+
+            <div class="aara_edit_grid_top_right">
+                <div class="aara_edit_card">
+                    <div class="aara_edit_card_img">
+                        <img src="{{ asset('public/images/front/Aara/4th_collection/Gaj Silver Elephants (set of two).webp') }}" alt="Lotus Bowl — HNOWW Diwali gifting, Dubai" loading="lazy">
+                        <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
+                    </div>
+                    <div class="aara_edit_card_body">
+                        <div class="aara_edit_card_row">
+                            <h3 class="aara_edit_card_title">Gaj Silver Elephants</h3>
+                            <span class="aara_edit_card_price">AED 325</span>
+                        </div>
+                        <p class="aara_edit_card_desc">For good luck, placed facing the door.</p>
+                        <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    </div>
+                </div>
+
+                <div class="aara_edit_card">
+                    <div class="aara_edit_card_img">
+                        <img src="{{ asset('public/images/front/Aara/4th_collection/Sandooq Silver Dry Fruit Box.webp') }}" alt="Mehr Candleholder and Vase Duo — HNOWW Diwali gifting, Dubai" loading="lazy">
+                        <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
+                    </div>
+                    <div class="aara_edit_card_body">
+                        <div class="aara_edit_card_row">
+                            <h3 class="aara_edit_card_title">Architectural Silver Jar</h3>
+                            <span class="aara_edit_card_price">AED 295</span>
+                        </div>
+                        <p class="aara_edit_card_desc">For one thing, kept well.</p>
+                        <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    </div>
+                </div>
+
+                <div class="aara_edit_card">
+                    <div class="aara_edit_card_img">
+                        <img src="{{ asset('public/images/front/Aara/4th_collection/Tara Silver Serving Tray.webp') }}" alt="Gaj Silver Urli (small) — HNOWW Diwali gifting, Dubai" loading="lazy">
+                        <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
+                    </div>
+                    <div class="aara_edit_card_body">
+                        <div class="aara_edit_card_row">
+                            <h3 class="aara_edit_card_title">Tara Silver Serving Tray</h3>
+                            <span class="aara_edit_card_price">AED 575</span>
+                        </div>
+                        <p class="aara_edit_card_desc">Made to hold the season.</p>
+                        <a href="javascript:void(0);"  rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    </div>
+                </div>
+
+                <div class="aara_edit_card">
+                    <div class="aara_edit_card_img">
+                        <img src="{{ asset('public/images/front/Aara/4th_collection/The Gathering.webp') }}" alt="Tara Silver Serving Tray — HNOWW Diwali gifting, Dubai" loading="lazy">
+                        <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
+                    </div>
+                    <div class="aara_edit_card_body">
+                        <div class="aara_edit_card_row">
+                            <h3 class="aara_edit_card_title">The Gathering</h3>
+                            <span class="aara_edit_card_price">AED 850</span>
+                        </div>
+                        <p class="aara_edit_card_desc">For a centrepiece that holds the fruit.</p>
+                        <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="aara_edit_grid_bottom">
+            <div class="aara_edit_card">
+                <div class="aara_edit_card_img">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/Gaj Silver Urli (small).webp') }}" alt="Gaj Silver Urli (small) — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
+                </div>
+                <div class="aara_edit_card_body">
+                    <div class="aara_edit_card_row">
+                        <h3 class="aara_edit_card_title">Gaj Silver Urli</h3>
+                        <span class="aara_edit_card_price">AED 425</span>
+                    </div>
+                    <p class="aara_edit_card_desc">For water, flame and flowers.</p>
+                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                </div>
+            </div>
+
+            <div class="aara_edit_card">
+                <div class="aara_edit_card_img">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/Silver Serving Tongs.webp') }}" alt="Silver Serving Tongs — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
+                </div>
+                <div class="aara_edit_card_body">
+                    <div class="aara_edit_card_row">
+                        <h3 class="aara_edit_card_title">Silver Serving Tongs</h3>
+                        <span class="aara_edit_card_price">AED 200</span>
+                    </div>
+                    <p class="aara_edit_card_desc">Service, with a little shine.</p>
+                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                </div>
+            </div>
+
+            <div class="aara_edit_card">
+                <div class="aara_edit_card_img">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/Mehr Candleholder and Vase Duo.webp') }}" alt="Mehr Candleholder and Vase Duo — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
+                </div>
+                <div class="aara_edit_card_body">
+                    <div class="aara_edit_card_row">
+                        <h3 class="aara_edit_card_title">Mehr Candleholder and Vase Duo</h3>
+                        <span class="aara_edit_card_price">AED 575</span>
+                    </div>
+                    <p class="aara_edit_card_desc">For flowers by day and flame by evening.</p>
+                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="aara_edit_grid_extra">
+            <p class="aara_edit_extra_label">More from the Edit</p>
+
+            <div class="aara_edit_card">
+                <div class="aara_edit_card_img">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/Two Tier Dessert Stand.webp') }}" alt="Two Tier Dessert Stand — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
+                </div>
+                <div class="aara_edit_card_body">
+                    <div class="aara_edit_card_row">
+                        <h3 class="aara_edit_card_title">Two Tier Dessert Stand</h3>
+                        <span class="aara_edit_card_price">AED 300</span>
+                    </div>
+                    <p class="aara_edit_card_desc">For height where there is no room.</p>
+                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                </div>
+            </div>
+
+            <div class="aara_edit_card">
+                <div class="aara_edit_card_img">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/Lotus Bowl.webp') }}" alt="Sandooq Silver Dry Fruit Box — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
+                </div>
+                <div class="aara_edit_card_body">
+                    <div class="aara_edit_card_row">
+                        <h3 class="aara_edit_card_title">Lotus Bowl</h3>
+                        <span class="aara_edit_card_price">AED 345</span>
+                    </div>
+                    <p class="aara_edit_card_desc">For a candle, incense or a single flower.</p>
+                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                </div>
+            </div>
+
+            <div class="aara_edit_card">
+                <div class="aara_edit_card_img">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/Zoya Silver Serving Tray.webp') }}" alt="Silver Serving Tongs — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
+                </div>
+                <div class="aara_edit_card_body">
+                    <div class="aara_edit_card_row">
+                        <h3 class="aara_edit_card_title">Zoya Silver Serving Tray</h3>
+                        <span class="aara_edit_card_price">AED 550</span>
+                    </div>
+                    <p class="aara_edit_card_desc">For sweets, lifted on a low foot.</p>
+                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                </div>
+            </div>
+
+            <div class="aara_edit_card">
+                <div class="aara_edit_card_img">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/Ganesh Mantra Tealight Holder.webp') }}" alt="The Gathering — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
+                </div>
+                <div class="aara_edit_card_body">
+                    <div class="aara_edit_card_row">
+                        <h3 class="aara_edit_card_title">Ganesh Mantra Tealight Holder</h3>
+                        <span class="aara_edit_card_price">AED 220</span>
+                    </div>
+                    <p class="aara_edit_card_desc">For a prayer lit from behind.</p>
+                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="aara_edit_footer_cta">
+            <a href="javascript:void(0);" class="com_btn">Shop All Pieces <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
         </div>
     </div>
 </section>
@@ -185,231 +412,6 @@
     </div>
 </section>
 
-<!-- The Festive Table Collection -->
-<section class="aara_edit mt_120 mb_120">
-    <div class="container">
-        <div class="aara_edit_header">
-            <div>
-                <p class="sub_head mb-0 aara_section_label">
-                    <span>
-                        <svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z" fill="#B58A46"></path>
-                        </svg>
-                    </span>
-                    <span>The Objects Behind the Setting</span>
-                    <span>
-                        <svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z" fill="#B58A46"></path>
-                        </svg>
-                    </span>
-                </p>
-                <h2 class="aara_edit_title">The Festive Table<br><em>Collection</em></h2>
-            </div>
-            <p class="aara_edit_para">
-                Everything you saw in the Reel, brought together in one place.
-                Objects selected for the table, but never limited to it.
-                Pieces that catch the light, hold a moment, bring something unexpected to a setting, and
-                continue to live beautifully long after the celebration is over.
-                For Diwali. For festive gatherings. For the years in between.
-            </p>
-        </div>
-
-        <div class="aara_edit_grid_top">
-            <div class="aara_edit_card">
-                <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/Aara/4th_collection/The Twin Columns.webp') }}" alt="The Twin Columns — HNOWW Diwali gifting, Dubai" loading="lazy">
-                    <span class="aara_edit_card_badge">HNOWW</span>
-                </div>
-                <div class="aara_edit_card_body">
-                    <div class="aara_edit_card_row">
-                        <h3 class="aara_edit_card_title">The Twin Columns</h3>
-                        <span class="aara_edit_card_price">AED 750</span>
-                    </div>
-                    <p class="aara_edit_card_desc">For two candles at two heights.</p>
-                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-                </div>
-            </div>
-
-            <div class="aara_edit_grid_top_right">
-                <div class="aara_edit_card">
-                    <div class="aara_edit_card_img">
-                        <img src="{{ asset('public/images/front/Aara/4th_collection/Gaj Silver Elephants (set of two).webp') }}" alt="Lotus Bowl — HNOWW Diwali gifting, Dubai" loading="lazy">
-                        <span class="aara_edit_card_badge">HNOWW</span>
-                    </div>
-                    <div class="aara_edit_card_body">
-                        <div class="aara_edit_card_row">
-                            <h3 class="aara_edit_card_title">Gaj Silver Elephants</h3>
-                            <span class="aara_edit_card_price">AED 325</span>
-                        </div>
-                        <p class="aara_edit_card_desc">For good luck, placed facing the door.</p>
-                        <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-                    </div>
-                </div>
-
-                <div class="aara_edit_card">
-                    <div class="aara_edit_card_img">
-                        <img src="{{ asset('public/images/front/Aara/4th_collection/Sandooq Silver Dry Fruit Box.webp') }}" alt="Mehr Candleholder and Vase Duo — HNOWW Diwali gifting, Dubai" loading="lazy">
-                        <span class="aara_edit_card_badge">HNOWW</span>
-                    </div>
-                    <div class="aara_edit_card_body">
-                        <div class="aara_edit_card_row">
-                            <h3 class="aara_edit_card_title">Architectural Silver Jar</h3>
-                            <span class="aara_edit_card_price">AED 295</span>
-                        </div>
-                        <p class="aara_edit_card_desc">For one thing, kept well.</p>
-                        <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-                    </div>
-                </div>
-
-                <div class="aara_edit_card">
-                    <div class="aara_edit_card_img">
-                        <img src="{{ asset('public/images/front/Aara/4th_collection/Tara Silver Serving Tray.webp') }}" alt="Gaj Silver Urli (small) — HNOWW Diwali gifting, Dubai" loading="lazy">
-                        <span class="aara_edit_card_badge">HNOWW</span>
-                    </div>
-                    <div class="aara_edit_card_body">
-                        <div class="aara_edit_card_row">
-                            <h3 class="aara_edit_card_title">Tara Silver Serving Tray</h3>
-                            <span class="aara_edit_card_price">AED 575</span>
-                        </div>
-                        <p class="aara_edit_card_desc">Made to hold the season.</p>
-                        <a href="javascript:void(0);"  rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-                    </div>
-                </div>
-
-                <div class="aara_edit_card">
-                    <div class="aara_edit_card_img">
-                        <img src="{{ asset('public/images/front/Aara/4th_collection/The Gathering.webp') }}" alt="Tara Silver Serving Tray — HNOWW Diwali gifting, Dubai" loading="lazy">
-                        <span class="aara_edit_card_badge">HNOWW</span>
-                    </div>
-                    <div class="aara_edit_card_body">
-                        <div class="aara_edit_card_row">
-                            <h3 class="aara_edit_card_title">The Gathering</h3>
-                            <span class="aara_edit_card_price">AED 850</span>
-                        </div>
-                        <p class="aara_edit_card_desc">For a centrepiece that holds the fruit.</p>
-                        <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="aara_edit_grid_bottom">
-            <div class="aara_edit_card">
-                <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/Aara/4th_collection/Gaj Silver Urli (small).webp') }}" alt="Gaj Silver Urli (small) — HNOWW Diwali gifting, Dubai" loading="lazy">
-                    <span class="aara_edit_card_badge">HNOWW</span>
-                </div>
-                <div class="aara_edit_card_body">
-                    <div class="aara_edit_card_row">
-                        <h3 class="aara_edit_card_title">Gaj Silver Urli</h3>
-                        <span class="aara_edit_card_price">AED 425</span>
-                    </div>
-                    <p class="aara_edit_card_desc">For water, flame and flowers.</p>
-                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-                </div>
-            </div>
-
-            <div class="aara_edit_card">
-                <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/Aara/4th_collection/Silver Serving Tongs.webp') }}" alt="Silver Serving Tongs — HNOWW Diwali gifting, Dubai" loading="lazy">
-                    <span class="aara_edit_card_badge">HNOWW</span>
-                </div>
-                <div class="aara_edit_card_body">
-                    <div class="aara_edit_card_row">
-                        <h3 class="aara_edit_card_title">Silver Serving Tongs</h3>
-                        <span class="aara_edit_card_price">AED 200</span>
-                    </div>
-                    <p class="aara_edit_card_desc">Service, with a little shine.</p>
-                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-                </div>
-            </div>
-
-            <div class="aara_edit_card">
-                <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/Aara/4th_collection/Mehr Candleholder and Vase Duo.webp') }}" alt="Mehr Candleholder and Vase Duo — HNOWW Diwali gifting, Dubai" loading="lazy">
-                    <span class="aara_edit_card_badge">HNOWW</span>
-                </div>
-                <div class="aara_edit_card_body">
-                    <div class="aara_edit_card_row">
-                        <h3 class="aara_edit_card_title">Mehr Candleholder and Vase Duo</h3>
-                        <span class="aara_edit_card_price">AED 575</span>
-                    </div>
-                    <p class="aara_edit_card_desc">For flowers by day and flame by evening.</p>
-                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-                </div>
-            </div>
-        </div>
-
-        <div class="aara_edit_grid_extra">
-            <p class="aara_edit_extra_label">More from the Edit</p>
-
-            <div class="aara_edit_card">
-                <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/Aara/4th_collection/Two Tier Dessert Stand.webp') }}" alt="Two Tier Dessert Stand — HNOWW Diwali gifting, Dubai" loading="lazy">
-                    <span class="aara_edit_card_badge">HNOWW</span>
-                </div>
-                <div class="aara_edit_card_body">
-                    <div class="aara_edit_card_row">
-                        <h3 class="aara_edit_card_title">Two Tier Dessert Stand</h3>
-                        <span class="aara_edit_card_price">AED 300</span>
-                    </div>
-                    <p class="aara_edit_card_desc">For height where there is no room.</p>
-                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-                </div>
-            </div>
-
-            <div class="aara_edit_card">
-                <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/Aara/4th_collection/Lotus Bowl.webp') }}" alt="Sandooq Silver Dry Fruit Box — HNOWW Diwali gifting, Dubai" loading="lazy">
-                    <span class="aara_edit_card_badge">HNOWW</span>
-                </div>
-                <div class="aara_edit_card_body">
-                    <div class="aara_edit_card_row">
-                        <h3 class="aara_edit_card_title">Lotus Bowl</h3>
-                        <span class="aara_edit_card_price">AED 345</span>
-                    </div>
-                    <p class="aara_edit_card_desc">For a candle, incense or a single flower.</p>
-                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-                </div>
-            </div>
-
-            <div class="aara_edit_card">
-                <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/Aara/4th_collection/Zoya Silver Serving Tray.webp') }}" alt="Silver Serving Tongs — HNOWW Diwali gifting, Dubai" loading="lazy">
-                    <span class="aara_edit_card_badge">HNOWW</span>
-                </div>
-                <div class="aara_edit_card_body">
-                    <div class="aara_edit_card_row">
-                        <h3 class="aara_edit_card_title">Zoya Silver Serving Tray</h3>
-                        <span class="aara_edit_card_price">AED 550</span>
-                    </div>
-                    <p class="aara_edit_card_desc">For sweets, lifted on a low foot.</p>
-                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-                </div>
-            </div>
-
-            <div class="aara_edit_card">
-                <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/Aara/4th_collection/Ganesh Mantra Tealight Holder.webp') }}" alt="The Gathering — HNOWW Diwali gifting, Dubai" loading="lazy">
-                    <span class="aara_edit_card_badge">HNOWW</span>
-                </div>
-                <div class="aara_edit_card_body">
-                    <div class="aara_edit_card_row">
-                        <h3 class="aara_edit_card_title">Ganesh Mantra Tealight Holder</h3>
-                        <span class="aara_edit_card_price">AED 220</span>
-                    </div>
-                    <p class="aara_edit_card_desc">For a prayer lit from behind.</p>
-                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="aara_edit_footer_cta">
-            <a href="javascript:void(0);" class="com_btn">Shop All Pieces <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-        </div>
-    </div>
-</section>
 
 <!-- The Films - Set the Scene -->
 @php
@@ -491,7 +493,7 @@
                     <div class="aara_film_media" role="button" tabindex="0" aria-label="Play {{ $film['title'] }} video">
                         <video src="{{ $film['video'] }}" muted loop playsinline preload="none" aria-label="{{ $film['alt'] }}"></video>
                         <span class="aara_film_play" aria-hidden="true">
-                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+                            <svg class="aara_icon_play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
                         </span>
                         <!-- <span class="aara_film_duration">{{ $film['duration'] }}</span> -->
                     </div>
@@ -519,6 +521,8 @@
                 infinite: false,
                 dots: true,
                 arrows: true,
+                autoplay: true,
+                autoplaySpeed: 4000,
                 prevArrow: '<button type="button" class="aara_film_arrow aara_film_arrow_prev" aria-label="Previous reels">&#8592;</button>',
                 nextArrow: '<button type="button" class="aara_film_arrow aara_film_arrow_next" aria-label="Next reels">&#8594;</button>',
                 responsive: [
@@ -527,6 +531,20 @@
                 ]
             });
         }
+
+        function positionFilmArrows() {
+            var media = filmSlider[0] && filmSlider[0].querySelector('.aara_film_media');
+            var prevArrow = filmSlider[0] && filmSlider[0].querySelector('.aara_film_arrow_prev');
+            var nextArrow = filmSlider[0] && filmSlider[0].querySelector('.aara_film_arrow_next');
+            if (!media || !prevArrow || !nextArrow) return;
+            var top = media.offsetHeight / 2;
+            prevArrow.style.top = top + 'px';
+            nextArrow.style.top = top + 'px';
+        }
+
+        positionFilmArrows();
+        window.addEventListener('resize', positionFilmArrows);
+        window.addEventListener('load', positionFilmArrows);
 
         function playFilmPreview(video) {
             video.preload = 'metadata';
@@ -545,44 +563,83 @@
             });
         }, { threshold: 0.25 });
 
-        document.querySelectorAll('.aara_film_media').forEach(function (media) {
+        var playIconSvg = '<svg class="aara_icon_play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>';
+        var pauseIconSvg = '<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zM14 5h4v14h-4z"></path></svg>';
+
+        var allFilmMedia = document.querySelectorAll('.aara_film_media');
+
+        function stopOtherFilms(exceptMedia) {
+            allFilmMedia.forEach(function (otherMedia) {
+                if (otherMedia === exceptMedia || !otherMedia.classList.contains('is-playing')) return;
+                var otherVideo = otherMedia.querySelector('video');
+                otherMedia.classList.remove('is-playing');
+                otherVideo.loop = true;
+                otherVideo.muted = true;
+                otherVideo.pause();
+                if (otherMedia.getBoundingClientRect().width > 0) playFilmPreview(otherVideo);
+                if (otherMedia._updateIcon) otherMedia._updateIcon();
+            });
+        }
+
+        allFilmMedia.forEach(function (media) {
             var video = media.querySelector('video');
+            var playIcon = media.querySelector('.aara_film_play');
             filmObserver.observe(media);
 
-            function startFilm() {
-                if (media.classList.contains('is-playing')) return;
-                media.classList.add('is-playing');
-                video.controls = true;
-                video.loop = false;
-                video.muted = false;
-                video.currentTime = 0;
-                video.play().catch(function () {
-                    media.classList.remove('is-playing');
-                    video.controls = false;
-                    video.loop = true;
-                    video.muted = true;
-                });
+            function updateIcon() {
+                var showPause = media.classList.contains('is-playing') && !video.paused;
+                playIcon.innerHTML = showPause ? pauseIconSvg : playIconSvg;
+            }
+            media._updateIcon = updateIcon;
+
+            var lastToggleAt = 0;
+
+            function toggleFilm() {
+                var now = Date.now();
+                if (now - lastToggleAt < 300) return;
+                lastToggleAt = now;
+
+                if (!media.classList.contains('is-playing')) {
+                    stopOtherFilms(media);
+                    media.classList.add('is-playing');
+                    video.loop = false;
+                    video.muted = false;
+                    video.currentTime = 0;
+                    video.play().then(updateIcon).catch(function () {
+                        media.classList.remove('is-playing');
+                        video.loop = true;
+                        video.muted = true;
+                        updateIcon();
+                    });
+                    updateIcon();
+                    return;
+                }
+                if (video.paused) {
+                    video.play().then(updateIcon);
+                } else {
+                    video.pause();
+                }
+                updateIcon();
             }
 
             function returnToPreview() {
                 media.classList.remove('is-playing');
-                video.controls = false;
                 video.loop = true;
                 video.muted = true;
                 if (media.getBoundingClientRect().width > 0) playFilmPreview(video);
+                updateIcon();
             }
 
-            media.addEventListener('click', startFilm);
+            media.addEventListener('click', toggleFilm);
             media.addEventListener('keydown', function (event) {
                 if (event.key === 'Enter' || event.key === ' ') {
                     event.preventDefault();
-                    startFilm();
+                    toggleFilm();
                 }
             });
             video.addEventListener('ended', returnToPreview);
-            video.addEventListener('pause', function () {
-                if (media.classList.contains('is-playing')) returnToPreview();
-            });
+            video.addEventListener('play', updateIcon);
+            video.addEventListener('pause', updateIcon);
         });
     });
 </script>
@@ -698,7 +755,7 @@
                 </p>
                 <h2 class="aara_faq_title">Questions, <br> <em>answered.</em></h2>
                 <p class="aara_faq_para">A few things worth knowing before bringing The Festive Table home.</p>
-                <a href="https://wa.me/971509509274?text=Hi%20I%20have%20a%20question%20about%20the%20HNOWW%20x%20Aara%20Diwali%20Edition" target="_blank" rel="noopener" class="aara_faq_btn">Chat on WhatsApp</a>
+               <div class="text-center text-lg-start"><a href="https://wa.me/971509509274?text=Hi%20I%20have%20a%20question%20about%20the%20HNOWW%20x%20Aara%20Diwali%20Edition" target="_blank" rel="noopener" class="aara_faq_btn">Chat on WhatsApp</a></div>
             </div>
 
             <div class="col-lg-7">
@@ -786,9 +843,9 @@
 
     <div class="aara_cta_content">
         <div class="aara_cta_logos aara_hero_logos">
-            <span class="brand_hnoww">HNOWW</span>
+            <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="brand_hnoww_logo">
             <span class="brand_x">×</span>
-            <span class="brand_aara">aara</span>
+            <img src="{{ asset('public/images/front/Aara/aara-logo-white.svg') }}" alt="aara" class="brand_aara_logo">
         </div>
 
         <p class="aara_cta_eyebrow">The Festive Season</p>
@@ -802,7 +859,7 @@
         </p>
 
         <div class="aara_cta_btns">
-            <a href="javascript:void(0);" class="aara_cta_btn_solid">Shop the Festive Table <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+            <a href="#festive-table-collection" class="aara_cta_btn_solid">Shop the Festive Table <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
             <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20complete%20HNOWW%20x%20Aara%20Festive%20Table%20Set" target="_blank" rel="noopener" class="com_btn_light">Enquire About the Complete Setting</a>
         </div>
     </div>

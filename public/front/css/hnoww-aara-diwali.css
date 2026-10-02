@@ -104,7 +104,7 @@
     align-items: baseline;
     justify-content: center;
     gap: 18px;
-    margin-bottom: 18px;
+    margin-bottom: 22px;
 }
 
 .aara_hero_logos span {
@@ -112,22 +112,19 @@
     color: var(--white-color);
 }
 
-.aara_hero_logos .brand_hnoww {
-    font-size: 22px;
-    font-weight: 600;
-    letter-spacing: 3px;
-    text-transform: uppercase;
+.aara_hero_logos .brand_hnoww_logo {
+    /* height: 34px; */
+    width: 150px;
 }
 
 .aara_hero_logos .brand_x {
-    font-size: 18px;
+    font-size: 45px;
     opacity: 0.6;
 }
 
-.aara_hero_logos .brand_aara {
-    font-size: 30px;
-    font-style: italic;
-    font-weight: 400;
+.aara_hero_logos .brand_aara_logo {
+    /* height: 30px; */
+    width: 150px;
 }
 
 .aara_hero_label {
@@ -301,11 +298,13 @@
     margin-top: 44px;
     padding-top: 26px;
     border-top: 1px solid rgba(14, 34, 51, 0.12);
+    align-items:baseline;
 }
 
 .aara_collab_brand {
     flex: 1;
     padding-right: 28px;
+    text-align: center;
 }
 
 .aara_collab_brand_aara {
@@ -313,31 +312,27 @@
     border-left: 1px solid rgba(14, 34, 51, 0.12);
 }
 
-.aara_collab_brand_name {
-    font-family: var(--heading-font);
-    color: var(--dark-900);
-    font-size: 26px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    margin-bottom: 6px;
+.aara_collab_brand_logo {
+    display: block;
+    /* height: 28px; */
+    width: 150px;
+    margin:auto;
+    margin-bottom: 10px;
 }
 
-.aara_collab_brand_name_aara {
-    color: var(--secondary-color);
-    font-style: italic;
-    font-weight: 400;
-    letter-spacing: 0;
-    text-transform: lowercase;
+.aara_collab_brand_logo_aara {
+    /* height: 24px; */
 }
 
 .aara_collab_brand_tag {
     font-family: var(--body-font);
     color: var(--secondary-color);
-    /* font-size: 11px; */
+    font-size: 14px;
     /* font-weight: 600; */
     letter-spacing: 1.5px;
     text-transform: uppercase;
     margin-bottom: 10px;
+    font-weight: 700;
 }
 
 .aara_collab_brand_desc {
@@ -563,6 +558,12 @@
     margin-top: 24px;
     padding-top: 44px;
     /* border-top: 1px solid rgba(14, 34, 51, 0.12); */
+    
+}
+
+.aara_edit_grid_bottom,.aara_edit_grid_extra,.aara_edit_grid_top_right
+{
+     align-items: baseline;
 }
 
 .aara_edit_extra_label {
@@ -594,18 +595,14 @@
     display: block;
 }
 
-.aara_edit_card_badge {
+.aara_edit_card_img .aara_edit_card_badge {
     position: absolute;
     left: 14px;
     top: 14px;
-    background-color: var(--white-color);
-    color: var(--dark-900);
-    font-family: var(--body-font);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 6px 10px;
+    width: 100px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
 }
 
 .aara_edit_card_body {
@@ -635,9 +632,9 @@
 }
 
 .aara_edit_card_desc {
-    font-family: var(--heading-font);
-    font-style: italic;
-    color: var(--secondary-color);
+    /* font-family: var(--heading-font); */
+    /* font-style: italic; */
+    /* color: var(--secondary-color); */
     /* font-size: 13px; */
     margin: 4px 0 12px;
 }
@@ -700,8 +697,10 @@
 }
 
 .aara_film_grid {
+    position: relative;
     display: block;
     margin: 0 -12px;
+    /* padding: 0 48px; */
 }
 
 .aara_film_grid .slick-list {
@@ -714,15 +713,28 @@
 }
 
 .aara_film_slider .slick-arrow {
+    position: absolute;
+    top: 50%;
     z-index: 2;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: var(--white-color);
     font-size: 18px;
     line-height: 1;
     border: 1px solid rgba(255, 255, 255, 0.65);
     border-radius: 50%;
-    background: rgba(14, 34, 51, 0.78);
+    background: rgba(14, 34, 51, 0.85);
+    transform: translateY(-50%);
+    transition: var(--transition);
+}
+
+.aara_film_slider .slick-arrow:hover {
+    background: var(--gold-color);
+    border-color: var(--gold-color);
+    color: var(--dark-900);
 }
 
 .aara_film_slider .slick-arrow::before {
@@ -730,24 +742,61 @@
 }
 
 .aara_film_slider .aara_film_arrow_prev {
-    left: 18px;
+    left: 0;
 }
 
 .aara_film_slider .aara_film_arrow_next {
-    right: 18px;
+    right: -12px;
+}
+
+.aara_film_slider .aara_film_arrow_prev
+ {
+  left: -12px;
+ }
+
+@media (max-width: 575px) {
+    .aara_film_grid {
+        /* padding: 0 40px; */
+    }
+
+    .aara_film_slider .slick-arrow {
+        width: 36px;
+        height: 36px;
+    }
 }
 
 .aara_film_slider .slick-dots {
     position: static;
     margin-top: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.aara_film_slider .slick-dots li {
+    width: auto;
+    height: auto;
+    margin: 0;
+}
+
+.aara_film_slider .slick-dots li button {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border-radius: 50%;
+    background-color: var(--gold-color);
+    opacity: 0.4;
+    transition: var(--transition);
 }
 
 .aara_film_slider .slick-dots li button::before {
-    color: var(--gold-color);
-    opacity: 0.45;
+    display: none;
 }
 
-.aara_film_slider .slick-dots li.slick-active button::before {
+.aara_film_slider .slick-dots li.slick-active button {
+    width: 26px;
+    border-radius: 5px;
     opacity: 1;
 }
 
@@ -764,6 +813,7 @@
     height: 100%;
     object-fit: cover;
     display: block;
+    pointer-events: none;
 }
 
 .aara_film_play {
@@ -771,11 +821,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 64px;
-    height: 64px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(0, 0, 0, 0.35);
+    border: none;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
@@ -784,13 +835,21 @@
 }
 
 .aara_film_media:hover .aara_film_play {
-    background: rgba(255, 255, 255, 0.35);
+    background: rgba(0, 0, 0, 0.5);
+    transform: translate(-50%, -50%) scale(1.06);
+}
+
+.aara_film_media:active .aara_film_play {
+    transform: translate(-50%, -50%) scale(0.92);
 }
 
 .aara_film_play svg {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     fill: var(--white-color);
+}
+
+.aara_film_play svg.aara_icon_play {
     margin-left: 3px;
 }
 
@@ -804,7 +863,6 @@
     opacity: 0.85;
 }
 
-.aara_film_media.is-playing .aara_film_play,
 .aara_film_media.is-playing .aara_film_duration {
     display: none;
 }
@@ -833,7 +891,7 @@
 
 .aara_film_caption_title {
     display: block;
-    font-family: var(--body-font);
+    font-family: var(--heading-font);
     color: var(--white-color);
     font-size: 24px;
     font-weight: 500;
@@ -1019,7 +1077,7 @@
     overflow: hidden;
 }
 
-.aara_cta img {
+.aara_cta > img {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -1157,6 +1215,23 @@
     font-size: 22px;
 }
 
+.aara_hero_logos .brand_hnoww_logo
+ {
+    width: 130px;
+}
+
+.aara_hero_logos .brand_aara_logo {
+    width: 130px;
+}
+
+.aara_collab_brand_logo {
+    width: 130px;
+}
+
+.aara_collab_brand_tag {
+    font-size: 12px;
+}
+
 }
 
 @media (max-width: 991px) {
@@ -1207,6 +1282,11 @@
 
 @media (max-width: 767px) {
 
+    .aara_film_slider .slick-arrow
+    {
+        display: none !important;
+    }
+
     .aara_section_label,.aara_pairing_title,.aara_pairing_para,.aara_edit_title,.aara_edit_para,.aara_film_title,.aara_film_hint,.aara_film_intro,.aara_gallery_title,.aara_gallery_body,.aara_faq_title,.aara_faq_para,.aara_cta_eyebrow,.aara_cta_title,.aara_cta_meta,.aara_film_hint
     {
         text-align: center;
@@ -1217,9 +1297,9 @@
         width: 100%;
     }
 
-    .aara_edit_grid_bottom {
-    gap: 36px;
-}
+/*    .aara_edit_grid_bottom {*/
+/*    gap: 36px;*/
+/*}*/
 
     .aara_hero {
         min-height: 100vh;
@@ -1243,6 +1323,7 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 16px;
+        margin-bottom: 10px;
     }
 
     .aara_edit_title {
@@ -1300,6 +1381,27 @@
     .aara_cta_title {
         font-size: 36px;
     }
+    
+    .aara_edit_grid_top_right,.aara_edit_grid_top,.aara_edit_grid_bottom,.aara_edit_grid_extra  {
+   
+    gap: 40px;
+}
+
+.aara_edit_footer_cta {
+
+    margin-top: 40px;
+}
+
+.aara_edit_grid_bottom
+{
+    margin-top:40px;
+}
+
+.aara_film_section {
+   
+    padding: 60px 0;
+}
+    
 }
 
 @media (max-width: 575px) {
