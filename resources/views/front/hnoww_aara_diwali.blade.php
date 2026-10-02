@@ -179,8 +179,8 @@
         </div>
 
         <div class="aara_pairing_btns">
-            <a href="javascript:void(0);" class="com_btn_light">Shop the Set <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-            <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20complete%20HNOWW%20x%20Aara%20Festive%20Table%20Set" target="_blank" rel="noopener" class="aara_pairing_link">Enquire about the complete setting</a>
+            <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20complete%20HNOWW%20x%20Aara%20Festive%20Table%20Set" class="com_btn_light">Shop the Set <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+            <!-- <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20complete%20HNOWW%20x%20Aara%20Festive%20Table%20Set" target="_blank" rel="noopener" class="aara_pairing_link">Enquire about the complete setting</a> -->
         </div>
     </div>
 </section>
@@ -666,14 +666,14 @@
     $aara_gallery_products = [
         'Tara Silver Serving Tray',
         'The Gathering',
-        'Sandooq Silver Dry Fruit Box',
+        /* 'Sandooq Silver Dry Fruit Box', */
         'Gaj Silver Elephants (set of two)',
         'Silver Serving Tongs',
         'The Twin Columns',
         'Mehr Candleholder and Vase Duo',
         'Two Tier Dessert Stand',
         'Gaj Silver Urli (small)',
-        'Lotus Bowl',
+        /* 'Lotus Bowl', */
         'Zoya Silver Serving Tray',
         'Ganesh Mantra Tealight Holder',
     ];
