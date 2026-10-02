@@ -1282,6 +1282,14 @@
 
 @media (max-width: 767px) {
 
+        .aara_hero_logos .brand_hnoww_logo {
+        width: 100px;
+    }
+
+        .aara_hero_logos .brand_aara_logo {
+        width: 100px;
+    }
+
     .aara_film_slider .slick-arrow
     {
         display: none !important;

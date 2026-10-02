@@ -113,6 +113,78 @@
     </div>
 </section>
 
+<!-- The Festive Table Set -->
+<section class="aara_pairing">
+    <div class="aara_pairing_media">
+        <img src="{{ asset('public/images/front/Aara/3rd_tableSet.webp') }}" alt="The Festive Table Set — HNOWW x Aara Diwali gifting, Dubai" loading="lazy">
+        <span class="aara_pairing_badge">The Pairing</span>
+    </div>
+
+    <div class="aara_pairing_content">
+        <p class="sub_head mb-0 aara_section_label">
+            <span>
+                <svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z" fill="#B58A46"></path>
+                </svg>
+            </span>
+            <span>The Table, Composed</span>
+            <span>
+                <svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z" fill="#B58A46"></path>
+                </svg>
+            </span>
+        </p>
+        <h2 class="aara_pairing_title">The Festive <em>Table Set</em></h2>
+
+        <p class="aara_pairing_para">
+            A considered selection of HNOWW objects brought together as one complete setting.
+            Chosen for the way they catch the light, create balance and make the table feel ready for the evening.
+            Use them together for the festivities. Keep them separately for everything that follows.
+        </p>
+
+        <div class="aara_pairing_steps">
+            <div class="aara_pairing_step">
+                <span class="aara_pairing_step_num">01</span>
+                <div>
+                    <p class="aara_pairing_step_title">Made for the table</p>
+                    <p class="aara_pairing_step_desc">A composed selection designed to work beautifully together.</p>
+                </div>
+            </div>
+            <div class="aara_pairing_step">
+                <span class="aara_pairing_step_num">02</span>
+                <div>
+                    <p class="aara_pairing_step_title">Chosen to remain</p>
+                    <p class="aara_pairing_step_desc">Pieces that continue beyond the season and find their place in your home.</p>
+                </div>
+            </div>
+            <div class="aara_pairing_step">
+                <span class="aara_pairing_step_num">03</span>
+                <div>
+                    <p class="aara_pairing_step_title">Finished with aara florals</p>
+                    <p class="aara_pairing_step_desc">Seasonal blooms bring colour, movement and warmth to the setting.</p>
+                </div>
+            </div>
+            <div class="aara_pairing_step">
+                <span class="aara_pairing_step_num">04</span>
+                <div>
+                    <p class="aara_pairing_step_title">For gifting or gathering</p>
+                    <p class="aara_pairing_step_desc">A complete gesture for someone special, or a setting made for your own table.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="aara_pairing_price_row">
+            <span class="aara_pairing_price_label">From</span>
+            <span class="aara_pairing_price">AED 650</span>
+        </div>
+
+        <div class="aara_pairing_btns">
+            <a href="javascript:void(0);" class="com_btn_light">Shop the Set <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+            <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20complete%20HNOWW%20x%20Aara%20Festive%20Table%20Set" target="_blank" rel="noopener" class="aara_pairing_link">Enquire about the complete setting</a>
+        </div>
+    </div>
+</section>
+
 
 <!-- The Festive Table Collection -->
 <section class="aara_edit mt_120 mb_120" id="festive-table-collection">
@@ -175,7 +247,7 @@
                     </div>
                 </div>
 
-                <div class="aara_edit_card">
+                <!-- <div class="aara_edit_card">
                     <div class="aara_edit_card_img">
                         <img src="{{ asset('public/images/front/Aara/4th_collection/Sandooq Silver Dry Fruit Box.webp') }}" alt="Mehr Candleholder and Vase Duo — HNOWW Diwali gifting, Dubai" loading="lazy">
                         <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
@@ -188,7 +260,22 @@
                         <p class="aara_edit_card_desc">For one thing, kept well.</p>
                         <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                     </div>
+                </div> -->
+
+                 <div class="aara_edit_card">
+                <div class="aara_edit_card_img">
+                    <img src="{{ asset('public/images/front/Aara/4th_collection/Ganesh Mantra Tealight Holder.webp') }}" alt="The Gathering — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
                 </div>
+                <div class="aara_edit_card_body">
+                    <div class="aara_edit_card_row">
+                        <h3 class="aara_edit_card_title">Ganesh Mantra Tealight Holder</h3>
+                        <span class="aara_edit_card_price">AED 220</span>
+                    </div>
+                    <p class="aara_edit_card_desc">For a prayer lit from behind.</p>
+                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                </div>
+            </div>
 
                 <div class="aara_edit_card">
                     <div class="aara_edit_card_img">
@@ -287,7 +374,7 @@
                 </div>
             </div>
 
-            <div class="aara_edit_card">
+            <!-- <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
                     <img src="{{ asset('public/images/front/Aara/4th_collection/Lotus Bowl.webp') }}" alt="Sandooq Silver Dry Fruit Box — HNOWW Diwali gifting, Dubai" loading="lazy">
                     <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
@@ -300,7 +387,7 @@
                     <p class="aara_edit_card_desc">For a candle, incense or a single flower.</p>
                     <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
-            </div>
+            </div> -->
 
             <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
@@ -317,7 +404,7 @@
                 </div>
             </div>
 
-            <div class="aara_edit_card">
+            <!-- <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
                     <img src="{{ asset('public/images/front/Aara/4th_collection/Ganesh Mantra Tealight Holder.webp') }}" alt="The Gathering — HNOWW Diwali gifting, Dubai" loading="lazy">
                     <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
@@ -330,87 +417,17 @@
                     <p class="aara_edit_card_desc">For a prayer lit from behind.</p>
                     <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
-            </div>
+            </div> -->
 
         </div>
 
-        <div class="aara_edit_footer_cta">
+        <div class="aara_edit_footer_cta text-lg-start">
             <a href="javascript:void(0);" class="com_btn">Shop All Pieces <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
         </div>
     </div>
 </section>
 
-<!-- The Festive Table Set -->
-<section class="aara_pairing">
-    <div class="aara_pairing_media">
-        <img src="{{ asset('public/images/front/Aara/3rd_tableSet.webp') }}" alt="The Festive Table Set — HNOWW x Aara Diwali gifting, Dubai" loading="lazy">
-        <span class="aara_pairing_badge">The Pairing</span>
-    </div>
 
-    <div class="aara_pairing_content">
-        <p class="sub_head mb-0 aara_section_label">
-            <span>
-                <svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z" fill="#B58A46"></path>
-                </svg>
-            </span>
-            <span>The Table, Composed</span>
-            <span>
-                <svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z" fill="#B58A46"></path>
-                </svg>
-            </span>
-        </p>
-        <h2 class="aara_pairing_title">The Festive <em>Table Set</em></h2>
-
-        <p class="aara_pairing_para">
-            A considered selection of HNOWW objects brought together as one complete setting.
-            Chosen for the way they catch the light, create balance and make the table feel ready for the evening.
-            Use them together for the festivities. Keep them separately for everything that follows.
-        </p>
-
-        <div class="aara_pairing_steps">
-            <div class="aara_pairing_step">
-                <span class="aara_pairing_step_num">01</span>
-                <div>
-                    <p class="aara_pairing_step_title">Made for the table</p>
-                    <p class="aara_pairing_step_desc">A composed selection designed to work beautifully together.</p>
-                </div>
-            </div>
-            <div class="aara_pairing_step">
-                <span class="aara_pairing_step_num">02</span>
-                <div>
-                    <p class="aara_pairing_step_title">Chosen to remain</p>
-                    <p class="aara_pairing_step_desc">Pieces that continue beyond the season and find their place in your home.</p>
-                </div>
-            </div>
-            <div class="aara_pairing_step">
-                <span class="aara_pairing_step_num">03</span>
-                <div>
-                    <p class="aara_pairing_step_title">Finished with aara florals</p>
-                    <p class="aara_pairing_step_desc">Seasonal blooms bring colour, movement and warmth to the setting.</p>
-                </div>
-            </div>
-            <div class="aara_pairing_step">
-                <span class="aara_pairing_step_num">04</span>
-                <div>
-                    <p class="aara_pairing_step_title">For gifting or gathering</p>
-                    <p class="aara_pairing_step_desc">A complete gesture for someone special, or a setting made for your own table.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="aara_pairing_price_row">
-            <span class="aara_pairing_price_label">From</span>
-            <span class="aara_pairing_price">AED 650</span>
-        </div>
-
-        <div class="aara_pairing_btns">
-            <a href="javascript:void(0);" class="com_btn_light">Shop the Set <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-            <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20complete%20HNOWW%20x%20Aara%20Festive%20Table%20Set" target="_blank" rel="noopener" class="aara_pairing_link">Enquire about the complete setting</a>
-        </div>
-    </div>
-</section>
 
 
 <!-- The Films - Set the Scene -->
