@@ -251,6 +251,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
             route::get('/view-order-details/{orderid}', [UserController::class, 'viewOrderDetails'])->name('orders.details');
             Route::get('/view-order-details/{orderid}/invoice', [InvoiceController::class, 'adminDownload'])->name('orders.invoice');
             route::get('/order-awb/{orderid}', [UserController::class, 'awb'])->name('orders.awb');
+            route::get('/get-payment-link', [UserController::class, 'getPaymentLink'])->name('get.payment.link');
+            route::post('/generate-payment-link', [UserController::class, 'generatePaymentLink'])->name('generate.payment.link');
         });
 
         Route::prefix('blogs')->name('blogs.')->group(function () {

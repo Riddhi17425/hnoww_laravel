@@ -20697,7 +20697,7 @@ textarea.form-control-lg {
 }
 
 [class=theme-tradewind] {
-  --primary-color:	#6aab9c;
+  --primary-color:	#8c8a72;
   --secondary-color:	#f7b36b;
   --chart-color1:	#6aab9c;
   --chart-color2:	#f7b36b;
@@ -23049,7 +23049,7 @@ input[type=date], input[type=time] {
   left: 5px;
 }
 .choose-skin .tradewind {
-  background-color: #6aab9c;
+  background-color: #8c8a72;
 }
 .choose-skin .monalisa {
   background-color: #FF7B89;

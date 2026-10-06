@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use App\Models\{User, Order, OrderProduct};
 use DataTables;
+use Stripe\Stripe;
+use Stripe\PaymentLink;
 
 class UserController extends Controller
 {
@@ -91,5 +94,47 @@ class UserController extends Controller
         }
 
         return response()->file($disk->path($awbPath), ['Content-Type' => 'application/pdf']);
+    }
+
+    public function getPaymentLink(Request $request){
+        return view('admin.user.payment_link', [
+            'paymentLinkUrl' => session('paymentLinkUrl'),
+            'generatedAmount' => session('generatedAmount'),
+        ]);
+    }
+
+    public function generatePaymentLink(Request $request){
+        $validator = Validator::make($request->all(), [
+            'link_amount' => ['required', 'numeric', 'min:2', 'regex:/^\d+(\.\d{1,2})?$/'],
+        ], [
+            'link_amount.required' => 'Amount is required.',
+            'link_amount.numeric' => 'Amount must be a valid number.',
+            'link_amount.min' => 'Amount must be at least AED 2.00.',
+            'link_amount.regex' => 'Amount can have up to two decimal places.',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $amount = (float) $validator->validated()['link_amount'];
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+        $paymentLink = PaymentLink::create([
+            'line_items' => [
+                [
+                    'price_data' => [
+                        'currency' => 'aed',
+                        'product_data' => [
+                            'name' => 'Payment',
+                        ],
+                        'unit_amount' => (int) round($amount * 100), // Convert AED to fils
+                    ],
+                    'quantity' => 1,
+                ],
+            ],
+        ]);
+
+        return redirect()->route('admin.users.get.payment.link')->with([
+            'paymentLinkUrl' => $paymentLink->url,
+            'generatedAmount' => number_format($amount, 2),
+        ]);
     }
 }

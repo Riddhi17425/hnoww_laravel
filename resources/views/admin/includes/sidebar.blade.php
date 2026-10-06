@@ -49,15 +49,15 @@
                 </ul>
             </li> --}}
 
-            <li class="{{ request()->routeIs('admin.giftshops*') ? '' : 'collapsed' }}">
+            <!-- <li class="{{ request()->routeIs('admin.giftshops*') ? '' : 'collapsed' }}">
                 <a class="m-link {{ request()->routeIs('admin.giftshops*') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#giftshops" href="#">
                     <i class="icofont icofont-gift-box fs-5"></i> <span>Gift Shop</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
-                <!-- Menu: Sub menu ul -->
+                
                 <ul class="sub-menu collapse {{ request()->routeIs('admin.giftshops*') ? 'show' : '' }}" id="giftshops">
                     <li><a class="ms-link {{ request()->routeIs('admin.giftshops.index') ? 'active' : '' }}" href="{{ route('admin.giftshops.index') }}">Gift List</a></li>
                     <li><a class="ms-link {{ request()->routeIs('admin.giftshops.create') ? 'active' : '' }}" href="{{ route('admin.giftshops.create') }}">Gift Add</a></li>
                 </ul>
-            </li>
+            </li> -->
 
             <li class="{{ request()->routeIs('admin.corporate-kits*') ? '' : 'collapsed' }}">
                 <a class="m-link {{ request()->routeIs('admin.corporate-kits*') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#corporate-kits" href="#">
@@ -85,6 +85,7 @@
                 <ul class="sub-menu collapse {{ request()->routeIs('admin.users*') ? 'show' : '' }}" id="users">
                     <li><a class="ms-link {{ request()->routeIs('admin.users.get') ? 'active' : '' }}" href="{{ route('admin.users.get') }}">Users List</a></li>
                     <li><a class="ms-link {{ request()->routeIs('admin.users.orders') ? 'active' : '' }}" href="{{ route('admin.users.orders') }}">User's Orders</a></li>
+                    <li><a class="ms-link {{ request()->routeIs('admin.users.get.payment.link') ? 'active' : '' }}" href="{{ route('admin.users.get.payment.link') }}">Generate Payment Link</a></li>
                 </ul>
             </li>
 
