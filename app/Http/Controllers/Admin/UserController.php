@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use App\Models\{User, Order, OrderProduct};
 use DataTables;
 use Stripe\Stripe;
-use Stripe\PaymentLink;
+use Stripe\Checkout\Session as CheckoutSession;
 
 class UserController extends Controller
 {
@@ -116,8 +117,30 @@ class UserController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $amount = (float) $validator->validated()['link_amount'];
+
+        $paymentLinkUrl = URL::signedRoute('payment.checkout', [
+            'amount' => number_format($amount, 2, '.', ''),
+        ]);
+
+        return redirect()->route('admin.users.get.payment.link')->with([
+            'paymentLinkUrl' => $paymentLinkUrl,
+            'generatedAmount' => number_format($amount, 2),
+        ]);
+    }
+
+    public function getLinkThankYou(Request $request){
+        return view('front.thank_you');
+    }
+
+    public function checkoutPaymentLink(string $amount){
         Stripe::setApiKey(env('STRIPE_SECRET'));
-        $paymentLink = PaymentLink::create([
+        $checkoutSession = CheckoutSession::create([
+            'mode' => 'payment',
+            'success_url' => route('front.link.thankyou'),
+            'cancel_url' => route('front.home'),
+            'adaptive_pricing' => [
+                'enabled' => false,
+            ],
             'line_items' => [
                 [
                     'price_data' => [
@@ -132,9 +155,6 @@ class UserController extends Controller
             ],
         ]);
 
-        return redirect()->route('admin.users.get.payment.link')->with([
-            'paymentLinkUrl' => $paymentLink->url,
-            'generatedAmount' => number_format($amount, 2),
-        ]);
+        return redirect()->away($checkoutSession->url);
     }
 }

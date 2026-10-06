@@ -24,6 +24,10 @@ Route::get('/clear', function () {
 
 Route::post('/newsletter-temp/store', [FrontController::class, 'storeNewsletterTempInquiry'])->name('newsletter.temp.store');
 Route::post('/check-email-unique', [FrontController::class, 'checkEmailUnique'])->name('front.check.email.unique');
+Route::get('/pay/{amount}', [UserController::class, 'checkoutPaymentLink'])
+    ->where('amount', '[0-9]+(?:\.[0-9]{1,2})?')
+    ->middleware('signed')
+    ->name('payment.checkout');
 
 // START - SITEMAP ROUTE
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
@@ -105,6 +109,7 @@ Route::name('front.')->group(function () {
     Route::get('/about', [FrontController::class, 'getAbout'])->name('about');
     Route::get('/editions', [FrontController::class, 'getEditions'])->name('editions');
     Route::get('/thankyou', [FrontController::class, 'getThankYou'])->name('thankyou');
+    Route::get('/thank-you', [UserController::class, 'getLinkThankYou'])->name('link.thankyou');
 
     Route::get('/blogs', [FrontController::class, 'getBlogs'])->name('blogs');
     Route::get('/blog/{url}', [FrontController::class, 'getBlogDetails'])->name('blog.detail');

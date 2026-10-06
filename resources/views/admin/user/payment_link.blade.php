@@ -54,7 +54,7 @@
                             <div class="d-flex align-items-start gap-2">
                                 <i class="icofont-check-circled fs-5"></i>
                                 <div class="flex-grow-1 min-w-0">
-                                    <h5 class="alert-heading mb-1">Your payment link is ready</h5>
+                                    <h5 class="alert-heading mb-1">Your AED checkout link is ready</h5>
                                     <p class="small mb-2">Payment amount: <strong>AED {{ $generatedAmount }}</strong></p>
                                     <div class="input-group">
                                         <input type="text" id="generatedPaymentLink" class="form-control bg-white"
@@ -63,6 +63,7 @@
                                             <i class="icofont-copy me-1"></i><span>Copy link</span>
                                         </button>
                                     </div>
+                                    <small class="d-block mt-2">This link can be shared and used for new AED checkout sessions.</small>
                                     <small class="d-block mt-2" id="copyFeedback" aria-live="polite"></small>
                                 </div>
                             </div>
