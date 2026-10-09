@@ -34,8 +34,8 @@
         </p>
 
         <div class="aara_hero_btns">
-            <a href="#festive-table-collection" class="com_btn_light">Shop the Festive Table <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-            <!-- <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20HNOWW%20x%20Aara%20Diwali%20Edition" target="_blank" rel="noopener" class="com_btn_light">Order on WhatsApp</a> -->
+            <a href="#festive-table-collection" class="com_btn_light">SHOP YOUR FESTIVE SETTING <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+            <!-- <a href="https://wa.me/971502243720?text=Hi%20I%20am%20interested%20in%20the%20HNOWW%20x%20Aara%20Diwali%20Edition" target="_blank" rel="noopener" class="com_btn_light">Order on WhatsApp</a> -->
         </div>
     </div>
 
@@ -179,8 +179,8 @@
         </div>
 
         <div class="aara_pairing_btns">
-            <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20complete%20HNOWW%20x%20Aara%20Festive%20Table%20Set" class="com_btn_light">Shop the Set <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-            <!-- <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20complete%20HNOWW%20x%20Aara%20Festive%20Table%20Set" target="_blank" rel="noopener" class="aara_pairing_link">Enquire about the complete setting</a> -->
+            <a href="https://wa.me/971502243720?text=Hi%20I%20am%20interested%20in%20the%20complete%20HNOWW%20x%20Aara%20Festive%20Table%20Set" class="com_btn_light">Shop the Set <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+            <!-- <a href="https://wa.me/971502243720?text=Hi%20I%20am%20interested%20in%20the%20complete%20HNOWW%20x%20Aara%20Festive%20Table%20Set" target="_blank" rel="noopener" class="aara_pairing_link">Enquire about the complete setting</a> -->
         </div>
     </div>
 </section>
@@ -227,7 +227,7 @@
                         <span class="aara_edit_card_price">AED 750</span>
                     </div>
                     <p class="aara_edit_card_desc">For two candles at two heights.</p>
-                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    <a href="https://hnoww.com/product-details/the-twin-columns" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
             </div>
 
@@ -243,7 +243,7 @@
                             <span class="aara_edit_card_price">AED 325</span>
                         </div>
                         <p class="aara_edit_card_desc">For good luck, placed facing the door.</p>
-                        <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                        <a href="https://hnoww.com/product-details/gaj-silver-elephants"   target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                     </div>
                 </div>
 
@@ -273,7 +273,7 @@
                         <span class="aara_edit_card_price">AED 220</span>
                     </div>
                     <p class="aara_edit_card_desc">For a prayer lit from behind.</p>
-                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    <a href="https://hnoww.com/product-details/ganesh-mantra-tealight-holder" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
             </div>
 
@@ -288,7 +288,7 @@
                             <span class="aara_edit_card_price">AED 575</span>
                         </div>
                         <p class="aara_edit_card_desc">Made to hold the season.</p>
-                        <a href="javascript:void(0);"  rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                        <a href="https://hnoww.com/product-details/tara-silver-serving-tray" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                     </div>
                 </div>
 
@@ -303,7 +303,7 @@
                             <span class="aara_edit_card_price">AED 850</span>
                         </div>
                         <p class="aara_edit_card_desc">For a centrepiece that holds the fruit.</p>
-                        <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                        <a href="https://hnoww.com/product-details/the-gathering" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                     </div>
                 </div>
             </div>
@@ -321,7 +321,7 @@
                         <span class="aara_edit_card_price">AED 425</span>
                     </div>
                     <p class="aara_edit_card_desc">For water, flame and flowers.</p>
-                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    <a href="https://hnoww.com/product-details/gaj-silver-urli-small" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
             </div>
 
@@ -336,7 +336,7 @@
                         <span class="aara_edit_card_price">AED 200</span>
                     </div>
                     <p class="aara_edit_card_desc">Service, with a little shine.</p>
-                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    <a href="https://hnoww.com/product-details/silver-serving-tongs" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
             </div>
 
@@ -351,7 +351,7 @@
                         <span class="aara_edit_card_price">AED 575</span>
                     </div>
                     <p class="aara_edit_card_desc">For flowers by day and flame by evening.</p>
-                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    <a href="https://hnoww.com/product-details/mehr-candleholder-and-vase-duo" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
             </div>
         </div>
@@ -370,7 +370,7 @@
                         <span class="aara_edit_card_price">AED 300</span>
                     </div>
                     <p class="aara_edit_card_desc">For height where there is no room.</p>
-                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    <a href="https://hnoww.com/product-details/two-tier-dessert-stand" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
             </div>
 
@@ -400,7 +400,7 @@
                         <span class="aara_edit_card_price">AED 550</span>
                     </div>
                     <p class="aara_edit_card_desc">For sweets, lifted on a low foot.</p>
-                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    <a href="https://hnoww.com/product-details/zoya-silver-serving-tray" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
             </div>
 
@@ -436,43 +436,43 @@
         [
             'video' => asset('public/reel_videos/aara_flowers.webm'),
             'duration' => '0:45',
-            'title' => 'Light the Table',
-            'desc' => 'Begin with light. A single flame changes the way silver catches, the way glass reflects, and the way the evening begins to take shape.',
+            'title' => 'The First Light',
+            'desc' => 'Begin with light. A single flame brings warmth to the setting, catching on silver and giving the evening its first sense of occasion.',
             'alt' => 'Light the Table — HNOWW x Aara Diwali film',
         ],
         [
             'video'  => asset('public/reel_videos/hnoww_aara_diwaliVO.webm'),
             'duration' => '0:[00]',
-            'title' => 'Bring in the Florals',
-            'desc' => "Then, bring in the flowers. Aara's seasonal arrangements add colour, movement and softness, giving the table its sense of occasion without overwhelming it.",
+            'title' => 'In Full Bloom',
+            'desc' => "Seasonal florals by Aara bring colour, movement and softness, adding a natural rhythm to the setting.",
             'alt' => 'Bring in the Florals — HNOWW x Aara Diwali film',
         ],
         [
             'video'  => asset('public/reel_videos/hnoww_aara_products.webm'),
             'duration' => '0:[00]',
-            'title' => 'Place the Objects',
-            'desc' => 'Finally, make room for what remains. Layer HNOWW objects among the florals, allowing form, material and light to come together naturally.',
+            'title' => 'A Place for Everything',
+            'desc' => 'HNoWW objects find their place among the blooms. Each piece brings form, balance and intention to the setting.',
             'alt' => 'Place the Objects — HNOWW x Aara Diwali film',
         ],
         [
             'video'  => asset('public/reel_videos/hnoww_aara-interview.webm'),
             'duration' => '0:[00]',
-            'title' => 'Place the Objects',
-            'desc' => 'Finally, make room for what remains. Layer HNOWW objects among the florals, allowing form, material and light to come together naturally.',
+            'title' => 'The Details Matter',
+            'desc' => 'A closer look at the details that shape the setting: HNoWW objects, soft reflections and the beauty of things placed with care.',
             'alt' => 'Place the Objects — HNOWW x Aara Diwali film',
         ],
         [
             'video'  => asset('public/reel_videos/hnoww_nandi.webm'),
             'duration' => '0:[00]',
-            'title' => 'Place the Objects',
-            'desc' => 'Finally, make room for what remains. Layer HNOWW objects among the florals, allowing form, material and light to come together naturally.',
+            'title' => 'Made for the Moment',
+            'desc' => 'As the setting comes together, HNoWW objects and Aara florals share the same space. One blooms for the evening, the other is made to remain.',
             'alt' => 'Place the Objects — HNOWW x Aara Diwali film',
         ],
         [
             'video'  => asset('public/reel_videos/hnoww_website.webm'),
             'duration' => '0:[00]',
-            'title' => 'Place the Objects',
-            'desc' => 'Finally, make room for what remains. Layer HNOWW objects among the florals, allowing form, material and light to come together naturally.',
+            'title' => 'Beyond the Evening',
+            'desc' => 'Some things stay with you long after the celebration. HNoWW objects are made to become part of the home, bringing the occasion into the everyday.',
             'alt' => 'Place the Objects — HNOWW x Aara Diwali film',
         ],
     ];
@@ -496,7 +496,7 @@
                 </p>
                 <h2 class="aara_film_title">Set the <em>Scene</em></h2>
             </div>
-            <p class="aara_film_hint">Tap to play with sound</p>
+            <!-- <p class="aara_film_hint">Tap to play with sound</p> -->
         </div>
 
         <p class="aara_film_intro">
@@ -772,7 +772,7 @@
                 </p>
                 <h2 class="aara_faq_title">Questions, <br> <em>answered.</em></h2>
                 <p class="aara_faq_para">A few things worth knowing before bringing The Festive Table home.</p>
-               <div class="text-center text-lg-start"><a href="https://wa.me/971509509274?text=Hi%20I%20have%20a%20question%20about%20the%20HNOWW%20x%20Aara%20Diwali%20Edition" target="_blank" rel="noopener" class="aara_faq_btn">Chat on WhatsApp</a></div>
+               <div class="text-center text-lg-start"><a href="https://wa.me/971502243720?text=Hi%20I%20have%20a%20question%20about%20the%20HNOWW%20x%20Aara%20Diwali%20Edition" target="_blank" rel="noopener" class="aara_faq_btn">Chat on WhatsApp</a></div>
             </div>
 
             <div class="col-lg-7">
@@ -876,8 +876,8 @@
         </p>
 
         <div class="aara_cta_btns">
-            <a href="#festive-table-collection" class="aara_cta_btn_solid">Shop the Festive Table <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-            <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20complete%20HNOWW%20x%20Aara%20Festive%20Table%20Set" target="_blank" rel="noopener" class="com_btn_light">Enquire About the Complete Setting</a>
+            <a href="#festive-table-collection" class="aara_cta_btn_solid">SHOP YOUR FESTIVE SETTING <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+            <a href="https://wa.me/971502243720?text=Hi%20I%20am%20interested%20in%20the%20complete%20HNOWW%20x%20Aara%20Festive%20Table%20Set" target="_blank" rel="noopener" class="com_btn_light">Enquire About the Complete Setting</a>
         </div>
     </div>
 </section>
