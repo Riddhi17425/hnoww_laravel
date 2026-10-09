@@ -247,22 +247,22 @@
                     </div>
                 </div>
 
-                <!-- <div class="aara_edit_card">
+                <div class="aara_edit_card">
                     <div class="aara_edit_card_img">
                         <img src="{{ asset('public/images/front/Aara/4th_collection/Sandooq Silver Dry Fruit Box.webp') }}" alt="Mehr Candleholder and Vase Duo — HNOWW Diwali gifting, Dubai" loading="lazy">
                         <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
                     </div>
                     <div class="aara_edit_card_body">
                         <div class="aara_edit_card_row">
-                            <h3 class="aara_edit_card_title">Architectural Silver Jar</h3>
-                            <span class="aara_edit_card_price">AED 295</span>
+                            <h3 class="aara_edit_card_title">Sandooq Silver Dry Fruit Box</h3>
+                            <span class="aara_edit_card_price">AED 350</span>
                         </div>
                         <p class="aara_edit_card_desc">For one thing, kept well.</p>
-                        <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                        <a href="https://hnoww.com/product-details/sandooq-silver-dry-fruit-box" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                     </div>
-                </div> -->
+                </div>
 
-                 <div class="aara_edit_card">
+                 <!-- <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
                     <img src="{{ asset('public/images/front/Aara/4th_collection/Ganesh Mantra Tealight Holder.webp') }}" alt="The Gathering — HNOWW Diwali gifting, Dubai" loading="lazy">
                     <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
@@ -275,7 +275,7 @@
                     <p class="aara_edit_card_desc">For a prayer lit from behind.</p>
                     <a href="https://hnoww.com/product-details/ganesh-mantra-tealight-holder" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
-            </div>
+            </div> -->
 
                 <div class="aara_edit_card">
                     <div class="aara_edit_card_img">
@@ -374,7 +374,7 @@
                 </div>
             </div>
 
-            <!-- <div class="aara_edit_card">
+            <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
                     <img src="{{ asset('public/images/front/Aara/4th_collection/Lotus Bowl.webp') }}" alt="Sandooq Silver Dry Fruit Box — HNOWW Diwali gifting, Dubai" loading="lazy">
                     <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
@@ -385,9 +385,9 @@
                         <span class="aara_edit_card_price">AED 345</span>
                     </div>
                     <p class="aara_edit_card_desc">For a candle, incense or a single flower.</p>
-                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    <a href="https://hnoww.com/product-details/lotus-bowl-diwali-gifting" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
-            </div> -->
+            </div>
 
             <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
@@ -404,7 +404,7 @@
                 </div>
             </div>
 
-            <!-- <div class="aara_edit_card">
+            <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
                     <img src="{{ asset('public/images/front/Aara/4th_collection/Ganesh Mantra Tealight Holder.webp') }}" alt="The Gathering — HNOWW Diwali gifting, Dubai" loading="lazy">
                     <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
@@ -415,9 +415,9 @@
                         <span class="aara_edit_card_price">AED 220</span>
                     </div>
                     <p class="aara_edit_card_desc">For a prayer lit from behind.</p>
-                    <a href="javascript:void(0);" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    <a href="https://hnoww.com/product-details/ganesh-mantra-tealight-holder" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
-            </div> -->
+            </div>
 
         </div>
 
