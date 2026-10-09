@@ -2,6 +2,7 @@
 /public/hot
 /public/reel_videos
 /public/storage
+/public/reel_videos
 /storage/*.key
 /storage
 /vendor

@@ -16,6 +16,32 @@ class InvoiceController extends Controller
         return $this->download($order);
     }
 
+    public function guestDownload($token)
+    {
+        $order = Order::where('guest_order_token', $token)
+            ->where(function ($query) {
+                $query->whereNull('guest_order_token_expires_at')
+                    ->orWhere('guest_order_token_expires_at', '>', now());
+            })
+            ->firstOrFail();
+
+        if ($order->isDelivered()) {
+            abort(410, 'This guest order link has expired.');
+        }
+
+        $sessionAccess = session('guest_order_access_' . $order->id);
+        if (!$sessionAccess
+            || !isset($sessionAccess['token'], $sessionAccess['expires_at'])
+            || !hash_equals((string) $token, (string) $sessionAccess['token'])
+            || now()->greaterThan($sessionAccess['expires_at'])) {
+            abort(403, 'Verify the guest order access link before downloading the invoice.');
+        }
+
+        $order->load(['user', 'orderAddress', 'orderProducts.product']);
+
+        return $this->download($order);
+    }
+
     public function adminDownload($orderId)
     {
         $order = Order::with(['user', 'orderAddress', 'orderProducts.product'])->findOrFail($orderId);

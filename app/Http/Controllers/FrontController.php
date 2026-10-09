@@ -205,7 +205,7 @@ class FrontController extends Controller
             return redirect()->back()->with('error', 'Product not Found');
         }
 
-        $similarProduct = Product::select('id', 'category_id', 'product_name', 'product_price', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'product_url')->where('category_id', $product->category_id)->where('id', '!=', $product->id)->isActive()->notDeleted()->latest('id')->take(3)->get();
+        $similarProduct = Product::select('id', 'category_id', 'product_name', 'product_price', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'product_url')->where('category_id', $product->category_id)->where('id', '!=', $product->id)->where('product_url', 'not like', 'test-%')->isActive()->notDeleted()->latest('id')->take(3)->get();
 
         $meta_title       = $product->meta_title ?? $product->product_name;
         $meta_description = $product->meta_description ?? strip_tags($product->short_description);
@@ -1008,6 +1008,15 @@ class FrontController extends Controller
         return view('front.corporate_diwali_collection', compact('meta_title', 'meta_description', 'categories', 'products', 'corporateProduct', 'weddingProduct', 'corporateKits'));
     }
 
+    public function getHnowwAaraDiwaliEdition(Request $request)
+    {
+        $meta_title       = 'HNOWW x Aara | The Festive Table | Diwali Edition 2026 | Dubai';
+        $meta_description = 'HNOWW x Aara Diwali Edition 2026: architectural HNOWW objects paired with fresh Aara Floral Luxury arrangements for the festive table. Order online, delivered across Dubai & the UAE.';
+        $og_image          = asset('public/images/front/hero-banner.webp');
+
+        return view('front.hnoww_aara_diwali', compact('meta_title', 'meta_description', 'og_image'));
+    }
+
     public function getRakshaBandhanCollection(Request $request)
     {
         $meta_title       = 'Raksha Bandhan Gifts in Dubai | Rakhi Collections | HNOWW';
@@ -1031,15 +1040,6 @@ class FrontController extends Controller
         $products = Product::where('category_id', $id)->select('id', 'product_name')->get();
 
         return response()->json($products);
-    }
-
-    public function getHnowwAaraDiwaliEdition(Request $request)
-    {
-        $meta_title       = 'HNOWW x Aara | The Festive Table | Diwali Edition 2026 | Dubai';
-        $meta_description = 'HNOWW x Aara Diwali Edition 2026: architectural HNOWW objects paired with fresh Aara Floral Luxury arrangements for the festive table. Order online, delivered across Dubai & the UAE.';
-        $og_image          = '';
- 
-        return view('front.hnoww_aara_diwali', compact('meta_title', 'meta_description', 'og_image'));
     }
 
     public function storeCorporateProposalRequest(Request $request, GoogleSheetService $googleSheetService)

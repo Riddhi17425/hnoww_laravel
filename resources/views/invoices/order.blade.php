@@ -17,6 +17,8 @@
         .summary td { width: 50%; vertical-align: top; padding: 12px 14px; background: #f8f7f3; border-left: 2px solid #c7b58c; }
         .label { color: #9a8658; font-size: 9px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; }
         .summary strong { color: #263238; }
+        .contact-details { margin-top: 5px; line-height: 1.7; overflow-wrap: anywhere; }
+        .contact-details span { color: #777; font-weight: bold; }
         .items { width: 100%; border-collapse: collapse; margin-top: 25px; }
         .items th { background: #c7b58c; color: #fff; padding: 10px 8px; font-size: 9px; letter-spacing: .5px; text-align: left; text-transform: uppercase; }
         .items td { border-bottom: 1px solid #e9e5dc; padding: 10px 8px; }
@@ -44,12 +46,23 @@
     </table>
     <div class="header-rule"></div>
 
+    @php
+        $customerName = $order->user->name ?? $order->orderAddress->name ?? 'Customer';
+        $customerEmail = $order->user->email ?? $order->guest_email ?? null;
+        $customerPhone = $order->orderAddress->contact_no ?? $order->user->phone ?? null;
+        $customerWhatsapp = $order->orderAddress->whatsapp_no ?? null;
+    @endphp
+
     <table class="summary">
         <tr>
             <td>
                 <div class="label">Billed to</div>
-                <strong>{{ $order->user->name ?? 'Customer' }}</strong><br>
-                {{ $order->user->email ?? '' }}
+                <strong>{{ $customerName }}</strong>
+                <div class="contact-details">
+                    @if($customerEmail)<span>Email:</span> {{ $customerEmail }}<br>@endif
+                    @if($customerPhone)<span>Phone:</span> {{ $customerPhone }}<br>@endif
+                    @if($customerWhatsapp && $customerWhatsapp !== $customerPhone)<span>WhatsApp:</span> {{ $customerWhatsapp }}@endif
+                </div>
             </td>
             <td>
                 <div class="label">Delivery address</div>

@@ -15,11 +15,30 @@
         text-decoration: none;
         text-transform: uppercase;
         transition: background-color .2s ease, color .2s ease;
+        white-space: nowrap;
+        box-sizing: border-box;
     }
 
     .order-invoice-download:hover {
         color: #fff;
         background: #b8a477;
+    }
+
+    .order-invoice-row {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 12px;
+    }
+
+    @media (max-width: 575.98px) {
+        .order-invoice-row {
+            justify-content: stretch;
+        }
+
+        .order-invoice-download {
+            width: 100%;
+            padding: 0 16px;
+        }
     }
 
     .theme-green .header-scrolled {
@@ -1047,8 +1066,12 @@
 
                 <!-- 1. ORDER SUMMARY TABLE (PELE JESA ORIGINAL & FULLY RESPONSIVE) -->
                 <div class="order_detail_wrapper mb-4">
-                    <div class="d-flex justify-content-end">
-                        <a href="{{ route('front.invoice.download', $orderDetails->id) }}" class="order-invoice-download">Download Invoice</a>
+                    <div class="order-invoice-row">
+                        @if($orderDetails->user_id)
+                            <a href="{{ route('front.invoice.download', $orderDetails->id) }}" class="order-invoice-download">Download Invoice</a>
+                        @elseif(!empty($orderDetails->guest_order_token))
+                            <a href="{{ route('front.guest.order.invoice', $orderDetails->guest_order_token) }}" class="order-invoice-download">Download Invoice</a>
+                        @endif
                     </div>
                     <div class="table-responsive order-summary-responsive">
                         <table class="table shopping-summery mb-0" style="--bs-table-bg:--bs-table-bg;">
@@ -1126,6 +1149,22 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                @if($orderDetails->user->email ?? $orderDetails->guest_email)
+                                <!-- Email -->
+                                <div class="address-entry">
+                                    <div class="address-entry-icon">
+                                        <svg class="order-icon order-icon-sm" viewBox="0 0 24 24" fill="none">
+                                            <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/>
+                                            <path d="m3.5 7 8.5 6 8.5-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div class="address-entry-content">
+                                        <div class="address-entry-label">Email</div>
+                                        <div class="address-entry-val">{{ $orderDetails->user->email ?? $orderDetails->guest_email }}</div>
+                                    </div>
+                                </div>
+                                @endif
 
                                 <!-- Contact No -->
                                 @if(!empty($orderDetails->orderAddress->contact_no))

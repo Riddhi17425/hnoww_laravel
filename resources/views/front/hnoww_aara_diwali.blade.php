@@ -422,7 +422,7 @@
         </div>
 
         <div class="aara_edit_footer_cta text-lg-start">
-            <a href="javascript:void(0);" class="com_btn">Shop All Pieces <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+            <a href="{{ route('front.list', 'diwali-gifts-dubai') }}" class="com_btn">Shop All Pieces <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
         </div>
     </div>
 </section>
@@ -876,8 +876,8 @@
         </p>
 
         <div class="aara_cta_btns">
-            <a href="#festive-table-collection" class="aara_cta_btn_solid">SHOP YOUR FESTIVE SETTING <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-            <a href="https://wa.me/971502243720?text=Hi%20I%20am%20interested%20in%20the%20complete%20HNOWW%20x%20Aara%20Festive%20Table%20Set" target="_blank" rel="noopener" class="com_btn_light">Enquire About the Complete Setting</a>
+            <a href="{{ route('front.list', 'diwali-gifts-dubai') }}" class="aara_cta_btn_solid">SHOP YOUR FESTIVE SETTING <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+            <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20complete%20HNOWW%20x%20Aara%20Festive%20Table%20Set" target="_blank" rel="noopener" class="com_btn_light">Enquire About the Complete Setting</a>
         </div>
     </div>
 </section>

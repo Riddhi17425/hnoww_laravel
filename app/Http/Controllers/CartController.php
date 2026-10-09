@@ -11,6 +11,7 @@ use Session;
 use Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class CartController extends Controller
@@ -185,13 +186,26 @@ class CartController extends Controller
     }
 
     public function getCheckout(Request $request){
-        $cartItems = Cart::where('user_id', auth()->id())->get();
+        $guestEmail = session('guest_checkout_email');
+        $verifiedUntil = session('guest_checkout_email_verified_until');
+
+        if (!auth()->check() && (!$guestEmail || !$verifiedUntil || now()->greaterThan($verifiedUntil))) {
+            return redirect()->route('front.cart.view')->with('error', 'Please login or continue as guest to checkout.');
+        }
+
+        if (auth()->check()) {
+            $cartItems = Cart::where('user_id', auth()->id())->get();
+            $userAddresses = UserAddress::where('user_id', auth()->id())->where('is_confirm', 1)->get();
+        } else {
+            $cartItems = Cart::where('session_id', Session::getId())->get();
+            $userAddresses = collect();
+        }
+
         $subTotal = $cartItems->sum(function ($item) {
             return $item->price * $item->quantity;
         });
         $shippingCharges = self::calculateShippingCharges();
-        $userAddresses = UserAddress::where('user_id', auth()->id())->where('is_confirm', 1)->get();
-      
+
         return view('front.orders.checkout', compact('cartItems', 'subTotal', 'shippingCharges', 'userAddresses'));
     }
 
@@ -210,14 +224,20 @@ class CartController extends Controller
         }
 
         $user = auth()->user();
-        if (!$user) {
+        $guestEmail = session('guest_checkout_email');
+        $verifiedUntil = session('guest_checkout_email_verified_until');
+
+        if (!$user && (!$guestEmail || !$verifiedUntil || now()->greaterThan($verifiedUntil))) {
             return response()->json([
                 'status' => false,
-                'message' => 'Authentication required.',
+                'message' => 'Please verify your email before checkout.',
             ], 401);
         }
 
-        $cartItems = Cart::where('user_id', $user->id)->get();
+        $cartItems = $user
+            ? Cart::where('user_id', $user->id)->get()
+            : Cart::where('session_id', Session::getId())->get();
+
         if ($cartItems->isEmpty()) {
             return response()->json([
                 'status' => false,
@@ -242,9 +262,14 @@ class CartController extends Controller
 
         $shippingCharge = 0.0;
         if ($request->filled('address_id')) {
-            $address = UserAddress::where('id', $request->address_id)
-                ->where('user_id', $user->id)
-                ->first();
+            $addressQuery = UserAddress::where('id', $request->address_id);
+            if ($user) {
+                $addressQuery->where('user_id', $user->id);
+            } else {
+                $addressQuery->whereNull('user_id');
+            }
+
+            $address = $addressQuery->first();
 
             if (!$address) {
                 return response()->json([
@@ -314,9 +339,26 @@ class CartController extends Controller
     protected function createOrderFromSuccessfulPayment(Request $request, $addressId)
     {
         $user = auth()->user();
-        if (!$user) {
+        $guestEmail = session('guest_checkout_email');
+
+        if (!$user && !$guestEmail) {
             return null;
         }
+        
+        $cartItems = $user
+            ? Cart::where('user_id', $user->id)->get()
+            : Cart::where('session_id', Session::getId())->get();
+
+        if ($cartItems->isEmpty()) {
+            return null;
+        }
+
+        $subTotal = $cartItems->sum(function ($item) {
+            return $item->price * $item->quantity;
+        });
+
+        $orderAddress = UserAddress::find($addressId);
+        $shippingCharges = self::calculateShippingCharges($orderAddress->emirate ?? null);
 
         $giftNote = trim((string) $request->input('gift_note', ''));
         if ($request->boolean('gift_wrapper') && $giftNote !== '') {
@@ -326,8 +368,12 @@ class CartController extends Controller
             $giftNote = null;
         }
 
-        return DB::transaction(function () use ($request, $addressId, $user, $giftNote) {
-            $cartItems = Cart::where('user_id', $user->id)->lockForUpdate()->get();
+        return DB::transaction(function () use ($request, $addressId, $user, $guestEmail, $giftNote) {
+            $cartQuery = Cart::query();
+            $user
+                ? $cartQuery->where('user_id', $user->id)
+                : $cartQuery->where('session_id', Session::getId());
+            $cartItems = $cartQuery->lockForUpdate()->get();
             if ($cartItems->isEmpty()) {
                 return null;
             }
@@ -351,8 +397,13 @@ class CartController extends Controller
             $orderAddress = UserAddress::find($addressId);
             $shippingCharges = self::calculateShippingCharges($orderAddress->emirate ?? null);
 
+            $guestOrder = !$user;
             $order = Order::create([
-                'user_id' => $user->id,
+                'user_id' => $user?->id,
+                'guest_email' => $guestOrder ? $guestEmail : null,
+                'guest_email_verified_at' => $guestOrder ? now() : null,
+                'guest_order_token' => $guestOrder ? Str::random(64) : null,
+                'guest_order_token_expires_at' => $guestOrder ? now()->addDays(30) : null,
                 'order_address_id' => $addressId,
                 'gift_wrapper' => $request->boolean('gift_wrapper'),
                 'gift_note' => $giftNote,
@@ -367,9 +418,14 @@ class CartController extends Controller
                 'payment_status' => 'paid',
             ]);
 
-            $order->order_number = 'ORD-' . $order->id . '-' . $user->id . '-' . rand(1000, 9999);
+            $order->order_number = 'ORD-' . $order->id . '-' . ($user?->id ?? 'G') . '-' . rand(1000, 9999);
             $order->save();
 
+            if ($user) {
+                UserAddress::where(['user_id' => $user->id, 'is_confirm' => 0])
+                    ->where('is_primary', '!=', 1)
+                    ->delete();
+            }
             foreach ($cartItems as $cart) {
                 $product = $products->get($cart->product_id);
                 OrderProduct::create([
@@ -385,15 +441,7 @@ class CartController extends Controller
                 $cart->delete();
             }
 
-            UserAddress::where(['user_id' => $user->id, 'is_confirm' => 0])
-                ->where('is_primary', '!=', 1)
-                ->delete();
-
-            if ($orderAddress) {
-                $orderAddress->is_confirm = 1;
-                $orderAddress->save();
-            }
-
+            Session::forget(['guest_checkout_email', 'guest_checkout_email_verified_until']);
             return $order;
         });
     }
@@ -403,10 +451,11 @@ class CartController extends Controller
         $adminEmail = $this->adminEmail;
         $adminSubject = 'New Order Placed - ' . $order->order_number;
         $userDetails = auth()->user();
-        $userEmail = $userDetails->email;
+        $userEmail = $userDetails->email ?? $order->guest_email;
+        $userName = $userDetails->name ?? ($order->orderAddress->name ?? 'Guest');
         $data = [
-            'name' => $userDetails->name ?? null,
-            'email' => $userDetails->email ?? null,
+            'name' => $userName,
+            'email' => $userEmail,
             'order_id' => $order->order_number ?? null,
             'status' => $order->status ?? null,
             'shipping_charges' => $order->shipping_charges ?? 0,
@@ -414,6 +463,7 @@ class CartController extends Controller
             'order_products' => $order->orderProducts ?? null,
             'gift_wrapper' => $order->gift_wrapper ?? null,
             'gift_note' => $order->gift_note ?? null,
+            'guest_order_access_url' => $order->guestOrderAccessUrl(),
         ];
 
         try {
@@ -497,6 +547,116 @@ class CartController extends Controller
     public function getFailed(Request $request, $orderid){
         return view('front.orders.failed');
     }
+
+    public function guestOrderAccess($token)
+    {
+        $order = Order::where('guest_order_token', $token)
+            ->where(function ($query) {
+                $query->whereNull('guest_order_token_expires_at')
+                    ->orWhere('guest_order_token_expires_at', '>', now());
+            })
+            ->first();
+
+        if (!$order) {
+            abort(404, 'Guest order access link is invalid or expired.');
+        }
+
+        if ($order->isDelivered()) {
+            return response()->view('front.orders.link_expired', [
+                'message' => 'This order link has expired.',
+            ], 410);
+        }
+
+        $email = strtolower(trim($order->guest_email));
+        if ($email) {
+            \App\Models\PasswordResetOtp::where('email', $email)->delete();
+            $otp = random_int(100000, 999999);
+            \App\Models\PasswordResetOtp::create([
+                'email' => $email,
+                'otp' => \Illuminate\Support\Facades\Hash::make($otp),
+                'expires_at' => now()->addMinutes(10),
+            ]);
+            \Illuminate\Support\Facades\Mail::to($email)->send(new \App\Mail\GuestOrderOtpMail($otp));
+        }
+
+        return view('front.orders.guest_order_access', compact('order', 'token'));
+    }
+
+    public function verifyGuestOrderAccess(Request $request, $token)
+    {
+        $request->validate([
+            'otp' => 'required|digits:6',
+        ]);
+
+        $order = Order::where('guest_order_token', $token)->first();
+        if (!$order) {
+            return $request->expectsJson() || $request->ajax()
+                ? response()->json(['success' => false, 'message' => 'Order access link is invalid.'], 404)
+                : abort(404, 'Order access link is invalid.');
+        }
+
+        if ($order->isDelivered()) {
+            return $request->expectsJson() || $request->ajax()
+                ? response()->json(['success' => false, 'message' => 'This order link has expired.'], 410)
+                : response()->view('front.orders.link_expired', [
+                    'message' => 'This order link has expired.',
+                ], 410);
+        }
+
+        if ($order->guest_order_token_expires_at && now()->greaterThan($order->guest_order_token_expires_at)) {
+            return $request->expectsJson() || $request->ajax()
+                ? response()->json(['success' => false, 'message' => 'This order link has expired.'], 410)
+                : response()->view('front.orders.link_expired', [
+                    'message' => 'This order link has expired.',
+                ], 410);
+        }
+
+        $otpRecord = \App\Models\PasswordResetOtp::where('email', strtolower(trim($order->guest_email)))
+            ->latest()
+            ->first();
+
+        if (!$otpRecord || now()->greaterThan($otpRecord->expires_at) || !\Illuminate\Support\Facades\Hash::check($request->otp, $otpRecord->otp)) {
+            return $request->expectsJson() || $request->ajax()
+                ? response()->json(['success' => false, 'message' => 'Invalid or expired OTP.'], 422)
+                : back()->withErrors(['otp' => 'Invalid or expired OTP.']);
+        }
+
+        $otpRecord->delete();
+        session()->put('guest_order_access_' . $order->id, ['token' => $token, 'expires_at' => now()->addMinutes(30)]);
+
+        if ($request->expectsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'redirect_url' => route('front.guest.order.details', ['token' => $token]),
+            ]);
+        }
+
+        return redirect()->route('front.guest.order.details', ['token' => $token]);
+    }
+
+    public function guestOrderDetails($token)
+    {
+        $order = Order::where('guest_order_token', $token)->first();
+        if (!$order) {
+            abort(404, 'Order not found.');
+        }
+
+        if ($order->isDelivered()) {
+            return response()->view('front.orders.link_expired', [
+                'message' => 'This order link has expired.',
+            ], 410);
+        }
+
+        $sessionAccess = session('guest_order_access_' . $order->id);
+        if (!$sessionAccess || !isset($sessionAccess['expires_at']) || now()->greaterThan($sessionAccess['expires_at'])) {
+            abort(403, 'You must verify the OTP before viewing this order.');
+        }
+
+        $orderDetails = $order->load(['user', 'orderProducts', 'orderAddress']);
+
+        return view('front.orders.order_detail', compact('orderDetails'));
+    }
+
     public function order()
     {
         $orderData = Order::where('user_id', auth()->id())->orderBy('id', 'desc')->get();
