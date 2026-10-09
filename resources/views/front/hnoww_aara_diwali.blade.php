@@ -8,7 +8,7 @@
     $aara_marquee_items = array_merge($aara_marquee_items, $aara_marquee_items, $aara_marquee_items, $aara_marquee_items);
 @endphp
 <section class="aara_hero">
-    <video class="aara_hero_video" src="{{ asset('public/images/front/Aara/HNoww_Website.mp4') }}" autoplay muted loop playsinline poster="{{ asset('public/images/front/Aara/imageHNoww_Website_poster.webp') }}"></video>
+    <video class="aara_hero_video" src="{{ asset('public/images/front/Aara/HNoww_Website.webm') }}" autoplay muted loop playsinline poster="{{ asset('public/images/front/Aara/imageHNoww_Website_poster.webp') }}"></video>
 
     <div class="aara_hero_vertical">
         <span class="aara_hero_vertical_line"></span>
@@ -258,7 +258,7 @@
                             <span class="aara_edit_card_price">AED 350</span>
                         </div>
                         <p class="aara_edit_card_desc">For one thing, kept well.</p>
-                        <a href="https://hnoww.com/product-details/sandooq-silver-dry-fruit-box" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                        <a href="https://hnoww.com/product-details/sandooq-silver-dry-fruit-box" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                     </div>
                 </div>
 
@@ -385,7 +385,7 @@
                         <span class="aara_edit_card_price">AED 345</span>
                     </div>
                     <p class="aara_edit_card_desc">For a candle, incense or a single flower.</p>
-                    <a href="https://hnoww.com/product-details/lotus-bowl-diwali-gifting" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    <a href="https://hnoww.com/product-details/lotus-bowl-diwali-gifting" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
             </div>
 
@@ -415,14 +415,14 @@
                         <span class="aara_edit_card_price">AED 220</span>
                     </div>
                     <p class="aara_edit_card_desc">For a prayer lit from behind.</p>
-                    <a href="https://hnoww.com/product-details/ganesh-mantra-tealight-holder" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+                    <a href="https://hnoww.com/product-details/ganesh-mantra-tealight-holder" target="_blank" rel="noopener" class="aara_edit_card_link">Explore More <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
                 </div>
             </div>
 
         </div>
 
         <div class="aara_edit_footer_cta text-lg-start">
-            <a href="{{ route('front.list', 'diwali-gifts-dubai') }}" class="com_btn">Shop All Pieces <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+            <a href="{{ route('front.list', 'diwali-gifts-dubai') }}" target="_blank" class="com_btn">Shop All Pieces <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
         </div>
     </div>
 </section>
@@ -876,8 +876,8 @@
         </p>
 
         <div class="aara_cta_btns">
-            <a href="{{ route('front.list', 'diwali-gifts-dubai') }}" class="aara_cta_btn_solid">SHOP YOUR FESTIVE SETTING <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
-            <a href="https://wa.me/971509509274?text=Hi%20I%20am%20interested%20in%20the%20complete%20HNOWW%20x%20Aara%20Festive%20Table%20Set" target="_blank" rel="noopener" class="com_btn_light">Enquire About the Complete Setting</a>
+            <a href="{{ route('front.list', 'diwali-gifts-dubai') }}" target="_blank" class="aara_cta_btn_solid">SHOP YOUR FESTIVE SETTING <span class="btn_arrow"><svg viewBox="0 0 24 10" width="18" height="8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.5 5H23M23 5L17 1M23 5L17 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+            <a href="https://wa.me/971502243720?text=Hi%20I%20am%20interested%20in%20the%20complete%20HNOWW%20x%20Aara%20Festive%20Table%20Set" target="_blank" rel="noopener" class="com_btn_light">Enquire About the Complete Setting</a>
         </div>
     </div>
 </section>
