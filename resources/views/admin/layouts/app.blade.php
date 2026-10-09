@@ -62,11 +62,45 @@
         .choices__list--multiple .choices__item .choices__button:hover {
             background-color: rgba(0,0,0,0.1) !important;
         }
+
+        /* Keep admin primary actions and status controls aligned with the selected theme. */
+        .btn.btn-primary,
+        .btn.btn-primary:hover,
+        .btn.btn-primary:focus,
+        .btn.btn-primary:active {
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+            color: var(--white-color, #fff) !important;
+        }
+
+        .btn.btn-outline-primary,
+        .btn.btn-outline-primary:hover,
+        .btn.btn-outline-primary:focus,
+        .btn.btn-outline-primary:active {
+            color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+        }
+
+        .btn.btn-outline-primary:hover,
+        .btn.btn-outline-primary:focus,
+        .btn.btn-outline-primary:active {
+            background-color: var(--primary-color) !important;
+            color: var(--white-color, #fff) !important;
+        }
+
+        .icofont-edit {
+            color: var(--primary-color) !important;
+        }
+
+        .form-switch .form-check-input:checked {
+            background-color: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+        }
     </style>
 </head>
 
 <body>
-    <div id="ebazar-layout" class="theme-blue">
+    <div id="ebazar-layout" class="theme-tradewind">
 
         @include('admin.includes.sidebar')
 
@@ -101,13 +135,13 @@
                                     <li data-theme="indigo">
                                         <div class="indigo"></div>
                                     </li>
-                                    <li data-theme="tradewind">
+                                    <li data-theme="tradewind" class="active">
                                         <div class="tradewind"></div>
                                     </li>
                                     <li data-theme="monalisa">
                                         <div class="monalisa"></div>
                                     </li>
-                                    <li data-theme="blue" class="active">
+                                    <li data-theme="blue">
                                         <div class="blue"></div>
                                     </li>
                                     <li data-theme="cyan">

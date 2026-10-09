@@ -613,7 +613,12 @@ var $shippingCharges = parseFloat(@json($shippingCharges));
 var $discountedTotal = $subtotal + $shippingCharges;
 
 function getShippingChargeByEmirate(emirate) {
-    return String(emirate || '').trim().toLowerCase() === 'dubai' ? 30 : 50;
+    const normalizedEmirate = String(emirate || '').trim().toLowerCase();
+    if (!normalizedEmirate || normalizedEmirate === 'dubai') {
+        return 30;
+    }
+
+    return 50;
 }
 
 function updateCheckoutSummary(emirate) {
@@ -901,18 +906,28 @@ $(document).ready(async function() {
     });
     $('.co-gift-checkbox').on('change', toggleGiftNote);
 
+    let paymentRefreshVersion = 0;
+
     function refreshPaymentForCurrentSelection() {
+        const refreshVersion = ++paymentRefreshVersion;
         const selectedAddress = $('input[name="selected_address"]:checked');
         const selectedEmirate = selectedAddress.length ? selectedAddress.data('emirate') : $('select[name="emirate"]').val();
 
         updateCheckoutSummary(selectedEmirate || '');
 
-        if (clientSecret && elements) {
-            elements.unmount();
+        // Unmount the Payment Element itself before replacing its PaymentIntent.
+        // Stripe Elements does not expose an unmount() method.
+        if (paymentElement) {
+            paymentElement.unmount();
+            paymentElement = null;
         }
 
         if ($subtotal > 0) {
             createPaymentIntent($discountedTotal).then(secret => {
+                // Ignore responses from older selections that completed out of order.
+                if (refreshVersion !== paymentRefreshVersion) {
+                    return;
+                }
                 clientSecret = secret;
                 return mountPaymentElement(clientSecret);
             }).catch(() => {

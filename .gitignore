@@ -1,5 +1,6 @@
 /node_modules
 /public/hot
+/public/reel_videos
 /public/storage
 /public/reel_videos
 /storage/*.key
@@ -12,3 +13,5 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+public/images/front/Aara/HNoww_Website.mp4
+public/images/front/Aara.zip

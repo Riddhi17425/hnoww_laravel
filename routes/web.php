@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin\{AdminController, BlessingController, BlogController, CategoryController, CeremonialController, CorporateKitController, FaqController, GiftShopController, JournalController, ProductController, ProductImageController, ProductTabController, UserController, BannerController};
 use App\Http\Controllers\Admin\Auth\LoginController;
-use App\Http\Controllers\{AuthController, CartController, FrontController, SitemapController};
+use App\Http\Controllers\{AuthController, CartController, FrontController, InvoiceController, SitemapController};
 use App\Http\Middleware\RedirectIfNotAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +24,10 @@ Route::get('/clear', function () {
 
 Route::post('/newsletter-temp/store', [FrontController::class, 'storeNewsletterTempInquiry'])->name('newsletter.temp.store');
 Route::post('/check-email-unique', [FrontController::class, 'checkEmailUnique'])->name('front.check.email.unique');
+Route::get('/pay/{amount}', [UserController::class, 'checkoutPaymentLink'])
+    ->where('amount', '[0-9]+(?:\.[0-9]{1,2})?')
+    ->middleware('signed')
+    ->name('payment.checkout');
 
 // START - SITEMAP ROUTE
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
@@ -36,6 +40,8 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap')
 
 //FRONT ROUTE
 Route::name('front.')->group(function () {
+    Route::get('/hnoww-aara-diwali-edition', [FrontController::class, 'getHnowwAaraDiwaliEdition'])->name('hnoww.aara.diwali');
+
     Route::get('/', [FrontController::class, 'index'])->name('home');
     Route::get('/live-search', [FrontController::class, 'liveSearch'])->name('live.search');
     Route::get('stripe', [FrontController::class, 'getStripe']);                             // Temporary
@@ -104,6 +110,7 @@ Route::name('front.')->group(function () {
     Route::get('/about', [FrontController::class, 'getAbout'])->name('about');
     Route::get('/editions', [FrontController::class, 'getEditions'])->name('editions');
     Route::get('/thankyou', [FrontController::class, 'getThankYou'])->name('thankyou');
+    Route::get('/thank-you', [UserController::class, 'getLinkThankYou'])->name('link.thankyou');
 
     Route::get('/blogs', [FrontController::class, 'getBlogs'])->name('blogs');
     Route::get('/blog/{url}', [FrontController::class, 'getBlogDetails'])->name('blog.detail');
@@ -144,6 +151,7 @@ Route::name('front.')->group(function () {
     Route::get('/guest-order/{token}', [CartController::class, 'guestOrderAccess'])->name('guest.order.access');
     Route::post('/guest-order/{token}/verify', [CartController::class, 'verifyGuestOrderAccess'])->name('guest.order.verify');
     Route::get('/guest-order/{token}/details', [CartController::class, 'guestOrderDetails'])->name('guest.order.details');
+    Route::get('/guest-order/{token}/invoice', [InvoiceController::class, 'guestDownload'])->name('guest.order.invoice');
     Route::get('/payment/success', [CartController::class, 'paymentSuccess'])->name('payment.success');
     Route::get('/get/success/{orderid?}', [CartController::class, 'getSuccess'])->name('get.success');
     Route::get('/get/failed/{orderid}', [CartController::class, 'getFailed'])->name('get.failed');
@@ -157,6 +165,7 @@ Route::name('front.')->group(function () {
 
         Route::get('/order', [CartController::class, 'order'])->name('order.view');
         Route::get('/order-detail/{orderid}', [CartController::class, 'orderDetail'])->name('order_detail.view');
+        Route::get('/order-detail/{orderid}/invoice', [InvoiceController::class, 'customerDownload'])->name('invoice.download');
 
         // Route::get('/cart', [CartController::class, 'getCart'])->name('cart.view');
         // Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add.ajax');
@@ -252,7 +261,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
             route::get('/get-orders', [UserController::class, 'getOrders'])->name('orders');
             route::get('/fetch-orders', [UserController::class, 'fetchOrders'])->name('orders.fetch');
             route::get('/view-order-details/{orderid}', [UserController::class, 'viewOrderDetails'])->name('orders.details');
+            Route::get('/view-order-details/{orderid}/invoice', [InvoiceController::class, 'adminDownload'])->name('orders.invoice');
             route::get('/order-awb/{orderid}', [UserController::class, 'awb'])->name('orders.awb');
+            route::get('/get-payment-link', [UserController::class, 'getPaymentLink'])->name('get.payment.link');
+            route::post('/generate-payment-link', [UserController::class, 'generatePaymentLink'])->name('generate.payment.link');
         });
 
         Route::prefix('blogs')->name('blogs.')->group(function () {

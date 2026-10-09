@@ -1,4 +1,42 @@
 //Increase & Decrease Quantity with stock check
+function showStockLimitMessage() {
+    Swal.fire({
+        icon: 'warning',
+        title: 'Stock limit reached',
+        text: 'You cannot add more quantity.',
+        showConfirmButton: true,
+        confirmButtonColor: '#B58A46',
+    });
+}
+
+function saveCartQuantity(row, productId, cartId, quantity, previousQuantity) {
+    $.post(sitePath + '/cart/add', {
+        cart_id: cartId,
+        quantity: quantity,
+        product_id: productId
+    }).done(function (response) {
+        if (!response.status) {
+            row.find('.qty_input').val(previousQuantity);
+            row.find('.span_value').text(previousQuantity);
+            recalculateCartTotals();
+            updateCartCount();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Stock limit reached',
+                text: response.message || 'The requested quantity is not available.',
+                showConfirmButton: true,
+                confirmButtonColor: '#B58A46',
+            });
+        }
+    }).fail(function () {
+        row.find('.qty_input').val(previousQuantity);
+        row.find('.span_value').text(previousQuantity);
+        recalculateCartTotals();
+        updateCartCount();
+        Swal.fire({ icon: 'error', title: 'Error', text: 'Could not update the cart quantity.' });
+    });
+}
+
 $(document).on('click', '.inc_btn', function () {
     let row = $(this).closest('.increment_decrement');
     let qtyInput = row.find('.qty_input');
@@ -8,28 +46,21 @@ $(document).on('click', '.inc_btn', function () {
     let productId = row.data('product-id');
     let callFrom = $(this).data('call');
     if (qty < stock) {
+        let previousQty = qty;
         qty++;
         qtyInput.val(qty);
         row.find('.span_value').text(qty);
         if(callFrom == 'cart'){
             recalculateCartTotals();
             updateCartCount();
-            // Update DB using your existing addToCartAjax function
-            $.post(sitePath + '/cart/add', { cart_id: cartId, quantity: qty, product_id: productId });
+            saveCartQuantity(row, productId, cartId, qty, previousQty);
         }
     } else {
         // Keep quantity as-is
         qtyInput.val(qty);
         row.find('.span_value').text(qty);
         // Stock warning
-        Swal.fire({
-            icon: 'warning',
-            title: 'Out of Stock',
-            text: 'You cannot add more than available stock (' + stock + ')',
-            timer: 3000,
-            showConfirmButton: true,
-            confirmButtonColor: '#B58A46',
-        });
+        showStockLimitMessage();
     }
 });
 
@@ -41,13 +72,14 @@ $(document).on('click', '.dec_btn', function () {
     let productId = row.data('product-id');
     let callFrom = $(this).data('call');
     if (qty > 1) {
+        let previousQty = qty;
         qty--;
         qtyInput.val(qty);
         row.find('.span_value').text(qty);
         if(callFrom == 'cart'){
             recalculateCartTotals();
             updateCartCount();
-            $.post(sitePath + '/cart/add', { cart_id: cartId, quantity: qty, product_id: productId });
+            saveCartQuantity(row, productId, cartId, qty, previousQty);
         }
     }
 });
@@ -87,19 +119,10 @@ $(document).on('click', '.add_to_cart_btn', function () {
                 });
             } else {
                 var message = response.message;
-                var availableQty = response.data.available_stock;
-                var alreadyAddedQty = response.data.already_in_cart;
-                if(availableQty > 0){
-                    message += " Total Stock Quantity is "+availableQty;
-                }
-                if(alreadyAddedQty > 0){
-                    message += " Your cart has already "+alreadyAddedQty+" QTY added";
-                }
-                // $('.span_value').text(1);
-                // $('.qty_input').text(1);
+                var data = response.data || {};
                 Swal.fire({
                     icon: 'warning',
-                    title: 'Warning',
+                    title: 'Stock limit reached',
                     text: message,
                     //timer: 3000,
                     showConfirmButton: true,

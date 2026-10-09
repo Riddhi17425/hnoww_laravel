@@ -4,16 +4,27 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-size: cover;
-    background-position: center;
     overflow: hidden;
+}
+
+.aara_hero_video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
 }
 
 .aara_hero::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(14, 34, 51, 0.55) 0%, rgba(14, 34, 51, 0.78) 50%, rgba(14, 34, 51, 0.55) 100%);
+    z-index: 1;
+    /* background: linear-gradient(90deg, rgba(14, 34, 51, 0.55) 0%, rgba(14, 34, 51, 0.78) 50%, rgba(14, 34, 51, 0.55) 100%); */
+
+        background: #00000087;
+    
 }
 
 .aara_hero_vertical {
@@ -62,8 +73,7 @@
     color: var(--white-color);
     font-family: var(--heading-font);
     font-style: italic;
-    font-size: 15px;
-    opacity: 0.8;
+    font-size: 17px;
     white-space: nowrap;
 }
 
@@ -77,7 +87,7 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     line-height: 1.8;
-    opacity: 0.85;
+    /* opacity: 0.85; */
     z-index: 2;
 }
 
@@ -91,10 +101,10 @@
 
 .aara_hero_logos {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: center;
     gap: 18px;
-    margin-bottom: 18px;
+    margin-bottom: 22px;
 }
 
 .aara_hero_logos span {
@@ -102,28 +112,25 @@
     color: var(--white-color);
 }
 
-.aara_hero_logos .brand_hnoww {
-    font-size: 22px;
-    font-weight: 600;
-    letter-spacing: 3px;
-    text-transform: uppercase;
+.aara_hero_logos .brand_hnoww_logo {
+    /* height: 34px; */
+    width: 150px;
 }
 
 .aara_hero_logos .brand_x {
-    font-size: 18px;
+    font-size: 45px;
     opacity: 0.6;
 }
 
-.aara_hero_logos .brand_aara {
-    font-size: 30px;
-    font-style: italic;
-    font-weight: 400;
+.aara_hero_logos .brand_aara_logo {
+    /* height: 30px; */
+    width: 150px;
 }
 
 .aara_hero_label {
     font-family: var(--body-font);
     color: var(--gold-color);
-    font-size: 13px;
+    /* font-size: 13px; */
     font-weight: 500;
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -146,7 +153,7 @@
 
 .aara_hero_para {
     color: var(--white-color);
-    opacity: 0.85;
+    /* opacity: 0.85; */
     margin-bottom: 34px;
 }
 
@@ -182,7 +189,7 @@
     gap: 14px;
     color: var(--gold-color);
     text-transform: uppercase;
-    font-size: 14px;
+    /* font-size: 14px; */
     letter-spacing: 2px;
     margin-bottom: 20px;
 }
@@ -205,8 +212,14 @@
 
 .com_btn_light:hover .btn_arrow,
 .aara_cta_btn_solid:hover .btn_arrow,
-.aara_faq_btn:hover .btn_arrow {
+.aara_faq_btn:hover .btn_arrow,
+.com_btn:hover .btn_arrow {
     transform: translateX(4px);
+}
+
+.aara_edit_footer_cta {
+    text-align: center;
+    margin-top: 50px;
 }
 
 .aara_marquee {
@@ -285,11 +298,13 @@
     margin-top: 44px;
     padding-top: 26px;
     border-top: 1px solid rgba(14, 34, 51, 0.12);
+    align-items:baseline;
 }
 
 .aara_collab_brand {
     flex: 1;
     padding-right: 28px;
+    text-align: center;
 }
 
 .aara_collab_brand_aara {
@@ -297,63 +312,44 @@
     border-left: 1px solid rgba(14, 34, 51, 0.12);
 }
 
-.aara_collab_brand_name {
-    font-family: var(--heading-font);
-    color: var(--dark-900);
-    font-size: 26px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    margin-bottom: 6px;
+.aara_collab_brand_logo {
+    display: block;
+    /* height: 28px; */
+    width: 150px;
+    margin:auto;
+    margin-bottom: 10px;
 }
 
-.aara_collab_brand_name_aara {
-    color: var(--secondary-color);
-    font-style: italic;
-    font-weight: 400;
-    letter-spacing: 0;
-    text-transform: lowercase;
+.aara_collab_brand_logo_aara {
+    /* height: 24px; */
 }
 
 .aara_collab_brand_tag {
     font-family: var(--body-font);
     color: var(--secondary-color);
-    font-size: 11px;
-    font-weight: 600;
+    font-size: 14px;
+    /* font-weight: 600; */
     letter-spacing: 1.5px;
     text-transform: uppercase;
     margin-bottom: 10px;
+    font-weight: 700;
 }
 
 .aara_collab_brand_desc {
     font-family: var(--body-font);
-    color: var(--grey-666);
-    font-size: 14px;
-    line-height: 22px;
+    /* color: var(--grey-666); */
+    /* font-size: 14px; */
+    /* line-height: 22px; */
 }
 
 .aara_collab_images {
     position: relative;
-    padding: 0 0 60px 60px;
 }
 
-.aara_collab_img_main {
-    width: 78%;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    margin-left: auto;
+.aara_collab_img_collage {
+    width: 100%;
     display: block;
     border-radius: 2px;
-}
-
-.aara_collab_img_secondary {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 46%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border: 6px solid #f8f7f3;
-    box-shadow: 0 20px 40px rgba(14, 34, 51, 0.15);
 }
 
 .aara_pairing {
@@ -397,7 +393,7 @@
 }
 
 .aara_pairing_content > * {
-    max-width: 460px;
+    /* max-width: 460px; */
 }
 
 .aara_pairing_title {
@@ -418,7 +414,7 @@
 .aara_pairing_para {
     color: var(--white-color);
     opacity: 0.7;
-    max-width: 420px;
+    /* max-width: 420px; */
     margin-bottom: 34px;
 }
 
@@ -481,24 +477,30 @@
     font-weight: 500;
 }
 
-.aara_pairing_note {
+.aara_pairing_btns {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 8px;
-    font-family: var(--body-font);
-    color: var(--white-color);
-    opacity: 0.65;
-    font-size: 13px;
-    margin-top: 18px;
+    gap: 18px;
 }
 
-.aara_pairing_note::before {
-    content: "";
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: var(--gold-color);
-    flex-shrink: 0;
+.aara_pairing_link {
+    font-family: var(--body-font);
+    color: var(--white-color);
+    opacity: 0.75;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    padding-bottom: 2px;
+    transition: var(--transition);
+}
+
+.aara_pairing_link:hover {
+    opacity: 1;
+    color: var(--gold-color);
+    border-bottom-color: var(--gold-color);
 }
 
 .aara_edit_header {
@@ -524,7 +526,7 @@
 }
 
 .aara_edit_para {
-    max-width: 300px;
+    max-width: 540px;
 }
 
 .aara_edit_grid_top {
@@ -545,6 +547,8 @@
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     gap: 24px;
+    margin-top: 24px;
+    padding-top: 44px;
 }
 
 .aara_edit_grid_extra {
@@ -553,7 +557,13 @@
     gap: 24px;
     margin-top: 24px;
     padding-top: 44px;
-    border-top: 1px solid rgba(14, 34, 51, 0.12);
+    /* border-top: 1px solid rgba(14, 34, 51, 0.12); */
+    
+}
+
+.aara_edit_grid_bottom,.aara_edit_grid_extra,.aara_edit_grid_top_right
+{
+     align-items: baseline;
 }
 
 .aara_edit_extra_label {
@@ -585,18 +595,14 @@
     display: block;
 }
 
-.aara_edit_card_badge {
+.aara_edit_card_img .aara_edit_card_badge {
     position: absolute;
     left: 14px;
     top: 14px;
-    background-color: var(--white-color);
-    color: var(--dark-900);
-    font-family: var(--body-font);
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 6px 10px;
+    width: 100px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
 }
 
 .aara_edit_card_body {
@@ -614,22 +620,22 @@
     font-family: var(--heading-font);
     font-style: italic;
     color: var(--dark-900);
-    font-size: 17px;
+    /* font-size: 17px; */
     font-weight: 500;
 }
 
 .aara_edit_card_price {
     font-family: var(--body-font);
     color: var(--grey-666);
-    font-size: 12px;
+    /* font-size: 12px; */
     white-space: nowrap;
 }
 
 .aara_edit_card_desc {
-    font-family: var(--heading-font);
-    font-style: italic;
-    color: var(--secondary-color);
-    font-size: 13px;
+    /* font-family: var(--heading-font); */
+    /* font-style: italic; */
+    /* color: var(--secondary-color); */
+    /* font-size: 13px; */
     margin: 4px 0 12px;
 }
 
@@ -637,7 +643,7 @@
     display: inline-block;
     font-family: var(--body-font);
     color: var(--dark-900);
-    font-size: 11px;
+    /* font-size: 11px; */
     font-weight: 600;
     letter-spacing: 1.5px;
     text-transform: uppercase;
@@ -691,9 +697,107 @@
 }
 
 .aara_film_grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    position: relative;
+    display: block;
+    margin: 0 -12px;
+    /* padding: 0 48px; */
+}
+
+.aara_film_grid .slick-list {
+    margin: 0;
+}
+
+.aara_film_slide {
+    height: auto;
+    padding: 0 12px;
+}
+
+.aara_film_slider .slick-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white-color);
+    font-size: 18px;
+    line-height: 1;
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 50%;
+    background: rgba(14, 34, 51, 0.85);
+    transform: translateY(-50%);
+    transition: var(--transition);
+}
+
+.aara_film_slider .slick-arrow:hover {
+    background: var(--gold-color);
+    border-color: var(--gold-color);
+    color: var(--dark-900);
+}
+
+.aara_film_slider .slick-arrow::before {
+    display: none;
+}
+
+.aara_film_slider .aara_film_arrow_prev {
+    left: 0;
+}
+
+.aara_film_slider .aara_film_arrow_next {
+    right: -12px;
+}
+
+.aara_film_slider .aara_film_arrow_prev
+ {
+  left: -12px;
+ }
+
+@media (max-width: 575px) {
+    .aara_film_grid {
+        /* padding: 0 40px; */
+    }
+
+    .aara_film_slider .slick-arrow {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+.aara_film_slider .slick-dots {
+    position: static;
+    margin-top: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.aara_film_slider .slick-dots li {
+    width: auto;
+    height: auto;
+    margin: 0;
+}
+
+.aara_film_slider .slick-dots li button {
+    width: 9px;
+    height: 9px;
+    padding: 0;
+    border-radius: 50%;
+    background-color: var(--gold-color);
+    opacity: 0.4;
+    transition: var(--transition);
+}
+
+.aara_film_slider .slick-dots li button::before {
+    display: none;
+}
+
+.aara_film_slider .slick-dots li.slick-active button {
+    width: 26px;
+    border-radius: 5px;
+    opacity: 1;
 }
 
 .aara_film_media {
@@ -704,16 +808,12 @@
     cursor: pointer;
 }
 
-.aara_film_media img,
 .aara_film_media video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-}
-
-.aara_film_media.is-playing img {
-    display: none;
+    pointer-events: none;
 }
 
 .aara_film_play {
@@ -721,11 +821,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 64px;
-    height: 64px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(0, 0, 0, 0.35);
+    border: none;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
@@ -734,13 +835,21 @@
 }
 
 .aara_film_media:hover .aara_film_play {
-    background: rgba(255, 255, 255, 0.35);
+    background: rgba(0, 0, 0, 0.5);
+    transform: translate(-50%, -50%) scale(1.06);
+}
+
+.aara_film_media:active .aara_film_play {
+    transform: translate(-50%, -50%) scale(0.92);
 }
 
 .aara_film_play svg {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     fill: var(--white-color);
+}
+
+.aara_film_play svg.aara_icon_play {
     margin-left: 3px;
 }
 
@@ -754,9 +863,15 @@
     opacity: 0.85;
 }
 
-.aara_film_media.is-playing .aara_film_play,
 .aara_film_media.is-playing .aara_film_duration {
     display: none;
+}
+
+.aara_film_intro {
+    color: var(--white-color);
+    /* opacity: 0.7; */
+    max-width: 558px;
+    margin-bottom: 44px;
 }
 
 .aara_film_caption {
@@ -770,14 +885,60 @@
     font-family: var(--heading-font);
     font-style: italic;
     color: var(--gold-color);
-    font-size: 14px;
+    font-size: 24px;
+    flex-shrink: 0;
 }
 
 .aara_film_caption_title {
+    display: block;
+    font-family: var(--heading-font);
+    color: var(--white-color);
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.aara_film_caption_desc {
     font-family: var(--body-font);
     color: var(--white-color);
-    font-size: 16px;
+    /* opacity: 0.6; */
+    /* font-size: 13px; */
+    line-height: 20px;
+    margin-bottom: 10px;
+}
+
+.aara_film_watch {
+    display: inline-block;
+    font-family: var(--body-font);
+    color: var(--gold-color);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.aara_gallery_header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.aara_gallery_header .aara_section_label {
+    justify-content: center;
+}
+
+.aara_gallery_title {
+    font-family: var(--heading-font);
+    color: var(--dark-900);
+    font-size: 42px;
     font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.aara_gallery_body {
+    font-family: var(--body-font);
+    color: var(--grey-666);
+    max-width: 560px;
+    margin: 0 auto;
 }
 
 .aara_gallery_strip {
@@ -879,8 +1040,8 @@
 .aara_faq_answer p {
     font-family: var(--body-font);
     color: var(--grey-666);
-    font-size: 18px;
-    line-height: 26px;
+    /* font-size: 18px; */
+    /* line-height: 26px; */
     margin: 0;
 }
 
@@ -916,7 +1077,7 @@
     overflow: hidden;
 }
 
-.aara_cta img {
+.aara_cta > img {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -943,10 +1104,19 @@
 
 .aara_cta_logos {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     justify-content: center;
     gap: 18px;
     margin-bottom: 26px;
+}
+
+.aara_cta_eyebrow {
+    color: var(--gold-color);
+    text-transform: uppercase;
+    /* font-size: 13px; */
+    /* font-weight: 600; */
+    letter-spacing: 2px;
+    margin-bottom: 16px;
 }
 
 .aara_cta_title {
@@ -967,8 +1137,8 @@
 .aara_cta_meta {
     font-family: var(--body-font);
     color: var(--white-color);
-    opacity: 0.8;
-    font-size: 14px;
+    /* opacity: 0.8; */
+    /* font-size: 14px; */
     margin-bottom: 34px;
 }
 
@@ -1003,13 +1173,73 @@
    Responsive — all media queries grouped below
    ========================================= */
 
+
+
+@media (max-width: 1601px)
+{
+    .aara_faq_question {
+   
+    font-size: 21px;
+} 
+
+
+.aara_hero_vertical_text {
+    font-size: 15px;
+}
+
+.aara_hero_title {
+    font-size: 54px;
+}
+
+.aara_collab_title {
+    font-size: 38px;
+}
+
+.aara_edit_para {
+    max-width: 449px;
+}
+
+.aara_section_label {
+    font-size: 14px;
+}
+
+.aara_edit_card_title {
+    font-size: 18px;
+}
+
+.aara_film_header {
+    margin-bottom: 25px;
+}
+
+.aara_film_caption_title {
+    font-size: 22px;
+}
+
+.aara_hero_logos .brand_hnoww_logo
+ {
+    width: 130px;
+}
+
+.aara_hero_logos .brand_aara_logo {
+    width: 130px;
+}
+
+.aara_collab_brand_logo {
+    width: 130px;
+}
+
+.aara_collab_brand_tag {
+    font-size: 12px;
+}
+
+}
+
 @media (max-width: 991px) {
     .aara_collab_title {
         font-size: 34px;
     }
 
     .aara_collab_images {
-        padding: 0 0 50px 50px;
         margin-top: 30px;
     }
 
@@ -1051,6 +1281,34 @@
 }
 
 @media (max-width: 767px) {
+
+        .aara_hero_logos .brand_hnoww_logo {
+        width: 100px;
+    }
+
+        .aara_hero_logos .brand_aara_logo {
+        width: 100px;
+    }
+
+    .aara_film_slider .slick-arrow
+    {
+        display: none !important;
+    }
+
+    .aara_section_label,.aara_pairing_title,.aara_pairing_para,.aara_edit_title,.aara_edit_para,.aara_film_title,.aara_film_hint,.aara_film_intro,.aara_gallery_title,.aara_gallery_body,.aara_faq_title,.aara_faq_para,.aara_cta_eyebrow,.aara_cta_title,.aara_cta_meta,.aara_film_hint
+    {
+        text-align: center;
+    }
+
+    .aara_film_hint
+    {
+        width: 100%;
+    }
+
+/*    .aara_edit_grid_bottom {*/
+/*    gap: 36px;*/
+/*}*/
+
     .aara_hero {
         min-height: 100vh;
     }
@@ -1073,6 +1331,7 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 16px;
+        margin-bottom: 10px;
     }
 
     .aara_edit_title {
@@ -1102,11 +1361,25 @@
     }
 
     .aara_faq_title {
-        font-size: 38px;
+        font-size: 34px;
+    }
+
+    .aara_faq_item {
+        padding: 20px 0;
     }
 
     .aara_faq_question {
+        font-size: 17px;
+        gap: 14px;
+    }
+
+    .aara_faq_icon {
         font-size: 19px;
+    }
+
+    .aara_faq_answer p {
+        font-size: 14px;
+        line-height: 22px;
     }
 
     .aara_cta {
@@ -1116,6 +1389,27 @@
     .aara_cta_title {
         font-size: 36px;
     }
+    
+    .aara_edit_grid_top_right,.aara_edit_grid_top,.aara_edit_grid_bottom,.aara_edit_grid_extra  {
+   
+    gap: 40px;
+}
+
+.aara_edit_footer_cta {
+
+    margin-top: 40px;
+}
+
+.aara_edit_grid_bottom
+{
+    margin-top:40px;
+}
+
+.aara_film_section {
+   
+    padding: 60px 0;
+}
+    
 }
 
 @media (max-width: 575px) {
@@ -1129,5 +1423,42 @@
         border-left: 0;
         padding-top: 24px;
         border-top: 1px solid rgba(14, 34, 51, 0.12);
+    }
+
+    .aara_faq_item {
+        padding: 18px 0;
+    }
+
+    .aara_faq_question {
+        gap: 12px;
+        font-size: 16px;
+    }
+
+    .aara_faq_icon {
+        font-size: 17px;
+    }
+
+    .aara_faq_answer p {
+        font-size: 13px;
+        line-height: 21px;
+    }
+}
+
+@media (max-width: 480px) {
+    .aara_faq_title {
+        font-size: 28px;
+    }
+
+    .aara_faq_item {
+        padding: 16px 0;
+    }
+
+    .aara_faq_question {
+        font-size: 15px;
+        gap: 10px;
+    }
+
+    .aara_faq_icon {
+        font-size: 16px;
     }
 }

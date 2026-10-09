@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Validator;
 use App\Models\{User, Order, OrderProduct};
 use DataTables;
+use Stripe\Stripe;
+use Stripe\Checkout\Session as CheckoutSession;
 
 class UserController extends Controller
 {
@@ -96,5 +100,66 @@ class UserController extends Controller
         }
 
         return response()->file($disk->path($awbPath), ['Content-Type' => 'application/pdf']);
+    }
+
+    public function getPaymentLink(Request $request){
+        return view('admin.user.payment_link', [
+            'paymentLinkUrl' => session('paymentLinkUrl'),
+            'generatedAmount' => session('generatedAmount'),
+        ]);
+    }
+
+    public function generatePaymentLink(Request $request){
+        $validator = Validator::make($request->all(), [
+            'link_amount' => ['required', 'numeric', 'min:2', 'regex:/^\d+(\.\d{1,2})?$/'],
+        ], [
+            'link_amount.required' => 'Amount is required.',
+            'link_amount.numeric' => 'Amount must be a valid number.',
+            'link_amount.min' => 'Amount must be at least AED 2.00.',
+            'link_amount.regex' => 'Amount can have up to two decimal places.',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $amount = (float) $validator->validated()['link_amount'];
+
+        $paymentLinkUrl = URL::signedRoute('payment.checkout', [
+            'amount' => number_format($amount, 2, '.', ''),
+        ]);
+
+        return redirect()->route('admin.users.get.payment.link')->with([
+            'paymentLinkUrl' => $paymentLinkUrl,
+            'generatedAmount' => number_format($amount, 2),
+        ]);
+    }
+
+    public function getLinkThankYou(Request $request){
+        return view('front.thank_you');
+    }
+
+    public function checkoutPaymentLink(string $amount){
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+        $checkoutSession = CheckoutSession::create([
+            'mode' => 'payment',
+            'success_url' => route('front.link.thankyou'),
+            'cancel_url' => route('front.home'),
+            'adaptive_pricing' => [
+                'enabled' => false,
+            ],
+            'line_items' => [
+                [
+                    'price_data' => [
+                        'currency' => 'aed',
+                        'product_data' => [
+                            'name' => 'Payment',
+                        ],
+                        'unit_amount' => (int) round($amount * 100), // Convert AED to fils
+                    ],
+                    'quantity' => 1,
+                ],
+            ],
+        ]);
+
+        return redirect()->away($checkoutSession->url);
     }
 }

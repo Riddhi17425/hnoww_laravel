@@ -288,7 +288,7 @@
 <!-- END - PRODUCT DISPLAY SECTION -->
 
 <!-- START - PERSONALISATION SECTION -->
-@if($category->category_url == 'corporate-diwali-gifts-dubai')
+{{-- @if($category->category_url == 'corporate-diwali-gifts-dubai')
 <section class="personalisation_section mt_120 mb_120">
     <div class="container">
         <div class="section_header text-center mb-5">
@@ -331,7 +331,7 @@
         </div>
     </div>
 </section>
-@endif
+@endif --}}
 <!-- END - PERSONALISATION SECTION -->
 
 <!-- START - PERSONALISATION FORM -->

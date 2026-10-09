@@ -10,6 +10,9 @@ use Stripe;
 use Session;
 use Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CartController extends Controller
 {
@@ -19,6 +22,10 @@ class CartController extends Controller
     public static function calculateShippingCharges($emirate = null): float
     {
         $normalizedEmirate = is_string($emirate) ? trim($emirate) : '';
+
+        if ($normalizedEmirate === '') {
+            return self::DUBAI_SHIPPING_CHARGE;
+        }
 
         return strtolower($normalizedEmirate) === 'dubai'
             ? self::DUBAI_SHIPPING_CHARGE
@@ -84,19 +91,20 @@ class CartController extends Controller
             $cart = $cart->where('session_id', $session_id)->first();
         }
 
-        $requestedQty = $request->quantity ?? 1;
+        $requestedQty = (int) $request->input('quantity', 1);
+        $existingQty = $cart ? (int) $cart->quantity : 0;
         if(isset($request->cart_id) && $request->cart_id != ''){
             $totalQty = $requestedQty;   
         }else{
-            $existingQty = $cart ? $cart->quantity : 0;
             $totalQty = $existingQty + $requestedQty;
         }
        
         // Stock check
-        if ($totalQty > $product->product_stock) {
+        $availableStock = max(0, (int) $product->product_stock - (isset($request->cart_id) && $request->cart_id != '' ? 0 : $existingQty));
+        if ((int) $product->product_stock < 1 || $totalQty > (int) $product->product_stock) {
             return response()->json([
                 'status'  => false,
-                'message' => 'Not enough stock available.',
+                'message' => 'You cannot add more quantity.',
                 'data'    => [
                     'available_stock' => $product->product_stock,
                     'already_in_cart' => $existingQty,
@@ -118,13 +126,13 @@ class CartController extends Controller
             }
         } else {
             // Only create if quantity > 0
-            if ($request->quantity > 0) {
+            if ($requestedQty > 0) {
                 Cart::create([
                     'user_id'    => $user_id != '' ? $user_id : null,
                     'session_id' => $session_id != '' ? $session_id : null,
                     'product_id' => $product->id,
                     'price'      => $product->product_price,
-                    'quantity'   => $request->quantity,
+                    'quantity'   => $requestedQty,
                 ]);
             }
         }
@@ -237,6 +245,17 @@ class CartController extends Controller
             ], 422);
         }
 
+        foreach ($cartItems as $cartItem) {
+            $product = Product::find($cartItem->product_id);
+            $stock = (int) ($product->product_stock ?? 0);
+            if (!$product || (int) $cartItem->quantity > $stock) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Please update the quantity for ' . ($product->product_name ?? 'the item') . ' in your cart. The requested quantity is not available.',
+                ], 422);
+            }
+        }
+
         $subTotal = $cartItems->sum(function ($item) {
             return (float) $item->price * (int) $item->quantity;
         });
@@ -325,7 +344,7 @@ class CartController extends Controller
         if (!$user && !$guestEmail) {
             return null;
         }
-
+        
         $cartItems = $user
             ? Cart::where('user_id', $user->id)->get()
             : Cart::where('session_id', Session::getId())->get();
@@ -349,55 +368,82 @@ class CartController extends Controller
             $giftNote = null;
         }
 
-        $order = Order::create([
-            'user_id' => $user->id ?? null,
-            'guest_email' => $guestEmail,
-            'guest_email_verified_at' => $guestEmail ? now() : null,
-            'order_address_id' => $addressId,
-            'gift_wrapper' => $request->boolean('gift_wrapper'),
-            'gift_note' => $giftNote,
-            'status' => 'confirmed',
-            'subtotal' => $subTotal,
-            'discount_percent' => 0,
-            'discount' => 0,
-            'shipping_charges' => $shippingCharges,
-            'order_total' => $subTotal + $shippingCharges,
-            'stripe_payment_intent' => $request->payment_intent ?? null,
-            'stripe_payment_intent_client_secret' => $request->payment_intent_client_secret ?? null,
-            'payment_status' => 'paid',
-            'guest_order_token' => \Illuminate\Support\Str::random(40),
-            'guest_order_token_expires_at' => now()->addDays(30),
-        ]);
+        return DB::transaction(function () use ($request, $addressId, $user, $guestEmail, $giftNote) {
+            $cartQuery = Cart::query();
+            $user
+                ? $cartQuery->where('user_id', $user->id)
+                : $cartQuery->where('session_id', Session::getId());
+            $cartItems = $cartQuery->lockForUpdate()->get();
+            if ($cartItems->isEmpty()) {
+                return null;
+            }
 
-        $order->order_number = 'ORD-' . $order->id . '-' . ($user->id ?? 'G') . '-' . rand(1000, 9999);
-        $order->save();
+            $products = Product::whereIn('id', $cartItems->pluck('product_id')->unique())
+                ->orderBy('id')
+                ->lockForUpdate()
+                ->get()
+                ->keyBy('id');
 
-        foreach ($cartItems as $cart) {
-            OrderProduct::create([
-                'order_id' => $order->id,
-                'product_id' => $cart->product_id,
-                'price' => $cart->price,
-                'quantity' => $cart->quantity,
-                'subtotal' => ($cart->price * $cart->quantity),
+            foreach ($cartItems as $cart) {
+                $product = $products->get($cart->product_id);
+                if (!$product || (int) $cart->quantity > (int) $product->product_stock) {
+                    return null;
+                }
+            }
+
+            $subTotal = $cartItems->sum(function ($item) {
+                return $item->price * $item->quantity;
+            });
+            $orderAddress = UserAddress::find($addressId);
+            $shippingCharges = self::calculateShippingCharges($orderAddress->emirate ?? null);
+
+            $guestOrder = !$user;
+            $order = Order::create([
+                'user_id' => $user?->id,
+                'guest_email' => $guestOrder ? $guestEmail : null,
+                'guest_email_verified_at' => $guestOrder ? now() : null,
+                'guest_order_token' => $guestOrder ? Str::random(64) : null,
+                'guest_order_token_expires_at' => $guestOrder ? now()->addDays(30) : null,
+                'order_address_id' => $addressId,
+                'gift_wrapper' => $request->boolean('gift_wrapper'),
+                'gift_note' => $giftNote,
+                'status' => 'confirmed',
+                'subtotal' => $subTotal,
+                'discount_percent' => 0,
+                'discount' => 0,
+                'shipping_charges' => $shippingCharges,
+                'order_total' => $subTotal + $shippingCharges,
+                'stripe_payment_intent' => $request->payment_intent ?? null,
+                'stripe_payment_intent_client_secret' => $request->payment_intent_client_secret ?? null,
+                'payment_status' => 'paid',
             ]);
 
-            $cart->delete();
-        }
+            $order->order_number = 'ORD-' . $order->id . '-' . ($user?->id ?? 'G') . '-' . rand(1000, 9999);
+            $order->save();
 
-        if ($user) {
-            UserAddress::where(['user_id' => $user->id, 'is_confirm' => 0])
-                ->where('is_primary', '!=', 1)
-                ->delete();
-        }
+            if ($user) {
+                UserAddress::where(['user_id' => $user->id, 'is_confirm' => 0])
+                    ->where('is_primary', '!=', 1)
+                    ->delete();
+            }
+            foreach ($cartItems as $cart) {
+                $product = $products->get($cart->product_id);
+                OrderProduct::create([
+                    'order_id' => $order->id,
+                    'product_id' => $cart->product_id,
+                    'price' => $cart->price,
+                    'quantity' => $cart->quantity,
+                    'subtotal' => ($cart->price * $cart->quantity),
+                ]);
 
-        if ($orderAddress) {
-            $orderAddress->is_confirm = 1;
-            $orderAddress->save();
-        }
+                $product->product_stock = (int) $product->product_stock - (int) $cart->quantity;
+                $product->save();
+                $cart->delete();
+            }
 
-        Session::forget(['guest_checkout_email', 'guest_checkout_email_verified_until']);
-
-        return $order;
+            Session::forget(['guest_checkout_email', 'guest_checkout_email_verified_until']);
+            return $order;
+        });
     }
 
     protected function sendOrderSuccessNotifications(Order $order, $addressId): void
@@ -421,12 +467,24 @@ class CartController extends Controller
         ];
 
         try {
+            $invoice = null;
+            try {
+                $invoiceOrder = Order::with(['user', 'orderAddress', 'orderProducts.product'])->findOrFail($order->id);
+                $invoice = Pdf::loadView('invoices.order', ['order' => $invoiceOrder])->output();
+            } catch (\Throwable $e) {
+                \Log::error('Order invoice generation failed: ' . $e->getMessage());
+            }
+
             Mail::send('email.admin.order_success', $data, function ($message) use ($adminEmail, $adminSubject) {
                 $message->to($this->adminEmail)->subject($adminSubject);
             });
 
-            Mail::send('email.front.order_success', $data, function ($message) use ($userEmail) {
+            Mail::send('email.front.order_success', $data, function ($message) use ($userEmail, $invoice, $order) {
                 $message->to($userEmail)->subject('Order Placed Successfully');
+                if ($invoice !== null) {
+                    $fileName = 'Invoice-' . ($order->order_number ?? $order->id) . '.pdf';
+                    $message->attachData($invoice, $fileName, ['mime' => 'application/pdf']);
+                }
             });
         } catch (\Throwable $e) {
             \Log::error('Inquiry Mail sending failed: ' . $e->getMessage());
