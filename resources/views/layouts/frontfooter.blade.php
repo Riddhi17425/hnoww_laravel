@@ -60,7 +60,7 @@
 
                 <!-- <div class="ft_center_box">
                     <div>
-                        <h4 class="ft_head">The Worlds</h4>
+                        <h4 class="ft_head"></h4>
                         <ul class="ft_menu">
                             {{-- <li><a href="{{ route('front.list', ['for-him', 'worlds']) }}">The Architect’s Study</a></li>
                             <li><a href="{{ route('front.list', ['for-her', 'worlds']) }}">The The Desert Rose</a></li>
@@ -82,7 +82,6 @@
                             <li><a href="{{route('front.bespoke.commission')}}">Bespoke Gifts</a></li>
                             <li><a href="{{route('front.wedding.vault.inside')}}">Wedding Gifts</a></li>
                             <li><a href="{{route('front.corporate.vault')}}">Corporate Gifts</a></li>
-                            <!--<li><a href="{{ route('front.ceremonials') }}">Ceremonial Objects</a></li>-->
                         </ul>
                     </div>
                 </div>

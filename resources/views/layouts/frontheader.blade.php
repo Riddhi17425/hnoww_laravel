@@ -398,18 +398,7 @@ $current_route === 'front.order.details' || $current_route === 'front.guest.orde
                     </li>
 
                     <li class="has-dropdown d-none">
-                        <a href="#" data-text="The Worlds">
-                            <span>The Worlds</span>
-                            <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
-                                <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                            </svg>
-                        </a>
                         <ul class="dropdown-menu">
-                            {{-- <li><a href="{{ route('front.list', ['for-him', 'worlds']) }}">The Architect’s
-                            Study</a>
-                            </li>
-                            <li><a href="{{ route('front.list', ['for-her', 'worlds']) }}">The The Desert Rose</a></li>
-                            <li><a href="{{ route('front.list', ['for-home', 'worlds']) }}">The Modern Majlis</a></li> --}}
                             <li><a href="#">The Ritual Table</a></li>
                             <li><a href="#">The Table As Landscape</a></li>
                         </ul>
