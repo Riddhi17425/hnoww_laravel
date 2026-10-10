@@ -178,6 +178,7 @@ class SitemapController extends Controller
 
         $products = Product::where('is_active', 0)
             ->whereNull('deleted_at')
+            ->where('product_type', 1) // Only Basic category products
             ->whereNotIn('product_url', $excludedProductUrls)
             ->get();
 
