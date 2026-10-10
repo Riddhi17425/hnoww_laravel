@@ -4,6 +4,13 @@
     'meta_description' => $product->meta_description ?? \Illuminate\Support\Str::limit(strip_tags($product->description), 160)
 ])
 
+<style>
+.pro_details_info_list ul{
+     margin-bottom: 0 !important;
+     padding-left: 1rem !important;
+}
+</style>
+
 {{-- START - PRODUCT SCHEMA --}}
 @php
     
@@ -657,7 +664,7 @@
             @endif
             @if(isset($product->materials) && $product->materials != '')
             <h4 class="sub_head mb-4">Material</h4>
-            <div class="pro_details_info_list">
+            <div class="pro_details_info_list mb-3">
                 {!! $product->materials ?? '' !!}
                 {{-- <h4 class="sub_head mb-4">Dimensions</h4>
                     <ul>
@@ -755,11 +762,11 @@
                 <div class="delivery-list">
                     <div class="delivery-row">
                         <span class="delivery-label">Dubai:</span>
-                        <span class="delivery-value">Within a 2-3 business days</span>
+                        <span class="delivery-value">Within 2-3 business days</span>
                     </div>
                     <div class="delivery-row">
                         <span class="delivery-label">Other Emirates:</span>
-                        <span class="delivery-value">Within a 6-7 business days</span>
+                        <span class="delivery-value">Within 6-7 business days</span>
                     </div>
                 </div>
             </div>

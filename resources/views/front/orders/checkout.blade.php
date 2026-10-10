@@ -397,11 +397,11 @@
                 <div class="checkout-delivery-list">
                     <div class="checkout-delivery-row">
                         <span class="checkout-delivery-label">Dubai:</span>
-                        <span class="checkout-delivery-value">Within a 2-3 business days</span>
+                        <span class="checkout-delivery-value">Within 2-3 business days</span>
                     </div>
                     <div class="checkout-delivery-row">
                         <span class="checkout-delivery-label">Other Emirates:</span>
-                        <span class="checkout-delivery-value">Within a 6-7 business days</span>
+                        <span class="checkout-delivery-value">Within 6-7 business days</span>
                     </div>
                 </div>
             </div>

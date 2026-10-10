@@ -73,6 +73,7 @@ class FrontController extends Controller
             ->whereHas('category', function ($q) {
                 $q->where('category_url', 'luxury-gifts-for-her')
                     ->where('is_active', 0)
+                     ->where('product_url', 'not like', 'test-%')
                     ->whereNull('deleted_at');
             })->with('category')->orderBy('id', 'DESC')->get();
 
@@ -80,6 +81,7 @@ class FrontController extends Controller
             ->whereHas('category', function ($q) {
                 $q->where('category_url', 'luxury-gifts-for-him')
                     ->where('is_active', 0)
+                    ->where('product_url', 'not like', 'test-%')
                     ->whereNull('deleted_at');
             })->with('category')->orderBy('id', 'DESC')->get();
 
@@ -87,6 +89,7 @@ class FrontController extends Controller
             ->whereHas('category', function ($q) {
                 $q->where('category_url', 'luxury-home-decor')
                     ->where('is_active', 0)
+                    ->where('product_url', 'not like', 'test-%')
                     ->whereNull('deleted_at');
             })->with('category')->orderBy('id', 'DESC')->get();
 
@@ -198,7 +201,7 @@ class FrontController extends Controller
 
     public function getProductDetails(Request $request, $productSlug)
     {
-        $product             = Product::select('id', 'category_id', 'product_name', 'product_url', 'product_price', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'large_description', 'height', 'width', 'length', 'detail_page_imgs', 'moq', 'short_note', 'product_stock', 'care_maintenance', 'meta_title', 'meta_description', 'materials', 'weight')->where('product_url', $productSlug)->isActive()->notDeleted()->first();
+        $product             = Product::select('id', 'category_id', 'product_name', 'product_url', 'product_price', 'short_description', 'list_page_img', 'is_active', 'deleted_at', 'large_description', 'height', 'width', 'length', 'detail_page_imgs', 'moq', 'short_note', 'product_stock', 'care_maintenance', 'meta_title', 'meta_description', 'materials', 'weight')->where('product_url', $productSlug)->isActive()->notDeleted()->where('product_url', 'not like', 'test-%')->first();
         $productDetailImages = $product != '' && $product->detail_page_imgs ? json_decode($product->detail_page_imgs) : '';
         $productTab          = $product->tabs ?? [];
         if (!isset($product) && $product == '') {
