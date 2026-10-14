@@ -133,6 +133,7 @@ a {
     position: relative;
     overflow: hidden;
     z-index: 1;
+    cursor: pointer;
     color: var(--secondary-color);
     font-weight: 500;
     padding: 14px 24px;

@@ -369,7 +369,7 @@ $current_route === 'front.order.details' || $current_route === 'front.guest.orde
                     </li>
                     @if($festiveCategories->count() > 0)
                         <li class="has-dropdown">
-                            <a href="#" data-text="Festive Gifts">
+                            <a data-text="Festive Gifts">
                                 <span>Festive Gifts</span>
 
                                 <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">

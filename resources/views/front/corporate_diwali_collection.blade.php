@@ -62,7 +62,7 @@
             </p>
             <h2 class="title_60">The Corporate Diwali Gifts</h2>
             <p>Make Every Business Relationship Count with Curated Corporate Diwali Gifts in Dubai.</p>
-            <a href="#" class="com_btn" data-bs-toggle="modal" data-category="19" data-bs-target="#requestCorporateProduct">ENQUIRE ABOUT DESK OBJECTS</a>
+            <button type="button" class="com_btn" data-bs-toggle="modal" data-category="19" data-bs-target="#requestCorporateProduct">ENQUIRE ABOUT DESK OBJECTS</button>
         </div>
 
         <!-- First Row: 3 Items -->

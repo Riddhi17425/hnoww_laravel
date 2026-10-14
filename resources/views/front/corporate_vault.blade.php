@@ -9,7 +9,7 @@
     <div class="hero_content_inner">
         <h2 class="main_head">The Corporate Gifts</h2>
         <p class="para my-3">Objects designed to remain.</p>
-        <a href="#" class="com_btn bg-white border-0" data-bs-toggle="modal"
+        <a class="com_btn bg-white border-0" data-bs-toggle="modal"
             data-bs-target="#requestCorporateProposal">Request CORPORATE CATALOGUE</a>
     </div>
 </section>
@@ -53,7 +53,7 @@
             </p>
             <h2 class="title_60">{{ $v->category_name ?? '' }}</h2>
             <p>{!! $v->description ?? '' !!}</p>
-            <a href="#" class="com_btn" data-bs-toggle="modal" data-category="{{ $v->id }}" data-bs-target="#requestCorporateProduct">{{ $v->button_text ?? '' }}</a>
+            <button type="button" class="com_btn" data-bs-toggle="modal" data-category="{{ $v->id }}" data-bs-target="#requestCorporateProduct">{{ $v->button_text ?? '' }}</button>
         </div>
 
         <div class="row gy-4 gy-lg-0">
@@ -227,7 +227,7 @@
 
                     {{-- <a href="#" class="com_btn border-white" data-bs-toggle="modal"
                             data-bs-target="#requestCorporateProposal">Request CORPORATE CATALOGUE</a> --}}
-                    <a href="#" class="com_btn border-white" data-bs-toggle="modal"
+                    <a class="com_btn border-white" data-bs-toggle="modal"
                         data-bs-target="#requestCorporateKitProposal">Request CORPORATE CATALOGUE</a>
                 </div>
             </div>

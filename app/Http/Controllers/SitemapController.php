@@ -113,7 +113,7 @@ class SitemapController extends Controller
             elseif ($category->category_type == 3)
             {
                 $loc = route('front.ceremonials', [
-                    'category_id' => $category->id
+                    'category_url' => $category->category_url
                 ]);
             }
             else

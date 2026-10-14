@@ -6,7 +6,7 @@
     <div class="hero_content_inner">
         <h2 class="main_head">The Corporate Vault</h2>
         <p class="para my-3">Objects designed to remain.</p>
-        <a href="#" class="com_btn border-white bg-white" data-bs-toggle="modal"
+        <a class="com_btn border-white bg-white" data-bs-toggle="modal"
             data-bs-target="#requestCorporateProposal">Request for CORPORATE CATALOGUE</a>
     </div>
 </section>
@@ -47,7 +47,7 @@
             <h2 class="title_60">The Desk</h2>
             <p><b>For environments where decisions are made.</b> Objects designed to sit within executive workspaces —
                 not to decorate them.</p>
-            <a href="#" class="com_btn" data-bs-toggle="modal" data-bs-target="#productInquiry" data-product="desk_objects"> ENQUIRE ABOUT DESK OBJECTS</a>
+            <a class="com_btn" data-bs-toggle="modal" data-bs-target="#productInquiry" data-product="desk_objects"> ENQUIRE ABOUT DESK OBJECTS</a>
         </div>
         <div class="row gy-4 gy-lg-0">
             <div class="col-md-4">

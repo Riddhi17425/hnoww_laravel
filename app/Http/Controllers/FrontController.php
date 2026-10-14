@@ -2069,10 +2069,16 @@ class FrontController extends Controller
         return view('front.wedding_vault_inside', compact('weddingCategory', 'meta_title', 'meta_description'));
     }
 
-    public function getCeremonials($categoryId = null)
+    public function getCeremonials($categoryUrl = null)
     {
-        $products = Product::select('id', 'category_id', 'product_url', 'product_name', 'short_note', 'short_description', 'list_page_img', 'is_active', 'deleted_at')->whereNull('deleted_at')->where('is_active', 0)->where('category_id', $categoryId)->get();
-        $category = Category::select('id', 'category_name', 'description')->where('id', $categoryId)->first();
+        $category = Category::select('id', 'category_name', 'description')
+            ->where('category_url', $categoryUrl)
+            ->first();
+        $products = Product::select('id', 'category_id', 'product_url', 'product_name', 'short_note', 'short_description', 'list_page_img', 'is_active', 'deleted_at')
+            ->whereNull('deleted_at')
+            ->where('is_active', 0)
+            ->where('category_id', $category ? $category->id : null)
+            ->get();
 
         return view('front.ceremonials', compact('products', 'category'));
     }
