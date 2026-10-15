@@ -474,22 +474,9 @@
 <!-- The Films - Set the Scene -->
 @php
     $aara_films = [
-        [
-            'video' => asset('public/reel_videos/aara_flowers.webm'),
-            'duration' => '0:45',
-            'title' => 'The First Light',
-            'desc' => 'Begin with light. A single flame brings warmth to the setting, catching on silver and giving the evening its first sense of occasion.',
-            'alt' => 'Light the Table — HNOWW x Aara Diwali film',
-        ],
-        [
-            'video'  => asset('public/reel_videos/hnoww_aara_diwaliVO.webm'),
-            'duration' => '0:[00]',
-            'title' => 'In Full Bloom',
-            'desc' => "Seasonal florals by Aara bring colour, movement and softness, adding a natural rhythm to the setting.",
-            'alt' => 'Bring in the Florals — HNOWW x Aara Diwali film',
-        ],
-        [
+    [
             'video'  => asset('public/reel_videos/hnoww_aara_products.webm'),
+            'url' => 'https://www.instagram.com/p/Dd6btjIoVOC/',
             'duration' => '0:[00]',
             'title' => 'A Place for Everything',
             'desc' => 'HNoWW objects find their place among the blooms. Each piece brings form, balance and intention to the setting.',
@@ -497,13 +484,32 @@
         ],
         [
             'video'  => asset('public/reel_videos/hnoww_aara-interview.webm'),
+            'url' =>'https://www.instagram.com/p/DeMVwXDoCpn/',
             'duration' => '0:[00]',
             'title' => 'The Details Matter',
             'desc' => 'A closer look at the details that shape the setting: HNoWW objects, soft reflections and the beauty of things placed with care.',
             'alt' => 'Place the Objects — HNOWW x Aara Diwali film',
         ],
         [
+            'video' => asset('public/reel_videos/aara_flowers.webm'),
+            'url' => '',
+            'duration' => '0:45',
+            'title' => 'The First Light',
+            'desc' => 'Begin with light. A single flame brings warmth to the setting, catching on silver and giving the evening its first sense of occasion.',
+            'alt' => 'Light the Table — HNOWW x Aara Diwali film',
+        ],
+        [
+            'video'  => asset('public/reel_videos/hnoww_aara_diwaliVO.webm'),
+            'url' => '',
+            'duration' => '0:[00]',
+            'title' => 'In Full Bloom',
+            'desc' => "Seasonal florals by Aara bring colour, movement and softness, adding a natural rhythm to the setting.",
+            'alt' => 'Bring in the Florals — HNOWW x Aara Diwali film',
+        ],
+        
+        [
             'video'  => asset('public/reel_videos/hnoww_nandi.webm'),
+            'url' => '',
             'duration' => '0:[00]',
             'title' => 'Made for the Moment',
             'desc' => 'As the setting comes together, HNoWW objects and Aara florals share the same space. One blooms for the evening, the other is made to remain.',
@@ -511,6 +517,7 @@
         ],
         [
             'video'  => asset('public/reel_videos/hnoww_website.webm'),
+            'url' => '',
             'duration' => '0:[00]',
             'title' => 'Beyond the Evening',
             'desc' => 'Some things stay with you long after the celebration. HNoWW objects are made to become part of the home, bringing the occasion into the everyday.',
@@ -548,19 +555,21 @@
         <div class="aara_film_grid aara_film_slider">
             @foreach ($aara_films as $i => $film)
                 <div class="aara_film_slide">
-                    <div class="aara_film_media" role="button" tabindex="0" aria-label="Play {{ $film['title'] }} video">
+                     <a href="{{ $film['url'] }}" target="_blank" rel="noopener" class="aara_film_watch"> <div class="aara_film_media" role="button" tabindex="0" aria-label="Play {{ $film['title'] }} video">
                         <video src="{{ $film['video'] }}" muted loop playsinline preload="none" aria-label="{{ $film['alt'] }}"></video>
                         <span class="aara_film_play" aria-hidden="true">
                             <svg class="aara_icon_play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
                         </span>
                         <!-- <span class="aara_film_duration">{{ $film['duration'] }}</span> -->
-                    </div>
+                    </div></a>
                     <div class="aara_film_caption">
                         <span class="aara_film_num">{{ sprintf('%02d', $i + 1) }}</span>
                         <div>
                             <span class="aara_film_caption_title">{{ $film['title'] }}</span>
                             <p class="aara_film_caption_desc">{{ $film['desc'] }}</p>
-                            <!-- <span class="aara_film_watch">Watch</span> -->
+                            @if ($film['url'])
+                                <a href="{{ $film['url'] }}" target="_blank" rel="noopener" class="aara_film_watch">View on Instagram</a>
+                            @endif
                         </div>
                     </div>
                 </div>
