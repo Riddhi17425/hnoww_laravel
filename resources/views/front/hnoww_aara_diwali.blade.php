@@ -677,10 +677,23 @@
         'Zoya Silver Serving Tray',
         'Ganesh Mantra Tealight Holder',
     ];
-    $aara_gallery_images = collect($aara_gallery_products)->map(function ($name) {
+    $aara_gallery_product_slugs = [
+        'Tara Silver Serving Tray' => 'tara-silver-serving-tray',
+        'The Gathering' => 'the-gathering',
+        'Gaj Silver Elephants (set of two)' => 'gaj-silver-elephants',
+        'Silver Serving Tongs' => 'silver-serving-tongs',
+        'The Twin Columns' => 'the-twin-columns',
+        'Mehr Candleholder and Vase Duo' => 'mehr-candleholder-and-vase-duo',
+        'Two Tier Dessert Stand' => 'two-tier-dessert-stand',
+        'Gaj Silver Urli (small)' => 'gaj-silver-urli-small',
+        'Zoya Silver Serving Tray' => 'zoya-silver-serving-tray',
+        'Ganesh Mantra Tealight Holder' => 'ganesh-mantra-tealight-holder',
+    ];
+    $aara_gallery_images = collect($aara_gallery_products)->map(function ($name) use ($aara_gallery_product_slugs) {
         return [
             'src' => asset('public/images/front/Aara/5th_Slider/' . $name . '.webp'),
             'alt' => $name . ' — HNOWW Diwali gifting, Dubai',
+            'url' => 'https://hnoww.com/product-details/' . $aara_gallery_product_slugs[$name],
         ];
     })->all();
 @endphp
@@ -713,7 +726,9 @@
         @for ($i = 0; $i < 2; $i++)
             <div class="aara_gallery_group" @if($i > 0) aria-hidden="true" @endif>
                 @foreach ($aara_gallery_images as $img)
-                    <img src="{{ $img['src'] }}" alt="{{ $img['alt'] }}" loading="lazy">
+                    <a href="{{ $img['url'] }}" target="_blank" rel="noopener">
+                        <img src="{{ $img['src'] }}" alt="{{ $img['alt'] }}" loading="lazy">
+                    </a>
                 @endforeach
             </div>
         @endfor
