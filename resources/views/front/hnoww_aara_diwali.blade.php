@@ -218,12 +218,12 @@
         <div class="aara_edit_grid_top">
             <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/Aara/4th_collection/The Twin Columns.webp') }}" alt="The Twin Columns — HNOWW Diwali gifting, Dubai" loading="lazy">
+                   <a href="https://hnoww.com/product-details/the-twin-columns" target="_blank" rel="noopener"> <img src="{{ asset('public/images/front/Aara/4th_collection/The Twin Columns.webp') }}" alt="The Twin Columns — HNOWW Diwali gifting, Dubai" loading="lazy"></a>
                     <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
                 </div>
                 <div class="aara_edit_card_body">
                     <div class="aara_edit_card_row">
-                        <h3 class="aara_edit_card_title">The Twin Columns</h3>
+                       <a href="https://hnoww.com/product-details/the-twin-columns" target="_blank" rel="noopener">   <h3 class="aara_edit_card_title">The Twin Columns</h3> </a>
                         <span class="aara_edit_card_price">AED 750</span>
                     </div>
                     <p class="aara_edit_card_desc">For two candles at two heights.</p>
@@ -234,12 +234,15 @@
             <div class="aara_edit_grid_top_right">
                 <div class="aara_edit_card">
                     <div class="aara_edit_card_img">
-                        <img src="{{ asset('public/images/front/Aara/4th_collection/Gaj Silver Elephants (set of two).webp') }}" alt="Lotus Bowl — HNOWW Diwali gifting, Dubai" loading="lazy">
+                      <a href="https://hnoww.com/product-details/gaj-silver-elephants" target="_blank" rel="noopener"> <img src="{{ asset('public/images/front/Aara/4th_collection/Gaj Silver Elephants (set of two).webp') }}" alt="Lotus Bowl — HNOWW Diwali gifting, Dubai" loading="lazy"> </a>
                         <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
+                     
                     </div>
                     <div class="aara_edit_card_body">
                         <div class="aara_edit_card_row">
-                            <h3 class="aara_edit_card_title">Gaj Silver Elephants</h3>
+                            <a href="https://hnoww.com/product-details/gaj-silver-elephants" target="_blank" rel="noopener">
+                                <h3 class="aara_edit_card_title">Gaj Silver Elephants</h3>
+                            </a>
                             <span class="aara_edit_card_price">AED 325</span>
                         </div>
                         <p class="aara_edit_card_desc">For good luck, placed facing the door.</p>
@@ -249,12 +252,15 @@
 
                 <div class="aara_edit_card">
                     <div class="aara_edit_card_img">
-                        <img src="{{ asset('public/images/front/Aara/4th_collection/Sandooq Silver Dry Fruit Box.webp') }}" alt="Mehr Candleholder and Vase Duo — HNOWW Diwali gifting, Dubai" loading="lazy">
+                      <a href="https://hnoww.com/product-details/sandooq-silver-dry-fruit-box" target="_blank" rel="noopener"> <img src="{{ asset('public/images/front/Aara/4th_collection/Sandooq Silver Dry Fruit Box.webp') }}" alt="Mehr Candleholder and Vase Duo — HNOWW Diwali gifting, Dubai" loading="lazy"></a>
                         <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
+                      
                     </div>
                     <div class="aara_edit_card_body">
                         <div class="aara_edit_card_row">
-                            <h3 class="aara_edit_card_title">Sandooq Silver Dry Fruit Box</h3>
+                            <a href="https://hnoww.com/product-details/sandooq-silver-dry-fruit-box" target="_blank" rel="noopener">
+                                <h3 class="aara_edit_card_title">Sandooq Silver Dry Fruit Box</h3>
+                            </a>
                             <span class="aara_edit_card_price">AED 350</span>
                         </div>
                         <p class="aara_edit_card_desc">For one thing, kept well.</p>
@@ -279,12 +285,14 @@
 
                 <div class="aara_edit_card">
                     <div class="aara_edit_card_img">
-                        <img src="{{ asset('public/images/front/Aara/4th_collection/Tara Silver Serving Tray.webp') }}" alt="Gaj Silver Urli (small) — HNOWW Diwali gifting, Dubai" loading="lazy">
+                       <a href="https://hnoww.com/product-details/tara-silver-serving-tray" target="_blank" rel="noopener"> <img src="{{ asset('public/images/front/Aara/4th_collection/Tara Silver Serving Tray.webp') }}" alt="Gaj Silver Urli (small) — HNOWW Diwali gifting, Dubai" loading="lazy"> </a>
                         <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
                     </div>
                     <div class="aara_edit_card_body">
                         <div class="aara_edit_card_row">
-                            <h3 class="aara_edit_card_title">Tara Silver Serving Tray</h3>
+                           <a href="https://hnoww.com/product-details/tara-silver-serving-tray" target="_blank" rel="noopener">
+                                <h3 class="aara_edit_card_title">Tara Silver Serving Tray</h3>
+                            </a>
                             <span class="aara_edit_card_price">AED 575</span>
                         </div>
                         <p class="aara_edit_card_desc">Made to hold the season.</p>
@@ -294,12 +302,16 @@
 
                 <div class="aara_edit_card">
                     <div class="aara_edit_card_img">
-                        <img src="{{ asset('public/images/front/Aara/4th_collection/The Gathering.webp') }}" alt="Tara Silver Serving Tray — HNOWW Diwali gifting, Dubai" loading="lazy">
+                       <a href="https://hnoww.com/product-details/the-gathering" target="_blank" rel="noopener">
+                            <img src="{{ asset('public/images/front/Aara/4th_collection/The Gathering.webp') }}" alt="Tara Silver Serving Tray — HNOWW Diwali gifting, Dubai" loading="lazy">
+                        </a>
                         <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
                     </div>
                     <div class="aara_edit_card_body">
                         <div class="aara_edit_card_row">
-                            <h3 class="aara_edit_card_title">The Gathering</h3>
+                            <a href="https://hnoww.com/product-details/the-gathering" target="_blank" rel="noopener">
+                                <h3 class="aara_edit_card_title">The Gathering</h3>
+                            </a>
                             <span class="aara_edit_card_price">AED 850</span>
                         </div>
                         <p class="aara_edit_card_desc">For a centrepiece that holds the fruit.</p>
@@ -312,12 +324,16 @@
         <div class="aara_edit_grid_bottom">
             <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
+                   <a href="https://hnoww.com/product-details/gaj-silver-urli-small" target="_blank" rel="noopener">
                     <img src="{{ asset('public/images/front/Aara/4th_collection/Gaj Silver Urli (small).webp') }}" alt="Gaj Silver Urli (small) — HNOWW Diwali gifting, Dubai" loading="lazy">
+                   </a>
                     <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
                 </div>
                 <div class="aara_edit_card_body">
                     <div class="aara_edit_card_row">
+                      <a href="https://hnoww.com/product-details/gaj-silver-urli-small" target="_blank" rel="noopener">
                         <h3 class="aara_edit_card_title">Gaj Silver Urli</h3>
+                      </a>
                         <span class="aara_edit_card_price">AED 425</span>
                     </div>
                     <p class="aara_edit_card_desc">For water, flame and flowers.</p>
@@ -327,12 +343,16 @@
 
             <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/Aara/4th_collection/Silver Serving Tongs.webp') }}" alt="Silver Serving Tongs — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <a href="https://hnoww.com/product-details/silver-serving-tongs" target="_blank" rel="noopener">
+                        <img src="{{ asset('public/images/front/Aara/4th_collection/Silver Serving Tongs.webp') }}" alt="Silver Serving Tongs — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    </a>
                     <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
                 </div>
                 <div class="aara_edit_card_body">
                     <div class="aara_edit_card_row">
-                        <h3 class="aara_edit_card_title">Silver Serving Tongs</h3>
+                        <a href="https://hnoww.com/product-details/silver-serving-tongs" target="_blank" rel="noopener">
+                            <h3 class="aara_edit_card_title">Silver Serving Tongs</h3>
+                        </a>
                         <span class="aara_edit_card_price">AED 200</span>
                     </div>
                     <p class="aara_edit_card_desc">Service, with a little shine.</p>
@@ -342,12 +362,17 @@
 
             <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/Aara/4th_collection/Mehr Candleholder and Vase Duo.webp') }}" alt="Mehr Candleholder and Vase Duo — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <a href="https://hnoww.com/product-details/mehr-candleholder-and-vase-duo" target="_blank" rel="noopener">
+                        <img src="{{ asset('public/images/front/Aara/4th_collection/Mehr Candleholder and Vase Duo.webp') }}" alt="Mehr Candleholder and Vase Duo — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    </a>
+                    <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
                     <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
                 </div>
                 <div class="aara_edit_card_body">
                     <div class="aara_edit_card_row">
-                        <h3 class="aara_edit_card_title">Mehr Candleholder and Vase Duo</h3>
+                        <a href="https://hnoww.com/product-details/mehr-candleholder-and-vase-duo" target="_blank" rel="noopener">
+                            <h3 class="aara_edit_card_title">Mehr Candleholder and Vase Duo</h3>
+                        </a>
                         <span class="aara_edit_card_price">AED 575</span>
                     </div>
                     <p class="aara_edit_card_desc">For flowers by day and flame by evening.</p>
@@ -361,12 +386,16 @@
 
             <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/Aara/4th_collection/Two Tier Dessert Stand.webp') }}" alt="Two Tier Dessert Stand — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <a href="https://hnoww.com/product-details/two-tier-dessert-stand" target="_blank" rel="noopener">
+                        <img src="{{ asset('public/images/front/Aara/4th_collection/Two Tier Dessert Stand.webp') }}" alt="Two Tier Dessert Stand — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    </a>
                     <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
                 </div>
                 <div class="aara_edit_card_body">
                     <div class="aara_edit_card_row">
-                        <h3 class="aara_edit_card_title">Two Tier Dessert Stand</h3>
+                        <a href="https://hnoww.com/product-details/two-tier-dessert-stand" target="_blank" rel="noopener">
+                            <h3 class="aara_edit_card_title">Two Tier Dessert Stand</h3>
+                        </a>
                         <span class="aara_edit_card_price">AED 300</span>
                     </div>
                     <p class="aara_edit_card_desc">For height where there is no room.</p>
@@ -376,12 +405,16 @@
 
             <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/Aara/4th_collection/Lotus Bowl.webp') }}" alt="Sandooq Silver Dry Fruit Box — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <a href="https://hnoww.com/product-details/lotus-bowl-diwali-gifting" target="_blank" rel="noopener">
+                        <img src="{{ asset('public/images/front/Aara/4th_collection/Lotus Bowl.webp') }}" alt="Lotus Bowl — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    </a>
                     <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
                 </div>
                 <div class="aara_edit_card_body">
                     <div class="aara_edit_card_row">
-                        <h3 class="aara_edit_card_title">Lotus Bowl</h3>
+                        <a href="https://hnoww.com/product-details/lotus-bowl-diwali-gifting" target="_blank" rel="noopener">
+                            <h3 class="aara_edit_card_title">Lotus Bowl</h3>
+                        </a>
                         <span class="aara_edit_card_price">AED 345</span>
                     </div>
                     <p class="aara_edit_card_desc">For a candle, incense or a single flower.</p>
@@ -391,12 +424,16 @@
 
             <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/Aara/4th_collection/Zoya Silver Serving Tray.webp') }}" alt="Silver Serving Tongs — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <a href="https://hnoww.com/product-details/zoya-silver-serving-tray" target="_blank" rel="noopener">
+                        <img src="{{ asset('public/images/front/Aara/4th_collection/Zoya Silver Serving Tray.webp') }}" alt="Zoya Silver Serving Tray — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    </a>
                     <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
                 </div>
                 <div class="aara_edit_card_body">
                     <div class="aara_edit_card_row">
-                        <h3 class="aara_edit_card_title">Zoya Silver Serving Tray</h3>
+                        <a href="https://hnoww.com/product-details/zoya-silver-serving-tray" target="_blank" rel="noopener">
+                            <h3 class="aara_edit_card_title">Zoya Silver Serving Tray</h3>
+                        </a>
                         <span class="aara_edit_card_price">AED 550</span>
                     </div>
                     <p class="aara_edit_card_desc">For sweets, lifted on a low foot.</p>
@@ -406,12 +443,16 @@
 
             <div class="aara_edit_card">
                 <div class="aara_edit_card_img">
-                    <img src="{{ asset('public/images/front/Aara/4th_collection/Ganesh Mantra Tealight Holder.webp') }}" alt="The Gathering — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    <a href="https://hnoww.com/product-details/ganesh-mantra-tealight-holder" target="_blank" rel="noopener">
+                        <img src="{{ asset('public/images/front/Aara/4th_collection/Ganesh Mantra Tealight Holder.webp') }}" alt="Ganesh Mantra Tealight Holder — HNOWW Diwali gifting, Dubai" loading="lazy">
+                    </a>
                     <img src="{{ asset('public/images/front/header-logo.svg') }}" alt="HNOWW" class="aara_edit_card_badge">
                 </div>
                 <div class="aara_edit_card_body">
                     <div class="aara_edit_card_row">
-                        <h3 class="aara_edit_card_title">Ganesh Mantra Tealight Holder</h3>
+                        <a href="https://hnoww.com/product-details/ganesh-mantra-tealight-holder" target="_blank" rel="noopener">
+                            <h3 class="aara_edit_card_title">Ganesh Mantra Tealight Holder</h3>
+                        </a>
                         <span class="aara_edit_card_price">AED 220</span>
                     </div>
                     <p class="aara_edit_card_desc">For a prayer lit from behind.</p>
