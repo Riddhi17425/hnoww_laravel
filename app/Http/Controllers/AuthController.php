@@ -531,32 +531,14 @@ class AuthController extends Controller
             ], 409);
         }
 
-        PasswordResetOtp::where('email', $email)->delete();
+        // Guest checkout no longer requires OTP verification
+        Session::put('guest_checkout_email', $email);
+        Session::put('guest_checkout_email_verified_until', now()->addMinutes(30));
 
-        $otp = random_int(100000, 999999);
-        PasswordResetOtp::create([
-            'email' => $email,
-            'otp' => Hash::make($otp),
-            'expires_at' => now()->addMinutes(10),
+        return response()->json([
+            'success' => true,
+            'redirect_url' => route('front.checkout.view'),
         ]);
-
-        try {
-            Mail::to($email)->send(new \App\Mail\GuestOrderOtpMail($otp));
-
-            Session::put('guest_checkout_email', $email);
-            Session::put('guest_checkout_email_verified_until', null);
-
-            return response()->json([
-                'success' => true,
-                'message' => 'OTP has been sent to your email address.',
-            ]);
-        } catch (\Exception $e) {
-            PasswordResetOtp::where('email', $email)->delete();
-            return response()->json([
-                'success' => false,
-                'message' => $e->getMessage(),
-            ]);
-        }
     }
 
     public function checkoutVerifyGuestOtp(Request $request)

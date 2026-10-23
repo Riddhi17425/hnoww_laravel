@@ -3,6 +3,7 @@
 /public/reel_videos
 /public/storage
 /public/reel_videos
+/public/images
 /storage/*.key
 /storage
 /vendor

@@ -1,7 +1,7 @@
 @include('layouts.frontheader')
 <!-- hero section -->
-{{-- <section class="hero-section" style="height: 100%;"> --}}
-    {{-- <img class="img-fluid d-none d-lg-block"
+{{-- <section class="hero-section" style="height: 100%;"> 
+    <img class="img-fluid d-none d-lg-block"
         src="{{ asset('public/images/front/Raksha-Bandhan/Raksha-Bandhan-Banner.webp') }}" alt="images" loading="lazy">
     <img class="img-fluid d-lg-none" src="{{ asset('public/images/front/Raksha-Bandhan/Raksha-Bandhan-Banner.webp') }}"
         alt="images" loading="lazy">
@@ -11,12 +11,10 @@
             <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white d-lg-none">Corporate
                 Enquiries</a>
         </div>
-    </div> --}}
-
-     {{-- </section> --}}
+    </div> 
+</section> --}}
 
     <section class="hero-section" style="height: 100%;">
-
         @php
             $activeBanner = $heroBanners->first();
         @endphp
@@ -65,7 +63,6 @@
                 @endif
             @endif
         @else
-            {{-- FALLBACK: agar koi banner active nahi hai to purana static video dikhao --}}
             <video autoplay muted loop class="hero_video d-none d-md-block">
                 <source src="{{ asset('public/images/front/hero-video.webm') }}" type="video/webm">
                 Your browser does not support the video tag.
