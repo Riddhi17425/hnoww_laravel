@@ -17,7 +17,7 @@
         <div class="row g-3">
 
             <div class="col-md-6">
-                <label class="form-label">Title</label><span class="text-danger">*</span>
+                <label class="form-label">Title</label>
                 <input type="text" name="title" id="title" class="form-control" value="{{ old('title', $banner->title ?? '') }}">
                 {{-- <div class="invalid-feedback">The banners title field is required.</div> --}}
                 @error('title') <span class="text-danger">{{ $message }}</span> @enderror
@@ -99,7 +99,7 @@
             </div>
 
             <div class="col-md-12">
-                <label class="form-label">Description</label><span class="text-danger">*</span>
+                <label class="form-label">Description</label>
                 <textarea name="description" id="description" class="form-control">{{ old('description', $banner->description ?? '') }}</textarea>
                 {{-- <div class="invalid-feedback">The banners desc field is required.</div> --}}
                 @error('description') <span class="text-danger">{{ $message }}</span> @enderror

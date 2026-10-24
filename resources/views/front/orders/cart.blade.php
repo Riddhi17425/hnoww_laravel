@@ -374,6 +374,10 @@
                                 <span class="sub_head">Total</span>
                                 <span class="sub_head" id="you-pay">AED {{ number_format($subTotal ?? 0, 2) }}</span>
                             </div>
+                            <style>
+                                .summary-actions .com_btn { display: block; padding: 11px; border: 0; border-radius: 6px; background: var(--secondary-color) !important; color: #fff !important; font-size: 14px; font-weight: 600; letter-spacing: .05em; }
+                                .summary-actions .com_btn:hover { opacity: .9; }
+                            </style>
                             <div class="summary-actions">
                                 <a class="com_btn w-100 text-center @auth @else user_icon @endauth" @auth href="{{ route('front.checkout.view') }}" @else data-bs-toggle="modal" data-bs-target="#checkoutAuthModal" @endauth>
                                     PROCEED TO CHECKOUT
@@ -387,6 +391,7 @@
                                 customization requests.
                             </p>
                         </div>
+                        @include('front.partials.delivery-info')
                     </div>
                     @endif
                 </div>

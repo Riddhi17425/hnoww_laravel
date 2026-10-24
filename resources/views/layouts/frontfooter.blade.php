@@ -1,3 +1,5 @@
+@include('front.partials.trust-strip')
+
 <footer class="hnow_footer" id="editions">
     <div class="container">
         <div class="ft_top">
@@ -124,7 +126,7 @@
             </div>
 
             <div class="ft_privacy">
-                <a></a>
+                <a href="{{ route('front.return.policy') }}">Return Policy</a>
                 <a href="{{ route('front.privacy') }}">Privacy Policy</a>
             </div>
             <div class="ft_social">
@@ -163,6 +165,8 @@
 </div>
 
 @include('front.whatsapp')
+
+@include('front.partials.sticky-cart')
 
 @include('front.corporate_request_modal')
 @include('front.wedding_request_modal')

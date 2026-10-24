@@ -14,109 +14,95 @@
     </div> 
 </section> --}}
 
-    <section class="hero-section" style="height: 100%;">
-        @php
-            $activeBanner = $heroBanners->first();
-        @endphp
+<!-- HERO BANNER SLIDER -->
+@php
+    // Active, non-deleted banners (FrontController); with none, show the default hero once.
+    $heroSlides = $heroBanners->isNotEmpty() ? $heroBanners->values() : collect([null]);
+    $isSlider   = $heroSlides->count() > 1;
+    $imgPath    = 'public/images/admin/banner/images/';
+    $vidPath    = 'public/images/admin/banner/videos/';
+@endphp
+<section class="hero-section" style="height: 100%;">
+    <div id="heroBannerCarousel" class="carousel slide carousel-fade hero-banner-carousel"
+        @if ($isSlider) data-bs-ride="carousel" data-bs-interval="6000" data-bs-pause="false" @endif>
 
-        @if ($activeBanner)
+        <div class="carousel-inner">
+            @foreach ($heroSlides as $banner)
+                <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                    @if ($banner && $banner->type == 'image')
+                        @php $alt = $banner->alt_text ?? $banner->title; @endphp
+                        @if ($banner->image)
+                            <img class="img-fluid d-none d-md-block hero_video" src="{{ asset($imgPath . $banner->image) }}" alt="{{ $alt }}">
+                        @endif
+                        @if ($banner->mobile_image ?: $banner->image)
+                            <img class="img-fluid d-md-none hero_video" src="{{ asset($imgPath . ($banner->mobile_image ?: $banner->image)) }}" alt="{{ $alt }}">
+                        @endif
+                    @elseif ($banner && $banner->type == 'video')
+                        @if ($banner->video)
+                            <video autoplay muted loop playsinline class="hero_video d-none d-md-block">
+                                <source src="{{ asset($vidPath . $banner->video) }}" type="video/{{ pathinfo($banner->video, PATHINFO_EXTENSION) }}">
+                            </video>
+                        @endif
+                        @if ($banner->mobile_video ?: $banner->video)
+                            @php $mobileVideo = $banner->mobile_video ?: $banner->video; @endphp
+                            <video autoplay muted loop playsinline class="hero_video d-md-none">
+                                <source src="{{ asset($vidPath . $mobileVideo) }}" type="video/{{ pathinfo($mobileVideo, PATHINFO_EXTENSION) }}">
+                            </video>
+                        @endif
+                    @elseif (!$banner)
+                        <video autoplay muted loop class="hero_video d-none d-md-block">
+                            <source src="{{ asset('public/images/front/hero-video.webm') }}" type="video/webm">
+                        </video>
+                        <video autoplay muted loop class="hero_video d-md-none">
+                            <source src="{{ asset('public/images/front/hero-video-mobaile.mp4') }}" type="video/mp4">
+                        </video>
+                        <div class="hero_content">
+                            <p class="mb-0 d-md-none">Designed in Dubai. Made to endure.</p>
+                            <h1 class="main_head">Objects Designed To Stay</h1>
+                            <p>Curated objects for the desk, the home & the relationships that matter.</p>
+                        </div>
+                        <div class="hero_left_right">
+                            <span><svg xmlns="http://www.w3.org/2000/svg" width="63" height="6" viewBox="0 0 63 6" fill="none"><path d="M5.33332 2.66669C5.33332 1.19393 4.13942 2.03451e-05 2.66666 2.03451e-05C1.1939 2.03451e-05 -1.01725e-05 1.19393 -1.01725e-05 2.66669C-1.01725e-05 4.13945 1.1939 5.33335 2.66666 5.33335C4.13942 5.33335 5.33332 4.13945 5.33332 2.66669ZM62.6667 2.66669V2.16669L2.66666 2.16669V2.66669V3.16669L62.6667 3.16669V2.66669Z" fill="white" /></svg></span>
+                            <p class="sub_head mb-0">Designed in Dubai. Made to endure.</p>
+                            <span><svg xmlns="http://www.w3.org/2000/svg" width="63" height="6" viewBox="0 0 63 6" fill="none"><path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.03451e-05 60 2.03451e-05C58.5272 2.03451e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669L0 3.16669L60 3.16669V2.66669V2.16669L0 2.16669L0 2.66669Z" fill="white" /></svg></span>
+                        </div>
+                    @endif
 
-            {{-- IMAGE TYPE BANNER --}}
-            @if ($activeBanner->type == 'image')
-                @if (!empty($activeBanner->image))
-                    <img class="img-fluid d-none d-md-block hero_video"
-                        src="{{ asset('public/images/admin/banner/images/' . $activeBanner->image) }}"
-                        alt="{{ $activeBanner->alt_text ?? $activeBanner->title }}" loading="lazy">
-                @endif
-                @if (!empty($activeBanner->mobile_image))
-                    <img class="img-fluid d-md-none hero_video"
-                        src="{{ asset('public/images/admin/banner/images/' . $activeBanner->mobile_image) }}"
-                        alt="{{ $activeBanner->alt_text ?? $activeBanner->title }}" loading="lazy">
-                @elseif(!empty($activeBanner->image))
-                    <img class="img-fluid d-md-none hero_video"
-                        src="{{ asset('public/images/admin/banner/images/' . $activeBanner->image) }}"
-                        alt="{{ $activeBanner->alt_text ?? $activeBanner->title }}" loading="lazy">
-                @endif
-            @endif
+                    @if ($banner && ($banner->title || $banner->description))
+                        <div class="hero_content">
+                            @if ($banner->title)
+                                <{{ $loop->first ? 'h1' : 'h2' }} class="main_head">{{ $banner->title }}</{{ $loop->first ? 'h1' : 'h2' }}>
+                            @endif
+                            @if ($banner->description)
+                                <p>{!! $banner->description !!}</p>
+                            @endif
+                        </div>
+                    @endif
 
-            {{-- VIDEO TYPE BANNER --}}
-            @if ($activeBanner->type == 'video')
-                @if (!empty($activeBanner->video))
-                    <video autoplay muted loop class="hero_video d-none d-md-block">
-                        <source src="{{ asset('public/images/admin/banner/videos/' . $activeBanner->video) }}"
-                            type="video/{{ pathinfo($activeBanner->video, PATHINFO_EXTENSION) }}">
-                        Your browser does not support the video tag.
-                    </video>
-                @endif
-                @if (!empty($activeBanner->mobile_video))
-                    <video autoplay muted loop class="hero_video d-md-none">
-                        <source src="{{ asset('public/images/admin/banner/videos/' . $activeBanner->mobile_video) }}"
-                            type="video/{{ pathinfo($activeBanner->mobile_video, PATHINFO_EXTENSION) }}">
-                        Your browser does not support the video tag.
-                    </video>
-                @elseif(!empty($activeBanner->video))
-                    <video autoplay muted loop class="hero_video d-md-none">
-                        <source src="{{ asset('public/images/admin/banner/videos/' . $activeBanner->video) }}"
-                            type="video/{{ pathinfo($activeBanner->video, PATHINFO_EXTENSION) }}">
-                        Your browser does not support the video tag.
-                    </video>
-                @endif
-            @endif
-        @else
-            <video autoplay muted loop class="hero_video d-none d-md-block">
-                <source src="{{ asset('public/images/front/hero-video.webm') }}" type="video/webm">
-                Your browser does not support the video tag.
-            </video>
-            <video autoplay muted loop class="hero_video d-md-none">
-                <source src="{{ asset('public/images/front/hero-video-mobaile.mp4') }}" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+                    <div class="home_btn">
+                        <a href="{{ route('front.collections') }}" class="com_btn border-0 bg-white">Explore Collections</a>
+                        @if ($banner && $banner->button_text && $banner->button_link)
+                            <a href="{{ $banner->button_link }}" class="com_btn border-0 bg-white ms-3">{{ $banner->button_text }}</a>
+                        @else
+                            <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white ms-3">Corporate Enquiries</a>
+                        @endif
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+        @if ($isSlider)
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroBannerCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroBannerCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         @endif
-        <div class="hero_content">
-            @if (empty($activeBanner))
-                <p class="mb-0 d-md-none">Designed in Dubai. Made to endure.</p>
-            @endif
-
-            @if (!empty($activeBanner->title))
-                <h1 class="main_head">{{ $activeBanner->title }}</h1>
-            @elseif(empty($activeBanner))
-                <h1 class="main_head">Objects Designed To Stay</h1>
-            @endif
-
-            @if (!empty($activeBanner->description))
-                <p>{!! $activeBanner->description !!}</p>
-            @elseif(empty($activeBanner))
-                <p>Curated objects for the desk, the home & the relationships that matter.</p>
-            @endif
-        </div>
-        @if (empty($activeBanner))
-        <div class="hero_left_right">
-            <span><svg xmlns="http://www.w3.org/2000/svg" width="63" height="6" viewBox="0 0 63 6"
-                    fill="none">
-                    <path
-                        d="M5.33332 2.66669C5.33332 1.19393 4.13942 2.03451e-05 2.66666 2.03451e-05C1.1939 2.03451e-05 -1.01725e-05 1.19393 -1.01725e-05 2.66669C-1.01725e-05 4.13945 1.1939 5.33335 2.66666 5.33335C4.13942 5.33335 5.33332 4.13945 5.33332 2.66669ZM62.6667 2.66669V2.16669L2.66666 2.16669V2.66669V3.16669L62.6667 3.16669V2.66669Z"
-                        fill="white" />
-                </svg></span>
-            <p class="sub_head mb-0">Designed in Dubai. Made to endure.</p><span><svg xmlns="http://www.w3.org/2000/svg"
-                    width="63" height="6" viewBox="0 0 63 6" fill="none">
-                    <path
-                        d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.03451e-05 60 2.03451e-05C58.5272 2.03451e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669L0 3.16669L60 3.16669V2.66669V2.16669L0 2.16669L0 2.66669Z"
-                        fill="white" />
-                </svg></span>
-        </div>
-        @endif
-
-        <div class="home_btn ">
-            <a href="{{ route('front.collections') }}" class="com_btn border-0 bg-white ">Explore Collections</a>
-            {{-- <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white ms-3">Corporate Enquiries</a> --}}
-            @if(!empty($activeBanner->button_text) && !empty($activeBanner->button_link))
-                <a href="{{ $activeBanner->button_link }}" class="com_btn border-0 bg-white ms-3">{{ $activeBanner->button_text }}</a>
-            @else
-                <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white ms-3">Corporate Enquiries</a>
-            @endif
-        </div>
-
-    </section>
+    </div>
+</section>
 
 <!--Find Gesture -->
 <section class="mt_120 d-none">

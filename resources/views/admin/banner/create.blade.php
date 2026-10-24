@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <form action="{{ route('admin.banners.store') }}" method="POST" enctype="multipart/form-data" id="bannerForm" novalidate>
+    <form action="{{ route('admin.banners.store') }}" method="POST" enctype="multipart/form-data" id="bannerForm" data-require-mobile="1" novalidate>
         @csrf
         <div class="row g-3">
 
@@ -43,7 +43,7 @@
                     @error('image') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Mobile Image</label>
+                    <label class="form-label">Mobile Image</label><span class="text-danger">*</span>
                     <input type="file" name="mobile_image" class="form-control">
                     @error('mobile_image') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
@@ -64,7 +64,7 @@
                     @error('video') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label">Mobile Video</label>
+                    <label class="form-label">Mobile Video</label><span class="text-danger">*</span>
                     <input type="file" name="mobile_video" class="form-control">
                     @error('mobile_video') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>

@@ -2405,6 +2405,11 @@ class FrontController extends Controller
     {
         return view('front.privacy');
     }
+    
+    public function getReturnPolicy()
+    {
+        return view('front.return-policy');
+    }
 
     public function getRituals()
     {

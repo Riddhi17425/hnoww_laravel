@@ -347,11 +347,8 @@
 }
 
 .delivery-header svg {
-    width: 28px;
-    height: 28px;
-    padding: 6px;
-    border-radius: 10px;
-    background: rgba(181, 138, 70, 0.12);
+    width: 20px;
+    height: 20px;
     color: #b58a46;
     flex-shrink: 0;
 }
@@ -380,9 +377,19 @@
 }
 
 .delivery-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     font-weight: 700;
-    min-width: 120px;
+    min-width: 140px;
     color: #0e2233;
+}
+
+.delivery-label svg {
+    width: 15px;
+    height: 15px;
+    color: #b58a46;
+    flex-shrink: 0;
 }
 
 .delivery-value {
@@ -512,15 +519,16 @@
         line-height: 1.7;
     }
 
+    .delivery-label {
+        display: flex;
+        min-width: auto;
+        margin-bottom: 2px;
+    }
+
     .pro_details_right .whatsapp_inquiry_row {
         margin-top: 4px;
     }
 
-    .delivery-label {
-        display: block;
-        min-width: auto;
-        margin-bottom: 2px;
-    }
 }
 </style>
 
@@ -625,9 +633,6 @@
                     <input type="hidden" class="qty_input" id="product-qty" value="1">
                     <button class="inc_btn" data-call="detail" type="button">+</button>
                 </div>
-                {{--@if($product->product_url == 'the-sovereign-weight' || $product->product_url == 'the-wireless-courtyard')
-                    <button type="button" class="com_btn" data-bs-toggle="modal" data-bs-target="#productInquiry">Reserved for June Delivery </button>
-                @else --}}
                     @if((int) ($product->product_stock ?? 0) <= 0)
                         <button type="button" class="com_btn out_of_stock_btn" disabled>Out of Stock</button>
                         <div class="whatsapp_inquiry_row">
@@ -640,6 +645,34 @@
                         </div>
                     @else
                         <button type="button" class="com_btn add_to_cart_btn" data-product-id="{{ $product->id }}" id="cartSubmitBtn"> Add to Cart</button>
+                        @php
+                            $waNo  = preg_replace('/\D/', '', config('global_values.admin_whatsapp_no'));
+                            $waMsg = 'Hi, I would like to order ' . $product->product_name . ' (' . url()->current() . ')';
+                        @endphp
+                        <style>
+                            .pro_details_right .wa_order { position: relative; overflow: hidden; width: fit-content; min-height: 0; margin: 0; padding: 4px 16px 4px 4px; gap: 8px; border: 1px solid #cfe3d3; border-radius: 50px; background: #eaf8ed; color: #1f6b4a; font-size: 13px; font-weight: 600; transition: .2s; }
+                            .pro_details_right .wa_order svg { flex: 0 0 28px; width: 28px; height: 28px; padding: 5px; border-radius: 50%; background: #25D366; color: #fff; animation: waPulse 2s infinite; }
+                            .pro_details_right .wa_order::after { content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%; background: linear-gradient(110deg, transparent, rgba(255, 255, 255, .7), transparent); transform: skewX(-20deg); }
+                            .pro_details_right .wa_order:hover { padding: 4px 16px 4px 4px; color: #1f6b4a; background: #d6efdc; border-color: #25D366; transform: translateY(-2px); box-shadow: 0 8px 16px rgba(37, 211, 102, .25); }
+                            .pro_details_right .wa_order:hover::after { left: 130%; transition: left .6s; }
+                            @keyframes waPulse { from { box-shadow: 0 0 0 0 rgba(37, 211, 102, .55); } to { box-shadow: 0 0 0 8px rgba(37, 211, 102, 0); } }
+                        </style>
+                        <div class="whatsapp_inquiry_row" style="margin-top: -4px;">
+                            <a href="https://wa.me/{{ $waNo }}?text={{ urlencode($waMsg) }}" target="_blank" rel="noopener"
+                                class="com_btn whatsapp_inquiry_btn wa_order" data-msg="{{ $waMsg }}">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.7-5.4A8.5 8.5 0 1 1 21 11.5z"></path>
+                                    <path d="M9 8.5c.3 2.6 2.9 5.2 5.5 5.5l1.2-1.2-2-1-.8.8c-.8-.4-1.9-1.5-2.3-2.3l.8-.8-1-2z"></path>
+                                </svg>
+                                Order on WhatsApp
+                            </a>
+                        </div>
+                        <script>
+                            document.querySelector('.wa_order').addEventListener('click', function () {
+                                var qty = parseInt(document.getElementById('product-qty').value, 10) || 1;
+                                this.href = this.href.split('?')[0] + '?text=' + encodeURIComponent(this.dataset.msg + '. Quantity: ' + qty + '. Please help me.');
+                            });
+                        </script>
                     @endif
 
                     {{-- <button type="button" class="com_btn buy_now_btn" data-product-id="{{ $product->id }}" id="buyNowBtn"> Buy Now</button> --}}
@@ -649,127 +682,102 @@
                 <a href="#" class="com_btn" data-bs-toggle="modal" data-bs-target="#productInquiry">Enquire Now </a>
             </div> --}}
             
-            @if(isset($product->large_description) && $product->large_description != '')
-            <h4 class="sub_head mb-4">The Story</h4>
-            <div class="mb-4">
-                {!! $product->large_description ?? '' !!}
-                {{-- <h4 class="sub_head mb-4">The Story</h4>
-                    <p>Rasa is the Sanskrit word for essence, taste, and the emotional core of art. This
-                        set is curated to evoke the "essence of delight" in your home.</p>
-                    <p>At its heart lies a hand-hammered brass and copper sculpture bowl—a vessel of warmth and texture.
-                        Paired with the Illumi aromatic bliss set, it transforms the atmosphere through fragrance and
-                        flame. Accompanied by a limited edition print and a poetic blessing, The Rasa is not just a
-                        gift, but a complete sensory ceremony designed to spark joy.</p> --}}
-            </div>
-            @endif
-            @if(isset($product->materials) && $product->materials != '')
-            <h4 class="sub_head mb-4">Material</h4>
-            <div class="pro_details_info_list mb-3">
-                {!! $product->materials ?? '' !!}
-                {{-- <h4 class="sub_head mb-4">Dimensions</h4>
-                    <ul>
-                        <li><b>Bowl Diameter:</b> 20–22 cm (Approx.)</li>
-                        <li><b>Box Dimensions:</b> 30 cm x 25 cm x 10 cm</li>
-                        <li><b>Weight:</b> ~1.8 kg (Full Set)</li>
-                    </ul> --}}
-            </div>
-            @endif
-            @if(isset($product->weight) && $product->weight != '')
-            <h4 class="sub_head mb-4">Weight</h4>
-            <div class="pro_details_info_list">
-                {{$product->weight ?? '' }}
-            </div>
-            @endif
             @php
                 $dimensionFields = [
                     'Height' => $product->height ? $product->height . ' cm' : null,
                     'Width' => $product->width ? $product->width . ' cm' : null,
                     'Length' => $product->length ? $product->length . ' cm' : null,
                 ];
+                $accPin = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>';
+                $accRows = fn ($a, $b) => '<div class="delivery-list">'
+                    . '<div class="delivery-row"><span class="delivery-label">' . $accPin . 'Dubai:</span><span class="delivery-value">' . $a . '</span></div>'
+                    . '<div class="delivery-row"><span class="delivery-label">' . $accPin . 'Other Emirates:</span><span class="delivery-value">' . $b . '</span></div>'
+                    . '</div>';
+
+                // inner svg paths per section (24x24, stroke icons)
+                $accIcons = [
+                    'The Story' => '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"></path><path d="M8 7h7M8 11h5"></path>',
+                    'Material' => '<path d="m12 3 9 5-9 5-9-5z"></path><path d="m3 13 9 5 9-5"></path>',
+                    'Weight' => '<path d="M6 8h12l2 12H4z"></path><circle cx="12" cy="5" r="2"></circle>',
+                    'Dimensions' => '<path d="M3 17 17 3l4 4L7 21z"></path><path d="m7 13 2 2M10 10l2 2M13 7l2 2"></path>',
+                    'Care and maintenance' => '<path d="M12 21s-8-5.5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.5-8 11-8 11z"></path>',
+                    'Delivery Charges' => '<path d="M1 3h15v13H1z"></path><path d="M16 8h4l3 3v5h-7z"></path><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle>',
+                    'Estimated Delivery' => '<rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path><path d="m9 16 2 2 4-4"></path>',
+                    'Returns' => '<path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v5h5"></path>',
+                ];
+
+                // [title, html body] - sections without content are skipped
+                $accordionItems = [];
+                if (!empty($product->large_description)) {
+                    $accordionItems['The Story'] = '<div>' . $product->large_description . '</div>';
+                }
+                if (!empty($product->materials)) {
+                    $accordionItems['Material'] = '<div class="pro_details_info_list">' . $product->materials . '</div>';
+                }
+                if (!empty($product->weight)) {
+                    $accordionItems['Weight'] = '<div class="pro_details_info_list">' . e($product->weight) . '</div>';
+                }
+                if (array_filter($dimensionFields)) {
+                    $li = '';
+                    foreach (array_filter($dimensionFields) as $label => $value) {
+                        $li .= '<li><b>' . $label . ':</b> ' . e($value) . '</li>';
+                    }
+                    $accordionItems['Dimensions'] = '<div class="pro_details_info_list"><ul class="mb-0 ps-3">' . $li . '</ul></div>';
+                }
+                if (!empty($product->care_maintenance)) {
+                    $accordionItems['Care and maintenance'] = '<p class="m-0">' . $product->care_maintenance . '</p>';
+                }
+                $accordionItems['Delivery Charges'] = $accRows('30 Dirham', '50 Dirham');
+                $accordionItems['Estimated Delivery'] = $accRows('Within 2-3 business days', 'Within 6-7 business days');
+                $accordionItems['Returns'] = $accRows('2-3 days', '14 days');
             @endphp
-            @if(array_filter($dimensionFields))
-            <h4 class="sub_head mb-4 mt-3">Dimensions</h4>
-            <div class="pro_details_info_list">
-                <ul class="mb-0 ps-3">
-                    @foreach($dimensionFields as $label => $value)
-                        @if($value)
-                            <li><b>{{ $label }}:</b> {{ $value }}</li>
-                        @endif
-                    @endforeach
-                </ul>
-            </div>
-            @endif
 
-            @if(isset($product->care_maintenance) && $product->care_maintenance != '')
-            <div>
-                <div class="d-flex align-items-center gap-3 mt-4 mb-2">
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 30 28" fill="none">
-                            <path class="heart-path"
-                                d="M22.1426 1C23.0312 1.00003 23.9132 1.19019 24.7393 1.56152C25.5655 1.93295 26.3221 2.4794 26.9629 3.1748V3.17578C27.6039 3.87135 28.1169 4.70101 28.4678 5.62012C28.8187 6.53946 29 7.52807 29 8.52734C28.9999 9.52647 28.8187 10.5144 28.4678 11.4336C28.1607 12.2379 27.7296 12.9738 27.1973 13.6113L26.9629 13.8789L15 26.8594L3.03711 13.8789C1.74115 12.4726 1.0001 10.5486 1 8.52734C1 6.50595 1.74106 4.58125 3.03711 3.1748C4.33058 1.77138 6.0665 1.00001 7.85742 1C9.64834 1 11.3843 1.7714 12.6777 3.1748L14.2646 4.89648L15 5.69434L15.7354 4.89648L17.3213 3.1748C17.9622 2.47924 18.7195 1.933 19.5459 1.56152C20.3719 1.19024 21.254 1 22.1426 1Z"
-                                stroke="#c7b58c" stroke-width="2" />
-                        </svg>
-                    </span>
-                    <span>
-                        <p class="mb-0 sub_head">Care and maintenance</p>
-                    </span>
-                </div>
-                <p class="m-0">{!! $product->care_maintenance ?? '' !!}</p>
-            </div>
-            @endif
-
-            <!-- <div class="mt-4 p-3" style="background: #F8F5F0; border: 1px solid #E5D5B5; border-radius: 8px; display: flex; align-items: center; gap: 15px;">
-                <div style="color: #B58A46; flex-shrink: 0;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="20 12 20 22 4 22 4 12"></polyline>
-                        <rect x="2" y="7" width="20" height="5"></rect>
-                        <line x1="12" y1="22" x2="12" y2="7"></line>
-                        <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
-                        <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
-                    </svg>
-                </div>
-                <div>
-                    <p class="m-0" style="font-weight: 500; font-size: 16px; color: #0e2233; line-height: 1.4;">Want to add Gift Wrap with this Product?</p>
-                    <p class="m-0 mt-1" style="font-size: 13px; color: #666;">You can add these options during checkout.</p>
-                </div>
-            </div> -->
-
-            <div class="mt-3 p-3" style="background: #F8F5F0; border: 1px solid #E5D5B5; border-radius: 8px; display: flex; align-items: center; gap: 15px;">
-                <div style="color: #B58A46; flex-shrink: 0;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="1" y="3" width="15" height="13"></rect>
-                        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
-                        <circle cx="5.5" cy="18.5" r="2.5"></circle>
-                        <circle cx="18.5" cy="18.5" r="2.5"></circle>
-                    </svg>
-                </div>
-                <div>
-                    <p class="m-0" style="font-weight: 500; font-size: 16px; color: #0e2233; line-height: 1.4;">Delivery charges based on Quantity</p>
-                </div>
-            </div>
-
-            <div class="delivery-info">
-                <div class="delivery-header">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color: #B58A46; flex-shrink: 0;">
-                        <rect x="1" y="3" width="15" height="13"></rect>
-                        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
-                        <circle cx="5.5" cy="18.5" r="2.5"></circle>
-                        <circle cx="18.5" cy="18.5" r="2.5"></circle>
-                    </svg>
-                    <p class="delivery-title">Estimated Delivery</p>
-                </div>
-
-                <div class="delivery-list">
-                    <div class="delivery-row">
-                        <span class="delivery-label">Dubai:</span>
-                        <span class="delivery-value">Within 2-3 business days</span>
+            <style>
+                .pd_accordion { margin-top: 1rem; }
+                .pd_accordion .accordion-item { margin-bottom: 6px; background: linear-gradient(135deg, #fffdf9 0%, #f5efe7 100%); border: 1px solid #e7d7b6; border-radius: 14px !important; overflow: hidden; box-shadow: 0 6px 14px rgba(9, 25, 35, .04); transition: box-shadow .2s, border-color .2s; }
+                .pd_accordion .accordion-item:hover, .pd_accordion .accordion-item:has(.show) { border-color: #b58a46; box-shadow: 0 8px 18px rgba(181, 138, 70, .15); }
+                .pd_accordion .accordion-button { gap: 10px; padding: 8px 12px; font-size: 14px; background: transparent; box-shadow: none; color: #0e2233; }
+                .pd_accordion .accordion-button:not(.collapsed) { color: #b58a46; border-bottom: 1px solid rgba(181, 138, 70, .2); }
+                .pd_accordion .accordion-button::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23b58a46' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E"); }
+                .pd_accordion .acc_icon { display: inline-flex; flex: 0 0 28px; width: 28px; height: 28px; padding: 6px; border-radius: 50%; background: #f1e6d0; color: #b58a46; transition: .2s; }
+                .pd_accordion .accordion-button:not(.collapsed) .acc_icon { background: #b58a46; color: #fff; }
+                .pd_accordion .accordion-button .sub_head { margin: 0; font-size: 14px; font-weight: 700; }
+                .pd_accordion .accordion-body { padding: 10px 12px 12px; font-size: 14px; }
+                .pd_accordion .delivery-label svg { width: 16px; height: 16px; color: #b58a46; }
+            </style>
+            <div class="accordion pd_accordion" id="productAccordion">
+                @foreach($accordionItems as $title => $body)
+                    @php $accId = 'pdAcc' . $loop->index; @endphp
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#{{ $accId }}" aria-expanded="false" aria-controls="{{ $accId }}">
+                                <svg class="acc_icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{!! $accIcons[$title] ?? '' !!}</svg>
+                                <span class="sub_head">{{ $title }}</span>
+                            </button>
+                        </h2>
+                        <div id="{{ $accId }}" class="accordion-collapse collapse" data-bs-parent="#productAccordion">
+                            <div class="accordion-body">{!! $body !!}</div>
+                        </div>
                     </div>
-                    <div class="delivery-row">
-                        <span class="delivery-label">Other Emirates:</span>
-                        <span class="delivery-value">Within 6-7 business days</span>
-                    </div>
-                </div>
+                @endforeach
             </div>
+
+            @if((int) ($product->product_stock ?? 0) > 0)
+                <style>
+                    @media (max-width: 767px) {
+                        #sticky-cart-bar { display: none !important; }
+                        body { padding-bottom: 84px; }
+                        .wa-container { bottom: 96px !important; }
+                    }
+                </style>
+                <div class="d-md-none position-fixed bottom-0 start-0 end-0 bg-white text-center px-3 pt-2 pb-1"
+                    style="z-index: 1040; border-radius: 14px 14px 0 0; box-shadow: 0 -4px 16px rgba(0,0,0,.12);">
+                    <button type="button" class="w-100 border-0 rounded py-3 fs-5 fw-semibold text-white"
+                        style="background: rgb(140 138 114);" onclick="cartSubmitBtn.click()">Add to cart</button>
+                    <small class="d-block mt-1" style="color: #574d3d;">Dubai delivery in 2-3 business days</small>
+                </div>
+            @endif
 
         </div>
     </div>
@@ -865,8 +873,10 @@
                     <div>
                         <div>
                             <h3 class="sub_head">{{ $val->product_name ?? '' }}</h3>
-                            <p class="mb-0">{!! $val->short_description ?? '' !!}</p>
                         </div>
+                        <p class="fw-semibold text-dark mb-2">AED {{ number_format((float) preg_replace('/[^0-9.]/', '', $val->product_price), 0) }}</p>
+                        <p class="mb-3">{!! $val->short_description ?? '' !!}</p>
+                        <span class="com_btn text-nowrap d-inline-block">EXPLORE MORE</span>
                     </div>
                 </a>
             </div>
@@ -977,51 +987,6 @@
 
 <script>
 var formSubmitted = false;
-// $(document).on('click', '.buy_now_btn', function() {
-//     let productId = $(this).data('product-id');
-//     let qty = $('#product-qty').val() || 1;
-
-//     $.ajax({
-//         url: sitePath + '/cart/add',
-//         method: 'POST',
-//         data: {
-//             product_id: productId,
-//             quantity: qty
-//         },
-//         success: function(response) {
-//             if (response.status) {
-//                 let newCount = response.cart_count || 0;
-//                 $('.cart-total').text(newCount).show();
-//                 $('#cart-count').show();
-//                 window.location.href = sitePath + '/checkout';
-//             } else {
-//                 var message = response.message;
-//                 var availableQty = response.data && response.data.available_stock;
-//                 var alreadyAddedQty = response.data && response.data.already_in_cart;
-//                 if (availableQty > 0) {
-//                     message += ' Total Stock Quantity is ' + availableQty;
-//                 }
-//                 if (alreadyAddedQty > 0) {
-//                     message += ' Your cart has already ' + alreadyAddedQty + ' QTY added';
-//                 }
-//                 Swal.fire({
-//                     icon: 'warning',
-//                     title: 'Warning',
-//                     text: message,
-//                     showConfirmButton: true,
-//                     confirmButtonColor: '#B58A46',
-//                 });
-//             }
-//         },
-//         error: function() {
-//             Swal.fire({
-//                 icon: 'error',
-//                 title: 'Error',
-//                 text: 'Something went wrong!',
-//             });
-//         }
-//     });
-// });
 
 $(document).ready(function() {
     $("#productInquiryForm").validate({
