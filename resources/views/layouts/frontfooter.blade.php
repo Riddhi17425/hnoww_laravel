@@ -118,12 +118,13 @@
         </div>
         <div class="ft_bottom">
             <div class="ym_cpy">
-                All rights reserved. <a href="{{ route('front.home') }}">©HNOWW</a> <?php echo date("Y"); ?>. <span
-                    style="font-size: 11px;font-weight: 400;">Designed & Developed by <a
+                <span class="ym_cpy_main">All rights reserved. <a href="{{ route('front.home') }}">©HNOWW</a> <?php echo date("Y"); ?></span>
+                <span class="ym_cpy_dev">Designed & Developed by <a
                         href="https://www.intelliworkz.tech/" target="_blank"> Intelliworkz</a></span>
             </div>
 
             <div class="ft_privacy">
+                <a href="{{ route('front.shipping.policy') }}">Shipping Policy</a>
                 <a href="{{ route('front.return.policy') }}">Return Policy</a>
                 <a href="{{ route('front.privacy') }}">Privacy Policy</a>
             </div>

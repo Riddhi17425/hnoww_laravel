@@ -729,7 +729,8 @@
                 }
                 $accordionItems['Delivery Charges'] = $accRows('30 Dirham', '50 Dirham');
                 $accordionItems['Estimated Delivery'] = $accRows('Within 2-3 business days', 'Within 6-7 business days');
-                $accordionItems['Returns'] = $accRows('2-3 days', '14 days');
+                // Returns is shown as a link row (see loop below), body unused
+                $accordionItems['Returns'] = '';
             @endphp
 
             <style>
@@ -743,11 +744,23 @@
                 .pd_accordion .accordion-button:not(.collapsed) .acc_icon { background: #b58a46; color: #fff; }
                 .pd_accordion .accordion-button .sub_head { margin: 0; font-size: 14px; font-weight: 700; }
                 .pd_accordion .accordion-body { padding: 10px 12px 12px; font-size: 14px; }
+                .pd_accordion .pd_acc_link::after { transform: rotate(-90deg); }
                 .pd_accordion .delivery-label svg { width: 16px; height: 16px; color: #b58a46; }
             </style>
             <div class="accordion pd_accordion" id="productAccordion">
                 @foreach($accordionItems as $title => $body)
                     @php $accId = 'pdAcc' . $loop->index; @endphp
+                    @if($title === 'Returns')
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <a href="{{ route('front.return.policy') }}" class="accordion-button collapsed pd_acc_link text-decoration-none">
+                                <svg class="acc_icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{!! $accIcons[$title] ?? '' !!}</svg>
+                                <span class="sub_head">Returns available within 14 days</span>
+                            </a>
+                        </h2>
+                    </div>
+                    @continue
+                    @endif
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -775,7 +788,14 @@
                     style="z-index: 1040; border-radius: 14px 14px 0 0; box-shadow: 0 -4px 16px rgba(0,0,0,.12);">
                     <button type="button" class="w-100 border-0 rounded py-3 fs-5 fw-semibold text-white"
                         style="background: rgb(140 138 114);" onclick="cartSubmitBtn.click()">Add to cart</button>
-                    <small class="d-block mt-1" style="color: #574d3d;">Dubai delivery in 2-3 business days</small>
+                    <small class="d-block mt-1" style="color: #574d3d;">@php
+                            $dlvFrom = \Carbon\Carbon::now('Asia/Dubai')->addWeekdays(2);
+                            $dlvTo = \Carbon\Carbon::now('Asia/Dubai')->addWeekdays(3);
+                            $dlvRange = $dlvFrom->format('M') === $dlvTo->format('M')
+                                ? $dlvFrom->format('j') . ' - ' . $dlvTo->format('j M')
+                                : $dlvFrom->format('j M') . ' - ' . $dlvTo->format('j M');
+                        @endphp
+                        Estimated Delivery in Dubai: {{ $dlvRange }}</small>
                 </div>
             @endif
 

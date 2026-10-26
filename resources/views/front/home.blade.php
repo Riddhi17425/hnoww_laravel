@@ -389,6 +389,58 @@
     </div>
 </section>
 
+@if(isset($bestsellerProducts) && $bestsellerProducts->count() > 0)
+<!--Bestsellers -->
+<section class="mt_80">
+    <div class="section_header">
+        <p class="sub_head mb-0">
+            <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z"
+                        fill="#B58A46" />
+                </svg>
+            </span>
+            <span>Our</span>
+            <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z"
+                        fill="#B58A46" />
+                </svg>
+            </span>
+        </p>
+        <h2 class="title_60">Best Sellers</h2>
+    </div>
+    <div class="desire_slider">
+        @foreach($bestsellerProducts as $val)
+        <div class="desire_box">
+            <div class="desire_box_top mb-4">
+                <a href="{{ route('front.product.details', $val->product_url) }}">
+                    <img class="img-fluid img_1"
+                        src="{{ isset($val->list_page_img) ? asset('public/images/admin/product_list/'.$val->list_page_img) : '' }}"
+                        alt="{{ $val->product_name ?? 'Product Image' }}" loading="lazy">
+                </a>
+            </div>
+
+            <div class="desire_box_bot_child">
+                <div>
+                    <a href="{{ route('front.product.details', $val->product_url) }}">
+                        <h3 class="sub_head">{{$val->product_name ?? ''}}</h3>
+                    </a>
+                    <p>{!! $val->short_description ?? '' !!}</p>
+                </div>
+                <a href="{{ route('front.product.details', $val->product_url) }}">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <path d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
+                            stroke="#8c8a72" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</section>
+@endif
+
 <!--The Curated Rituals -->
 {{-- <section class="mt_120">
     <div class="container">
@@ -528,6 +580,76 @@ alt="Curated Rituals 1" loading="lazy">
         </div>
     </div>
 </section>
+
+@if(isset($reviews) && $reviews->count() > 0)
+<!-- Customer Reviews -->
+<style>
+    .hn_reviews .review_card { margin: 0 12px; padding: 28px 26px; height: 100%; background: linear-gradient(135deg, #fffdf9 0%, #f5efe7 100%); border: 1px solid #e7d7b6; text-align: left; }
+    .hn_reviews .review_stars { color: #b58a46; font-size: 18px; letter-spacing: 2px; margin-bottom: 12px; }
+    .hn_reviews .review_stars .off { color: #d9ccb2; }
+    .hn_reviews .review_text { margin: 0 0 20px; font-size: 15px; line-height: 1.7; }
+    .hn_reviews .review_author { display: flex; align-items: center; gap: 12px; }
+    .hn_reviews .review_avatar { flex: 0 0 48px; width: 48px; height: 48px; border-radius: 50%; object-fit: cover; background: #b58a46; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-weight: 600; }
+    .hn_reviews .review_name { display: block; font-weight: 600; color: #0e2233; }
+    .hn_reviews .review_city { display: block; font-size: 13px; color: #8a7a5c; }
+    .hn_reviews .review_slider .slick-track { display: flex; }
+    .hn_reviews .review_slider .slick-slide { height: auto; }
+    .hn_reviews .review_slider .slick-slide > div { height: 100%; }
+    .hn_reviews .review_slider .slick-dots li button:before { color: #b58a46; }
+    .hn_reviews .review_slider:not(.slick-initialized) { display: flex; overflow-x: auto; gap: 24px; }
+    .hn_reviews .review_slider:not(.slick-initialized) .review_card { flex: 0 0 85%; margin: 0; }
+</style>
+<section class="mt_120 mb_120 hn_reviews">
+    <div class="container">
+        <div class="section_header">
+            <h2 class="title_60">What Our Clients Say</h2>
+        </div>
+        <div class="review_slider">
+            @foreach($reviews as $review)
+                <div>
+                    <div class="review_card">
+                        <div class="review_stars" aria-label="{{ $review->rating }} out of 5 stars">
+                            @for($i = 1; $i <= 5; $i++)
+                                <span class="{{ $i <= $review->rating ? '' : 'off' }}">&#9733;</span>
+                            @endfor
+                        </div>
+                        <p class="review_text">{{ $review->description }}</p>
+                        <div class="review_author">
+                            @if($review->photo)
+                                <img class="review_avatar" src="{{ asset('public/images/admin/reviews/' . $review->photo) }}" alt="{{ $review->name }}" loading="lazy">
+                            @else
+                                <span class="review_avatar">{{ strtoupper(mb_substr($review->name, 0, 1)) }}</span>
+                            @endif
+                            <span>
+                                <span class="review_name">{{ $review->name }}</span>
+                                <span class="review_city">{{ $review->city }}</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@push('script')
+<script>
+$(document).ready(function () {
+    $('.hn_reviews .review_slider').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        arrows: false,
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 4500,
+        responsive: [
+            { breakpoint: 992, settings: { slidesToShow: 2 } },
+            { breakpoint: 576, settings: { slidesToShow: 1 } }
+        ]
+    });
+});
+</script>
+@endpush
+@endif
 
 <!--The Editions -->
 <section class="mt_120 mb_120">

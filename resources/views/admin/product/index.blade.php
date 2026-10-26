@@ -49,6 +49,7 @@
                         <th>Price</th>
                         <th>Short Description</th>
                         <th>Product Type</th>
+                        <th>Bestseller</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -67,6 +68,7 @@
 window.APP_URLS = {
             getProducts: "{{ route('admin.products.fetch') }}",
             updateStatus:"{{ route('admin.products.update.status') }}",
+            updateBestseller:"{{ route('admin.products.update.bestseller') }}",
             deleteProduct:"{{ route('admin.products.delete' , [':id']) }}",
             csrfToken: "{{ csrf_token() }}"
         };
