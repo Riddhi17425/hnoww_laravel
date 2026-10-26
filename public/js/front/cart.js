@@ -84,6 +84,32 @@ $(document).on('click', '.dec_btn', function () {
     }
 });
 
+// "Added to cart" popup: product summary + Continue Shopping / View cart buttons
+function showAddedToCartPopup(product, cartCount) {
+    let name = $('<div>').text(product.name).html(); // escape product name
+    Swal.fire({
+        position: 'top-end',
+        title: 'Added to cart',
+        html: `<div class="atc_item">
+                   <img src="${product.image}" alt="${name}">
+                   <div class="atc_info">
+                       <p class="atc_name">${name}</p>
+                       <span class="atc_price">AED ${product.price}</span>
+                   </div>
+               </div>`,
+        showCloseButton: true,
+        showCancelButton: true,
+        cancelButtonText: 'Continue Shopping',
+        confirmButtonText: `View cart (${cartCount})`,
+        customClass: { popup: 'atc_popup', actions: 'atc_actions', confirmButton: 'atc_view_cart', cancelButton: 'atc_continue' },
+        buttonsStyling: false,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = sitePath + '/cart';
+        }
+    });
+}
+
 $(document).on('click', '.add_to_cart_btn', function () {
     let productId = $(this).data('product-id');
     let qty = $(this).closest('.increment_decrement_area').find('.qty_input').val();
@@ -98,25 +124,10 @@ $(document).on('click', '.add_to_cart_btn', function () {
         },
         success: function (response) {
             if(response.status){
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: response.message,
-                    //timer: 3000,
-                    showConfirmButton: true,
-                    confirmButtonColor: '#B58A46',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Reload the page when OK button is clicked
-                        //location.reload();
-                        // let currentCount = parseInt($('#cart-count').text()) || 0;
-                        // let addedQty = parseInt($('#product-qty').val()) || 1;
-                        // $('#cart-count').text(currentCount + addedQty);
-                        let newCount = response.cart_count || 0;
-                        $('.cart-total').text(newCount).show();
-                        $('#cart-count').show();
-                    }
-                });
+                let cartCount = response.cart_count || 0;
+                $('.cart-total').text(cartCount).show();
+                $('#cart-count').show();
+                showAddedToCartPopup(response.product, cartCount);
             } else {
                 var message = response.message;
                 var data = response.data || {};

@@ -284,6 +284,9 @@ $(document).ready(function () {
                 accept: "image/jpeg,image/png,image/jpg,image/gif,image/webp"
             },
             mobile_image: {
+                required: function () {
+                    return $('#type').val() === 'image' && $form.data('require-mobile') === 1;
+                },
                 accept: "image/jpeg,image/png,image/jpg,image/gif,image/webp"
             },
             alt_text: {
@@ -298,6 +301,9 @@ $(document).ready(function () {
                 accept: "video/mp4,video/quicktime,video/x-msvideo,video/webm"
             },
             mobile_video: {
+                required: function () {
+                    return $('#type').val() === 'video' && $form.data('require-mobile') === 1;
+                },
                 accept: "video/mp4,video/quicktime,video/x-msvideo,video/webm"
             }
         },
@@ -311,6 +317,7 @@ $(document).ready(function () {
                 accept: "Only jpeg, png, jpg, gif, webp images are allowed."
             },
             mobile_image: {
+                required: "Please upload a mobile image.",
                 accept: "Only jpeg, png, jpg, gif, webp images are allowed."
             },
             alt_text: {
@@ -321,6 +328,7 @@ $(document).ready(function () {
                 accept: "Only mp4, mov, avi, webm videos are allowed."
             },
             mobile_video: {
+                required: "Please upload a mobile video.",
                 accept: "Only mp4, mov, avi, webm videos are allowed."
             }
         },

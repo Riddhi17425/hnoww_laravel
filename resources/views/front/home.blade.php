@@ -1,7 +1,7 @@
 @include('layouts.frontheader')
 <!-- hero section -->
-{{-- <section class="hero-section" style="height: 100%;"> --}}
-    {{-- <img class="img-fluid d-none d-lg-block"
+{{-- <section class="hero-section" style="height: 100%;"> 
+    <img class="img-fluid d-none d-lg-block"
         src="{{ asset('public/images/front/Raksha-Bandhan/Raksha-Bandhan-Banner.webp') }}" alt="images" loading="lazy">
     <img class="img-fluid d-lg-none" src="{{ asset('public/images/front/Raksha-Bandhan/Raksha-Bandhan-Banner.webp') }}"
         alt="images" loading="lazy">
@@ -11,115 +11,98 @@
             <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white d-lg-none">Corporate
                 Enquiries</a>
         </div>
-    </div> --}}
+    </div> 
+</section> --}}
 
-     {{-- </section> --}}
+<!-- HERO BANNER SLIDER -->
+@php
+    // Active, non-deleted banners (FrontController); with none, show the default hero once.
+    $heroSlides = $heroBanners->isNotEmpty() ? $heroBanners->values() : collect([null]);
+    $isSlider   = $heroSlides->count() > 1;
+    $imgPath    = 'public/images/admin/banner/images/';
+    $vidPath    = 'public/images/admin/banner/videos/';
+@endphp
+<section class="hero-section" style="height: 100%;">
+    <div id="heroBannerCarousel" class="carousel slide carousel-fade hero-banner-carousel"
+        @if ($isSlider) data-bs-ride="carousel" data-bs-interval="6000" data-bs-pause="false" @endif>
 
-    <section class="hero-section" style="height: 100%;">
+        <div class="carousel-inner">
+            @foreach ($heroSlides as $banner)
+                <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                    @if ($banner && $banner->type == 'image')
+                        @php $alt = $banner->alt_text ?? $banner->title; @endphp
+                        @if ($banner->image)
+                            <img class="img-fluid d-none d-md-block hero_video" src="{{ asset($imgPath . $banner->image) }}" alt="{{ $alt }}">
+                        @endif
+                        @if ($banner->mobile_image ?: $banner->image)
+                            <img class="img-fluid d-md-none hero_video" src="{{ asset($imgPath . ($banner->mobile_image ?: $banner->image)) }}" alt="{{ $alt }}">
+                        @endif
+                    @elseif ($banner && $banner->type == 'video')
+                        @if ($banner->video)
+                            <video autoplay muted loop playsinline class="hero_video d-none d-md-block">
+                                <source src="{{ asset($vidPath . $banner->video) }}" type="video/{{ pathinfo($banner->video, PATHINFO_EXTENSION) }}">
+                            </video>
+                        @endif
+                        @if ($banner->mobile_video ?: $banner->video)
+                            @php $mobileVideo = $banner->mobile_video ?: $banner->video; @endphp
+                            <video autoplay muted loop playsinline class="hero_video d-md-none">
+                                <source src="{{ asset($vidPath . $mobileVideo) }}" type="video/{{ pathinfo($mobileVideo, PATHINFO_EXTENSION) }}">
+                            </video>
+                        @endif
+                    @elseif (!$banner)
+                        <video autoplay muted loop class="hero_video d-none d-md-block">
+                            <source src="{{ asset('public/images/front/hero-video.webm') }}" type="video/webm">
+                        </video>
+                        <video autoplay muted loop class="hero_video d-md-none">
+                            <source src="{{ asset('public/images/front/hero-video-mobaile.mp4') }}" type="video/mp4">
+                        </video>
+                        <div class="hero_content">
+                            <p class="mb-0 d-md-none">Designed in Dubai. Made to endure.</p>
+                            <h1 class="main_head">Objects Designed To Stay</h1>
+                            <p>Curated objects for the desk, the home & the relationships that matter.</p>
+                        </div>
+                        <div class="hero_left_right">
+                            <span><svg xmlns="http://www.w3.org/2000/svg" width="63" height="6" viewBox="0 0 63 6" fill="none"><path d="M5.33332 2.66669C5.33332 1.19393 4.13942 2.03451e-05 2.66666 2.03451e-05C1.1939 2.03451e-05 -1.01725e-05 1.19393 -1.01725e-05 2.66669C-1.01725e-05 4.13945 1.1939 5.33335 2.66666 5.33335C4.13942 5.33335 5.33332 4.13945 5.33332 2.66669ZM62.6667 2.66669V2.16669L2.66666 2.16669V2.66669V3.16669L62.6667 3.16669V2.66669Z" fill="white" /></svg></span>
+                            <p class="sub_head mb-0">Designed in Dubai. Made to endure.</p>
+                            <span><svg xmlns="http://www.w3.org/2000/svg" width="63" height="6" viewBox="0 0 63 6" fill="none"><path d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.03451e-05 60 2.03451e-05C58.5272 2.03451e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669L0 3.16669L60 3.16669V2.66669V2.16669L0 2.16669L0 2.66669Z" fill="white" /></svg></span>
+                        </div>
+                    @endif
 
-        @php
-            $activeBanner = $heroBanners->first();
-        @endphp
+                    @if ($banner && ($banner->title || $banner->description))
+                        <div class="hero_content">
+                            @if ($banner->title)
+                                <{{ $loop->first ? 'h1' : 'h2' }} class="main_head">{{ $banner->title }}</{{ $loop->first ? 'h1' : 'h2' }}>
+                            @endif
+                            @if ($banner->description)
+                                <p>{!! $banner->description !!}</p>
+                            @endif
+                        </div>
+                    @endif
 
-        @if ($activeBanner)
+                    <div class="home_btn">
+                        <a href="{{ route('front.collections') }}" class="com_btn border-0 bg-white">Explore Collections</a>
+                        @if ($banner && $banner->button_text && $banner->button_link)
+                            <a href="{{ $banner->button_link }}" class="com_btn border-0 bg-white ms-3">{{ $banner->button_text }}</a>
+                        @else
+                            <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white ms-3">Corporate Enquiries</a>
+                        @endif
+                    </div>
+                </div>
+            @endforeach
+        </div>
 
-            {{-- IMAGE TYPE BANNER --}}
-            @if ($activeBanner->type == 'image')
-                @if (!empty($activeBanner->image))
-                    <img class="img-fluid d-none d-md-block hero_video"
-                        src="{{ asset('public/images/admin/banner/images/' . $activeBanner->image) }}"
-                        alt="{{ $activeBanner->alt_text ?? $activeBanner->title }}" loading="lazy">
-                @endif
-                @if (!empty($activeBanner->mobile_image))
-                    <img class="img-fluid d-md-none hero_video"
-                        src="{{ asset('public/images/admin/banner/images/' . $activeBanner->mobile_image) }}"
-                        alt="{{ $activeBanner->alt_text ?? $activeBanner->title }}" loading="lazy">
-                @elseif(!empty($activeBanner->image))
-                    <img class="img-fluid d-md-none hero_video"
-                        src="{{ asset('public/images/admin/banner/images/' . $activeBanner->image) }}"
-                        alt="{{ $activeBanner->alt_text ?? $activeBanner->title }}" loading="lazy">
-                @endif
-            @endif
-
-            {{-- VIDEO TYPE BANNER --}}
-            @if ($activeBanner->type == 'video')
-                @if (!empty($activeBanner->video))
-                    <video autoplay muted loop class="hero_video d-none d-md-block">
-                        <source src="{{ asset('public/images/admin/banner/videos/' . $activeBanner->video) }}"
-                            type="video/{{ pathinfo($activeBanner->video, PATHINFO_EXTENSION) }}">
-                        Your browser does not support the video tag.
-                    </video>
-                @endif
-                @if (!empty($activeBanner->mobile_video))
-                    <video autoplay muted loop class="hero_video d-md-none">
-                        <source src="{{ asset('public/images/admin/banner/videos/' . $activeBanner->mobile_video) }}"
-                            type="video/{{ pathinfo($activeBanner->mobile_video, PATHINFO_EXTENSION) }}">
-                        Your browser does not support the video tag.
-                    </video>
-                @elseif(!empty($activeBanner->video))
-                    <video autoplay muted loop class="hero_video d-md-none">
-                        <source src="{{ asset('public/images/admin/banner/videos/' . $activeBanner->video) }}"
-                            type="video/{{ pathinfo($activeBanner->video, PATHINFO_EXTENSION) }}">
-                        Your browser does not support the video tag.
-                    </video>
-                @endif
-            @endif
-        @else
-            {{-- FALLBACK: agar koi banner active nahi hai to purana static video dikhao --}}
-            <video autoplay muted loop class="hero_video d-none d-md-block">
-                <source src="{{ asset('public/images/front/hero-video.webm') }}" type="video/webm">
-                Your browser does not support the video tag.
-            </video>
-            <video autoplay muted loop class="hero_video d-md-none">
-                <source src="{{ asset('public/images/front/hero-video-mobaile.mp4') }}" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+        @if ($isSlider)
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroBannerCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroBannerCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         @endif
-        <div class="hero_content">
-            @if (empty($activeBanner))
-                <p class="mb-0 d-md-none">Designed in Dubai. Made to endure.</p>
-            @endif
-
-            @if (!empty($activeBanner->title))
-                <h1 class="main_head">{{ $activeBanner->title }}</h1>
-            @elseif(empty($activeBanner))
-                <h1 class="main_head">Objects Designed To Stay</h1>
-            @endif
-
-            @if (!empty($activeBanner->description))
-                <p>{!! $activeBanner->description !!}</p>
-            @elseif(empty($activeBanner))
-                <p>Curated objects for the desk, the home & the relationships that matter.</p>
-            @endif
-        </div>
-        @if (empty($activeBanner))
-        <div class="hero_left_right">
-            <span><svg xmlns="http://www.w3.org/2000/svg" width="63" height="6" viewBox="0 0 63 6"
-                    fill="none">
-                    <path
-                        d="M5.33332 2.66669C5.33332 1.19393 4.13942 2.03451e-05 2.66666 2.03451e-05C1.1939 2.03451e-05 -1.01725e-05 1.19393 -1.01725e-05 2.66669C-1.01725e-05 4.13945 1.1939 5.33335 2.66666 5.33335C4.13942 5.33335 5.33332 4.13945 5.33332 2.66669ZM62.6667 2.66669V2.16669L2.66666 2.16669V2.66669V3.16669L62.6667 3.16669V2.66669Z"
-                        fill="white" />
-                </svg></span>
-            <p class="sub_head mb-0">Designed in Dubai. Made to endure.</p><span><svg xmlns="http://www.w3.org/2000/svg"
-                    width="63" height="6" viewBox="0 0 63 6" fill="none">
-                    <path
-                        d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.03451e-05 60 2.03451e-05C58.5272 2.03451e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669L0 3.16669L60 3.16669V2.66669V2.16669L0 2.16669L0 2.66669Z"
-                        fill="white" />
-                </svg></span>
-        </div>
-        @endif
-
-        <div class="home_btn ">
-            <a href="{{ route('front.collections') }}" class="com_btn border-0 bg-white ">Explore Collections</a>
-            {{-- <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white ms-3">Corporate Enquiries</a> --}}
-            @if(!empty($activeBanner->button_text) && !empty($activeBanner->button_link))
-                <a href="{{ $activeBanner->button_link }}" class="com_btn border-0 bg-white ms-3">{{ $activeBanner->button_text }}</a>
-            @else
-                <a href="{{ route('front.corporate.vault') }}" class="com_btn border-0 bg-white ms-3">Corporate Enquiries</a>
-            @endif
-        </div>
-
-    </section>
+    </div>
+</section>
 
 <!--Find Gesture -->
 <section class="mt_120 d-none">
@@ -406,6 +389,58 @@
     </div>
 </section>
 
+@if(isset($bestsellerProducts) && $bestsellerProducts->count() > 0)
+<!--Bestsellers -->
+<section class="mt_80">
+    <div class="section_header">
+        <p class="sub_head mb-0">
+            <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z"
+                        fill="#B58A46" />
+                </svg>
+            </span>
+            <span>Our</span>
+            <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z"
+                        fill="#B58A46" />
+                </svg>
+            </span>
+        </p>
+        <h2 class="title_60">Best Sellers</h2>
+    </div>
+    <div class="desire_slider">
+        @foreach($bestsellerProducts as $val)
+        <div class="desire_box">
+            <div class="desire_box_top mb-4">
+                <a href="{{ route('front.product.details', $val->product_url) }}">
+                    <img class="img-fluid img_1"
+                        src="{{ isset($val->list_page_img) ? asset('public/images/admin/product_list/'.$val->list_page_img) : '' }}"
+                        alt="{{ $val->product_name ?? 'Product Image' }}" loading="lazy">
+                </a>
+            </div>
+
+            <div class="desire_box_bot_child">
+                <div>
+                    <a href="{{ route('front.product.details', $val->product_url) }}">
+                        <h3 class="sub_head">{{$val->product_name ?? ''}}</h3>
+                    </a>
+                    <p>{!! $val->short_description ?? '' !!}</p>
+                </div>
+                <a href="{{ route('front.product.details', $val->product_url) }}">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <path d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
+                            stroke="#8c8a72" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</section>
+@endif
+
 <!--The Curated Rituals -->
 {{-- <section class="mt_120">
     <div class="container">
@@ -545,6 +580,76 @@ alt="Curated Rituals 1" loading="lazy">
         </div>
     </div>
 </section>
+
+@if(isset($reviews) && $reviews->count() > 0)
+<!-- Customer Reviews -->
+<style>
+    .hn_reviews .review_card { margin: 0 12px; padding: 28px 26px; height: 100%; background: linear-gradient(135deg, #fffdf9 0%, #f5efe7 100%); border: 1px solid #e7d7b6; text-align: left; }
+    .hn_reviews .review_stars { color: #b58a46; font-size: 18px; letter-spacing: 2px; margin-bottom: 12px; }
+    .hn_reviews .review_stars .off { color: #d9ccb2; }
+    .hn_reviews .review_text { margin: 0 0 20px; font-size: 15px; line-height: 1.7; }
+    .hn_reviews .review_author { display: flex; align-items: center; gap: 12px; }
+    .hn_reviews .review_avatar { flex: 0 0 48px; width: 48px; height: 48px; border-radius: 50%; object-fit: cover; background: #b58a46; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-weight: 600; }
+    .hn_reviews .review_name { display: block; font-weight: 600; color: #0e2233; }
+    .hn_reviews .review_city { display: block; font-size: 13px; color: #8a7a5c; }
+    .hn_reviews .review_slider .slick-track { display: flex; }
+    .hn_reviews .review_slider .slick-slide { height: auto; }
+    .hn_reviews .review_slider .slick-slide > div { height: 100%; }
+    .hn_reviews .review_slider .slick-dots li button:before { color: #b58a46; }
+    .hn_reviews .review_slider:not(.slick-initialized) { display: flex; overflow-x: auto; gap: 24px; }
+    .hn_reviews .review_slider:not(.slick-initialized) .review_card { flex: 0 0 85%; margin: 0; }
+</style>
+<section class="mt_120 mb_120 hn_reviews">
+    <div class="container">
+        <div class="section_header">
+            <h2 class="title_60">What Our Clients Say</h2>
+        </div>
+        <div class="review_slider">
+            @foreach($reviews as $review)
+                <div>
+                    <div class="review_card">
+                        <div class="review_stars" aria-label="{{ $review->rating }} out of 5 stars">
+                            @for($i = 1; $i <= 5; $i++)
+                                <span class="{{ $i <= $review->rating ? '' : 'off' }}">&#9733;</span>
+                            @endfor
+                        </div>
+                        <p class="review_text">{{ $review->description }}</p>
+                        <div class="review_author">
+                            @if($review->photo)
+                                <img class="review_avatar" src="{{ asset('public/images/admin/reviews/' . $review->photo) }}" alt="{{ $review->name }}" loading="lazy">
+                            @else
+                                <span class="review_avatar">{{ strtoupper(mb_substr($review->name, 0, 1)) }}</span>
+                            @endif
+                            <span>
+                                <span class="review_name">{{ $review->name }}</span>
+                                <span class="review_city">{{ $review->city }}</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@push('script')
+<script>
+$(document).ready(function () {
+    $('.hn_reviews .review_slider').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        arrows: false,
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 4500,
+        responsive: [
+            { breakpoint: 992, settings: { slidesToShow: 2 } },
+            { breakpoint: 576, settings: { slidesToShow: 1 } }
+        ]
+    });
+});
+</script>
+@endpush
+@endif
 
 <!--The Editions -->
 <section class="mt_120 mb_120">

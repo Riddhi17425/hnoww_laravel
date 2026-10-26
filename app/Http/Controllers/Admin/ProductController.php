@@ -68,6 +68,18 @@ class ProductController extends Controller
                             </div>';;
                     }              
             })        
+            ->addColumn('bestseller', function ($result) {
+                // Bestseller applies to Basic products only (not Corporate / Wedding)
+                if ((int) $result->product_type !== 1) {
+                    return '-';
+                }
+                $checked = $result->is_bestseller == 1 ? 'checked' : '';
+                $label = $result->is_bestseller == 1 ? 'Yes' : 'No';
+                return '<div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" ' . $checked . ' onclick="updateBestseller(' . ($result->is_bestseller == 1 ? 0 : 1) . ',' . $result->id . ');">
+                            <label class="form-check-label">' . $label . '</label>
+                        </div>';
+            })
             ->addColumn('action', function ($row) {
                 $editUrl = route('admin.products.edit', $row->id);
                 return '
@@ -79,7 +91,7 @@ class ProductController extends Controller
                     </button>
                 ';
             })    
-            ->rawColumns(['status', 'action', 'category_name', 'list_img', 'detail_img', 'short_description'])
+            ->rawColumns(['status', 'bestseller', 'action', 'category_name', 'list_img', 'detail_img', 'short_description'])
             ->make(true);
     }
 
@@ -99,6 +111,32 @@ class ProductController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Status updated successfully'
+        ]);
+    }
+
+    public function updateBestseller(Request $request){
+        $product = Product::find($request->id);
+
+        if (!$product) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Product not found'
+            ]);
+        }
+
+        if ((int) $product->product_type !== 1) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Bestseller is available for Basic products only'
+            ]);
+        }
+
+        $product->is_bestseller = (int) $request->status === 1 ? 1 : 0;
+        $product->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Bestseller updated successfully'
         ]);
     }
 

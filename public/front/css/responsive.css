@@ -1567,6 +1567,17 @@
         margin: 15px 0;
     }
 
+    .ft_bottom > .ym_cpy,
+    .ft_bottom > .ft_privacy,
+    .ft_bottom > .ft_social {
+        flex: 0 0 auto;
+    }
+
+    .ft_bottom > .ft_social {
+        justify-content: center;
+        width: 100%;
+    }
+
     /*.hnow_footer {*/
     /*    padding-bottom: 0;*/
     /*}*/

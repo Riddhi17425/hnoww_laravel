@@ -249,6 +249,75 @@ $current_route === 'front.order.details' || $current_route === 'front.guest.orde
         </div>
     </div>  -->
 
+    <!-- Top announcement bar -->
+    <div class="top-announcement-bar" id="topAnnouncementBar">
+        <span class="announcement-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
+            Signature Gift Packaging on Every Order
+        </span>
+        <span class="announcement-sep">·</span>
+        <span class="announcement-item">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h15v13H1z"></path><path d="M16 8h4l3 3v5h-7z"></path><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            Express Dubai Delivery
+        </span>
+        <!-- · Pay in 4 with Tabby -->
+    </div>
+    <style>
+        .top-announcement-bar {
+            background: #eae6de;
+            color: var(--dark-900, #0e2233);
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.4;
+            letter-spacing: 0.3px;
+            padding: 8px 16px;
+        }
+
+        /* fixed header sits below the bar, then slides to the top as the bar scrolls away */
+        .sticky-header {
+            top: var(--announcement-offset, 0px);
+            transition-property: transform, background, box-shadow, padding;
+        }
+
+        .top-announcement-bar .announcement-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .top-announcement-bar .announcement-item svg {
+            width: 16px;
+            height: 16px;
+            color: #b58a46;
+            flex-shrink: 0;
+        }
+
+        .top-announcement-bar .announcement-sep {
+            margin: 0 10px;
+        }
+
+        @media (max-width: 767px) {
+            .top-announcement-bar {
+                font-size: 11px;
+                padding: 6px 10px;
+            }
+        }
+    </style>
+    <script>
+        (function () {
+            var bar = document.getElementById('topAnnouncementBar');
+            if (!bar) return;
+            function setOffset() {
+                var offset = Math.max(0, bar.offsetHeight - window.pageYOffset);
+                document.documentElement.style.setProperty('--announcement-offset', offset + 'px');
+            }
+            setOffset();
+            window.addEventListener('scroll', setOffset, { passive: true });
+            window.addEventListener('resize', setOffset);
+        })();
+    </script>
+
     <header class="sticky-header <?php echo $is_green ? 'theme-green' : 'theme-white' ?>">
 
         <nav class="navbar navbar-expand-lg">

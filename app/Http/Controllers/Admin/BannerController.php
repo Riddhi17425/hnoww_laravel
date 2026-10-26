@@ -86,11 +86,11 @@ class BannerController extends Controller
 
         if ($request->type == 'image') {
             $rules['image']        = 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048';
-            $rules['mobile_image'] = 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048';
+            $rules['mobile_image'] = 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048';
             $rules['alt_text']     = 'required|string|max:255';
         } else {
             $rules['video']        = 'required|mimes:mp4,mov,avi,webm|max:20480';
-            $rules['mobile_video'] = 'nullable|mimes:mp4,mov,avi,webm|max:20480';
+            $rules['mobile_video'] = 'required|mimes:mp4,mov,avi,webm|max:20480';
         }
 
         $validator = Validator::make($request->all(), $rules, [
@@ -99,6 +99,8 @@ class BannerController extends Controller
             'description.required' => 'The description is required.',
             'image.required'       => 'An image is required.',
             'video.required'       => 'A video is required.',
+            'mobile_image.required' => 'A mobile image is required.',
+            'mobile_video.required' => 'A mobile video is required.',
             'alt_text.required'    => 'Alt text is required for image banners.',
         ]);
 

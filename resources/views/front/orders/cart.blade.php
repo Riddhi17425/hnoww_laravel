@@ -374,6 +374,10 @@
                                 <span class="sub_head">Total</span>
                                 <span class="sub_head" id="you-pay">AED {{ number_format($subTotal ?? 0, 2) }}</span>
                             </div>
+                            <style>
+                                .summary-actions .com_btn { display: block; padding: 11px; border: 0; border-radius: 6px; background: var(--secondary-color) !important; color: #fff !important; font-size: 14px; font-weight: 600; letter-spacing: .05em; }
+                                .summary-actions .com_btn:hover { opacity: .9; }
+                            </style>
                             <div class="summary-actions">
                                 <a class="com_btn w-100 text-center @auth @else user_icon @endauth" @auth href="{{ route('front.checkout.view') }}" @else data-bs-toggle="modal" data-bs-target="#checkoutAuthModal" @endauth>
                                     PROCEED TO CHECKOUT
@@ -387,6 +391,7 @@
                                 customization requests.
                             </p>
                         </div>
+                        @include('front.partials.delivery-info')
                     </div>
                     @endif
                 </div>
@@ -789,13 +794,13 @@
                         <div id="guest-checkout-alert" class="alert d-none py-2 px-3 mb-3 text-start"></div>
 
                         <div id="guest-step-email" class="guest-step">
-                            <p>Please enter your email address to receive an OTP.</p>
+                            <p>Please enter your email address to continue.</p>
                             <div class="form-floating">
                                 <input type="email" name="guest_email" id="guest_email" class="form-control shadow-none" placeholder=" " required>
                                 <label for="guest_email">Email address</label>
                             </div>
                             <div class="d-flex flex-row justify-content-center align-items-stretch gap-3 mt-4">
-                                <button type="submit" id="btn-guest-email-submit" class="btn-auth-primary com_btn" style="width:auto;">Send OTP</button>
+                                <button type="submit" id="btn-guest-email-submit" class="btn-auth-primary com_btn" style="width:auto;">Continue</button>
                                 <button type="button" id="btn-guest-modal-back" class="btn-guest-back"><svg width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M15 6H1M6 1L1 6l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Back</span></button>
                             </div>
                         </div>
@@ -1062,7 +1067,7 @@
                 },
                 success: function(response) {
                     if (response.success) {
-                        showGuestOtpStep(email);
+                        window.location.href = response.redirect_url;
                     } else {
                         showError(response.message);
                         showGuestError(response.message);
@@ -1773,4 +1778,5 @@
 </script>
 @endpush
 
+@include('front.partials.trust-strip')
 @include('layouts.frontfooter')

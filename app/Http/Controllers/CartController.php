@@ -147,6 +147,13 @@ class CartController extends Controller
             'status' => true,
             'message' => 'Product added to cart successfully!',
             'cart_count' => $cartCount,
+            'product' => [
+                'name'  => $product->product_name,
+                'price' => number_format((float) preg_replace('/[^0-9.]/', '', $product->product_price), 0),
+                'image' => $product->list_page_img && file_exists(public_path('images/admin/product_list/' . $product->list_page_img))
+                    ? asset('public/images/admin/product_list/' . $product->list_page_img)
+                    : asset('public/noimg.jpg'),
+            ],
         ]);
     }
 

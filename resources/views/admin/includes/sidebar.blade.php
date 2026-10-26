@@ -99,6 +99,16 @@
                     </ul>
             </li>
 
+            <li class="{{ request()->routeIs('admin.reviews*') ? '' : 'collapsed' }}">
+                <a class="m-link {{ request()->routeIs('admin.reviews.*') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-reviews" href="#">
+                    <i class="icofont-star fs-5"></i> <span>Reviews</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>
+                    <!-- Menu: Sub menu ul -->
+                    <ul class="sub-menu collapse {{ request()->routeIs('admin.reviews*') ? 'show' : '' }}" id="menu-reviews">
+                        <li><a class="ms-link {{ request()->routeIs('admin.reviews.index') ? 'active' : '' }}" href="{{ route('admin.reviews.index') }}">List</a></li>
+                        <li><a class="ms-link {{ request()->routeIs('admin.reviews.create') ? 'active' : '' }}" href="{{ route('admin.reviews.create') }}">Add</a></li>
+                    </ul>
+            </li>
+
             <li class="{{ request()->routeIs('admin.blessings*') ? '' : 'collapsed' }}">
                 <a class="m-link {{ request()->routeIs('admin.blessings.*') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-blessings" href="#">
                     <i class="icofont-star-alt-1 fs-5"></i> <span>Blessings</span> <span class="arrow icofont-rounded-down ms-auto text-end fs-5"></span></a>

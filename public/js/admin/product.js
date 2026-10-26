@@ -62,6 +62,7 @@ $(document).ready(function () {
             { data: 'product_price', name: 'product_price' },
             { data: 'short_description', name: 'short_description' },
             { data: 'product_type', name: 'product_type', searchable: false  },
+            { data: 'bestseller', name: 'bestseller', orderable: false, searchable: false  },
             { data: 'status', name: 'status', orderable: false, searchable: false  },
             { data: 'action', name: 'action', orderable: false, searchable: false }
         ]
@@ -177,6 +178,33 @@ function updateStatus(status, productId){
         },
         error: function () {
             // alert('Server error');
+        }
+    });
+}
+
+function updateBestseller(status, productId){
+    $.ajax({
+        url:  window.APP_URLS.updateBestseller,
+        type: "POST",
+        headers: {
+            'X-CSRF-TOKEN': window.APP_URLS.csrfToken
+        },
+        data: {
+            id: productId,
+            status: status
+        },
+        success: function (response) {
+            if (response.success) {
+                $("#message-pop-up").attr('style', 'display:block');
+                $("#message-pop-up")
+                    .removeClass('alert-warning alert-danger')
+                    .addClass('alert-success');
+                $("#success-message").html(response.message);
+                setTimeout(() => {
+                    $("#message-pop-up").attr('style', 'display:none');
+                }, 3000);
+                $('#productTable').DataTable().ajax.reload(null, false);
+            }
         }
     });
 }

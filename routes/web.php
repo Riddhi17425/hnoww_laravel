@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\{AdminController, BlessingController, BlogController, CategoryController, CeremonialController, CorporateKitController, FaqController, GiftShopController, JournalController, ProductController, ProductImageController, ProductTabController, UserController, BannerController};
+use App\Http\Controllers\Admin\{AdminController, BlessingController, BlogController, CategoryController, CeremonialController, CorporateKitController, FaqController, GiftShopController, JournalController, ReviewController, ProductController, ProductImageController, ProductTabController, UserController, BannerController};
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\{AuthController, CartController, FrontController, InvoiceController, SitemapController};
 use App\Http\Middleware\RedirectIfNotAdmin;
@@ -79,6 +79,8 @@ Route::name('front.')->group(function () {
     Route::get('gift-details/{product_slug}', [FrontController::class, 'getGiftDetails'])->name('gift.details');
     Route::get('/bespoke-gifts-dubai', [FrontController::class, 'getBespokeCommission'])->name('bespoke.commission');
     Route::get('/privacy', [FrontController::class, 'getprivacy'])->name('privacy');
+    Route::get('/return-policy', [FrontController::class, 'getReturnPolicy'])->name('return.policy');
+    Route::get('/shipping-policy', [FrontController::class, 'getShippingPolicy'])->name('shipping.policy');
 
     Route::get('/corporate-gifts-dubai/{cat_slug?}', [FrontController::class, 'getCorporateVault'])->name('corporate.vault');
     Route::get('/corporate-diwali-collection-2026', [FrontController::class, 'getCorporateDiwaliCollection'])->name('corporate.diwali.collection');
@@ -214,6 +216,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('/update/{product_id}', [ProductController::class, 'update'])->name('update');
             Route::delete('/delete/{product_id}', [ProductController::class, 'delete'])->name('delete');
             Route::post('/update-status', [ProductController::class, 'updateStatus'])->name('update.status');
+            Route::post('/update-bestseller', [ProductController::class, 'updateBestseller'])->name('update.bestseller');
             Route::get('/get-other-categories', [ProductController::class, 'getOtherCategories'])->name('getOtherCategories');
 
             Route::post('delete-detail-image', [ProductController::class, 'deleteDetailImage'])->name('delete.detail.image');
@@ -282,6 +285,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('journals', JournalController::class);
         route::get('journal/fetch', [JournalController::class, 'getJournals'])->name('journal.fetch');
         route::post('journal/update/status', [JournalController::class, 'updateStatus'])->name('journal.update.status');
+
+        Route::resource('reviews', ReviewController::class)->except(['show']);
+        route::get('review/fetch', [ReviewController::class, 'getReviews'])->name('review.fetch');
+        route::post('review/update/status', [ReviewController::class, 'updateStatus'])->name('review.update.status');
 
         Route::resource('blessings', BlessingController::class);
         route::get('blessing/fetch', [BlessingController::class, 'getBlessings'])->name('blessing.fetch');

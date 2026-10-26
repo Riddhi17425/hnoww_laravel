@@ -177,7 +177,16 @@ class FrontController extends Controller
         ->orderBy('id', 'desc')
         ->get();
 
-        return view('front.home', compact('herProduct', 'himProduct', 'homeProduct', 'corporateProduct', 'weddingProduct', /*'allProd',*/'allGifts', 'desiredProductsArray', 'instagramPosts', 'meta_title', 'meta_description','heroBanners'));
+        // Bestsellers apply to Basic products only
+        $bestsellerProducts = Product::select($selectFields)->isActive()->notDeleted()
+            ->where('product_type', 1)
+            ->where('is_bestseller', 1)
+            ->where('product_url', 'not like', 'test-%')
+            ->orderBy('id', 'DESC')->get();
+
+        $reviews = \App\Models\Review::active()->orderBy('id', 'desc')->get();
+
+        return view('front.home', compact('herProduct', 'himProduct', 'homeProduct', 'corporateProduct', 'weddingProduct', /*'allProd',*/'allGifts', 'desiredProductsArray', 'instagramPosts', 'meta_title', 'meta_description','heroBanners', 'reviews', 'bestsellerProducts'));
     }
 
     public function getList(Request $request, $catSlug, $from = null)
@@ -2404,6 +2413,16 @@ class FrontController extends Controller
     public function getprivacy()
     {
         return view('front.privacy');
+    }
+    
+    public function getReturnPolicy()
+    {
+        return view('front.return-policy');
+    }
+
+    public function getShippingPolicy()
+    {
+        return view('front.shipping-policy');
     }
 
     public function getRituals()
