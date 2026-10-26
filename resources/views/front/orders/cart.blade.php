@@ -1778,4 +1778,5 @@
 </script>
 @endpush
 
+@include('front.partials.trust-strip')
 @include('layouts.frontfooter')

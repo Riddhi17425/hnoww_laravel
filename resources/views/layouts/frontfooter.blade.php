@@ -1,5 +1,3 @@
-@include('front.partials.trust-strip')
-
 <footer class="hnow_footer" id="editions">
     <div class="container">
         <div class="ft_top">

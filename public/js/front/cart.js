@@ -92,8 +92,10 @@ function showAddedToCartPopup(product, cartCount) {
         title: 'Added to cart',
         html: `<div class="atc_item">
                    <img src="${product.image}" alt="${name}">
-                   <p class="atc_name">${name}</p>
-                   <span class="atc_price">AED ${product.price}</span>
+                   <div class="atc_info">
+                       <p class="atc_name">${name}</p>
+                       <span class="atc_price">AED ${product.price}</span>
+                   </div>
                </div>`,
         showCloseButton: true,
         showCancelButton: true,
