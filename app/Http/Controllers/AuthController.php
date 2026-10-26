@@ -350,7 +350,7 @@ class AuthController extends Controller
         // Send to Google Sheets
         // try {
             $response = Http::withHeaders(['Content-Type' => 'application/json'])
-                ->post('https://script.google.com/macros/s/AKfycbwC1jNkkBNUH9lJsOtG5gk5DZePCISChsgcTNzE-_v8e2FJdSjs_eI3JLmLB-ZZ5GCZ/exec',
+                ->post('https://script.google.com/macros/s/AKfycbxof9NO9pr6QR0CPz5IVV1Jc13piVuIF3TAfE93iVUax0S6QGhtdVF3GhKMCrHdVcChkw/exec',
                     $sheetsData
                 );
             if ($response->failed()) {
