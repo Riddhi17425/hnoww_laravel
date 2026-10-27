@@ -389,58 +389,6 @@
     </div>
 </section>
 
-@if(isset($bestsellerProducts) && $bestsellerProducts->count() > 0)
-<!--Bestsellers -->
-<section class="mt_80">
-    <div class="section_header">
-        <p class="sub_head mb-0">
-            <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z"
-                        fill="#B58A46" />
-                </svg>
-            </span>
-            <span>Our</span>
-            <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z"
-                        fill="#B58A46" />
-                </svg>
-            </span>
-        </p>
-        <h2 class="title_60">Best Sellers</h2>
-    </div>
-    <div class="desire_slider">
-        @foreach($bestsellerProducts as $val)
-        <div class="desire_box">
-            <div class="desire_box_top mb-4">
-                <a href="{{ route('front.product.details', $val->product_url) }}">
-                    <img class="img-fluid img_1"
-                        src="{{ isset($val->list_page_img) ? asset('public/images/admin/product_list/'.$val->list_page_img) : '' }}"
-                        alt="{{ $val->product_name ?? 'Product Image' }}" loading="lazy">
-                </a>
-            </div>
-
-            <div class="desire_box_bot_child">
-                <div>
-                    <a href="{{ route('front.product.details', $val->product_url) }}">
-                        <h3 class="sub_head">{{$val->product_name ?? ''}}</h3>
-                    </a>
-                    <p>{!! $val->short_description ?? '' !!}</p>
-                </div>
-                <a href="{{ route('front.product.details', $val->product_url) }}">
-                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                        <path d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
-                            stroke="#8c8a72" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </a>
-            </div>
-        </div>
-        @endforeach
-    </div>
-</section>
-@endif
-
 <!--The Curated Rituals -->
 {{-- <section class="mt_120">
     <div class="container">
@@ -580,6 +528,59 @@ alt="Curated Rituals 1" loading="lazy">
         </div>
     </div>
 </section>
+
+
+@if(isset($bestsellerProducts) && $bestsellerProducts->count() > 0)
+<!--Bestsellers -->
+<section class="mt_80">
+    <div class="section_header">
+        <p class="sub_head mb-0">
+            <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M2.02656e-05 2.66669C2.02656e-05 4.13945 1.19393 5.33335 2.66669 5.33335C4.13945 5.33335 5.33335 4.13945 5.33335 2.66669C5.33335 1.19393 4.13945 2.02656e-05 2.66669 2.02656e-05C1.19393 2.02656e-05 2.02656e-05 1.19393 2.02656e-05 2.66669ZM2.66669 2.66669V3.16669H62.6667V2.66669V2.16669H2.66669V2.66669Z"
+                        fill="#B58A46" />
+                </svg>
+            </span>
+            <span>Our</span>
+            <span><svg width="63" height="6" viewBox="0 0 63 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M57.3333 2.66669C57.3333 4.13945 58.5272 5.33335 60 5.33335C61.4728 5.33335 62.6667 4.13945 62.6667 2.66669C62.6667 1.19393 61.4728 2.02656e-05 60 2.02656e-05C58.5272 2.02656e-05 57.3333 1.19393 57.3333 2.66669ZM0 2.66669V3.16669H60V2.66669V2.16669H0V2.66669Z"
+                        fill="#B58A46" />
+                </svg>
+            </span>
+        </p>
+        <h2 class="title_60">Best Sellers</h2>
+    </div>
+    <div class="desire_slider">
+        @foreach($bestsellerProducts as $val)
+        <div class="desire_box">
+            <div class="desire_box_top mb-4">
+                <a href="{{ route('front.product.details', $val->product_url) }}">
+                    <img class="img-fluid img_1"
+                        src="{{ isset($val->list_page_img) ? asset('public/images/admin/product_list/'.$val->list_page_img) : '' }}"
+                        alt="{{ $val->product_name ?? 'Product Image' }}" loading="lazy">
+                </a>
+            </div>
+
+            <div class="desire_box_bot_child">
+                <div>
+                    <a href="{{ route('front.product.details', $val->product_url) }}">
+                        <h3 class="sub_head">{{$val->product_name ?? ''}}</h3>
+                    </a>
+                    <p>{!! $val->short_description ?? '' !!}</p>
+                </div>
+                <a href="{{ route('front.product.details', $val->product_url) }}">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                        <path d="M30.8334 9.16675L9.16669 30.8334M30.8334 9.16675H14.1667M30.8334 9.16675V25.8334"
+                            stroke="#8c8a72" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</section>
+@endif
 
 @if(isset($reviews) && $reviews->count() > 0)
 <!-- Customer Reviews -->

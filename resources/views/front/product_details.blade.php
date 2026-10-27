@@ -753,7 +753,7 @@
                     @if($title === 'Returns')
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <a href="{{ route('front.return.policy') }}" class="accordion-button collapsed pd_acc_link text-decoration-none">
+                            <a href="#" class="accordion-button collapsed pd_acc_link text-decoration-none">
                                 <svg class="acc_icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{!! $accIcons[$title] ?? '' !!}</svg>
                                 <span class="sub_head">Returns available within 14 days</span>
                             </a>

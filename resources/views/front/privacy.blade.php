@@ -1,12 +1,16 @@
 @include('layouts.frontheader')
 
 <style>
-    .sticky-header
-    {
-        background:transparent;
-    }
+    /*.sticky-header*/
+    /*{*/
+    /*    background:transparent;*/
+    /*}*/
     
 </style>
+
+<script>
+    window.disableStickyOnScrollUp = true;
+</script>
 
 <!-- hero section -->
 <section class="hero-section_inner">
