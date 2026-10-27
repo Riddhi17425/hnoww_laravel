@@ -659,7 +659,7 @@ class FrontController extends Controller
                 'date'  => $timestamp,
             ];
             $response = Http::withHeaders(['Content-Type' => 'application/json'])
-                ->post('https://script.google.com/macros/s/AKfycbxH4I7n_9ZOkgc0eK1N4XC4Pbx5Bc0aC_8k0Cd3jqL5RVBtnnhjoLhWDMJxmRwpwEGy/exec',
+                ->post('https://script.google.com/macros/s/AKfycbxnzZQAVIMWcKUv2b6UvWfstwIpcL8f2BaCbZxFPZBdFdHsnY8_57pLbIV-EInnNyEU/exec',
                     $sheetsData
                 );
             if ($response->failed()) {
@@ -936,7 +936,7 @@ class FrontController extends Controller
         // STORE IN SHEET
         try {
             $response = Http::withHeaders(['Content-Type' => 'application/json'])
-                ->post('https://script.google.com/macros/s/AKfycbx67EVt27zgYnp-ULaFlBKnrUwd6mo0vxSYgp0Y88CFv5VVyzFn8-wVwzC8pvCdQYZyEQ/exec',
+                ->post('https://script.google.com/macros/s/AKfycbyJtpyehmKHdEZusBoGMvelgrEtvI1hX_-DM1bxJtnpg2iki78h2UP5mNO8GsPUdeZ1/exec',
                     $data
                 );
             if ($response->failed()) {
