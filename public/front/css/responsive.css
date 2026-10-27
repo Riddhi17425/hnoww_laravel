@@ -1918,6 +1918,13 @@
         height: 640px;
     } */
 
+    .nav_links li.has-dropdown > a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
     /* Premium Animated Accordion Dropdown for Mobile */
     .has-dropdown .dropdown-menu {
         display: block !important;

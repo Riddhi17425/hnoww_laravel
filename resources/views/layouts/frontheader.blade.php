@@ -1087,7 +1087,17 @@ $current_route === 'front.order.details' || $current_route === 'front.guest.orde
         document.querySelectorAll('.has-dropdown > a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 if (window.innerWidth < 992) {
-                    e.preventDefault(); // Prevent following the link on mobile
+                    var clickedArrow = e.target.closest('.dropdown-arrow');
+                    var href = this.getAttribute('href');
+                    var hasRealLink = href && href !== '#';
+
+                    // Clicking the label of a link with a real URL should navigate normally.
+                    // Only the arrow (or a toggle-only item with no real href) should open/close the dropdown.
+                    if (!clickedArrow && hasRealLink) {
+                        return;
+                    }
+
+                    e.preventDefault();
                     const parent = this.parentElement;
                     const wasActive = parent.classList.contains('active');
 
