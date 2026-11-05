@@ -55,7 +55,10 @@ class CartController extends Controller
         }
         $cartData = $cartData->get();   
         
-        return view('front.orders.cart', compact('cartData'));
+        // Default (Dubai) shipping; final charge depends on the emirate chosen at checkout
+        $shippingCharges = self::calculateShippingCharges();
+
+        return view('front.orders.cart', compact('cartData', 'shippingCharges'));
     }
 
     public function addToCart(Request $request)

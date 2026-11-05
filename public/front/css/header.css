@@ -739,3 +739,30 @@ header .navbar {
 .atc_actions button { width: 100%; padding: 12px; border-radius: 0; font-size: 16px; }
 .atc_view_cart { border: 1px solid #b58a46; background: #b58a46; color: #fff; }
 .atc_continue { border: 1px solid #ccc; background: #fff; color: #222; }
+
+/* Mobile: keep the popup fully inside the viewport, centred under the header */
+@media (max-width: 767px) {
+    .swal2-container.swal2-top-end,
+    .swal2-container.swal2-top-end.swal2-grid-column {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: flex-start !important;
+        padding: 0 10px !important;
+        box-sizing: border-box;
+    }
+    .swal2-container.swal2-top-end > .atc_popup {
+        grid-column: auto !important;
+        width: calc(100vw - 20px) !important;
+        max-width: 380px !important;
+        margin: 70px auto 0 !important;
+        padding: 16px !important;
+        box-sizing: border-box;
+    }
+    .atc_popup .swal2-title { font-size: 18px; margin-bottom: 12px; padding-right: 36px; }
+    .atc_item { gap: 10px; }
+    .atc_item img { width: 60px; height: 60px; flex-shrink: 0; }
+    .atc_name { font-size: 14px; word-break: break-word; }
+    .atc_price { font-size: 16px; }
+    .atc_actions { margin-top: 14px; }
+    .atc_actions button { padding: 10px; font-size: 15px; }
+}

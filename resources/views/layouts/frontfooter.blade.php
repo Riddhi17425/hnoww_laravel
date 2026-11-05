@@ -124,7 +124,7 @@
             </div>
 
             <div class="ft_privacy">
-                <a href="{{ route('front.shipping.policy') }}">Shipping Policy</a>
+                <!-- <a href="{{ route('front.shipping.policy') }}">Shipping Policy</a> -->
                 <a href="{{ route('front.return.policy') }}">Return Policy</a>
                 <a href="{{ route('front.privacy') }}">Privacy Policy</a>
             </div>

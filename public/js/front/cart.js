@@ -220,7 +220,8 @@ function recalculateCartTotals() {
     // $('#discounted-values').text(`- AED ${$discount.toFixed(2)}`); // Display discount  
     
     $('#cart-subtotal').text(subtotal.toFixed(2) + ' AED');
-    $('#you-pay').text(subtotal.toFixed(2) + ' AED');
+    let shipping = parseFloat($('#cart-shipping').data('shipping')) || 0;
+    $('#you-pay').text((subtotal + shipping).toFixed(2) + ' AED');
     // $('#you-pay').text(`AED ${$discountedTotal.toFixed(2)}`); // Display total after discount
 }
 

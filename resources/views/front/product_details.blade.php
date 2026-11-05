@@ -753,7 +753,7 @@
                     @if($title === 'Returns')
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <a href="#" class="accordion-button collapsed pd_acc_link text-decoration-none">
+                            <a href="{{ route('front.return.policy') }}" class="accordion-button collapsed pd_acc_link text-decoration-none">
                                 <svg class="acc_icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{!! $accIcons[$title] ?? '' !!}</svg>
                                 <span class="sub_head">Returns available within 14 days</span>
                             </a>
@@ -788,14 +788,15 @@
                     style="z-index: 1040; border-radius: 14px 14px 0 0; box-shadow: 0 -4px 16px rgba(0,0,0,.12);">
                     <button type="button" class="w-100 border-0 rounded py-3 fs-5 fw-semibold text-white"
                         style="background: rgb(140 138 114);" onclick="cartSubmitBtn.click()">Add to cart</button>
-                    <small class="d-block mt-1" style="color: #574d3d;">@php
-                            $dlvFrom = \Carbon\Carbon::now('Asia/Dubai')->addWeekdays(2);
-                            $dlvTo = \Carbon\Carbon::now('Asia/Dubai')->addWeekdays(3);
-                            $dlvRange = $dlvFrom->format('M') === $dlvTo->format('M')
-                                ? $dlvFrom->format('j') . ' - ' . $dlvTo->format('j M')
-                                : $dlvFrom->format('j M') . ' - ' . $dlvTo->format('j M');
-                        @endphp
-                        Estimated Delivery in Dubai: {{ $dlvRange }}</small>
+                    @php
+                        // Calendar days (not weekdays): today + 2 to today + 3 days, Dubai time
+                        $dlvFrom = \Carbon\Carbon::now('Asia/Dubai')->addDays(2);
+                        $dlvTo = \Carbon\Carbon::now('Asia/Dubai')->addDays(3);
+                        $dlvRange = $dlvFrom->format('M') === $dlvTo->format('M')
+                            ? $dlvFrom->format('j') . ' - ' . $dlvTo->format('j M')
+                            : $dlvFrom->format('j M') . ' - ' . $dlvTo->format('j M');
+                    @endphp
+                    <small class="d-block mt-1" style="color: #574d3d;">Estimated Delivery in Dubai: {{ $dlvRange }}</small>
                 </div>
             @endif
 

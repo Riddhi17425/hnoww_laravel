@@ -255,11 +255,11 @@ $current_route === 'front.order.details' || $current_route === 'front.guest.orde
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
             Signature Gift Packaging on Every Order
         </span>
-        <span class="announcement-sep">·</span>
-        <span class="announcement-item">
+        <!-- <span class="announcement-sep">·</span> -->
+        <!-- <span class="announcement-item">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h15v13H1z"></path><path d="M16 8h4l3 3v5h-7z"></path><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
             Express Dubai Delivery
-        </span>
+        </span> -->
         <!-- · Pay in 4 with Tabby -->
     </div>
     <style>
@@ -624,9 +624,10 @@ $current_route === 'front.order.details' || $current_route === 'front.guest.orde
                                 <polyline points="6 9 12 15 18 9"></polyline>
                             </svg>
                             <div class="dropdown-list" id="dropdownList">
-                                <div class="search-box">
-                                    <input type="text" id="searchInput" placeholder="Search language..." autocomplete="off" />
-                                </div>
+                                <!--<div class="search-box">-->
+                                <!--    <input type="text" id="searchInput" placeholder="Search language..." autocomplete="off" />-->
+                                <!--</div>-->
+                                <!--<div class="list-items" id="listItems"></div>-->
                                 <div class="list-items" id="listItems"></div>
                             </div>
                         </div>
@@ -649,349 +650,17 @@ $current_route === 'front.order.details' || $current_route === 'front.guest.orde
 <script>
     // Your languages array (unchanged)
     const languages = [{
-            code: 'ar',
-            name: 'العربية (Arabic)'
-        }, {
-            code: 'ru',
-            name: 'Русский (Russian)'
-        }, {
-            code: 'af',
-            name: 'Afrikaans'
-        }, {
-            code: 'sq',
-            name: 'Shqip (Albanian)'
-        }, {
-            code: 'am',
-            name: 'አማርኛ (Amharic)'
-        }, {
-            code: 'hy',
-            name: 'Հայերեն (Armenian)'
-        }, {
-            code: 'az',
-            name: 'Azərbaycan (Azerbaijani)'
-        }, {
-            code: 'eu',
-            name: 'Euskara (Basque)'
-        }, {
-            code: 'be',
-            name: 'Беларуская (Belarusian)'
-        }, {
-            code: 'bn',
-            name: 'বাংলা (Bengali)'
-        }, {
-            code: 'bs',
-            name: 'Bosanski (Bosnian)'
-        },
-        {
-            code: 'bg',
-            name: 'Български (Bulgarian)'
-        }, {
-            code: 'ca',
-            name: 'Català (Catalan)'
-        }, {
-            code: 'ceb',
-            name: 'Cebuano'
-        }, {
-            code: 'ny',
-            name: 'Chichewa'
-        }, {
-            code: 'zh-CN',
-            name: '中文 (Chinese Simplified)'
-        }, {
-            code: 'zh-TW',
-            name: '中文繁體 (Chinese Traditional)'
-        }, {
-            code: 'co',
-            name: 'Corsican'
-        }, {
-            code: 'hr',
-            name: 'Hrvatski (Croatian)'
-        }, {
-            code: 'cs',
-            name: 'Čeština (Czech)'
-        }, {
-            code: 'da',
-            name: 'Dansk (Danish)'
-        },
-        {
-            code: 'nl',
-            name: 'Nederlands (Dutch)'
-        }, {
             code: 'en',
             name: 'English'
         }, {
-            code: 'eo',
-            name: 'Esperanto'
-        }, {
-            code: 'et',
-            name: 'Eesti (Estonian)'
-        }, {
-            code: 'tl',
-            name: 'Filipino'
-        }, {
-            code: 'fi',
-            name: 'Suomi (Finnish)'
-        }, {
-            code: 'fr',
-            name: 'Français (French)'
-        }, {
-            code: 'fy',
-            name: 'Frysk (Frisian)'
-        }, {
-            code: 'gl',
-            name: 'Galego (Galician)'
-        }, {
-            code: 'ka',
-            name: 'ქართული (Georgian)'
-        },
-        {
-            code: 'de',
-            name: 'Deutsch (German)'
-        }, {
-            code: 'el',
-            name: 'Ελληνικά (Greek)'
-        }, {
-            code: 'gu',
-            name: 'ગુજરાતી (Gujarati)'
-        }, {
-            code: 'ht',
-            name: 'Kreyòl ayisyen (Haitian Creole)'
-        }, {
-            code: 'ha',
-            name: 'Hausa'
-        }, {
-            code: 'haw',
-            name: 'ʻŌlelo Hawaiʻi (Hawaiian)'
-        }, {
-            code: 'he',
-            name: 'עברית (Hebrew)'
-        }, {
-            code: 'hi',
-            name: 'हिन्दी (Hindi)'
-        }, {
-            code: 'hmn',
-            name: 'Hmong'
-        }, {
-            code: 'hu',
-            name: 'Magyar (Hungarian)'
-        },
-        {
-            code: 'is',
-            name: 'Íslenska (Icelandic)'
-        }, {
-            code: 'ig',
-            name: 'Igbo'
-        }, {
-            code: 'id',
-            name: 'Bahasa Indonesia'
-        }, {
-            code: 'ga',
-            name: 'Gaeilge (Irish)'
-        }, {
-            code: 'it',
-            name: 'Italiano (Italian)'
-        }, {
-            code: 'ja',
-            name: '日本語 (Japanese)'
-        }, {
-            code: 'jw',
-            name: 'Javanese'
-        }, {
-            code: 'kn',
-            name: 'ಕನ್ನಡ (Kannada)'
-        }, {
-            code: 'kk',
-            name: 'Қазақ тілі (Kazakh)'
-        }, {
-            code: 'km',
-            name: 'Khmer (ភាសាខ្មែរ)'
-        },
-        {
-            code: 'rw',
-            name: 'Kinyarwanda'
-        }, {
-            code: 'ko',
-            name: '한국어 (Korean)'
-        }, {
-            code: 'ku',
-            name: 'Kurdî (Kurdish)'
-        }, {
-            code: 'ky',
-            name: 'Кыргызча (Kyrgyz)'
-        }, {
-            code: 'lo',
-            name: 'ລາວ (Lao)'
-        }, {
-            code: 'la',
-            name: 'Latina (Latin)'
-        }, {
-            code: 'lv',
-            name: 'Latviešu (Latvian)'
-        }, {
-            code: 'lt',
-            name: 'Lietuvių (Lithuanian)'
-        }, {
-            code: 'lb',
-            name: 'Lëtzebuergesch (Luxembourgish)'
-        }, {
-            code: 'mk',
-            name: 'Македонски (Macedonian)'
-        },
-        {
-            code: 'mg',
-            name: 'Malagasy'
-        }, {
-            code: 'ms',
-            name: 'Bahasa Melayu (Malay)'
-        }, {
-            code: 'ml',
-            name: 'മലയാളം (Malayalam)'
-        }, {
-            code: 'mt',
-            name: 'Malti (Maltese)'
-        }, {
-            code: 'mi',
-            name: 'Māori'
-        }, {
-            code: 'mr',
-            name: 'मराठी (Marathi)'
-        }, {
-            code: 'mn',
-            name: 'Монгол (Mongolian)'
-        }, {
-            code: 'my',
-            name: 'မြန်မာစာ (Myanmar/Burmese)'
-        }, {
-            code: 'ne',
-            name: 'नेपाली (Nepali)'
-        }, {
-            code: 'no',
-            name: 'Norsk (Norwegian)'
-        },
-        {
-            code: 'or',
-            name: 'ଓଡ଼ିଆ (Odia)'
-        }, {
-            code: 'ps',
-            name: 'پښتو (Pashto)'
-        }, {
-            code: 'fa',
-            name: 'فارسی (Persian)'
-        }, {
-            code: 'pl',
-            name: 'Polski (Polish)'
-        }, {
-            code: 'pt',
-            name: 'Português (Portuguese)'
-        }, {
-            code: 'pa',
-            name: 'ਪੰਜਾਬੀ (Punjabi)'
-        }, {
-            code: 'ro',
-            name: 'Română (Romanian)'
-        }, {
-            code: 'sm',
-            name: 'Gagana Sāmoa (Samoan)'
-        }, {
-            code: 'gd',
-            name: 'Gàidhlig (Scots Gaelic)'
-        },
-        {
-            code: 'sr',
-            name: 'Српски (Serbian)'
-        }, {
-            code: 'st',
-            name: 'Sesotho'
-        }, {
-            code: 'sn',
-            name: 'Shona'
-        }, {
-            code: 'sd',
-            name: 'سنڌي (Sindhi)'
-        }, {
-            code: 'si',
-            name: 'සිංහල (Sinhala)'
-        }, {
-            code: 'sk',
-            name: 'Slovenčina (Slovak)'
-        }, {
-            code: 'sl',
-            name: 'Slovenščina (Slovenian)'
-        }, {
-            code: 'so',
-            name: 'Soomaali (Somali)'
-        }, {
-            code: 'es',
-            name: 'Español (Spanish)'
-        }, {
-            code: 'su',
-            name: 'Sundanese'
-        },
-        {
-            code: 'sw',
-            name: 'Kiswahili (Swahili)'
-        }, {
-            code: 'sv',
-            name: 'Svenska (Swedish)'
-        }, {
-            code: 'tg',
-            name: 'Тоҷикӣ (Tajik)'
-        }, {
-            code: 'ta',
-            name: 'தமிழ் (Tamil)'
-        }, {
-            code: 'tt',
-            name: 'Татар (Tatar)'
-        }, {
-            code: 'te',
-            name: 'తెలుగు (Telugu)'
-        }, {
-            code: 'th',
-            name: 'ไทย (Thai)'
-        }, {
-            code: 'tr',
-            name: 'Türkçe (Turkish)'
-        }, {
-            code: 'tk',
-            name: 'Türkmençe (Turkmen)'
-        }, {
-            code: 'uk',
-            name: 'Українська (Ukrainian)'
-        },
-        {
-            code: 'ur',
-            name: 'اردو (Urdu)'
-        }, {
-            code: 'ug',
-            name: 'ئۇيغۇرچە (Uyghur)'
-        }, {
-            code: 'uz',
-            name: 'Oʻzbek (Uzbek)'
-        }, {
-            code: 'vi',
-            name: 'Tiếng Việt (Vietnamese)'
-        }, {
-            code: 'cy',
-            name: 'Cymraeg (Welsh)'
-        }, {
-            code: 'xh',
-            name: 'isiXhosa (Xhosa)'
-        }, {
-            code: 'yi',
-            name: 'ייִדיש (Yiddish)'
-        }, {
-            code: 'yo',
-            name: 'Yorùbá'
-        }, {
-            code: 'zu',
-            name: 'isiZulu (Zulu)'
+            code: 'ar',
+            name: 'العربية (Arabic)'
         }
     ];
 
     const dropdownInput = document.getElementById('dropdownInput');
     const dropdownList = document.getElementById('dropdownList');
     const listItems = document.getElementById('listItems');
-    const searchInput = document.getElementById('searchInput');
 
     // Render language list
     function renderList(langList) {
@@ -1010,13 +679,6 @@ $current_route === 'front.order.details' || $current_route === 'front.guest.orde
     }
 
     renderList(languages);
-
-    // Search filter
-    searchInput.addEventListener('input', () => {
-        const term = searchInput.value.toLowerCase();
-        const filtered = languages.filter(l => l.name.toLowerCase().includes(term));
-        renderList(filtered);
-    });
 
     const dropdownTrigger = document.getElementById('dropdownTrigger');
 
@@ -1072,11 +734,11 @@ $current_route === 'front.order.details' || $current_route === 'front.guest.orde
             const parts = cookie.split('=');
             const value = parts[1];
             const langCode = value.split('/')[2];
-            const lang = languages.find(l => l.code === langCode);
-            if (lang) {
-                // dropdownInput.value = lang.name; // Removed to keep EN always
+            // Show the active language code (EN / AR) in the header
+            if (langCode === 'ar') {
+                dropdownInput.value = 'AR';
             } else {
-                // dropdownInput.value = 'Select Language'; // Removed to keep EN always
+                dropdownInput.value = 'EN';
             }
         }
     });

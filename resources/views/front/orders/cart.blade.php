@@ -362,7 +362,12 @@
                                     <span class="value" id="cart-subtotal">AED
                                         {{ number_format($subTotal ?? 0, 2) }}</span>
                                 </div>
-                                 
+                                <div class="summary-row">
+                                    <span class="label">Shipping Charges</span>
+                                    <span class="value" id="cart-shipping" data-shipping="{{ $shippingCharges }}">AED
+                                        {{ number_format($shippingCharges, 2) }}</span>
+                                </div>
+
                                 {{-- <div class="summary-row">
                                     <span class="label">Discount (FLAT 15% OFF)</span>
                                     <span class="value text-muted" id="discounted-values"></span>
@@ -372,7 +377,7 @@
                             <hr class="summary-divider">
                             <div class="summary-row total-row">
                                 <span class="sub_head">Total</span>
-                                <span class="sub_head" id="you-pay">AED {{ number_format($subTotal ?? 0, 2) }}</span>
+                                <span class="sub_head" id="you-pay">AED {{ number_format(($subTotal ?? 0) + $shippingCharges, 2) }}</span>
                             </div>
                             <style>
                                 .summary-actions .com_btn { display: block; padding: 11px; border: 0; border-radius: 6px; background: var(--secondary-color) !important; color: #fff !important; font-size: 14px; font-weight: 600; letter-spacing: .05em; }
