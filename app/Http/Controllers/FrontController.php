@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\{BespokeCommissionEnquiry, Blessing, Banner, Blog, Category, CeremonialInquiry, ContactInquiry, CorporateKit, CorporateKitRequest, CorporateProposalRequest, FaqType, FestivalInquiry, GiftBlessing, GiftShop, Journal, Newsletter, Order, Product, ProductInquiry, RequestCatalogue, SharedDetail, User, UserAddress, WeddingCatalogueRequest, WhatsappGiftBlessing};
+use App\Models\{BespokeCommissionEnquiry, Blessing, Banner, Blog, Category, CeremonialInquiry, ContactInquiry, CorporateKit, CorporateKitRequest, CorporateProposalRequest, FaqType, FestivalInquiry, GiftBlessing, GiftShop, Journal, Newsletter, Order, Product, ProductInquiry, RequestCatalogue, SharedDetail, User, UserAddress, WeddingCatalogueRequest, WhatsappGiftBlessing, Review};
 use App\Services\{ElevenLabsTextToSpeechService, PaymentService, YetiWhatsappMesasgeService, GoogleSheetService};
 use Carbon\Carbon;
 use Exception;
@@ -184,7 +184,7 @@ class FrontController extends Controller
             ->where('product_url', 'not like', 'test-%')
             ->orderBy('id', 'DESC')->get();
 
-        $reviews = \App\Models\Review::active()->common()->orderBy('id', 'desc')->get();
+        $reviews = Review::active()->common()->orderBy('id', 'desc')->get();
 
         return view('front.home', compact('herProduct', 'himProduct', 'homeProduct', 'corporateProduct', 'weddingProduct', /*'allProd',*/'allGifts', 'desiredProductsArray', 'instagramPosts', 'meta_title', 'meta_description','heroBanners', 'reviews', 'bestsellerProducts'));
     }
@@ -223,7 +223,7 @@ class FrontController extends Controller
         $meta_description = $product->meta_description ?? strip_tags($product->short_description);
         $og_image         = $product->list_page_img ? asset('public/images/admin/product_list/' . $product->list_page_img) : null;
 
-        $reviews       = \App\Models\Review::active()->forProduct($product->id)->orderBy('id', 'desc')->get();
+        $reviews       = Review::active()->forProduct($product->id)->orderBy('id', 'desc')->get();
         $avgRating     = $reviews->count() ? round($reviews->avg('rating'), 1) : 0;
         $reviewsCount  = $reviews->count();
 
@@ -521,7 +521,7 @@ class FrontController extends Controller
             ], 422);
         }
 
-        $blessing  = \App\Models\Blessing::find($request->blessing_id);
+        $blessing  = Blessing::find($request->blessing_id);
         $shareLink = route('front.blessings.library', ['slug' => $blessing->slug ?? '']);
 
         SharedDetail::create([
@@ -570,7 +570,7 @@ class FrontController extends Controller
             'receiver_phone' => $request->receiver_phone,
         ]);
 
-        $blessing  = \App\Models\Blessing::find($request->blessing_id);
+        $blessing  = Blessing::find($request->blessing_id);
 
         $googleSheetSuccess = $googleSheetService->send('Blessing Library', [
             'Submitted At' => now()->format('Y-m-d H:i:s'),
