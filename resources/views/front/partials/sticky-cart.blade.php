@@ -15,7 +15,7 @@
             align-items: center;
             gap: 10px;
             padding: 14px 22px;
-            border-radius: 50px;
+            border-radius: 0;
             background: rgb(140 138 114);
             color: #fff;
             font-size: 18px;

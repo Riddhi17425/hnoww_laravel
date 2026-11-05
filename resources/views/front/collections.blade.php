@@ -15,31 +15,79 @@
 
 <section class="mt_60">
     <div class="container">
+        <style>
+            .col_filter { width: 100%; text-align: left; }
+            .col_filter_toggle { display: inline-flex; align-items: center; gap: 10px; padding: 8px 20px; color: #fff; background: #8c8a72; border: 1px solid #8c8a72; border-radius: 0; font-weight: 600; letter-spacing: .04em; transition: .25s; }
+            .col_filter_toggle:hover, .col_filter_toggle[aria-expanded="true"] { background: #7a785f; border-color: #7a785f; }
+            .col_filter_toggle svg { width: 18px; height: 18px; color: #fff; transition: transform .25s; }
+            .col_filter_toggle[aria-expanded="true"] .chev { transform: rotate(180deg); }
+            .col_filter_panel { position: relative; margin-top: 10px; padding: 12px 20px; background: linear-gradient(135deg, #fffdf9 0%, #f5efe7 100%); border: 1px solid #d9d7c8; border-top: 3px solid #8c8a72; border-radius: 0; }
+            .col_filter_group { display: flex; align-items: center; gap: 20px; }
+            .col_filter_group + .col_filter_group { margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(140, 138, 114, .4); }
+            .col_filter_title { flex: 0 0 110px; margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #8c8a72; }
+            .col_filter_chips { display: flex; flex-wrap: wrap; gap: 8px; }
+            .col_chip { padding: 4px 14px; font-size: 13px; font-weight: 500; color: #574d3d; background: #fff; border: 1px solid #d9d7c8; border-radius: 0; cursor: pointer; transition: .2s; }
+            .col_chip:hover { color: #8c8a72; border-color: #8c8a72; transform: translateY(-2px); }
+            .col_chip.active { color: #fff; background: #8c8a72; border-color: #8c8a72; }
+            /* No shadows anywhere in the filter (also overrides Bootstrap / theme focus & hover shadows) */
+            .col_filter, .col_filter * { box-shadow: none !important; }
+            @media (max-width: 575px) {
+                .col_filter_panel { padding: 12px; }
+                .col_filter_group { flex-direction: column; align-items: flex-start; gap: 6px; }
+                .col_filter_title { flex-basis: auto; }
+            }
+        </style>
         <div class="section_header mb-4">
-            <div class="gesture_filter">
-                <div class="gesture_filter_child">
-                    <h3 class="gesture_title">Category</h3>
-                    <select id="collection_category_filter" class="dropdown">
-                        <option value="">Select Category</option>
-                        @foreach($categories as $category)
-                            <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
-                                {{ $category->category_name }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="gesture_filter_child">
-                    <h3 class="gesture_title">Price</h3>
-                    <select id="collection_price_filter" class="dropdown">
-                        <option value="">Select Price</option>
-                        @if(!empty($priceRanges))
-                            @foreach($priceRanges as $range)
-                                <option value="{{ $range['value'] }}" {{ request('price_range') == $range['value'] ? 'selected' : '' }}>
-                                    {{ $range['label'] }}
-                                </option>
-                            @endforeach
+            <div class="col_filter">
+                @php $filterActive = request('category_id') || request('price_range'); @endphp
+                <button type="button" class="col_filter_toggle" data-bs-toggle="collapse" data-bs-target="#collectionFilterPanel"
+                    aria-expanded="{{ $filterActive ? 'true' : 'false' }}" aria-controls="collectionFilterPanel">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18M6 12h12M10 19h4"></path></svg>
+                    Filters
+                    <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+                </button>
+
+                <div class="collapse {{ $filterActive ? 'show' : '' }}" id="collectionFilterPanel">
+                    <div class="col_filter_panel">
+                        {{-- Hidden inputs keep the ids used by the ajax script below --}}
+                        <input type="hidden" id="collection_category_filter" value="{{ request('category_id') }}" autocomplete="off">
+                        <input type="hidden" id="collection_price_filter" value="{{ request('price_range') }}" autocomplete="off">
+
+                        <div class="col_filter_group">
+                            <h3 class="col_filter_title">Recipient</h3>
+                            <div class="col_filter_chips" data-target="#collection_category_filter">
+                                <button type="button" class="col_chip" data-value="">All</button>
+                                @foreach($categories->where('is_festive', 0) as $category)
+                                    <button type="button" class="col_chip" data-value="{{ $category->id }}">{{ $category->category_name }}</button>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        @if($categories->where('is_festive', 1)->isNotEmpty())
+                            {{-- Festive categories: separate row, same category filter (both "All" pills clear it) --}}
+                            <div class="col_filter_group">
+                                <h3 class="col_filter_title">Festive</h3>
+                                <div class="col_filter_chips" data-target="#collection_category_filter">
+                                    <button type="button" class="col_chip" data-value="">All</button>
+                                    @foreach($categories->where('is_festive', 1) as $category)
+                                        <button type="button" class="col_chip" data-value="{{ $category->id }}">{{ $category->category_name }}</button>
+                                    @endforeach
+                                </div>
+                            </div>
                         @endif
-                    </select>
+
+                        <div class="col_filter_group">
+                            <h3 class="col_filter_title">Price (AED)</h3>
+                            <div class="col_filter_chips" data-target="#collection_price_filter">
+                                <button type="button" class="col_chip" data-value="">All</button>
+                                @if(!empty($priceRanges))
+                                    @foreach($priceRanges as $range)
+                                        <button type="button" class="col_chip" data-value="{{ $range['value'] }}">{{ $range['label'] }}</button>
+                                    @endforeach
+                                @endif
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -151,8 +199,25 @@
             });
         }
 
-        // Filter dropdown change event (resets to page 1)
-        $('#collection_category_filter, #collection_price_filter').on('change', function () {
+        // Highlight the chip matching each hidden input's current value
+        function syncChips() {
+            $('.col_filter_chips').each(function () {
+                const value = String($($(this).data('target')).val() || '');
+                const chips = $(this).find('.col_chip');
+                // If the value belongs to another row sharing this input, this row shows "All"
+                const hasMatch = chips.filter(function () { return String($(this).data('value')) === value && value !== ''; }).length > 0;
+                chips.each(function () {
+                    const chipValue = String($(this).data('value'));
+                    $(this).toggleClass('active', hasMatch ? chipValue === value : chipValue === '');
+                });
+            });
+        }
+        syncChips();
+
+        // Chip click: set the hidden input, then reload (resets to page 1)
+        $('.col_chip').on('click', function () {
+            $($(this).parent().data('target')).val($(this).data('value'));
+            syncChips();
             fetchCollections(collectionsBaseUrl, true);
         });
 
@@ -177,6 +242,7 @@
 
             $('#collection_category_filter').val(catId);
             $('#collection_price_filter').val(pRange);
+            syncChips();
 
             fetchCollections(window.location.href, false);
         });

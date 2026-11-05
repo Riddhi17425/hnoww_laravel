@@ -16,4 +16,20 @@ class Review extends Model
     {
         return $query->where('is_active', 1);
     }
+
+    // is_product_review: 0 = Common review (home page), 1 = Product review
+    public function scopeCommon($query)
+    {
+        return $query->where('is_product_review', 0);
+    }
+
+    public function scopeForProduct($query, $productId)
+    {
+        return $query->where('is_product_review', 1)->where('product_id', $productId);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

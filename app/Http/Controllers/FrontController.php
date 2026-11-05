@@ -184,7 +184,7 @@ class FrontController extends Controller
             ->where('product_url', 'not like', 'test-%')
             ->orderBy('id', 'DESC')->get();
 
-        $reviews = \App\Models\Review::active()->orderBy('id', 'desc')->get();
+        $reviews = \App\Models\Review::active()->common()->orderBy('id', 'desc')->get();
 
         return view('front.home', compact('herProduct', 'himProduct', 'homeProduct', 'corporateProduct', 'weddingProduct', /*'allProd',*/'allGifts', 'desiredProductsArray', 'instagramPosts', 'meta_title', 'meta_description','heroBanners', 'reviews', 'bestsellerProducts'));
     }
@@ -223,7 +223,11 @@ class FrontController extends Controller
         $meta_description = $product->meta_description ?? strip_tags($product->short_description);
         $og_image         = $product->list_page_img ? asset('public/images/admin/product_list/' . $product->list_page_img) : null;
 
-        return view('front.product_details', compact('product', 'productDetailImages', 'productTab', 'similarProduct', 'meta_title', 'meta_description', 'og_image'));
+        $reviews       = \App\Models\Review::active()->forProduct($product->id)->orderBy('id', 'desc')->get();
+        $avgRating     = $reviews->count() ? round($reviews->avg('rating'), 1) : 0;
+        $reviewsCount  = $reviews->count();
+
+        return view('front.product_details', compact('product', 'productDetailImages', 'productTab', 'similarProduct', 'meta_title', 'meta_description', 'og_image', 'reviews', 'avgRating', 'reviewsCount'));
     }
 
     public function getGiftDetails(Request $request, $productSlug)

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use DataTables;
@@ -72,9 +74,31 @@ class ReviewController extends Controller
             ->make(true);
     }
 
+    // Only products that have a detail page (Basic type), not wedding / corporate
+    private function detailPageProducts()
+    {
+        return Product::select('id', 'product_name')
+            ->where('product_type', 1)
+            ->isActive()->notDeleted()
+            ->where('product_url', 'not like', 'test-%')
+            ->orderBy('product_name')
+            ->get();
+    }
+
+    private function fillReview(Review $review, Request $request)
+    {
+        $review->name = $request->name;
+        $review->city = $request->city;
+        $review->description = $request->description;
+        $review->rating = (int) $request->rating;
+        $review->is_product_review = (int) $request->is_product_review;
+        $review->product_id = $review->is_product_review ? (int) $request->product_id : null;
+    }
+
     public function create()
     {
-        return view('admin.review.create');
+        $products = $this->detailPageProducts();
+        return view('admin.review.create', compact('products'));
     }
 
     public function store(Request $request)
@@ -85,10 +109,7 @@ class ReviewController extends Controller
         }
 
         $review = new Review();
-        $review->name = $request->name;
-        $review->city = $request->city;
-        $review->description = $request->description;
-        $review->rating = (int) $request->rating;
+        $this->fillReview($review, $request);
         $review->is_active = 1;
         if ($request->hasFile('photo')) {
             $review->photo = $this->uploadPhoto($request->file('photo'));
@@ -100,7 +121,8 @@ class ReviewController extends Controller
 
     public function edit(Review $review)
     {
-        return view('admin.review.edit', compact('review'));
+        $products = $this->detailPageProducts();
+        return view('admin.review.edit', compact('review', 'products'));
     }
 
     public function update(Request $request, Review $review)
@@ -110,10 +132,7 @@ class ReviewController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $review->name = $request->name;
-        $review->city = $request->city;
-        $review->description = $request->description;
-        $review->rating = (int) $request->rating;
+        $this->fillReview($review, $request);
         if ($request->hasFile('photo')) {
             $this->deletePhoto($review->photo);
             $review->photo = $this->uploadPhoto($request->file('photo'));
@@ -151,7 +170,13 @@ class ReviewController extends Controller
             'city'        => 'required|string|max:255',
             'description' => 'required|string|max:1000',
             'rating'      => 'required|integer|min:1|max:5',
-            'photo'       => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'is_product_review' => 'required|in:0,1',
+            'product_id'  => [
+                'required_if:is_product_review,1',
+                'nullable',
+                Rule::exists('products', 'id')->where('product_type', 1),
+            ],
+            'photo'      => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
     }
 

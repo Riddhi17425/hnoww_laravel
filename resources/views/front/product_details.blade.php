@@ -189,6 +189,18 @@
         ],
     ];
 
+    // AGGREGATE RATING (only when the product has reviews)
+    if ($reviewsCount > 0)
+    {
+        $productSchema['aggregateRating'] = [
+            '@type' => 'AggregateRating',
+            'ratingValue' => $avgRating,
+            'reviewCount' => $reviewsCount,
+            'bestRating' => 5,
+            'worstRating' => 1,
+        ];
+    }
+
     // MATERIAL
     if (!empty($schemaMaterial))
     {
@@ -588,6 +600,20 @@
             <h4 class="sub_head_inter">AED {{ $product->product_price ?? '' }} @if(isset($product->moq)) | MOQ
                 {{$product->moq }} @endif</h4>
 
+            @if($reviewsCount > 0)
+                <style>
+                    .pd_rating_link { padding: 4px 12px; color: #0e2233; background: transparent; border: 1px solid transparent; border-radius: 50px; transition: background .2s, border-color .2s, box-shadow .2s, transform .2s; }
+                    .pd_rating_link:hover { color: #0e2233; background: #f5efe7; border-color: #e7d7b6; box-shadow: 0 4px 12px rgba(181, 138, 70, .2); transform: translateY(-1px); }
+                    .pd_rating_link:hover small { text-decoration: underline; text-underline-offset: 3px; }
+                </style>
+                <a href="#product-reviews" class="pd_rating_link d-inline-flex align-items-center gap-2 mb-2 text-decoration-none" style="margin-left:-12px;">
+                    <span style="color:#b58a46; letter-spacing:2px;" aria-label="{{ $avgRating }} out of 5 stars">
+                        @for($i = 1; $i <= 5; $i++){!! $i <= round($avgRating) ? '&#9733;' : '<span style="color:#d9ccb2;">&#9733;</span>' !!}@endfor
+                    </span>
+                    <small>{{ number_format($avgRating, 1) }} ({{ $reviewsCount }} {{ \Illuminate\Support\Str::plural('review', $reviewsCount) }})</small>
+                </a>
+            @endif
+
             @php $availableStock = (int) ($product->product_stock ?? 0); @endphp
             <p class="{{ $availableStock > 0 && $availableStock <= 5 ? 'product-stock-status' : '' }}" role="status">
                 @if($availableStock > 0 && $availableStock <= 5)
@@ -936,6 +962,10 @@
 
     </div>
 </section>
+
+<div id="product-reviews">
+    @include('front.partials.reviews-slider', ['reviews' => $reviews, 'title' => 'Customer Reviews'])
+</div>
 
 <div class="modal fade audio_modal" id="productInquiry" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="productInquiryLabel" aria-hidden="true">

@@ -106,8 +106,8 @@
                         <ul class="ft_menu">
                             {{-- <li><a href="{{ route('front.request.catalogue') }}">Request Catalogue</a></li> --}}
                             <li><a href="{{ route('front.contactus') }}">Contact Us</a></li>
-                            {{-- <li><a href="#">Shipping & Returns</a></li>
-                             <li><a href="#">Your Wishlist</a></li> --}}
+                            <li><a href="{{ route('front.shipping.policy') }}">Shipping Policy</a></li>
+                            {{-- <li><a href="#">Your Wishlist</a></li> --}}
                             <li><a href="{{ route('front.faqs') }}">FAQ's</a></li>
                             <li><a href="{{ route('front.blogs') }}">Blogs</a></li>
                         </ul>
@@ -124,7 +124,7 @@
             </div>
 
             <div class="ft_privacy">
-                <!-- <a href="{{ route('front.shipping.policy') }}">Shipping Policy</a> -->
+                <a href="{{ route('front.shipping.policy') }}">Shipping Policy</a>
                 <a href="{{ route('front.return.policy') }}">Return Policy</a>
                 <a href="{{ route('front.privacy') }}">Privacy Policy</a>
             </div>

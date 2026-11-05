@@ -15,6 +15,8 @@ return new class extends Migration
             $table->string('city');
             $table->text('description');
             $table->unsignedTinyInteger('rating')->default(5);
+            $table->tinyInteger('is_product_review')->default(0)->comment('0 = Common 1 = Product');
+            $table->unsignedBigInteger('product_id')->nullable();
             $table->string('photo')->nullable();
             $table->tinyInteger('is_active')->default(1)->comment('1 = Active 0 = In-active');
             $table->timestamps();

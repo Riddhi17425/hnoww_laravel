@@ -11,6 +11,29 @@
         @error('city') <span class="text-danger">{{ $message }}</span> @enderror
     </div>
 
+    @php $isProductReview = (int) old('is_product_review', $review->is_product_review ?? 0); @endphp
+    <div class="col-md-6">
+        <label class="form-label">Review Type</label><span class="text-danger">*</span>
+        <select name="is_product_review" id="is_product_review" class="form-control">
+            <option value="0" {{ $isProductReview === 0 ? 'selected' : '' }}>Common Review (Home page)</option>
+            <option value="1" {{ $isProductReview === 1 ? 'selected' : '' }}>Product Review (Product detail page)</option>
+        </select>
+        @error('is_product_review') <span class="text-danger">{{ $message }}</span> @enderror
+    </div>
+
+    <div class="col-md-6" id="product_select_wrap" style="{{ $isProductReview ? '' : 'display:none;' }}">
+        <label class="form-label">Product</label><span class="text-danger">*</span>
+        <select name="product_id" class="form-control">
+            <option value="">Select Product</option>
+            @foreach($products as $product)
+                <option value="{{ $product->id }}" {{ (int) old('product_id', $review->product_id ?? 0) === $product->id ? 'selected' : '' }}>
+                    {{ $product->product_name }}
+                </option>
+            @endforeach
+        </select>
+        @error('product_id') <span class="text-danger">{{ $message }}</span> @enderror
+    </div>
+
     <div class="col-md-6">
         <label class="form-label">Rating</label><span class="text-danger">*</span>
         <select name="rating" class="form-control">
@@ -40,3 +63,9 @@
         @error('description') <span class="text-danger">{{ $message }}</span> @enderror
     </div>
 </div>
+
+<script>
+    document.getElementById('is_product_review').addEventListener('change', function () {
+        document.getElementById('product_select_wrap').style.display = this.value === '1' ? '' : 'none';
+    });
+</script>
