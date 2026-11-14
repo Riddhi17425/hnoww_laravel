@@ -310,7 +310,7 @@
 {{-- BREADCRUMB SCHEMA --}}
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
+    "@@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "@id": "{{ url()->current() }}#breadcrumb",
     "itemListElement": [

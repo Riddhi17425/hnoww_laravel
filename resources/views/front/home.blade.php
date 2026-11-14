@@ -804,7 +804,7 @@ alt="Curated Rituals 1" loading="lazy">
 
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
+  "@@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Organization",
