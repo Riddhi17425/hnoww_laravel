@@ -176,7 +176,7 @@
     // PRODUCT SCHEMA
 
     $productSchema = [
-        '@context' => 'https://schema.org',
+        '@@context' => 'https://schema.org',
         '@type' => 'Product',
         '@id' => $schemaProductUrl . '#product',
         'name' => $product->meta_title ?? '',
